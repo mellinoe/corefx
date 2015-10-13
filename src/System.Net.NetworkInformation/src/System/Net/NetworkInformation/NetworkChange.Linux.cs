@@ -22,7 +22,7 @@ namespace System.Net.NetworkInformation
                 {
                     if (s_netlinkSocket == null)
                     {
-                        s_netlinkSocket = Interop.Sys.CreateAndBindNetlinkSocket();
+                        CreateSocket();
                     }
                 }
             }
@@ -30,6 +30,26 @@ namespace System.Net.NetworkInformation
             {
                 throw new PlatformNotSupportedException();
             }
+        }
+
+        private static unsafe void CreateSocket()
+        {
+            s_netlinkSocket = Interop.Sys.CreateAndBindNetlinkSocket();
+            SocketAsyncEventArgs asyncArgs = new SocketAsyncEventArgs();
+            byte[] buffer = new byte[4096];
+            asyncArgs.SetBuffer(buffer, 0, buffer.Length);
+            asyncArgs.Completed += OnSocketReceived;
+            Console.WriteLine("Entering ReceiveAsync loop");
+            while (s_netlinkSocket.ReceiveAsync(asyncArgs))
+            {
+
+            }
+            Console.WriteLine("Exited ReceiveAsync loop.");
+        }
+
+        public static void OnSocketReceived(object sender, SocketAsyncEventArgs args)
+        {
+            Console.WriteLine("_-^-_ Receiving data from socket. _-^-_");
         }
 
         static public event NetworkAddressChangedEventHandler NetworkAddressChanged
