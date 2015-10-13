@@ -14,6 +14,10 @@ namespace System.Net.NetworkInformation
     {
         private static Socket s_netlinkSocket;
 
+        private static NetworkAvailabilityChangedEventHandler s_availabilityListeners;
+
+        private static bool s_active = false;
+
         static public event NetworkAvailabilityChangedEventHandler NetworkAvailabilityChanged
         {
             add
@@ -24,32 +28,48 @@ namespace System.Net.NetworkInformation
                     {
                         CreateSocket();
                     }
+                    s_availabilityListeners += value;
                 }
             }
             remove
             {
-                throw new PlatformNotSupportedException();
+                s_availabilityListeners -= value;
+                if (s_availabilityListeners == null)
+                {
+                    Console.WriteLine("All availability listeners unsubscribed.");
+                }
             }
         }
 
         private static unsafe void CreateSocket()
         {
+            s_active = true;
             s_netlinkSocket = Interop.Sys.CreateAndBindNetlinkSocket();
             SocketAsyncEventArgs asyncArgs = new SocketAsyncEventArgs();
             byte[] buffer = new byte[4096];
             asyncArgs.SetBuffer(buffer, 0, buffer.Length);
             asyncArgs.Completed += OnSocketReceived;
             Console.WriteLine("Entering ReceiveAsync loop");
-            while (s_netlinkSocket.ReceiveAsync(asyncArgs))
+            while (s_active)
             {
-
+                if (s_netlinkSocket.ReceiveAsync(asyncArgs))
+                {
+                    Console.WriteLine("Finished asynchronously");
+                }
+                else
+                {
+                    Console.WriteLine("BytesTransferred: " + asyncArgs.BytesTransferred);
+                    Console.WriteLine("LastOperation: " + asyncArgs.LastOperation);
+                    Console.WriteLine("SocketError: " + asyncArgs.SocketError);
+                    return;
+                }
             }
             Console.WriteLine("Exited ReceiveAsync loop.");
         }
 
         public static void OnSocketReceived(object sender, SocketAsyncEventArgs args)
         {
-            Console.WriteLine("_-^-_ Receiving data from socket. _-^-_");
+            Console.WriteLine("_-^-_ Receiving data from socket, SocketError: " + args.SocketError +  " _-^-_");
         }
 
         static public event NetworkAddressChangedEventHandler NetworkAddressChanged

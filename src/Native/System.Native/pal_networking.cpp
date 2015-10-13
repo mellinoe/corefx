@@ -446,7 +446,6 @@ extern "C" Error SetAddressFamily(uint8_t* socketAddress, int32_t socketAddressL
             return PAL_SUCCESS;
 
         case AF_NETLINK:
-            printf("Detected a netlink address.\n");
             sockAddr->sa_family = AF_NETLINK;
             return PAL_SUCCESS;
 
