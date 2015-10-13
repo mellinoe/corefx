@@ -43,9 +43,9 @@ internal static partial class Interop
             int bufferLength = 32;
             int addressFamily, protocolFamily;
             CreateNetlinkSockaddr(addressBuffer, &bufferLength, &addressFamily, &protocolFamily);
-            
+            Console.WriteLine("Got Address family " + (int)addressFamily);
             Socket socket = new Socket((AddressFamily)addressFamily, SocketType.Raw, (ProtocolType)protocolFamily);
-            SocketAddress sa = new SocketAddress(AddressFamily.Unknown, bufferLength);
+            SocketAddress sa = new SocketAddress((AddressFamily)addressFamily, bufferLength);
             for (int i = 0; i < bufferLength; i++)
             {
                 sa[i] = addressBuffer[i];

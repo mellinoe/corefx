@@ -23,8 +23,6 @@ static_assert(HAVE_AF_PACKET || HAVE_AF_LINK, "System must have AF_PACKET or AF_
 #include <net/if_dl.h>
 #endif
 
-const int NUM_BYTES_IN_IPV4_ADDRESS = 4;
-const int NUM_BYTES_IN_IPV6_ADDRESS = 16;
 const int INET6_ADDRSTRLEN_MANAGED = 65; // The C# code has a longer max string length
 
 static_assert(PAL_HOST_NOT_FOUND == HOST_NOT_FOUND, "");
@@ -411,6 +409,10 @@ extern "C" Error GetAddressFamily(const uint8_t* socketAddress, int32_t socketAd
             *addressFamily = PAL_AF_INET6;
             return PAL_SUCCESS;
 
+        case AF_NETLINK:
+            *addressFamily = AF_NETLINK;
+            return PAL_SUCCESS;
+
         default:
             return PAL_EAFNOSUPPORT;
     }
@@ -443,7 +445,13 @@ extern "C" Error SetAddressFamily(uint8_t* socketAddress, int32_t socketAddressL
             sockAddr->sa_family = AF_INET6;
             return PAL_SUCCESS;
 
+        case AF_NETLINK:
+            printf("Detected a netlink address.\n");
+            sockAddr->sa_family = AF_NETLINK;
+            return PAL_SUCCESS;
+
         default:
+            printf("Unsupported: %i\n", addressFamily);
             return PAL_EAFNOSUPPORT;
     }
 }
