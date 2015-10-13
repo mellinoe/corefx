@@ -5186,8 +5186,21 @@ namespace System.Net.Sockets
             {
                 throw new ArgumentException(SR.Format(SR.net_sockets_invalid_dnsendpoint, "remoteEP"), "remoteEP");
             }
+            else if (remoteEP is IPEndPoint)
+            {
+                return IPEndPointExtensions.Serialize(remoteEP);
+            }
+            else
+            {
+                SocketAddress serializedAddress = remoteEP.Serialize();
+                Internals.SocketAddress internalSocketAddress = new Internals.SocketAddress(serializedAddress.Family, serializedAddress.Size);
+                for (int i = 0; i < serializedAddress.Size; i++)
+                {
+                    internalSocketAddress[i] = serializedAddress[i];
+                }
 
-            return IPEndPointExtensions.Serialize(remoteEP);
+                return internalSocketAddress;
+            }
         }
 
         // DualMode: automatically re-map IPv4 addresses to IPv6 addresses.
