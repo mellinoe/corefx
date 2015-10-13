@@ -126,6 +126,10 @@ check_cxx_source_compiles(
     HAVE_TCP_VAR_H
 )
 
+check_include_files(
+    linux/netlink.h
+    HAVE_LINUX_NETLINK_H)
+
 set (CMAKE_REQUIRED_LIBRARIES)
 
 configure_file(

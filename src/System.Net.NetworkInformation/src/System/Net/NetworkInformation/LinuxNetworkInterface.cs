@@ -16,6 +16,8 @@ namespace System.Net.NetworkInformation
 
         public unsafe static NetworkInterface[] GetLinuxNetworkInterfaces()
         {
+            NetworkChange.NetworkAvailabilityChanged += (sender, e) => { Console.WriteLine("Not really"); };
+
             Dictionary<string, LinuxNetworkInterface> interfacesByName = new Dictionary<string, LinuxNetworkInterface>();
             Interop.Sys.EnumerateInterfaceAddresses(
                 (name, ipAddr, maskAddr) =>

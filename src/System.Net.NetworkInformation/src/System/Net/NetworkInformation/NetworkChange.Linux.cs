@@ -1,4 +1,9 @@
-﻿namespace System.Net.NetworkInformation
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System.Net.Sockets;
+
+namespace System.Net.NetworkInformation
 {
     public delegate void NetworkAddressChangedEventHandler(object sender, EventArgs e);
 
@@ -7,11 +12,19 @@
     // Linux implementation of NetworkChange
     public class NetworkChange
     {
+        private static Socket s_netlinkSocket;
+
         static public event NetworkAvailabilityChangedEventHandler NetworkAvailabilityChanged
         {
             add
             {
-                throw new PlatformNotSupportedException();
+                unsafe
+                {
+                    if (s_netlinkSocket == null)
+                    {
+                        s_netlinkSocket = Interop.Sys.CreateAndBindNetlinkSocket();
+                    }
+                }
             }
             remove
             {
