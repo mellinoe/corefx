@@ -65,7 +65,7 @@ namespace System.Security.Cryptography
 
             if (ecKey.IsInvalid)
             {
-                throw Interop.libcrypto.CreateOpenSslCryptographicException();
+                throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
 
             // Set base.KeySize rather than this.KeySize to avoid an unnecessary Lazy<> allocation.
@@ -90,7 +90,7 @@ namespace System.Security.Cryptography
                 // So everything should be copacetic.
                 if (!Interop.libcrypto.EVP_PKEY_set1_EC_KEY(pkeyHandle, currentKey))
                 {
-                    throw Interop.libcrypto.CreateOpenSslCryptographicException();
+                    throw Interop.Crypto.CreateOpenSslCryptographicException();
                 }
 
                 return pkeyHandle;
@@ -140,7 +140,7 @@ namespace System.Security.Cryptography
             int signatureLength = Interop.libcrypto.ECDSA_size(key);
             byte[] signature = new byte[signatureLength];
             if (!Interop.libcrypto.ECDSA_sign(0, hash, hash.Length, signature, ref signatureLength, key))
-                throw Interop.libcrypto.CreateOpenSslCryptographicException();
+                throw Interop.Crypto.CreateOpenSslCryptographicException();
             Array.Resize(ref signature, signatureLength);
             return signature;
         }
@@ -206,7 +206,7 @@ namespace System.Security.Cryptography
 
             if (keySize == 0)
             {
-                string curveNameOid = Interop.libcrypto.OBJ_obj2txt_helper(Interop.libcrypto.OBJ_nid2obj(nid));
+                string curveNameOid = Interop.Crypto.GetOidValue(Interop.Crypto.ObjNid2Obj(nid));
                 throw new NotSupportedException(SR.Format(SR.Cryptography_UnsupportedEcKeyAlgorithm, curveNameOid));
             }
 
@@ -223,10 +223,10 @@ namespace System.Security.Cryptography
                     int nid = s_supportedAlgorithms[i].Nid;
                     SafeEcKeyHandle key = Interop.libcrypto.EC_KEY_new_by_curve_name(nid);
                     if (key == null || key.IsInvalid)
-                        throw Interop.libcrypto.CreateOpenSslCryptographicException();
+                        throw Interop.Crypto.CreateOpenSslCryptographicException();
 
                     if (!Interop.libcrypto.EC_KEY_generate_key(key))
-                        throw Interop.libcrypto.CreateOpenSslCryptographicException();
+                        throw Interop.Crypto.CreateOpenSslCryptographicException();
 
                     return key;
                 }
@@ -255,9 +255,10 @@ namespace System.Security.Cryptography
         private static readonly SupportedAlgorithm[] s_supportedAlgorithms =
             new SupportedAlgorithm[]
             {
-                new SupportedAlgorithm(keySize: 224, nid: Interop.libcrypto.NID_secp224r1),
-                new SupportedAlgorithm(keySize: 384, nid: Interop.libcrypto.NID_secp384r1),
-                new SupportedAlgorithm(keySize: 521, nid: Interop.libcrypto.NID_secp521r1),
+                new SupportedAlgorithm(keySize: 224, nid: Interop.Crypto.NID_secp224r1),
+                new SupportedAlgorithm(keySize: 256, nid: Interop.Crypto.NID_X9_62_prime256v1),
+                new SupportedAlgorithm(keySize: 384, nid: Interop.Crypto.NID_secp384r1),
+                new SupportedAlgorithm(keySize: 521, nid: Interop.Crypto.NID_secp521r1),
             };
     }
 }

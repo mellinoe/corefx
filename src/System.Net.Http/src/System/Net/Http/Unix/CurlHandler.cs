@@ -294,14 +294,16 @@ namespace System.Net.Http
                 throw new ArgumentNullException("request", SR.net_http_handler_norequest);
             }
 
-            if ((request.RequestUri.Scheme != UriSchemeHttp) && (request.RequestUri.Scheme != UriSchemeHttps))
+            if (request.RequestUri.Scheme == UriSchemeHttps)
             {
-                throw NotImplemented.ByDesignWithMessage(SR.net_http_client_http_baseaddress_required);
+                if (!s_supportsSSL)
+                {
+                    throw new PlatformNotSupportedException(SR.net_http_unix_https_support_unavailable_libcurl);
+                }
             }
-
-            if (request.RequestUri.Scheme == UriSchemeHttps && !s_supportsSSL)
+            else
             {
-                throw new PlatformNotSupportedException(SR.net_http_unix_https_support_unavailable_libcurl);
+                Debug.Assert(request.RequestUri.Scheme == UriSchemeHttp, "HttpClient expected to validate scheme as http or https.");
             }
 
             if (request.Headers.TransferEncodingChunked.GetValueOrDefault() && (request.Content == null))
@@ -313,9 +315,6 @@ namespace System.Net.Http
             {
                 throw new InvalidOperationException(SR.net_http_invalid_cookiecontainer);
             }
-
-            // TODO: Check that SendAsync is not being called again for same request object.
-            //       Probably fix is needed in WinHttpHandler as well
 
             CheckDisposed();
             SetOperationStarted();
@@ -331,29 +330,13 @@ namespace System.Net.Http
             // Create the easy request.  This associates the easy request with this handler and configures
             // it based on the settings configured for the handler.
             var easy = new EasyRequest(this, request, cancellationToken);
-
-            // Submit the easy request to the multi agent.
-            if (request.Content != null)
-            {
-                // If there is request content to be sent, preload the stream
-                // and submit the request to the multi agent.  This is separated
-                // out into a separate async method to avoid associated overheads
-                // in the case where there is no request content stream.
-                return QueueOperationWithRequestContentAsync(easy);
-            }
-            else
-            {
-                // Otherwise, just submit the request.
-                ConfigureAndQueue(easy);
-                return easy.Task;
-            }
-        }
-
-        private void ConfigureAndQueue(EasyRequest easy)
-        {
             try
             {
                 easy.InitializeCurl();
+                if (easy._requestContentStream != null)
+                {
+                    easy._requestContentStream.Run();
+                }
                 _agent.Queue(new MultiAgent.IncomingRequest { Easy = easy, Type = MultiAgent.IncomingRequestType.New });
             }
             catch (Exception exc)
@@ -361,27 +344,7 @@ namespace System.Net.Http
                 easy.FailRequest(exc);
                 easy.Cleanup(); // no active processing remains, so we can cleanup
             }
-        }
-
-        /// <summary>
-        /// Loads the request's request content stream asynchronously and 
-        /// then submits the request to the multi agent.
-        /// </summary>
-        private async Task<HttpResponseMessage> QueueOperationWithRequestContentAsync(EasyRequest easy)
-        {
-            Debug.Assert(easy._requestMessage.Content != null, "Expected request to have non-null request content");
-
-            easy._requestContentStream = await easy._requestMessage.Content.ReadAsStreamAsync().ConfigureAwait(false);
-            if (easy._cancellationToken.IsCancellationRequested)
-            {
-                easy.FailRequest(new OperationCanceledException(easy._cancellationToken));
-                easy.Cleanup(); // no active processing remains, so we can cleanup
-            }
-            else
-            {
-                ConfigureAndQueue(easy);
-            }
-            return await easy.Task.ConfigureAwait(false);
+            return easy.Task;
         }
 
         #region Private methods
@@ -497,7 +460,7 @@ namespace System.Net.Http
             {
                 var inner = new CurlException(error, isMulti: false);
                 VerboseTrace(inner.Message);
-                throw CreateHttpRequestException(inner);
+                throw inner;
             }
         }
 
@@ -520,7 +483,7 @@ namespace System.Net.Http
                         throw new OutOfMemoryException(msg);
                     case CURLMcode.CURLM_INTERNAL_ERROR:
                     default:
-                        throw CreateHttpRequestException(new CurlException(error, msg));
+                        throw new CurlException(error, msg);
                 }
             }
         }
