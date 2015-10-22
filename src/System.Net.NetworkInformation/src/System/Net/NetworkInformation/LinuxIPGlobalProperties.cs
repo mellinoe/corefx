@@ -155,7 +155,8 @@ namespace System.Net.NetworkInformation
 
         public override IcmpV4Statistics GetIcmpV4Statistics()
         {
-            return LinuxIcmpV4Statistics.CreateIcmpV4Statistics();
+            Icmpv4StatisticsTable statisticsTable = LinuxStringParsingHelpers.ParseFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
+            return new LinuxIcmpV4Statistics(statisticsTable);
         }
 
         public override IcmpV6Statistics GetIcmpV6Statistics()
