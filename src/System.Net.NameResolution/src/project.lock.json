@@ -332,7 +332,7 @@
           "lib/dotnet/System.Security.Principal.dll": {}
         }
       },
-      "System.Security.Principal.Windows/4.0.0-beta-23420": {
+      "System.Security.Principal.Windows/4.0.0-beta-23428": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -412,7 +412,7 @@
           "ref/dotnet/System.Threading.Tasks.dll": {}
         }
       },
-      "System.Threading.ThreadPool/4.0.10-beta-23420": {
+      "System.Threading.ThreadPool/4.0.10-beta-23428": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0",
@@ -756,7 +756,7 @@
           "lib/dotnet/System.Security.Principal.dll": {}
         }
       },
-      "System.Security.Principal.Windows/4.0.0-beta-23420": {
+      "System.Security.Principal.Windows/4.0.0-beta-23428": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -836,7 +836,7 @@
           "ref/dotnet/System.Threading.Tasks.dll": {}
         }
       },
-      "System.Threading.ThreadPool/4.0.10-beta-23420": {
+      "System.Threading.ThreadPool/4.0.10-beta-23428": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0",
@@ -1180,7 +1180,7 @@
           "lib/dotnet/System.Security.Principal.dll": {}
         }
       },
-      "System.Security.Principal.Windows/4.0.0-beta-23420": {
+      "System.Security.Principal.Windows/4.0.0-beta-23428": {
         "type": "package",
         "dependencies": {
           "System.Collections": "4.0.0",
@@ -1260,7 +1260,7 @@
           "ref/dotnet/System.Threading.Tasks.dll": {}
         }
       },
-      "System.Threading.ThreadPool/4.0.10-beta-23420": {
+      "System.Threading.ThreadPool/4.0.10-beta-23428": {
         "type": "package",
         "dependencies": {
           "System.Runtime": "4.0.0",
@@ -2090,10 +2090,10 @@
         "System.Security.Principal.nuspec"
       ]
     },
-    "System.Security.Principal.Windows/4.0.0-beta-23420": {
+    "System.Security.Principal.Windows/4.0.0-beta-23428": {
       "type": "package",
       "serviceable": true,
-      "sha512": "vpW55QEeC234v+eDhZZS/WCHwKShHsjsnC2a1yAzDI/JHOG098byKFLi6EPTUnLSZbGOb+fnsT/zeAv7Yb9uhQ==",
+      "sha512": "sOuwXhMFAwuT1I5eifp8VqqE8nivuxOdu2tsq3dz1K/4xNbH8PWCcBkdGdD0JeDOU5H9aEXEskv8cdD7tY3zCA==",
       "files": [
         "lib/DNXCore50/System.Security.Principal.Windows.dll",
         "lib/net46/System.Security.Principal.Windows.dll",
@@ -2109,8 +2109,8 @@
         "ref/dotnet5.4/zh-hans/System.Security.Principal.Windows.xml",
         "ref/dotnet5.4/zh-hant/System.Security.Principal.Windows.xml",
         "ref/net46/System.Security.Principal.Windows.dll",
-        "System.Security.Principal.Windows.4.0.0-beta-23420.nupkg",
-        "System.Security.Principal.Windows.4.0.0-beta-23420.nupkg.sha512",
+        "System.Security.Principal.Windows.4.0.0-beta-23428.nupkg",
+        "System.Security.Principal.Windows.4.0.0-beta-23428.nupkg.sha512",
         "System.Security.Principal.Windows.nuspec"
       ]
     },
@@ -2301,10 +2301,10 @@
         "System.Threading.Tasks.nuspec"
       ]
     },
-    "System.Threading.ThreadPool/4.0.10-beta-23420": {
+    "System.Threading.ThreadPool/4.0.10-beta-23428": {
       "type": "package",
       "serviceable": true,
-      "sha512": "9rt6FxpZafONDm0IpeUzs1H65QnbOqjRcfzLi+uJpvjaX8VYswdhQy04PUjHEU8ATKFNvPyaP6Ev4zr7v+SMqw==",
+      "sha512": "2ATv3fvC5CIzQ+tk+CfFgSZFTHglzgJyMIfp8xek8Bj3hkoLNjVgFNdjDOB99DACFBo0dM2S7nhcnvdaV6OBhQ==",
       "files": [
         "lib/DNXCore50/System.Threading.ThreadPool.dll",
         "lib/MonoAndroid10/_._",
@@ -2328,8 +2328,8 @@
         "ref/net46/System.Threading.ThreadPool.dll",
         "ref/xamarinios10/_._",
         "ref/xamarinmac20/_._",
-        "System.Threading.ThreadPool.4.0.10-beta-23420.nupkg",
-        "System.Threading.ThreadPool.4.0.10-beta-23420.nupkg.sha512",
+        "System.Threading.ThreadPool.4.0.10-beta-23428.nupkg",
+        "System.Threading.ThreadPool.4.0.10-beta-23428.nupkg.sha512",
         "System.Threading.ThreadPool.nuspec"
       ]
     }
