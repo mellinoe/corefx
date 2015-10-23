@@ -155,44 +155,42 @@ namespace System.Net.NetworkInformation
 
         public override IcmpV4Statistics GetIcmpV4Statistics()
         {
-            Icmpv4StatisticsTable statisticsTable = LinuxStringParsingHelpers.ParseIcmpv4FromSnmpFile(NetworkFiles.SnmpV4StatsFile);
-            return new LinuxIcmpV4Statistics(ref statisticsTable);
+            return new LinuxIcmpV4Statistics();
         }
 
         public override IcmpV6Statistics GetIcmpV6Statistics()
         {
-            Icmpv6StatisticsTable statisticsTable = LinuxStringParsingHelpers.ParseIcmpv6FromSnmp6File(NetworkFiles.SnmpV6StatsFile);
-            return new LinuxIcmpV6Statistics(ref statisticsTable);
+            return new LinuxIcmpV6Statistics();
         }
 
         public override IPGlobalStatistics GetIPv4GlobalStatistics()
         {
-            return new LinuxIPGlobalStatistics(ipv6: false);
+            return new LinuxIPGlobalStatistics(ipv4: true);
         }
 
         public override IPGlobalStatistics GetIPv6GlobalStatistics()
         {
-            return new LinuxIPGlobalStatistics(ipv6: true);
+            return new LinuxIPGlobalStatistics(ipv4: false);
         }
 
         public override TcpStatistics GetTcpIPv4Statistics()
         {
-            return new LinuxTcpStatistics(ipv6:false);
+            return new LinuxTcpStatistics(ipv4:true);
         }
 
         public override TcpStatistics GetTcpIPv6Statistics()
         {
-            return new LinuxTcpStatistics(ipv6:true);
+            return new LinuxTcpStatistics(ipv4:false);
         }
 
         public override UdpStatistics GetUdpIPv4Statistics()
         {
-            return LinuxUdpStatistics.CreateUdpIPv4Statistics();
+            return new LinuxUdpStatistics(true);
         }
 
         public override UdpStatistics GetUdpIPv6Statistics()
         {
-            return LinuxUdpStatistics.CreateUdpIPv6Statistics();
+            return new LinuxUdpStatistics(false);
         }
 
         private UnicastIPAddressInformationCollection GetUnicastAddresses()

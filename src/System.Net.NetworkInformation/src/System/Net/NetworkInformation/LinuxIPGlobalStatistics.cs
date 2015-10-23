@@ -16,9 +16,9 @@ namespace System.Net.NetworkInformation
         private int _numInterfaces;
         private int _numIPAddresses;
 
-        public LinuxIPGlobalStatistics(bool ipv6)
+        public LinuxIPGlobalStatistics(bool ipv4)
         {
-            if (!ipv6)
+            if (ipv4)
             {
                 _table = LinuxStringParsingHelpers.ParseIPv4GlobalStatisticsFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
                 _numRoutes = LinuxStringParsingHelpers.ParseNumRoutesFromRouteFile(NetworkFiles.Ipv4RouteFile);

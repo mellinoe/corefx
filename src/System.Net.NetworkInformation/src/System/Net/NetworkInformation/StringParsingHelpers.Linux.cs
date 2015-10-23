@@ -81,6 +81,36 @@ namespace System.Net.NetworkInformation
         public int OutTimeExcds;
     }
 
+    internal struct TcpGlobalStatisticsTable
+    {
+        public int RtoAlgorithm;
+        public int RtoMin;
+        public int RtoMax;
+        public int MaxConn;
+        public int ActiveOpens;
+        public int PassiveOpens;
+        public int AttemptFails;
+        public int EstabResets;
+        public int CurrEstab;
+        public int InSegs;
+        public int OutSegs;
+        public int RetransSegs;
+        public int InErrs;
+        public int OutRsts;
+        public int InCsumErrors;
+    }
+
+    internal struct UdpGlobalStatisticsTable
+    {
+        public int InDatagrams;
+        public int NoPorts;
+        public int InErrors;
+        public int OutDatagrams;
+        public int RcvbufErrors;
+        public int SndbufErrors;
+        public int InCsumErrors;
+    }
+
     /// <summary>
     /// Storage structure for IP Global statistics from /proc/net/snmp
     /// </summary>
@@ -276,6 +306,97 @@ namespace System.Net.NetworkInformation
             };
         }
 
+        internal static TcpGlobalStatisticsTable ParseTcpGlobalStatisticsFromSnmpFile(string filePath)
+        {
+            // NOTE: There is no information in the snmp6 file regarding TCP statistics,
+            // so the statistics are always pulled from /proc/net/snmp.
+            string fileContents = File.ReadAllText(filePath);
+            int firstTcpHeader = fileContents.IndexOf("Tcp:");
+            int secondTcpHeader = fileContents.IndexOf("Tcp:", firstTcpHeader + 1);
+            int endOfSecondLine = fileContents.IndexOf(Environment.NewLine, secondTcpHeader);
+            string tcpData = fileContents.Substring(secondTcpHeader, endOfSecondLine - secondTcpHeader);
+            StringParser parser = new StringParser(tcpData, ' ');
+
+            // NOTE: Need to verify that this order is consistent. Otherwise, we need to parse the first-line header
+            // to determine the order of information contained in the row.
+
+            parser.MoveNextOrFail(); // Skip Tcp:
+
+            return new TcpGlobalStatisticsTable()
+            {
+                RtoAlgorithm = parser.ParseNextInt32(),
+                RtoMin = parser.ParseNextInt32(),
+                RtoMax = parser.ParseNextInt32(),
+                MaxConn = parser.ParseNextInt32(),
+                ActiveOpens = parser.ParseNextInt32(),
+                PassiveOpens = parser.ParseNextInt32(),
+                AttemptFails = parser.ParseNextInt32(),
+                EstabResets = parser.ParseNextInt32(),
+                CurrEstab = parser.ParseNextInt32(),
+                InSegs = parser.ParseNextInt32(),
+                OutSegs = parser.ParseNextInt32(),
+                RetransSegs = parser.ParseNextInt32(),
+                InErrs = parser.ParseNextInt32(),
+                OutRsts = parser.ParseNextInt32(),
+                InCsumErrors = parser.ParseNextInt32()
+            };
+        }
+
+        internal static UdpGlobalStatisticsTable ParseUdpv4GlobalStatisticsFromSnmpFile(string filePath)
+        {
+            string fileContents = File.ReadAllText(NetworkFiles.SnmpV4StatsFile);
+            int firstUdpHeader = fileContents.IndexOf("Udp:");
+            int secondUdpHeader = fileContents.IndexOf("Udp:", firstUdpHeader + 1);
+            int endOfSecondLine = fileContents.IndexOf(Environment.NewLine, secondUdpHeader);
+            string tcpData = fileContents.Substring(secondUdpHeader, endOfSecondLine - secondUdpHeader);
+            StringParser parser = new StringParser(tcpData, ' ');
+
+            // NOTE: Need to verify that this order is consistent. Otherwise, we need to parse the first-line header
+            // to determine the order of information contained in the file.
+
+            parser.MoveNextOrFail(); // Skip Udp:
+
+            return new UdpGlobalStatisticsTable()
+            {
+                InDatagrams = parser.ParseNextInt32(),
+                NoPorts = parser.ParseNextInt32(),
+                InErrors = parser.ParseNextInt32(),
+                OutDatagrams = parser.ParseNextInt32(),
+                RcvbufErrors = parser.ParseNextInt32(),
+                SndbufErrors = parser.ParseNextInt32(),
+                InCsumErrors = parser.ParseNextInt32()
+            };
+        }
+
+        internal static UdpGlobalStatisticsTable ParseUdpv6GlobalStatisticsFromSnmp6File(string filePath)
+        {
+            string fileContents = File.ReadAllText(filePath);
+            RowConfigReader reader = new RowConfigReader(fileContents);
+
+            return new UdpGlobalStatisticsTable()
+            {
+                InDatagrams = reader.GetNextValueAsInt32("Udp6InDatagrams"),
+                NoPorts = reader.GetNextValueAsInt32("Udp6NoPorts"),
+                InErrors = reader.GetNextValueAsInt32("Udp6InErrors"),
+                OutDatagrams = reader.GetNextValueAsInt32("Udp6OutDatagrams"),
+                RcvbufErrors = reader.GetNextValueAsInt32("Udp6RcvbufErrors"),
+                SndbufErrors = reader.GetNextValueAsInt32("Udp6SndbufErrors"),
+                InCsumErrors = reader.GetNextValueAsInt32("Udp6InCsumErrors"),
+            };
+        }
+
+        internal static int ParseNumSocketConnections(string filePath, string protocolName)
+        {
+            // Parse the number of active connections out of /proc/net/sockstat
+            string sockstatFile = File.ReadAllText(filePath);
+            int indexOfTcp = sockstatFile.IndexOf(protocolName);
+            int endOfTcpLine = sockstatFile.IndexOf(Environment.NewLine, indexOfTcp + 1);
+            string tcpLineData = sockstatFile.Substring(indexOfTcp, endOfTcpLine - indexOfTcp);
+            StringParser sockstatParser = new StringParser(tcpLineData, ' ');
+            sockstatParser.MoveNextOrFail(); // Skip "<name>:"
+            sockstatParser.MoveNextOrFail(); // Skip: "inuse"
+            return sockstatParser.ParseNextInt32();
+        }
 
         internal static int ParseNumRoutesFromRouteFile(string filePath)
         {

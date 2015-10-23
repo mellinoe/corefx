@@ -1,17 +1,15 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.IO;
-
 namespace System.Net.NetworkInformation
 {
     internal class LinuxIcmpV6Statistics : IcmpV6Statistics
     {
         private readonly Icmpv6StatisticsTable _table;
 
-        public LinuxIcmpV6Statistics(ref Icmpv6StatisticsTable table)
+        public LinuxIcmpV6Statistics()
         {
-            _table = table;
+            _table = LinuxStringParsingHelpers.ParseIcmpv6FromSnmp6File(NetworkFiles.SnmpV6StatsFile);
         }
 
         public override long DestinationUnreachableMessagesReceived { get { return _table.InDestUnreachs; } }

@@ -10,9 +10,9 @@ namespace System.Net.NetworkInformation
         private readonly Icmpv4StatisticsTable _table;
 
         // The table is a fairly large struct (108 bytes), pass it by reference
-        public LinuxIcmpV4Statistics(ref Icmpv4StatisticsTable table)
+        public LinuxIcmpV4Statistics()
         {
-            _table = table;
+            _table = LinuxStringParsingHelpers.ParseIcmpv4FromSnmpFile(NetworkFiles.SnmpV4StatsFile);
         }
 
         public override long AddressMaskRepliesReceived { get { return _table.InAddrMaskReps; } }
