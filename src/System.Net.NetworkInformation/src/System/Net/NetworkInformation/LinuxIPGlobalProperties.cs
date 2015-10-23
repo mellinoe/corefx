@@ -155,23 +155,24 @@ namespace System.Net.NetworkInformation
 
         public override IcmpV4Statistics GetIcmpV4Statistics()
         {
-            Icmpv4StatisticsTable statisticsTable = LinuxStringParsingHelpers.ParseFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
-            return new LinuxIcmpV4Statistics(statisticsTable);
+            Icmpv4StatisticsTable statisticsTable = LinuxStringParsingHelpers.ParseIcmpv4FromSnmpFile(NetworkFiles.SnmpV4StatsFile);
+            return new LinuxIcmpV4Statistics(ref statisticsTable);
         }
 
         public override IcmpV6Statistics GetIcmpV6Statistics()
         {
-            return LinuxIcmpV6Statistics.CreateIcmpV6Statistics();
+            Icmpv6StatisticsTable statisticsTable = LinuxStringParsingHelpers.ParseIcmpv6FromSnmp6File(NetworkFiles.SnmpV6StatsFile);
+            return new LinuxIcmpV6Statistics(ref statisticsTable);
         }
 
         public override IPGlobalStatistics GetIPv4GlobalStatistics()
         {
-            return LinuxIPGlobalStatistics.CreateIPv4Statistics();
+            return new LinuxIPGlobalStatistics(ipv6: false);
         }
 
         public override IPGlobalStatistics GetIPv6GlobalStatistics()
         {
-            return LinuxIPGlobalStatistics.CreateIPv6Statistics();
+            return new LinuxIPGlobalStatistics(ipv6: true);
         }
 
         public override TcpStatistics GetTcpIPv4Statistics()

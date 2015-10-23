@@ -7,10 +7,10 @@ namespace System.Net.NetworkInformation
 {
     internal class LinuxIcmpV4Statistics : IcmpV4Statistics
     {
-
         private readonly Icmpv4StatisticsTable _table;
 
-        public LinuxIcmpV4Statistics(Icmpv4StatisticsTable table)
+        // The table is a fairly large struct (108 bytes), pass it by reference
+        public LinuxIcmpV4Statistics(ref Icmpv4StatisticsTable table)
         {
             _table = table;
         }

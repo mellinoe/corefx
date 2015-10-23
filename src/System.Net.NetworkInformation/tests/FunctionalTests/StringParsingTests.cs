@@ -7,7 +7,7 @@ namespace System.Net.NetworkInformation.Tests
         [Fact]
         public static void TestIcmpv4Parsing()
         {
-            Icmpv4StatisticsTable table = LinuxStringParsingHelpers.ParseFromSnmpFile("snmp_example.txt");
+            Icmpv4StatisticsTable table = LinuxStringParsingHelpers.ParseIcmpv4FromSnmpFile("snmp_example.txt");
             Assert.Equal(1, table.InMsgs);
             Assert.Equal(2, table.InErrors);
             Assert.Equal(3, table.InCsumErrors);
