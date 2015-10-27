@@ -11,8 +11,6 @@ namespace System.Net.NetworkInformation
 {
     internal class LinuxIPGlobalProperties : IPGlobalProperties
     {
-        private static readonly string[] s_newLineSeparator = new string[] { Environment.NewLine }; // Used for string splitting
-
         public override string DhcpScopeName
         {
             get
