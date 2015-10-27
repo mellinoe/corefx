@@ -499,7 +499,7 @@ namespace System.Net.NetworkInformation
                     index += 1;
                 }
 
-                throw new NetworkInformationException("Reached the end of the file. Interface name " + name + " was invalid.");
+                throw new NetworkInformationException();
             }
         }
 
@@ -512,6 +512,22 @@ namespace System.Net.NetworkInformation
             }
 
             return ret;
+        }
+
+        internal static long ParseRawLongFile(string filePath)
+        {
+            long ret;
+            if (!long.TryParse(File.ReadAllText(filePath), out ret))
+            {
+                throw new NetworkInformationException();
+            }
+
+            return ret;
+        }
+
+        internal static int ParseRawHexFileAsInt(string filePath)
+        {
+            return Convert.ToInt32(File.ReadAllText(filePath), 16);
         }
 
         private static int CountOccurences(string value, string candidate)
