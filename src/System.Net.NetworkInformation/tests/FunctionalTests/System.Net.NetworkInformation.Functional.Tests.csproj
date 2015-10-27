@@ -42,6 +42,12 @@
     <Compile Include="$(CommonPath)\System\IO\RowConfigReader.cs">
       <Link>Common\System\IO\RowConfigReader.cs</Link>
     </Compile>
+    <Compile Include="$(CommonPath)\Interop\Linux\Interop.LinuxTcpState.cs">
+      <Link>Interop\Linux\Interop.LinuxTcpState.cs</Link>
+    </Compile>
+    <Compile Include="..\..\src\System\Net\NetworkInformation\SimpleTcpConnectionInformation.cs">
+      <Link>SimpleTcpConnectionInformation.cs</Link>
+    </Compile>
   </ItemGroup>
   <!-- TODO: Remove after the packages are not using System.Private.Networking. -->
   <ItemGroup>

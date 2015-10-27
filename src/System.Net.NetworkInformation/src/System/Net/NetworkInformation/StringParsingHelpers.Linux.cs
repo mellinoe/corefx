@@ -725,7 +725,7 @@ namespace System.Net.NetworkInformation
             }
             else
             {
-                throw new NetworkInformationException("Invalid address string: " + remoteAddressString);
+                throw new NetworkInformationException();
             }
         }
 
@@ -737,7 +737,7 @@ namespace System.Net.NetworkInformation
             long addressValue;
             if (!long.TryParse(hexAddress, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out addressValue))
             {
-                throw new NetworkInformationException("Invalid address string: " + hexAddress);
+                throw new NetworkInformationException();
             }
             ipAddress = new IPAddress(addressValue);
             return ipAddress;
