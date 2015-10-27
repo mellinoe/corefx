@@ -147,8 +147,33 @@ namespace System.Net.NetworkInformation
         public int FragmentCreates; // FragCreates
     }
 
+    internal struct IPInterfaceStatisticsTable
+    {
+        // Receive section
+        public uint BytesReceived;
+        public uint PacketsReceived;
+        public uint ErrorsReceived;
+        public uint IncomingPacketsDropped;
+        public uint FifoBufferErrorsReceived;
+        public uint PacketFramingErrorsReceived;
+        public uint CompressedPacketsReceived;
+        public uint MulticastFramesReceived;
+
+        // Transmit section
+        public uint BytesTransmitted;
+        public uint PacketsTransmitted;
+        public uint ErrorsTransmitted;
+        public uint OutgoingPacketsDropped;
+        public uint FifoBufferErrorsTransmitted;
+        public uint CollisionsDetected;
+        public uint CarrierLosses;
+        public uint CompressedPacketsTransmitted;
+    }
+
     internal static class LinuxStringParsingHelpers
     {
+        private static uint _collisionsDetected;
+
         // Parses ICMP v4 statistics from /proc/net/snmp
         public static Icmpv4StatisticsTable ParseIcmpv4FromSnmpFile(string filePath)
         {
@@ -434,6 +459,48 @@ namespace System.Net.NetworkInformation
             // According to RFC 1213, "1" indicates "acting as a gateway". "2" indicates "NOT acting as a gateway".
             parser.MoveNextOrFail(); // Skip forwarding
             return parser.ParseNextInt32();
+        }
+
+        internal static IPInterfaceStatisticsTable ParseInterfaceStatisticsTableFromFile(string filePath, string name)
+        {
+            using (StreamReader sr = File.OpenText(filePath))
+            {
+                sr.ReadLine();
+                sr.ReadLine();
+                int index = 0;
+                while (!sr.EndOfStream)
+                {
+                    string line = sr.ReadLine();
+                    if (line.Contains(name))
+                    {
+                        string[] pieces = line.Split(new char[] { ' ', ':' }, StringSplitOptions.RemoveEmptyEntries);
+
+                        return new IPInterfaceStatisticsTable()
+                        {
+                            BytesReceived = uint.Parse(pieces[1]),
+                            PacketsReceived = uint.Parse(pieces[2]),
+                            ErrorsReceived = uint.Parse(pieces[3]),
+                            IncomingPacketsDropped = uint.Parse(pieces[4]),
+                            FifoBufferErrorsReceived = uint.Parse(pieces[5]),
+                            PacketFramingErrorsReceived = uint.Parse(pieces[6]),
+                            CompressedPacketsReceived = uint.Parse(pieces[7]),
+                            MulticastFramesReceived = uint.Parse(pieces[8]),
+
+                            BytesTransmitted = uint.Parse(pieces[9]),
+                            PacketsTransmitted = uint.Parse(pieces[10]),
+                            ErrorsTransmitted = uint.Parse(pieces[11]),
+                            OutgoingPacketsDropped = uint.Parse(pieces[12]),
+                            FifoBufferErrorsTransmitted = uint.Parse(pieces[13]),
+                            CollisionsDetected = uint.Parse(pieces[14]),
+                            CarrierLosses = uint.Parse(pieces[15]),
+                            CompressedPacketsTransmitted = uint.Parse(pieces[16])
+                        };
+                    }
+                    index += 1;
+                }
+
+                throw new NetworkInformationException("Reached the end of the file. Interface name " + name + " was invalid.");
+            }
         }
 
         internal static int ParseRawIntFile(string filePath)
