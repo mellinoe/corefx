@@ -19,11 +19,11 @@ namespace System.Net.NetworkInformation
 
         public LinuxIPInterfaceStatistics(string name)
         {
-            _table = LinuxStringParsingHelpers.ParseInterfaceStatisticsTableFromFile(NetworkFiles.InterfaceListingFile, name);
+            _table = StringParsingHelpers.ParseInterfaceStatisticsTableFromFile(NetworkFiles.InterfaceListingFile, name);
 
             // sys/class/net/<interfacename>/tx_queue_len
             string transmitQueueLengthFilePath = Path.Combine(NetworkFiles.SysClassNetFolder, name, NetworkFiles.TransmitQueueLengthFileName);
-            _transmitQueueLength = LinuxStringParsingHelpers.ParseRawIntFile(transmitQueueLengthFilePath);
+            _transmitQueueLength = StringParsingHelpers.ParseRawIntFile(transmitQueueLengthFilePath);
 
         }
 

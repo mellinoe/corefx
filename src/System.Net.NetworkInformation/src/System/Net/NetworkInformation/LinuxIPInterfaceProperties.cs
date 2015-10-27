@@ -75,21 +75,21 @@ namespace System.Net.NetworkInformation
         public GatewayIPAddressInformationCollection GetGatewayAddresses()
         {
             Collection<GatewayIPAddressInformation> innerCollection
-                = LinuxStringParsingHelpers.ParseGatewayAddressesFromRouteFile(NetworkFiles.Ipv4RouteFile, _linuxNetworkInterface.Name);
+                = StringParsingHelpers.ParseGatewayAddressesFromRouteFile(NetworkFiles.Ipv4RouteFile, _linuxNetworkInterface.Name);
             return new GatewayIPAddressInformationCollection(innerCollection);
         }
 
         private IPAddressCollection GetDhcpServerAddresses()
         {
             Collection<IPAddress> internalCollection
-                = LinuxStringParsingHelpers.ParseDhcpServerAddressesFromLeasesFile(NetworkFiles.DHClientLeasesFile, _linuxNetworkInterface.Name);
+                = StringParsingHelpers.ParseDhcpServerAddressesFromLeasesFile(NetworkFiles.DHClientLeasesFile, _linuxNetworkInterface.Name);
             return new InternalIPAddressCollection(internalCollection);
         }
 
         private IPAddressCollection GetWinsServerAddresses()
         {
             Collection<IPAddress> internalCollection
-                = LinuxStringParsingHelpers.ParseWinsServerAddressesFromSmbConfFile(NetworkFiles.SmbConfFile);
+                = StringParsingHelpers.ParseWinsServerAddressesFromSmbConfFile(NetworkFiles.SmbConfFile);
             return new InternalIPAddressCollection(internalCollection);
         }
     }

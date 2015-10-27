@@ -9,7 +9,7 @@ namespace System.Net.NetworkInformation
 
         public LinuxIcmpV6Statistics()
         {
-            _table = LinuxStringParsingHelpers.ParseIcmpv6FromSnmp6File(NetworkFiles.SnmpV6StatsFile);
+            _table = StringParsingHelpers.ParseIcmpv6FromSnmp6File(NetworkFiles.SnmpV6StatsFile);
         }
 
         public override long DestinationUnreachableMessagesReceived { get { return _table.InDestUnreachs; } }

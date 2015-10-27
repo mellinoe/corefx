@@ -14,13 +14,13 @@ namespace System.Net.NetworkInformation
         {
             if (ipv4)
             {
-                _table = LinuxStringParsingHelpers.ParseUdpv4GlobalStatisticsFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
-                _udpListeners = LinuxStringParsingHelpers.ParseNumSocketConnections(NetworkFiles.SockstatFile, "UDP");
+                _table = StringParsingHelpers.ParseUdpv4GlobalStatisticsFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
+                _udpListeners = StringParsingHelpers.ParseNumSocketConnections(NetworkFiles.SockstatFile, "UDP");
             }
             else
             {
-                _table = LinuxStringParsingHelpers.ParseUdpv6GlobalStatisticsFromSnmp6File(NetworkFiles.SnmpV6StatsFile);
-                _udpListeners = LinuxStringParsingHelpers.ParseNumSocketConnections(NetworkFiles.Sockstat6File, "UDP6");
+                _table = StringParsingHelpers.ParseUdpv6GlobalStatisticsFromSnmp6File(NetworkFiles.SnmpV6StatsFile);
+                _udpListeners = StringParsingHelpers.ParseNumSocketConnections(NetworkFiles.Sockstat6File, "UDP6");
             }
         }
 

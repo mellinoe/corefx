@@ -20,24 +20,24 @@ namespace System.Net.NetworkInformation
         {
             if (ipv4)
             {
-                _table = LinuxStringParsingHelpers.ParseIPv4GlobalStatisticsFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
-                _numRoutes = LinuxStringParsingHelpers.ParseNumRoutesFromRouteFile(NetworkFiles.Ipv4RouteFile);
-                _numInterfaces = LinuxStringParsingHelpers.ParseNumIPInterfaces(NetworkFiles.Ipv4ConfigFolder);
+                _table = StringParsingHelpers.ParseIPv4GlobalStatisticsFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
+                _numRoutes = StringParsingHelpers.ParseNumRoutesFromRouteFile(NetworkFiles.Ipv4RouteFile);
+                _numInterfaces = StringParsingHelpers.ParseNumIPInterfaces(NetworkFiles.Ipv4ConfigFolder);
             }
             else
             {
-                _table = LinuxStringParsingHelpers.ParseIPv6GlobalStatisticsFromSnmp6File(NetworkFiles.SnmpV6StatsFile);
-                _numRoutes = LinuxStringParsingHelpers.ParseNumRoutesFromRouteFile(NetworkFiles.Ipv6RouteFile);
-                _numInterfaces = LinuxStringParsingHelpers.ParseNumIPInterfaces(NetworkFiles.Ipv6ConfigFolder);
+                _table = StringParsingHelpers.ParseIPv6GlobalStatisticsFromSnmp6File(NetworkFiles.SnmpV6StatsFile);
+                _numRoutes = StringParsingHelpers.ParseNumRoutesFromRouteFile(NetworkFiles.Ipv6RouteFile);
+                _numInterfaces = StringParsingHelpers.ParseNumIPInterfaces(NetworkFiles.Ipv6ConfigFolder);
 
                 // /proc/sys/net/ipv6/conf/default/forwarding
                 string forwardingConfigFile = Path.Combine(NetworkFiles.Ipv6ConfigFolder,
                                                 NetworkFiles.DefaultNetworkInterfaceFileName,
                                                 NetworkFiles.ForwardingFileName);
-                _table.Forwarding = LinuxStringParsingHelpers.ParseRawIntFile(forwardingConfigFile) == 1;
+                _table.Forwarding = StringParsingHelpers.ParseRawIntFile(forwardingConfigFile) == 1;
 
                 // snmp6 does not include Default TTL info. Read it from snmp.
-                _table.DefaultTtl = LinuxStringParsingHelpers.ParseDefaultTtlFromFile(NetworkFiles.SnmpV4StatsFile);
+                _table.DefaultTtl = StringParsingHelpers.ParseDefaultTtlFromFile(NetworkFiles.SnmpV4StatsFile);
             }
 
             _numIPAddresses = GetNumIPAddresses();

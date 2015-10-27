@@ -1,13 +1,16 @@
-﻿using Xunit;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using Xunit;
 
 namespace System.Net.NetworkInformation.Tests
 {
-    public class StringParsingTests
+    public class StatisticsParsingTests
     {
         [Fact]
         public static void TestIcmpv4Parsing()
         {
-            Icmpv4StatisticsTable table = LinuxStringParsingHelpers.ParseIcmpv4FromSnmpFile("snmp_example.txt");
+            Icmpv4StatisticsTable table = StringParsingHelpers.ParseIcmpv4FromSnmpFile("snmp_example.txt");
             Assert.Equal(1, table.InMsgs);
             Assert.Equal(2, table.InErrors);
             Assert.Equal(3, table.InCsumErrors);
@@ -33,14 +36,14 @@ namespace System.Net.NetworkInformation.Tests
             Assert.Equal(9001, table.OutEchoReps);
             Assert.Equal(42, table.OutTimestamps);
             Assert.Equal(4100414, table.OutTimestampReps);
-            Assert.Equal(25555555, table.OutAddrMasks);
+            Assert.Equal(2147483647, table.OutAddrMasks);
             Assert.Equal(0, table.OutAddrMaskReps);
         }
 
         [Fact]
         public static void TestIcmpv6Parsing()
         {
-            Icmpv6StatisticsTable table = LinuxStringParsingHelpers.ParseIcmpv6FromSnmp6File("snmp6_example.txt");
+            Icmpv6StatisticsTable table = StringParsingHelpers.ParseIcmpv6FromSnmp6File("snmp6_example.txt");
             Assert.Equal(1, table.InMsgs);
             Assert.Equal(2, table.InErrors);
             Assert.Equal(3, table.OutMsgs);

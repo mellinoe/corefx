@@ -91,12 +91,12 @@ namespace System.Net.NetworkInformation
 
         private static string GetDnsSuffix()
         {
-            return UnixStringParsingHelpers.ParseDnsSuffixFromResolvConfFile(NetworkFiles.EtcResolvConfFile);
+            return StringParsingHelpers.ParseDnsSuffixFromResolvConfFile(NetworkFiles.EtcResolvConfFile);
         }
 
         private static IPAddressCollection GetDnsAddresses()
         {
-            Collection<IPAddress> internalAddresses = UnixStringParsingHelpers.ParseDnsAddressesFromResolvConfFile(NetworkFiles.EtcResolvConfFile);
+            Collection<IPAddress> internalAddresses = StringParsingHelpers.ParseDnsAddressesFromResolvConfFile(NetworkFiles.EtcResolvConfFile);
             return new InternalIPAddressCollection(internalAddresses);
         }
     }

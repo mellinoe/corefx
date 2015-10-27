@@ -12,7 +12,7 @@ namespace System.Net.NetworkInformation
         // The table is a fairly large struct (108 bytes), pass it by reference
         public LinuxIcmpV4Statistics()
         {
-            _table = LinuxStringParsingHelpers.ParseIcmpv4FromSnmpFile(NetworkFiles.SnmpV4StatsFile);
+            _table = StringParsingHelpers.ParseIcmpv4FromSnmpFile(NetworkFiles.SnmpV4StatsFile);
         }
 
         public override long AddressMaskRepliesReceived { get { return _table.InAddrMaskReps; } }

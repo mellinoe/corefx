@@ -73,7 +73,7 @@ namespace System.Net.NetworkInformation
         {
             // /sys/class/net/<interface_name>/flags
             string path = Path.Combine(NetworkFiles.SysClassNetFolder, name, NetworkFiles.FlagsFileName);
-            Interop.LinuxNetDeviceFlags flags = (Interop.LinuxNetDeviceFlags)LinuxStringParsingHelpers.ParseRawHexFileAsInt(path);
+            Interop.LinuxNetDeviceFlags flags = (Interop.LinuxNetDeviceFlags)StringParsingHelpers.ParseRawHexFileAsInt(path);
 
             return (flags & Interop.LinuxNetDeviceFlags.IFF_MULTICAST) == Interop.LinuxNetDeviceFlags.IFF_MULTICAST;
         }
@@ -116,7 +116,7 @@ namespace System.Net.NetworkInformation
             try
             {
                 string path = Path.Combine(NetworkFiles.SysClassNetFolder, name, NetworkFiles.SpeedFileName);
-                return LinuxStringParsingHelpers.ParseRawLongFile(path);
+                return StringParsingHelpers.ParseRawLongFile(path);
             }
             catch (IOException) // Some interfaces may give an "Invalid argument" error when opening this file.
             {

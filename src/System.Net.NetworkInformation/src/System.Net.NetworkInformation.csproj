@@ -239,7 +239,7 @@
     <Compile Include="System\Net\NetworkInformation\NetworkFiles.cs" />
     <Compile Include="System\Net\NetworkInformation\SimpleGatewayIPAddressInformation.cs" />
     <Compile Include="System\Net\NetworkInformation\SimpleTcpConnectionInformation.cs" />
-    <Compile Include="System\Net\NetworkInformation\StringParsingHelpers.Unix.cs" />
+    <Compile Include="System\Net\NetworkInformation\StringParsingHelpers.Dns.cs" />
     <Compile Include="System\Net\NetworkInformation\UnixIPInterfaceProperties.cs" />
     <Compile Include="System\Net\NetworkInformation\UnixIPv4InterfaceProperties.cs" />
     <Compile Include="System\Net\NetworkInformation\UnixIPv6InterfaceProperties.cs" />
@@ -289,7 +289,10 @@
     <Compile Include="System\Net\NetworkInformation\LinuxNetworkInterface.cs" />
     <Compile Include="System\Net\NetworkInformation\LinuxIPv4InterfaceProperties.cs" />
     <Compile Include="System\Net\NetworkInformation\LinuxIPv6InterfaceProperties.cs" />
-    <Compile Include="System\Net\NetworkInformation\StringParsingHelpers.Linux.cs" />
+    <Compile Include="System\Net\NetworkInformation\StringParsingHelpers.Addresses.cs" />
+    <Compile Include="System\Net\NetworkInformation\StringParsingHelpers.Connections.cs" />
+    <Compile Include="System\Net\NetworkInformation\StringParsingHelpers.Misc.cs" />
+    <Compile Include="System\Net\NetworkInformation\StringParsingHelpers.Statistics.cs" />
     <!-- Linux Common -->
     <Compile Include="$(CommonPath)\System\IO\StringParser.cs">
       <Link>Common\System\IO\StringParser.cs</Link>

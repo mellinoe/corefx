@@ -12,11 +12,11 @@ namespace System.Net.NetworkInformation
         public LinuxTcpStatistics(bool ipv4)
         {
             string snmpFile = ipv4 ? NetworkFiles.SnmpV4StatsFile : NetworkFiles.SnmpV6StatsFile;
-            _table = LinuxStringParsingHelpers.ParseTcpGlobalStatisticsFromSnmpFile(snmpFile);
+            _table = StringParsingHelpers.ParseTcpGlobalStatisticsFromSnmpFile(snmpFile);
 
             string sockstatFile = ipv4 ? NetworkFiles.SockstatFile : NetworkFiles.Sockstat6File;
             string protoName = ipv4 ? "TCP" : "TCP6";
-            _currentConnections = LinuxStringParsingHelpers.ParseNumSocketConnections(sockstatFile, protoName);
+            _currentConnections = StringParsingHelpers.ParseNumSocketConnections(sockstatFile, protoName);
         }
 
         public override long ConnectionsAccepted { get { throw new PlatformNotSupportedException(); } }

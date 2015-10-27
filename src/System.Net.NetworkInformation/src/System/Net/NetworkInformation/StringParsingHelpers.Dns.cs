@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+
+using System.Collections.ObjectModel;
 using System.IO;
 
 namespace System.Net.NetworkInformation
 {
-    internal static class UnixStringParsingHelpers
+    internal static partial class StringParsingHelpers
     {
         internal static string ParseDnsSuffixFromResolvConfFile(string filePath)
         {
