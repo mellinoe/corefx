@@ -239,6 +239,7 @@
     <Compile Include="System\Net\NetworkInformation\NetworkFiles.cs" />
     <Compile Include="System\Net\NetworkInformation\SimpleGatewayIPAddressInformation.cs" />
     <Compile Include="System\Net\NetworkInformation\SimpleTcpConnectionInformation.cs" />
+    <Compile Include="System\Net\NetworkInformation\StringParsingHelpers.Unix.cs" />
     <Compile Include="System\Net\NetworkInformation\UnixIPInterfaceProperties.cs" />
     <Compile Include="System\Net\NetworkInformation\UnixIPv4InterfaceProperties.cs" />
     <Compile Include="System\Net\NetworkInformation\UnixIPv6InterfaceProperties.cs" />
