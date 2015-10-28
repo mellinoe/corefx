@@ -17,14 +17,14 @@ namespace System.Net.NetworkInformation
             return rcr.TryGetNextValue("search", out dnsSuffix) ? dnsSuffix : string.Empty;
         }
 
-        internal static Collection<IPAddress> ParseDnsAddressesFromResolvConfFile(string filepath)
+        internal static Collection<IPAddress> ParseDnsAddressesFromResolvConfFile(string filePath)
         {
             // Parse /etc/resolv.conf for all of the "nameserver" entries.
             // These are the DNS servers the machine is configured to use.
             // On OSX, this file is not directly used by most processes for DNS
             // queries/routing, but it is automatically generated instead, with
             // the machine's DNS servers listed in it.
-            string data = File.ReadAllText(NetworkFiles.EtcResolvConfFile);
+            string data = File.ReadAllText(filePath);
             RowConfigReader rcr = new RowConfigReader(data);
             Collection<IPAddress> addresses = new Collection<IPAddress>();
 

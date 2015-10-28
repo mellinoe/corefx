@@ -38,7 +38,11 @@
       <Link>SharedSource\SimpleGatewayIPAddressInformation.cs</Link>
     </Compile>
     <!-- Tests -->
+    <Compile Include="AddressParsingTests.cs" />
+    <Compile Include="DnsParsingTests.cs" />
+    <Compile Include="FileUtil.cs" />
     <Compile Include="IPInterfacePropertiesTest.cs" />
+    <Compile Include="MiscParsingTests.cs" />
     <Compile Include="NetworkChangeTest.cs" />
     <Compile Include="NetworkInterfaceBasicTest.cs" />
     <Compile Include="PhysicalAddressTest.cs" />
@@ -83,54 +87,67 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="networkfiles\etc\resolv.conf">
+    <None Include="networkfiles\rawhexint">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\etc\samba\smb.conf">
+    <None Include="networkfiles\rawlong">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\dev">
+    <None Include="networkfiles\rawint_maxvalue">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\ipv6_route">
+    <None Include="networkfiles\rawlong_maxvalue">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\route">
+    <None Include="networkfiles\resolv.conf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\snmp">
+    <None Include="networkfiles\smb.conf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\snmp6">
+    <None Include="networkfiles\dev">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\sockstat">
+    <None Include="networkfiles\ipv6_route">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\sockstat6">
+    <None Include="networkfiles\route">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\tcp">
+    <None Include="networkfiles\snmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\tcp6">
+    <None Include="networkfiles\snmp6">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\udp">
+    <None Include="networkfiles\sockstat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\proc\net\udp6">
+    <None Include="networkfiles\sockstat6">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\var\lib\dhcp\dhclient.leases">
+    <None Include="networkfiles\tcp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\tcp6">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\udp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\udp6">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\dhclient.leases">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="project.json" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="networkfiles\proc\sys\net\ipv4\" />
-    <Folder Include="networkfiles\proc\sys\net\ipv6\" />
-    <Folder Include="networkfiles\sys\class\net\" />
+    <None Include="networkfiles\rawint">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.targets))\dir.targets" />
 </Project>

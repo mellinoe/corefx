@@ -1,18 +1,36 @@
 ﻿// Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.IO;
 using Xunit;
 
 namespace System.Net.NetworkInformation.Tests
 {
-    public class ConnectionsParsingTests
+    public class ConnectionsParsingTests : IDisposable
     {
+        [Fact]
+        public static void NumSocketConnectionsParsing()
+        {
+            FileUtil.NormalizeLineEndings("sockstat", "sockstat_normalized");
+            FileUtil.NormalizeLineEndings("sockstat6", "sockstat6_normalized");
+
+            int numTcp = StringParsingHelpers.ParseNumSocketConnections("sockstat_normalized", "TCP");
+            Assert.Equal(4, numTcp);
+
+            int numTcp6 = StringParsingHelpers.ParseNumSocketConnections("sockstat6_normalized", "TCP6");
+            Assert.Equal(6, numTcp6);
+
+            int numUdp = StringParsingHelpers.ParseNumSocketConnections("sockstat_normalized", "UDP");
+            Assert.Equal(12, numUdp);
+
+            int numUdp6 = StringParsingHelpers.ParseNumSocketConnections("sockstat6_normalized", "UDP6");
+            Assert.Equal(3, numUdp6);
+        }
+
         [Fact]
         public static void ActiveTcpConnectionsParsing()
         {
-            NormalizeLineEndings("tcp", "tcp_normalized0");
-            NormalizeLineEndings("tcp6", "tcp6_normalized0");
+            FileUtil.NormalizeLineEndings("tcp", "tcp_normalized0");
+            FileUtil.NormalizeLineEndings("tcp6", "tcp6_normalized0");
 
             TcpConnectionInformation[] infos = StringParsingHelpers.ParseActiveTcpConnectionsFromFiles("tcp_normalized0", "tcp6_normalized0");
             Assert.Equal(10, infos.Length);
@@ -61,8 +79,8 @@ namespace System.Net.NetworkInformation.Tests
         [Fact]
         public static void TcpListenersParsing()
         {
-            NormalizeLineEndings("tcp", "tcp_normalized1");
-            NormalizeLineEndings("tcp6", "tcp6_normalized1");
+            FileUtil.NormalizeLineEndings("tcp", "tcp_normalized1");
+            FileUtil.NormalizeLineEndings("tcp6", "tcp6_normalized1");
 
             IPEndPoint[] listeners = StringParsingHelpers.ParseActiveTcpListenersFromFiles("tcp_normalized1", "tcp6_normalized1");
             Assert.Equal(10, listeners.Length);
@@ -83,8 +101,8 @@ namespace System.Net.NetworkInformation.Tests
         [Fact]
         public static void UdpListenersParsing()
         {
-            NormalizeLineEndings("udp", "udp_normalized0");
-            NormalizeLineEndings("udp6", "udp6_normalized0");
+            FileUtil.NormalizeLineEndings("udp", "udp_normalized0");
+            FileUtil.NormalizeLineEndings("udp6", "udp6_normalized0");
 
             IPEndPoint[] listeners = StringParsingHelpers.ParseActiveUdpListenersFromFiles("udp_normalized0", "udp6_normalized0");
             Assert.Equal(15, listeners.Length);
@@ -107,19 +125,16 @@ namespace System.Net.NetworkInformation.Tests
             Assert.Equal(listeners[14], new IPEndPoint(StringParsingHelpers.ParseHexIPAddress("00000000000000000000000000000000"), 0x8B58));
         }
 
-        private static void NormalizeLineEndings(string source, string normalizedDest)
-        {
-            // I'm storing the test text assets with their original line endings.
-            // The parsing logic depends on Environment.NewLine, so we normalize beforehand.
-            string contents = File.ReadAllText(source);
-            File.WriteAllText(normalizedDest, contents.Replace("\n", "\r\n"));
-        }
-
         private static void ValidateInfo(TcpConnectionInformation tcpConnectionInformation, IPEndPoint localEP, IPEndPoint remoteEP, TcpState state)
         {
             Assert.Equal(localEP, tcpConnectionInformation.LocalEndPoint);
             Assert.Equal(remoteEP, tcpConnectionInformation.RemoteEndPoint);
             Assert.Equal(state, tcpConnectionInformation.State);
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }
