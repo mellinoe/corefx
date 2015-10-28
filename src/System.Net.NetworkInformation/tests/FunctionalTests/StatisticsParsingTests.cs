@@ -8,9 +8,9 @@ namespace System.Net.NetworkInformation.Tests
     public class StatisticsParsingTests
     {
         [Fact]
-        public static void TestIcmpv4Parsing()
+        public static void Icmpv4Parsing()
         {
-            Icmpv4StatisticsTable table = StringParsingHelpers.ParseIcmpv4FromSnmpFile("snmp_example.txt");
+            Icmpv4StatisticsTable table = StringParsingHelpers.ParseIcmpv4FromSnmpFile("snmp");
             Assert.Equal(1, table.InMsgs);
             Assert.Equal(2, table.InErrors);
             Assert.Equal(3, table.InCsumErrors);
@@ -41,9 +41,9 @@ namespace System.Net.NetworkInformation.Tests
         }
 
         [Fact]
-        public static void TestIcmpv6Parsing()
+        public static void Icmpv6Parsing()
         {
-            Icmpv6StatisticsTable table = StringParsingHelpers.ParseIcmpv6FromSnmp6File("snmp6_example.txt");
+            Icmpv6StatisticsTable table = StringParsingHelpers.ParseIcmpv6FromSnmp6File("snmp6");
             Assert.Equal(1, table.InMsgs);
             Assert.Equal(2, table.InErrors);
             Assert.Equal(3, table.OutMsgs);
@@ -76,6 +76,153 @@ namespace System.Net.NetworkInformation.Tests
             Assert.Equal(32, table.OutNeighborSolicits);
             Assert.Equal(33, table.OutNeighborAdvertisements);
             Assert.Equal(34, table.OutRedirects);
+        }
+
+        [Fact]
+        public static void TcpGlobalStatisticsParsing()
+        {
+            TcpGlobalStatisticsTable table = StringParsingHelpers.ParseTcpGlobalStatisticsFromSnmpFile("snmp");
+            Assert.Equal(1, table.RtoAlgorithm);
+            Assert.Equal(200, table.RtoMin);
+            Assert.Equal(120000, table.RtoMax);
+            Assert.Equal(-1, table.MaxConn);
+            Assert.Equal(359, table.ActiveOpens);
+            Assert.Equal(28, table.PassiveOpens);
+            Assert.Equal(2, table.AttemptFails);
+            Assert.Equal(53, table.EstabResets);
+            Assert.Equal(4, table.CurrEstab);
+            Assert.Equal(21368, table.InSegs);
+            Assert.Equal(20642, table.OutSegs);
+            Assert.Equal(19, table.RetransSegs);
+            Assert.Equal(0, table.InErrs);
+            Assert.Equal(111, table.OutRsts);
+            Assert.Equal(0, table.InCsumErrors);
+        }
+
+        [Fact]
+        public static void Udpv4GlobalStatisticsParsing()
+        {
+            UdpGlobalStatisticsTable table = StringParsingHelpers.ParseUdpv4GlobalStatisticsFromSnmpFile("snmp");
+            Assert.Equal(7181, table.InDatagrams);
+            Assert.Equal(150, table.NoPorts);
+            Assert.Equal(0, table.InErrors);
+            Assert.Equal(4386, table.OutDatagrams);
+            Assert.Equal(0, table.RcvbufErrors);
+            Assert.Equal(0, table.SndbufErrors);
+            Assert.Equal(1, table.InCsumErrors);
+        }
+
+        [Fact]
+        public static void Udpv6GlobalStatisticsParsing()
+        {
+            UdpGlobalStatisticsTable table = StringParsingHelpers.ParseUdpv6GlobalStatisticsFromSnmp6File("snmp6");
+            Assert.Equal(19, table.InDatagrams);
+            Assert.Equal(0, table.NoPorts);
+            Assert.Equal(0, table.InErrors);
+            Assert.Equal(21, table.OutDatagrams);
+            Assert.Equal(99999, table.RcvbufErrors);
+            Assert.Equal(11011011, table.SndbufErrors);
+            Assert.Equal(0, table.InCsumErrors);
+        }
+
+        [Fact]
+        public static void Ipv4GlobalStatisticsParsing()
+        {
+            IPGlobalStatisticsTable table = StringParsingHelpers.ParseIPv4GlobalStatisticsFromSnmpFile("snmp");
+
+            Assert.Equal(false, table.Forwarding);
+            Assert.Equal(64, table.DefaultTtl);
+            Assert.Equal(28121, table.InReceives);
+            Assert.Equal(0, table.InHeaderErrors);
+            Assert.Equal(2, table.InAddressErrors);
+            Assert.Equal(0, table.ForwardedDatagrams);
+            Assert.Equal(0, table.InUnknownProtocols);
+            Assert.Equal(0, table.InDiscards);
+            Assert.Equal(28117, table.InDelivers);
+            Assert.Equal(24616, table.OutRequests);
+            Assert.Equal(48, table.OutDiscards);
+            Assert.Equal(0, table.OutNoRoutes);
+            Assert.Equal(0, table.ReassemblyTimeout);
+            Assert.Equal(0, table.ReassemblyRequireds);
+            Assert.Equal(1, table.ReassemblyOKs);
+            Assert.Equal(2, table.ReassemblyFails);
+            Assert.Equal(14, table.FragmentOKs);
+            Assert.Equal(0, table.FragmentFails);
+            Assert.Equal(92, table.FragmentCreates);
+        }
+
+        [Fact]
+        public static void Ipv6GlobalStatisticsParsing()
+        {
+            IPGlobalStatisticsTable table = StringParsingHelpers.ParseIPv6GlobalStatisticsFromSnmp6File("snmp6");
+
+            Assert.Equal(189, table.InReceives);
+            Assert.Equal(0, table.InHeaderErrors);
+            Assert.Equal(2000, table.InAddressErrors);
+            Assert.Equal(42, table.InUnknownProtocols);
+            Assert.Equal(0, table.InDiscards);
+            Assert.Equal(189, table.InDelivers);
+            Assert.Equal(55, table.ForwardedDatagrams);
+            Assert.Equal(199, table.OutRequests);
+            Assert.Equal(0, table.OutDiscards);
+            Assert.Equal(53, table.OutNoRoutes);
+            Assert.Equal(2121, table.ReassemblyTimeout);
+            Assert.Equal(1, table.ReassemblyRequireds);
+            Assert.Equal(2, table.ReassemblyOKs);
+            Assert.Equal(4, table.ReassemblyFails);
+            Assert.Equal(8, table.FragmentOKs);
+            Assert.Equal(16, table.FragmentFails);
+            Assert.Equal(32, table.FragmentCreates);
+        }
+
+        [Fact]
+        public static void IpInterfaceStatisticsParsingFirst()
+        {
+            // First row in the 'dev' table
+            IPInterfaceStatisticsTable table = StringParsingHelpers.ParseInterfaceStatisticsTableFromFile("dev", "wlan0");
+
+            Assert.Equal(26622u, table.BytesReceived);
+            Assert.Equal(394u, table.PacketsReceived);
+            Assert.Equal(2u, table.ErrorsReceived);
+            Assert.Equal(4u, table.IncomingPacketsDropped);
+            Assert.Equal(6u, table.FifoBufferErrorsReceived);
+            Assert.Equal(8u, table.PacketFramingErrorsReceived);
+            Assert.Equal(10u, table.CompressedPacketsReceived);
+            Assert.Equal(12u, table.MulticastFramesReceived);
+
+            Assert.Equal(27465u, table.BytesTransmitted);
+            Assert.Equal(208u, table.PacketsTransmitted);
+            Assert.Equal(1u, table.ErrorsTransmitted);
+            Assert.Equal(2u, table.OutgoingPacketsDropped);
+            Assert.Equal(3u, table.FifoBufferErrorsTransmitted);
+            Assert.Equal(4u, table.CollisionsDetected);
+            Assert.Equal(5u, table.CarrierLosses);
+            Assert.Equal(6u, table.CompressedPacketsTransmitted);
+        }
+
+        [Fact]
+        public static void IpInterfaceStatisticsParsingLast()
+        {
+            // Last row in the 'dev' table
+            IPInterfaceStatisticsTable table = StringParsingHelpers.ParseInterfaceStatisticsTableFromFile("dev", "lo");
+
+            Assert.Equal(30008u, table.BytesReceived);
+            Assert.Equal(302u, table.PacketsReceived);
+            Assert.Equal(0u, table.ErrorsReceived);
+            Assert.Equal(0u, table.IncomingPacketsDropped);
+            Assert.Equal(0u, table.FifoBufferErrorsReceived);
+            Assert.Equal(0u, table.PacketFramingErrorsReceived);
+            Assert.Equal(0u, table.CompressedPacketsReceived);
+            Assert.Equal(0u, table.MulticastFramesReceived);
+
+            Assert.Equal(30008u, table.BytesTransmitted);
+            Assert.Equal(302u, table.PacketsTransmitted);
+            Assert.Equal(0u, table.ErrorsTransmitted);
+            Assert.Equal(0u, table.OutgoingPacketsDropped);
+            Assert.Equal(0u, table.FifoBufferErrorsTransmitted);
+            Assert.Equal(0u, table.CollisionsDetected);
+            Assert.Equal(0u, table.CarrierLosses);
+            Assert.Equal(0u, table.CompressedPacketsTransmitted);
         }
     }
 }

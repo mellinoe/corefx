@@ -1,9 +1,9 @@
 {
   "locked": true,
-  "version": 1,
+  "version": 2,
   "targets": {
     "DNXCore,Version=v5.0": {
-      "coveralls.io/1.4": {
+      "coveralls.io/1.4.0": {
         "type": "package"
       },
       "Microsoft.CSharp/4.0.1-beta-23419": {
@@ -243,7 +243,7 @@
       "OpenCover/4.6.166": {
         "type": "package"
       },
-      "ReportGenerator/2.3.1.0": {
+      "ReportGenerator/2.3.1": {
         "type": "package"
       },
       "System.AppContext/4.0.1-beta-23419": {
@@ -1973,7 +1973,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x64": {
-      "coveralls.io/1.4": {
+      "coveralls.io/1.4.0": {
         "type": "package"
       },
       "Microsoft.CSharp/4.0.1-beta-23419": {
@@ -2231,7 +2231,7 @@
       "OpenCover/4.6.166": {
         "type": "package"
       },
-      "ReportGenerator/2.3.1.0": {
+      "ReportGenerator/2.3.1": {
         "type": "package"
       },
       "runtime.win7.Microsoft.Win32.Primitives/4.0.1-beta-23419": {
@@ -2867,6 +2867,18 @@
           "runtimes/win7-x64/native/api-ms-win-service-private-l1-1-1.dll": {},
           "runtimes/win7-x64/native/api-ms-win-service-winsvc-l1-1-0.dll": {},
           "runtimes/win7-x64/native/ext-ms-win-advapi32-encryptedfile-l1-1-0.dll": {}
+        }
+      },
+      "runtime.win7-x64.System.Data.SqlClient.sni/4.0.0-beta-23419": {
+        "type": "package",
+        "native": {
+          "runtimes/win7-x64/native/sni.dll": {}
+        }
+      },
+      "runtime.win7-x64.System.IO.Compression.clrcompression/4.0.1-beta-23419": {
+        "type": "package",
+        "native": {
+          "runtimes/win7-x64/native/clrcompression.dll": {}
         }
       },
       "System.AppContext/4.0.1-beta-23419": {
@@ -4676,7 +4688,7 @@
       }
     },
     "DNXCore,Version=v5.0/win7-x86": {
-      "coveralls.io/1.4": {
+      "coveralls.io/1.4.0": {
         "type": "package"
       },
       "Microsoft.CSharp/4.0.1-beta-23419": {
@@ -4934,7 +4946,7 @@
       "OpenCover/4.6.166": {
         "type": "package"
       },
-      "ReportGenerator/2.3.1.0": {
+      "ReportGenerator/2.3.1": {
         "type": "package"
       },
       "runtime.win7.Microsoft.Win32.Primitives/4.0.1-beta-23419": {
@@ -5570,6 +5582,18 @@
           "runtimes/win7-x86/native/api-ms-win-service-private-l1-1-1.dll": {},
           "runtimes/win7-x86/native/api-ms-win-service-winsvc-l1-1-0.dll": {},
           "runtimes/win7-x86/native/ext-ms-win-advapi32-encryptedfile-l1-1-0.dll": {}
+        }
+      },
+      "runtime.win7-x86.System.Data.SqlClient.sni/4.0.0-beta-23419": {
+        "type": "package",
+        "native": {
+          "runtimes/win7-x86/native/sni.dll": {}
+        }
+      },
+      "runtime.win7-x86.System.IO.Compression.clrcompression/4.0.1-beta-23419": {
+        "type": "package",
+        "native": {
+          "runtimes/win7-x86/native/clrcompression.dll": {}
         }
       },
       "System.AppContext/4.0.1-beta-23419": {
@@ -7379,7 +7403,7 @@
       }
     },
     "DNXCore,Version=v5.0/ubuntu.14.04-x64": {
-      "coveralls.io/1.4": {
+      "coveralls.io/1.4.0": {
         "type": "package"
       },
       "Microsoft.CSharp/4.0.1-beta-23419": {
@@ -7619,7 +7643,7 @@
       "OpenCover/4.6.166": {
         "type": "package"
       },
-      "ReportGenerator/2.3.1.0": {
+      "ReportGenerator/2.3.1": {
         "type": "package"
       },
       "runtime.linux.System.Diagnostics.Process/4.1.0-beta-23419": {
@@ -9973,7 +9997,7 @@
       }
     },
     "DNXCore,Version=v5.0/osx.10.10-x64": {
-      "coveralls.io/1.4": {
+      "coveralls.io/1.4.0": {
         "type": "package"
       },
       "Microsoft.CSharp/4.0.1-beta-23419": {
@@ -10213,7 +10237,7 @@
       "OpenCover/4.6.166": {
         "type": "package"
       },
-      "ReportGenerator/2.3.1.0": {
+      "ReportGenerator/2.3.1": {
         "type": "package"
       },
       "runtime.osx.10.10.System.Diagnostics.Process/4.1.0-beta-23419": {
@@ -12566,7 +12590,7 @@
     }
   },
   "libraries": {
-    "coveralls.io/1.4": {
+    "coveralls.io/1.4.0": {
       "type": "package",
       "sha512": "QJLuUzAD50drCp5P+PiWHh/TKcNBbsgnnZiN600YtRPx5DP4aY4MpVeY1oYs8eOnuhCZW+5TqcpUct3oHJigIQ==",
       "files": [
@@ -12902,7 +12926,7 @@
         "transform/transform.ps1"
       ]
     },
-    "ReportGenerator/2.3.1.0": {
+    "ReportGenerator/2.3.1": {
       "type": "package",
       "sha512": "R0NM/SAjRjGGtlMcnyD53RVtPykTPkU7JNWgomUSKfTN66Vtuw8aDzmpycd5BJZ06yJ7NOE+6Pw4/esKnVeXdg==",
       "files": [
@@ -14018,6 +14042,27 @@
         "runtimes/win8-x64/native/api-ms-win-service-private-l1-1-1.dll"
       ]
     },
+    "runtime.win7-x64.System.Data.SqlClient.sni/4.0.0-beta-23419": {
+      "type": "package",
+      "sha512": "GuH9cKtDvlFr3bhm+fiEEyUNHt+4z54PLMmaomH3QpoTUXVVcFh+d020NQt/brF7v0szbHBDZoUpw/h47NhjlA==",
+      "files": [
+        "runtime.win7-x64.System.Data.SqlClient.sni.4.0.0-beta-23419.nupkg",
+        "runtime.win7-x64.System.Data.SqlClient.sni.4.0.0-beta-23419.nupkg.sha512",
+        "runtime.win7-x64.System.Data.SqlClient.sni.nuspec",
+        "runtimes/win7-x64/native/sni.dll"
+      ]
+    },
+    "runtime.win7-x64.System.IO.Compression.clrcompression/4.0.1-beta-23419": {
+      "type": "package",
+      "sha512": "twFwug8zgLKoQwEpdo0EMnkuexZv6FmMP0JdVeuio23/6NUIshyMRaqgzIErN3d0vYl77FcQ4sbyA2qqkO2nEg==",
+      "files": [
+        "runtime.win7-x64.System.IO.Compression.clrcompression.4.0.1-beta-23419.nupkg",
+        "runtime.win7-x64.System.IO.Compression.clrcompression.4.0.1-beta-23419.nupkg.sha512",
+        "runtime.win7-x64.System.IO.Compression.clrcompression.nuspec",
+        "runtimes/win10-x64/native/ClrCompression.dll",
+        "runtimes/win7-x64/native/clrcompression.dll"
+      ]
+    },
     "runtime.win7-x86.Microsoft.NETCore.ConsoleHost/1.0.0-beta-23419": {
       "type": "package",
       "sha512": "oRlTbNaozeJYXXb3ki4U/KrJDqgqdjriEoGmu8/AEzaPuBGqFqg7CS0RVsX4eomxDHgU9syh+F1NN4f/KNrfCw==",
@@ -14222,6 +14267,27 @@
         "runtimes/win8-x86/native/api-ms-win-security-cryptoapi-l1-1-0.dll",
         "runtimes/win8-x86/native/api-ms-win-security-lsalookup-l2-1-1.dll",
         "runtimes/win8-x86/native/api-ms-win-service-private-l1-1-1.dll"
+      ]
+    },
+    "runtime.win7-x86.System.Data.SqlClient.sni/4.0.0-beta-23419": {
+      "type": "package",
+      "sha512": "zfF+Y/Syi4yTNtKdzqbuRoFiZERUS7yJXdCM5qN4EJ1DMjYitfaCluaE5cwfWSPHqS/bTWZTDqVxviO3G25QJw==",
+      "files": [
+        "runtime.win7-x86.System.Data.SqlClient.sni.4.0.0-beta-23419.nupkg",
+        "runtime.win7-x86.System.Data.SqlClient.sni.4.0.0-beta-23419.nupkg.sha512",
+        "runtime.win7-x86.System.Data.SqlClient.sni.nuspec",
+        "runtimes/win7-x86/native/sni.dll"
+      ]
+    },
+    "runtime.win7-x86.System.IO.Compression.clrcompression/4.0.1-beta-23419": {
+      "type": "package",
+      "sha512": "NXsS0pw3zfLjbD4a3jSThXsKT3yYPQaWmNLHNvLncTyEu81OLVmyTg7iJj2lnJKMDVo7zo/uEPpuASGRm5NTzw==",
+      "files": [
+        "runtime.win7-x86.System.IO.Compression.clrcompression.4.0.1-beta-23419.nupkg",
+        "runtime.win7-x86.System.IO.Compression.clrcompression.4.0.1-beta-23419.nupkg.sha512",
+        "runtime.win7-x86.System.IO.Compression.clrcompression.nuspec",
+        "runtimes/win10-x86/native/ClrCompression.dll",
+        "runtimes/win7-x86/native/clrcompression.dll"
       ]
     },
     "System.AppContext/4.0.1-beta-23419": {
@@ -17597,7 +17663,7 @@
       "Microsoft.NETCore.TestHost >= 1.0.0-beta-23419",
       "Microsoft.NETCore.Console >= 1.0.0-beta-23419",
       "System.IO.Compression >= 4.1.0-beta-23419",
-      "coveralls.io >= 1.4",
+      "coveralls.io >= 1.4.0",
       "OpenCover >= 4.6.166",
       "ReportGenerator >= 2.3.1",
       "Microsoft.DotNet.xunit.performance.analysis >= 1.0.0-alpha-build0022",

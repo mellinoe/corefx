@@ -69,7 +69,7 @@ namespace System.Net.NetworkInformation
                 string line = v4connections[i];
                 IPAddress remoteIPAddress;
                 int remotePort;
-                ParseRemoteConnectionInformation(line, out remoteIPAddress, out remotePort);
+                ParseLocalConnectionInformation(line, out remoteIPAddress, out remotePort);
 
                 endPoints[index++] = new IPEndPoint(remoteIPAddress, remotePort);
             }
@@ -80,7 +80,7 @@ namespace System.Net.NetworkInformation
                 string line = v6connections[i];
                 IPAddress remoteIPAddress;
                 int remotePort;
-                ParseRemoteConnectionInformation(line, out remoteIPAddress, out remotePort);
+                ParseLocalConnectionInformation(line, out remoteIPAddress, out remotePort);
 
                 endPoints[index++] = new IPEndPoint(remoteIPAddress, remotePort);
             }
@@ -105,7 +105,7 @@ namespace System.Net.NetworkInformation
                 string line = v4connections[i];
                 IPAddress remoteIPAddress;
                 int remotePort;
-                ParseRemoteConnectionInformation(line, out remoteIPAddress, out remotePort);
+                ParseLocalConnectionInformation(line, out remoteIPAddress, out remotePort);
 
                 endPoints[index++] = new IPEndPoint(remoteIPAddress, remotePort);
             }
@@ -116,7 +116,7 @@ namespace System.Net.NetworkInformation
                 string line = v6connections[i];
                 IPAddress remoteIPAddress;
                 int remotePort;
-                ParseRemoteConnectionInformation(line, out remoteIPAddress, out remotePort);
+                ParseLocalConnectionInformation(line, out remoteIPAddress, out remotePort);
 
                 endPoints[index++] = new IPEndPoint(remoteIPAddress, remotePort);
             }
@@ -152,6 +152,29 @@ namespace System.Net.NetworkInformation
             IPEndPoint remoteEndPoint = new IPEndPoint(remoteAddress, remotePort);
 
             return new SimpleTcpConnectionInformation(localEndPoint, remoteEndPoint, tcpState);
+        }
+
+        // Common parsing logic for the local connection information
+        private static void ParseLocalConnectionInformation(string line, out IPAddress remoteIPAddress, out int remotePort)
+        {
+            StringParser parser = new StringParser(line, ' ', true);
+            parser.MoveNextOrFail(); // skip Index
+
+            string localAddressAndPort = parser.MoveAndExtractNext();
+            int indexOfColon = localAddressAndPort.IndexOf(':');
+            if (indexOfColon == -1)
+            {
+                throw new InvalidOperationException("Parsing error. No colon in " + localAddressAndPort);
+            }
+
+            string remoteAddressString = localAddressAndPort.Substring(0, indexOfColon);
+            remoteIPAddress = ParseHexIPAddress(remoteAddressString);
+
+            string portString = localAddressAndPort.Substring(indexOfColon + 1, localAddressAndPort.Length - (indexOfColon + 1));
+            if (!int.TryParse(portString, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out remotePort))
+            {
+                throw new InvalidOperationException("Couldn't parse remote port number " + portString);
+            }
         }
 
         // Common parsing logic for the remote connection information
@@ -233,7 +256,7 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private static IPAddress ParseHexIPAddress(string remoteAddressString)
+        internal static IPAddress ParseHexIPAddress(string remoteAddressString)
         {
             if (remoteAddressString.Length <= 8) // IPv4 Address
             {

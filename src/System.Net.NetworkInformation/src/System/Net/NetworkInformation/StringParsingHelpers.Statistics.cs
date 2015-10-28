@@ -366,7 +366,7 @@ namespace System.Net.NetworkInformation
 
         internal static UdpGlobalStatisticsTable ParseUdpv4GlobalStatisticsFromSnmpFile(string filePath)
         {
-            string fileContents = File.ReadAllText(NetworkFiles.SnmpV4StatsFile);
+            string fileContents = File.ReadAllText(filePath);
             int firstUdpHeader = fileContents.IndexOf("Udp:");
             int secondUdpHeader = fileContents.IndexOf("Udp:", firstUdpHeader + 1);
             int endOfSecondLine = fileContents.IndexOf(Environment.NewLine, secondUdpHeader);

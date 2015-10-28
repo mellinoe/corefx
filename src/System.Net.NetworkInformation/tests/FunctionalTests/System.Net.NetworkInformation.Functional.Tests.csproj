@@ -42,6 +42,7 @@
     <Compile Include="NetworkChangeTest.cs" />
     <Compile Include="NetworkInterfaceBasicTest.cs" />
     <Compile Include="PhysicalAddressTest.cs" />
+    <Compile Include="ConnectionsParsingTests.cs" />
     <Compile Include="StatisticsParsingTests.cs" />
     <!-- Common test files -->
     <Compile Include="$(CommonTestPath)\System\Net\TestLogging.cs">
@@ -82,17 +83,54 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="networkfiles\etc\resolv.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\etc\samba\smb.conf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\dev">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\ipv6_route">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\route">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\snmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\snmp6">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\sockstat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\sockstat6">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\tcp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\tcp6">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\udp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\proc\net\udp6">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="networkfiles\var\lib\dhcp\dhclient.leases">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="snmp_example.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="snmp6_example.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <Folder Include="networkfiles\proc\sys\net\ipv4\" />
+    <Folder Include="networkfiles\proc\sys\net\ipv6\" />
+    <Folder Include="networkfiles\sys\class\net\" />
   </ItemGroup>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.targets))\dir.targets" />
 </Project>
