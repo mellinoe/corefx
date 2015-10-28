@@ -11,8 +11,7 @@ namespace System.Net.NetworkInformation
 
         public LinuxTcpStatistics(bool ipv4)
         {
-            string snmpFile = ipv4 ? NetworkFiles.SnmpV4StatsFile : NetworkFiles.SnmpV6StatsFile;
-            _table = StringParsingHelpers.ParseTcpGlobalStatisticsFromSnmpFile(snmpFile);
+            _table = StringParsingHelpers.ParseTcpGlobalStatisticsFromSnmpFile(NetworkFiles.SnmpV4StatsFile);
 
             string sockstatFile = ipv4 ? NetworkFiles.SockstatFile : NetworkFiles.Sockstat6File;
             string protoName = ipv4 ? "TCP" : "TCP6";
