@@ -49,7 +49,7 @@ namespace System.Net.NetworkInformation
         internal static int ParseRawIntFile(string filePath)
         {
             int ret;
-            if (!int.TryParse(File.ReadAllText(filePath), out ret))
+            if (!int.TryParse(File.ReadAllText(filePath).Trim(), out ret))
             {
                 throw new NetworkInformationException();
             }
@@ -60,7 +60,7 @@ namespace System.Net.NetworkInformation
         internal static long ParseRawLongFile(string filePath)
         {
             long ret;
-            if (!long.TryParse(File.ReadAllText(filePath), out ret))
+            if (!long.TryParse(File.ReadAllText(filePath).Trim(), out ret))
             {
                 throw new NetworkInformationException();
             }
@@ -70,7 +70,7 @@ namespace System.Net.NetworkInformation
 
         internal static int ParseRawHexFileAsInt(string filePath)
         {
-            return Convert.ToInt32(File.ReadAllText(filePath), 16);
+            return Convert.ToInt32(File.ReadAllText(filePath).Trim(), 16);
         }
 
         private static int CountOccurences(string value, string candidate)

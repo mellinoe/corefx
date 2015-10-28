@@ -87,65 +87,65 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="networkfiles\rawhexint">
+    <None Include="NetworkFiles\rawhexint">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\rawlong">
+    <None Include="NetworkFiles\rawlong">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\rawint_maxvalue">
+    <None Include="NetworkFiles\rawint_maxvalue">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\rawlong_maxvalue">
+    <None Include="NetworkFiles\rawlong_maxvalue">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\resolv.conf">
+    <None Include="NetworkFiles\resolv.conf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\smb.conf">
+    <None Include="NetworkFiles\smb.conf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\dev">
+    <None Include="NetworkFiles\dev">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\ipv6_route">
+    <None Include="NetworkFiles\ipv6_route">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\route">
+    <None Include="NetworkFiles\route">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\snmp">
+    <None Include="NetworkFiles\snmp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\snmp6">
+    <None Include="NetworkFiles\snmp6">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\sockstat">
+    <None Include="NetworkFiles\sockstat">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\sockstat6">
+    <None Include="NetworkFiles\sockstat6">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\tcp">
+    <None Include="NetworkFiles\tcp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\tcp6">
+    <None Include="NetworkFiles\tcp6">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\udp">
+    <None Include="NetworkFiles\udp">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\udp6">
+    <None Include="NetworkFiles\udp6">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="networkfiles\dhclient.leases">
+    <None Include="NetworkFiles\dhclient.leases">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="networkfiles\rawint">
+    <None Include="NetworkFiles\rawint">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
