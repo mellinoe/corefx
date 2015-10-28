@@ -10,13 +10,15 @@ namespace System.Net.NetworkInformation.Tests
     {
         public static void NormalizeLineEndings(string source, string normalizedDest)
         {
-            // I'm storing the test text assets with their original line endings.
+            // I'm storing the test text assets with their original line endings ('\n').
             // The parsing logic depends on Environment.NewLine, so we normalize beforehand.
+            string contents = File.ReadAllText(source);
             if (Environment.NewLine != "\n")
             {
-                string contents = File.ReadAllText(source);
-                File.WriteAllText(normalizedDest, contents.Replace("\n", Environment.NewLine));
+                contents = contents.Replace("\n", Environment.NewLine);
             }
+
+            File.WriteAllText(normalizedDest, contents);
         }
     }
 }
