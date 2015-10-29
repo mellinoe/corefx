@@ -51,7 +51,6 @@ namespace System.Net.NetworkInformation
 
             var interfaces = (UnixNetworkInterface[])NetworkInterface.GetAllNetworkInterfaces();
 
-            // PERF: In native shim, use sysctl: net.link.generic.system.ifcount = number of network interfaces
             _numInterfaces = interfaces.Length;
             _numIPAddresses = interfaces.Sum(uni => uni.Addresses.Count);
 
