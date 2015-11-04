@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "pal_tcpstate.h"
+
 // Exchange types used to normalize Network protocol statistics information
 // from the OS, for use in the NetworkInformation library.
 
@@ -119,8 +121,6 @@ struct NativeTcpConnectionInformation
     IPEndPointInfo RemoteEndPoint;
     TcpState State;
 };
-
-TcpState MapTcpState(int tcpState);
 
 struct NativeIPInterfaceStatistics
 {
