@@ -205,7 +205,7 @@ namespace System.Net.NetworkInformation
             return new IPEndPoint(ipAddress, port);
         }
 
-        // Maps from Linux TCP states (include/net/tcp_states.h) to .NET TcpStates.
+        // Maps from Linux TCP states to .NET TcpStates.
         private static TcpState MapTcpState(int state)
         {
             return Interop.Sys.MapTcpState((int)state);
