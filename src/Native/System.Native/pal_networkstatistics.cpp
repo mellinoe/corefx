@@ -13,6 +13,7 @@
 #include "pal_utilities.h"
 #include "pal_networkstatistics.h"
 #include "pal_errno.h"
+#include "pal_tcpstate.h"
 
 #include <errno.h>
 #include <net/route.h>

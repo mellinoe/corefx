@@ -148,12 +148,12 @@ namespace System.Net.NetworkInformation
             IPEndPoint remoteEndPoint = ParseAddressAndPort(remoteAddressAndPort);
 
             string socketStateHex = parser.MoveAndExtractNext();
-            int state;
-            if (!int.TryParse(socketStateHex, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out state))
+            int nativeTcpState;
+            if (!int.TryParse(socketStateHex, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out nativeTcpState))
             {
                 throw ExceptionHelper.CreateForParseFailure();
             }
-            TcpState tcpState = MapTcpState((Interop.LinuxTcpState)state);
+            TcpState tcpState = MapTcpState(nativeTcpState);
 
             return new SimpleTcpConnectionInformation(localEndPoint, remoteEndPoint, tcpState);
         }
@@ -206,37 +206,9 @@ namespace System.Net.NetworkInformation
         }
 
         // Maps from Linux TCP states (include/net/tcp_states.h) to .NET TcpStates.
-        // TODO: Move this to the native shim.
-        private static TcpState MapTcpState(Interop.LinuxTcpState state)
+        private static TcpState MapTcpState(int state)
         {
-            switch (state)
-            {
-                case Interop.LinuxTcpState.TCP_ESTABLISHED:
-                    return TcpState.Established;
-                case Interop.LinuxTcpState.TCP_SYN_SENT:
-                    return TcpState.SynSent;
-                case Interop.LinuxTcpState.TCP_SYN_RECV:
-                case Interop.LinuxTcpState.TCP_NEW_SYN_RECV:
-                    return TcpState.SynReceived;
-                case Interop.LinuxTcpState.TCP_FIN_WAIT1:
-                    return TcpState.FinWait1;
-                case Interop.LinuxTcpState.TCP_FIN_WAIT2:
-                    return TcpState.FinWait2;
-                case Interop.LinuxTcpState.TCP_TIME_WAIT:
-                    return TcpState.TimeWait;
-                case Interop.LinuxTcpState.TCP_CLOSE:
-                    return TcpState.Closing;
-                case Interop.LinuxTcpState.TCP_CLOSE_WAIT:
-                    return TcpState.CloseWait;
-                case Interop.LinuxTcpState.TCP_LAST_ACK:
-                    return TcpState.LastAck;
-                case Interop.LinuxTcpState.TCP_LISTEN:
-                    return TcpState.Listen;
-                case Interop.LinuxTcpState.TCP_CLOSING:
-                    return TcpState.Closing;
-                default:
-                    return TcpState.Unknown;
-            }
+            return Interop.Sys.MapTcpState((int)state);
         }
 
         internal static IPAddress ParseHexIPAddress(string remoteAddressString)
