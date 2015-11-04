@@ -7,10 +7,10 @@
 
 #if HAVE_TCP_VAR_H
 #include <netinet/tcp_var.h>
-#elif HAVE_TCP_STATES_H
-#include <netinet/tcp_states.h>
+#elif HAVE_TCP_H_TCPSTATE_ENUM
+#include <netinet/tcp.h>
 #else
-#error System must have tcp_states.h or tcp_var.h.
+#error System must have tcp_states.h or have Tcp states defined in tcp.h.
 #endif
 
 extern "C" TcpState MapTcpState(int32_t tcpState)
@@ -40,13 +40,12 @@ extern "C" TcpState MapTcpState(int32_t tcpState)
             return TimeWait;
         default:
             return Unknown;
-#elif HAVE_TCP_STATES_H
+#elif HAVE_TCP_H_TCPSTATE_ENUM
         case TCP_ESTABLISHED:
             return Established;
         case TCP_SYN_SENT:
             return SynSent;
         case TCP_SYN_RECV:
-        case TCP_NEW_SYN_RECV:
             return SynReceived;
         case TCP_FIN_WAIT1:
             return FinWait1;
