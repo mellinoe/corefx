@@ -1,3 +1,5 @@
+#pragma once
+
 #include "pal_config.h"
 
 enum TcpState

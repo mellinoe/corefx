@@ -5,19 +5,19 @@
 #include "pal_utilities.h"
 #include "pal_networkstatistics.h"
 
-#if HAVE_TCP_VAR_H
-#include <netinet/tcp_var.h>
+#if HAVE_TCP_FSM_H
+#include <netinet/tcp_fsm.h>
 #elif HAVE_TCP_H_TCPSTATE_ENUM
 #include <netinet/tcp.h>
 #else
-#error System must have tcp_states.h or have Tcp states defined in tcp.h.
+#error System must have TCP states defined in either tcp.h or tcp_fsm.h.
 #endif
 
 extern "C" TcpState MapTcpState(int32_t tcpState)
 {
     switch (tcpState)
     {
-#if HAVE_TCP_VAR_H
+#if HAVE_TCP_FSM_H
         case TCPS_CLOSED:
             return Closed;
         case TCPS_LISTEN:

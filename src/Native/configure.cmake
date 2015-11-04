@@ -242,6 +242,14 @@ check_cxx_source_compiles(
 
 check_cxx_source_compiles(
     "
+    #include <netinet/tcp_fsm.h>
+    int main() { int x = TCPS_ESTABLISHED; return x; }
+    "
+    HAVE_TCP_FSM_H
+)
+
+check_cxx_source_compiles(
+    "
     #include <sys/types.h>
     #include <net/route.h>
     int main() { rt_msghdr* hdr; return 0; }
