@@ -12,6 +12,9 @@ namespace System.Net.NetworkInformation
 {
     public partial class Ping
     {
+        [DllImport("libc")]
+        public static extern void printf(string message);
+
         private const int IcmpHeaderLengthInBytes = 8;
         private const int IpHeaderLengthInBytes = 20;
 
@@ -36,7 +39,6 @@ namespace System.Net.NetworkInformation
                 SequenceNumber = 0,
             };
             byte[] sendBuffer = CreateSendMessageBuffer(header, buffer);
-
 
             using (Socket socket = new Socket(address.AddressFamily, SocketType.Raw, protocolType))
             {
