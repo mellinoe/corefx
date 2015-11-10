@@ -72,12 +72,9 @@
     <Compile Include="$(CommonPath)\System\Net\Internals\IPEndPointExtensions.cs">
       <Link>Common\System\Net\Internals\IPEndPointExtensions.cs</Link>
     </Compile>
-    <Compile Include="$(CommonPath)\System\Net\Sockets\SocketType.cs">
-      <Link>Common\System\Net\Sockets\SocketType.cs</Link>
-    </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetsUnix)' == 'true' ">
+  <ItemGroup Condition=" '$(TargetsUnix)' != 'true' ">
     <Compile Include="System\Net\NetworkInformation\Ping.Unix.cs" />
 
     <!-- System.Net Common -->
@@ -86,9 +83,6 @@
     </Compile>
     <Compile Include="$(CommonPath)\System\Net\SocketProtocolSupportPal.Unix.cs">
       <Link>Common\System\Net\SocketProtocolSupportPal.Unix.cs</Link>
-    </Compile>
-    <Compile Include="$(CommonPath)\System\Net\Sockets\ProtocolType.cs">
-      <Link>Common\System\Net\Sockets\ProtocolType.cs</Link>
     </Compile>
 
     <!-- Interop -->
@@ -109,7 +103,7 @@
     </Compile>
   </ItemGroup>
 
-  <ItemGroup Condition=" '$(TargetsWindows)' == 'true' ">
+  <ItemGroup Condition=" '$(TargetsWindows)' != 'true' ">
     <Compile Include="System\Net\NetworkInformation\Ping.Windows.cs" />
 
     <!-- System.Net Common -->
