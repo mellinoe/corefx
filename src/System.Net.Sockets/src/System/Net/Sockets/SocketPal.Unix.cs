@@ -137,6 +137,9 @@ namespace System.Net.Sockets
                 case Interop.Error.EHOSTUNREACH:
                     return SocketError.HostUnreachable;
 
+                case Interop.Error.EPERM:
+                    return SocketError.AccessDenied;
+
                 default:
                     return SocketError.SocketError;
             }
