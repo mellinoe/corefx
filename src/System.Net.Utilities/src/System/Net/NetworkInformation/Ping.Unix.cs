@@ -59,7 +59,7 @@ namespace System.Net.NetworkInformation
 
             IcmpHeader header = new IcmpHeader()
             {
-                Type = isIpv4 ? (byte)8 : (byte)128,
+                Type = isIpv4 ? (byte)Icmpv4MessageConstants.EchoRequest : (byte)Icmpv6MessageConstants.EchoRequest,
                 Code = 0,
                 HeaderChecksum = 0,
                 Identifier = 42,
@@ -104,7 +104,7 @@ namespace System.Net.NetworkInformation
                         pr = new PingReply(
                             address,
                             options,
-                            isIpv4 ? MapV4TypeToStatus(type, code) : MapV6TypeToStatus(type, code),
+                            isIpv4 ? Icmpv4MessageConstants.MapV4TypeToIPStatus(type, code) : Icmpv6MessageConstants.MapV6TypeToIPStatus(type, code),
                             roundTripTime,
                             receiveBuffer);
                         break;
@@ -124,34 +124,6 @@ namespace System.Net.NetworkInformation
 
             Finish();
             asyncOp.PostOperationCompleted(callback, ea);
-        }
-
-        private IPStatus MapV4TypeToStatus(byte type, byte code)
-        {
-            // TODO: There are a LOT of other possibilities here.
-            switch (type)
-            {
-                case 0:
-                    return IPStatus.Success;
-                case 3:
-                    return IPStatus.DestinationUnreachable;
-                default:
-                    return IPStatus.Unknown;
-            }
-        }
-
-        private IPStatus MapV6TypeToStatus(byte type, byte code)
-        {
-            // TODO: There are a LOT of other possibilities here.
-            switch (type)
-            {
-                case 129:
-                    return IPStatus.Success;
-                case 1:
-                    return IPStatus.DestinationUnreachable;
-                default:
-                    return IPStatus.Unknown;
-            }
         }
 
         // Must be 8 bytes total.
