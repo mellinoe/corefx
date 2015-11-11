@@ -18,7 +18,34 @@ namespace System.Net.NetworkInformation
         private const int IcmpHeaderLengthInBytes = 8;
         private const int IpHeaderLengthInBytes = 20;
 
+        private static readonly bool s_canUseRawSockets = CheckRawSocketPermissions();
+
+        private static bool CheckRawSocketPermissions()
+        {
+            try
+            {
+                Socket s = new Socket(AddressFamily.InterNetwork, SocketType.Raw, ProtocolType.Icmp);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private unsafe void InternalSendAsync(IPAddress address, byte[] buffer, int timeout, PingOptions options)
+        {
+            if (s_canUseRawSockets)
+            {
+                SendIcmpPingOverRawSocket(address, buffer, timeout, options);
+            }
+            else
+            {
+                throw new PlatformNotSupportedException("Need raw socket permissions.");
+            }
+        }
+
+        private unsafe void SendIcmpPingOverRawSocket(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
             AsyncOperation asyncOp = _asyncOp;
             SendOrPostCallback callback = _onPingCompletedDelegate;
@@ -56,23 +83,32 @@ namespace System.Net.NetworkInformation
                     Stopwatch sw = Stopwatch.StartNew();
                     socket.SendTo(sendBuffer, endPoint);
                     byte[] receiveBuffer = new byte[ipHeaderLength + IcmpHeaderLengthInBytes + buffer.Length];
-                    int bytesReceived = socket.ReceiveFrom(receiveBuffer, ref endPoint);
-                    byte type, code;
-                    fixed (byte* bytesPtr = receiveBuffer)
+                    while (true)
                     {
-                        int icmpHeaderOffset = isIpv4 ? ipHeaderLength : 0;
-                        IcmpHeader receivedHeader = *((IcmpHeader*)(bytesPtr + icmpHeaderOffset)); // Skip IP header.
-                        type = receivedHeader.Type;
-                        code = receivedHeader.Code;
+                        int bytesReceived = socket.ReceiveFrom(receiveBuffer, ref endPoint);
+                        byte type, code;
+                        fixed (byte* bytesPtr = receiveBuffer)
+                        {
+                            int icmpHeaderOffset = ipHeaderLength;
+                            IcmpHeader receivedHeader = *((IcmpHeader*)(bytesPtr + icmpHeaderOffset)); // Skip IP header.
+                            type = receivedHeader.Type;
+                            code = receivedHeader.Code;
+
+                            if (type == 8 || type == 128) // Echo Request
+                            {
+                                continue;
+                            }
+                        }
+                        sw.Stop();
+                        long roundTripTime = sw.ElapsedMilliseconds;
+                        pr = new PingReply(
+                            address,
+                            options,
+                            isIpv4 ? MapV4TypeToStatus(type, code) : MapV6TypeToStatus(type, code),
+                            roundTripTime,
+                            receiveBuffer);
+                        break;
                     }
-                    sw.Stop();
-                    long roundTripTime = sw.ElapsedMilliseconds;
-                    pr = new PingReply(
-                        address,
-                        options,
-                        isIpv4 ? MapV4TypeToStatus(type, code) : MapV6TypeToStatus(type, code),
-                        roundTripTime,
-                        receiveBuffer);
                 }
                 catch (SocketException se)
                 {
@@ -88,12 +124,11 @@ namespace System.Net.NetworkInformation
 
             Finish();
             asyncOp.PostOperationCompleted(callback, ea);
-
         }
 
         private IPStatus MapV4TypeToStatus(byte type, byte code)
         {
-            // TODO: There's a LOT of other possibilities here.
+            // TODO: There are a LOT of other possibilities here.
             switch (type)
             {
                 case 0:
@@ -107,7 +142,7 @@ namespace System.Net.NetworkInformation
 
         private IPStatus MapV6TypeToStatus(byte type, byte code)
         {
-            // TODO: There's a LOT of other possibilities here.
+            // TODO: There are a LOT of other possibilities here.
             switch (type)
             {
                 case 129:
@@ -143,8 +178,8 @@ namespace System.Net.NetworkInformation
             ushort checksum = ComputerBufferChecksum(result, 0, result.Length);
             // Jam the checksum into the buffer.
             // TODO: Fix the order of this, not sure what is up.
-            result[3] = (byte)(checksum & (0xFF));
             result[2] = (byte)(checksum >> 8);
+            result[3] = (byte)(checksum & (0xFF));
 
             return result;
         }

@@ -142,19 +142,6 @@ namespace System.Net.Utilities.Tests
                 });
         }
 
-        [PlatformSpecific(PlatformID.AnyUnix)]
-        [Fact]
-        public async Task SendAsync_ThrowsPlatformNotSupported_Unix()
-        {
-            // TODO: Remove this test once Ping implemented on Unix
-
-            IPAddress localIpAddress = IPAddress.Loopback;
-            Ping p = new Ping();
-
-            PingException e = await Assert.ThrowsAsync<PingException>(() => p.SendPingAsync(localIpAddress));
-            Assert.IsType<PlatformNotSupportedException>(e.InnerException);
-        }
-
         private const int PingCount = 4;
 
         private static void SendBatchPingAsync(Func<Ping, Task<PingReply>> sendPing, Action<PingReply> pingResultValidator)

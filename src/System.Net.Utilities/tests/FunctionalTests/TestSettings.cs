@@ -5,6 +5,9 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
+//REMOVE
+using System.Runtime.InteropServices;
+
 namespace System.Net.Utilities.Tests
 {
     internal static class TestSettings
@@ -31,7 +34,6 @@ namespace System.Net.Utilities.Tests
         private static async Task<IPAddress> ResolveHost(string host, AddressFamily family)
         {
             IPHostEntry hostEntry = await Dns.GetHostEntryAsync(host);
-
             foreach (IPAddress address in hostEntry.AddressList)
             {
                 if (address.AddressFamily == family)
@@ -40,7 +42,7 @@ namespace System.Net.Utilities.Tests
                 }
             }
 
-            return null;
+            throw new InvalidOperationException("Unable to discover any addresses for host " + host + " of family " + family);
         }
     }
 }
