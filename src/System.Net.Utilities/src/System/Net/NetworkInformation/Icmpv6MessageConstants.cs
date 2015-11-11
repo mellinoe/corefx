@@ -34,6 +34,7 @@ namespace System.Net.NetworkInformation
 
         public static IPStatus MapV6TypeToIPStatus(byte type, byte code)
         {
+            Ping.printf($"Mapping {type}, {code}\n");
             switch (type)
             {
                 case DestinationUnreachable:
@@ -70,7 +71,7 @@ namespace System.Net.NetworkInformation
                         default:
                             return IPStatus.Unknown;
                     }
-                case EchoRequest:
+                case EchoReply:
                     return IPStatus.Success;
                 default:
                     return IPStatus.Unknown;

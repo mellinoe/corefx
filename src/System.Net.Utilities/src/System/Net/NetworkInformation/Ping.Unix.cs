@@ -77,7 +77,7 @@ namespace System.Net.NetworkInformation
                     socket.Ttl = (short)options.Ttl;
                 }
 
-                int ipHeaderLength = isIpv4 ? 20 : 18;
+                int ipHeaderLength = isIpv4 ? 20 : 0;
                 try
                 {
                     Stopwatch sw = Stopwatch.StartNew();
@@ -94,7 +94,8 @@ namespace System.Net.NetworkInformation
                             type = receivedHeader.Type;
                             code = receivedHeader.Code;
 
-                            if (type == 8 || type == 128) // Echo Request
+                            if (type == Icmpv4MessageConstants.EchoRequest
+                                || type == Icmpv6MessageConstants.EchoRequest) // Echo Request, ignore
                             {
                                 continue;
                             }
