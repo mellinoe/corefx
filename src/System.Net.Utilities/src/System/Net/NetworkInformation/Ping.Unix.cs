@@ -7,6 +7,8 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Linq;
 using System.Diagnostics;
+using System.Text;
+using System.IO;
 
 namespace System.Net.NetworkInformation
 {
@@ -19,6 +21,13 @@ namespace System.Net.NetworkInformation
         private const int IpHeaderLengthInBytes = 20;
 
         private static readonly bool s_canUseRawSockets = CheckRawSocketPermissions();
+
+        // Ubuntu has ping under /bin, OSX under /sbin.
+        private static readonly string[] s_binFolders = { "/bin", "/sbin" };
+        private static readonly string s_ipv4PingFile = "ping";
+        private static readonly string s_ipv6PingFile = "ping6";
+        private static readonly string s_discoveredPing4UtilityPath = GetPingUtilityPath(true);
+        private static readonly string s_discoveredPing6UtilityPath = GetPingUtilityPath(false);
 
         private static bool CheckRawSocketPermissions()
         {
@@ -33,6 +42,21 @@ namespace System.Net.NetworkInformation
             }
         }
 
+        private static string GetPingUtilityPath(bool ipv4)
+        {
+            string fileName = ipv4 ? s_ipv4PingFile : s_ipv6PingFile;
+            foreach (string folder in s_binFolders)
+            {
+                string path = Path.Combine(folder, fileName);
+                if (File.Exists(path))
+                {
+                    return path;
+                }
+            }
+
+            return null;
+        }
+
         private unsafe void InternalSendAsync(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
             if (s_canUseRawSockets)
@@ -41,7 +65,7 @@ namespace System.Net.NetworkInformation
             }
             else
             {
-                throw new PlatformNotSupportedException("Need raw socket permissions.");
+                SendWithPingUtility(address, buffer, timeout, options);
             }
         }
 
@@ -127,6 +151,95 @@ namespace System.Net.NetworkInformation
             asyncOp.PostOperationCompleted(callback, ea);
         }
 
+        private void SendWithPingUtility(IPAddress address, byte[] buffer, int timeout, PingOptions options)
+        {
+            AsyncOperation asyncOp = _asyncOp;
+            SendOrPostCallback callback = _onPingCompletedDelegate;
+
+            bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
+            string pingExecutable = isIpv4 ? s_discoveredPing4UtilityPath : s_discoveredPing6UtilityPath;
+            if (pingExecutable == null)
+            {
+                throw new PlatformNotSupportedException();
+            }
+
+            StringBuilder sb = new StringBuilder();
+            sb.Append("-c 1"); // Just use the ping utility to send one ping.
+            if (options != null)
+            {
+                if (options.DontFragment)
+                {
+                    sb.Append(" -D");
+                }
+                sb.Append(" -m ");
+                sb.Append(options.Ttl);
+            }
+
+            // The ping utility is not flexible enough to specify an exact payload.
+            // But we can at least send the right number of bytes.
+            sb.Append(" -s");
+            sb.Append(buffer.Length);
+
+            sb.Append(" ");
+            sb.Append(address.ToString());
+
+            string processArgs = sb.ToString();
+            ProcessStartInfo psi = new ProcessStartInfo(pingExecutable, processArgs);
+            psi.RedirectStandardOutput = true;
+
+            Process p = new Process() { StartInfo = psi };
+            p.Start();
+            if (!p.WaitForExit(timeout))
+            {
+                throw new PingException(SR.net_ping);
+            }
+
+            string output = p.StandardOutput.ReadToEnd();
+            PingReply pr = null;
+            Exception e = null;
+
+            int timeIndex = output.IndexOf("time=", StringComparison.Ordinal);
+            if (timeIndex == -1)
+            {
+                e = new PingException(SR.net_ping);
+            }
+            else
+            {
+                int afterTime = timeIndex + 5;
+                double parsedRtt;
+                int msIndex = output.IndexOf("ms", afterTime);
+                int numLength = msIndex - afterTime - 1;
+                string timeSubstring = output.Substring(afterTime, numLength);
+                if (!double.TryParse(timeSubstring, out parsedRtt))
+                {
+                    e = new PingException(SR.net_ping);
+                }
+                else
+                {
+                    long rtt = (long)Math.Round(parsedRtt);
+                    pr = new PingReply(
+                            address,
+                            options,
+                            IPStatus.Success,
+                            rtt,
+                            Array.Empty<byte>()); // Ping utility doesn't deliver this info.
+                }
+            }
+
+            var ea = new PingCompletedEventArgs(
+                pr,
+                e,
+                false,
+                asyncOp.UserSuppliedState);
+
+            Finish();
+            asyncOp.PostOperationCompleted(callback, ea);
+        }
+
+        private void InternalDisposeCore()
+        {
+        }
+
         // Must be 8 bytes total.
         [StructLayout(LayoutKind.Sequential)]
         internal struct IcmpHeader
@@ -136,10 +249,6 @@ namespace System.Net.NetworkInformation
             public ushort HeaderChecksum;
             public ushort Identifier;
             public ushort SequenceNumber;
-        }
-
-        private void InternalDisposeCore()
-        {
         }
 
         private static unsafe byte[] CreateSendMessageBuffer(IcmpHeader header, byte[] payload)
