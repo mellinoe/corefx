@@ -59,23 +59,41 @@ namespace System.Net.NetworkInformation
 
         private unsafe void InternalSendAsync(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
-            if (s_canUseRawSockets)
-            {
-                SendIcmpPingOverRawSocket(address, buffer, timeout, options);
-            }
-            else
-            {
-                SendWithPingUtility(address, buffer, timeout, options);
-            }
-        }
-
-        private unsafe void SendIcmpPingOverRawSocket(IPAddress address, byte[] buffer, int timeout, PingOptions options)
-        {
             AsyncOperation asyncOp = _asyncOp;
             SendOrPostCallback callback = _onPingCompletedDelegate;
 
-            Exception pingException = null;
             PingReply pr = null;
+            Exception pingException = null;
+
+            try
+            {
+                if (s_canUseRawSockets)
+                {
+                    pr = SendIcmpPingOverRawSocket(address, buffer, timeout, options);
+                }
+                else
+                {
+                    pr = SendWithPingUtility(address, buffer, timeout, options);
+                }
+            }
+            catch (Exception e)
+            {
+                pingException = e;
+            }
+
+            // At this point, either PR has a real PingReply in it, or pingException has an Exception in it.
+            var ea = new PingCompletedEventArgs(
+                pr,
+                pingException,
+                false,
+                asyncOp.UserSuppliedState);
+
+            Finish();
+            asyncOp.PostOperationCompleted(callback, ea);
+        }
+
+        private unsafe PingReply SendIcmpPingOverRawSocket(IPAddress address, byte[] buffer, int timeout, PingOptions options)
+        {
             EndPoint endPoint = new IPEndPoint(address, 0);
 
             bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
@@ -93,8 +111,8 @@ namespace System.Net.NetworkInformation
 
             using (Socket socket = new Socket(address.AddressFamily, SocketType.Raw, protocolType))
             {
-                socket.ReceiveTimeout = DefaultTimeout;
-                socket.SendTimeout = DefaultTimeout;
+                socket.ReceiveTimeout = timeout;
+                socket.SendTimeout = timeout;
                 if (options != null)
                 {
                     socket.DontFragment = options.DontFragment;
@@ -102,69 +120,55 @@ namespace System.Net.NetworkInformation
                 }
 
                 int ipHeaderLength = isIpv4 ? 20 : 0;
-                try
+
+                Stopwatch sw = Stopwatch.StartNew();
+                socket.SendTo(sendBuffer, endPoint);
+                byte[] receiveBuffer = new byte[ipHeaderLength + IcmpHeaderLengthInBytes + buffer.Length];
+                while (sw.ElapsedMilliseconds < timeout)
                 {
-                    Stopwatch sw = Stopwatch.StartNew();
-                    socket.SendTo(sendBuffer, endPoint);
-                    byte[] receiveBuffer = new byte[ipHeaderLength + IcmpHeaderLengthInBytes + buffer.Length];
-                    while (true)
+                    int bytesReceived = socket.ReceiveFrom(receiveBuffer, ref endPoint);
+                    byte type, code;
+                    fixed (byte* bytesPtr = receiveBuffer)
                     {
-                        int bytesReceived = socket.ReceiveFrom(receiveBuffer, ref endPoint);
-                        byte type, code;
-                        fixed (byte* bytesPtr = receiveBuffer)
+                        int icmpHeaderOffset = ipHeaderLength;
+                        IcmpHeader receivedHeader = *((IcmpHeader*)(bytesPtr + icmpHeaderOffset)); // Skip IP header.
+                        type = receivedHeader.Type;
+                        code = receivedHeader.Code;
+
+                        if (type == Icmpv4MessageConstants.EchoRequest
+                            || type == Icmpv6MessageConstants.EchoRequest) // Echo Request, ignore
                         {
-                            int icmpHeaderOffset = ipHeaderLength;
-                            IcmpHeader receivedHeader = *((IcmpHeader*)(bytesPtr + icmpHeaderOffset)); // Skip IP header.
-                            type = receivedHeader.Type;
-                            code = receivedHeader.Code;
-
-                            if (type == Icmpv4MessageConstants.EchoRequest
-                                || type == Icmpv6MessageConstants.EchoRequest) // Echo Request, ignore
-                            {
-                                continue;
-                            }
+                            continue;
                         }
-                        sw.Stop();
-                        long roundTripTime = sw.ElapsedMilliseconds;
-                        pr = new PingReply(
-                            address,
-                            options,
-                            isIpv4 ? Icmpv4MessageConstants.MapV4TypeToIPStatus(type, code) : Icmpv6MessageConstants.MapV6TypeToIPStatus(type, code),
-                            roundTripTime,
-                            receiveBuffer);
-                        break;
                     }
+
+                    sw.Stop();
+                    long roundTripTime = sw.ElapsedMilliseconds;
+                    return new PingReply(
+                        address,
+                        options,
+                        isIpv4 ? Icmpv4MessageConstants.MapV4TypeToIPStatus(type, code) : Icmpv6MessageConstants.MapV6TypeToIPStatus(type, code),
+                        roundTripTime,
+                        receiveBuffer);
                 }
-                catch (SocketException se)
-                {
-                    pingException = se;
-                }
+
+                // We have exceeded our tiemout duration, and no reply has been received.
+                sw.Stop();
+                throw new PingException(SR.net_ping_reply_timeout);
             }
-
-            var ea = new PingCompletedEventArgs(
-                pr,
-                pingException,
-                false,
-                asyncOp.UserSuppliedState);
-
-            Finish();
-            asyncOp.PostOperationCompleted(callback, ea);
         }
 
-        private void SendWithPingUtility(IPAddress address, byte[] buffer, int timeout, PingOptions options)
+        private PingReply SendWithPingUtility(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
-            AsyncOperation asyncOp = _asyncOp;
-            SendOrPostCallback callback = _onPingCompletedDelegate;
-
             bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
             string pingExecutable = isIpv4 ? s_discoveredPing4UtilityPath : s_discoveredPing6UtilityPath;
             if (pingExecutable == null)
             {
-                throw new PlatformNotSupportedException();
+                throw new PlatformNotSupportedException(SR.net_ping_utility_not_found);
             }
 
             StringBuilder sb = new StringBuilder();
-            sb.Append("-c 1"); // Just use the ping utility to send one ping.
+            sb.Append("-c 1"); // Just send a single ping ("count = 1")
             if (options != null)
             {
                 if (options.DontFragment)
@@ -191,49 +195,30 @@ namespace System.Net.NetworkInformation
             p.Start();
             if (!p.WaitForExit(timeout))
             {
-                throw new PingException(SR.net_ping);
+                throw new PingException(SR.net_ping_reply_timeout);
+            }
+
+            if (p.ExitCode != 0)
+            {
+                // This means no reply was received, although transmission may have been successful.
+                throw new PingException(SR.net_ping_reply_timeout);
             }
 
             string output = p.StandardOutput.ReadToEnd();
-            PingReply pr = null;
-            Exception e = null;
-
             int timeIndex = output.IndexOf("time=", StringComparison.Ordinal);
-            if (timeIndex == -1)
-            {
-                e = new PingException(SR.net_ping);
-            }
-            else
-            {
-                int afterTime = timeIndex + 5;
-                double parsedRtt;
-                int msIndex = output.IndexOf("ms", afterTime);
-                int numLength = msIndex - afterTime - 1;
-                string timeSubstring = output.Substring(afterTime, numLength);
-                if (!double.TryParse(timeSubstring, out parsedRtt))
-                {
-                    e = new PingException(SR.net_ping);
-                }
-                else
-                {
-                    long rtt = (long)Math.Round(parsedRtt);
-                    pr = new PingReply(
-                            address,
-                            options,
-                            IPStatus.Success,
-                            rtt,
-                            Array.Empty<byte>()); // Ping utility doesn't deliver this info.
-                }
-            }
-
-            var ea = new PingCompletedEventArgs(
-                pr,
-                e,
-                false,
-                asyncOp.UserSuppliedState);
-
-            Finish();
-            asyncOp.PostOperationCompleted(callback, ea);
+            int afterTime = timeIndex + 5;
+            double parsedRtt;
+            int msIndex = output.IndexOf("ms", afterTime);
+            int numLength = msIndex - afterTime - 1;
+            string timeSubstring = output.Substring(afterTime, numLength);
+            parsedRtt = double.Parse(timeSubstring);
+            long rtt = (long)Math.Round(parsedRtt);
+            return new PingReply(
+                    address,
+                    options,
+                    IPStatus.Success,
+                    rtt,
+                    Array.Empty<byte>()); // Ping utility doesn't deliver this info.
         }
 
         private void InternalDisposeCore()
@@ -257,34 +242,38 @@ namespace System.Net.NetworkInformation
             byte[] result = new byte[headerSize + payload.Length];
             Marshal.Copy(new IntPtr(&header), result, 0, headerSize);
             payload.CopyTo(result, headerSize);
-            ushort checksum = ComputerBufferChecksum(result, 0, result.Length);
+            ushort checksum = ComputerBufferChecksum(result);
             // Jam the checksum into the buffer.
-            // TODO: Fix the order of this, not sure what is up.
             result[2] = (byte)(checksum >> 8);
             result[3] = (byte)(checksum & (0xFF));
 
             return result;
         }
 
-        private static ushort ComputerBufferChecksum(byte[] header, int start, int length)
+        private static ushort ComputerBufferChecksum(byte[] buffer)
         {
-            ushort word;
-            long sum = 0;
-            for (int i = start; i < (length + start); i += 2)
+            // This is using the "deferred carries" approach outlined in RFC 1071.
+            uint sum = 0;
+            for (int i = 0; i < buffer.Length; i+= 2)
             {
-                word = (ushort)(((header[i] << 8) & 0xFF00)
-                + (header[i + 1] & 0xFF));
-                sum += (long)word;
+                // Combine each pair of bytes into a 16-bit number and add it to the sum
+                ushort element0 = (ushort)((buffer[i] << 8) & 0xFF00);
+                ushort element1 = (i + 1 < buffer.Length)
+                                    ? (ushort)(buffer[i + 1] & 0x00FF)
+                                    : (ushort)0; // If there's an odd number of bytes, pad by one octet of zeros.
+                ushort combined = (ushort)(element0 | element1);
+                sum += (uint)combined;
             }
 
+            // Add back the "carry bits" which have risen to the upper 16 bits of the sum.
             while ((sum >> 16) != 0)
             {
-                sum = (sum & 0xFFFF) + (sum >> 16);
+                var partialSum = sum & 0xFFFF;
+                var carries = sum >> 16;
+                sum = partialSum + carries;
             }
 
-            sum = ~sum;
-
-            return (ushort)sum;
+            return (ushort)~sum;
         }
     }
 }
