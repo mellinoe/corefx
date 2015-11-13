@@ -137,6 +137,10 @@
     <Compile Include="$(CommonPath)\Interop\Windows\Winsock\Interop.WSASocketW.cs">
       <Link>Common\Interop\Windows\Winsock\Interop.WSASocketW.cs</Link>
     </Compile>
+    <!-- System.Net.Internals -->
+    <Compile Include="$(CommonPath)\System\Net\Sockets\SocketType.cs">
+      <Link>Common\System\Net\Sockets\SocketType.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
