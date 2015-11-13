@@ -98,13 +98,14 @@ namespace System.Net.NetworkInformation
 
             bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
             ProtocolType protocolType = isIpv4 ? ProtocolType.Icmp : ProtocolType.IcmpV6;
-
+            // Use the current thread's ID as the identifier.
+            ushort identifier = (ushort)Environment.CurrentManagedThreadId;
             IcmpHeader header = new IcmpHeader()
             {
                 Type = isIpv4 ? (byte)Icmpv4MessageConstants.EchoRequest : (byte)Icmpv6MessageConstants.EchoRequest,
                 Code = 0,
                 HeaderChecksum = 0,
-                Identifier = 42,
+                Identifier = identifier,
                 SequenceNumber = 0,
             };
             byte[] sendBuffer = CreateSendMessageBuffer(header, buffer);
@@ -130,7 +131,8 @@ namespace System.Net.NetworkInformation
                         type = receivedHeader.Type;
                         code = receivedHeader.Code;
 
-                        if (type == Icmpv4MessageConstants.EchoRequest
+                        if (identifier != receivedHeader.Identifier
+                            || type == Icmpv4MessageConstants.EchoRequest
                             || type == Icmpv6MessageConstants.EchoRequest) // Echo Request, ignore
                         {
                             continue;
