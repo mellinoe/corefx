@@ -182,6 +182,7 @@ namespace System.Net.NetworkInformation
             string processArgs = sb.ToString();
             ProcessStartInfo psi = new ProcessStartInfo(pingExecutable, processArgs);
             psi.RedirectStandardOutput = true;
+            psi.RedirectStandardError = true;
             Process p = new Process() { StartInfo = psi };
             p.Start();
             if (!p.WaitForExit(timeout))
