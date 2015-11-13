@@ -113,14 +113,9 @@ namespace System.Net.NetworkInformation
             {
                 socket.ReceiveTimeout = timeout;
                 socket.SendTimeout = timeout;
-                if (options != null)
-                {
-                    socket.DontFragment = options.DontFragment;
-                    socket.Ttl = (short)options.Ttl;
-                }
+                // Setting Socket.DontFragment and .Ttl is not supported on Unix, so ignore the PingOptions parameter.
 
                 int ipHeaderLength = isIpv4 ? 20 : 0;
-
                 Stopwatch sw = Stopwatch.StartNew();
                 socket.SendTo(sendBuffer, endPoint);
                 byte[] receiveBuffer = new byte[ipHeaderLength + IcmpHeaderLengthInBytes + buffer.Length];
@@ -144,12 +139,15 @@ namespace System.Net.NetworkInformation
 
                     sw.Stop();
                     long roundTripTime = sw.ElapsedMilliseconds;
-                    return new PingReply(
-                        address,
-                        options,
-                        isIpv4 ? Icmpv4MessageConstants.MapV4TypeToIPStatus(type, code) : Icmpv6MessageConstants.MapV6TypeToIPStatus(type, code),
-                        roundTripTime,
-                        receiveBuffer);
+                    // We want to return a buffer with the actual data we sent out, not including the header data.
+                    byte[] dataBuffer = new byte[bytesReceived - IcmpHeaderLengthInBytes];
+                    Array.Copy(receiveBuffer, IcmpHeaderLengthInBytes, dataBuffer, 0, dataBuffer.Length);
+
+                    IPStatus status = isIpv4 
+                                        ? Icmpv4MessageConstants.MapV4TypeToIPStatus(type, code) 
+                                        : Icmpv6MessageConstants.MapV6TypeToIPStatus(type, code);
+                    
+                    return new PingReply(address, options, status, roundTripTime, dataBuffer);
                 }
 
                 // We have exceeded our tiemout duration, and no reply has been received.
@@ -169,19 +167,13 @@ namespace System.Net.NetworkInformation
 
             StringBuilder sb = new StringBuilder();
             sb.Append("-c 1"); // Just send a single ping ("count = 1")
-            if (options != null)
-            {
-                if (options.DontFragment)
-                {
-                    sb.Append(" -D");
-                }
-                sb.Append(" -m ");
-                sb.Append(options.Ttl);
-            }
+
+            // The command-line flags for "Do-not-fragment" and "TTL" are not standard.
+            // In fact, they are different even between ping and ping6 on the same machine.
 
             // The ping utility is not flexible enough to specify an exact payload.
             // But we can at least send the right number of bytes.
-            sb.Append(" -s");
+            sb.Append(" -s ");
             sb.Append(buffer.Length);
 
             sb.Append(" ");
@@ -190,7 +182,6 @@ namespace System.Net.NetworkInformation
             string processArgs = sb.ToString();
             ProcessStartInfo psi = new ProcessStartInfo(pingExecutable, processArgs);
             psi.RedirectStandardOutput = true;
-
             Process p = new Process() { StartInfo = psi };
             p.Start();
             if (!p.WaitForExit(timeout))
@@ -215,7 +206,7 @@ namespace System.Net.NetworkInformation
             long rtt = (long)Math.Round(parsedRtt);
             return new PingReply(
                     address,
-                    options,
+                    null, // Ping utility cannot accomodate these, return null to indicate they were ignored.
                     IPStatus.Success,
                     rtt,
                     Array.Empty<byte>()); // Ping utility doesn't deliver this info.

@@ -34,7 +34,6 @@ namespace System.Net.NetworkInformation
 
         public static IPStatus MapV6TypeToIPStatus(byte type, byte code)
         {
-            Ping.printf($"Mapping {type}, {code}\n");
             switch (type)
             {
                 case DestinationUnreachable:

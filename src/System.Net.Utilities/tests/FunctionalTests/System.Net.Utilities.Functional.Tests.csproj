@@ -25,6 +25,10 @@
       <Project>{85FD05E8-A4B1-4B89-ABED-33AFD200CABD}</Project>
       <Name>System.Net.Utilities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\System.Net.Sockets\src\System.Net.Sockets.csproj">
+      <Project>{43311AFB-D7C4-4E5A-B1DE-855407F90D1B}</Project>
+      <Name>System.Net.Sockets</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
