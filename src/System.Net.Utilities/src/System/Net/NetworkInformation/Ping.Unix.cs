@@ -8,6 +8,7 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace System.Net.NetworkInformation
 {
@@ -35,7 +36,7 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private void InternalSendAsync(IPAddress address, byte[] buffer, int timeout, PingOptions options)
+        private async void InternalSendAsync(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
             AsyncOperation asyncOp = _asyncOp;
             SendOrPostCallback callback = _onPingCompletedDelegate;
@@ -47,11 +48,11 @@ namespace System.Net.NetworkInformation
             {
                 if (s_canUseRawSockets)
                 {
-                    pr = SendIcmpPingOverRawSocket(address, buffer, timeout, options);
+                    pr = await SendIcmpPingOverRawSocket(address, buffer, timeout, options);
                 }
                 else
                 {
-                    pr = SendWithPingUtility(address, buffer, timeout, options);
+                    pr = await SendWithPingUtility(address, buffer, timeout, options);
                 }
             }
             catch (Exception e)
@@ -70,7 +71,7 @@ namespace System.Net.NetworkInformation
             asyncOp.PostOperationCompleted(callback, ea);
         }
 
-        private unsafe PingReply SendIcmpPingOverRawSocket(IPAddress address, byte[] buffer, int timeout, PingOptions options)
+        private async Task<PingReply> SendIcmpPingOverRawSocket(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
             EndPoint endPoint = new IPEndPoint(address, 0);
 
@@ -96,28 +97,46 @@ namespace System.Net.NetworkInformation
 
                 int ipHeaderLength = isIpv4 ? IpHeaderLengthInBytes : 0;
                 Stopwatch sw = Stopwatch.StartNew();
-                socket.SendTo(sendBuffer, endPoint);
+                await socket.SendToAsync(new ArraySegment<byte>(sendBuffer), SocketFlags.None, endPoint).ConfigureAwait(false);
                 byte[] receiveBuffer = new byte[ipHeaderLength + IcmpHeaderLengthInBytes + buffer.Length];
+                
                 while (sw.ElapsedMilliseconds < timeout)
                 {
-                    int bytesReceived = socket.ReceiveFrom(receiveBuffer, ref endPoint);
+                    Task<SocketReceiveFromResult> receiveTask = socket.ReceiveFromAsync(
+                                                                    new ArraySegment<byte>(receiveBuffer),
+                                                                    SocketFlags.None,
+                                                                    endPoint);
+                    Task finished = await Task.WhenAny(receiveTask, Task.Delay(timeout - (int)sw.ElapsedMilliseconds))
+                                        .ConfigureAwait(false);
+                    if (finished != receiveTask)
+                    {
+                        sw.Stop();
+                        throw new PingException(SR.net_ping_reply_timeout);
+                    }
+
+                    SocketReceiveFromResult receiveResult = receiveTask.Result;
+                    int bytesReceived = receiveResult.ReceivedBytes;
                     if (bytesReceived - ipHeaderLength < IcmpHeaderLengthInBytes)
                     {
                         continue; // Not enough bytes to reconstruct IP header + ICMP header.
                     }
-                    byte type, code;
-                    fixed (byte* bytesPtr = receiveBuffer)
-                    {
-                        int icmpHeaderOffset = ipHeaderLength;
-                        IcmpHeader receivedHeader = *((IcmpHeader*)(bytesPtr + icmpHeaderOffset)); // Skip IP header.
-                        type = receivedHeader.Type;
-                        code = receivedHeader.Code;
 
-                        if (identifier != receivedHeader.Identifier
-                            || type == Icmpv4MessageConstants.EchoRequest
-                            || type == Icmpv6MessageConstants.EchoRequest) // Echo Request, ignore
+                    byte type, code;
+                    unsafe
+                    {
+                        fixed (byte* bytesPtr = receiveBuffer)
                         {
-                            continue;
+                            int icmpHeaderOffset = ipHeaderLength;
+                            IcmpHeader receivedHeader = *((IcmpHeader*)(bytesPtr + icmpHeaderOffset)); // Skip IP header.
+                            type = receivedHeader.Type;
+                            code = receivedHeader.Code;
+
+                            if (identifier != receivedHeader.Identifier
+                                || type == Icmpv4MessageConstants.EchoRequest
+                                || type == Icmpv6MessageConstants.EchoRequest) // Echo Request, ignore
+                            {
+                                continue;
+                            }
                         }
                     }
 
@@ -127,10 +146,10 @@ namespace System.Net.NetworkInformation
                     byte[] dataBuffer = new byte[bytesReceived - IcmpHeaderLengthInBytes];
                     Array.Copy(receiveBuffer, IcmpHeaderLengthInBytes, dataBuffer, 0, dataBuffer.Length);
 
-                    IPStatus status = isIpv4 
-                                        ? Icmpv4MessageConstants.MapV4TypeToIPStatus(type, code) 
+                    IPStatus status = isIpv4
+                                        ? Icmpv4MessageConstants.MapV4TypeToIPStatus(type, code)
                                         : Icmpv6MessageConstants.MapV6TypeToIPStatus(type, code);
-                    
+
                     return new PingReply(address, options, status, roundTripTime, dataBuffer);
                 }
 
@@ -140,7 +159,7 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private PingReply SendWithPingUtility(IPAddress address, byte[] buffer, int timeout, PingOptions options)
+        private async Task<PingReply> SendWithPingUtility(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
             bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
             string pingExecutable = isIpv4 ? s_ipv4PingFile : s_ipv6PingFile;
@@ -164,41 +183,51 @@ namespace System.Net.NetworkInformation
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
             Process p = new Process() { StartInfo = psi };
+
+            var processCompletion = new TaskCompletionSource<bool>();
+            p.EnableRaisingEvents = true;
+            p.Exited += (s, e) => processCompletion.SetResult(true);
             p.Start();
-            if (!p.WaitForExit(timeout))
+            Task timeoutTask = Task.Delay(timeout);
+
+            Task finished = await Task.WhenAny(processCompletion.Task, timeoutTask).ConfigureAwait(false);
+            if (finished == timeoutTask)
             {
+                if (p.HasExited) { Debug.Fail("Process exited but no callback was received."); }
                 p.Kill();
                 throw new PingException(SR.net_ping_reply_timeout);
             }
+            else
+            {
+                if (p.ExitCode != 0)
+                {
+                    // This means no reply was received, although transmission may have been successful.
+                    throw new PingException(SR.net_ping_reply_timeout);
+                }
 
-            if (p.ExitCode != 0)
-            {
-                // This means no reply was received, although transmission may have been successful.
-                throw new PingException(SR.net_ping_reply_timeout);
-            }
-
-            try
-            {
-                string output = p.StandardOutput.ReadToEnd();
-                int timeIndex = output.IndexOf("time=", StringComparison.Ordinal);
-                int afterTime = timeIndex + "time=".Length;
-                double parsedRtt;
-                int msIndex = output.IndexOf("ms", afterTime);
-                int numLength = msIndex - afterTime - 1;
-                string timeSubstring = output.Substring(afterTime, numLength);
-                parsedRtt = double.Parse(timeSubstring);
-                long rtt = (long)Math.Round(parsedRtt);
-                return new PingReply(
-                        address,
-                        null, // Ping utility cannot accomodate these, return null to indicate they were ignored.
-                        IPStatus.Success,
-                        rtt,
-                        Array.Empty<byte>()); // Ping utility doesn't deliver this info.
-            }
-            catch (Exception)
-            {
-                // If the standard output cannot be successfully parsed, throw a generic PingException.
-                throw new PingException(SR.net_ping);
+                try
+                {
+                    string output = await p.StandardOutput.ReadToEndAsync();
+                    int timeIndex = output.IndexOf("time=", StringComparison.Ordinal);
+                    int afterTime = timeIndex + "time=".Length;
+                    double parsedRtt;
+                    int msIndex = output.IndexOf("ms", afterTime);
+                    int numLength = msIndex - afterTime - 1;
+                    string timeSubstring = output.Substring(afterTime, numLength);
+                    parsedRtt = double.Parse(timeSubstring);
+                    long rtt = (long)Math.Round(parsedRtt);
+                    return new PingReply(
+                            address,
+                            null, // Ping utility cannot accomodate these, return null to indicate they were ignored.
+                            IPStatus.Success,
+                            rtt,
+                            Array.Empty<byte>()); // Ping utility doesn't deliver this info.
+                }
+                catch (Exception)
+                {
+                    // If the standard output cannot be successfully parsed, throw a generic PingException.
+                    throw new PingException(SR.net_ping);
+                }
             }
         }
 
@@ -235,7 +264,7 @@ namespace System.Net.NetworkInformation
         {
             // This is using the "deferred carries" approach outlined in RFC 1071.
             uint sum = 0;
-            for (int i = 0; i < buffer.Length; i+= 2)
+            for (int i = 0; i < buffer.Length; i += 2)
             {
                 // Combine each pair of bytes into a 16-bit number and add it to the sum
                 ushort element0 = (ushort)((buffer[i] << 8) & 0xFF00);
