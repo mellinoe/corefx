@@ -14,9 +14,6 @@ namespace System.Net.NetworkInformation
 {
     public partial class Ping
     {
-        [DllImport("libc")]
-        public static extern void printf(string message);
-
         private const int IcmpHeaderLengthInBytes = 8;
         private const int IpHeaderLengthInBytes = 20;
 
