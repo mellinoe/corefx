@@ -131,9 +131,10 @@ namespace System.Net.NetworkInformation
 
                     sw.Stop();
                     long roundTripTime = sw.ElapsedMilliseconds;
+                    int dataOffset = ipHeaderLength + IcmpHeaderLengthInBytes;
                     // We want to return a buffer with the actual data we sent out, not including the header data.
-                    byte[] dataBuffer = new byte[bytesReceived - IcmpHeaderLengthInBytes];
-                    Array.Copy(receiveBuffer, IcmpHeaderLengthInBytes, dataBuffer, 0, dataBuffer.Length);
+                    byte[] dataBuffer = new byte[bytesReceived - dataOffset];
+                    Array.Copy(receiveBuffer, dataOffset, dataBuffer, 0, dataBuffer.Length);
 
                     IPStatus status = isIpv4
                                         ? Icmpv4MessageConstants.MapV4TypeToIPStatus(type, code)
@@ -175,7 +176,7 @@ namespace System.Net.NetworkInformation
 
             var processCompletion = new TaskCompletionSource<bool>();
             p.EnableRaisingEvents = true;
-            p.Exited += (s, e) => processCompletion.SetResult(true);
+            p.Exited += (s, e) => Task.Run(() => processCompletion.SetResult(true));
             p.Start();
             var cts = new CancellationTokenSource();
             Task timeoutTask = Task.Delay(timeout, cts.Token);
@@ -202,7 +203,7 @@ namespace System.Net.NetworkInformation
 
                 try
                 {
-                    string output = await p.StandardOutput.ReadToEndAsync();
+                    string output = await p.StandardOutput.ReadToEndAsync().ConfigureAwait(false);
                     int timeIndex = output.IndexOf("time=", StringComparison.Ordinal);
                     int afterTime = timeIndex + "time=".Length;
                     double parsedRtt;
