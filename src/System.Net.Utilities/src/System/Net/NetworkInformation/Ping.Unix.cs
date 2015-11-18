@@ -14,6 +14,10 @@ namespace System.Net.NetworkInformation
 {
     public partial class Ping
     {
+        [DllImport("libc")]
+        private static extern void printf(string message);
+        private static void Print(string message) { printf("[" + Environment.CurrentManagedThreadId + "]" + message + Environment.NewLine); }
+
         private const int IcmpHeaderLengthInBytes = 8;
         private const int IpHeaderLengthInBytes = 20;
 
@@ -176,14 +180,16 @@ namespace System.Net.NetworkInformation
 
             var processCompletion = new TaskCompletionSource<bool>();
             p.EnableRaisingEvents = true;
-            p.Exited += (s, e) => Task.Run(() => processCompletion.SetResult(true));
+            p.Exited += (s, e) => { Print("Exited event fired."); Task.Run(() => processCompletion.SetResult(true)); };
             p.Start();
             var cts = new CancellationTokenSource();
             Task timeoutTask = Task.Delay(timeout, cts.Token);
 
             Task finished = await Task.WhenAny(processCompletion.Task, timeoutTask).ConfigureAwait(false);
-            if (finished == timeoutTask)
+            Print("Task.WhenAny finished. Finished task is " + finished + " and p.HasExited=" + p.HasExited);
+            if (finished == timeoutTask && !p.HasExited)
             {
+                Print("Timeout task was the one that finished. Process has not exited.");
                 // Try to kill the ping process if it didn't return. If it is already in the process of exiting, a Win32Exception will be thrown.
                 try
                 {
@@ -194,6 +200,11 @@ namespace System.Net.NetworkInformation
             }
             else
             {
+                if (finished == timeoutTask)
+                {
+                    Print("Timeout task was the one that finished, but the process had already completed.");
+                }
+
                 cts.Cancel();
                 if (p.ExitCode != 0)
                 {
