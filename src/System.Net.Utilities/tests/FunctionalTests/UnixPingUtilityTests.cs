@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Net.Sockets;
 using System.Net.Utilities.Tests;
 
 using Xunit;
@@ -21,8 +22,9 @@ namespace System.Net.NetworkInformation.Tests
         public static void PacketSizeIsRespected(int payloadSize)
         {
             IPAddress localAddress = TestSettings.GetLocalIPAddress().Result;
-            string arguments = UnixCommandLinePing.ConstructCommandLine(payloadSize, localAddress.ToString());
-            string utilityPath = (localAddress.AddressFamily == Sockets.AddressFamily.InterNetwork)
+            bool ipv4 = localAddress.AddressFamily == AddressFamily.InterNetwork;
+            string arguments = UnixCommandLinePing.ConstructCommandLine(payloadSize, localAddress.ToString(), ipv4);
+            string utilityPath = (localAddress.AddressFamily == AddressFamily.InterNetwork)
                 ? UnixCommandLinePing.Ping4UtilityPath
                 : UnixCommandLinePing.Ping6UtilityPath;
 
@@ -37,7 +39,13 @@ namespace System.Net.NetworkInformation.Tests
             // Validate that the returned data size is correct.
             // It should be equal to the bytes we sent plus the size of the ICMP header.
             int receivedBytes = ParseReturnedPacketSize(pingOutput);
-            Assert.Equal(payloadSize + IcmpHeaderLengthInBytes, receivedBytes);
+            int expected = payloadSize + IcmpHeaderLengthInBytes;
+            if (!ipv4 && payloadSize == 0)
+            {
+                expected += 1;
+            }
+
+            Assert.Equal(expected, receivedBytes);
 
             // Validate that we only sent one ping with the "-c 1" argument.
             int numPingsSent = ParseNumPingsSent(pingOutput);
@@ -48,7 +56,7 @@ namespace System.Net.NetworkInformation.Tests
         {
             int indexOfBytesFrom = pingOutput.IndexOf("bytes from");
             int previousNewLine = pingOutput.LastIndexOf(Environment.NewLine, indexOfBytesFrom);
-            string number = pingOutput.Substring(previousNewLine + 1, indexOfBytesFrom - previousNewLine);
+            string number = pingOutput.Substring(previousNewLine + 1, indexOfBytesFrom - previousNewLine - 1);
             int parsedReceivedBytes;
             if (!int.TryParse(number, out parsedReceivedBytes))
             {
@@ -62,7 +70,7 @@ namespace System.Net.NetworkInformation.Tests
         {
             int indexOfPacketsTransmitted = pingOutput.IndexOf("packets transmitted");
             int previousNewLine = pingOutput.LastIndexOf(Environment.NewLine, indexOfPacketsTransmitted);
-            string number = pingOutput.Substring(previousNewLine + 1, indexOfPacketsTransmitted - previousNewLine);
+            string number = pingOutput.Substring(previousNewLine + 1, indexOfPacketsTransmitted - previousNewLine - 1);
 
             int parsedNumPings;
             if (!int.TryParse(number, out parsedNumPings))

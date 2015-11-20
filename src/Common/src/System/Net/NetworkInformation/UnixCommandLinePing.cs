@@ -47,7 +47,7 @@ namespace System.Net.NetworkInformation
         /// <param name="packetSize">The packet size to use in the ping. Exact packet payload cannot be specified.</param>
         /// <param name="address">A string representation of the IP address to ping.</param>
         /// <returns>The constructed command line arguments, which can be passed to ping or ping6.</returns>
-        public static string ConstructCommandLine(int packetSize, string address)
+        public static string ConstructCommandLine(int packetSize, string address, bool ipv4)
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("-c 1"); // Just send a single ping ("count = 1")
@@ -57,6 +57,13 @@ namespace System.Net.NetworkInformation
 
             // The ping utility is not flexible enough to specify an exact payload.
             // But we can at least send the right number of bytes.
+
+            // ping6 does not accept packet sizes of 0 for some reason, but ping allows this.
+            if (!ipv4 && packetSize == 0)
+            {
+                packetSize = 1;
+            }
+
             sb.Append(" -s ");
             sb.Append(packetSize);
 
