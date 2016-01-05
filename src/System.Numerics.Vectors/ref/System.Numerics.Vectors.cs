@@ -270,12 +270,24 @@ namespace System.Numerics
         public Vector(T value) { throw new System.NotImplementedException(); }
         public Vector(T[] values) { throw new System.NotImplementedException(); }
         public Vector(T[] values, int index) { throw new System.NotImplementedException(); }
+        [CLSCompliant(false)]
+        public unsafe Vector(void* dataPointer) { throw new System.NotImplementedException(); }
+        [CLSCompliant(false)]
+        public unsafe Vector(void* dataPointer, int offset) { throw new System.NotImplementedException(); }
+        public Vector(IntPtr dataPointer) { throw new System.NotImplementedException(); }
+        public Vector(IntPtr dataPointer, int offset) { throw new System.NotImplementedException(); }
         public static int Count { get { return default(int); } }
         public T this[int index] { get { return default(T); } }
         public static System.Numerics.Vector<T> One { get { return default(System.Numerics.Vector<T>); } }
         public static System.Numerics.Vector<T> Zero { get { return default(System.Numerics.Vector<T>); } }
         public void CopyTo(T[] destination) { }
         public void CopyTo(T[] destination, int startIndex) { }
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(void* destination) { }
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(void* destination, int offset) { }
+        public void CopyTo(IntPtr destination) { }
+        public void CopyTo(IntPtr destination, int offset) { }
         public bool Equals(System.Numerics.Vector<T> other) { return default(bool); }
         public override bool Equals(object obj) { return default(bool); }
         public override int GetHashCode() { return default(int); }

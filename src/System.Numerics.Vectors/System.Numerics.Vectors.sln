@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Numerics.Vectors", "src\System.Numerics.Vectors.csproj", "{53134B0C-0D57-481B-B84E-D1991E8D54FF}"
 EndProject
@@ -11,22 +11,50 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{D65B33
 		..\.nuget\packages.Windows_NT.config = ..\.nuget\packages.Windows_NT.config
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8E2EAEF6-38B4-4300-A30E-21C175B82A48}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ref", "ref", "{C4CE32C9-678B-4681-92FD-FAD6BF683A5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "System.Numerics.Vectors", "ref\System.Numerics.Vectors.csproj", "{00E09321-4554-42C2-A5C8-0C6397680FCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		net46_Debug|Any CPU = net46_Debug|Any CPU
+		net46_Release|Any CPU = net46_Release|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{53134B0C-0D57-481B-B84E-D1991E8D54FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{53134B0C-0D57-481B-B84E-D1991E8D54FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53134B0C-0D57-481B-B84E-D1991E8D54FF}.net46_Debug|Any CPU.ActiveCfg = net46_Debug|Any CPU
+		{53134B0C-0D57-481B-B84E-D1991E8D54FF}.net46_Debug|Any CPU.Build.0 = net46_Debug|Any CPU
+		{53134B0C-0D57-481B-B84E-D1991E8D54FF}.net46_Release|Any CPU.ActiveCfg = net46_Release|Any CPU
+		{53134B0C-0D57-481B-B84E-D1991E8D54FF}.net46_Release|Any CPU.Build.0 = net46_Release|Any CPU
 		{53134B0C-0D57-481B-B84E-D1991E8D54FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53134B0C-0D57-481B-B84E-D1991E8D54FF}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A7074928-82C3-4739-88FE-9B528977950C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A7074928-82C3-4739-88FE-9B528977950C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7074928-82C3-4739-88FE-9B528977950C}.net46_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7074928-82C3-4739-88FE-9B528977950C}.net46_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7074928-82C3-4739-88FE-9B528977950C}.net46_Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7074928-82C3-4739-88FE-9B528977950C}.net46_Release|Any CPU.Build.0 = Release|Any CPU
 		{A7074928-82C3-4739-88FE-9B528977950C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7074928-82C3-4739-88FE-9B528977950C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00E09321-4554-42C2-A5C8-0C6397680FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E09321-4554-42C2-A5C8-0C6397680FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E09321-4554-42C2-A5C8-0C6397680FCB}.net46_Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E09321-4554-42C2-A5C8-0C6397680FCB}.net46_Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00E09321-4554-42C2-A5C8-0C6397680FCB}.net46_Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E09321-4554-42C2-A5C8-0C6397680FCB}.net46_Release|Any CPU.Build.0 = Debug|Any CPU
+		{00E09321-4554-42C2-A5C8-0C6397680FCB}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{00E09321-4554-42C2-A5C8-0C6397680FCB}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{53134B0C-0D57-481B-B84E-D1991E8D54FF} = {8E2EAEF6-38B4-4300-A30E-21C175B82A48}
+		{00E09321-4554-42C2-A5C8-0C6397680FCB} = {C4CE32C9-678B-4681-92FD-FAD6BF683A5B}
 	EndGlobalSection
 EndGlobal

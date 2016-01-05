@@ -6,6 +6,7 @@
     <OutputType>Library</OutputType>
     <PackageTargetFramework>dotnet5.4</PackageTargetFramework>
     <NuGetTargetMoniker>.NETPlatform,Version=v5.4</NuGetTargetMoniker>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="System.Numerics.Vectors.cs" />

@@ -83,7 +83,7 @@ namespace System.Numerics
             internal byte _byte;
         }
 
-		// Calculates the size of this struct in bytes, by computing the offset of a field in a structure
+        // Calculates the size of this struct in bytes, by computing the offset of a field in a structure
         private static unsafe int InitializeCount()
         {
             VectorSizeHelper vsh;
@@ -610,13 +610,31 @@ namespace System.Numerics
             }
         }
 
-#pragma warning disable 3001 // void* is not a CLS-Compliant argument type
-        private unsafe Vector(void* dataPointer) : this(dataPointer, 0) { }
-#pragma warning restore 3001 // void* is not a CLS-Compliant argument type
+        /// <summary>
+        /// Constructs a vector from data at the given pointer location.
+        /// There must be at least Vector`T.Count readable elements at the location.
+        /// </summary>
+        public unsafe Vector(IntPtr dataPointer) : this(dataPointer.ToPointer(), 0) { }
 
-#pragma warning disable 3001 // void* is not a CLS-Compliant argument type
-        // Implemented with offset if this API ever becomes public; an offset of 0 is used internally.
-        private unsafe Vector(void* dataPointer, int offset)
+        /// <summary>
+        /// Constructs a vector from data at the given pointer location, starting after the given offset offset.
+        /// There must be at least Vector`T.Count readable elements at the location.
+        /// </summary>
+        public unsafe Vector(IntPtr dataPointer, int offset) : this(dataPointer.ToPointer(), 0) { }
+
+        /// <summary>
+        /// Constructs a vector from data at the given pointer location.
+        /// There must be at least Vector`T.Count readable elements at the location.
+        /// </summary>
+        [CLSCompliant(false)]
+        public unsafe Vector(void* dataPointer) : this(dataPointer, 0) { }
+
+        /// <summary>
+        /// Constructs a vector from data at the given pointer location, starting after the given offset.
+        /// There must be at least Vector`T.Count readable elements at the location.
+        /// </summary>
+        [CLSCompliant(false)]
+        public unsafe Vector(void* dataPointer, int offset)
             : this()
         {
             if (typeof(T) == typeof(Byte))
@@ -1039,6 +1057,273 @@ namespace System.Numerics
                     {
                         destinationBase[startIndex + 0] = this.register.double_0;
                         destinationBase[startIndex + 1] = this.register.double_1;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Copies the vector to the given destination pointer.
+        /// </summary>
+        /// <param name="destination">The destination to which the values are copied.</param>
+        /// <exception cref="ArgumentNullException">If the destination is IntPtr.Zero.</exception>
+        [JitIntrinsic]
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(IntPtr destination)
+        {
+            CopyTo(destination.ToPointer(), 0);
+        }
+
+        /// <summary>
+        /// Copies the vector to the given destination pointer.
+        /// </summary>
+        /// <param name="destination">The destination to which the values are copied.</param>
+        /// <param name="offset">The number of elements in the destination after which the data is copied to.</param>
+        /// <exception cref="ArgumentNullException">If the destination is IntPtr.Zero.</exception>
+        [JitIntrinsic]
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(IntPtr destination, int offset)
+        {
+            CopyTo(destination.ToPointer(), offset);
+        }
+
+        /// <summary>
+        /// Copies the vector to the given destination pointer.
+        /// </summary>
+        /// <param name="destination">The destination to which the values are copied.</param>
+        /// <exception cref="ArgumentNullException">If the destination is null.</exception>
+        [JitIntrinsic]
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(void* destination)
+        {
+            CopyTo(destination, 0);
+        }
+
+        /// <summary>
+        /// Copies the vector to the given destination pointer.
+        /// </summary>
+        /// <param name="destination">The destination to which the values are copied.</param>
+        /// <param name="offset">The number of elements in the destination after which the data is copied to.</param>
+        /// <exception cref="ArgumentNullException">If the destination is null</exception>
+        [JitIntrinsic]
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(void* destination, int offset)
+        {
+            if (destination == null)
+            {
+                // Match the JIT's exception type here. For perf, a NullReference is thrown instead of an ArgumentNull.
+                throw new NullReferenceException(SR.Arg_NullArgumentNullRef);
+            }
+
+            if (Vector.IsHardwareAccelerated)
+            {
+                if (typeof(T) == typeof(Byte))
+                {
+                    Byte* destinationBase = (Byte*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (Byte)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(SByte))
+                {
+                    SByte* destinationBase = (SByte*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (SByte)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(UInt16))
+                {
+                    UInt16* destinationBase = (UInt16*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (UInt16)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(Int16))
+                {
+                    Int16* destinationBase = (Int16*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (Int16)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(UInt32))
+                {
+                    UInt32* destinationBase = (UInt32*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (UInt32)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(Int32))
+                {
+                    Int32* destinationBase = (Int32*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (Int32)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(UInt64))
+                {
+                    UInt64* destinationBase = (UInt64*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (UInt64)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(Int64))
+                {
+                    Int64* destinationBase = (Int64*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (Int64)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(Single))
+                {
+                    Single* destinationBase = (Single*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (Single)(object)this[g];
+                    }
+                }
+                else if (typeof(T) == typeof(Double))
+                {
+                    Double* destinationBase = (Double*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (Double)(object)this[g];
+                    }
+                }
+            }
+            else
+            {
+                if (typeof(T) == typeof(Byte))
+                {
+                    Byte* destinationBase = (Byte*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.byte_0;
+                        destinationBase[offset + 1] = this.register.byte_1;
+                        destinationBase[offset + 2] = this.register.byte_2;
+                        destinationBase[offset + 3] = this.register.byte_3;
+                        destinationBase[offset + 4] = this.register.byte_4;
+                        destinationBase[offset + 5] = this.register.byte_5;
+                        destinationBase[offset + 6] = this.register.byte_6;
+                        destinationBase[offset + 7] = this.register.byte_7;
+                        destinationBase[offset + 8] = this.register.byte_8;
+                        destinationBase[offset + 9] = this.register.byte_9;
+                        destinationBase[offset + 10] = this.register.byte_10;
+                        destinationBase[offset + 11] = this.register.byte_11;
+                        destinationBase[offset + 12] = this.register.byte_12;
+                        destinationBase[offset + 13] = this.register.byte_13;
+                        destinationBase[offset + 14] = this.register.byte_14;
+                        destinationBase[offset + 15] = this.register.byte_15;
+                    }
+                }
+                else if (typeof(T) == typeof(SByte))
+                {
+                    SByte* destinationBase = (SByte*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.sbyte_0;
+                        destinationBase[offset + 1] = this.register.sbyte_1;
+                        destinationBase[offset + 2] = this.register.sbyte_2;
+                        destinationBase[offset + 3] = this.register.sbyte_3;
+                        destinationBase[offset + 4] = this.register.sbyte_4;
+                        destinationBase[offset + 5] = this.register.sbyte_5;
+                        destinationBase[offset + 6] = this.register.sbyte_6;
+                        destinationBase[offset + 7] = this.register.sbyte_7;
+                        destinationBase[offset + 8] = this.register.sbyte_8;
+                        destinationBase[offset + 9] = this.register.sbyte_9;
+                        destinationBase[offset + 10] = this.register.sbyte_10;
+                        destinationBase[offset + 11] = this.register.sbyte_11;
+                        destinationBase[offset + 12] = this.register.sbyte_12;
+                        destinationBase[offset + 13] = this.register.sbyte_13;
+                        destinationBase[offset + 14] = this.register.sbyte_14;
+                        destinationBase[offset + 15] = this.register.sbyte_15;
+                    }
+                }
+                else if (typeof(T) == typeof(UInt16))
+                {
+                    UInt16* destinationBase = (UInt16*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.uint16_0;
+                        destinationBase[offset + 1] = this.register.uint16_1;
+                        destinationBase[offset + 2] = this.register.uint16_2;
+                        destinationBase[offset + 3] = this.register.uint16_3;
+                        destinationBase[offset + 4] = this.register.uint16_4;
+                        destinationBase[offset + 5] = this.register.uint16_5;
+                        destinationBase[offset + 6] = this.register.uint16_6;
+                        destinationBase[offset + 7] = this.register.uint16_7;
+                    }
+                }
+                else if (typeof(T) == typeof(Int16))
+                {
+                    Int16* destinationBase = (Int16*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.int16_0;
+                        destinationBase[offset + 1] = this.register.int16_1;
+                        destinationBase[offset + 2] = this.register.int16_2;
+                        destinationBase[offset + 3] = this.register.int16_3;
+                        destinationBase[offset + 4] = this.register.int16_4;
+                        destinationBase[offset + 5] = this.register.int16_5;
+                        destinationBase[offset + 6] = this.register.int16_6;
+                        destinationBase[offset + 7] = this.register.int16_7;
+                    }
+                }
+                else if (typeof(T) == typeof(UInt32))
+                {
+                    UInt32* destinationBase = (UInt32*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.uint32_0;
+                        destinationBase[offset + 1] = this.register.uint32_1;
+                        destinationBase[offset + 2] = this.register.uint32_2;
+                        destinationBase[offset + 3] = this.register.uint32_3;
+                    }
+                }
+                else if (typeof(T) == typeof(Int32))
+                {
+                    Int32* destinationBase = (Int32*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.int32_0;
+                        destinationBase[offset + 1] = this.register.int32_1;
+                        destinationBase[offset + 2] = this.register.int32_2;
+                        destinationBase[offset + 3] = this.register.int32_3;
+                    }
+                }
+                else if (typeof(T) == typeof(UInt64))
+                {
+                    UInt64* destinationBase = (UInt64*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.uint64_0;
+                        destinationBase[offset + 1] = this.register.uint64_1;
+                    }
+                }
+                else if (typeof(T) == typeof(Int64))
+                {
+                    Int64* destinationBase = (Int64*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.int64_0;
+                        destinationBase[offset + 1] = this.register.int64_1;
+                    }
+                }
+                else if (typeof(T) == typeof(Single))
+                {
+                    Single* destinationBase = (Single*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.single_0;
+                        destinationBase[offset + 1] = this.register.single_1;
+                        destinationBase[offset + 2] = this.register.single_2;
+                        destinationBase[offset + 3] = this.register.single_3;
+                    }
+                }
+                else if (typeof(T) == typeof(Double))
+                {
+                    Double* destinationBase = (Double*)destination;
+                    {
+                        destinationBase[offset + 0] = this.register.double_0;
+                        destinationBase[offset + 1] = this.register.double_1;
                     }
                 }
             }

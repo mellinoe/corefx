@@ -11,6 +11,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace System.Numerics.Tests
@@ -132,6 +133,62 @@ namespace System.Numerics.Tests
                 var vector = new Vector<T>(values);
             });
         }
+<# 
+    foreach (var type in supportedTypes)
+    {
+#>
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointer<#=type.Name#>(int offset)
+        {
+            <#=type.Name#>[] data = Util.GenerateRandomValues<<#=type.Name#>>(Vector<<#=type.Name#>>.Count + offset);
+
+            // Pinned Array
+            fixed (<#=type.Name#>* dataPtr = data)
+            {
+                Vector<<#=type.Name#>> vectorFromPinnedArray = new Vector<<#=type.Name#>>(dataPtr, offset);
+                for (int g = 0; g < Vector<<#=type.Name#>>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            <#=type.Name#>* stackDestination = stackalloc <#=type.Name#>[Vector<<#=type.Name#>>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<<#=type.Name#>> vectorFromStack = new Vector<<#=type.Name#>>(stackDestination, offset);
+            for (int g = 0; g < Vector<<#=type.Name#>>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(<#=type.Name#>) * (Vector<<#=type.Name#>>.Count + offset));
+            <#=type.Name#>* heapDestination = (<#=type.Name#>*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<<#=type.Name#>> vectorFromHeap = new Vector<<#=type.Name#>>(heapDestination, offset);
+            for (int g = 0; g < Vector<<#=type.Name#>>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+<#
+    }
+#>
         #endregion Constructor Tests
 
         #region Indexer Tests
@@ -197,23 +254,23 @@ namespace System.Numerics.Tests
         }
         #endregion
 
-        #region CopyTo (array) Tests
+        #region CopyTo Tests
 <# 
     foreach (var type in supportedTypes)
     {
 #>
         [Fact]
-        public void CopyTo<#=type.Name#>() { TestCopyTo<<#=type.Name#>>(); }
+        public void CopyToArray<#=type.Name#>() { TestCopyToArray<<#=type.Name#>>(); }
 <#
     }
 #>
-        private void TestCopyTo<T>() where T : struct
+        private void TestCopyToArray<T>() where T : struct
         {
             var initialValues = GenerateRandomValuesForVector<T>();
             var vector = new Vector<T>(initialValues);
             T[] array = new T[Vector<T>.Count];
 
-            Assert.Throws<NullReferenceException>(() => vector.CopyTo(null, 0));
+            Assert.Throws<NullReferenceException>(() => vector.CopyTo((T[])null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => vector.CopyTo(array, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => vector.CopyTo(array, array.Length));
             Assert.Throws<ArgumentException>(() => vector.CopyTo(array, array.Length - 1));
@@ -231,11 +288,11 @@ namespace System.Numerics.Tests
     {
 #>
         [Fact]
-        public void CopyToWithOffset<#=type.Name#>() { TestCopyToWithOffset<<#=type.Name#>>(); }
+        public void CopyToArrayWithOffset<#=type.Name#>() { TestCopyToArrayWithOffset<<#=type.Name#>>(); }
 <#
     }
 #>
-        private void TestCopyToWithOffset<T>() where T : struct
+        private void TestCopyToArrayWithOffset<T>() where T : struct
         {
             int offset = Util.GenerateSingleValue<int>(5, 500);
             var initialValues = GenerateRandomValuesForVector<T>();
@@ -248,6 +305,68 @@ namespace System.Numerics.Tests
                 Assert.Equal(vector[g], array[g + offset]);
             }
         }
+
+        [Fact]
+        public unsafe void CopyToPointer_NullPointerThrowsNullRef()
+        {
+            Assert.Throws<NullReferenceException>(() => new Vector<int>().CopyTo((void*)null, 0));
+        }
+
+<# 
+    foreach (var type in supportedTypes)
+    {
+#>
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffset<#=type.Name#>(int offset)
+        {
+            <#=type.Name#>[] initialValues = GenerateRandomValuesForVector<<#=type.Name#>>();
+            Vector<<#=type.Name#>> vector = new Vector<<#=type.Name#>>(initialValues);
+
+            // Stack Allocated
+            <#=type.Name#>* destination = stackalloc <#=type.Name#>[Vector<<#=type.Name#>>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<<#=type.Name#>>.Count; g++)
+            {
+                Assert.Equal((<#=type.Name#>)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((<#=type.Name#>)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(<#=type.Name#>) * (Vector<<#=type.Name#>>.Count + offset));
+            destination = (<#=type.Name#>*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<<#=type.Name#>>.Count; g++)
+            {
+                Assert.Equal((<#=type.Name#>)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((<#=type.Name#>)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            <#=type.Name#>[] array = new <#=type.Name#>[Vector<<#=type.Name#>>.Count + offset];
+            fixed (<#=type.Name#>* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((<#=type.Name#>)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<<#=type.Name#>>.Count + offset; g++)
+                {
+                    Assert.Equal((<#=type.Name#>)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((<#=type.Name#>)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+<#
+    }
+#>
         #endregion
 
         #region EqualsTests

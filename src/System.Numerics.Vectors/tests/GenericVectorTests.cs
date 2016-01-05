@@ -6,6 +6,7 @@ using System;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using Xunit;
 
 namespace System.Numerics.Tests
@@ -182,6 +183,496 @@ namespace System.Numerics.Tests
                 var vector = new Vector<T>(values);
             });
         }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerByte(int offset)
+        {
+            Byte[] data = Util.GenerateRandomValues<Byte>(Vector<Byte>.Count + offset);
+
+            // Pinned Array
+            fixed (Byte* dataPtr = data)
+            {
+                Vector<Byte> vectorFromPinnedArray = new Vector<Byte>(dataPtr, offset);
+                for (int g = 0; g < Vector<Byte>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            Byte* stackDestination = stackalloc Byte[Vector<Byte>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<Byte> vectorFromStack = new Vector<Byte>(stackDestination, offset);
+            for (int g = 0; g < Vector<Byte>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Byte) * (Vector<Byte>.Count + offset));
+            Byte* heapDestination = (Byte*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<Byte> vectorFromHeap = new Vector<Byte>(heapDestination, offset);
+            for (int g = 0; g < Vector<Byte>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerSByte(int offset)
+        {
+            SByte[] data = Util.GenerateRandomValues<SByte>(Vector<SByte>.Count + offset);
+
+            // Pinned Array
+            fixed (SByte* dataPtr = data)
+            {
+                Vector<SByte> vectorFromPinnedArray = new Vector<SByte>(dataPtr, offset);
+                for (int g = 0; g < Vector<SByte>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            SByte* stackDestination = stackalloc SByte[Vector<SByte>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<SByte> vectorFromStack = new Vector<SByte>(stackDestination, offset);
+            for (int g = 0; g < Vector<SByte>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(SByte) * (Vector<SByte>.Count + offset));
+            SByte* heapDestination = (SByte*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<SByte> vectorFromHeap = new Vector<SByte>(heapDestination, offset);
+            for (int g = 0; g < Vector<SByte>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerUInt16(int offset)
+        {
+            UInt16[] data = Util.GenerateRandomValues<UInt16>(Vector<UInt16>.Count + offset);
+
+            // Pinned Array
+            fixed (UInt16* dataPtr = data)
+            {
+                Vector<UInt16> vectorFromPinnedArray = new Vector<UInt16>(dataPtr, offset);
+                for (int g = 0; g < Vector<UInt16>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            UInt16* stackDestination = stackalloc UInt16[Vector<UInt16>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<UInt16> vectorFromStack = new Vector<UInt16>(stackDestination, offset);
+            for (int g = 0; g < Vector<UInt16>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(UInt16) * (Vector<UInt16>.Count + offset));
+            UInt16* heapDestination = (UInt16*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<UInt16> vectorFromHeap = new Vector<UInt16>(heapDestination, offset);
+            for (int g = 0; g < Vector<UInt16>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerInt16(int offset)
+        {
+            Int16[] data = Util.GenerateRandomValues<Int16>(Vector<Int16>.Count + offset);
+
+            // Pinned Array
+            fixed (Int16* dataPtr = data)
+            {
+                Vector<Int16> vectorFromPinnedArray = new Vector<Int16>(dataPtr, offset);
+                for (int g = 0; g < Vector<Int16>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            Int16* stackDestination = stackalloc Int16[Vector<Int16>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<Int16> vectorFromStack = new Vector<Int16>(stackDestination, offset);
+            for (int g = 0; g < Vector<Int16>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Int16) * (Vector<Int16>.Count + offset));
+            Int16* heapDestination = (Int16*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<Int16> vectorFromHeap = new Vector<Int16>(heapDestination, offset);
+            for (int g = 0; g < Vector<Int16>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerUInt32(int offset)
+        {
+            UInt32[] data = Util.GenerateRandomValues<UInt32>(Vector<UInt32>.Count + offset);
+
+            // Pinned Array
+            fixed (UInt32* dataPtr = data)
+            {
+                Vector<UInt32> vectorFromPinnedArray = new Vector<UInt32>(dataPtr, offset);
+                for (int g = 0; g < Vector<UInt32>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            UInt32* stackDestination = stackalloc UInt32[Vector<UInt32>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<UInt32> vectorFromStack = new Vector<UInt32>(stackDestination, offset);
+            for (int g = 0; g < Vector<UInt32>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(UInt32) * (Vector<UInt32>.Count + offset));
+            UInt32* heapDestination = (UInt32*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<UInt32> vectorFromHeap = new Vector<UInt32>(heapDestination, offset);
+            for (int g = 0; g < Vector<UInt32>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerInt32(int offset)
+        {
+            Int32[] data = Util.GenerateRandomValues<Int32>(Vector<Int32>.Count + offset);
+
+            // Pinned Array
+            fixed (Int32* dataPtr = data)
+            {
+                Vector<Int32> vectorFromPinnedArray = new Vector<Int32>(dataPtr, offset);
+                for (int g = 0; g < Vector<Int32>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            Int32* stackDestination = stackalloc Int32[Vector<Int32>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<Int32> vectorFromStack = new Vector<Int32>(stackDestination, offset);
+            for (int g = 0; g < Vector<Int32>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Int32) * (Vector<Int32>.Count + offset));
+            Int32* heapDestination = (Int32*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<Int32> vectorFromHeap = new Vector<Int32>(heapDestination, offset);
+            for (int g = 0; g < Vector<Int32>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerUInt64(int offset)
+        {
+            UInt64[] data = Util.GenerateRandomValues<UInt64>(Vector<UInt64>.Count + offset);
+
+            // Pinned Array
+            fixed (UInt64* dataPtr = data)
+            {
+                Vector<UInt64> vectorFromPinnedArray = new Vector<UInt64>(dataPtr, offset);
+                for (int g = 0; g < Vector<UInt64>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            UInt64* stackDestination = stackalloc UInt64[Vector<UInt64>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<UInt64> vectorFromStack = new Vector<UInt64>(stackDestination, offset);
+            for (int g = 0; g < Vector<UInt64>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(UInt64) * (Vector<UInt64>.Count + offset));
+            UInt64* heapDestination = (UInt64*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<UInt64> vectorFromHeap = new Vector<UInt64>(heapDestination, offset);
+            for (int g = 0; g < Vector<UInt64>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerInt64(int offset)
+        {
+            Int64[] data = Util.GenerateRandomValues<Int64>(Vector<Int64>.Count + offset);
+
+            // Pinned Array
+            fixed (Int64* dataPtr = data)
+            {
+                Vector<Int64> vectorFromPinnedArray = new Vector<Int64>(dataPtr, offset);
+                for (int g = 0; g < Vector<Int64>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            Int64* stackDestination = stackalloc Int64[Vector<Int64>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<Int64> vectorFromStack = new Vector<Int64>(stackDestination, offset);
+            for (int g = 0; g < Vector<Int64>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Int64) * (Vector<Int64>.Count + offset));
+            Int64* heapDestination = (Int64*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<Int64> vectorFromHeap = new Vector<Int64>(heapDestination, offset);
+            for (int g = 0; g < Vector<Int64>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerSingle(int offset)
+        {
+            Single[] data = Util.GenerateRandomValues<Single>(Vector<Single>.Count + offset);
+
+            // Pinned Array
+            fixed (Single* dataPtr = data)
+            {
+                Vector<Single> vectorFromPinnedArray = new Vector<Single>(dataPtr, offset);
+                for (int g = 0; g < Vector<Single>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            Single* stackDestination = stackalloc Single[Vector<Single>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<Single> vectorFromStack = new Vector<Single>(stackDestination, offset);
+            for (int g = 0; g < Vector<Single>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Single) * (Vector<Single>.Count + offset));
+            Single* heapDestination = (Single*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<Single> vectorFromHeap = new Vector<Single>(heapDestination, offset);
+            for (int g = 0; g < Vector<Single>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void ConstructorPointerDouble(int offset)
+        {
+            Double[] data = Util.GenerateRandomValues<Double>(Vector<Double>.Count + offset);
+
+            // Pinned Array
+            fixed (Double* dataPtr = data)
+            {
+                Vector<Double> vectorFromPinnedArray = new Vector<Double>(dataPtr, offset);
+                for (int g = 0; g < Vector<Double>.Count; g++)
+                {
+                    Assert.Equal(data[g + offset], vectorFromPinnedArray[g]);
+                }
+            }
+            
+            // Stack Allocated
+            Double* stackDestination = stackalloc Double[Vector<Double>.Count + offset];
+            for (int g = 0; g < data.Length; g++)
+            {
+                stackDestination[g] = data[g];
+            }            
+            Vector<Double> vectorFromStack = new Vector<Double>(stackDestination, offset);
+            for (int g = 0; g < Vector<Double>.Count; g++)
+            {
+                Assert.Equal(stackDestination[g + offset], vectorFromStack[g]);
+                Assert.Equal(data[g + offset], vectorFromStack[g]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Double) * (Vector<Double>.Count + offset));
+            Double* heapDestination = (Double*)memoryPtr.ToPointer();
+            for (int g = 0; g < data.Length; g++)
+            {
+                heapDestination[g] = data[g];
+            }
+            Vector<Double> vectorFromHeap = new Vector<Double>(heapDestination, offset);
+            for (int g = 0; g < Vector<Double>.Count; g++)
+            {
+                Assert.Equal(heapDestination[g + offset], vectorFromHeap[g]);
+                Assert.Equal(data[g + offset], vectorFromHeap[g]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+        }
         #endregion Constructor Tests
 
         #region Indexer Tests
@@ -280,34 +771,34 @@ namespace System.Numerics.Tests
         }
         #endregion
 
-        #region CopyTo (array) Tests
+        #region CopyTo Tests
         [Fact]
-        public void CopyToByte() { TestCopyTo<Byte>(); }
+        public void CopyToArrayByte() { TestCopyToArray<Byte>(); }
         [Fact]
-        public void CopyToSByte() { TestCopyTo<SByte>(); }
+        public void CopyToArraySByte() { TestCopyToArray<SByte>(); }
         [Fact]
-        public void CopyToUInt16() { TestCopyTo<UInt16>(); }
+        public void CopyToArrayUInt16() { TestCopyToArray<UInt16>(); }
         [Fact]
-        public void CopyToInt16() { TestCopyTo<Int16>(); }
+        public void CopyToArrayInt16() { TestCopyToArray<Int16>(); }
         [Fact]
-        public void CopyToUInt32() { TestCopyTo<UInt32>(); }
+        public void CopyToArrayUInt32() { TestCopyToArray<UInt32>(); }
         [Fact]
-        public void CopyToInt32() { TestCopyTo<Int32>(); }
+        public void CopyToArrayInt32() { TestCopyToArray<Int32>(); }
         [Fact]
-        public void CopyToUInt64() { TestCopyTo<UInt64>(); }
+        public void CopyToArrayUInt64() { TestCopyToArray<UInt64>(); }
         [Fact]
-        public void CopyToInt64() { TestCopyTo<Int64>(); }
+        public void CopyToArrayInt64() { TestCopyToArray<Int64>(); }
         [Fact]
-        public void CopyToSingle() { TestCopyTo<Single>(); }
+        public void CopyToArraySingle() { TestCopyToArray<Single>(); }
         [Fact]
-        public void CopyToDouble() { TestCopyTo<Double>(); }
-        private void TestCopyTo<T>() where T : struct
+        public void CopyToArrayDouble() { TestCopyToArray<Double>(); }
+        private void TestCopyToArray<T>() where T : struct
         {
             var initialValues = GenerateRandomValuesForVector<T>();
             var vector = new Vector<T>(initialValues);
             T[] array = new T[Vector<T>.Count];
 
-            Assert.Throws<NullReferenceException>(() => vector.CopyTo(null, 0));
+            Assert.Throws<NullReferenceException>(() => vector.CopyTo((T[])null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => vector.CopyTo(array, -1));
             Assert.Throws<ArgumentOutOfRangeException>(() => vector.CopyTo(array, array.Length));
             Assert.Throws<ArgumentException>(() => vector.CopyTo(array, array.Length - 1));
@@ -321,26 +812,26 @@ namespace System.Numerics.Tests
         }
 
         [Fact]
-        public void CopyToWithOffsetByte() { TestCopyToWithOffset<Byte>(); }
+        public void CopyToArrayWithOffsetByte() { TestCopyToArrayWithOffset<Byte>(); }
         [Fact]
-        public void CopyToWithOffsetSByte() { TestCopyToWithOffset<SByte>(); }
+        public void CopyToArrayWithOffsetSByte() { TestCopyToArrayWithOffset<SByte>(); }
         [Fact]
-        public void CopyToWithOffsetUInt16() { TestCopyToWithOffset<UInt16>(); }
+        public void CopyToArrayWithOffsetUInt16() { TestCopyToArrayWithOffset<UInt16>(); }
         [Fact]
-        public void CopyToWithOffsetInt16() { TestCopyToWithOffset<Int16>(); }
+        public void CopyToArrayWithOffsetInt16() { TestCopyToArrayWithOffset<Int16>(); }
         [Fact]
-        public void CopyToWithOffsetUInt32() { TestCopyToWithOffset<UInt32>(); }
+        public void CopyToArrayWithOffsetUInt32() { TestCopyToArrayWithOffset<UInt32>(); }
         [Fact]
-        public void CopyToWithOffsetInt32() { TestCopyToWithOffset<Int32>(); }
+        public void CopyToArrayWithOffsetInt32() { TestCopyToArrayWithOffset<Int32>(); }
         [Fact]
-        public void CopyToWithOffsetUInt64() { TestCopyToWithOffset<UInt64>(); }
+        public void CopyToArrayWithOffsetUInt64() { TestCopyToArrayWithOffset<UInt64>(); }
         [Fact]
-        public void CopyToWithOffsetInt64() { TestCopyToWithOffset<Int64>(); }
+        public void CopyToArrayWithOffsetInt64() { TestCopyToArrayWithOffset<Int64>(); }
         [Fact]
-        public void CopyToWithOffsetSingle() { TestCopyToWithOffset<Single>(); }
+        public void CopyToArrayWithOffsetSingle() { TestCopyToArrayWithOffset<Single>(); }
         [Fact]
-        public void CopyToWithOffsetDouble() { TestCopyToWithOffset<Double>(); }
-        private void TestCopyToWithOffset<T>() where T : struct
+        public void CopyToArrayWithOffsetDouble() { TestCopyToArrayWithOffset<Double>(); }
+        private void TestCopyToArrayWithOffset<T>() where T : struct
         {
             int offset = Util.GenerateSingleValue<int>(5, 500);
             var initialValues = GenerateRandomValuesForVector<T>();
@@ -353,6 +844,493 @@ namespace System.Numerics.Tests
                 Assert.Equal(vector[g], array[g + offset]);
             }
         }
+
+        [Fact]
+        public unsafe void CopyToPointer_NullPointerThrowsNullRef()
+        {
+            Assert.Throws<NullReferenceException>(() => new Vector<int>().CopyTo((void*)null, 0));
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetByte(int offset)
+        {
+            Byte[] initialValues = GenerateRandomValuesForVector<Byte>();
+            Vector<Byte> vector = new Vector<Byte>(initialValues);
+
+            // Stack Allocated
+            Byte* destination = stackalloc Byte[Vector<Byte>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Byte>.Count; g++)
+            {
+                Assert.Equal((Byte)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Byte)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Byte) * (Vector<Byte>.Count + offset));
+            destination = (Byte*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Byte>.Count; g++)
+            {
+                Assert.Equal((Byte)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Byte)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            Byte[] array = new Byte[Vector<Byte>.Count + offset];
+            fixed (Byte* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((Byte)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<Byte>.Count + offset; g++)
+                {
+                    Assert.Equal((Byte)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((Byte)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetSByte(int offset)
+        {
+            SByte[] initialValues = GenerateRandomValuesForVector<SByte>();
+            Vector<SByte> vector = new Vector<SByte>(initialValues);
+
+            // Stack Allocated
+            SByte* destination = stackalloc SByte[Vector<SByte>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<SByte>.Count; g++)
+            {
+                Assert.Equal((SByte)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((SByte)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(SByte) * (Vector<SByte>.Count + offset));
+            destination = (SByte*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<SByte>.Count; g++)
+            {
+                Assert.Equal((SByte)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((SByte)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            SByte[] array = new SByte[Vector<SByte>.Count + offset];
+            fixed (SByte* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((SByte)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<SByte>.Count + offset; g++)
+                {
+                    Assert.Equal((SByte)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((SByte)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetUInt16(int offset)
+        {
+            UInt16[] initialValues = GenerateRandomValuesForVector<UInt16>();
+            Vector<UInt16> vector = new Vector<UInt16>(initialValues);
+
+            // Stack Allocated
+            UInt16* destination = stackalloc UInt16[Vector<UInt16>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<UInt16>.Count; g++)
+            {
+                Assert.Equal((UInt16)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((UInt16)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(UInt16) * (Vector<UInt16>.Count + offset));
+            destination = (UInt16*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<UInt16>.Count; g++)
+            {
+                Assert.Equal((UInt16)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((UInt16)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            UInt16[] array = new UInt16[Vector<UInt16>.Count + offset];
+            fixed (UInt16* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((UInt16)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<UInt16>.Count + offset; g++)
+                {
+                    Assert.Equal((UInt16)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((UInt16)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetInt16(int offset)
+        {
+            Int16[] initialValues = GenerateRandomValuesForVector<Int16>();
+            Vector<Int16> vector = new Vector<Int16>(initialValues);
+
+            // Stack Allocated
+            Int16* destination = stackalloc Int16[Vector<Int16>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Int16>.Count; g++)
+            {
+                Assert.Equal((Int16)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Int16)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Int16) * (Vector<Int16>.Count + offset));
+            destination = (Int16*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Int16>.Count; g++)
+            {
+                Assert.Equal((Int16)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Int16)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            Int16[] array = new Int16[Vector<Int16>.Count + offset];
+            fixed (Int16* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((Int16)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<Int16>.Count + offset; g++)
+                {
+                    Assert.Equal((Int16)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((Int16)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetUInt32(int offset)
+        {
+            UInt32[] initialValues = GenerateRandomValuesForVector<UInt32>();
+            Vector<UInt32> vector = new Vector<UInt32>(initialValues);
+
+            // Stack Allocated
+            UInt32* destination = stackalloc UInt32[Vector<UInt32>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<UInt32>.Count; g++)
+            {
+                Assert.Equal((UInt32)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((UInt32)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(UInt32) * (Vector<UInt32>.Count + offset));
+            destination = (UInt32*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<UInt32>.Count; g++)
+            {
+                Assert.Equal((UInt32)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((UInt32)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            UInt32[] array = new UInt32[Vector<UInt32>.Count + offset];
+            fixed (UInt32* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((UInt32)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<UInt32>.Count + offset; g++)
+                {
+                    Assert.Equal((UInt32)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((UInt32)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetInt32(int offset)
+        {
+            Int32[] initialValues = GenerateRandomValuesForVector<Int32>();
+            Vector<Int32> vector = new Vector<Int32>(initialValues);
+
+            // Stack Allocated
+            Int32* destination = stackalloc Int32[Vector<Int32>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Int32>.Count; g++)
+            {
+                Assert.Equal((Int32)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Int32)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Int32) * (Vector<Int32>.Count + offset));
+            destination = (Int32*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Int32>.Count; g++)
+            {
+                Assert.Equal((Int32)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Int32)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            Int32[] array = new Int32[Vector<Int32>.Count + offset];
+            fixed (Int32* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((Int32)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<Int32>.Count + offset; g++)
+                {
+                    Assert.Equal((Int32)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((Int32)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetUInt64(int offset)
+        {
+            UInt64[] initialValues = GenerateRandomValuesForVector<UInt64>();
+            Vector<UInt64> vector = new Vector<UInt64>(initialValues);
+
+            // Stack Allocated
+            UInt64* destination = stackalloc UInt64[Vector<UInt64>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<UInt64>.Count; g++)
+            {
+                Assert.Equal((UInt64)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((UInt64)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(UInt64) * (Vector<UInt64>.Count + offset));
+            destination = (UInt64*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<UInt64>.Count; g++)
+            {
+                Assert.Equal((UInt64)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((UInt64)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            UInt64[] array = new UInt64[Vector<UInt64>.Count + offset];
+            fixed (UInt64* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((UInt64)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<UInt64>.Count + offset; g++)
+                {
+                    Assert.Equal((UInt64)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((UInt64)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetInt64(int offset)
+        {
+            Int64[] initialValues = GenerateRandomValuesForVector<Int64>();
+            Vector<Int64> vector = new Vector<Int64>(initialValues);
+
+            // Stack Allocated
+            Int64* destination = stackalloc Int64[Vector<Int64>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Int64>.Count; g++)
+            {
+                Assert.Equal((Int64)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Int64)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Int64) * (Vector<Int64>.Count + offset));
+            destination = (Int64*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Int64>.Count; g++)
+            {
+                Assert.Equal((Int64)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Int64)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            Int64[] array = new Int64[Vector<Int64>.Count + offset];
+            fixed (Int64* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((Int64)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<Int64>.Count + offset; g++)
+                {
+                    Assert.Equal((Int64)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((Int64)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetSingle(int offset)
+        {
+            Single[] initialValues = GenerateRandomValuesForVector<Single>();
+            Vector<Single> vector = new Vector<Single>(initialValues);
+
+            // Stack Allocated
+            Single* destination = stackalloc Single[Vector<Single>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Single>.Count; g++)
+            {
+                Assert.Equal((Single)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Single)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Single) * (Vector<Single>.Count + offset));
+            destination = (Single*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Single>.Count; g++)
+            {
+                Assert.Equal((Single)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Single)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            Single[] array = new Single[Vector<Single>.Count + offset];
+            fixed (Single* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((Single)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<Single>.Count + offset; g++)
+                {
+                    Assert.Equal((Single)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((Single)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData(0)]
+        [InlineData(1)]
+        [InlineData(10)]
+        [InlineData(100)]
+        [InlineData(1000)]
+        public unsafe void TestCopyToPointerWithOffsetDouble(int offset)
+        {
+            Double[] initialValues = GenerateRandomValuesForVector<Double>();
+            Vector<Double> vector = new Vector<Double>(initialValues);
+
+            // Stack Allocated
+            Double* destination = stackalloc Double[Vector<Double>.Count + offset];
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Double>.Count; g++)
+            {
+                Assert.Equal((Double)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Double)(object)vector[g], destination[g + offset]);
+            }
+
+            // Marshal Allocated
+            IntPtr memoryPtr = Marshal.AllocHGlobal(sizeof(Double) * (Vector<Double>.Count + offset));
+            destination = (Double*)memoryPtr.ToPointer();
+            vector.CopyTo(destination, offset);
+            for (int g = 0; g < Vector<Double>.Count; g++)
+            {
+                Assert.Equal((Double)(object)initialValues[g], destination[g + offset]);
+                Assert.Equal((Double)(object)vector[g], destination[g + offset]);
+            }
+            Marshal.FreeHGlobal(memoryPtr);
+
+            // Pinned Array
+            Double[] array = new Double[Vector<Double>.Count + offset];
+            fixed (Double* arrayPtr = array)
+            {
+                vector.CopyTo(arrayPtr, offset);
+                for (int g = 0; g < offset; g++)
+                {
+                    Assert.Equal((Double)0, arrayPtr[g]);
+                }
+                for (int g = offset; g < Vector<Double>.Count + offset; g++)
+                {
+                    Assert.Equal((Double)(object)initialValues[g - offset], arrayPtr[g]);
+                    Assert.Equal((Double)(object)vector[g - offset], arrayPtr[g]);
+                }
+            }
+        }
+
         #endregion
 
         #region EqualsTests

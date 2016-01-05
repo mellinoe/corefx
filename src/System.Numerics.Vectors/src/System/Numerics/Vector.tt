@@ -88,7 +88,7 @@ namespace System.Numerics
             internal byte _byte;
         }
 
-		// Calculates the size of this struct in bytes, by computing the offset of a field in a structure
+        // Calculates the size of this struct in bytes, by computing the offset of a field in a structure
         private static unsafe int InitializeCount()
         {
             VectorSizeHelper vsh;
@@ -232,13 +232,31 @@ namespace System.Numerics
             }
         }
 
-#pragma warning disable 3001 // void* is not a CLS-Compliant argument type
-        private unsafe Vector(void* dataPointer) : this(dataPointer, 0) { }
-#pragma warning restore 3001 // void* is not a CLS-Compliant argument type
+        /// <summary>
+        /// Constructs a vector from data at the given pointer location.
+        /// There must be at least Vector`T.Count readable elements at the location.
+        /// </summary>
+        public unsafe Vector(IntPtr dataPointer) : this(dataPointer.ToPointer(), 0) { }
 
-#pragma warning disable 3001 // void* is not a CLS-Compliant argument type
-        // Implemented with offset if this API ever becomes public; an offset of 0 is used internally.
-        private unsafe Vector(void* dataPointer, int offset)
+        /// <summary>
+        /// Constructs a vector from data at the given pointer location, starting after the given offset offset.
+        /// There must be at least Vector`T.Count readable elements at the location.
+        /// </summary>
+        public unsafe Vector(IntPtr dataPointer, int offset) : this(dataPointer.ToPointer(), 0) { }
+
+        /// <summary>
+        /// Constructs a vector from data at the given pointer location.
+        /// There must be at least Vector`T.Count readable elements at the location.
+        /// </summary>
+        [CLSCompliant(false)]
+        public unsafe Vector(void* dataPointer) : this(dataPointer, 0) { }
+
+        /// <summary>
+        /// Constructs a vector from data at the given pointer location, starting after the given offset.
+        /// There must be at least Vector`T.Count readable elements at the location.
+        /// </summary>
+        [CLSCompliant(false)]
+        public unsafe Vector(void* dataPointer, int offset)
             : this()
         {
 <# foreach (Type type in supportedTypes)
@@ -345,6 +363,101 @@ namespace System.Numerics
             {
 #>
                         destinationBase[startIndex + <#=g#>] = this.<#=GetRegisterFieldName(type, g)#>;
+<#
+            }
+#>
+                    }
+                }
+<#
+        }
+#>
+            }
+        }
+
+        /// <summary>
+        /// Copies the vector to the given destination pointer.
+        /// </summary>
+        /// <param name="destination">The destination to which the values are copied.</param>
+        /// <exception cref="ArgumentNullException">If the destination is IntPtr.Zero.</exception>
+        [JitIntrinsic]
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(IntPtr destination)
+        {
+            CopyTo(destination.ToPointer(), 0);
+        }
+
+        /// <summary>
+        /// Copies the vector to the given destination pointer.
+        /// </summary>
+        /// <param name="destination">The destination to which the values are copied.</param>
+        /// <param name="offset">The number of elements in the destination after which the data is copied to.</param>
+        /// <exception cref="ArgumentNullException">If the destination is IntPtr.Zero.</exception>
+        [JitIntrinsic]
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(IntPtr destination, int offset)
+        {
+            CopyTo(destination.ToPointer(), offset);
+        }
+
+        /// <summary>
+        /// Copies the vector to the given destination pointer.
+        /// </summary>
+        /// <param name="destination">The destination to which the values are copied.</param>
+        /// <exception cref="ArgumentNullException">If the destination is null.</exception>
+        [JitIntrinsic]
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(void* destination)
+        {
+            CopyTo(destination, 0);
+        }
+
+        /// <summary>
+        /// Copies the vector to the given destination pointer.
+        /// </summary>
+        /// <param name="destination">The destination to which the values are copied.</param>
+        /// <param name="offset">The number of elements in the destination after which the data is copied to.</param>
+        /// <exception cref="ArgumentNullException">If the destination is null</exception>
+        [JitIntrinsic]
+        [CLSCompliant(false)]
+        public unsafe void CopyTo(void* destination, int offset)
+        {
+            if (destination == null)
+            {
+                // Match the JIT's exception type here. For perf, a NullReference is thrown instead of an ArgumentNull.
+                throw new NullReferenceException(SR.Arg_NullArgumentNullRef);
+            }
+
+            if (Vector.IsHardwareAccelerated)
+            {
+<#    foreach (Type type in supportedTypes)
+        {
+#>
+                <#=GenerateIfStatementHeader(type)#>
+                {
+                    <#=type.Name#>* destinationBase = (<#=type.Name#>*)destination;
+                    for (int g = 0; g < Count; g++)
+                    {
+                        destinationBase[offset + g] = (<#=type.Name#>)(object)this[g];
+                    }
+                }
+<#
+        }
+#>
+            }
+            else
+            {
+<#    foreach (Type type in supportedTypes)
+        {
+#>
+                <#=GenerateIfStatementHeader(type)#>
+                {
+                    <#=type.Name#>* destinationBase = (<#=type.Name#>*)destination;
+                    {
+<#
+            for (int g = 0; g < GetNumFields(type, totalSize); g++)
+            {
+#>
+                        destinationBase[offset + <#=g#>] = this.<#=GetRegisterFieldName(type, g)#>;
 <#
             }
 #>
