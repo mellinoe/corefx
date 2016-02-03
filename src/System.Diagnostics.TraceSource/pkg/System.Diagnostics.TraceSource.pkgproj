@@ -7,7 +7,9 @@
       <SupportedFramework>net46;dnxcore50</SupportedFramework>
     </ProjectReference>
     
-    <ProjectReference Include="..\src\facade\System.Diagnostics.TraceSource.csproj" />
+    <ProjectReference Include="..\src\System.Diagnostics.TraceSource.csproj">
+      <AdditionalProperties>TargetGroup=net46</AdditionalProperties>
+    </ProjectReference>
 
     <ProjectReference Include="win\System.Diagnostics.TraceSource.pkgproj" />
     <ProjectReference Include="unix\System.Diagnostics.TraceSource.pkgproj" />
