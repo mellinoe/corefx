@@ -14,6 +14,8 @@
     <IsInterpreting Condition="'$(PackageTargetFramework)' == 'netcore50'">true</IsInterpreting>
     <DefineConstants Condition=" '$(IsInterpreting)' != 'true' ">$(DefineConstants);FEATURE_COMPILE</DefineConstants>
     <DefineConstants Condition=" '$(FeatureInterpret)' == 'true' ">$(DefineConstants);FEATURE_INTERPRET</DefineConstants>
+    <IsPartialFacadeAssembly Condition="'$(TargetGroup)' == 'net46'">true</IsPartialFacadeAssembly>
+    <ResourcesSourceOutputDirectory Condition="'$(TargetGroup)' == 'net46'">None</ResourcesSourceOutputDirectory>
   </PropertyGroup>
 
   <!-- Default configurations to help VS understand the configurations -->
@@ -23,6 +25,8 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcore50aot_Release|AnyCPU'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcore50_Debug|AnyCPU'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcore50_Release|AnyCPU'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net46_Debug|AnyCPU'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'net46_Release|AnyCPU'" />
 
   <PropertyGroup Condition="'$(TargetGroup)' == 'netcore50aot'">
     <ProjectJson>netcore50aot/project.json</ProjectJson>
@@ -33,7 +37,7 @@
     <EmbeddedResource Include="Resources\$(AssemblyName).rd.xml" />
     <TargetingPackReference Include="System.Private.CoreLib.DynamicDelegate" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetGroup)' != 'net46'">
     <Compile Include="$(CommonPath)\System\Collections\Generic\EnumerableHelpers.cs">
       <Link>Common\System\Collections\Generic\EnumerableHelpers.cs</Link>
     </Compile>
@@ -142,7 +146,7 @@
     <Compile Include="System\Runtime\CompilerServices\IRuntimeVariables.cs" />
     <None Include="project.json" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(IsInterpreting)' != 'true' ">
+  <ItemGroup Condition=" '$(IsInterpreting)' != 'true' And '$(TargetGroup)' != 'net46'">
     <Compile Include="$(CommonPath)\System\Dynamic\Utils\CollectionExtensions.AddFirst.cs">
       <Link>Common\System\Dynamic\Utils\CollectionExtensions.AddFirst.cs</Link>
     </Compile>
@@ -182,7 +186,7 @@
     <Compile Include="System\Runtime\CompilerServices\RuntimeOps.ExpressionQuoter.cs" />
     <Compile Include="System\Runtime\CompilerServices\RuntimeOps.RuntimeVariableList.cs" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(IsInterpreting)' == 'true' Or '$(FeatureInterpret)' == 'true' ">
+  <ItemGroup Condition=" ('$(IsInterpreting)' == 'true' Or '$(FeatureInterpret)' == 'true') And '$(TargetGroup)' != 'net46' ">
     <Compile Include="$(CommonPath)\System\Dynamic\Utils\DelegateHelpers.cs">
       <Link>Common\System\Dynamic\Utils\DelegateHelpers.cs</Link>
     </Compile>
@@ -219,6 +223,10 @@
     <Compile Include="System\Linq\Expressions\Interpreter\TypeOperations.cs" />
     <Compile Include="System\Linq\Expressions\Interpreter\Utilities.cs" />
     <Compile Include="System\Linq\Expressions\Compiler\DelegateHelpers.Generated.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetGroup)' == 'net46'">
+    <TargetingPackReference Include="mscorlib" />
+    <TargetingPackReference Include="System.Core" />
   </ItemGroup>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.targets))\dir.targets" />
 </Project>

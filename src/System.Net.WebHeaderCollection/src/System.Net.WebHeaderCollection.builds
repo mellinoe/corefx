@@ -14,7 +14,7 @@
     <Project Include="System.Net.WebHeaderCollection.csproj">
       <OSGroup>Windows_NT</OSGroup>
     </Project>
-    <Project Include="facade\System.Net.WebHeaderCollection.csproj">
+    <Project Include="System.Net.WebHeaderCollection.csproj">
       <TargetGroup>net46</TargetGroup>
     </Project>
   </ItemGroup>

@@ -14,7 +14,7 @@
     <Project Include="System.Net.Requests.csproj">
       <OSGroup>Windows_NT</OSGroup>
     </Project>
-    <Project Include="facade\System.Net.Requests.csproj">
+    <Project Include="System.Net.Requests.csproj">
       <TargetGroup>net46</TargetGroup>
     </Project>
   </ItemGroup>
