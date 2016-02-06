@@ -19,6 +19,7 @@
     <NuGetTargetMoniker>.NETPlatform,Version=v5.3</NuGetTargetMoniker>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="$(SourceDir)/mscorlib.WinRT-Facade/mscorlib.WinRT-Facade.csproj" />
     <Compile Include="System.Runtime.WindowsRuntime.cs" />
     <Compile Include="System.Runtime.WindowsRuntime.Manual.cs" />
   </ItemGroup>

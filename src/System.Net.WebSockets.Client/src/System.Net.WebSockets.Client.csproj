@@ -117,6 +117,10 @@
     <Compile Include="System\Net\WebSockets\WebSocketHandle.Unix.cs" />
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetGroup)' == 'netcore50'">
+    <ProjectReference Include="$(SourceDir)/mscorlib.WinRT-Facade/mscorlib.WinRT-Facade.csproj" />
+  </ItemGroup>
+
   <ItemGroup>
     <None Include="project.json" />
   </ItemGroup>
