@@ -13,6 +13,7 @@
     </Project>
     <Project Include="System.Diagnostics.Process.csproj">
       <TargetGroup>net46</TargetGroup>
+      <OSGroup>AnyOS</OSGroup>
     </Project>
     <Project Include="System.Diagnostics.Process.csproj">
       <TargetGroup>net461</TargetGroup>

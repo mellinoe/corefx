@@ -4,9 +4,6 @@
   <ItemGroup>
     <Project Include="System.Diagnostics.Contracts.csproj" />
     <Project Include="System.Diagnostics.Contracts.csproj">
-      <TargetGroup>net46</TargetGroup>
-    </Project>
-    <Project Include="System.Diagnostics.Contracts.csproj">
       <TargetGroup>netcore50</TargetGroup>
     </Project>
     <Project Include="System.Diagnostics.Contracts.csproj">
