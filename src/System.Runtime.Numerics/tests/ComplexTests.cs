@@ -14,11 +14,28 @@ namespace System.Numerics.Tests
     {
         private static Random s_random = new Random(-55);
         
+        public static double[] s_validDoubleValues = new double[]
+        {
+            double.MinValue,
+            -1,
+            0,
+            double.Epsilon,
+            1,
+            double.MaxValue
+        };
+
         public static readonly double[] s_invalidDoubleValues = new double[]
         {
             double.NegativeInfinity,
             double.PositiveInfinity,
             double.NaN
+        };
+
+        public static double[] s_typicalPhaseValues = new double[]
+        {
+            -Math.PI/2,
+            0,
+            Math.PI/2
         };
 
         public static string[] s_supportedStandardNumericFormats = new string[] { "C", "E", "F", "G", "N", "P", "R" };
@@ -44,6 +61,17 @@ namespace System.Numerics.Tests
         {
             VerifyRealImaginaryProperties(Complex.ImaginaryOne, 0, 1);
             VerifyMagnitudePhaseProperties(Complex.ImaginaryOne, 1, Math.PI / 2);
+        }
+
+        public static IEnumerable<object[]> Valid_2_TestData()
+        {
+            foreach (double real in s_validDoubleValues)
+            {
+                foreach (double imaginary in s_validDoubleValues)
+                {
+                    yield return new object[] { real, imaginary };
+                }
+            }
         }
 
         public static IEnumerable<object[]> Primitives_2_TestData()
@@ -162,7 +190,7 @@ namespace System.Numerics.Tests
         }
 
         [Theory]
-        [MemberData("Primitives_2_TestData")]
+        [MemberData("Valid_2_TestData")]
         [MemberData("Random_2_TestData")]
         [MemberData("Invalid_2_TestData")]
         public static void Ctor_Double_Double(double real, double imaginary)
@@ -432,7 +460,7 @@ namespace System.Numerics.Tests
             yield return new object[] { 0, double.MaxValue, double.PositiveInfinity, double.NaN };
             yield return new object[] { 0, double.MinValue, double.PositiveInfinity, double.NaN };
 
-            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, double.NegativeInfinity };
+            yield return new object[] { double.MaxValue, double.MaxValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, double.NegativeInfinity };
             yield return new object[] { double.MinValue, double.MinValue, double.NegativeInfinity, double.NegativeInfinity };
 
             // Invalid values
@@ -488,7 +516,7 @@ namespace System.Numerics.Tests
             yield return new object[] { 0, double.MaxValue, Math.Cos(double.MaxValue), 0 };
             yield return new object[] { 0, double.MinValue, Math.Cos(double.MinValue), 0 };
 
-            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, double.PositiveInfinity };
+            yield return new object[] { double.MaxValue, double.MaxValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, double.PositiveInfinity };
             yield return new object[] { double.MinValue, double.MinValue, double.NegativeInfinity, double.PositiveInfinity };
 
             // Invalid values
@@ -692,6 +720,7 @@ namespace System.Numerics.Tests
         public static IEnumerable<object[]> Exp_TestData()
         {
             // Boundary values
+            yield return new object[] { double.MaxValue, 0 };
             yield return new object[] { double.MinValue, 0 };
 
             yield return new object[] { 0, double.MaxValue };
@@ -711,7 +740,11 @@ namespace System.Numerics.Tests
             // Special case the complex {double.MaxValue, double.MaxValue)
             if (real == double.MaxValue && imaginary == double.MaxValue)
             {
-                expected = new Complex(double.PositiveInfinity, double.PositiveInfinity);
+                expected = new Complex(Math.Cos(double.MaxValue) * double.PositiveInfinity, double.PositiveInfinity);
+            }
+            else if (real == double.MaxValue && imaginary == 0)
+            {
+                expected = new Complex(Math.Cos(double.MaxValue) * double.PositiveInfinity, double.NaN);
             }
             else
             {
@@ -736,27 +769,15 @@ namespace System.Numerics.Tests
             VerifyRealImaginaryProperties(result, expected.Real, expected.Imaginary);
         }
 
-        [ActiveIssue(6022, PlatformID.AnyUnix)]
-        [Fact]
-        public static void Exp_MaxReal()
-        {
-            // On Windows, the result is {double.PostiveInfinity, double.NaN}
-            // On Unix, the result is {double.NegativeInfinity, double.NaN}
-            // Which one is incorrect should be determined.
-            var complex = new Complex(double.MaxValue, 0);
-            Complex result = Complex.Exp(complex);
-            VerifyRealImaginaryProperties(result, double.PositiveInfinity, double.NaN);
-        }
-
         public static IEnumerable<object[]> FromPolarCoordinates_TestData()
         {
-            yield return new object[] { RandomPositiveDouble(), -Math.PI / 2 };
-            yield return new object[] { RandomPositiveDouble(), 0 };
-            yield return new object[] { RandomPositiveDouble(), Math.PI / 2 };
-
-            yield return new object[] { RandomNegativeDouble(), -Math.PI / 2 };
-            yield return new object[] { RandomNegativeDouble(), 0 };
-            yield return new object[] { RandomNegativeDouble(), Math.PI / 2 };
+            foreach (double magnitude in s_validDoubleValues)
+            {
+                foreach (double phase in s_typicalPhaseValues)
+                {
+                    yield return new object[] { magnitude, phase };
+                }
+            }
             
             yield return new object[] { RandomPositiveDouble(), RandomPositivePhase() }; // First quadrant
             yield return new object[] { RandomNegativeDouble(), RandomPositivePhase() }; // Second quadrant
@@ -946,7 +967,7 @@ namespace System.Numerics.Tests
         }
         
         [Theory]
-        [MemberData("Primitives_2_TestData")]
+        [MemberData("Valid_2_TestData")]
         [MemberData("Random_2_TestData")]
         [MemberData("Invalid_2_TestData")]
         public static void Negate(double real, double imaginary)
@@ -1086,7 +1107,7 @@ namespace System.Numerics.Tests
             yield return new object[] { 0, double.MaxValue, double.NaN, double.PositiveInfinity };
             yield return new object[] { 0, double.MinValue, double.NaN, double.NegativeInfinity };
 
-            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, double.PositiveInfinity };
+            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, Math.Cos(double.MaxValue) * double.PositiveInfinity };
             yield return new object[] { double.MinValue, double.MinValue, double.NegativeInfinity, double.PositiveInfinity };
 
             foreach (double invalidReal in s_invalidDoubleValues)
@@ -1137,7 +1158,7 @@ namespace System.Numerics.Tests
             yield return new object[] { 0, double.MaxValue, 0, Math.Sin(double.MaxValue) };
             yield return new object[] { 0, double.MinValue, 0, Math.Sin(double.MinValue) };
 
-            yield return new object[] { double.MaxValue, double.MaxValue, double.PositiveInfinity, double.PositiveInfinity };
+            yield return new object[] { double.MaxValue, double.MaxValue, Math.Cos(double.MaxValue) * double.PositiveInfinity, double.PositiveInfinity };
             yield return new object[] { double.MinValue, double.MinValue, double.PositiveInfinity, double.NegativeInfinity };
 
             // Invalid values
