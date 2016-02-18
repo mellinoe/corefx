@@ -14,7 +14,7 @@ namespace System.Numerics.Tests
     {
         private static Random s_random = new Random(-55);
         
-        public static double[] s_validDoubleValues = new double[]
+        public static readonly double[] s_validDoubleValues = new double[]
         {
             double.MinValue,
             -1,
@@ -31,7 +31,7 @@ namespace System.Numerics.Tests
             double.NaN
         };
 
-        public static double[] s_typicalPhaseValues = new double[]
+        public static readonly double[] s_typicalPhaseValues = new double[]
         {
             -Math.PI/2,
             0,
@@ -720,7 +720,6 @@ namespace System.Numerics.Tests
         public static IEnumerable<object[]> Exp_TestData()
         {
             // Boundary values
-            yield return new object[] { double.MaxValue, 0 };
             yield return new object[] { double.MinValue, 0 };
 
             yield return new object[] { 0, double.MaxValue };
@@ -741,10 +740,6 @@ namespace System.Numerics.Tests
             if (real == double.MaxValue && imaginary == double.MaxValue)
             {
                 expected = new Complex(Math.Cos(double.MaxValue) * double.PositiveInfinity, double.PositiveInfinity);
-            }
-            else if (real == double.MaxValue && imaginary == 0)
-            {
-                expected = new Complex(Math.Cos(double.MaxValue) * double.PositiveInfinity, double.NaN);
             }
             else
             {
@@ -767,6 +762,18 @@ namespace System.Numerics.Tests
             var complex = new Complex(real, imaginary);
             Complex result = Complex.Exp(complex);
             VerifyRealImaginaryProperties(result, expected.Real, expected.Imaginary);
+        }
+
+        [ActiveIssue(6022, PlatformID.AnyUnix)]
+        [Fact]
+        public static void Exp_MaxReal()
+        {
+            // On Windows, the result is {double.PostiveInfinity, double.NaN}
+            // On Unix, the result is {double.NegativeInfinity, double.NaN}
+            // Which one is incorrect should be determined.
+            var complex = new Complex(double.MaxValue, 0);
+            Complex result = Complex.Exp(complex);
+            VerifyRealImaginaryProperties(result, double.PositiveInfinity, double.NaN);
         }
 
         public static IEnumerable<object[]> FromPolarCoordinates_TestData()
@@ -1376,15 +1383,6 @@ namespace System.Numerics.Tests
                 actual = complex.ToString(format, numberFormatInfo);
                 Assert.Equal(expected, actual);
             }
-        }
-
-        public static IEnumerable<object[]> Cast_SByte_TestData()
-        {
-            yield return new object[] { sbyte.MinValue };
-            yield return new object[] { -1 };
-            yield return new object[] { 0 };
-            yield return new object[] { 1 };
-            yield return new object[] { sbyte.MaxValue };
         }
 
         [Theory]
