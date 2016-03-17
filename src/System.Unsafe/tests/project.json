@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "Microsoft.NETCore.Platforms": "1.0.1-rc3-24018-00",
+    "System.Runtime": "4.1.0-rc3-24018-00",
+    "xunit": "2.1.0",
+    "xunit.netcore.extensions": "1.0.0-prerelease-00312-04",
+    "test-runtime": {
+      "target": "project",
+      "exclude": "compile"
+    }
+  },
+  "frameworks": {
+    "dnxcore50": {
+      "imports": "portable-net45+win8"
+    }
+  }
+}
