@@ -19,7 +19,7 @@
     "System.Threading.Overlapped": "4.0.1-rc3-24006-00",
     "xunit": "2.1.0",
     "xunit.netcore.extensions": "1.0.0-prerelease-00231-07",
-    "test-runtime": { "target": "project" }
+    "test-runtime": { "target": "project", "exclude": "compile" }
   },
   "frameworks": {
     "dnxcore50": {
