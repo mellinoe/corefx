@@ -10,10 +10,12 @@
     "System.Threading.Tasks": "4.0.11-rc3-24007-00",
     "xunit": "2.1.0",
     "xunit.netcore.extensions": "1.0.0-prerelease-00231-07",
-    "test-runtime": { "target": "project", "exclude": "compile" }
   },
   "frameworks": {
     "dnxcore50": {
+      "dependencies": {
+        "test-runtime": { "target": "project", "exclude": "compile" }
+      },
       "imports": "portable-net45+win8"
     },
     "net46": {
