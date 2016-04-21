@@ -13,10 +13,31 @@
   // --- The following custom attribute is added automatically, do not uncomment -------
   //  .custom instance void [System.Runtime]System.Diagnostics.DebuggableAttribute::.ctor(valuetype [System.Runtime]System.Diagnostics.DebuggableAttribute/DebuggingModes) = ( 01 00 02 00 00 00 00 00 ) 
 
-  .custom instance void [System.Runtime]System.Reflection.AssemblyFileVersionAttribute::.ctor(string) = ( 01 00 07 31 2E 30 2E 30 2E 30 00 00 )             // ...1.0.0.0..
-  .custom instance void [System.Runtime]System.Reflection.AssemblyInformationalVersionAttribute::.ctor(string) = ( 01 00 05 31 2E 30 2E 30 00 00 )                   // ...1.0.0..
-  .custom instance void [System.Runtime]System.Runtime.Versioning.TargetFrameworkAttribute::.ctor(string) = ( 01 00 14 44 4E 58 43 6F 72 65 2C 56 65 72 73 69   // ...DNXCore,Versi
-                                                                                                              6F 6E 3D 76 35 2E 30 00 00 )                      // on=v5.0..
+  .custom instance void [System.Runtime]System.Reflection.AssemblyFileVersionAttribute::.ctor(string) = ( 01 00 07 34 2E 30 2E 30 2E 30 00 00 )             // ...4.0.0.0..
+  .custom instance void [System.Runtime]System.Reflection.AssemblyInformationalVersionAttribute::.ctor(string) = ( 01 00 07 34 2E 30 2E 30 2E 30 00 00 )             // ...4.0.0.0..
+  .custom instance void [System.Runtime]System.Reflection.AssemblyTitleAttribute::.ctor(string) = ( 01 00 0D 53 79 73 74 65 6D 2E 55 6E 73 61 66 65   // ...System.Unsafe
+                                                                                              00 00 )
+  .custom instance void [System.Runtime]System.Reflection.AssemblyDescriptionAttribute::.ctor(string) = ( 01 00 0D 53 79 73 74 65 6D 2E 55 6E 73 61 66 65   // ...System.Unsafe
+                                                                                                    00 00 )
+  .custom instance void [System.Runtime]System.Reflection.AssemblyMetadataAttribute::.ctor(string, string) = (
+    01 00 15 2e 4e 45 54 46 72 61 6d 65 77 6f 72 6b
+    41 73 73 65 6d 62 6c 79 00 00 00
+  ) // ".NETFrameworkAssembly", ""
+  .custom instance void [System.Runtime]System.Reflection.AssemblyMetadataAttribute::.ctor(string, string) = (
+    01 00 0b 53 65 72 76 69 63 65 61 62 6c 65 04 54
+    72 75 65 00 00
+  ) // "Serviceable", "True"
+  .custom instance void [System.Runtime]System.Reflection.AssemblyCopyrightAttribute::.ctor(string) = ( 01 00 2F C2 A9 20 4D 69 63 72 6F 73 6F 66 74 20   // ../.. Microsoft 
+                                                                                        43 6F 72 70 6F 72 61 74 69 6F 6E 2E 20 20 41 6C   // Corporation.  Al
+                                                                                        6C 20 72 69 67 68 74 73 20 72 65 73 65 72 76 65   // l rights reserve
+                                                                                        64 2E 00 00 )                                     // d...
+  .custom instance void [System.Runtime]System.Reflection.AssemblyCompanyAttribute::.ctor(string) = ( 01 00 15 4D 69 63 72 6F 73 6F 66 74 20 43 6F 72   // ...Microsoft Cor
+                                                                                      70 6F 72 61 74 69 6F 6E 00 00 )                   // poration..
+  .custom instance void [System.Runtime]System.Reflection.AssemblyProductAttribute::.ctor(string) = ( 01 00 1A 4D 69 63 72 6F 73 6F 66 74 C2 AE 20 2E   // ...Microsoft.. .
+                                                                                      4E 45 54 20 46 72 61 6D 65 77 6F 72 6B 00 00 )    // NET Framework..
+  .custom instance void [System.Runtime]System.CLSCompliantAttribute::.ctor(bool) = (
+    01 00 00 00 00
+  ) // false
   .hash algorithm 0x00008004
   .ver 4:0:0:0
 }
