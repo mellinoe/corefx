@@ -8,6 +8,7 @@ using System.Globalization;
 
 namespace System.Numerics
 {
+    [DebuggerDisplay("{DebuggerDisplayString}")]
     public struct BigInteger : IFormattable, IComparable, IComparable<BigInteger>, IEquatable<BigInteger>
     {
         private const int knMaskHighBit = int.MinValue;
@@ -1188,6 +1189,18 @@ namespace System.Numerics
         public string ToString(string format, IFormatProvider provider)
         {
             return BigNumber.FormatBigInteger(this, format, NumberFormatInfo.GetInstance(provider));
+        }
+
+        private string DebuggerDisplayString
+        {
+            get
+            {
+                // _bits larger than this will be formatted with "E" specifier.
+                const int scientificBitLimit = 4;
+                return string.Format("{0}, Bytes: {1}",
+                    (_bits != null && _bits.Length > scientificBitLimit) ? ToString("E5") : ToString("G"),
+                    (_bits != null) ? _bits.Length * sizeof(uint) : sizeof(int));
+            }
         }
 
         private static BigInteger Add(uint[] leftBits, int leftSign, uint[] rightBits, int rightSign)
