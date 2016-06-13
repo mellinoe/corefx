@@ -20,17 +20,12 @@ namespace System.Net.NetworkInformation
 
         private async Task<PingReply> SendPingAsyncCore(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
-            try
-            {
-                Task<PingReply> t = RawSocketPermissions.CanUseRawSockets(address.AddressFamily) ?
-                    SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options) :
-                    SendWithPingUtility(address, buffer, timeout, options);
-                return await t.ConfigureAwait(false);
-            }
-            finally
-            {
-                Finish();
-            }
+            Task<PingReply> t = RawSocketPermissions.CanUseRawSockets(address.AddressFamily) ?
+                SendIcmpEchoRequestOverRawSocket(address, buffer, timeout, options) :
+                SendWithPingUtility(address, buffer, timeout, options);
+            var pr = await t.ConfigureAwait(false);
+            Finish();
+            return pr;
         }
 
         private async Task<PingReply> SendIcmpEchoRequestOverRawSocket(IPAddress address, byte[] buffer, int timeout, PingOptions options)
@@ -56,7 +51,8 @@ namespace System.Net.NetworkInformation
             {
                 socket.ReceiveTimeout = timeout;
                 socket.SendTimeout = timeout;
-                // Setting Socket.DontFragment and .Ttl is not supported on Unix, so ignore the PingOptions parameter.
+                short ttl = (short)Math.Min(options.Ttl, short.MaxValue);
+                socket.Ttl = ttl;
 
                 int ipHeaderLength = isIpv4 ? IpHeaderLengthInBytes : 0;
                 await socket.SendToAsync(new ArraySegment<byte>(sendBuffer), SocketFlags.None, endPoint).ConfigureAwait(false);
@@ -127,9 +123,14 @@ namespace System.Net.NetworkInformation
                 return CreateTimedOutPingReply();
             }
         }
-
+        
         private async Task<PingReply> SendWithPingUtility(IPAddress address, byte[] buffer, int timeout, PingOptions options)
         {
+            if (options != null)
+            {
+                throw new NotSupportedException(SR.net_ping_utility_options_not_supported);
+            }
+
             bool isIpv4 = address.AddressFamily == AddressFamily.InterNetwork;
             string pingExecutable = isIpv4 ? UnixCommandLinePing.Ping4UtilityPath : UnixCommandLinePing.Ping6UtilityPath;
             if (pingExecutable == null)
