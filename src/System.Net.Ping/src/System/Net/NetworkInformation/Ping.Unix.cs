@@ -51,8 +51,11 @@ namespace System.Net.NetworkInformation
             {
                 socket.ReceiveTimeout = timeout;
                 socket.SendTimeout = timeout;
-                short ttl = (short)Math.Min(options.Ttl, short.MaxValue);
-                socket.Ttl = ttl;
+                if (options != null)
+                {
+                    short ttl = (short)Math.Min(options.Ttl, short.MaxValue);
+                    socket.Ttl = ttl;
+                }
 
                 int ipHeaderLength = isIpv4 ? IpHeaderLengthInBytes : 0;
                 await socket.SendToAsync(new ArraySegment<byte>(sendBuffer), SocketFlags.None, endPoint).ConfigureAwait(false);
