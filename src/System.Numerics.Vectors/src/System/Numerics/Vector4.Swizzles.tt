@@ -1,0 +1,55 @@
+﻿<#@ template debug="true" hostSpecific="true" #>
+<#@ output extension=".cs" #>
+<#@ Assembly Name="System.Core.dll" #>
+<#@ Assembly Name="System.Xml.dll" #>
+<#@ import namespace="System" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Runtime.InteropServices" #>
+<#@ import namespace="System.Diagnostics" #>
+<#@ include file="GenerationConfig.ttinclude" #><#
+GenerateCopyrightHeader();
+string[] components = new string[] { "X", "Y", "Z", "W" };
+#>
+
+namespace System.Numerics
+{
+    /// <summary>
+    /// Expresses component-swizzling operations for Vector4.
+    /// </summary>
+    public static class Vector4Swizzles
+    {
+<# 
+foreach (string first in components)
+    foreach (string second in components)
+{
+#>        /// <summary>Returns a new Vector2 whose components are the <#=first + second#> components of this Vector4.</summary>
+        public static Vector2 <#=first + second#>(this Vector4 v) => new Vector2(v.<#=first#>, v.<#=second#>);
+
+<#
+}
+#>
+<# 
+foreach (string first in components)
+    foreach (string second in components)
+        foreach (string third in components)
+{
+#>        /// <summary>Returns a new Vector3 whose components are the <#=first + second + third#> components of this Vector4.</summary>
+        public static Vector3 <#=first + second + third#>(this Vector4 v) => new Vector3(v.<#=first#>, v.<#=second#>, v.<#=third#>);
+
+<#
+}
+#>
+<# 
+foreach (string first in components)
+    foreach (string second in components)
+        foreach (string third in components)
+            foreach (string fourth in components)
+{
+#>        /// <summary>Returns a new Vector4 whose components are the <#=first + second + third + fourth#> components of this Vector4.</summary>
+        public static Vector4 <#=first + second + third + fourth#>(this Vector4 v) => new Vector4(v.<#=first#>, v.<#=second#>, v.<#=third#>, v.<#=fourth#>);
+
+<#
+}
+#>
+    }
+}
