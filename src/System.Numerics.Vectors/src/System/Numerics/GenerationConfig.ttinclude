@@ -31,7 +31,7 @@
     };
 
     // The total register size, in bytes. 16 for SSE2, 32 for AVX, 64 for AVX512
-    public static int totalSize = 16;
+    public static int totalSize = 8;
 
     /* General template helper procedures */
 

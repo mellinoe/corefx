@@ -438,7 +438,7 @@ namespace System.Numerics
                 if (g == 0)
                 {
 #>
-                        this.<#=GetRegisterFieldName(type, g)#> == other.<#=GetRegisterFieldName(type, g)#>
+                        this.<#=GetRegisterFieldName(type, g)#> == other.<#=GetRegisterFieldName(type, g)#><#=(g == (GetNumFields(type, totalSize) -1)) ? ";" : ""#>
 <#
                 }
                 else
@@ -910,7 +910,6 @@ namespace System.Numerics
                 else
                 {
                     result.<#=GetRegisterFieldName(typeof(Int64), 0)#> = left.<#=GetRegisterFieldName(typeof(Int64), 0)#> & right.<#=GetRegisterFieldName(typeof(Int64), 0)#>;
-                    result.<#=GetRegisterFieldName(typeof(Int64), 1)#> = left.<#=GetRegisterFieldName(typeof(Int64), 1)#> & right.<#=GetRegisterFieldName(typeof(Int64), 1)#>;
                 }
             }
             return result;
@@ -941,7 +940,6 @@ namespace System.Numerics
                 else
                 {
                     result.<#=GetRegisterFieldName(typeof(Int64), 0)#> = left.<#=GetRegisterFieldName(typeof(Int64), 0)#> | right.<#=GetRegisterFieldName(typeof(Int64), 0)#>;
-                    result.<#=GetRegisterFieldName(typeof(Int64), 1)#> = left.<#=GetRegisterFieldName(typeof(Int64), 1)#> | right.<#=GetRegisterFieldName(typeof(Int64), 1)#>;
                 }
             }
             return result;
@@ -972,7 +970,6 @@ namespace System.Numerics
                 else
                 {
                     result.<#=GetRegisterFieldName(typeof(Int64), 0)#> = left.<#=GetRegisterFieldName(typeof(Int64), 0)#> ^ right.<#=GetRegisterFieldName(typeof(Int64), 0)#>;
-                    result.<#=GetRegisterFieldName(typeof(Int64), 1)#> = left.<#=GetRegisterFieldName(typeof(Int64), 1)#> ^ right.<#=GetRegisterFieldName(typeof(Int64), 1)#>;
                 }
             }
             return result;
