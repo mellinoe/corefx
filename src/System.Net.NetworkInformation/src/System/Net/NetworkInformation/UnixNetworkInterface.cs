@@ -19,8 +19,9 @@ namespace System.Net.NetworkInformation
         // If this is an ipv6 device, contains the Scope ID.
         protected uint? _ipv6ScopeId = null;
 
-        protected UnixNetworkInterface(string name)
+        protected UnixNetworkInterface(int index, string name)
         {
+            _index = index;
             _name = name;
         }
 
@@ -95,7 +96,7 @@ namespace System.Net.NetworkInformation
             }
             PhysicalAddress physicalAddress = new PhysicalAddress(macAddress);
 
-            _index = llAddr->InterfaceIndex;
+            Debug.Assert(_index == llAddr->InterfaceIndex);
             _physicalAddress = physicalAddress;
             _networkInterfaceType = (NetworkInterfaceType)llAddr->HardwareType;
         }

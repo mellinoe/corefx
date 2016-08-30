@@ -7,6 +7,7 @@ using System.IO;
 
 namespace System.Net.NetworkInformation
 {
+
     internal static partial class StringParsingHelpers
     {
         // /proc/net/route contains some information about gateway addresses,
@@ -17,7 +18,6 @@ namespace System.Net.NetworkInformation
             {
                 throw ExceptionHelper.CreateForInformationUnavailable();
             }
-
             List<GatewayIPAddressInformation> collection = new List<GatewayIPAddressInformation>();
             // Columns are as follows (first-line header):
             // Iface  Destination  Gateway  Flags  RefCnt  Use  Metric  Mask  MTU  Window  IRTT

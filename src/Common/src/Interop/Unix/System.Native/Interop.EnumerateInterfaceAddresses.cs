@@ -27,9 +27,9 @@ internal static partial class Interop
             private fixed byte __padding[3];
         }
 
-        public unsafe delegate void IPv4AddressDiscoveredCallback(string ifaceName, IpAddressInfo* ipAddressInfo, IpAddressInfo* netMaskInfo);
-        public unsafe delegate void IPv6AddressDiscoveredCallback(string ifaceName, IpAddressInfo* ipAddressInfo, uint* scopeId);
-        public unsafe delegate void LinkLayerAddressDiscoveredCallback(string ifaceName, LinkLayerAddressInfo* llAddress);
+        public unsafe delegate void IPv4AddressDiscoveredCallback(uint interfaceIndex, string ifaceName, IpAddressInfo* ipAddressInfo, IpAddressInfo* netMaskInfo);
+        public unsafe delegate void IPv6AddressDiscoveredCallback(uint interfaceIndex, string ifaceName, IpAddressInfo* ipAddressInfo, uint* scopeId);
+        public unsafe delegate void LinkLayerAddressDiscoveredCallback(uint interfaceIndex, string ifaceName, LinkLayerAddressInfo* llAddress);
         public unsafe delegate void DnsAddessDiscoveredCallback(IpAddressInfo* gatewayAddress);
 
         [DllImport(Libraries.SystemNative, EntryPoint = "SystemNative_EnumerateInterfaceAddresses")]

@@ -24,9 +24,9 @@ struct IpAddressInfo
     uint8_t __padding[3];
 };
 
-typedef void (*IPv4AddressFound)(const char* interfaceName, IpAddressInfo* addressInfo, IpAddressInfo* netMaskInfo);
-typedef void (*IPv6AddressFound)(const char* interfaceName, IpAddressInfo* info, uint32_t* scopeId);
-typedef void (*LinkLayerAddressFound)(const char* interfaceName, LinkLayerAddressInfo* llAddress);
+typedef void (*IPv4AddressFound)(uint32_t interfaceIndex, const char* interfaceName, IpAddressInfo* addressInfo, IpAddressInfo* netMaskInfo);
+typedef void (*IPv6AddressFound)(uint32_t interfaceIndex, const char* interfaceName, IpAddressInfo* info, uint32_t* scopeId);
+typedef void (*LinkLayerAddressFound)(uint32_t interfaceIndex, const char* interfaceName, LinkLayerAddressInfo* llAddress);
 typedef void (*GatewayAddressFound)(IpAddressInfo* addressInfo);
 
 int32_t EnumerateGatewayAddressesForInterface(uint32_t interfaceIndex,

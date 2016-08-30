@@ -92,11 +92,11 @@ namespace System.Net.NetworkInformation
         {
             int count = 0;
             Interop.Sys.EnumerateInterfaceAddresses(
-                (name, ipAddressInfo, netmaskInfo) =>
+                (index, name, ipAddressInfo, netmaskInfo) =>
                 {
                     count++;
                 },
-                (name, ipAddressInfo, scopeId) =>
+                (index, name, ipAddressInfo, scopeId) =>
                 {
                     count++;
                 },

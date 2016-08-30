@@ -30,7 +30,7 @@ namespace System.Net.NetworkInformation
             UnicastIPAddressInformationCollection collection = new UnicastIPAddressInformationCollection();
 
             Interop.Sys.EnumerateInterfaceAddresses(
-                (name, ipAddressInfo, netmaskInfo) =>
+                (index, name, ipAddressInfo, netmaskInfo) =>
                 {
                     IPAddress ipAddress = IPAddressUtil.GetIPAddressFromNativeInfo(ipAddressInfo);
                     if (!IPAddressUtil.IsMulticast(ipAddress))
@@ -39,7 +39,7 @@ namespace System.Net.NetworkInformation
                         collection.InternalAdd(new UnixUnicastIPAddressInformation(ipAddress, netMaskAddress));
                     }
                 },
-                (name, ipAddressInfo, scopeId) =>
+                (index, name, ipAddressInfo, scopeId) =>
                 {
                     IPAddress ipAddress = IPAddressUtil.GetIPAddressFromNativeInfo(ipAddressInfo);
                     if (!IPAddressUtil.IsMulticast(ipAddress))

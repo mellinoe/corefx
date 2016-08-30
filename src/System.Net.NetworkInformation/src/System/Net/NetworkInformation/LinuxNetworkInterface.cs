@@ -18,54 +18,110 @@ namespace System.Net.NetworkInformation
         private readonly long? _speed;
         private readonly LinuxIPInterfaceProperties _ipProperties;
 
-        internal LinuxNetworkInterface(string name) : base(name)
+        internal LinuxNetworkInterface(int index, string name) : base(index, name)
         {
             _operationalStatus = GetOperationalStatus(name);
             _supportsMulticast = GetSupportsMulticast(name);
             _speed = GetSpeed(name);
             _ipProperties = new LinuxIPInterfaceProperties(this);
         }
-
+        
         public unsafe static NetworkInterface[] GetLinuxNetworkInterfaces()
         {
             Dictionary<string, LinuxNetworkInterface> interfacesByName = new Dictionary<string, LinuxNetworkInterface>();
-            Interop.Sys.EnumerateInterfaceAddresses(
-                (name, ipAddr, maskAddr) =>
+            Dictionary<uint, LinuxNetworkInterface> interfacesByIndex = new Dictionary<uint, LinuxNetworkInterface>();
+            const int MaxRetries = 3;
+            for (int attempt = 0; attempt < MaxRetries; attempt++)
+            {
+                interfacesByName.Clear();
+                interfacesByIndex.Clear();
+                bool invalidate = false;
+                int result = Interop.Sys.EnumerateInterfaceAddresses(
+                    (index, name, ipAddr, maskAddr) =>
+                    {
+                        LinuxNetworkInterface lni;
+                        if (!GetOrCreate(interfacesByName, interfacesByIndex, index, name, out lni))
+                        {
+                            invalidate = true;
+                        }
+                        else
+                        {
+                            lni.ProcessIpv4Address(ipAddr, maskAddr);
+                        }
+                    },
+                    (index, name, ipAddr, scopeId) =>
+                    {
+                        LinuxNetworkInterface lni;
+                        if (!GetOrCreate(interfacesByName, interfacesByIndex, index, name, out lni))
+                        {
+                            invalidate = true;
+                        }
+                        else
+                        {
+                            lni.ProcessIpv6Address(ipAddr, *scopeId);
+                        }
+                    },
+                    (index, name, llAddr) =>
+                    {
+                        LinuxNetworkInterface lni;
+                        if (!GetOrCreate(interfacesByName, interfacesByIndex, index, name, out lni))
+                        {
+                            invalidate = true;
+                        }
+                        else
+                        {
+                            lni.ProcessLinkLayerAddress(llAddr);
+                        }
+                    });
+                if (result == 0 && !invalidate)
                 {
-                    LinuxNetworkInterface lni = GetOrCreate(interfacesByName, name);
-                    lni.ProcessIpv4Address(ipAddr, maskAddr);
-                },
-                (name, ipAddr, scopeId) =>
-                {
-                    LinuxNetworkInterface lni = GetOrCreate(interfacesByName, name);
-                    lni.ProcessIpv6Address( ipAddr, *scopeId);
-                },
-                (name, llAddr) =>
-                {
-                    LinuxNetworkInterface lni = GetOrCreate(interfacesByName, name);
-                    lni.ProcessLinkLayerAddress(llAddr);
-                });
-
-            return interfacesByName.Values.ToArray();
+                    return interfacesByName.Values.ToArray();
+                }
+            }
+            
+            throw new NetworkInformationException(SR.net_PInvokeError);
         }
 
         /// <summary>
-        /// Gets or creates a LinuxNetworkInterface, based on whether it already exists in the given Dictionary.
-        /// If created, it is added to the Dictionary.
+        /// Gets or creates a LinuxNetworkInterface, based on whether it already exists in the given
+        /// Dictionaries. If the given index and names do not match what was previously given for
+        /// either value, then this method returns false. If the values do match, true is returned
+        /// and lni contains the cached interface. If the interface has not been cached, a new one
+        /// is created and added to both dictionaries.
         /// </summary>
-        /// <param name="interfaces">The Dictionary of existing interfaces.</param>
+        /// <param name="interfacesByName">The Dictionary of existing interfaces, indexed by name.</param>
+        /// <param name="interfacesByName">The Dictionary of existing interfaces, indexed by interface index.</param>
         /// <param name="name">The name of the interface.</param>
         /// <returns>The cached or new LinuxNetworkInterface with the given name.</returns>
-        private static LinuxNetworkInterface GetOrCreate(Dictionary<string, LinuxNetworkInterface> interfaces, string name)
+        private static bool GetOrCreate(
+            Dictionary<string, LinuxNetworkInterface> interfacesByName,
+            Dictionary<uint, LinuxNetworkInterface> interfacesByIndex,
+            uint index,
+            string name,
+            out LinuxNetworkInterface lni)
         {
-            LinuxNetworkInterface lni;
-            if (!interfaces.TryGetValue(name, out lni))
+            LinuxNetworkInterface fromName;
+            LinuxNetworkInterface fromIndex;
+            interfacesByName.TryGetValue(name, out fromName);
+            interfacesByIndex.TryGetValue(index, out fromIndex);
+
+            if (fromName != fromIndex)
             {
-                lni = new LinuxNetworkInterface(name);
-                interfaces.Add(name, lni);
+                lni = null;
+                return false;
+            }
+            else if (fromName == fromIndex && fromName == null)
+            {
+                lni = new LinuxNetworkInterface((int)index, name);
+                interfacesByName.Add(name, lni);
+                interfacesByIndex.Add(index, lni);
+            }
+            else
+            {
+                lni = fromName;
             }
 
-            return lni;
+            return true;
         }
 
         public override bool SupportsMulticast

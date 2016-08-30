@@ -12,7 +12,7 @@ namespace System.Net.NetworkInformation
         private readonly OsxIpInterfaceProperties _ipProperties;
         private readonly long _speed;
 
-        protected unsafe OsxNetworkInterface(string name) : base(name)
+        protected unsafe OsxNetworkInterface(int index, string name) : base(int index, name)
         {
             Interop.Sys.NativeIPInterfaceStatistics nativeStats;
             if (Interop.Sys.GetNativeIPInterfaceStatistics(name, out nativeStats) == -1)
@@ -27,46 +27,89 @@ namespace System.Net.NetworkInformation
         public unsafe static NetworkInterface[] GetOsxNetworkInterfaces()
         {
             Dictionary<string, OsxNetworkInterface> interfacesByName = new Dictionary<string, OsxNetworkInterface>();
-            if (Interop.Sys.EnumerateInterfaceAddresses(
-                (name, ipAddr, maskAddr) =>
-                {
-                    OsxNetworkInterface oni = GetOrCreate(interfacesByName, name);
-                    oni.ProcessIpv4Address(ipAddr, maskAddr);
-                },
-                (name, ipAddr, scopeId) =>
-                {
-                    OsxNetworkInterface oni = GetOrCreate(interfacesByName, name);
-                    oni.ProcessIpv6Address(ipAddr, *scopeId);
-                },
-                (name, llAddr) =>
-                {
-                    OsxNetworkInterface oni = GetOrCreate(interfacesByName, name);
-                    oni.ProcessLinkLayerAddress(llAddr);
-                }) != 0)
+            Dictionary<uint, OsxNetworkInterface> interfacesByIndex = new Dictionary<uint, OsxNetworkInterface>();
+            const int MaxRetries = 3;
+            for (int attempt = 0; attempt < MaxRetries; attempt++)
             {
-                throw new NetworkInformationException(SR.net_PInvokeError);
+                interfacesByName.Clear();
+                bool invalidate = false;
+                int result = Interop.Sys.EnumerateInterfaceAddresses(
+                    (index, name, ipAddr, maskAddr) =>
+                    {
+                        OsxNetworkInterface oni;
+                        if (!GetOrCreate(interfacesByName, interfacesByIndex, index, name, out oni))
+                        {
+                            invalidate = true;
+                        }
+                        oni.ProcessIpv4Address(ipAddr, maskAddr);
+                    },
+                    (index, name, ipAddr, scopeId) =>
+                    {
+                        OsxNetworkInterface oni;
+                        if (!GetOrCreate(interfacesByName, interfacesByIndex, index, name, out oni))
+                        {
+                            invalidate = true;
+                        }
+                        oni.ProcessIpv6Address(ipAddr, *scopeId);
+                    },
+                    (index, name, llAddr) =>
+                    {
+                        OsxNetworkInterface oni;
+                        if (!GetOrCreate(interfacesByName, interfacesByIndex, index, name, out oni))
+                        {
+                            invalidate = true;
+                        }
+                        oni.ProcessLinkLayerAddress(llAddr);
+                    });
+                if (result == 0 && !invalidate)
+                {
+                    return interfacesByName.Values.ToArray();
+                }
             }
-
-            return interfacesByName.Values.ToArray();
+            
+            throw new NetworkInformationException(SR.net_PInvokeError);
         }
 
         /// <summary>
-        /// Gets or creates an OsxNetworkInterface, based on whether it already exists in the given Dictionary.
-        /// If created, it is added to the Dictionary.
+        /// Gets or creates a OsxNetworkInterface, based on whether it already exists in the given
+        /// Dictionaries. If the given index and names do not match what was previously given for
+        /// either value, then this method returns false. If the values do match, true is returned
+        /// and oni contains the cached interface. If the interface has not been cached, a new one
+        /// is created and added to both dictionaries.
         /// </summary>
-        /// <param name="interfaces">The Dictionary of existing interfaces.</param>
+        /// <param name="interfacesByName">The Dictionary of existing interfaces, indexed by name.</param>
+        /// <param name="interfacesByName">The Dictionary of existing interfaces, indexed by interface index.</param>
         /// <param name="name">The name of the interface.</param>
         /// <returns>The cached or new OsxNetworkInterface with the given name.</returns>
-        private static OsxNetworkInterface GetOrCreate(Dictionary<string, OsxNetworkInterface> interfaces, string name)
+        private static bool GetOrCreate(
+            Dictionary<string, OsxNetworkInterface> interfacesByName,
+            Dictionary<uint, OsxNetworkInterface> interfacesByIndex,
+            uint index,
+            string name,
+            out OsxNetworkInterface oni)
         {
-            OsxNetworkInterface oni;
-            if (!interfaces.TryGetValue(name, out oni))
+            OsxNetworkInterface fromName;
+            OsxNetworkInterface fromIndex;
+            interfacesByName.TryGetValue(name, out fromName);
+            interfacesByIndex.TryGetValue(index, out fromIndex);
+
+            if (fromName != fromIndex)
             {
-                oni = new OsxNetworkInterface(name);
-                interfaces.Add(name, oni);
+                oni = null;
+                return false;
+            }
+            else if (fromName == fromIndex && fromName == null)
+            {
+                oni = new OsxNetworkInterface((int)index, name);
+                interfacesByName.Add(name, oni);
+                interfacesByIndex.Add(index, oni);
+            }
+            else
+            {
+                oni = fromName;
             }
 
-            return oni;
+            return true;
         }
 
         public override IPInterfaceProperties GetIPProperties()

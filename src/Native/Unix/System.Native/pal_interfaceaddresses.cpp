@@ -48,8 +48,11 @@ extern "C" int32_t SystemNative_EnumerateInterfaceAddresses(IPv4AddressFound onI
         // Use if_indextoname to map back to the true device name.
         char actualName[IF_NAMESIZE];
         char* result = if_indextoname(interfaceIndex, actualName);
-        assert(result == actualName && result != nullptr);
-        (void)result; // Silence compiler warnings about unused variables on release mode
+        if (result == nullptr)
+        {
+            freeifaddrs(headAddr);
+            return -1;
+        }
         int family = current->ifa_addr->sa_family;
         if (family == AF_INET)
         {
@@ -73,7 +76,7 @@ extern "C" int32_t SystemNative_EnumerateInterfaceAddresses(IPv4AddressFound onI
                 sockaddr_in* mask_sain = reinterpret_cast<sockaddr_in*>(current->ifa_netmask);
                 memcpy(maskInfo.AddressBytes, &mask_sain->sin_addr.s_addr, sizeof(mask_sain->sin_addr.s_addr));
 
-                onIpv4Found(actualName, &iai, &maskInfo);
+                onIpv4Found(interfaceIndex, actualName, &iai, &maskInfo);
             }
         }
         else if (family == AF_INET6)
@@ -88,7 +91,7 @@ extern "C" int32_t SystemNative_EnumerateInterfaceAddresses(IPv4AddressFound onI
                 sockaddr_in6* sain6 = reinterpret_cast<sockaddr_in6*>(current->ifa_addr);
                 memcpy(iai.AddressBytes, sain6->sin6_addr.s6_addr, sizeof(sain6->sin6_addr.s6_addr));
                 uint32_t scopeId = sain6->sin6_scope_id;
-                onIpv6Found(actualName, &iai, &scopeId);
+                onIpv6Found(interfaceIndex, actualName, &iai, &scopeId);
             }
         }
 
@@ -106,7 +109,7 @@ extern "C" int32_t SystemNative_EnumerateInterfaceAddresses(IPv4AddressFound onI
                 lla.HardwareType = MapHardwareType(sall->sll_hatype);
 
                 memcpy(&lla.AddressBytes, &sall->sll_addr, sall->sll_halen);
-                onLinkLayerFound(current->ifa_name, &lla);
+                onLinkLayerFound(interfaceIndex, current->ifa_name, &lla);
             }
         }
 #elif defined(AF_LINK)
@@ -123,7 +126,7 @@ extern "C" int32_t SystemNative_EnumerateInterfaceAddresses(IPv4AddressFound onI
                 };
 
                 memcpy(&lla.AddressBytes, reinterpret_cast<uint8_t*>(LLADDR(sadl)), sadl->sdl_alen);
-                onLinkLayerFound(current->ifa_name, &lla);
+                onLinkLayerFound(interfaceIndex, current->ifa_name, &lla);
             }
         }
 #endif
