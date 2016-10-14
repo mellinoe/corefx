@@ -673,7 +673,7 @@ namespace System.Net.Http
                 string.Equals(credential1.Password, credential2.Password, StringComparison.Ordinal);
         }
 
-        private static bool EventSourceTracingEnabled { get { return HttpEventSource.Log.IsEnabled(); } }
+        private static bool EventSourceTracingEnabled { get { return true; } }
 
         // PERF NOTE:
         // These generic overloads of EventSourceTrace (and similar wrapper methods in some of the other CurlHandler
@@ -710,6 +710,10 @@ namespace System.Net.Http
             }
         }
 
+        [System.Runtime.InteropServices.DllImport("libc")]
+        private static extern void printf(string message);
+        private static void PrintLine(string message) => printf($"{message}\n");
+
         private static void EventSourceTraceCore(string message, MultiAgent agent, EasyRequest easy, string memberName)
         {
             // If we weren't handed a multi agent, see if we can get one from the EasyRequest
@@ -717,6 +721,10 @@ namespace System.Net.Http
             {
                 agent = easy._associatedMultiAgent;
             }
+
+            DateTime now = DateTime.Now;
+            string timestamp = $"{now.Hour}:{now.Minute}:{now.Second}.{now.Millisecond}";
+            PrintLine($"{timestamp} [{(agent?.RunningWorkerId).GetValueOrDefault()}] ID:{(easy != null ? easy.Task.Id.ToString() : 0.ToString())}, {memberName}, {message}");
 
             HttpEventSource.Log.HandlerMessage(
                 (agent?.RunningWorkerId).GetValueOrDefault(),
