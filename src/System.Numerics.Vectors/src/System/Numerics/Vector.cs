@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Numerics.Hashing;
 using System.Runtime.CompilerServices;
@@ -611,12 +612,12 @@ namespace System.Numerics
         }
 
 #pragma warning disable 3001 // void* is not a CLS-Compliant argument type
-        private unsafe Vector(void* dataPointer) : this(dataPointer, 0) { }
+        internal unsafe Vector(void* dataPointer) : this(dataPointer, 0) { }
 #pragma warning restore 3001 // void* is not a CLS-Compliant argument type
 
 #pragma warning disable 3001 // void* is not a CLS-Compliant argument type
         // Implemented with offset if this API ever becomes public; an offset of 0 is used internally.
-        private unsafe Vector(void* dataPointer, int offset)
+        internal unsafe Vector(void* dataPointer, int offset)
             : this()
         {
             if (typeof(T) == typeof(Byte))
@@ -4998,5 +4999,432 @@ namespace System.Numerics
             }
         }
         #endregion
+    }
+
+    public static partial class Vector
+    {
+        #region Widen/Narrow
+        /// <summary>
+        /// Widens a Vector{Byte} into two Vector{UInt16}'s.
+        /// <param name="source">The source vector whose elements are widened into the outputs.</param>
+        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// </summary>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe void Widen(Vector<Byte> source, out Vector<UInt16> dest1, out Vector<UInt16> dest2)
+        {
+            const int elements = 16;
+            UInt16* dest1Ptr = stackalloc UInt16[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest1Ptr[i] = (UInt16)source[i];
+            }
+            UInt16* dest2Ptr = stackalloc UInt16[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest2Ptr[i] = (UInt16)source[i + (elements / 2)];
+            }
+
+            dest1 = new Vector<UInt16>(dest1Ptr);
+            dest2 = new Vector<UInt16>(dest2Ptr);
+        }
+
+        /// <summary>
+        /// Widens a Vector{UInt16} into two Vector{UInt32}'s.
+        /// <param name="source">The source vector whose elements are widened into the outputs.</param>
+        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// </summary>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe void Widen(Vector<UInt16> source, out Vector<UInt32> dest1, out Vector<UInt32> dest2)
+        {
+            const int elements = 8;
+            UInt32* dest1Ptr = stackalloc UInt32[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest1Ptr[i] = (UInt32)source[i];
+            }
+            UInt32* dest2Ptr = stackalloc UInt32[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest2Ptr[i] = (UInt32)source[i + (elements / 2)];
+            }
+
+            dest1 = new Vector<UInt32>(dest1Ptr);
+            dest2 = new Vector<UInt32>(dest2Ptr);
+        }
+
+        /// <summary>
+        /// Widens a Vector{UInt32} into two Vector{UInt64}'s.
+        /// <param name="source">The source vector whose elements are widened into the outputs.</param>
+        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// </summary>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe void Widen(Vector<UInt32> source, out Vector<UInt64> dest1, out Vector<UInt64> dest2)
+        {
+            const int elements = 4;
+            UInt64* dest1Ptr = stackalloc UInt64[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest1Ptr[i] = (UInt64)source[i];
+            }
+            UInt64* dest2Ptr = stackalloc UInt64[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest2Ptr[i] = (UInt64)source[i + (elements / 2)];
+            }
+
+            dest1 = new Vector<UInt64>(dest1Ptr);
+            dest2 = new Vector<UInt64>(dest2Ptr);
+        }
+
+        /// <summary>
+        /// Widens a Vector{SByte} into two Vector{Int16}'s.
+        /// <param name="source">The source vector whose elements are widened into the outputs.</param>
+        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// </summary>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe void Widen(Vector<SByte> source, out Vector<Int16> dest1, out Vector<Int16> dest2)
+        {
+            const int elements = 16;
+            Int16* dest1Ptr = stackalloc Int16[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest1Ptr[i] = (Int16)source[i];
+            }
+            Int16* dest2Ptr = stackalloc Int16[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest2Ptr[i] = (Int16)source[i + (elements / 2)];
+            }
+
+            dest1 = new Vector<Int16>(dest1Ptr);
+            dest2 = new Vector<Int16>(dest2Ptr);
+        }
+
+        /// <summary>
+        /// Widens a Vector{Int16} into two Vector{Int32}'s.
+        /// <param name="source">The source vector whose elements are widened into the outputs.</param>
+        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// </summary>
+        [JitIntrinsic]
+        public static unsafe void Widen(Vector<Int16> source, out Vector<Int32> dest1, out Vector<Int32> dest2)
+        {
+            const int elements = 8;
+            Int32* dest1Ptr = stackalloc Int32[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest1Ptr[i] = (Int32)source[i];
+            }
+            Int32* dest2Ptr = stackalloc Int32[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest2Ptr[i] = (Int32)source[i + (elements / 2)];
+            }
+
+            dest1 = new Vector<Int32>(dest1Ptr);
+            dest2 = new Vector<Int32>(dest2Ptr);
+        }
+
+        /// <summary>
+        /// Widens a Vector{Int32} into two Vector{Int64}'s.
+        /// <param name="source">The source vector whose elements are widened into the outputs.</param>
+        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// </summary>
+        [JitIntrinsic]
+        public static unsafe void Widen(Vector<Int32> source, out Vector<Int64> dest1, out Vector<Int64> dest2)
+        {
+            const int elements = 4;
+            Int64* dest1Ptr = stackalloc Int64[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest1Ptr[i] = (Int64)source[i];
+            }
+            Int64* dest2Ptr = stackalloc Int64[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest2Ptr[i] = (Int64)source[i + (elements / 2)];
+            }
+
+            dest1 = new Vector<Int64>(dest1Ptr);
+            dest2 = new Vector<Int64>(dest2Ptr);
+        }
+
+        /// <summary>
+        /// Widens a Vector{Single} into two Vector{Double}'s.
+        /// <param name="source">The source vector whose elements are widened into the outputs.</param>
+        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// </summary>
+        [JitIntrinsic]
+        public static unsafe void Widen(Vector<Single> source, out Vector<Double> dest1, out Vector<Double> dest2)
+        {
+            const int elements = 4;
+            Double* dest1Ptr = stackalloc Double[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest1Ptr[i] = (Double)source[i];
+            }
+            Double* dest2Ptr = stackalloc Double[elements / 2];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                dest2Ptr[i] = (Double)source[i + (elements / 2)];
+            }
+
+            dest1 = new Vector<Double>(dest1Ptr);
+            dest2 = new Vector<Double>(dest2Ptr);
+        }
+
+        /// <summary>
+        /// Narrows two Vector{UInt16}'s into one Vector{Byte}.
+        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <returns>A Vector{Byte} containing elements narrowed from the source vectors.</returns>
+        /// </summary>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe Vector<Byte> Narrow(Vector<UInt16> source1, Vector<UInt16> source2)
+        {
+            const int elements = 16;
+            Byte* retPtr = stackalloc Byte[elements];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i] = (Byte)source1[i];
+            }
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i + (elements / 2)] = (Byte)source2[i];
+            }
+
+            return new Vector<Byte>(retPtr);
+        }
+
+        /// <summary>
+        /// Narrows two Vector{UInt32}'s into one Vector{UInt16}.
+        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <returns>A Vector{UInt16} containing elements narrowed from the source vectors.</returns>
+        /// </summary>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe Vector<UInt16> Narrow(Vector<UInt32> source1, Vector<UInt32> source2)
+        {
+            const int elements = 8;
+            UInt16* retPtr = stackalloc UInt16[elements];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i] = (UInt16)source1[i];
+            }
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i + (elements / 2)] = (UInt16)source2[i];
+            }
+
+            return new Vector<UInt16>(retPtr);
+        }
+
+        /// <summary>
+        /// Narrows two Vector{UInt64}'s into one Vector{UInt32}.
+        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <returns>A Vector{UInt32} containing elements narrowed from the source vectors.</returns>
+        /// </summary>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe Vector<UInt32> Narrow(Vector<UInt64> source1, Vector<UInt64> source2)
+        {
+            const int elements = 4;
+            UInt32* retPtr = stackalloc UInt32[elements];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i] = (UInt32)source1[i];
+            }
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i + (elements / 2)] = (UInt32)source2[i];
+            }
+
+            return new Vector<UInt32>(retPtr);
+        }
+
+        /// <summary>
+        /// Narrows two Vector{Int16}'s into one Vector{SByte}.
+        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <returns>A Vector{SByte} containing elements narrowed from the source vectors.</returns>
+        /// </summary>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe Vector<SByte> Narrow(Vector<Int16> source1, Vector<Int16> source2)
+        {
+            const int elements = 16;
+            SByte* retPtr = stackalloc SByte[elements];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i] = (SByte)source1[i];
+            }
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i + (elements / 2)] = (SByte)source2[i];
+            }
+
+            return new Vector<SByte>(retPtr);
+        }
+
+        /// <summary>
+        /// Narrows two Vector{Int32}'s into one Vector{Int16}.
+        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <returns>A Vector{Int16} containing elements narrowed from the source vectors.</returns>
+        /// </summary>
+        [JitIntrinsic]
+        public static unsafe Vector<Int16> Narrow(Vector<Int32> source1, Vector<Int32> source2)
+        {
+            const int elements = 8;
+            Int16* retPtr = stackalloc Int16[elements];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i] = (Int16)source1[i];
+            }
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i + (elements / 2)] = (Int16)source2[i];
+            }
+
+            return new Vector<Int16>(retPtr);
+        }
+
+        /// <summary>
+        /// Narrows two Vector{Int64}'s into one Vector{Int32}.
+        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <returns>A Vector{Int32} containing elements narrowed from the source vectors.</returns>
+        /// </summary>
+        [JitIntrinsic]
+        public static unsafe Vector<Int32> Narrow(Vector<Int64> source1, Vector<Int64> source2)
+        {
+            const int elements = 4;
+            Int32* retPtr = stackalloc Int32[elements];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i] = (Int32)source1[i];
+            }
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i + (elements / 2)] = (Int32)source2[i];
+            }
+
+            return new Vector<Int32>(retPtr);
+        }
+
+        /// <summary>
+        /// Narrows two Vector{Double}'s into one Vector{Single}.
+        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <returns>A Vector{Single} containing elements narrowed from the source vectors.</returns>
+        /// </summary>
+        [JitIntrinsic]
+        public static unsafe Vector<Single> Narrow(Vector<Double> source1, Vector<Double> source2)
+        {
+            const int elements = 4;
+            Single* retPtr = stackalloc Single[elements];
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i] = (Single)source1[i];
+            }
+            for (int i = 0; i < elements / 2; i++)
+            {
+                retPtr[i + (elements / 2)] = (Single)source2[i];
+            }
+
+            return new Vector<Single>(retPtr);
+        }
+
+        #endregion Widen/Narrow
+
+        #region Same-Size Conversion
+        /// <summary>
+        /// Converts a Vector{Int32} to a Vector{Single}.
+        /// </summary>
+        /// <param name="value">The source vector.</param>
+        /// <returns>The converted vector.</returns>
+        [JitIntrinsic]
+        public static unsafe Vector<Single> ConvertToSingle(Vector<Int32> value)
+        {
+            const int elements = 4;
+            Single* retPtr = stackalloc Single[elements];
+            for (int i = 0; i < elements; i++)
+            {
+                retPtr[i] = (Single)value[i];
+            }
+
+            return new Vector<Single>(retPtr);
+        }
+
+        /// <summary>
+        /// Converts a Vector{UInt32} to a Vector{Single}.
+        /// </summary>
+        /// <param name="value">The source vector.</param>
+        /// <returns>The converted vector.</returns>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe Vector<Single> ConvertToSingle(Vector<UInt32> value)
+        {
+            const int elements = 4;
+            Single* retPtr = stackalloc Single[elements];
+            for (int i = 0; i < elements; i++)
+            {
+                retPtr[i] = (Single)value[i];
+            }
+
+            return new Vector<Single>(retPtr);
+        }
+
+        /// <summary>
+        /// Converts a Vector{Int64} to a Vector{Double}.
+        /// </summary>
+        /// <param name="value">The source vector.</param>
+        /// <returns>The converted vector.</returns>
+        [JitIntrinsic]
+        public static unsafe Vector<Double> ConvertToDouble(Vector<Int64> value)
+        {
+            const int elements = 2;
+            Double* retPtr = stackalloc Double[elements];
+            for (int i = 0; i < elements; i++)
+            {
+                retPtr[i] = (Double)value[i];
+            }
+
+            return new Vector<Double>(retPtr);
+        }
+
+        /// <summary>
+        /// Converts a Vector{UInt64} to a Vector{Double}.
+        /// </summary>
+        /// <param name="value">The source vector.</param>
+        /// <returns>The converted vector.</returns>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe Vector<Double> ConvertToDouble(Vector<UInt64> value)
+        {
+            const int elements = 2;
+            Double* retPtr = stackalloc Double[elements];
+            for (int i = 0; i < elements; i++)
+            {
+                retPtr[i] = (Double)value[i];
+            }
+
+            return new Vector<Double>(retPtr);
+        }
+
+        #endregion Same-Size Conversion
     }
 }
