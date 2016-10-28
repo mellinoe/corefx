@@ -5425,6 +5425,80 @@ namespace System.Numerics
             return new Vector<Double>(retPtr);
         }
 
+        /// <summary>
+        /// Converts a Vector{Single} to a Vector{Int32}.
+        /// </summary>
+        /// <param name="value">The source vector.</param>
+        /// <returns>The converted vector.</returns>
+        [JitIntrinsic]
+        public static unsafe Vector<Int32> ConvertToInt32(Vector<Single> value)
+        {
+            const int elements = 4;
+            Int32* retPtr = stackalloc Int32[elements];
+            for (int i = 0; i < elements; i++)
+            {
+                retPtr[i] = (Int32)value[i];
+            }
+
+            return new Vector<Int32>(retPtr);
+        }
+
+        /// <summary>
+        /// Converts a Vector{Single} to a Vector{UInt32}.
+        /// </summary>
+        /// <param name="value">The source vector.</param>
+        /// <returns>The converted vector.</returns>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe Vector<UInt32> ConvertToUInt32(Vector<Single> value)
+        {
+            const int elements = 4;
+            UInt32* retPtr = stackalloc UInt32[elements];
+            for (int i = 0; i < elements; i++)
+            {
+                retPtr[i] = (UInt32)value[i];
+            }
+
+            return new Vector<UInt32>(retPtr);
+        }
+
+        /// <summary>
+        /// Converts a Vector{Double} to a Vector{Int64}.
+        /// </summary>
+        /// <param name="value">The source vector.</param>
+        /// <returns>The converted vector.</returns>
+        [JitIntrinsic]
+        public static unsafe Vector<Int64> ConvertToInt64(Vector<Double> value)
+        {
+            const int elements = 2;
+            Int64* retPtr = stackalloc Int64[elements];
+            for (int i = 0; i < elements; i++)
+            {
+                retPtr[i] = (Int64)value[i];
+            }
+
+            return new Vector<Int64>(retPtr);
+        }
+
+        /// <summary>
+        /// Converts a Vector{Double} to a Vector{UInt64}.
+        /// </summary>
+        /// <param name="value">The source vector.</param>
+        /// <returns>The converted vector.</returns>
+        [CLSCompliant(false)]
+        [JitIntrinsic]
+        public static unsafe Vector<UInt64> ConvertToUInt64(Vector<Double> value)
+        {
+            const int elements = 2;
+            UInt64* retPtr = stackalloc UInt64[elements];
+            for (int i = 0; i < elements; i++)
+            {
+                retPtr[i] = (UInt64)value[i];
+            }
+
+            return new Vector<UInt64>(retPtr);
+        }
+
         #endregion Same-Size Conversion
     }
 }

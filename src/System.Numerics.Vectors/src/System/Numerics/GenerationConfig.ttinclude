@@ -113,12 +113,16 @@
         return target;
     }
 
-    public static Dictionary<Type, Type> SameSizeConversionPairs = new Dictionary<Type, Type>()
+    public static List<KeyValuePair<Type, Type>> SameSizeConversionPairs = new List<KeyValuePair<Type, Type>>()
     {
-        { typeof(int), typeof(float) },
-        { typeof(uint), typeof(float) },
-        { typeof(long), typeof(double) },
-        { typeof(ulong), typeof(double) },
+        new KeyValuePair<Type, Type>(typeof(int), typeof(float)),
+        new KeyValuePair<Type, Type>(typeof(uint), typeof(float)),
+        new KeyValuePair<Type, Type>(typeof(long), typeof(double)),
+        new KeyValuePair<Type, Type>(typeof(ulong), typeof(double)),
+        new KeyValuePair<Type, Type>(typeof(float), typeof(int)),
+        new KeyValuePair<Type, Type>(typeof(float), typeof(uint)),
+        new KeyValuePair<Type, Type>(typeof(double), typeof(long)),
+        new KeyValuePair<Type, Type>(typeof(double), typeof(ulong)),
     };
 
     public void GenerateCopyrightHeader()
