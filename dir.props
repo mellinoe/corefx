@@ -27,7 +27,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BuildToolsTargets45 Condition="'$(OsEnvironment)'=='Windows_NT'">true</BuildToolsTargets45>
+    <BuildToolsTargetsDesktop Condition="'$(OsEnvironment)'=='Windows_NT'">true</BuildToolsTargetsDesktop>
   </PropertyGroup>
 
   <!-- Common repo directories -->
@@ -56,7 +56,7 @@
   <Import Project="$(ToolRuntimePath)BuildVersion.targets" Condition="Exists('$(ToolRuntimePath)BuildVersion.targets')" />
 
   <PropertyGroup>
-    <GenFacadesArgs>-ignoreBuildAndRevisionMismatch</GenFacadesArgs>
+    <GenFacadesIgnoreBuildAndRevisionMismatch>true</GenFacadesIgnoreBuildAndRevisionMismatch>
   </PropertyGroup>
 
   <!-- Import Build tools common props file where repo-independent properties are found -->
