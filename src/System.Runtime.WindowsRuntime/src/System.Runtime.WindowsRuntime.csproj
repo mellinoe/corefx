@@ -17,6 +17,7 @@
     <PackageTargetRuntime>win8</PackageTargetRuntime>
     <PackageTargetRuntime Condition="'$(TargetGroup)' == 'uap101aot'">win8-aot</PackageTargetRuntime>
     <NuGetTargetMoniker Condition="'$(TargetGroup)' == ''">.NETStandard,Version=v1.7</NuGetTargetMoniker>
+    <UseLegacyGenFacadesExe>true</UseLegacyGenFacadesExe>
   </PropertyGroup>
   <PropertyGroup Condition="'$(TargetGroup)'==''">
     <DefineConstants>$(DefineConstants);netstandard;FEATURE_APPX</DefineConstants>
