@@ -271,12 +271,7 @@ namespace System.Numerics
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static Vector3 operator /(Vector3 value1, float value2)
         {
-            float invDiv = 1.0f / value2;
-
-            return new Vector3(
-                value1.X * invDiv,
-                value1.Y * invDiv,
-                value1.Z * invDiv);
+            return new Vector3(value1.X / value2, value1.Y / value2, value1.Z / value2);
         }
 
         /// <summary>
