@@ -93,7 +93,7 @@
 
     <Exec Command="$(TestCommandLine)"
           Condition="'$(TestDisabled)' != 'true'"
-          WorkingDirectory="$(TestRuntimeDir)"
+          WorkingDirectory="$(OutDir)"
           CustomErrorRegularExpression="Failed: [^0]"
           ContinueOnError="true"
           IgnoreStandardErrorWarningFormat="true"
