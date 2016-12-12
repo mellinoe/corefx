@@ -1713,7 +1713,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe void Widen(Vector<<#=type.Name#>> source, out Vector<<#=widenTarget.Name#>> dest1, out Vector<<#=widenTarget.Name#>> dest2)
         {
-            const int elements = <#=GetNumFields(type, totalSize)#>;
+            int elements = Vector<<#=type.Name#>>.Count;
             <#=widenTarget.Name#>* dest1Ptr = stackalloc <#=widenTarget.Name#>[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -1753,7 +1753,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<<#=narrowTarget.Name#>> Narrow(Vector<<#=narrowSource.Name#>> source1, Vector<<#=narrowSource.Name#>> source2)
         {
-            const int elements = <#=GetNumFields(narrowTarget, totalSize)#>;
+            int elements = Vector<<#=narrowTarget.Name#>>.Count;
             <#=narrowTarget.Name#>* retPtr = stackalloc <#=narrowTarget.Name#>[elements];
             for (int i = 0; i < elements / 2; i++)
             {

@@ -5014,7 +5014,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe void Widen(Vector<Byte> source, out Vector<UInt16> dest1, out Vector<UInt16> dest2)
         {
-            const int elements = 16;
+            int elements = Vector<Byte>.Count;
             UInt16* dest1Ptr = stackalloc UInt16[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5040,7 +5040,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe void Widen(Vector<UInt16> source, out Vector<UInt32> dest1, out Vector<UInt32> dest2)
         {
-            const int elements = 8;
+            int elements = Vector<UInt16>.Count;
             UInt32* dest1Ptr = stackalloc UInt32[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5066,7 +5066,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe void Widen(Vector<UInt32> source, out Vector<UInt64> dest1, out Vector<UInt64> dest2)
         {
-            const int elements = 4;
+            int elements = Vector<UInt32>.Count;
             UInt64* dest1Ptr = stackalloc UInt64[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5092,7 +5092,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe void Widen(Vector<SByte> source, out Vector<Int16> dest1, out Vector<Int16> dest2)
         {
-            const int elements = 16;
+            int elements = Vector<SByte>.Count;
             Int16* dest1Ptr = stackalloc Int16[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5117,7 +5117,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe void Widen(Vector<Int16> source, out Vector<Int32> dest1, out Vector<Int32> dest2)
         {
-            const int elements = 8;
+            int elements = Vector<Int16>.Count;
             Int32* dest1Ptr = stackalloc Int32[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5142,7 +5142,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe void Widen(Vector<Int32> source, out Vector<Int64> dest1, out Vector<Int64> dest2)
         {
-            const int elements = 4;
+            int elements = Vector<Int32>.Count;
             Int64* dest1Ptr = stackalloc Int64[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5167,7 +5167,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe void Widen(Vector<Single> source, out Vector<Double> dest1, out Vector<Double> dest2)
         {
-            const int elements = 4;
+            int elements = Vector<Single>.Count;
             Double* dest1Ptr = stackalloc Double[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5193,7 +5193,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Byte> Narrow(Vector<UInt16> source1, Vector<UInt16> source2)
         {
-            const int elements = 16;
+            int elements = Vector<Byte>.Count;
             Byte* retPtr = stackalloc Byte[elements];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5217,7 +5217,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<UInt16> Narrow(Vector<UInt32> source1, Vector<UInt32> source2)
         {
-            const int elements = 8;
+            int elements = Vector<UInt16>.Count;
             UInt16* retPtr = stackalloc UInt16[elements];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5241,7 +5241,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<UInt32> Narrow(Vector<UInt64> source1, Vector<UInt64> source2)
         {
-            const int elements = 4;
+            int elements = Vector<UInt32>.Count;
             UInt32* retPtr = stackalloc UInt32[elements];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5265,7 +5265,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<SByte> Narrow(Vector<Int16> source1, Vector<Int16> source2)
         {
-            const int elements = 16;
+            int elements = Vector<SByte>.Count;
             SByte* retPtr = stackalloc SByte[elements];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5288,7 +5288,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Int16> Narrow(Vector<Int32> source1, Vector<Int32> source2)
         {
-            const int elements = 8;
+            int elements = Vector<Int16>.Count;
             Int16* retPtr = stackalloc Int16[elements];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5311,7 +5311,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Int32> Narrow(Vector<Int64> source1, Vector<Int64> source2)
         {
-            const int elements = 4;
+            int elements = Vector<Int32>.Count;
             Int32* retPtr = stackalloc Int32[elements];
             for (int i = 0; i < elements / 2; i++)
             {
@@ -5334,7 +5334,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Single> Narrow(Vector<Double> source1, Vector<Double> source2)
         {
-            const int elements = 4;
+            int elements = Vector<Single>.Count;
             Single* retPtr = stackalloc Single[elements];
             for (int i = 0; i < elements / 2; i++)
             {
