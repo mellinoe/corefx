@@ -1792,7 +1792,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<<#=pair.Value.Name#>> ConvertTo<#=pair.Value.Name#>(Vector<<#=pair.Key.Name#>> value)
         {
-            const int elements = <#=GetNumFields(pair.Value, totalSize)#>;
+            int elements = Vector<<#=pair.Value.Name#>>.Count;
             <#=pair.Value.Name#>* retPtr = stackalloc <#=pair.Value.Name#>[elements];
             for (int i = 0; i < elements; i++)
             {

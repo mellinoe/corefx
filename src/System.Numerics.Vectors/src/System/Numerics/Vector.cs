@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Numerics.Hashing;
 using System.Runtime.CompilerServices;
@@ -5359,7 +5358,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Single> ConvertToSingle(Vector<Int32> value)
         {
-            const int elements = 4;
+            int elements = Vector<Single>.Count;
             Single* retPtr = stackalloc Single[elements];
             for (int i = 0; i < elements; i++)
             {
@@ -5378,7 +5377,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Single> ConvertToSingle(Vector<UInt32> value)
         {
-            const int elements = 4;
+            int elements = Vector<Single>.Count;
             Single* retPtr = stackalloc Single[elements];
             for (int i = 0; i < elements; i++)
             {
@@ -5396,7 +5395,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Double> ConvertToDouble(Vector<Int64> value)
         {
-            const int elements = 2;
+            int elements = Vector<Double>.Count;
             Double* retPtr = stackalloc Double[elements];
             for (int i = 0; i < elements; i++)
             {
@@ -5415,7 +5414,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Double> ConvertToDouble(Vector<UInt64> value)
         {
-            const int elements = 2;
+            int elements = Vector<Double>.Count;
             Double* retPtr = stackalloc Double[elements];
             for (int i = 0; i < elements; i++)
             {
@@ -5433,7 +5432,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Int32> ConvertToInt32(Vector<Single> value)
         {
-            const int elements = 4;
+            int elements = Vector<Int32>.Count;
             Int32* retPtr = stackalloc Int32[elements];
             for (int i = 0; i < elements; i++)
             {
@@ -5452,7 +5451,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<UInt32> ConvertToUInt32(Vector<Single> value)
         {
-            const int elements = 4;
+            int elements = Vector<UInt32>.Count;
             UInt32* retPtr = stackalloc UInt32[elements];
             for (int i = 0; i < elements; i++)
             {
@@ -5470,7 +5469,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<Int64> ConvertToInt64(Vector<Double> value)
         {
-            const int elements = 2;
+            int elements = Vector<Int64>.Count;
             Int64* retPtr = stackalloc Int64[elements];
             for (int i = 0; i < elements; i++)
             {
@@ -5489,7 +5488,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static unsafe Vector<UInt64> ConvertToUInt64(Vector<Double> value)
         {
-            const int elements = 2;
+            int elements = Vector<UInt64>.Count;
             UInt64* retPtr = stackalloc UInt64[elements];
             for (int i = 0; i < elements; i++)
             {
