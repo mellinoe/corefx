@@ -1699,8 +1699,8 @@ namespace System.Numerics
         /// <summary>
         /// Widens a Vector{<#=type.Name#>} into two Vector{<#=widenTarget.Name#>}'s.
         /// <param name="source">The source vector whose elements are widened into the outputs.</param>
-        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
-        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
 <#
         if (nonClsCompliantTypes.Contains(type) || nonClsCompliantTypes.Contains(widenTarget))
@@ -1711,22 +1711,22 @@ namespace System.Numerics
         }
 #>
         [JitIntrinsic]
-        public static unsafe void Widen(Vector<<#=type.Name#>> source, out Vector<<#=widenTarget.Name#>> dest1, out Vector<<#=widenTarget.Name#>> dest2)
+        public static unsafe void Widen(Vector<<#=type.Name#>> source, out Vector<<#=widenTarget.Name#>> low, out Vector<<#=widenTarget.Name#>> high)
         {
             int elements = Vector<<#=type.Name#>>.Count;
-            <#=widenTarget.Name#>* dest1Ptr = stackalloc <#=widenTarget.Name#>[elements / 2];
+            <#=widenTarget.Name#>* lowPtr = stackalloc <#=widenTarget.Name#>[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest1Ptr[i] = (<#=widenTarget.Name#>)source[i];
+                lowPtr[i] = (<#=widenTarget.Name#>)source[i];
             }
-            <#=widenTarget.Name#>* dest2Ptr = stackalloc <#=widenTarget.Name#>[elements / 2];
+            <#=widenTarget.Name#>* highPtr = stackalloc <#=widenTarget.Name#>[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest2Ptr[i] = (<#=widenTarget.Name#>)source[i + (elements / 2)];
+                highPtr[i] = (<#=widenTarget.Name#>)source[i + (elements / 2)];
             }
 
-            dest1 = new Vector<<#=widenTarget.Name#>>(dest1Ptr);
-            dest2 = new Vector<<#=widenTarget.Name#>>(dest2Ptr);
+            low = new Vector<<#=widenTarget.Name#>>(lowPtr);
+            high = new Vector<<#=widenTarget.Name#>>(highPtr);
         }
 
 <#
@@ -1738,8 +1738,8 @@ namespace System.Numerics
 #>
         /// <summary>
         /// Narrows two Vector{<#=narrowSource.Name#>}'s into one Vector{<#=narrowTarget.Name#>}.
-        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
-        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <param name="low">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{<#=narrowTarget.Name#>} containing elements narrowed from the source vectors.</returns>
         /// </summary>
 <#
@@ -1751,17 +1751,17 @@ namespace System.Numerics
         }
 #>
         [JitIntrinsic]
-        public static unsafe Vector<<#=narrowTarget.Name#>> Narrow(Vector<<#=narrowSource.Name#>> source1, Vector<<#=narrowSource.Name#>> source2)
+        public static unsafe Vector<<#=narrowTarget.Name#>> Narrow(Vector<<#=narrowSource.Name#>> low, Vector<<#=narrowSource.Name#>> high)
         {
             int elements = Vector<<#=narrowTarget.Name#>>.Count;
             <#=narrowTarget.Name#>* retPtr = stackalloc <#=narrowTarget.Name#>[elements];
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i] = (<#=narrowTarget.Name#>)source1[i];
+                retPtr[i] = (<#=narrowTarget.Name#>)low[i];
             }
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i + (elements / 2)] = (<#=narrowTarget.Name#>)source2[i];
+                retPtr[i + (elements / 2)] = (<#=narrowTarget.Name#>)high[i];
             }
 
             return new Vector<<#=narrowTarget.Name#>>(retPtr);

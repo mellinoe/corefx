@@ -5006,201 +5006,201 @@ namespace System.Numerics
         /// <summary>
         /// Widens a Vector{Byte} into two Vector{UInt16}'s.
         /// <param name="source">The source vector whose elements are widened into the outputs.</param>
-        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
-        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
         [CLSCompliant(false)]
         [JitIntrinsic]
-        public static unsafe void Widen(Vector<Byte> source, out Vector<UInt16> dest1, out Vector<UInt16> dest2)
+        public static unsafe void Widen(Vector<Byte> source, out Vector<UInt16> low, out Vector<UInt16> high)
         {
             int elements = Vector<Byte>.Count;
-            UInt16* dest1Ptr = stackalloc UInt16[elements / 2];
+            UInt16* lowPtr = stackalloc UInt16[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest1Ptr[i] = (UInt16)source[i];
+                lowPtr[i] = (UInt16)source[i];
             }
-            UInt16* dest2Ptr = stackalloc UInt16[elements / 2];
+            UInt16* highPtr = stackalloc UInt16[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest2Ptr[i] = (UInt16)source[i + (elements / 2)];
+                highPtr[i] = (UInt16)source[i + (elements / 2)];
             }
 
-            dest1 = new Vector<UInt16>(dest1Ptr);
-            dest2 = new Vector<UInt16>(dest2Ptr);
+            low = new Vector<UInt16>(lowPtr);
+            high = new Vector<UInt16>(highPtr);
         }
 
         /// <summary>
         /// Widens a Vector{UInt16} into two Vector{UInt32}'s.
         /// <param name="source">The source vector whose elements are widened into the outputs.</param>
-        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
-        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
         [CLSCompliant(false)]
         [JitIntrinsic]
-        public static unsafe void Widen(Vector<UInt16> source, out Vector<UInt32> dest1, out Vector<UInt32> dest2)
+        public static unsafe void Widen(Vector<UInt16> source, out Vector<UInt32> low, out Vector<UInt32> high)
         {
             int elements = Vector<UInt16>.Count;
-            UInt32* dest1Ptr = stackalloc UInt32[elements / 2];
+            UInt32* lowPtr = stackalloc UInt32[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest1Ptr[i] = (UInt32)source[i];
+                lowPtr[i] = (UInt32)source[i];
             }
-            UInt32* dest2Ptr = stackalloc UInt32[elements / 2];
+            UInt32* highPtr = stackalloc UInt32[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest2Ptr[i] = (UInt32)source[i + (elements / 2)];
+                highPtr[i] = (UInt32)source[i + (elements / 2)];
             }
 
-            dest1 = new Vector<UInt32>(dest1Ptr);
-            dest2 = new Vector<UInt32>(dest2Ptr);
+            low = new Vector<UInt32>(lowPtr);
+            high = new Vector<UInt32>(highPtr);
         }
 
         /// <summary>
         /// Widens a Vector{UInt32} into two Vector{UInt64}'s.
         /// <param name="source">The source vector whose elements are widened into the outputs.</param>
-        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
-        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
         [CLSCompliant(false)]
         [JitIntrinsic]
-        public static unsafe void Widen(Vector<UInt32> source, out Vector<UInt64> dest1, out Vector<UInt64> dest2)
+        public static unsafe void Widen(Vector<UInt32> source, out Vector<UInt64> low, out Vector<UInt64> high)
         {
             int elements = Vector<UInt32>.Count;
-            UInt64* dest1Ptr = stackalloc UInt64[elements / 2];
+            UInt64* lowPtr = stackalloc UInt64[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest1Ptr[i] = (UInt64)source[i];
+                lowPtr[i] = (UInt64)source[i];
             }
-            UInt64* dest2Ptr = stackalloc UInt64[elements / 2];
+            UInt64* highPtr = stackalloc UInt64[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest2Ptr[i] = (UInt64)source[i + (elements / 2)];
+                highPtr[i] = (UInt64)source[i + (elements / 2)];
             }
 
-            dest1 = new Vector<UInt64>(dest1Ptr);
-            dest2 = new Vector<UInt64>(dest2Ptr);
+            low = new Vector<UInt64>(lowPtr);
+            high = new Vector<UInt64>(highPtr);
         }
 
         /// <summary>
         /// Widens a Vector{SByte} into two Vector{Int16}'s.
         /// <param name="source">The source vector whose elements are widened into the outputs.</param>
-        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
-        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
         [CLSCompliant(false)]
         [JitIntrinsic]
-        public static unsafe void Widen(Vector<SByte> source, out Vector<Int16> dest1, out Vector<Int16> dest2)
+        public static unsafe void Widen(Vector<SByte> source, out Vector<Int16> low, out Vector<Int16> high)
         {
             int elements = Vector<SByte>.Count;
-            Int16* dest1Ptr = stackalloc Int16[elements / 2];
+            Int16* lowPtr = stackalloc Int16[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest1Ptr[i] = (Int16)source[i];
+                lowPtr[i] = (Int16)source[i];
             }
-            Int16* dest2Ptr = stackalloc Int16[elements / 2];
+            Int16* highPtr = stackalloc Int16[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest2Ptr[i] = (Int16)source[i + (elements / 2)];
+                highPtr[i] = (Int16)source[i + (elements / 2)];
             }
 
-            dest1 = new Vector<Int16>(dest1Ptr);
-            dest2 = new Vector<Int16>(dest2Ptr);
+            low = new Vector<Int16>(lowPtr);
+            high = new Vector<Int16>(highPtr);
         }
 
         /// <summary>
         /// Widens a Vector{Int16} into two Vector{Int32}'s.
         /// <param name="source">The source vector whose elements are widened into the outputs.</param>
-        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
-        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
         [JitIntrinsic]
-        public static unsafe void Widen(Vector<Int16> source, out Vector<Int32> dest1, out Vector<Int32> dest2)
+        public static unsafe void Widen(Vector<Int16> source, out Vector<Int32> low, out Vector<Int32> high)
         {
             int elements = Vector<Int16>.Count;
-            Int32* dest1Ptr = stackalloc Int32[elements / 2];
+            Int32* lowPtr = stackalloc Int32[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest1Ptr[i] = (Int32)source[i];
+                lowPtr[i] = (Int32)source[i];
             }
-            Int32* dest2Ptr = stackalloc Int32[elements / 2];
+            Int32* highPtr = stackalloc Int32[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest2Ptr[i] = (Int32)source[i + (elements / 2)];
+                highPtr[i] = (Int32)source[i + (elements / 2)];
             }
 
-            dest1 = new Vector<Int32>(dest1Ptr);
-            dest2 = new Vector<Int32>(dest2Ptr);
+            low = new Vector<Int32>(lowPtr);
+            high = new Vector<Int32>(highPtr);
         }
 
         /// <summary>
         /// Widens a Vector{Int32} into two Vector{Int64}'s.
         /// <param name="source">The source vector whose elements are widened into the outputs.</param>
-        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
-        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
         [JitIntrinsic]
-        public static unsafe void Widen(Vector<Int32> source, out Vector<Int64> dest1, out Vector<Int64> dest2)
+        public static unsafe void Widen(Vector<Int32> source, out Vector<Int64> low, out Vector<Int64> high)
         {
             int elements = Vector<Int32>.Count;
-            Int64* dest1Ptr = stackalloc Int64[elements / 2];
+            Int64* lowPtr = stackalloc Int64[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest1Ptr[i] = (Int64)source[i];
+                lowPtr[i] = (Int64)source[i];
             }
-            Int64* dest2Ptr = stackalloc Int64[elements / 2];
+            Int64* highPtr = stackalloc Int64[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest2Ptr[i] = (Int64)source[i + (elements / 2)];
+                highPtr[i] = (Int64)source[i + (elements / 2)];
             }
 
-            dest1 = new Vector<Int64>(dest1Ptr);
-            dest2 = new Vector<Int64>(dest2Ptr);
+            low = new Vector<Int64>(lowPtr);
+            high = new Vector<Int64>(highPtr);
         }
 
         /// <summary>
         /// Widens a Vector{Single} into two Vector{Double}'s.
         /// <param name="source">The source vector whose elements are widened into the outputs.</param>
-        /// <param name="dest1">The first destination vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
-        /// <param name="dest2">The second destination vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
+        /// <param name="low">The first output vector, whose elements will contain the widened elements from lower indices in the source vector.</param>
+        /// <param name="high">The second output vector, whose elements will contain the widened elements from higher indices in the source vector.</param>
         /// </summary>
         [JitIntrinsic]
-        public static unsafe void Widen(Vector<Single> source, out Vector<Double> dest1, out Vector<Double> dest2)
+        public static unsafe void Widen(Vector<Single> source, out Vector<Double> low, out Vector<Double> high)
         {
             int elements = Vector<Single>.Count;
-            Double* dest1Ptr = stackalloc Double[elements / 2];
+            Double* lowPtr = stackalloc Double[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest1Ptr[i] = (Double)source[i];
+                lowPtr[i] = (Double)source[i];
             }
-            Double* dest2Ptr = stackalloc Double[elements / 2];
+            Double* highPtr = stackalloc Double[elements / 2];
             for (int i = 0; i < elements / 2; i++)
             {
-                dest2Ptr[i] = (Double)source[i + (elements / 2)];
+                highPtr[i] = (Double)source[i + (elements / 2)];
             }
 
-            dest1 = new Vector<Double>(dest1Ptr);
-            dest2 = new Vector<Double>(dest2Ptr);
+            low = new Vector<Double>(lowPtr);
+            high = new Vector<Double>(highPtr);
         }
 
         /// <summary>
         /// Narrows two Vector{UInt16}'s into one Vector{Byte}.
-        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
-        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <param name="low">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{Byte} containing elements narrowed from the source vectors.</returns>
         /// </summary>
         [CLSCompliant(false)]
         [JitIntrinsic]
-        public static unsafe Vector<Byte> Narrow(Vector<UInt16> source1, Vector<UInt16> source2)
+        public static unsafe Vector<Byte> Narrow(Vector<UInt16> low, Vector<UInt16> high)
         {
             int elements = Vector<Byte>.Count;
             Byte* retPtr = stackalloc Byte[elements];
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i] = (Byte)source1[i];
+                retPtr[i] = (Byte)low[i];
             }
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i + (elements / 2)] = (Byte)source2[i];
+                retPtr[i + (elements / 2)] = (Byte)high[i];
             }
 
             return new Vector<Byte>(retPtr);
@@ -5208,23 +5208,23 @@ namespace System.Numerics
 
         /// <summary>
         /// Narrows two Vector{UInt32}'s into one Vector{UInt16}.
-        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
-        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <param name="low">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{UInt16} containing elements narrowed from the source vectors.</returns>
         /// </summary>
         [CLSCompliant(false)]
         [JitIntrinsic]
-        public static unsafe Vector<UInt16> Narrow(Vector<UInt32> source1, Vector<UInt32> source2)
+        public static unsafe Vector<UInt16> Narrow(Vector<UInt32> low, Vector<UInt32> high)
         {
             int elements = Vector<UInt16>.Count;
             UInt16* retPtr = stackalloc UInt16[elements];
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i] = (UInt16)source1[i];
+                retPtr[i] = (UInt16)low[i];
             }
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i + (elements / 2)] = (UInt16)source2[i];
+                retPtr[i + (elements / 2)] = (UInt16)high[i];
             }
 
             return new Vector<UInt16>(retPtr);
@@ -5232,23 +5232,23 @@ namespace System.Numerics
 
         /// <summary>
         /// Narrows two Vector{UInt64}'s into one Vector{UInt32}.
-        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
-        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <param name="low">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{UInt32} containing elements narrowed from the source vectors.</returns>
         /// </summary>
         [CLSCompliant(false)]
         [JitIntrinsic]
-        public static unsafe Vector<UInt32> Narrow(Vector<UInt64> source1, Vector<UInt64> source2)
+        public static unsafe Vector<UInt32> Narrow(Vector<UInt64> low, Vector<UInt64> high)
         {
             int elements = Vector<UInt32>.Count;
             UInt32* retPtr = stackalloc UInt32[elements];
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i] = (UInt32)source1[i];
+                retPtr[i] = (UInt32)low[i];
             }
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i + (elements / 2)] = (UInt32)source2[i];
+                retPtr[i + (elements / 2)] = (UInt32)high[i];
             }
 
             return new Vector<UInt32>(retPtr);
@@ -5256,23 +5256,23 @@ namespace System.Numerics
 
         /// <summary>
         /// Narrows two Vector{Int16}'s into one Vector{SByte}.
-        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
-        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <param name="low">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{SByte} containing elements narrowed from the source vectors.</returns>
         /// </summary>
         [CLSCompliant(false)]
         [JitIntrinsic]
-        public static unsafe Vector<SByte> Narrow(Vector<Int16> source1, Vector<Int16> source2)
+        public static unsafe Vector<SByte> Narrow(Vector<Int16> low, Vector<Int16> high)
         {
             int elements = Vector<SByte>.Count;
             SByte* retPtr = stackalloc SByte[elements];
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i] = (SByte)source1[i];
+                retPtr[i] = (SByte)low[i];
             }
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i + (elements / 2)] = (SByte)source2[i];
+                retPtr[i + (elements / 2)] = (SByte)high[i];
             }
 
             return new Vector<SByte>(retPtr);
@@ -5280,22 +5280,22 @@ namespace System.Numerics
 
         /// <summary>
         /// Narrows two Vector{Int32}'s into one Vector{Int16}.
-        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
-        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <param name="low">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{Int16} containing elements narrowed from the source vectors.</returns>
         /// </summary>
         [JitIntrinsic]
-        public static unsafe Vector<Int16> Narrow(Vector<Int32> source1, Vector<Int32> source2)
+        public static unsafe Vector<Int16> Narrow(Vector<Int32> low, Vector<Int32> high)
         {
             int elements = Vector<Int16>.Count;
             Int16* retPtr = stackalloc Int16[elements];
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i] = (Int16)source1[i];
+                retPtr[i] = (Int16)low[i];
             }
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i + (elements / 2)] = (Int16)source2[i];
+                retPtr[i + (elements / 2)] = (Int16)high[i];
             }
 
             return new Vector<Int16>(retPtr);
@@ -5303,22 +5303,22 @@ namespace System.Numerics
 
         /// <summary>
         /// Narrows two Vector{Int64}'s into one Vector{Int32}.
-        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
-        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <param name="low">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{Int32} containing elements narrowed from the source vectors.</returns>
         /// </summary>
         [JitIntrinsic]
-        public static unsafe Vector<Int32> Narrow(Vector<Int64> source1, Vector<Int64> source2)
+        public static unsafe Vector<Int32> Narrow(Vector<Int64> low, Vector<Int64> high)
         {
             int elements = Vector<Int32>.Count;
             Int32* retPtr = stackalloc Int32[elements];
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i] = (Int32)source1[i];
+                retPtr[i] = (Int32)low[i];
             }
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i + (elements / 2)] = (Int32)source2[i];
+                retPtr[i + (elements / 2)] = (Int32)high[i];
             }
 
             return new Vector<Int32>(retPtr);
@@ -5326,22 +5326,22 @@ namespace System.Numerics
 
         /// <summary>
         /// Narrows two Vector{Double}'s into one Vector{Single}.
-        /// <param name="source1">The first source vector, whose elements become the lower-index elements of the return value.</param>
-        /// <param name="source2">The second source vector, whose elements become the upper-index elements of the return value.</param>
+        /// <param name="low">The first source vector, whose elements become the lower-index elements of the return value.</param>
+        /// <param name="high">The second source vector, whose elements become the higher-index elements of the return value.</param>
         /// <returns>A Vector{Single} containing elements narrowed from the source vectors.</returns>
         /// </summary>
         [JitIntrinsic]
-        public static unsafe Vector<Single> Narrow(Vector<Double> source1, Vector<Double> source2)
+        public static unsafe Vector<Single> Narrow(Vector<Double> low, Vector<Double> high)
         {
             int elements = Vector<Single>.Count;
             Single* retPtr = stackalloc Single[elements];
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i] = (Single)source1[i];
+                retPtr[i] = (Single)low[i];
             }
             for (int i = 0; i < elements / 2; i++)
             {
-                retPtr[i + (elements / 2)] = (Single)source2[i];
+                retPtr[i + (elements / 2)] = (Single)high[i];
             }
 
             return new Vector<Single>(retPtr);
