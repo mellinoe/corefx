@@ -3,6 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using Xunit;
+using System.Runtime.InteropServices;
 
 namespace System.Tests
 {
@@ -16,6 +17,8 @@ namespace System.Tests
             bool isEnabled;
             Assert.False(AppContext.TryGetSwitch(switchName, out isEnabled));
             Assert.False(isEnabled);
+            IntPtr ptr = (IntPtr)42;
+            Marshal.StructureToPtr(42, ptr, true);
         }
 
 
