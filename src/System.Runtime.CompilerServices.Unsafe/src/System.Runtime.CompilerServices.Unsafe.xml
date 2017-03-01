@@ -17,9 +17,45 @@
             <param name="source">The location to read from.</param>
             <returns>An object of type <typeparamref name="T"/> read from the given location.</returns>
         </member>
+        <member name="M:System.Runtime.CompilerServices.Unsafe.ReadUnaligned``1(System.Void*)">
+            <summary>
+            Reads a value of type <typeparamref name="T"/> from the given location
+            without assuming architecture dependent alignment of the address.
+            </summary>
+            <typeparam name="T">The type to read.</typeparam>
+            <param name="source">The location to read from.</param>
+            <returns>An object of type <typeparamref name="T"/> read from the given location.</returns>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.Unsafe.ReadUnaligned``1(System.Byte@)">
+            <summary>
+            Reads a value of type <typeparamref name="T"/> from the given location
+            without assuming architecture dependent alignment of the address.
+            </summary>
+            <typeparam name="T">The type to read.</typeparam>
+            <param name="source">The location to read from.</param>
+            <returns>An object of type <typeparamref name="T"/> read from the given location.</returns>
+        </member>
         <member name="M:System.Runtime.CompilerServices.Unsafe.Write``1(System.Void*,``0)">
             <summary>
             Writes a value of type <typeparamref name="T"/> to the given location.
+            </summary>
+            <typeparam name="T">The type of value to write.</typeparam>
+            <param name="destination">The location to write to.</param>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.Unsafe.WriteUnaligned``1(System.Void*,``0)">
+            <summary>
+            Writes a value of type <typeparamref name="T"/> to the given location
+            without assuming architecture dependent alignment of the address.
+            </summary>
+            <typeparam name="T">The type of value to write.</typeparam>
+            <param name="destination">The location to write to.</param>
+            <param name="value">The value to write.</param>
+        </member>
+        <member name="M:System.Runtime.CompilerServices.Unsafe.WriteUnaligned``1(System.Byte@,``0)">
+            <summary>
+            Writes a value of type <typeparamref name="T"/> to the given location
+            without assuming architecture dependent alignment of the address.
             </summary>
             <typeparam name="T">The type of value to write.</typeparam>
             <param name="destination">The location to write to.</param>
