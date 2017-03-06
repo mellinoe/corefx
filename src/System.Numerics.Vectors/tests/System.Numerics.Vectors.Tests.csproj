@@ -5,6 +5,12 @@
     <ProjectGuid>{99E1E564-0EF4-4E33-BECE-8ABE64771349}</ProjectGuid>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <!-- Setting TestWithoutSimd=true prevents the JIT from generating optimized SIMD code in the tests.
+       This allows us to get better code coverage data for non-SIMD codepaths. -->
+  <ItemGroup Condition="'$(TestWithoutSimd)' == 'true'">
+    <TestCommandLines Condition="'$(TargetsUnix)' != 'true'" Include="set COMPLUS_FEATURESIMD=0" />
+    <TestCommandLines Condition="'$(TargetsUnix)' == 'true'" Include="export COMPLUS_FEATURESIMD=0" />
+  </ItemGroup>
   <!-- Default configurations to help VS understand the configurations -->
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcoreapp-Debug|AnyCPU'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcoreapp-Release|AnyCPU'" />
