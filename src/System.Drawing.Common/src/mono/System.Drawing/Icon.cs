@@ -758,9 +758,14 @@ namespace System.Drawing
 
         private void InitFromStreamWithSize(Stream stream, int width, int height)
         {
-            //read the icon header
-            if (stream == null || stream.Length == 0)
+            if (stream == null)
+            {
+                throw new ArgumentException(SR.Format(SR.InvalidArgument, "stream", "null"));
+            }
+            if (stream.Length == 0)
+            {
                 throw new System.ArgumentException("The argument 'stream' must be a picture that can be used as a Icon", "stream");
+            }
 
             BinaryReader reader = new BinaryReader(stream);
 
