@@ -6,11 +6,10 @@ namespace System.Drawing.Configuration
 {
     using System.Configuration;
 
-    /// <include file='doc\SystemDrawingSection.uex' path='docs/doc[@for="SystemDrawingSection"]/*' />
-    /// <devdoc>
+    /// <summary>
     /// A configuration section with a "bitmapSuffix" string value that specifies the suffix to be
     /// appended to bitmaps that are loaded through ToolboxBitmapAttribute and similar attributes.
-    /// </devdoc>
+    /// </summary>
     public sealed class SystemDrawingSection : ConfigurationSection
     {
         private const string BitmapSuffixSectionName = "bitmapSuffix";

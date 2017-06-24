@@ -4,12 +4,11 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\RegionData.uex' path='docs/doc[@for="RegionData"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Encapsulates the data that makes up a <see cref='System.Drawing.Region'/>.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public sealed class RegionData
     {
         private byte[] _data;
@@ -19,12 +18,11 @@ namespace System.Drawing.Drawing2D
             _data = data;
         }
 
-        /// <include file='doc\RegionData.uex' path='docs/doc[@for="RegionData.Data"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       An array of characters that contain the data that makes up a <see cref='System.Drawing.Region'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public byte[] Data
         {
             get

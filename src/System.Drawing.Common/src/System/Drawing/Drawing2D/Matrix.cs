@@ -10,11 +10,10 @@ namespace System.Drawing.Drawing2D
     /**
      * Represent a Matrix object
      */
-    /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Encapsulates a 3 X 3 affine matrix that
     ///    represents a geometric transform.
-    /// </devdoc>
+    /// </summary>
     public sealed class Matrix : MarshalByRefObject, IDisposable
     {
         internal IntPtr nativeMatrix;
@@ -23,10 +22,9 @@ namespace System.Drawing.Drawing2D
          * Create a new identity matrix
          */
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Matrix"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Matrix'/> class.
-        /// </devdoc>
+        /// </summary>
         public Matrix()
         {
             IntPtr matrix = IntPtr.Zero;
@@ -39,13 +37,12 @@ namespace System.Drawing.Drawing2D
             nativeMatrix = matrix;
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Matrix1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initialized a new instance of the <see cref='System.Drawing.Drawing2D.Matrix'/> class with the specified
         ///       elements.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Matrix(float m11,
                       float m12,
                       float m21,
@@ -65,13 +62,12 @@ namespace System.Drawing.Drawing2D
         }
 
         // float version
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Matrix2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Matrix'/> class to the geometrical transform
         ///       defined by the specified rectangle and array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Matrix(RectangleF rect, PointF[] plgpts)
         {
             if (plgpts == null)
@@ -106,13 +102,12 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Matrix3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Matrix'/> class to the geometrical transform
         ///       defined by the specified rectangle and array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Matrix(Rectangle rect, Point[] plgpts)
         {
             if (plgpts == null)
@@ -146,11 +141,10 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Dispose"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Cleans up resources allocated for this
         /// <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        /// </devdoc>
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -166,20 +160,18 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Finalize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Cleans up resources allocated for this
         /// <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        /// </devdoc>
+        /// </summary>
         ~Matrix()
         {
             Dispose(false);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Clone"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        /// </devdoc>
+        /// </summary>
         public Matrix Clone()
         {
             IntPtr cloneMatrix = IntPtr.Zero;
@@ -192,11 +184,10 @@ namespace System.Drawing.Drawing2D
             return new Matrix(cloneMatrix);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Elements"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets an array of floating-point values that
         ///    represent the elements of this <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        /// </devdoc>
+        /// </summary>
         public float[] Elements
         {
             get
@@ -227,30 +218,27 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.OffsetX"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the x translation value (the dx value,
         ///    or the element in the third row and first column) of this <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        /// </devdoc>
+        /// </summary>
         public float OffsetX
         {
             get { return Elements[4]; }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.OffsetY"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the y translation value (the dy
         ///    value, or the element in the third row and second column) of this <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        /// </devdoc>
+        /// </summary>
         public float OffsetY
         {
             get { return Elements[5]; }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Reset"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Resets this <see cref='System.Drawing.Drawing2D.Matrix'/> to identity.
-        /// </devdoc>
+        /// </summary>
         public void Reset()
         {
             int status = SafeNativeMethods.Gdip.GdipSetMatrixElements(new HandleRef(this, nativeMatrix),
@@ -261,23 +249,21 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Multiply"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Multiplies this <see cref='System.Drawing.Drawing2D.Matrix'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Multiply(Matrix matrix)
         {
             Multiply(matrix, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Multiply1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Multiplies this <see cref='System.Drawing.Drawing2D.Matrix'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Multiply(Matrix matrix, MatrixOrder order)
         {
             if (matrix == null)
@@ -292,26 +278,24 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Translate"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Applies the specified translation vector to
         ///       the this <see cref='System.Drawing.Drawing2D.Matrix'/> by
         ///       prepending the translation vector.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Translate(float offsetX, float offsetY)
         {
             Translate(offsetX, offsetY, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Translate1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Applies the specified translation vector to
         ///       the this <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Translate(float offsetX, float offsetY, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateMatrix(new HandleRef(this, nativeMatrix),
@@ -321,23 +305,21 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Scale"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Applies the specified scale vector to this
         /// <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the scale vector.
-        /// </devdoc>
+        /// </summary>
         public void Scale(float scaleX, float scaleY)
         {
             Scale(scaleX, scaleY, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Scale1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Applies the specified scale vector to this
         ///    <see cref='System.Drawing.Drawing2D.Matrix'/> using the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Scale(float scaleX, float scaleY, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipScaleMatrix(new HandleRef(this, nativeMatrix), scaleX, scaleY, order);
@@ -346,26 +328,24 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Rotate"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Rotates this <see cref='System.Drawing.Drawing2D.Matrix'/> clockwise about the
         ///       origin by the specified angle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Rotate(float angle)
         {
             Rotate(angle, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Rotate1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Rotates this <see cref='System.Drawing.Drawing2D.Matrix'/> clockwise about the
         ///       origin by the specified
         ///       angle in the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Rotate(float angle, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipRotateMatrix(new HandleRef(this, nativeMatrix), angle, order);
@@ -374,26 +354,24 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.RotateAt"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Applies a clockwise rotation about the
         ///       specified point to this <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the rotation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void RotateAt(float angle, PointF point)
         {
             RotateAt(angle, point, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.RotateAt1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Applies a clockwise rotation about the specified point
         ///       to this <see cref='System.Drawing.Drawing2D.Matrix'/> in the
         ///       specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void RotateAt(float angle, PointF point, MatrixOrder order)
         {
             int status;
@@ -416,11 +394,10 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Shear"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Applies the specified shear
         ///    vector to this <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the shear vector.
-        /// </devdoc>
+        /// </summary>
         public void Shear(float shearX, float shearY)
         {
             int status = SafeNativeMethods.Gdip.GdipShearMatrix(new HandleRef(this, nativeMatrix), shearX, shearY, MatrixOrder.Prepend);
@@ -429,13 +406,12 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Shear1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Applies the specified shear
         ///       vector to this <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Shear(float shearX, float shearY, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipShearMatrix(new HandleRef(this, nativeMatrix), shearX, shearY, order);
@@ -444,11 +420,10 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Invert"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Inverts this <see cref='System.Drawing.Drawing2D.Matrix'/>, if it is
         ///    invertible.
-        /// </devdoc>
+        /// </summary>
         public void Invert()
         {
             int status = SafeNativeMethods.Gdip.GdipInvertMatrix(new HandleRef(this, nativeMatrix));
@@ -458,13 +433,12 @@ namespace System.Drawing.Drawing2D
         }
 
         // float version
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.TransformPoints"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Applies the geometrical transform this <see cref='System.Drawing.Drawing2D.Matrix'/>represents to an
         ///       array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void TransformPoints(PointF[] pts)
         {
             if (pts == null)
@@ -496,12 +470,11 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.TransformPoints1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Applies the geometrical transform this <see cref='System.Drawing.Drawing2D.Matrix'/> represents to an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void TransformPoints(Point[] pts)
         {
             if (pts == null)
@@ -533,10 +506,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.TransformVectors"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void TransformVectors(PointF[] pts)
         {
             if (pts == null)
@@ -572,19 +544,17 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.VectorTransformPoints"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void VectorTransformPoints(Point[] pts)
         {
             TransformVectors(pts);
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.TransformVectors1"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void TransformVectors(Point[] pts)
         {
             if (pts == null)
@@ -619,11 +589,10 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.IsInvertible"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets a value indicating whether this
         /// <see cref='System.Drawing.Drawing2D.Matrix'/> is invertible.
-        /// </devdoc>
+        /// </summary>
         public bool IsInvertible
         {
             get
@@ -639,10 +608,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.IsIdentity"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets a value indicating whether this <see cref='System.Drawing.Drawing2D.Matrix'/> is the identity matrix.
-        /// </devdoc>
+        /// </summary>
         public bool IsIdentity
         {
             get
@@ -658,13 +626,12 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.Equals"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Tests whether the specified object is a
         ///    <see cref='System.Drawing.Drawing2D.Matrix'/> and is identical to this <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public override bool Equals(object obj)
         {
             Matrix matrix2 = obj as Matrix;
@@ -682,12 +649,11 @@ namespace System.Drawing.Drawing2D
             return isEqual != 0;
         }
 
-        /// <include file='doc\Matrix.uex' path='docs/doc[@for="Matrix.GetHashCode"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Returns a hash code.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public override int GetHashCode()
         {
             return base.GetHashCode();

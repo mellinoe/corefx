@@ -7,61 +7,51 @@ namespace System.Drawing.Drawing2D
     /**
      * Various wrap modes for brushes
      */
-    /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies how data is interpolated between
     ///    endpoints.
-    /// </devdoc>
+    /// </summary>
     public enum InterpolationMode
     {
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.Invalid"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Equivalent to <see cref='System.Drawing.Drawing2D.QualityMode.Invalid'/>
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Invalid = QualityMode.Invalid,
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.Default"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies default mode.
-        /// </devdoc>
+        /// </summary>
         Default = QualityMode.Default,
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.Low"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies low quality.
-        /// </devdoc>
+        /// </summary>
         Low = QualityMode.Low,
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.High"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies high quality.
-        /// </devdoc>
+        /// </summary>
         High = QualityMode.High,
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.Bilinear"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies bilinear interpolation.
-        /// </devdoc>
+        /// </summary>
         Bilinear,
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.Bicubic"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies bicubic interpolation.
-        /// </devdoc>
+        /// </summary>
         Bicubic,
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.NearestNeighbor"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies nearest neighbor interpolation.
-        /// </devdoc>
+        /// </summary>
         NearestNeighbor,
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.HighQualityBilinear"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies high qulaity bilenear
         ///    interpolation.
-        /// </devdoc>
+        /// </summary>
         HighQualityBilinear,
-        /// <include file='doc\InterpolationMode.uex' path='docs/doc[@for="InterpolationMode.HighQualityBicubic"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies high quality bicubic
         ///    interpolation.
-        /// </devdoc>
+        /// </summary>
         HighQualityBicubic
     }
 }

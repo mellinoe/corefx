@@ -7,39 +7,33 @@ namespace System.Drawing.Drawing2D
     /**
      * PenType Type
      */
-    /// <include file='doc\PenType.uex' path='docs/doc[@for="PenType"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies the type of fill a <see cref='System.Drawing.Pen'/> uses to
     ///       fill lines.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum PenType
     {
-        /// <include file='doc\PenType.uex' path='docs/doc[@for="PenType.SolidColor"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a solid fill.
-        /// </devdoc>
+        /// </summary>
         SolidColor = BrushType.SolidColor,
-        /// <include file='doc\PenType.uex' path='docs/doc[@for="PenType.HatchFill"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a hatch fill.
-        /// </devdoc>
+        /// </summary>
         HatchFill = BrushType.HatchFill,
-        /// <include file='doc\PenType.uex' path='docs/doc[@for="PenType.TextureFill"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a bitmap texture fill.
-        /// </devdoc>
+        /// </summary>
         TextureFill = BrushType.TextureFill,
-        /// <include file='doc\PenType.uex' path='docs/doc[@for="PenType.PathGradient"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a path gradient fill.
-        /// </devdoc>
+        /// </summary>
         PathGradient = BrushType.PathGradient,
-        /// <include file='doc\PenType.uex' path='docs/doc[@for="PenType.LinearGradient"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a linear gradient fill.
-        /// </devdoc>
+        /// </summary>
         LinearGradient = BrushType.LinearGradient,
     }
 }

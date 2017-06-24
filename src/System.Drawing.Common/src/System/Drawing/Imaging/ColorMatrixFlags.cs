@@ -7,29 +7,25 @@ namespace System.Drawing.Imaging
     /**
      * Color matrix flag constants
      */
-    /// <include file='doc\ColorMatrixFlags.uex' path='docs/doc[@for="ColorMatrixFlag"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies available options for
     ///    color-adjusting. GDI+ can adjust color data only, grayscale data only,
     ///    or both.
-    /// </devdoc>
+    /// </summary>
     public enum ColorMatrixFlag
     {
-        /// <include file='doc\ColorMatrixFlags.uex' path='docs/doc[@for="ColorMatrixFlag.Default"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Both colors and grayscale are
         ///    color-adjusted.
-        /// </devdoc>
+        /// </summary>
         Default = 0,
-        /// <include file='doc\ColorMatrixFlags.uex' path='docs/doc[@for="ColorMatrixFlag.SkipGrays"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Grascale values are not color-adjusted.
-        /// </devdoc>
+        /// </summary>
         SkipGrays = 1,
-        /// <include file='doc\ColorMatrixFlags.uex' path='docs/doc[@for="ColorMatrixFlag.AltGrays"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Only grascale values are color-adjusted.
-        /// </devdoc>
+        /// </summary>
         AltGrays = 2
     }
 }

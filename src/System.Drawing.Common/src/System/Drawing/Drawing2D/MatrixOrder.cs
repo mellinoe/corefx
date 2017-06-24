@@ -7,27 +7,24 @@ namespace System.Drawing.Drawing2D
     /**
      * Various wrap modes for brushes
      */
-    /// <include file='doc\MatrixOrder.uex' path='docs/doc[@for="MatrixOrder"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the order for matrix transform
     ///    operations.
-    /// </devdoc>
+    /// </summary>
     public enum MatrixOrder
     {
-        /// <include file='doc\MatrixOrder.uex' path='docs/doc[@for="MatrixOrder.Prepend"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       The new operation is applied before the old
         ///       operation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Prepend = 0,
-        /// <include file='doc\MatrixOrder.uex' path='docs/doc[@for="MatrixOrder.Append"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       The new operation is applied after the old operation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Append = 1
     }
 }

@@ -7,11 +7,10 @@ namespace System.Drawing.Drawing2D
     /**
      * Represent the internal data of a Graphics Container object
      */
-    /// <include file='doc\GraphicsContainer.uex' path='docs/doc[@for="GraphicsContainer"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Represents the internal data of a graphics
     ///    container.
-    /// </devdoc>
+    /// </summary>
     public sealed class GraphicsContainer : MarshalByRefObject
     {
         /**

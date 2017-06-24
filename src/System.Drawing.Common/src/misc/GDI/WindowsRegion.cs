@@ -7,11 +7,11 @@ namespace System.Drawing.Internal
     using System.Diagnostics;
     using System.Runtime.InteropServices;
 
-    /// <devdoc>
-    ///     <para>
+    /// <summary>
+    ///     
     ///         Encapsulates a GDI Region object.
-    ///     </para>
-    /// </devdoc>
+    ///     
+    /// </summary>
 
     internal sealed partial class WindowsRegion : MarshalByRefObject, ICloneable, IDisposable
     {
@@ -23,21 +23,21 @@ namespace System.Drawing.Internal
         private string AllocationSite = DbgUtil.StackTrace;
 #endif
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         private WindowsRegion()
         {
         }
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public WindowsRegion(Rectangle rect)
         {
             CreateRegion(rect);
         }
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public WindowsRegion(int x, int y, int width, int height)
         {
             CreateRegion(new Rectangle(x, y, width, height));
@@ -45,10 +45,10 @@ namespace System.Drawing.Internal
 
         // Consider implementing a constructor that calls ExtCreateRegion(XFORM lpXform, DWORD nCount, RGNDATA lpRgnData) if needed.
 
-        /// <devdoc>
+        /// <summary>
         ///     Creates a WindowsRegion from a region handle, if 'takeOwnership' is true, the handle is added to the HandleCollector
         ///     and is removed & destroyed on dispose. 
-        /// </devdoc>
+        /// </summary>
         public static WindowsRegion FromHregion(IntPtr hRegion, bool takeOwnership)
         {
             WindowsRegion wr = new WindowsRegion();
@@ -68,9 +68,9 @@ namespace System.Drawing.Internal
             return wr;
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Creates a WindowsRegion from a System.Drawing.Region. 
-        /// </devdoc>
+        /// </summary>
         public static WindowsRegion FromRegion(Region region, Graphics g)
         {
             if (region.IsInfinite(g))
@@ -89,8 +89,8 @@ namespace System.Drawing.Internal
             return WindowsRegion.FromHregion(region.GetHrgn(g), true);
         }
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public object Clone()
         {
             // WARNING: WindowsRegion currently supports rectangulare regions only, if the WindowsRegion was created
@@ -101,17 +101,17 @@ namespace System.Drawing.Internal
                 new WindowsRegion(ToRectangle());
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Combines region1 & region2 into this region.   The regions cannot be null. 
         ///     The three regions need not be distinct. For example, the sourceRgn1 can equal this region. 
-        /// </devdoc>
+        /// </summary>
         public IntNativeMethods.RegionFlags CombineRegion(WindowsRegion region1, WindowsRegion region2, RegionCombineMode mode)
         {
             return IntUnsafeNativeMethods.CombineRgn(new HandleRef(this, HRegion), new HandleRef(region1, region1.HRegion), new HandleRef(region2, region2.HRegion), mode);
         }
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         private void CreateRegion(Rectangle rect)
         {
             Debug.Assert(_nativeHandle == IntPtr.Zero, "nativeHandle should be null, we're leaking handle");
@@ -119,15 +119,15 @@ namespace System.Drawing.Internal
             _ownHandle = true;
         }
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
         }
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void Dispose(bool disposing)
         {
             if (_nativeHandle != IntPtr.Zero)
@@ -148,16 +148,16 @@ namespace System.Drawing.Internal
             }
         }
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         ~WindowsRegion()
         {
             Dispose(false);
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     The native region handle. 
-        /// </devdoc>
+        /// </summary>
         public IntPtr HRegion
         {
             get
@@ -166,8 +166,8 @@ namespace System.Drawing.Internal
             }
         }
 
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsInfinite
         {
             get
@@ -176,9 +176,9 @@ namespace System.Drawing.Internal
             }
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     A rectangle representing the window region set with the SetWindowRgn function. 
-        /// </devdoc>
+        /// </summary>
         public Rectangle ToRectangle()
         {
             if (IsInfinite)

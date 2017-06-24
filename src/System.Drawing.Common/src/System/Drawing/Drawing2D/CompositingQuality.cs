@@ -4,42 +4,35 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\CompositingQuality.uex' path='docs/doc[@for="CompositingQuality"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the quality level to use during
     ///    compositing.
-    /// </devdoc>
+    /// </summary>
     public enum CompositingQuality
     {
-        /// <include file='doc\CompositingQuality.uex' path='docs/doc[@for="CompositingQuality.Invalid"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Invalid quality.
-        /// </devdoc>
+        /// </summary>
         Invalid = QualityMode.Invalid,
-        /// <include file='doc\CompositingQuality.uex' path='docs/doc[@for="CompositingQuality.Default"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Default quality.
-        /// </devdoc>
+        /// </summary>
         Default = QualityMode.Default,
-        /// <include file='doc\CompositingQuality.uex' path='docs/doc[@for="CompositingQuality.HighSpeed"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Low quality, high speed.
-        /// </devdoc>
+        /// </summary>
         HighSpeed = QualityMode.Low,
-        /// <include file='doc\CompositingQuality.uex' path='docs/doc[@for="CompositingQuality.HighQuality"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    High quality, low speed.
-        /// </devdoc>
+        /// </summary>
         HighQuality = QualityMode.High,
-        /// <include file='doc\CompositingQuality.uex' path='docs/doc[@for="CompositingQuality.GammaCorrected"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gamma correction is used.
-        /// </devdoc>
+        /// </summary>
         GammaCorrected,
-        /// <include file='doc\CompositingQuality.uex' path='docs/doc[@for="CompositingQuality.AssumeLinear"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Assume linear values.
-        /// </devdoc>
+        /// </summary>
         AssumeLinear
     }
 }

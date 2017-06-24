@@ -220,11 +220,11 @@ namespace System.Drawing.Internal
             public int iLeftMargin;
             public int iRightMargin;
 
-            /// <devdoc>
+            /// <summary>
             ///     Receives the number of characters processed by DrawTextEx, including white-space characters. 
             ///     The number can be the length of the string or the index of the first line that falls below the drawing area. 
             ///     Note that DrawTextEx always processes the entire string if the DT_NOCLIP formatting flag is specified. 
-            /// </devdoc>
+            /// </summary>
             public int uiLengthDrawn;
 
             public DRAWTEXTPARAMS()

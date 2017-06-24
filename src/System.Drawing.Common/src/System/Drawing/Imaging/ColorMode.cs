@@ -7,28 +7,25 @@ namespace System.Drawing.Imaging
     /**
      * Color mode constants
      */
-    /// <include file='doc\ColorMode.uex' path='docs/doc[@for="ColorMode"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies two modes for color component
     ///       values.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum ColorMode
     {
-        /// <include file='doc\ColorMode.uex' path='docs/doc[@for="ColorMode.Argb32Mode"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies that integer values supplied are
         ///    32-bit values.
-        /// </devdoc>
+        /// </summary>
         Argb32Mode = 0,
-        /// <include file='doc\ColorMode.uex' path='docs/doc[@for="ColorMode.Argb64Mode"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies that integer values supplied are
         ///       64-bit values.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Argb64Mode = 1
     }
 }

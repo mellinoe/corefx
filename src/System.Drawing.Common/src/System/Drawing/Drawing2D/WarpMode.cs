@@ -7,21 +7,18 @@ namespace System.Drawing.Drawing2D
     /**
      * Various wrap modes for brushes
      */
-    /// <include file='doc\WarpMode.uex' path='docs/doc[@for="WarpMode"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the warp style.
-    /// </devdoc>
+    /// </summary>
     public enum WarpMode
     {
-        /// <include file='doc\WarpMode.uex' path='docs/doc[@for="WarpMode.Perspective"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a perspective warp.
-        /// </devdoc>
+        /// </summary>
         Perspective = 0,
-        /// <include file='doc\WarpMode.uex' path='docs/doc[@for="WarpMode.Bilinear"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a bilinear warp.
-        /// </devdoc>
+        /// </summary>
         Bilinear = 1
     }
 }

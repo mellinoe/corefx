@@ -8,990 +8,795 @@ namespace System.Drawing.Imaging
      * EmfPlusRecordType constants
      */
 
-    /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies the methods available in a metafile to read and write graphic
     ///       commands.
-    ///    </para>
-    /// </devdoc>    
+    ///    
+    /// </summary>    
     public enum EmfPlusRecordType
     {
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfRecordBase"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfRecordBase = 0x00010000,
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetBkColor"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetBkColor = WmfRecordBase | 0x201,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetBkMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetBkMode = WmfRecordBase | 0x102,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetMapMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetMapMode = WmfRecordBase | 0x103,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetROP2"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetROP2 = WmfRecordBase | 0x104,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetRelAbs"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetRelAbs = WmfRecordBase | 0x105,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetPolyFillMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetPolyFillMode = WmfRecordBase | 0x106,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetStretchBltMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetStretchBltMode = WmfRecordBase | 0x107,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetTextCharExtra"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetTextCharExtra = WmfRecordBase | 0x108,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetTextColor"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetTextColor = WmfRecordBase | 0x209,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetTextJustification"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetTextJustification = WmfRecordBase | 0x20A,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetWindowOrg"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetWindowOrg = WmfRecordBase | 0x20B,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetWindowExt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetWindowExt = WmfRecordBase | 0x20C,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetViewportOrg"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetViewportOrg = WmfRecordBase | 0x20D,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetViewportExt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetViewportExt = WmfRecordBase | 0x20E,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfOffsetWindowOrg"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfOffsetWindowOrg = WmfRecordBase | 0x20F,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfScaleWindowExt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfScaleWindowExt = WmfRecordBase | 0x410,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfOffsetViewportOrg"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfOffsetViewportOrg = WmfRecordBase | 0x211,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfScaleViewportExt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfScaleViewportExt = WmfRecordBase | 0x412,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfLineTo"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfLineTo = WmfRecordBase | 0x213,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfMoveTo"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfMoveTo = WmfRecordBase | 0x214,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfExcludeClipRect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfExcludeClipRect = WmfRecordBase | 0x415,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfIntersectClipRect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfIntersectClipRect = WmfRecordBase | 0x416,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfArc"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfArc = WmfRecordBase | 0x817,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfEllipse"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfEllipse = WmfRecordBase | 0x418,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfFloodFill"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfFloodFill = WmfRecordBase | 0x419,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfPie"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfPie = WmfRecordBase | 0x81A,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfRectangle"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfRectangle = WmfRecordBase | 0x41B,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfRoundRect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfRoundRect = WmfRecordBase | 0x61C,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfPatBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfPatBlt = WmfRecordBase | 0x61D,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSaveDC"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSaveDC = WmfRecordBase | 0x01E,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetPixel"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetPixel = WmfRecordBase | 0x41F,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfOffsetCilpRgn"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfOffsetCilpRgn = WmfRecordBase | 0x220,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfTextOut"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfTextOut = WmfRecordBase | 0x521,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfBitBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfBitBlt = WmfRecordBase | 0x922,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfStretchBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfStretchBlt = WmfRecordBase | 0xB23,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfPolygon"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfPolygon = WmfRecordBase | 0x324,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfPolyline"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfPolyline = WmfRecordBase | 0x325,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfEscape"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfEscape = WmfRecordBase | 0x626,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfRestoreDC"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfRestoreDC = WmfRecordBase | 0x127,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfFillRegion"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfFillRegion = WmfRecordBase | 0x228,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfFrameRegion"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfFrameRegion = WmfRecordBase | 0x429,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfInvertRegion"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfInvertRegion = WmfRecordBase | 0x12A,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfPaintRegion"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfPaintRegion = WmfRecordBase | 0x12B,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSelectClipRegion"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSelectClipRegion = WmfRecordBase | 0x12C,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSelectObject"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSelectObject = WmfRecordBase | 0x12D,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetTextAlign"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetTextAlign = WmfRecordBase | 0x12E,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfChord"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfChord = WmfRecordBase | 0x830,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetMapperFlags"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetMapperFlags = WmfRecordBase | 0x231,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfExtTextOut"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfExtTextOut = WmfRecordBase | 0xA32,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetDibToDev"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetDibToDev = WmfRecordBase | 0xD33,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSelectPalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSelectPalette = WmfRecordBase | 0x234,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfRealizePalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfRealizePalette = WmfRecordBase | 0x035,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfAnimatePalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfAnimatePalette = WmfRecordBase | 0x436,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetPalEntries"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetPalEntries = WmfRecordBase | 0x037,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfPolyPolygon"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfPolyPolygon = WmfRecordBase | 0x538,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfResizePalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfResizePalette = WmfRecordBase | 0x139,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfDibBitBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfDibBitBlt = WmfRecordBase | 0x940,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfDibStretchBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfDibStretchBlt = WmfRecordBase | 0xb41,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfDibCreatePatternBrush"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfDibCreatePatternBrush = WmfRecordBase | 0x142,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfStretchDib"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfStretchDib = WmfRecordBase | 0xf43,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfExtFloodFill"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfExtFloodFill = WmfRecordBase | 0x548,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfSetLayout"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfSetLayout = WmfRecordBase | 0x149, // META_SETLAYOUT
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfDeleteObject"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfDeleteObject = WmfRecordBase | 0x1f0,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfCreatePalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfCreatePalette = WmfRecordBase | 0x0f7,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfCreatePatternBrush"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfCreatePatternBrush = WmfRecordBase | 0x1f9,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfCreatePenIndirect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfCreatePenIndirect = WmfRecordBase | 0x2fa,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfCreateFontIndirect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfCreateFontIndirect = WmfRecordBase | 0x2fb,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfCreateBrushIndirect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfCreateBrushIndirect = WmfRecordBase | 0x2fc,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.WmfCreateRegion"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         WmfCreateRegion = WmfRecordBase | 0x6ff,
 
         // Since we have to enumerate GDI records right along with GDI+ records,
         // we list all the GDI records here so that they can be part of the
         // same enumeration type which is used in the enumeration callback.
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfHeader"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfHeader = 1,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyBezier"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyBezier = 2,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolygon"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolygon = 3,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyline"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyline = 4,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyBezierTo"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyBezierTo = 5,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyLineTo"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyLineTo = 6,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyPolyline"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyPolyline = 7,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyPolygon"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyPolygon = 8,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetWindowExtEx"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetWindowExtEx = 9,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetWindowOrgEx"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetWindowOrgEx = 10,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetViewportExtEx"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetViewportExtEx = 11,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetViewportOrgEx"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetViewportOrgEx = 12,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetBrushOrgEx"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetBrushOrgEx = 13,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfEof"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfEof = 14,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetPixelV"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetPixelV = 15,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetMapperFlags"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetMapperFlags = 16,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetMapMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetMapMode = 17,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetBkMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetBkMode = 18,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetPolyFillMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetPolyFillMode = 19,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetROP2"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetROP2 = 20,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetStretchBltMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetStretchBltMode = 21,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetTextAlign"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetTextAlign = 22,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetColorAdjustment"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetColorAdjustment = 23,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetTextColor"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetTextColor = 24,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetBkColor"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetBkColor = 25,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfOffsetClipRgn"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfOffsetClipRgn = 26,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfMoveToEx"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfMoveToEx = 27,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetMetaRgn"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetMetaRgn = 28,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfExcludeClipRect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfExcludeClipRect = 29,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfIntersectClipRect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfIntersectClipRect = 30,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfScaleViewportExtEx"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfScaleViewportExtEx = 31,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfScaleWindowExtEx"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfScaleWindowExtEx = 32,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSaveDC"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSaveDC = 33,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfRestoreDC"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfRestoreDC = 34,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetWorldTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetWorldTransform = 35,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfModifyWorldTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfModifyWorldTransform = 36,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSelectObject"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSelectObject = 37,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfCreatePen"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfCreatePen = 38,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfCreateBrushIndirect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfCreateBrushIndirect = 39,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfDeleteObject"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfDeleteObject = 40,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfAngleArc"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfAngleArc = 41,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfEllipse"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfEllipse = 42,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfRectangle"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfRectangle = 43,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfRoundRect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfRoundRect = 44,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfRoundArc"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfRoundArc = 45,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfChord"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfChord = 46,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPie"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPie = 47,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSelectPalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSelectPalette = 48,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfCreatePalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfCreatePalette = 49,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetPaletteEntries"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetPaletteEntries = 50,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfResizePalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfResizePalette = 51,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfRealizePalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfRealizePalette = 52,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfExtFloodFill"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfExtFloodFill = 53,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfLineTo"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfLineTo = 54,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfArcTo"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfArcTo = 55,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyDraw"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyDraw = 56,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetArcDirection"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetArcDirection = 57,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetMiterLimit"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetMiterLimit = 58,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfBeginPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfBeginPath = 59,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfEndPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfEndPath = 60,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfCloseFigure"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfCloseFigure = 61,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfFillPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfFillPath = 62,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfStrokeAndFillPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfStrokeAndFillPath = 63,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfStrokePath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfStrokePath = 64,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfFlattenPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfFlattenPath = 65,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfWidenPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfWidenPath = 66,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSelectClipPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSelectClipPath = 67,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfAbortPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfAbortPath = 68,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfReserved069"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfReserved069 = 69,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfGdiComment"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfGdiComment = 70,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfFillRgn"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfFillRgn = 71,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfFrameRgn"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfFrameRgn = 72,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfInvertRgn"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfInvertRgn = 73,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPaintRgn"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPaintRgn = 74,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfExtSelectClipRgn"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfExtSelectClipRgn = 75,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfBitBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfBitBlt = 76,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfStretchBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfStretchBlt = 77,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfMaskBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfMaskBlt = 78,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPlgBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPlgBlt = 79,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetDIBitsToDevice"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetDIBitsToDevice = 80,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfStretchDIBits"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfStretchDIBits = 81,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfExtCreateFontIndirect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfExtCreateFontIndirect = 82,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfExtTextOutA"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfExtTextOutA = 83,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfExtTextOutW"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfExtTextOutW = 84,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyBezier16"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyBezier16 = 85,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolygon16"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolygon16 = 86,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyline16"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyline16 = 87,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyBezierTo16"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyBezierTo16 = 88,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolylineTo16"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolylineTo16 = 89,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyPolyline16"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyPolyline16 = 90,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyPolygon16"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyPolygon16 = 91,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyDraw16"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyDraw16 = 92,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfCreateMonoBrush"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfCreateMonoBrush = 93,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfCreateDibPatternBrushPt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfCreateDibPatternBrushPt = 94,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfExtCreatePen"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfExtCreatePen = 95,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyTextOutA"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyTextOutA = 96,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPolyTextOutW"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPolyTextOutW = 97,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetIcmMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetIcmMode = 98,  // EMR_SETICMMODE,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfCreateColorSpace"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfCreateColorSpace = 99,  // EMR_CREATECOLORSPACE,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetColorSpace"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetColorSpace = 100, // EMR_SETCOLORSPACE,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfDeleteColorSpace"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfDeleteColorSpace = 101, // EMR_DELETECOLORSPACE,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfGlsRecord"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfGlsRecord = 102, // EMR_GLSRECORD,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfGlsBoundedRecord"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfGlsBoundedRecord = 103, // EMR_GLSBOUNDEDRECORD,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPixelFormat"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPixelFormat = 104, // EMR_PIXELFORMAT,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfDrawEscape"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfDrawEscape = 105, // EMR_RESERVED_105,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfExtEscape"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfExtEscape = 106, // EMR_RESERVED_106,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfStartDoc"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfStartDoc = 107, // EMR_RESERVED_107,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSmallTextOut"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSmallTextOut = 108, // EMR_RESERVED_108,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfForceUfiMapping"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfForceUfiMapping = 109, // EMR_RESERVED_109,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfNamedEscpae"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfNamedEscpae = 110, // EMR_RESERVED_110,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfColorCorrectPalette"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfColorCorrectPalette = 111, // EMR_COLORCORRECTPALETTE,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetIcmProfileA"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetIcmProfileA = 112, // EMR_SETICMPROFILEA,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetIcmProfileW"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetIcmProfileW = 113, // EMR_SETICMPROFILEW,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfAlphaBlend"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfAlphaBlend = 114, // EMR_ALPHABLEND,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetLayout"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetLayout = 115, // EMR_SETLAYOUT,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfTransparentBlt"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfTransparentBlt = 116, // EMR_TRANSPARENTBLT,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfReserved117"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfReserved117 = 117,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfGradientFill"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfGradientFill = 118, // EMR_GRADIENTFILL,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetLinkedUfis"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetLinkedUfis = 119, // EMR_RESERVED_119,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfSetTextJustification"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfSetTextJustification = 120, // EMR_RESERVED_120,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfColorMatchToTargetW"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfColorMatchToTargetW = 121, // EMR_COLORMATCHTOTARGETW,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfCreateColorSpaceW"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfCreateColorSpaceW = 122, // EMR_CREATECOLORSPACEW,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfMax"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfMax = 122,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfMin"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfMin = 1,
 
         // That is the END of the GDI EMF records.
@@ -1000,312 +805,253 @@ namespace System.Drawing.Imaging
         // a bit of room here for the addition of any new GDI
         // records that may be added later.
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EmfPlusRecordBase"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EmfPlusRecordBase = 0x00004000,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Invalid"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Invalid = EmfPlusRecordBase,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Header"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Header,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EndOfFile"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EndOfFile,
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Comment"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Comment,
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.GetDC"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         GetDC,    // the application grabbed the metafile dc
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.MultiFormatStart"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         MultiFormatStart,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.MultiFormatSection"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         MultiFormatSection,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.MultiFormatEnd"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         MultiFormatEnd,
 
         // For all Persistent Objects
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Object"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Object,
         // Drawing Records
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Clear"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Clear,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.FillRects"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         FillRects,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawRects"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawRects,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.FillPolygon"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         FillPolygon,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawLines"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawLines,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.FillEllipse"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         FillEllipse,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawEllipse"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawEllipse,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.FillPie"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         FillPie,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawPie"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawPie,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawArc"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawArc,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.FillRegion"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         FillRegion,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.FillPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         FillPath,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawPath,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.FillClosedCurve"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         FillClosedCurve,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawClosedCurve"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawClosedCurve,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawCurve"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawCurve,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawBeziers"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawBeziers,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawImage"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawImage,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawImagePoints"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawImagePoints,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawString"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawString,
 
         // Graphics State Records
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetRenderingOrigin"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetRenderingOrigin,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetAntiAliasMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetAntiAliasMode,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetTextRenderingHint"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetTextRenderingHint,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetTextContrast"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetTextContrast,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetInterpolationMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetInterpolationMode,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetPixelOffsetMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetPixelOffsetMode,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetCompositingMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetCompositingMode,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetCompositingQuality"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetCompositingQuality,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Save"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Save,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Restore"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Restore,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.BeginContainer"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         BeginContainer,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.BeginContainerNoParams"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         BeginContainerNoParams,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.EndContainer"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         EndContainer,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetWorldTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetWorldTransform,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.ResetWorldTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         ResetWorldTransform,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.MultiplyWorldTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         MultiplyWorldTransform,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.TranslateWorldTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         TranslateWorldTransform,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.ScaleWorldTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         ScaleWorldTransform,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.RotateWorldTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         RotateWorldTransform,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetPageTransform"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetPageTransform,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.ResetClip"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         ResetClip,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetClipRect"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetClipRect,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetClipPath"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetClipPath,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.SetClipRegion"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         SetClipRegion,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.OffsetClip"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         OffsetClip,
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.DrawDriverString"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         DrawDriverString,
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Total"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Total,
 
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Max"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Max = Total - 1,
-        /// <include file='doc\EmfPlusRecordType.uex' path='docs/doc[@for="EmfPlusRecordType.Min"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Min = Header
     }
 }

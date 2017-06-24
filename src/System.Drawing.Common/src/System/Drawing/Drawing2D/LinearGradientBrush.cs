@@ -12,12 +12,11 @@ namespace System.Drawing.Drawing2D
     /**
      * Represent a LinearGradient brush object
      */
-    /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Encapsulates a <see cref='System.Drawing.Brush'/> with a linear gradient.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public sealed class LinearGradientBrush : Brush
     {
         private bool _interpolationColorsWasSet;
@@ -25,11 +24,10 @@ namespace System.Drawing.Drawing2D
         /**
          * Create a new rectangle gradient brush object
          */
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearGradientBrush"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the specified points and
         ///    colors.
-        /// </devdoc>
+        /// </summary>
         public LinearGradientBrush(PointF point1, PointF point2,
                                    Color color1, Color color2)
         {
@@ -48,13 +46,12 @@ namespace System.Drawing.Drawing2D
             SetNativeBrushInternal(brush);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearGradientBrush1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
         ///       specified points and colors.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public LinearGradientBrush(Point point1, Point point2,
                                    Color color1, Color color2)
         {
@@ -73,13 +70,12 @@ namespace System.Drawing.Drawing2D
             SetNativeBrushInternal(brush);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearGradientBrush2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with
         ///       the specified points, colors, and orientation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public LinearGradientBrush(RectangleF rect, Color color1, Color color2,
                                    LinearGradientMode linearGradientMode)
         {
@@ -112,13 +108,12 @@ namespace System.Drawing.Drawing2D
             SetNativeBrushInternal(brush);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearGradientBrush3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
         ///       specified points, colors, and orientation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public LinearGradientBrush(Rectangle rect, Color color1, Color color2,
                                    LinearGradientMode linearGradientMode)
         {
@@ -151,25 +146,23 @@ namespace System.Drawing.Drawing2D
             SetNativeBrushInternal(brush);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearGradientBrush4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
         ///       specified points, colors, and orientation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public LinearGradientBrush(RectangleF rect, Color color1, Color color2,
                                  float angle)
             : this(rect, color1, color2, angle, false)
         { }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearGradientBrush5"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
         ///       specified points, colors, and orientation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public LinearGradientBrush(RectangleF rect, Color color1, Color color2,
                                  float angle, bool isAngleScaleable)
         {
@@ -196,26 +189,24 @@ namespace System.Drawing.Drawing2D
             SetNativeBrushInternal(brush);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearGradientBrush6"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
         ///       specified points, colors, and orientation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public LinearGradientBrush(Rectangle rect, Color color1, Color color2,
                                    float angle)
             : this(rect, color1, color2, angle, false)
         {
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearGradientBrush7"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
         ///       specified points, colors, and orientation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public LinearGradientBrush(Rectangle rect, Color color1, Color color2,
                                  float angle, bool isAngleScaleable)
         {
@@ -242,19 +233,18 @@ namespace System.Drawing.Drawing2D
             SetNativeBrushInternal(brush);
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Constructor to initialized this object to be owned by GDI+.
-        /// </devdoc>
+        /// </summary>
         internal LinearGradientBrush(IntPtr nativeBrush)
         {
             Debug.Assert(nativeBrush != IntPtr.Zero, "Initializing native brush with null.");
             SetNativeBrushInternal(nativeBrush);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.Clone"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>.
-        /// </devdoc>
+        /// </summary>
         public override object Clone()
         {
             IntPtr cloneBrush = IntPtr.Zero;
@@ -303,11 +293,10 @@ namespace System.Drawing.Drawing2D
             return lineColor;
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.LinearColors"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the starting and ending colors of the
         ///    gradient.
-        /// </devdoc>
+        /// </summary>
         public Color[] LinearColors
         {
             get { return _GetLinearColors(); }
@@ -329,25 +318,23 @@ namespace System.Drawing.Drawing2D
             return rect.ToRectangleF();
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.Rectangle"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets a rectangular region that defines the
         ///       starting and ending points of the gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public RectangleF Rectangle
         {
             get { return _GetRectangle(); }
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.GammaCorrection"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets a value indicating whether
         ///       gamma correction is enabled for this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool GammaCorrection
         {
             get
@@ -487,11 +474,10 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.Blend"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets a <see cref='System.Drawing.Drawing2D.Blend'/> that specifies
         ///    positions and factors that define a custom falloff for the gradient.
-        /// </devdoc>
+        /// </summary>
         public Blend Blend
         {
             get { return _GetBlend(); }
@@ -502,21 +488,19 @@ namespace System.Drawing.Drawing2D
          * SigmaBlend & LinearBlend not yet implemented
          */
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.SetSigmaBellShape"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates a gradient falloff based on a
         ///    bell-shaped curve.
-        /// </devdoc>
+        /// </summary>
         public void SetSigmaBellShape(float focus)
         {
             SetSigmaBellShape(focus, (float)1.0);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.SetSigmaBellShape1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates a gradient falloff based on a
         ///    bell-shaped curve.
-        /// </devdoc>
+        /// </summary>
         public void SetSigmaBellShape(float focus, float scale)
         {
             int status = SafeNativeMethods.Gdip.GdipSetLineSigmaBlend(new HandleRef(this, NativeBrush), focus, scale);
@@ -525,23 +509,21 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.SetBlendTriangularShape"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a triangular gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetBlendTriangularShape(float focus)
         {
             SetBlendTriangularShape(focus, (float)1.0);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.SetBlendTriangularShape1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a triangular gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetBlendTriangularShape(float focus, float scale)
         {
             int status = SafeNativeMethods.Gdip.GdipSetLineLinearBlend(new HandleRef(this, NativeBrush), focus, scale);
@@ -707,13 +689,12 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.InterpolationColors"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets a <see cref='System.Drawing.Drawing2D.ColorBlend'/> that defines a multi-color linear
         ///       gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public ColorBlend InterpolationColors
         {
             get { return _GetInterpolationColors(); }
@@ -743,12 +724,11 @@ namespace System.Drawing.Drawing2D
             return (WrapMode)mode;
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.WrapMode"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets a <see cref='System.Drawing.Drawing2D.WrapMode'/> that indicates the wrap mode for this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public WrapMode WrapMode
         {
             get
@@ -796,23 +776,21 @@ namespace System.Drawing.Drawing2D
             return matrix;
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.Transform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets a <see cref='System.Drawing.Drawing2D.Matrix'/> that defines a local geometrical transform for
         ///       this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Matrix Transform
         {
             get { return _GetTransform(); }
             set { _SetTransform(value); }
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.ResetTransform"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Resets the <see cref='System.Drawing.Drawing2D.LinearGradientBrush.Transform'/> property to identity.
-        /// </devdoc>
+        /// </summary>
         public void ResetTransform()
         {
             int status = SafeNativeMethods.Gdip.GdipResetLineTransform(new HandleRef(this, NativeBrush));
@@ -821,25 +799,23 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.MultiplyTransform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that represents the local geometrical
         ///       transform of this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void MultiplyTransform(Matrix matrix)
         {
             MultiplyTransform(matrix, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.MultiplyTransform1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that represents the local geometrical
         ///       transform of this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void MultiplyTransform(Matrix matrix, MatrixOrder order)
         {
             if (matrix == null)
@@ -856,20 +832,18 @@ namespace System.Drawing.Drawing2D
         }
 
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.TranslateTransform"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Translates the local geometrical transform
         ///    by the specified dimmensions. This method prepends the translation to the
         ///    transform.
-        /// </devdoc>
+        /// </summary>
         public void TranslateTransform(float dx, float dy)
         { TranslateTransform(dx, dy, MatrixOrder.Prepend); }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.TranslateTransform1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Translates the local geometrical transform
         ///    by the specified dimmensions in the specified order.
-        /// </devdoc>
+        /// </summary>
         public void TranslateTransform(float dx, float dy, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateLineTransform(new HandleRef(this, NativeBrush),
@@ -880,21 +854,19 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.ScaleTransform"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Scales the local geometric transform by the
         ///    specified amounts. This method prepends the scaling matrix to the transform.
-        /// </devdoc>
+        /// </summary>
         public void ScaleTransform(float sx, float sy)
         { ScaleTransform(sx, sy, MatrixOrder.Prepend); }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.ScaleTransform1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Scales the local geometric transform by the
         ///       specified amounts in the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void ScaleTransform(float sx, float sy, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipScaleLineTransform(new HandleRef(this, NativeBrush),
@@ -906,21 +878,19 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.RotateTransform"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Rotates the local geometric transform by the
         ///    specified amount. This method prepends the rotation to the transform.
-        /// </devdoc>
+        /// </summary>
         public void RotateTransform(float angle)
         { RotateTransform(angle, MatrixOrder.Prepend); }
 
-        /// <include file='doc\LinearGradientBrush.uex' path='docs/doc[@for="LinearGradientBrush.RotateTransform1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Rotates the local geometric transform by the specified
         ///       amount in the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void RotateTransform(float angle, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipRotateLineTransform(new HandleRef(this, NativeBrush),

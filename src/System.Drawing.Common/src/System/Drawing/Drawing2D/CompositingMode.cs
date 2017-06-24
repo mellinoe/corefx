@@ -11,26 +11,23 @@ namespace System.Drawing.Drawing2D
      *  and support only SrcOver instead?
      */
 
-    /// <include file='doc\CompositingMode.uex' path='docs/doc[@for="CompositingMode"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Defines how the source image is composited with the background image.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum CompositingMode
     {
-        /// <include file='doc\CompositingMode.uex' path='docs/doc[@for="CompositingMode.SourceOver"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       The source pixels overwrite the background pixels.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         SourceOver = 0,
-        /// <include file='doc\CompositingMode.uex' path='docs/doc[@for="CompositingMode.SourceCopy"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    The source pixels are combined with the
         ///    background pixels.
-        /// </devdoc>
+        /// </summary>
         SourceCopy = 1
     }
 }

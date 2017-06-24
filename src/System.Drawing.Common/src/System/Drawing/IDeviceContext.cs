@@ -4,8 +4,7 @@
 
 namespace System.Drawing
 {
-    /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="IDeviceContext"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///       This interface defines methods for obtaining a display/window device context handle (Win32 hdc).
     ///       Note: Display and window dc handles are obtained and released using BeginPaint/EndPaint and
     ///       GetDC/ReleaseDC; this interface is intended to be used with the last method only.  
@@ -18,7 +17,7 @@ namespace System.Drawing
     ///       for freeing non-display dc handles.
     ///       
     ///       This is a low-level API that is expected to be used with TextRenderer or PInvoke calls.
-    /// </devdoc>
+    /// </summary>
     public interface IDeviceContext : IDisposable
     {
         IntPtr GetHdc();

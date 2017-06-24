@@ -7,36 +7,31 @@ namespace System.Drawing.Drawing2D
     /**
      * Line join constants
      */
-    /// <include file='doc\LineJoin.uex' path='docs/doc[@for="LineJoin"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies how to join two intersecting lines in a
     ///    <see cref='System.Drawing.Drawing2D.GraphicsPath'/> at their intersection.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum LineJoin
     {
-        /// <include file='doc\LineJoin.uex' path='docs/doc[@for="LineJoin.Miter"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies an angled miter join.
-        /// </devdoc>
+        /// </summary>
         Miter = 0,
-        /// <include file='doc\LineJoin.uex' path='docs/doc[@for="LineJoin.Bevel"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies a beveled join.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Bevel = 1,
-        /// <include file='doc\LineJoin.uex' path='docs/doc[@for="LineJoin.Round"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a smooth, rounded join.
-        /// </devdoc>
+        /// </summary>
         Round = 2,
-        /// <include file='doc\LineJoin.uex' path='docs/doc[@for="LineJoin.MiterClipped"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a mitered clipped join
-        /// </devdoc>
+        /// </summary>
         MiterClipped = 3
     }
 }

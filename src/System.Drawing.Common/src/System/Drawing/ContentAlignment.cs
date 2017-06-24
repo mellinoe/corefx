@@ -4,83 +4,73 @@
 
 namespace System.Drawing
 {
-    /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies alignment of content on the drawing surface.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum ContentAlignment
     {
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.TopLeft"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Content is vertically aligned at the top, and horizontally
         ///    aligned on the left.
-        /// </devdoc>
+        /// </summary>
         TopLeft = 0x001,
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.TopCenter"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Content is vertically aligned at the top, and
         ///       horizontally aligned at the center.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         TopCenter = 0x002,
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.TopRight"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Content is vertically aligned at the top, and
         ///       horizontally aligned on the right.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         TopRight = 0x004,
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.MiddleLeft"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Content is vertically aligned in the middle, and
         ///       horizontally aligned on the left.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         MiddleLeft = 0x010,
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.MiddleCenter"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Content is vertically aligned in the middle, and
         ///       horizontally aligned at the center.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         MiddleCenter = 0x020,
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.MiddleRight"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Content is vertically aligned in the middle, and horizontally aligned on the
         ///       right.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         MiddleRight = 0x040,
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.BottomLeft"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Content is vertically aligned at the bottom, and horizontally aligned on the
         ///       left.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         BottomLeft = 0x100,
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.BottomCenter"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Content is vertically aligned at the bottom, and horizontally aligned at the
         ///       center.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         BottomCenter = 0x200,
-        /// <include file='doc\ContentAlignment.uex' path='docs/doc[@for="ContentAlignment.BottomRight"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Content is vertically aligned at the bottom, and horizontally aligned on the
         ///       right.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         BottomRight = 0x400,
     }
 }

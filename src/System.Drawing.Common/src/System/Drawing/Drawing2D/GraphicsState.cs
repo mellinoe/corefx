@@ -4,10 +4,9 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\GraphicsState.uex' path='docs/doc[@for="GraphicsState"]/*' />
-    /// <devdoc>
-    ///    <para>[To be supplied.]</para>
-    /// </devdoc>
+    /// <summary>
+    ///    [To be supplied.]
+    /// </summary>
     public sealed class GraphicsState : MarshalByRefObject
     {
         internal int nativeState;

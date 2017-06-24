@@ -4,158 +4,140 @@
 
 namespace System.Drawing
 {
-    /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies the
     ///       Copy Pixel (ROP) operation.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     [System.Runtime.InteropServices.ComVisible(true)]
     public enum CopyPixelOperation
     {
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.Blackness"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the Destination Rectangle using the color associated with the index 0 in the physical palette.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Blackness = SafeNativeMethods.BLACKNESS,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.CaptureBlt"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Includes any windows that are Layered on Top.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         CaptureBlt = SafeNativeMethods.CAPTUREBLT,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.DestinationInvert"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       DestinationInvert.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         DestinationInvert = SafeNativeMethods.DSTINVERT,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.MergeCopy"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       MergeCopy.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         MergeCopy = SafeNativeMethods.MERGECOPY,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.MergePaint"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       MergePaint.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         MergePaint = SafeNativeMethods.MERGEPAINT,
 
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.NoMirrorBitmap"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       NoMirrorBitmap.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         NoMirrorBitmap = SafeNativeMethods.NOMIRRORBITMAP,
 
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.NotSourceCopy"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       NotSourceCopy.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         NotSourceCopy = SafeNativeMethods.NOTSRCCOPY,
 
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.NotSourceErase"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       NotSourceErase.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         NotSourceErase = SafeNativeMethods.NOTSRCERASE,
 
 
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.PatCopy"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       PatCopy.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         PatCopy = SafeNativeMethods.PATCOPY,
 
 
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.PatInvert"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       PatInvert.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         PatInvert = SafeNativeMethods.PATINVERT,
 
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.PatPaint"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       PatPaint.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         PatPaint = SafeNativeMethods.PATPAINT,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.SourceAnd"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       SourceAnd.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         SourceAnd = SafeNativeMethods.SRCAND,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.SourceCopy"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       SourceCopy.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         SourceCopy = SafeNativeMethods.SRCCOPY,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.SourceErase"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       SourceErase.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         SourceErase = SafeNativeMethods.SRCERASE,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.SourceInvert"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       SourceInvert.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         SourceInvert = SafeNativeMethods.SRCINVERT,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.SourcePaint"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       SourcePaint.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         SourcePaint = SafeNativeMethods.SRCPAINT,
 
-        /// <include file='doc\CopyPixelOperation.uex' path='docs/doc[@for="CopyPixelOperation.Whiteness"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Whiteness.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Whiteness = SafeNativeMethods.WHITENESS,
     }
 }

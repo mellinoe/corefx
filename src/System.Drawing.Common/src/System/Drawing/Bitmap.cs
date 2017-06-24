@@ -12,10 +12,9 @@ namespace System.Drawing
     using System.Runtime.InteropServices;
     using System.Security.Permissions;
 
-    /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Encapsultates a GDI+ bitmap.
-    /// </devdoc>
+    /// </summary>
     /**
      * Represent a bitmap image
      */
@@ -28,12 +27,11 @@ namespace System.Drawing
          * Predefined bitmap data formats
          */
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the
         /// <see cref='System.Drawing.Bitmap'/> 
         /// class from the specified file.
-        /// </devdoc>
+        /// </summary>
         /**
          * Create a new bitmap object from URL
          */
@@ -64,13 +62,12 @@ namespace System.Drawing
             EnsureSave(this, filename, null);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Bitmap'/> class from the specified
         ///       file.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Bitmap(String filename, bool useIcm)
         {
             //GDI+ will read this file multiple times.  Get the fully qualified path
@@ -106,12 +103,11 @@ namespace System.Drawing
             EnsureSave(this, filename, null);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Bitmap'/> class from a specified resource.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Bitmap(Type type, string resource)
         {
             Stream stream = type.Module.Assembly.GetManifestResourceStream(type, resource);
@@ -138,12 +134,11 @@ namespace System.Drawing
             EnsureSave(this, null, stream);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap3"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the
         /// <see cref='System.Drawing.Bitmap'/> 
         /// class from the specified data stream.
-        /// </devdoc>
+        /// </summary>
         /**
          * Create a new bitmap object from a stream
          */
@@ -172,13 +167,12 @@ namespace System.Drawing
             EnsureSave(this, null, stream);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Bitmap'/> class from the specified data
         ///       stream.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Bitmap(Stream stream, bool useIcm)
         {
             if (stream == null)
@@ -212,13 +206,12 @@ namespace System.Drawing
             EnsureSave(this, null, stream);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap5"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the
         ///       Bitmap class with the specified size, pixel format, and pixel data.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Bitmap(int width, int height, int stride, PixelFormat format, IntPtr scan0)
         {
             IntPtr bitmap = IntPtr.Zero;
@@ -231,13 +224,12 @@ namespace System.Drawing
             SetNativeImage(bitmap);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap6"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the Bitmap class with the specified
         ///       size and format.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Bitmap(int width, int height, PixelFormat format)
         {
             IntPtr bitmap = IntPtr.Zero;
@@ -250,22 +242,20 @@ namespace System.Drawing
             SetNativeImage(bitmap);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap7"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the
         /// <see cref='System.Drawing.Bitmap'/> 
         /// class with the specified size.
-        /// </devdoc>
+        /// </summary>
         public Bitmap(int width, int height) : this(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
         {
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap8"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the
         /// <see cref='System.Drawing.Bitmap'/> 
         /// class with the specified size and target <see cref='System.Drawing.Graphics'/>.
-        /// </devdoc>
+        /// </summary>
         public Bitmap(int width, int height, Graphics g)
         {
             if (g == null)
@@ -281,22 +271,20 @@ namespace System.Drawing
             SetNativeImage(bitmap);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap9"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the
         /// <see cref='System.Drawing.Bitmap'/> 
         /// class, from the specified existing image, with the specified size.
-        /// </devdoc>
+        /// </summary>
         public Bitmap(Image original) : this(original, original.Width, original.Height)
         {
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap10"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the
         /// <see cref='System.Drawing.Bitmap'/> 
         /// class, from the specified existing image, with the specified size.
-        /// </devdoc>
+        /// </summary>
         public Bitmap(Image original, int width, int height) : this(width, height)
         {
             Graphics g = null;
@@ -315,11 +303,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.FromHicon"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates a <see cref='System.Drawing.Bitmap'/> from a Windows handle to an
         ///    Icon.
-        /// </devdoc>
+        /// </summary>
         public static Bitmap FromHicon(IntPtr hicon)
         {
             IntPtr bitmap = IntPtr.Zero;
@@ -332,9 +319,8 @@ namespace System.Drawing
             return Bitmap.FromGDIplus(bitmap);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.FromResource"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public static Bitmap FromResource(IntPtr hinstance, String bitmapName)
         {
             IntPtr bitmap;
@@ -354,15 +340,14 @@ namespace System.Drawing
             return Bitmap.FromGDIplus(bitmap);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.GetHbitmap"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a Win32 HBITMAP out of the image. You are responsible for
         ///       de-allocating the HBITMAP with Windows.DeleteObject(handle). If the image uses
         ///       transparency, the background will be filled with the specified background
         ///       color.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IntPtr GetHbitmap()
@@ -370,12 +355,11 @@ namespace System.Drawing
             return GetHbitmap(Color.LightGray);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.GetHbitmap1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Creates a Win32 HBITMAP out of the image.  You are responsible for
         ///     de-allocating the HBITMAP with Windows.DeleteObject(handle).
         ///     If the image uses transparency, the background will be filled with the specified background color.
-        /// </devdoc>
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IntPtr GetHbitmap(Color background)
@@ -395,10 +379,9 @@ namespace System.Drawing
             return hBitmap;
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.GetHicon"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Returns the handle to an icon.
-        /// </devdoc>
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public IntPtr GetHicon()
@@ -413,13 +396,12 @@ namespace System.Drawing
             return hIcon;
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Bitmap11"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Bitmap'/> class, from the specified
         ///       existing image, with the specified size.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Bitmap(Image original, Size newSize) :
         this(original, (object)newSize != null ? newSize.Width : 0, (object)newSize != null ? newSize.Height : 0)
         {
@@ -441,11 +423,10 @@ namespace System.Drawing
             return result;
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Clone"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates a copy of the section of this
         ///    Bitmap defined by <paramref term="rect"/> with a specified <see cref='System.Drawing.Imaging.PixelFormat'/>.
-        /// </devdoc>
+        /// </summary>
         // int version
         public Bitmap Clone(Rectangle rect, PixelFormat format)
         {
@@ -472,13 +453,12 @@ namespace System.Drawing
             return Bitmap.FromGDIplus(dstHandle);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.Clone1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a copy of the section of this
         ///       Bitmap defined by <paramref term="rect"/> with a specified <see cref='System.Drawing.Imaging.PixelFormat'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         // float version
         public Bitmap Clone(RectangleF rect, PixelFormat format)
         {
@@ -505,13 +485,12 @@ namespace System.Drawing
             return Bitmap.FromGDIplus(dstHandle);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.MakeTransparent"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Makes the default transparent color transparent for this <see cref='System.Drawing.Bitmap'/>
         ///       .
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void MakeTransparent()
         {
             Color transparent = s_defaultTransparentColor;
@@ -526,11 +505,10 @@ namespace System.Drawing
             MakeTransparent(transparent);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.MakeTransparent1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Makes the specified color transparent
         ///    for this <see cref='System.Drawing.Bitmap'/>.
-        /// </devdoc>        
+        /// </summary>        
         public void MakeTransparent(Color transparentColor)
         {
             if (RawFormat.Guid == ImageFormat.Icon.Guid)
@@ -592,10 +570,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.LockBits"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Locks a Bitmap into system memory.
-        /// </devdoc>
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public BitmapData LockBits(Rectangle rect, ImageLockMode flags, PixelFormat format)
         {
@@ -606,11 +583,10 @@ namespace System.Drawing
             return LockBits(rect, flags, format, bitmapData);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.LockBits1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Locks a Bitmap into system memory.  This overload takes a user-defined
         ///    BitmapData object and is intended to be used with an ImageLockMode.UserInputBuffer.
-        /// </devdoc>
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public BitmapData LockBits(Rectangle rect, ImageLockMode flags, PixelFormat format, BitmapData bitmapData)
         {
@@ -627,10 +603,9 @@ namespace System.Drawing
         }
 
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.UnlockBits"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Unlocks this <see cref='System.Drawing.Bitmap'/> from system memory.
-        /// </devdoc>
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public void UnlockBits(BitmapData bitmapdata)
         {
@@ -640,13 +615,12 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.GetPixel"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets the color of the specified pixel
         ///       in this <see cref='System.Drawing.Bitmap'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Color GetPixel(int x, int y)
         {
             int color = 0;
@@ -669,12 +643,11 @@ namespace System.Drawing
             return Color.FromArgb(color);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.SetPixel"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Sets the color of the specified pixel in this <see cref='System.Drawing.Bitmap'/> .
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetPixel(int x, int y, Color color)
         {
             if ((PixelFormat & PixelFormat.Indexed) != 0)
@@ -698,10 +671,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Bitmap.uex' path='docs/doc[@for="Bitmap.SetResolution"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Sets the resolution for this <see cref='System.Drawing.Bitmap'/>.
-        /// </devdoc>
+        /// </summary>
         public void SetResolution(float xDpi, float yDpi)
         {
             int status = SafeNativeMethods.Gdip.GdipBitmapSetResolution(new HandleRef(this, nativeImage), xDpi, yDpi);

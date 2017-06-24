@@ -12,12 +12,11 @@ namespace System.Drawing
     using System.Runtime.InteropServices;
     using System.Text;
 
-    /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///     This class represents a Windows icon, which is a small bitmap image used to
     ///     represent an object.  Icons can be thought of as transparent bitmaps, although
     ///     their size is determined by the system.
-    /// </devdoc>
+    /// </summary>
     public sealed partial class Icon : MarshalByRefObject, ICloneable, IDisposable
     {
 #if FINALIZATION_WATCH
@@ -62,10 +61,9 @@ namespace System.Drawing
 
 
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Icon"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Loads an icon object from the given filename.
-        /// </devdoc>
+        /// </summary>
         public Icon(string fileName) : this(fileName, 0, 0)
         {
         }
@@ -86,28 +84,26 @@ namespace System.Drawing
             Initialize(width, height);
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Icon1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Duplicates the given icon, attempting to find a version of the icon
         ///     that matches the requested size.  If a version cannot be found that
         ///     exactally matches the size, the closest match will be used.  Note
         ///     that if original is an icon with a single size, this will
         ///     merely create a dupicate icon.  You can use the stretching modes
         ///     of drawImage to force the icon to the size you want.
-        /// </devdoc>
+        /// </summary>
         public Icon(Icon original, Size size) : this(original, size.Width, size.Height)
         {
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Icon2"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Duplicates the given icon, attempting to find a version of the icon
         ///     that matches the requested size.  If a version cannot be found that
         ///     exactally matches the size, the closest match will be used.  Note
         ///     that if original is an icon with a single size, this will
         ///     merely create a dupicate icon.  You can use the stretching modes
         ///     of drawImage to force the icon to the size you want.
-        /// </devdoc>
+        /// </summary>
         public Icon(Icon original, int width, int height) : this()
         {
             if (original == null)
@@ -128,10 +124,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Icon3"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Loads an icon object from the given resource.
-        /// </devdoc>
+        /// </summary>
         public Icon(Type type, string resource) : this()
         {
             Stream stream = type.Module.Assembly.GetManifestResourceStream(type, resource);
@@ -145,10 +140,9 @@ namespace System.Drawing
             Initialize(0, 0);
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Icon4"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Loads an icon object from the given data stream.
-        /// </devdoc>
+        /// </summary>
         public Icon(Stream stream) : this(stream, 0, 0)
         {
         }
@@ -156,10 +150,9 @@ namespace System.Drawing
         {
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Icon5"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public Icon(Stream stream, int width, int height) : this()
         {
             if (stream == null)
@@ -172,19 +165,17 @@ namespace System.Drawing
             Initialize(width, height);
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.ExtractAssociatedIcon"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Extracts an icon object from the given filename.
-        /// </devdoc>
+        /// </summary>
         public static Icon ExtractAssociatedIcon(string filePath)
         {
             return ExtractAssociatedIcon(filePath, 0);
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.ExtractAssociatedIcon"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Extracts an icon object from the given filename.
-        /// </devdoc>
+        /// </summary>
         private static Icon ExtractAssociatedIcon(string filePath, int index)
         {
             if (filePath == null)
@@ -227,11 +218,10 @@ namespace System.Drawing
             return null;
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Handle"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     The Win32 handle for this object.  This is not a copy of the handle; do
         ///     not free it.
-        /// </devdoc>
+        /// </summary>
         [Browsable(false)]
         public IntPtr Handle
         {
@@ -245,20 +235,18 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Height"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [Browsable(false)]
         public int Height
         {
             get { return Size.Height; }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Size"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     The size of this icon object.
-        /// </devdoc>
+        /// </summary>
         public Size Size
         {
             get
@@ -291,27 +279,24 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Width"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [Browsable(false)]
         public int Width
         {
             get { return Size.Width; }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Clone"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Clones the icon object, creating a duplicate image.
-        /// </devdoc>
+        /// </summary>
         public object Clone()
         {
             return new Icon(this, Size.Width, Size.Height);
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.DestroyHandle"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Called when this object is going to destroy it's Win32 handle.  You
         ///     may override this if there is something special you need to do to
         ///     destroy the handle.  This will be called even if the handle is not
@@ -322,7 +307,7 @@ namespace System.Drawing
         ///     call to destroy the handle if this object currently owns the
         ///     handle.  It will do nothing if the object does not currently
         ///     own the handle.
-        /// </devdoc>
+        /// </summary>
         internal void DestroyHandle()
         {
             if (_ownHandle)
@@ -332,11 +317,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Dispose"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Cleans up the resources allocated by this object.  Once called, the cursor
         ///     object is no longer useful.
-        /// </devdoc>
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -356,13 +340,12 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.DrawIcon"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Draws this image to a graphics object.  The drawing command originates on the graphics
         ///     object, but a graphics object generally has no idea how to render a given image.  So,
         ///     it passes the call to the actual image.  This version crops the image to the given
         ///     dimensions and allows the user to specify a rectangle within the image to draw.
-        /// </devdoc>
+        /// </summary>
         // This method is way more powerful than what we expose, but I'll leave it in place.
         private void DrawIcon(IntPtr dc, Rectangle imageRect, Rectangle targetRect, bool stretch)
         {
@@ -453,13 +436,12 @@ namespace System.Drawing
             Draw(graphics, new Rectangle(x, y, size.Width, size.Height));
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Draw"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Draws this image to a graphics object.  The drawing command originates on the graphics
         ///     object, but a graphics object generally has no idea how to render a given image.  So,
         ///     it passes the call to the actual image.  This version stretches the image to the given
         ///     dimensions and allows the user to specify a rectangle within the image to draw.
-        /// </devdoc>
+        /// </summary>
         internal void Draw(Graphics graphics, Rectangle targetRect)
         {
             Rectangle copy = targetRect;
@@ -479,13 +461,12 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.DrawUnstretched"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Draws this image to a graphics object.  The drawing command originates on the graphics
         ///     object, but a graphics object generally has no idea how to render a given image.  So,
         ///     it passes the call to the actual image.  This version crops the image to the given
         ///     dimensions and allows the user to specify a rectangle within the image to draw.
-        /// </devdoc>
+        /// </summary>
         internal void DrawUnstretched(Graphics graphics, Rectangle targetRect)
         {
             Rectangle copy = targetRect;
@@ -504,21 +485,19 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Finalize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Cleans up Windows resources for this object.
-        /// </devdoc>
+        /// </summary>
         ~Icon()
         {
             Dispose(false);
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.FromHandle"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Creates an icon object from a given Win32 icon handle.  The Icon object
         ///     does not claim ownership of the icon handle; you must free it when you are
         ///     done.
-        /// </devdoc>
+        /// </summary>
         public static Icon FromHandle(IntPtr handle)
         {
             return new Icon(handle);
@@ -558,12 +537,11 @@ namespace System.Drawing
         }
 
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Initialize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Initializes this Image object.  This is identical to calling the image's
         ///     constructor with picture, but this allows non-constructor initialization,
         ///     which may be necessary in some instances.
-        /// </devdoc>
+        /// </summary>
         private unsafe void Initialize(int width, int height)
         {
             if (_iconData == null || _handle != IntPtr.Zero)
@@ -755,10 +733,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.Save"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Saves this image to the given output stream.
-        /// </devdoc>
+        /// </summary>
         public void Save(Stream outputStream)
         {
             if (_iconData != null)
@@ -1044,10 +1021,9 @@ namespace System.Drawing
             return _isBestImagePng.Value;
         }
 
-        /// <include file='doc\Icon.uex' path='docs/doc[@for="Icon.ToString"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Retrieves a human readable string representing the cursor.
-        /// </devdoc>
+        /// </summary>
         public override string ToString()
         {
             return SR.Format(SR.toStringIcon);

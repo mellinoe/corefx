@@ -17,11 +17,10 @@ namespace System.Drawing
     /**
      * Represent an image object (could be bitmap or vector)
      */
-    /// <include file='doc\Image.uex' path='docs/doc[@for="Image"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    An abstract base class that provides
     ///    functionality for 'Bitmap', 'Icon', 'Cursor', and 'Metafile' descended classes.
-    /// </devdoc>
+    /// </summary>
     [ImmutableObject(true)]
     [ComVisible(true)]
     public abstract partial class Image : MarshalByRefObject, ICloneable, IDisposable
@@ -31,10 +30,9 @@ namespace System.Drawing
 #endif
 
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.GetThumbnailImageAbort"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         // The signature of this delegate is incorrect. The signature of the corresponding 
         // native callback function is:
         // extern "C" {
@@ -65,7 +63,6 @@ namespace System.Drawing
         {
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Tag"]/*' />
         [
         Localizable(false),
         DefaultValue(null),
@@ -85,20 +82,18 @@ namespace System.Drawing
         /**
         * Create an image object from a URL
         */
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.FromFile"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an <see cref='System.Drawing.Image'/> from the specified file.
-        /// </devdoc>
+        /// </summary>
         // [Obsolete("Use Image.FromFile(string, useEmbeddedColorManagement)")]
         public static Image FromFile(String filename)
         {
             return Image.FromFile(filename, false);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.FromFile1"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public static Image FromFile(String filename,
                                      bool useEmbeddedColorManagement)
         {
@@ -145,31 +140,28 @@ namespace System.Drawing
         /**
          * Create an image object from a data stream
          */
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.FromStream"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an <see cref='System.Drawing.Image'/> from the specified data
         ///    stream.
-        /// </devdoc>
+        /// </summary>
         // [Obsolete("Use Image.FromStream(stream, useEmbeddedColorManagement)")]
         public static Image FromStream(Stream stream)
         {
             return Image.FromStream(stream, false);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.FromStream1"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public static Image FromStream(Stream stream,
                                        bool useEmbeddedColorManagement)
         {
             return FromStream(stream, useEmbeddedColorManagement, true);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.FromStream2"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public static Image FromStream(Stream stream, bool useEmbeddedColorManagement, bool validateImageData)
         {
             if (stream == null)
@@ -250,10 +242,9 @@ namespace System.Drawing
         /**
          * Make a copy of the image object
          */
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Clone"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an exact copy of this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public object Clone()
         {
             IntPtr cloneImage = IntPtr.Zero;
@@ -277,18 +268,16 @@ namespace System.Drawing
         /**
          * Dispose of resources associated with the Image object
          */
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Dispose"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Cleans up Windows resources for this
         /// <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Dispose2"]/*' />
         protected virtual void Dispose(bool disposing)
         {
 #if FINALIZATION_WATCH
@@ -323,11 +312,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Finalize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Cleans up Windows resources for this
         /// <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         ~Image()
         {
             Dispose(false);
@@ -460,11 +448,10 @@ namespace System.Drawing
             return image;
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.GetEncoderParameterList"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Returns information about the codecs used
         ///    for this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public EncoderParameters GetEncoderParameterList(Guid encoder)
         {
             EncoderParameters p;
@@ -503,20 +490,18 @@ namespace System.Drawing
             return p;
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Save"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Saves this <see cref='System.Drawing.Image'/> to the specified file.
-        /// </devdoc>
+        /// </summary>
         public void Save(string filename)
         {
             Save(filename, RawFormat);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Save1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Saves this <see cref='System.Drawing.Image'/> to the specified file in the
         ///    specified format.
-        /// </devdoc>
+        /// </summary>
         public void Save(string filename, ImageFormat format)
         {
             if (format == null)
@@ -530,13 +515,12 @@ namespace System.Drawing
             Save(filename, codec, null);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Save2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Saves this <see cref='System.Drawing.Image'/> to the specified file in the specified format
         ///       and with the specified encoder parameters.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void Save(string filename, ImageCodecInfo encoder, EncoderParameters encoderParams)
         {
@@ -615,13 +599,12 @@ namespace System.Drawing
             Save(stream, codec, null);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Save3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Saves this <see cref='System.Drawing.Image'/> to the specified stream in the specified
         ///       format.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Save(Stream stream, ImageFormat format)
         {
             if (format == null)
@@ -631,13 +614,12 @@ namespace System.Drawing
             Save(stream, codec, null);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Save4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Saves this <see cref='System.Drawing.Image'/> to the specified stream in the specified
         ///       format.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void Save(Stream stream, ImageCodecInfo encoder, EncoderParameters encoderParams)
         {
@@ -697,13 +679,12 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.SaveAdd"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds an <see cref='System.Drawing.Imaging.EncoderParameters'/> to this
         ///    <see cref='System.Drawing.Image'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void SaveAdd(EncoderParameters encoderParams)
         {
@@ -726,13 +707,12 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.SaveAdd1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds an <see cref='System.Drawing.Imaging.EncoderParameters'/> to the
         ///       specified <see cref='System.Drawing.Image'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void SaveAdd(Image image, EncoderParameters encoderParams)
         {
@@ -776,24 +756,22 @@ namespace System.Drawing
             return new SizeF(width, height);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.PhysicalDimension"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets the width and height of this
         ///    <see cref='System.Drawing.Image'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public SizeF PhysicalDimension
         {
             get { return _GetPhysicalDimension(); }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Size"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets the width and height of this <see cref='System.Drawing.Image'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Size Size
         {
             get
@@ -802,10 +780,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Width"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the width of this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         [
         DefaultValue(false),
         Browsable(false),
@@ -826,10 +803,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Height"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the height of this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         [
         DefaultValue(false),
         Browsable(false),
@@ -850,11 +826,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.HorizontalResolution"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the horizontal resolution, in
         ///    pixels-per-inch, of this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public float HorizontalResolution
         {
             get
@@ -870,11 +845,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.VerticalResolution"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the vertical resolution, in
         ///    pixels-per-inch, of this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public float VerticalResolution
         {
             get
@@ -890,10 +864,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Flags"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets attribute flags for this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         [Browsable(false)]
         public int Flags
         {
@@ -910,10 +883,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.RawFormat"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the format of this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public ImageFormat RawFormat
         {
             get
@@ -930,10 +902,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.PixelFormat"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the pixel format for this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public PixelFormat PixelFormat
         {
             get
@@ -949,11 +920,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.GetBounds"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets a bounding rectangle in
         ///    the specified units for this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>        
+        /// </summary>        
         public RectangleF GetBounds(ref GraphicsUnit pageUnit)
         {
             GPRECTF gprectf = new GPRECTF();
@@ -1023,11 +993,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.Palette"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the color
         ///    palette used for this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         [Browsable(false)]
         public ColorPalette Palette
         {
@@ -1043,10 +1012,9 @@ namespace System.Drawing
 
         // Thumbnail support
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.GetThumbnailImage"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Returns the thumbnail for this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public Image GetThumbnailImage(int thumbWidth, int thumbHeight,
                                        GetThumbnailImageAbort callback, IntPtr callbackData)
         {
@@ -1062,13 +1030,12 @@ namespace System.Drawing
 
         // Multi-frame support
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.FrameDimensionsList"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets an array of GUIDs that represent the
         ///       dimensions of frames within this <see cref='System.Drawing.Image'/>.
-        ///    </para>
-        /// </devdoc>        
+        ///    
+        /// </summary>        
         [Browsable(false)]
         public Guid[] FrameDimensionsList
         {
@@ -1123,13 +1090,12 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.GetFrameCount"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Returns the number of frames of the given
         ///       dimension.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public int GetFrameCount(FrameDimension dimension)
         {
             int[] count = new int[] { 0 };
@@ -1143,13 +1109,12 @@ namespace System.Drawing
             return count[0];
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.SelectActiveFrame"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Selects the frame specified by the given
         ///       dimension and index.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public int SelectActiveFrame(FrameDimension dimension, int frameIndex)
         {
             int[] count = new int[] { 0 };
@@ -1163,11 +1128,10 @@ namespace System.Drawing
             return count[0];
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.RotateFlip"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         public void RotateFlip(RotateFlipType rotateFlipType)
         {
             int status = SafeNativeMethods.Gdip.GdipImageRotateFlip(new HandleRef(this, nativeImage), unchecked((int)rotateFlipType));
@@ -1176,11 +1140,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.PropertyIdList"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets an array of the property IDs stored in
         ///    this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         [Browsable(false)]
         public int[] PropertyIdList
         {
@@ -1208,11 +1171,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.GetPropertyItem"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the specified property item from this
         /// <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public PropertyItem GetPropertyItem(int propid)
         {
             PropertyItem propitem;
@@ -1250,11 +1212,10 @@ namespace System.Drawing
             return propitem;
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.RemovePropertyItem"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Removes the specified property item from
         ///    this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public void RemovePropertyItem(int propid)
         {
             int status = SafeNativeMethods.Gdip.GdipRemovePropertyItem(new HandleRef(this, nativeImage), propid);
@@ -1262,13 +1223,12 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.SetPropertyItem"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Sets the specified property item to the
         ///       specified value.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetPropertyItem(PropertyItem propitem)
         {
             PropertyItemInternal propItemInternal = PropertyItemInternal.ConvertFromPropertyItem(propitem);
@@ -1281,10 +1241,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.PropertyItems"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets an array of <see cref='System.Drawing.Imaging.PropertyItem'/> objects that describe this <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         [Browsable(false)]
         public PropertyItem[] PropertyItems
         {
@@ -1339,22 +1298,20 @@ namespace System.Drawing
         }
 
         // !! Ambiguous to offer constructor for 'FromHbitmap'
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.FromHbitmap"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates a <see cref='System.Drawing.Bitmap'/> from a Windows handle.
-        /// </devdoc>
+        /// </summary>
         public static Bitmap FromHbitmap(IntPtr hbitmap)
         {
             return FromHbitmap(hbitmap, IntPtr.Zero);
         }
 
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.FromHbitmap1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a <see cref='System.Drawing.Bitmap'/> from the specified Windows
         ///       handle with the specified color palette.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public static Bitmap FromHbitmap(IntPtr hbitmap, IntPtr hpalette)
         {
             IntPtr bitmap = IntPtr.Zero;
@@ -1369,11 +1326,10 @@ namespace System.Drawing
         /*
          * Return the pixel size for the specified format (in bits)
          */
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.GetPixelFormatSize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Returns the size of the specified pixel
         ///    format.
-        /// </devdoc>
+        /// </summary>
         public static int GetPixelFormatSize(PixelFormat pixfmt)
         {
             return (unchecked((int)pixfmt) >> 8) & 0xFF;
@@ -1382,13 +1338,12 @@ namespace System.Drawing
         /*
          * Determine if the pixel format can have alpha channel
          */
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.IsAlphaPixelFormat"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Returns a value indicating whether the
         ///       pixel format contains alpha information.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public static bool IsAlphaPixelFormat(PixelFormat pixfmt)
         {
             return (pixfmt & PixelFormat.Alpha) != 0;
@@ -1398,12 +1353,11 @@ namespace System.Drawing
          * Determine if the pixel format is an extended format,
          * i.e. supports 16-bit per channel
          */
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.IsExtendedPixelFormat"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Returns a value indicating whether the pixel format is extended.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public static bool IsExtendedPixelFormat(PixelFormat pixfmt)
         {
             return (pixfmt & PixelFormat.Extended) != 0;
@@ -1416,12 +1370,11 @@ namespace System.Drawing
          *   PixelFormat64bppARGB
          *   PixelFormat64bppPARGB
          */
-        /// <include file='doc\Image.uex' path='docs/doc[@for="Image.IsCanonicalPixelFormat"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Returns a value indicating whether the pixel format is canonical.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public static bool IsCanonicalPixelFormat(PixelFormat pixfmt)
         {
             return (pixfmt & PixelFormat.Canonical) != 0;

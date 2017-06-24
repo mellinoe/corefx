@@ -4,45 +4,38 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\PixelOffsetMode.uex' path='docs/doc[@for="PixelOffsetMode"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies how pixels are offset during
     ///    rendering.
-    /// </devdoc>
+    /// </summary>
     public enum PixelOffsetMode
     {
-        /// <include file='doc\PixelOffsetMode.uex' path='docs/doc[@for="PixelOffsetMode.Invalid"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies an invalid mode.
-        /// </devdoc>
+        /// </summary>
         Invalid = QualityMode.Invalid,
-        /// <include file='doc\PixelOffsetMode.uex' path='docs/doc[@for="PixelOffsetMode.Default"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the default mode.
-        /// </devdoc>
+        /// </summary>
         Default = QualityMode.Default,
-        /// <include file='doc\PixelOffsetMode.uex' path='docs/doc[@for="PixelOffsetMode.HighSpeed"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies high low quality (high
         ///    performance) mode.
-        /// </devdoc>
+        /// </summary>
         HighSpeed = QualityMode.Low,
-        /// <include file='doc\PixelOffsetMode.uex' path='docs/doc[@for="PixelOffsetMode.HighQuality"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies high quality (lower performance)
         ///    mode.
-        /// </devdoc>
+        /// </summary>
         HighQuality = QualityMode.High,
-        /// <include file='doc\PixelOffsetMode.uex' path='docs/doc[@for="PixelOffsetMode.None"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies no pixel offset.
-        /// </devdoc>
+        /// </summary>
         None,                   // no pixel offset
-        /// <include file='doc\PixelOffsetMode.uex' path='docs/doc[@for="PixelOffsetMode.Half"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies that pixels are offset by -.5
         ///    units both horizontally and vertically for high performance anti-aliasing.
-        /// </devdoc>
+        /// </summary>
         Half                    // offset by -0.5, -0.5 for fast anti-alias perf
     }
 }

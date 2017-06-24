@@ -4,43 +4,39 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\ColorBlend.uex' path='docs/doc[@for="ColorBlend"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Defines arrays of colors and positions used
     ///    for interpolating color blending in a gradient.
-    /// </devdoc>
+    /// </summary>
     public sealed class ColorBlend
     {
         private Color[] _colors;
         private float[] _positions;
 
-        /// <include file='doc\ColorBlend.uex' path='docs/doc[@for="ColorBlend.ColorBlend"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.ColorBlend'/> class.
-        /// </devdoc>
+        /// </summary>
         public ColorBlend()
         {
             _colors = new Color[1];
             _positions = new float[1];
         }
 
-        /// <include file='doc\ColorBlend.uex' path='docs/doc[@for="ColorBlend.ColorBlend1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.ColorBlend'/> class with the specified number of
         ///       colors and positions.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public ColorBlend(int count)
         {
             _colors = new Color[count];
             _positions = new float[count];
         }
 
-        /// <include file='doc\ColorBlend.uex' path='docs/doc[@for="ColorBlend.Colors"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Represents an array of colors.
-        /// </devdoc>
+        /// </summary>
         public Color[] Colors
         {
             get
@@ -53,11 +49,10 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\ColorBlend.uex' path='docs/doc[@for="ColorBlend.Positions"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Represents the positions along a gradient
         ///    line.
-        /// </devdoc>
+        /// </summary>
         public float[] Positions
         {
             get

@@ -7,52 +7,45 @@ namespace System.Drawing.Drawing2D
     /**
      * Dash style constants (sdkinc\GDIplusEnums.h)
      */
-    /// <include file='doc\DashStyle.uex' path='docs/doc[@for="DashStyle"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies the style of dashed lines drawn with a <see cref='System.Drawing.Pen'/> .
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum DashStyle
     {
-        /// <include file='doc\DashStyle.uex' path='docs/doc[@for="DashStyle.Solid"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a solid line.
-        /// </devdoc>
+        /// </summary>
         Solid = 0,
-        /// <include file='doc\DashStyle.uex' path='docs/doc[@for="DashStyle.Dash"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies a line comprised of dashes.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Dash = 1,
-        /// <include file='doc\DashStyle.uex' path='docs/doc[@for="DashStyle.Dot"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies a line comprised of dots.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Dot = 2,
-        /// <include file='doc\DashStyle.uex' path='docs/doc[@for="DashStyle.DashDot"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a line comprised of an alternating
         ///    pattern of dash-dot-dash-dot.
-        /// </devdoc>
+        /// </summary>
         DashDot = 3,
-        /// <include file='doc\DashStyle.uex' path='docs/doc[@for="DashStyle.DashDotDot"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a line comprised of an alternating
         ///    pattern of dash-dot-dot-dash-dot-dot.
-        /// </devdoc>
+        /// </summary>
         DashDotDot = 4,
-        /// <include file='doc\DashStyle.uex' path='docs/doc[@for="DashStyle.Custom"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies a user-defined custom dash
         ///       style.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Custom = 5
     }
 }

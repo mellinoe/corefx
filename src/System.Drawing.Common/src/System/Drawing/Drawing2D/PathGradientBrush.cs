@@ -12,32 +12,29 @@ namespace System.Drawing.Drawing2D
     /**
      * Represent a PathGradient brush object
      */
-    /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Encapsulates a <see cref='System.Drawing.Brush'/> that fills the interior of a
     /// <see cref='System.Drawing.Drawing2D.GraphicsPath'/> with a gradient.
-    /// </devdoc>
+    /// </summary>
     public sealed class PathGradientBrush : Brush
     {
         /**
          * Create a new rectangle gradient brush object
          */
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.PathGradientBrush"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> class with the specified points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public PathGradientBrush(PointF[] points)
             : this(points, System.Drawing.Drawing2D.WrapMode.Clamp)
         {
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.PathGradientBrush1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> class with the specified points and
         ///    wrap mode.
-        /// </devdoc>
+        /// </summary>
         public PathGradientBrush(PointF[] points, WrapMode wrapMode)
         {
             if (points == null)
@@ -76,25 +73,23 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.PathGradientBrush2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> class with the
         ///       specified points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public PathGradientBrush(Point[] points)
             : this(points, System.Drawing.Drawing2D.WrapMode.Clamp)
         {
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.PathGradientBrush3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> class with the
         ///       specified points and wrap mode.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public PathGradientBrush(Point[] points, WrapMode wrapMode)
         {
             if (points == null)
@@ -132,13 +127,12 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.PathGradientBrush4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>
         ///       class with the specified path.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public PathGradientBrush(GraphicsPath path)
         {
             if (path == null)
@@ -154,19 +148,18 @@ namespace System.Drawing.Drawing2D
             SetNativeBrushInternal(brush);
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Constructor to initialized this object to be owned by GDI+.
-        /// </devdoc>
+        /// </summary>
         internal PathGradientBrush(IntPtr nativeBrush)
         {
             Debug.Assert(nativeBrush != IntPtr.Zero, "Initializing native brush with null.");
             SetNativeBrushInternal(nativeBrush);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.Clone"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>.
-        /// </devdoc>
+        /// </summary>
         public override object Clone()
         {
             IntPtr cloneBrush = IntPtr.Zero;
@@ -182,11 +175,10 @@ namespace System.Drawing.Drawing2D
         /**
          * Set/get center color attributes
          */
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.CenterColor"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the color at the center of the
         ///    path gradient.
-        /// </devdoc>
+        /// </summary>
         public Color CenterColor
         {
             get
@@ -269,13 +261,12 @@ namespace System.Drawing.Drawing2D
             return colors;
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.SurroundColors"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets an array of colors that
         ///       correspond to the points in the path this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> fills.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Color[] SurroundColors
         {
             get { return _GetSurroundColors(); }
@@ -285,13 +276,12 @@ namespace System.Drawing.Drawing2D
         /**
           * Set/get center point
           */
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.CenterPoint"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets the center point of the path
         ///       gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public PointF CenterPoint
         {
             get
@@ -330,12 +320,11 @@ namespace System.Drawing.Drawing2D
             return rect.ToRectangleF();
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.Rectangle"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets a bounding rectangle for this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public RectangleF Rectangle
         {
             get { return _GetRectangle(); }
@@ -442,13 +431,12 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.Blend"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets a <see cref='System.Drawing.Drawing2D.Blend'/> that specifies positions and factors
         ///       that define a custom falloff for the gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Blend Blend
         {
             get { return _GetBlend(); }
@@ -459,23 +447,21 @@ namespace System.Drawing.Drawing2D
          * SigmaBlend & LinearBlend
          */
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.SetSigmaBellShape"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a gradient falloff based on a bell-shaped curve.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetSigmaBellShape(float focus)
         {
             SetSigmaBellShape(focus, (float)1.0);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.SetSigmaBellShape1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a gradient falloff based on a bell-shaped curve.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetSigmaBellShape(float focus, float scale)
         {
             int status = SafeNativeMethods.Gdip.GdipSetPathGradientSigmaBlend(new HandleRef(this, NativeBrush), focus, scale);
@@ -484,23 +470,21 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.SetBlendTriangularShape"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a triangular gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetBlendTriangularShape(float focus)
         {
             SetBlendTriangularShape(focus, (float)1.0);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.SetBlendTriangularShape1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a triangular gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetBlendTriangularShape(float focus, float scale)
         {
             int status = SafeNativeMethods.Gdip.GdipSetPathGradientLinearBlend(new HandleRef(this, NativeBrush), focus, scale);
@@ -634,13 +618,12 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.InterpolationColors"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets a <see cref='System.Drawing.Drawing2D.ColorBlend'/> that defines a multi-color linear
         ///       gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public ColorBlend InterpolationColors
         {
             get { return _GetInterpolationColors(); }
@@ -673,26 +656,24 @@ namespace System.Drawing.Drawing2D
             return matrix;
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.Transform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets a <see cref='System.Drawing.Drawing2D.Matrix'/> that defines a local geometrical
         ///       transform for this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Matrix Transform
         {
             get { return _GetTransform(); }
             set { _SetTransform(value); }
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.ResetTransform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Resets the <see cref='System.Drawing.Drawing2D.PathGradientBrush.Transform'/> property to
         ///       identity.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void ResetTransform()
         {
             int status = SafeNativeMethods.Gdip.GdipResetPathGradientTransform(new HandleRef(this, NativeBrush));
@@ -701,25 +682,23 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.MultiplyTransform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that represents the local geometrical
         ///       transform of this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void MultiplyTransform(Matrix matrix)
         {
             MultiplyTransform(matrix, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.MultiplyTransform1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that represents the local geometrical
         ///       transform of this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void MultiplyTransform(Matrix matrix, MatrixOrder order)
         {
             if (matrix == null)
@@ -733,25 +712,23 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.TranslateTransform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Translates the local geometrical transform by the specified dimmensions. This
         ///       method prepends the translation to the transform.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void TranslateTransform(float dx, float dy)
         {
             TranslateTransform(dx, dy, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.TranslateTransform1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Translates the local geometrical transform by the specified dimmensions in
         ///       the specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void TranslateTransform(float dx, float dy, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslatePathGradientTransform(new HandleRef(this, NativeBrush),
@@ -761,25 +738,23 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.ScaleTransform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Scales the local geometric transform by the specified amounts. This method
         ///       prepends the scaling matrix to the transform.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void ScaleTransform(float sx, float sy)
         {
             ScaleTransform(sx, sy, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.ScaleTransform1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Scales the local geometric transform by the specified amounts in the
         ///       specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void ScaleTransform(float sx, float sy, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipScalePathGradientTransform(new HandleRef(this, NativeBrush),
@@ -789,25 +764,23 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.RotateTransform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Rotates the local geometric transform by the specified amount. This method
         ///       prepends the rotation to the transform.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void RotateTransform(float angle)
         {
             RotateTransform(angle, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.RotateTransform1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Rotates the local geometric transform by the specified amount in the
         ///       specified order.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void RotateTransform(float angle, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipRotatePathGradientTransform(new HandleRef(this, NativeBrush),
@@ -820,11 +793,10 @@ namespace System.Drawing.Drawing2D
         /**
          * Set/get brush focus scales
          */
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.FocusScales"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the focus point for the
         ///    gradient falloff.
-        /// </devdoc>
+        /// </summary>
         public PointF FocusScales
         {
             get
@@ -871,13 +843,12 @@ namespace System.Drawing.Drawing2D
             return (WrapMode)mode;
         }
 
-        /// <include file='doc\PathGradientBrush.uex' path='docs/doc[@for="PathGradientBrush.WrapMode"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets a <see cref='System.Drawing.Drawing2D.WrapMode'/> that indicates the wrap mode for this
         ///    <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>. 
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public WrapMode WrapMode
         {
             get

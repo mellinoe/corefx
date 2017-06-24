@@ -8,17 +8,16 @@ namespace System.Drawing.Internal
     using System.Diagnostics;
     using System.Runtime.InteropServices;
 
-    /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="DeviceContext"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///     Represents a Win32 device context.  Provides operations for setting some of the properties
     ///     of a device context.  It's the managed wrapper for an HDC.
     ///     
     ///     This class is divided into two files separating the code that needs to be compiled into
     ///     reatail builds and debugging code.
-    /// </devdoc>
+    /// </summary>
     internal sealed partial class DeviceContext : MarshalByRefObject, IDeviceContext, IDisposable
     {
-        /// <devdoc>
+        /// <summary>
         ///     This class is a wrapper to a Win32 device context, and the Hdc property is the way to get a 
         ///     handle to it.
         ///     
@@ -56,7 +55,7 @@ namespace System.Drawing.Internal
         ///     Brush origin, Polygon filling mode, Bitmap stretching mode, Logical font, Intercharacter spacing, 
         ///     Font mapper flags, Text alignment, Test justification, Layout, Path, Meta region.
         ///     See book "Windows Graphics Programming - Feng Yuang", P315 - Device Context Attributes.
-        /// </devdoc>
+        /// </summary>
 
         private IntPtr _hDC;
         private DeviceContextType _dcType;
@@ -90,13 +89,13 @@ namespace System.Drawing.Internal
         /// Class properties...
         ///
 
-        /// <devdoc>
+        /// <summary>
         ///     Specifies whether a modification has been applied to the dc, like setting the clipping area or a coordinate transform.
-        /// </devdoc>
+        /// </summary>
 
-        /// <devdoc>
+        /// <summary>
         ///     The device type the context refers to.
-        /// </devdoc>
+        /// </summary>
         public DeviceContextType DeviceContextType
         {
             get
@@ -105,11 +104,11 @@ namespace System.Drawing.Internal
             }
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     This object's hdc.  If this property is called, then the object will be used as an HDC wrapper,
         ///     so the hdc is cached and calls to GetHdc/ReleaseHdc won't PInvoke into GDI.
         ///     Call Dispose to properly release the hdc.
-        /// </devdoc>
+        /// </summary>
         public IntPtr Hdc
         {
             get
@@ -195,9 +194,9 @@ namespace System.Drawing.Internal
         // object construction API.  Publicly constructable from static methods only.
         //
 
-        /// <devdoc>
+        /// <summary>
         ///     Constructor to contruct a DeviceContext object from an window handle.
-        /// </devdoc>
+        /// </summary>
         private DeviceContext(IntPtr hWnd)
         {
             _hWnd = hWnd;
@@ -212,9 +211,9 @@ namespace System.Drawing.Internal
 #endif
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Constructor to contruct a DeviceContext object from an existing Win32 device context handle.
-        /// </devdoc>
+        /// </summary>
         private DeviceContext(IntPtr hDC, DeviceContextType dcType)
         {
             _hDC = hDC;
@@ -234,9 +233,9 @@ namespace System.Drawing.Internal
 
 
 
-        /// <devdoc>
+        /// <summary>
         ///     CreateDC creates a DeviceContext object wrapping an hdc created with the Win32 CreateDC function.
-        /// </devdoc>
+        /// </summary>
         public static DeviceContext CreateDC(string driverName, string deviceName, string fileName, HandleRef devMode)
         {
             // Note: All input params can be null but not at the same time.  See MSDN for information.
@@ -245,9 +244,9 @@ namespace System.Drawing.Internal
             return new DeviceContext(hdc, DeviceContextType.NamedDevice);
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     CreateIC creates a DeviceContext object wrapping an hdc created with the Win32 CreateIC function.
-        /// </devdoc>
+        /// </summary>
         public static DeviceContext CreateIC(string driverName, string deviceName, string fileName, HandleRef devMode)
         {
             // Note: All input params can be null but not at the same time.  See MSDN for information.
@@ -256,9 +255,9 @@ namespace System.Drawing.Internal
             return new DeviceContext(hdc, DeviceContextType.Information);
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Creates a DeviceContext object wrapping a memory DC compatible with the specified device.
-        /// </devdoc>
+        /// </summary>
         public static DeviceContext FromCompatibleDC(IntPtr hdc)
         {
             // If hdc is null, the function creates a memory DC compatible with the application's current screen.
@@ -270,41 +269,36 @@ namespace System.Drawing.Internal
             return new DeviceContext(compatibleDc, DeviceContextType.Memory);
         }
 
-        /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="DeviceContext.FromHdc"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Used for wrapping an existing hdc.  In this case, this object doesn't own the hdc
         ///     so calls to GetHdc/ReleaseHdc don't PInvoke into GDI.
-        /// </devdoc>
+        /// </summary>
         public static DeviceContext FromHdc(IntPtr hdc)
         {
             Debug.Assert(hdc != IntPtr.Zero, "hdc == 0");
             return new DeviceContext(hdc, DeviceContextType.Unknown);
         }
 
-        /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="DeviceContext.FromHwnd"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     When hwnd is null, we are getting the screen DC.
-        /// </devdoc>
+        /// </summary>
         public static DeviceContext FromHwnd(IntPtr hwnd)
         {
             return new DeviceContext(hwnd);
         }
 
 
-        /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="DeviceContext.Finalize"]/*' />
         ~DeviceContext()
         {
             Dispose(false);
         }
 
-        /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="DeviceContext.Dispose"]/*' />
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="DeviceContext.Dispose1"]/*' />
         internal void Dispose(bool disposing)
         {
             if (_disposed)
@@ -364,12 +358,11 @@ namespace System.Drawing.Internal
             DbgUtil.AssertFinalization(this, disposing);
         }
 
-        /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="DeviceContext.GetHdc"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Explicit interface method implementation to hide them a bit for usability reasons so the object is seen 
         ///     as a wrapper around an hdc that is always available, and for performance reasons since it caches the hdc 
         ///     if used in this way.
-        /// </devdoc>
+        /// </summary>
         IntPtr IDeviceContext.GetHdc()
         {
             if (_hDC == IntPtr.Zero)
@@ -388,11 +381,10 @@ namespace System.Drawing.Internal
         }
 
 
-        /// <include file='doc\IDeviceContext.uex' path='docs/doc[@for="DeviceContext.ReleaseHdc"]/*' />
-        ///<devdoc>
+        ///<summary>
         ///     If the object was created from a DC, this object doesn't 'own' the dc so we just ignore 
         ///     this call.
-        ///</devdoc>
+        ///</summary>
         void IDeviceContext.ReleaseHdc()
         {
             if (_hDC != IntPtr.Zero && _dcType == DeviceContextType.Display)
@@ -410,10 +402,10 @@ namespace System.Drawing.Internal
         }
 
 
-        /// <devdoc>
+        /// <summary>
         ///     Specifies whether the DC is in GM_ADVANCE mode (supported only in NT platforms).  
         ///     If false, it is in GM_COMPATIBLE mode.
-        /// </devdoc>
+        /// </summary>
         public DeviceContextGraphicsMode GraphicsMode
         {
             get
@@ -422,15 +414,15 @@ namespace System.Drawing.Internal
             }
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Sets the dc graphics mode and returns the old value.
-        /// </devdoc>
+        /// </summary>
         public DeviceContextGraphicsMode SetGraphicsMode(DeviceContextGraphicsMode newMode)
         {
             return (DeviceContextGraphicsMode)IntUnsafeNativeMethods.SetGraphicsMode(new HandleRef(this, _hDC), unchecked((int)newMode));
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Restores the device context to the specified state. The DC is restored by popping state information off a 
         ///     stack created by earlier calls to the SaveHdc function. 
         ///     The stack can contain the state information for several instances of the DC. If the state specified by the 
@@ -440,7 +432,7 @@ namespace System.Drawing.Internal
         ///     instance of the state to be restored. If this parameter is negative, nSavedDC represents an instance relative 
         ///     to the current state. For example, -1 restores the most recently saved state. 
         ///     See MSDN for more info.
-        /// </devdoc>
+        /// </summary>
         public void RestoreHdc()
         {
 #if TRACK_HDC
@@ -472,14 +464,14 @@ namespace System.Drawing.Internal
 #endif        
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Saves the current state of the device context by copying data describing selected objects and graphic 
         ///     modes (such as the bitmap, brush, palette, font, pen, region, drawing mode, and mapping mode) to a 
         ///     context stack. 
         ///     The SaveDC function can be used any number of times to save any number of instances of the DC state. 
         ///     A saved state can be restored by using the RestoreHdc method.
         ///     See MSDN for more details. 
-        /// </devdoc>
+        /// </summary>
         public int SaveHdc()
         {
             HandleRef hdc = new HandleRef(this, _hDC);
@@ -505,13 +497,13 @@ namespace System.Drawing.Internal
             return state;
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Selects a region as the current clipping region for the device context.
         ///     Remarks (From MSDN):
         ///         - Only a copy of the selected region is used. The region itself can be selected for any number of other device contexts or it can be deleted. 
         ///         - The SelectClipRgn function assumes that the coordinates for a region are specified in device units. 
         ///         - To remove a device-context's clipping region, specify a NULL region handle. 
-        /// </devdoc>
+        /// </summary>
         public void SetClip(WindowsRegion region)
         {
             HandleRef hdc = new HandleRef(this, _hDC);
@@ -520,10 +512,10 @@ namespace System.Drawing.Internal
             IntUnsafeNativeMethods.SelectClipRgn(hdc, hRegion);
         }
 
-        ///<devdoc>
+        ///<summary>
         ///     Creates a new clipping region from the intersection of the current clipping region and 
         ///     the specified rectangle. 
-        ///</devdoc>
+        ///</summary>
         public void IntersectClip(WindowsRegion wr)
         {
             //if the incoming windowsregion is infinite, there is no need to do any intersecting.
@@ -552,9 +544,9 @@ namespace System.Drawing.Internal
             }
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Modifies the viewport origin for a device context using the specified horizontal and vertical offsets in logical units.
-        /// </devdoc>
+        /// </summary>
         public void TranslateTransform(int dx, int dy)
         {
             IntNativeMethods.POINT orgn = new IntNativeMethods.POINT();

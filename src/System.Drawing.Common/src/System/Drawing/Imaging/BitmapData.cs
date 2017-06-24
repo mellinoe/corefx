@@ -6,10 +6,9 @@ namespace System.Drawing.Imaging
 {
     using System.Runtime.InteropServices;
 
-    /// <include file='doc\BitmapData.uex' path='docs/doc[@for="BitmapData"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the attributes of a bitmap image.
-    /// </devdoc>
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public sealed class BitmapData
     {
@@ -20,41 +19,37 @@ namespace System.Drawing.Imaging
         private IntPtr _scan0;
         private int _reserved;
 
-        /// <include file='doc\BitmapData.uex' path='docs/doc[@for="BitmapData.Width"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the pixel width of the <see cref='System.Drawing.Bitmap'/>.
-        /// </devdoc>
+        /// </summary>
         public int Width
         {
             get { return _width; }
             set { _width = value; }
         }
 
-        /// <include file='doc\BitmapData.uex' path='docs/doc[@for="BitmapData.Height"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the pixel height of the <see cref='System.Drawing.Bitmap'/>.
-        /// </devdoc>
+        /// </summary>
         public int Height
         {
             get { return _height; }
             set { _height = value; }
         }
 
-        /// <include file='doc\BitmapData.uex' path='docs/doc[@for="BitmapData.Stride"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the stride width of the <see cref='System.Drawing.Bitmap'/>.
-        /// </devdoc>
+        /// </summary>
         public int Stride
         {
             get { return _stride; }
             set { _stride = value; }
         }
 
-        /// <include file='doc\BitmapData.uex' path='docs/doc[@for="BitmapData.PixelFormat"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the format of the pixel
         ///    information in this <see cref='System.Drawing.Bitmap'/>.
-        /// </devdoc>
+        /// </summary>
         public PixelFormat PixelFormat
         {
             get { return (PixelFormat)_pixelFormat; }
@@ -95,20 +90,18 @@ namespace System.Drawing.Imaging
             }
         }
 
-        /// <include file='doc\BitmapData.uex' path='docs/doc[@for="BitmapData.Scan0"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the address of the pixel data.
-        /// </devdoc>
+        /// </summary>
         public IntPtr Scan0
         {
             get { return _scan0; }
             set { _scan0 = value; }
         }
 
-        /// <include file='doc\BitmapData.uex' path='docs/doc[@for="BitmapData.Reserved"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Reserved. Do not use.
-        /// </devdoc>
+        /// </summary>
         public int Reserved
         {
             // why make public??

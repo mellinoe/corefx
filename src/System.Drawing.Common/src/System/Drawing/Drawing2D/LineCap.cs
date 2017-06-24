@@ -7,75 +7,63 @@ namespace System.Drawing.Drawing2D
     /**
      * Line cap constants
      */
-    /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the available cap
     ///    styles with which a <see cref='System.Drawing.Pen'/> can end a line.
-    /// </devdoc>
+    /// </summary>
     public enum LineCap
     {
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.Flat"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a flat line cap.
-        /// </devdoc>
+        /// </summary>
         Flat = 0,
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.Square"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a square line cap.
-        /// </devdoc>
+        /// </summary>
         Square = 1,
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.Round"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a round line cap.
-        /// </devdoc>
+        /// </summary>
         Round = 2,
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.Triangle"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a triangular line cap.
-        /// </devdoc>
+        /// </summary>
         Triangle = 3,
 
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.NoAnchor"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         NoAnchor = 0x10, // corresponds to flat cap
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.SquareAnchor"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies no line cap.
-        /// </devdoc>
+        /// </summary>
         SquareAnchor = 0x11, // corresponds to square cap
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.RoundAnchor"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a round anchor cap.
-        /// </devdoc>
+        /// </summary>
         RoundAnchor = 0x12, // corresponds to round cap
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.DiamondAnchor"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a diamond anchor cap.
-        /// </devdoc>
+        /// </summary>
         DiamondAnchor = 0x13, // corresponds to triangle cap
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.ArrowAnchor"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies an arrow-shaped anchor cap.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         ArrowAnchor = 0x14, // no correspondence
 
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.Custom"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies a custom line cap.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Custom = 0xff, // custom cap
 
-        /// <include file='doc\LineCap.uex' path='docs/doc[@for="LineCap.AnchorMask"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a mask used to check whether a
         ///    line cap is an anchor cap.
-        /// </devdoc>
+        /// </summary>
         AnchorMask = 0xf0  // mask to check for anchor or not.
     }
 }

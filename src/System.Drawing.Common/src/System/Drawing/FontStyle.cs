@@ -8,42 +8,36 @@
 
 namespace System.Drawing
 {
-    /// <include file='doc\FontStyle.uex' path='docs/doc[@for="FontStyle"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies style information applied to
     ///       text.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     [
     Flags
     ]
     public enum FontStyle
     {
-        /// <include file='doc\FontStyle.uex' path='docs/doc[@for="FontStyle.Regular"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Normal text.
-        /// </devdoc>
+        /// </summary>
         Regular = 0,
-        /// <include file='doc\FontStyle.uex' path='docs/doc[@for="FontStyle.Bold"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Bold text.
-        /// </devdoc>
+        /// </summary>
         Bold = 1,
-        /// <include file='doc\FontStyle.uex' path='docs/doc[@for="FontStyle.Italic"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Italic text.
-        /// </devdoc>
+        /// </summary>
         Italic = 2,
-        /// <include file='doc\FontStyle.uex' path='docs/doc[@for="FontStyle.Underline"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Underlined text.
-        /// </devdoc>
+        /// </summary>
         Underline = 4,
-        /// <include file='doc\FontStyle.uex' path='docs/doc[@for="FontStyle.Strikeout"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Text with a line through the middle.
-        /// </devdoc>
+        /// </summary>
         Strikeout = 8,
     }
 }

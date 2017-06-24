@@ -7,51 +7,44 @@ namespace System.Drawing.Drawing2D
     /**
      * Combine mode constants
      */
-    /// <include file='doc\CombineMode.uex' path='docs/doc[@for="CombineMode"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Defines how different clipping regions can
     ///    be combined.
-    /// </devdoc>
+    /// </summary>
     public enum CombineMode
     {
-        /// <include file='doc\CombineMode.uex' path='docs/doc[@for="CombineMode.Replace"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    One clipping region is replaced by another.
-        /// </devdoc>
+        /// </summary>
         Replace = 0,
-        /// <include file='doc\CombineMode.uex' path='docs/doc[@for="CombineMode.Intersect"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    The two clipping regions are combined by
         ///    taking their intersection.
-        /// </devdoc>
+        /// </summary>
         Intersect = 1,
-        /// <include file='doc\CombineMode.uex' path='docs/doc[@for="CombineMode.Union"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    The two clipping regions are combined by
         ///    taking the union of both.
-        /// </devdoc>
+        /// </summary>
         Union = 2,
-        /// <include file='doc\CombineMode.uex' path='docs/doc[@for="CombineMode.Xor"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    The two clipping regions are combined by
         ///    taking only the area enclosed by one or the other regions, but not both.
-        /// </devdoc>
+        /// </summary>
         Xor = 3,
-        /// <include file='doc\CombineMode.uex' path='docs/doc[@for="CombineMode.Exclude"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Two clipping regions are combined by taking
         ///       the area of the first region that does not intersect with the second.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Exclude = 4,
-        /// <include file='doc\CombineMode.uex' path='docs/doc[@for="CombineMode.Complement"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Two clipping regions are combined by taking
         ///       the area of the second region that does not intersect with the first.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Complement = 5
     }
 }

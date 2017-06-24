@@ -212,7 +212,7 @@ namespace System.Drawing
         }
 #endif
 
-        /// <devdoc>
+        /// <summary>
         ///   WeakRefCollection - a collection that holds onto weak references
         ///
         ///   Essentially you pass in the object as it is, and under the covers
@@ -227,7 +227,7 @@ namespace System.Drawing
         ///   to make sure dead refs are removed.
         ///   -----------------------------------------------------------------
         ///
-        /// </devdoc>        
+        /// </summary>        
         internal class WeakRefCollection : IList
         {
             private int _refCheckThreshold = Int32.MaxValue; // this means this is disabled by default.
@@ -414,7 +414,6 @@ namespace System.Drawing
             #endregion
 
             #region ICollection Members
-            /// <include file='doc\ArrangedElementCollection.uex' path='docs/doc[@for="ArrangedElementCollection.Count"]/*' />
             public int Count { get { return InnerList.Count; } }
             object ICollection.SyncRoot { get { return InnerList.SyncRoot; } }
             public bool IsReadOnly { get { return InnerList.IsReadOnly; } }

@@ -90,9 +90,9 @@ namespace System.Drawing
                 Initialize();
             }
 
-            /// <devdoc>
+            /// <summary>
             ///      Returns true if GDI+ has been started, but not shut down
-            /// </devdoc>
+            /// </summary>
             private static bool Initialized
             {
                 get
@@ -101,12 +101,12 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc>
+            /// <summary>
             ///      This property will give us back a hashtable we can use to store
             ///      all of our static brushes and pens on a per-thread basis.  This way   
             ///      we can avoid 'object in use' crashes when different threads are
             ///      referencing the same drawing object.
-            /// </devdoc>
+            /// </summary>
             internal static IDictionary ThreadData
             {
                 get
@@ -132,10 +132,10 @@ namespace System.Drawing
                 Thread.SetData(slot, null);
             }
 
-            /// <devdoc>
+            /// <summary>
             ///      Initializes GDI+
             ///      This should only be called by our constructor (static), we do not expect multiple calls per domain
-            /// </devdoc>
+            /// </summary>
             [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals")]
             private static void Initialize()
             {
@@ -170,9 +170,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc>
+            /// <summary>
             ///      Shutsdown GDI+
-            /// </devdoc>            
+            /// </summary>            
             private static void Shutdown()
             {
                 Debug.WriteLineIf(s_gdiPlusInitialization.TraceVerbose, "Shutdown GDI+ [" + AppDomain.CurrentDomain.FriendlyName + "]");
@@ -4154,65 +4154,55 @@ namespace System.Drawing
 #endif
             }
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.Accelerator"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for accelerator tables.
-            /// </devdoc>
+            /// </summary>
             public static readonly int Accelerator = System.Internal.HandleCollector.RegisterType("Accelerator", 80, 50);
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.Cursor"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     handle type for cursors.
-            /// </devdoc>
+            /// </summary>
             public static readonly int Cursor = System.Internal.HandleCollector.RegisterType("Cursor", 20, 500);
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.EMF"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for enhanced metafiles.
-            /// </devdoc>
+            /// </summary>
             public static readonly int EMF = System.Internal.HandleCollector.RegisterType("EnhancedMetaFile", 20, 500);
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.Find"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for file find handles.
-            /// </devdoc>
+            /// </summary>
             public static readonly int Find = System.Internal.HandleCollector.RegisterType("Find", 0, 1000);
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.GDI"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for GDI objects.
-            /// </devdoc>
+            /// </summary>
             public static readonly int GDI = System.Internal.HandleCollector.RegisterType("GDI", 50, 500);
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.HDC"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for HDC's that count against the Win98 limit of five DC's.  HDC's
             ///     which are not scarce, such as HDC's for bitmaps, are counted as GDIHANDLE's.
-            /// </devdoc>
+            /// </summary>
             public static readonly int HDC = System.Internal.HandleCollector.RegisterType("HDC", 100, 2); // wait for 2 dc's before collecting
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.Icon"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for icons.
-            /// </devdoc>
+            /// </summary>
             public static readonly int Icon = System.Internal.HandleCollector.RegisterType("Icon", 20, 500);
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.Kernel"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for kernel objects.
-            /// </devdoc>
+            /// </summary>
             public static readonly int Kernel = System.Internal.HandleCollector.RegisterType("Kernel", 0, 1000);
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.Menu"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for files.
-            /// </devdoc>
+            /// </summary>
             public static readonly int Menu = System.Internal.HandleCollector.RegisterType("Menu", 30, 1000);
 
-            /// <include file='doc\SafeNativeMethods.uex' path='docs/doc[@for="SafeNativeMethods.CommonHandles.Window"]/*' />
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for windows.
-            /// </devdoc>
+            /// </summary>
             public static readonly int Window = System.Internal.HandleCollector.RegisterType("Window", 5, 1000);
 
 #if DEBUG

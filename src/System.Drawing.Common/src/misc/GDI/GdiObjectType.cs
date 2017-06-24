@@ -4,9 +4,9 @@
 
 namespace System.Drawing.Internal
 {
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the the type of a GDI object.
-    /// </devdoc>
+    /// </summary>
     internal enum GdiObjectType
     {
         Pen = 1,

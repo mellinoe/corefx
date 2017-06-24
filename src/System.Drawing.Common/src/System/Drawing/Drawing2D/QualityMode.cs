@@ -4,36 +4,31 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\QualityMode.uex' path='docs/doc[@for="QualityMode"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies the overall quality of rendering
     ///       of graphics shapes.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum QualityMode
     {
-        /// <include file='doc\QualityMode.uex' path='docs/doc[@for="QualityMode.Invalid"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies an invalid mode.
-        /// </devdoc>
+        /// </summary>
         Invalid = -1,
-        /// <include file='doc\QualityMode.uex' path='docs/doc[@for="QualityMode.Default"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the default mode.
-        /// </devdoc>
+        /// </summary>
         Default = 0,
-        /// <include file='doc\QualityMode.uex' path='docs/doc[@for="QualityMode.Low"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies low quality, high performance
         ///    rendering.
-        /// </devdoc>
+        /// </summary>
         Low = 1,             // for apps that need the best performance
-        /// <include file='doc\QualityMode.uex' path='docs/doc[@for="QualityMode.High"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies high quality, lower performance
         ///    rendering.
-        /// </devdoc>
+        /// </summary>
         High = 2             // for apps that need the best rendering quality                                          
     }
 }

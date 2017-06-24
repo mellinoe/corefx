@@ -7,39 +7,33 @@ namespace System.Drawing.Imaging
     /**
      * Color channel flag constants
      */
-    /// <include file='doc\ColorChannelFlags.uex' path='docs/doc[@for="ColorChannelFlag"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies a range of CMYK channels.
-    /// </devdoc>
+    /// </summary>
     public enum ColorChannelFlag
     {
-        /// <include file='doc\ColorChannelFlags.uex' path='docs/doc[@for="ColorChannelFlag.ColorChannelC"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the Cyan color channel.
-        /// </devdoc>
+        /// </summary>
         ColorChannelC = 0,
-        /// <include file='doc\ColorChannelFlags.uex' path='docs/doc[@for="ColorChannelFlag.ColorChannelM"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the Magenta color channel.
-        /// </devdoc>
+        /// </summary>
         ColorChannelM,
-        /// <include file='doc\ColorChannelFlags.uex' path='docs/doc[@for="ColorChannelFlag.ColorChannelY"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the Yellow color channel.
-        /// </devdoc>
+        /// </summary>
         ColorChannelY,
-        /// <include file='doc\ColorChannelFlags.uex' path='docs/doc[@for="ColorChannelFlag.ColorChannelK"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the Black color channel.
-        /// </devdoc>
+        /// </summary>
         ColorChannelK,
-        /// <include file='doc\ColorChannelFlags.uex' path='docs/doc[@for="ColorChannelFlag.ColorChannelLast"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       This element specifies to leave the color
         ///       channel unchanged from the last selected channel.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         ColorChannelLast
     }
 }

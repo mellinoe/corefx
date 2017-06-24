@@ -8,35 +8,32 @@ namespace System.Drawing.Drawing2D
      * Fill mode constants
      */
 
-    /// <include file='doc\FillMode.uex' path='docs/doc[@for="FillMode"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies how the interior of a closed path
     ///       is filled.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum FillMode
     {
         /**
          * Odd-even fill rule
          */
-        /// <include file='doc\FillMode.uex' path='docs/doc[@for="FillMode.Alternate"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies the alternate fill mode.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Alternate = 0,
 
         /**
          * Non-zero winding fill rule
          */
-        /// <include file='doc\FillMode.uex' path='docs/doc[@for="FillMode.Winding"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies the winding fill mode.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Winding = 1
     }
 }

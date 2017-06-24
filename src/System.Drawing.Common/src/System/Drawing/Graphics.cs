@@ -19,10 +19,9 @@ namespace System.Drawing
     /**
      * Represent a graphics drawing context
      */
-    /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Encapsulates a GDI+ drawing surface.
-    /// </devdoc>
+    /// </summary>
     public sealed class Graphics : MarshalByRefObject, IDisposable, IDeviceContext
     {
 #if FINALIZATION_WATCH
@@ -38,27 +37,27 @@ namespace System.Drawing
         private string allocationSite = Graphics.GetAllocationStack();
 #endif
 
-        /// <devdoc>
+        /// <summary>
         ///     The context state previous to the current Graphics context (the head of the stack).
         ///     We don't keep a GraphicsContext for the current context since it is available at any time from GDI+ and
         ///     we don't want to keep track of changes in it.
-        /// </devdoc>
+        /// </summary>
         private GraphicsContext _previousContext;
 
-        /// <devdoc>
+        /// <summary>
         ///     Object to lock on for static methods. 
 
         private static readonly object s_syncObject = new Object();
 
-        /// <devdoc>
+        /// <summary>
         ///     Handle to native GDI+ graphics object.  This object is created on demand.
-        /// </devdoc>
+        /// </summary>
         private IntPtr _nativeGraphics;
 
-        /// <devdoc>
+        /// <summary>
         ///     Handle to native DC - obtained from the GDI+ graphics object.
         ///     We need to cache it to implement IDeviceContext interface.
-        /// </devdoc>
+        /// </summary>
         private IntPtr _nativeHdc;
 
         // Object reference used for printing; it could point to a PrintPreviewGraphics to obtain the VisibleClipBounds, or 
@@ -71,9 +70,8 @@ namespace System.Drawing
         // pointer back to the Image backing a specific graphic object
         private Image _backingImage;
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImageAbort"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public delegate bool DrawImageAbort(IntPtr callbackdata);
 
         // Callback for EnumerateMetafile methods.  The parameters are:
@@ -88,9 +86,8 @@ namespace System.Drawing
         // record that was just enumerated.  If this method  returns
         // FALSE, the enumeration process is aborted.  Otherwise, it continues.        
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafileProc"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public delegate bool EnumerateMetafileProc(EmfPlusRecordType recordType,
                                                    int flags,
                                                    int dataSize,
@@ -98,9 +95,9 @@ namespace System.Drawing
                                                    PlayRecordCallback callbackData);
 
 
-        /// <devdoc>
+        /// <summary>
         ///     Constructor to initialize this object from a native GDI+ Graphics pointer.
-        /// </devdoc>
+        /// </summary>
         private Graphics(IntPtr gdipNativeGraphics)
         {
             if (gdipNativeGraphics == IntPtr.Zero)
@@ -110,13 +107,12 @@ namespace System.Drawing
             _nativeGraphics = gdipNativeGraphics;
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FromHdc"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a new instance of the <see cref='System.Drawing.Graphics'/> class from the specified
         ///       handle to a device context.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHdc(IntPtr hdc)
         {
@@ -128,7 +124,6 @@ namespace System.Drawing
             return FromHdcInternal(hdc);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FromHdcInternal"]/*' />
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHdcInternal(IntPtr hdc)
@@ -146,13 +141,12 @@ namespace System.Drawing
             return new Graphics(nativeGraphics);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FromHdc1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Creates a new instance of the Graphics class from the specified handle to 
         ///       a device context and handle to a device.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHdc(IntPtr hdc, IntPtr hdevice)
         {
@@ -170,21 +164,19 @@ namespace System.Drawing
             return new Graphics(gdipNativeGraphics);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FromHwnd"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates a new instance of the <see cref='System.Drawing.Graphics'/> class
         ///    from a window handle.
-        /// </devdoc>
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHwnd(IntPtr hwnd)
         {
             return FromHwndInternal(hwnd);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FromHwndInternal"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHwndInternal(IntPtr hwnd)
@@ -201,11 +193,10 @@ namespace System.Drawing
             return new Graphics(nativeGraphics);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FromImage"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an instance of the <see cref='System.Drawing.Graphics'/> class
         ///    from an existing <see cref='System.Drawing.Image'/>.
-        /// </devdoc>
+        /// </summary>
         public static Graphics FromImage(Image image)
         {
             if (image == null)
@@ -233,9 +224,9 @@ namespace System.Drawing
         }
 
 
-        /// <devdoc>
+        /// <summary>
         ///     Gets the GDI+ native graphics pointer.
-        /// </devdoc>
+        /// </summary>
         internal IntPtr NativeGraphics
         {
             get
@@ -245,9 +236,9 @@ namespace System.Drawing
             }
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Implementation of IDeviceContext.GetHdc().
-        /// </devdoc>
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public IntPtr GetHdc()
         {
@@ -266,33 +257,30 @@ namespace System.Drawing
         }
 
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ReleaseHdc"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Releases the memory allocated for the handle to a device context.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public void ReleaseHdc(IntPtr hdc)
         {
             ReleaseHdcInternal(hdc);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ReleaseHdc1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     Implementation of IDeviceContext.ReleaseHdc().
-        /// </devdoc>
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public void ReleaseHdc()
         {
             ReleaseHdcInternal(_nativeHdc);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ReleaseHdcInternal"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    This method is public but is meant to be used by the .Net Framework only.
         ///    From MSDN: Internal method. Do not use.
-        /// </devdoc>
+        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void ReleaseHdcInternal(IntPtr hdc)
@@ -316,18 +304,16 @@ namespace System.Drawing
          * @notes How do we set up delegates to notice others
          *  when a Graphics object is disposed.
          */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Dispose"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Deletes this <see cref='System.Drawing.Graphics'/>, and
         ///    frees the memory allocated for it.
-        /// </devdoc>        
+        /// </summary>        
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Dispose2"]/*' />
         private void Dispose(bool disposing)
         {
 #if DEBUG
@@ -395,33 +381,30 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Finalize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Deletes this <see cref='System.Drawing.Graphics'/>, and
         ///    frees the memory allocated for it.
-        /// </devdoc>
+        /// </summary>
         ~Graphics()
         {
             Dispose(false);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Flush"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Forces immediate execution of all operations currently on the stack.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Flush()
         {
             Flush(FlushIntention.Flush);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Flush1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Forces execution of all operations currently on the stack.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void Flush(FlushIntention intention)
         {
             int status = SafeNativeMethods.Gdip.GdipFlush(new HandleRef(this, NativeGraphics), intention);
@@ -443,10 +426,9 @@ namespace System.Drawing
         *  filtering, etc.
         */
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.CompositingMode"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the <see cref='System.Drawing.Drawing2D.CompositingMode'/> associated with this <see cref='System.Drawing.Graphics'/>.
-        /// </devdoc>
+        /// </summary>
         public CompositingMode CompositingMode
         {
             get
@@ -480,10 +462,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.RenderingOrigin"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public Point RenderingOrigin
         {
             get
@@ -510,10 +491,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.CompositingQuality"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public CompositingQuality CompositingQuality
         {
             get
@@ -547,14 +527,13 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.TextRenderingHint"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or sets the rendering mode for text associated with
         ///       this <see cref='System.Drawing.Graphics'/>
         ///       .
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public TextRenderingHint TextRenderingHint
         {
             get
@@ -587,10 +566,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.TextContrast"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int TextContrast
         {
             get
@@ -617,10 +595,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SmoothingMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public SmoothingMode SmoothingMode
         {
             get
@@ -653,10 +630,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.PixelOffsetMode"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public PixelOffsetMode PixelOffsetMode
         {
             get
@@ -689,10 +665,10 @@ namespace System.Drawing
             }
         }
 
-        /// <devdoc>
+        /// <summary>
         ///    Represents an object used in conection with the printing API, it is used to hold a reference to a PrintPreviewGraphics (fake graphics)
         ///    or a printer DeviceContext (and maybe more in the future).
-        /// </devdoc>
+        /// </summary>
         internal object PrintingHelper
         {
             get
@@ -706,11 +682,10 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.InterpolationMode"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the interpolation mode
         ///    associated with this Graphics.
-        /// </devdoc>
+        /// </summary>
         public InterpolationMode InterpolationMode
         {
             get
@@ -747,11 +722,10 @@ namespace System.Drawing
         /**
          * Return the current world transform
          */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Transform"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the world transform
         ///    for this <see cref='System.Drawing.Graphics'/>.
-        /// </devdoc>
+        /// </summary>
         public Matrix Transform
         {
             get
@@ -785,9 +759,8 @@ namespace System.Drawing
          * Retrieve the current page transform information
          * notes @ these are atomic
          */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.PageUnit"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public GraphicsUnit PageUnit
         {
             get
@@ -820,9 +793,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.PageScale"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public float PageScale
         {
             get
@@ -850,9 +822,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DpiX"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public float DpiX
         {
             get
@@ -870,9 +841,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DpiY"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public float DpiY
         {
             get
@@ -891,41 +861,37 @@ namespace System.Drawing
         }
 
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.CopyFromScreen"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     CopyPixels will perform a gdi "bitblt" operation to the source from the destination
         ///     with the given size.
-        /// </devdoc>
+        /// </summary>
         public void CopyFromScreen(Point upperLeftSource, Point upperLeftDestination, Size blockRegionSize)
         {
             CopyFromScreen(upperLeftSource.X, upperLeftSource.Y, upperLeftDestination.X, upperLeftDestination.Y, blockRegionSize);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.CopyFromScreen1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     CopyPixels will perform a gdi "bitblt" operation to the source from the destination
         ///     with the given size.
-        /// </devdoc>
+        /// </summary>
         public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize)
         {
             CopyFromScreen(sourceX, sourceY, destinationX, destinationY, blockRegionSize, CopyPixelOperation.SourceCopy);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.CopyFromScreen2"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     CopyPixels will perform a gdi "bitblt" operation to the source from the destination
         ///     with the given size and specified raster operation.
-        /// </devdoc>
+        /// </summary>
         public void CopyFromScreen(Point upperLeftSource, Point upperLeftDestination, Size blockRegionSize, CopyPixelOperation copyPixelOperation)
         {
             CopyFromScreen(upperLeftSource.X, upperLeftSource.Y, upperLeftDestination.X, upperLeftDestination.Y, blockRegionSize, copyPixelOperation);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.CopyFromScreen3"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///     CopyPixels will perform a gdi "bitblt" operation to the source from the destination
         ///     with the given size and specified raster operation.
-        /// </devdoc>        
+        /// </summary>        
         public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize, CopyPixelOperation copyPixelOperation)
         {
             switch (copyPixelOperation)
@@ -985,10 +951,9 @@ namespace System.Drawing
          *  For set methods, we make copies of the objects passed in.
          */
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ResetTransform"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Resets the world transform to identity.
-        /// </devdoc>
+        /// </summary>
         public void ResetTransform()
         {
             int status = SafeNativeMethods.Gdip.GdipResetWorldTransform(new HandleRef(this, NativeGraphics));
@@ -999,23 +964,21 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MultiplyTransform"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that
         ///       represents the world transform and <paramref term="matrix"/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void MultiplyTransform(Matrix matrix)
         {
             MultiplyTransform(matrix, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MultiplyTransform1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that
         ///    represents the world transform and <paramref term="matrix"/>.
-        /// </devdoc>
+        /// </summary>
         public void MultiplyTransform(Matrix matrix, MatrixOrder order)
         {
             if (matrix == null)
@@ -1032,17 +995,15 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.TranslateTransform"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void TranslateTransform(float dx, float dy)
         {
             TranslateTransform(dx, dy, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.TranslateTransform1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void TranslateTransform(float dx, float dy, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateWorldTransform(new HandleRef(this, NativeGraphics), dx, dy, order);
@@ -1062,17 +1023,15 @@ namespace System.Drawing
             }
         }*/
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ScaleTransform"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void ScaleTransform(float sx, float sy)
         {
             ScaleTransform(sx, sy, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ScaleTransform1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void ScaleTransform(float sx, float sy, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipScaleWorldTransform(new HandleRef(this, NativeGraphics), sx, sy, order);
@@ -1083,17 +1042,15 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.RotateTransform"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void RotateTransform(float angle)
         {
             RotateTransform(angle, MatrixOrder.Prepend);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.RotateTransform1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void RotateTransform(float angle, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipRotateWorldTransform(new HandleRef(this, NativeGraphics), angle, order);
@@ -1108,9 +1065,8 @@ namespace System.Drawing
          * Transform points in the current graphics context
          */
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.TransformPoints"]/*' />
-        /// <devdoc>
-        /// </devdoc
+        /// <summary>
+        /// </summary
         public void TransformPoints(CoordinateSpace destSpace,
                                      CoordinateSpace srcSpace,
                                      PointF[] pts)
@@ -1146,9 +1102,8 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.TransformPoints1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void TransformPoints(CoordinateSpace destSpace,
                                     CoordinateSpace srcSpace,
@@ -1183,9 +1138,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.GetNearestColor"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public Color GetNearestColor(Color color)
         {
             int nearest = color.ToArgb();
@@ -1208,13 +1162,12 @@ namespace System.Drawing
          */
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawLine"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a line connecting the two
         ///       specified points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawLine(Pen pen, float x1, float y1, float x2, float y2)
         {
             if (pen == null)
@@ -1226,25 +1179,23 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawLine1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a line connecting the two
         ///       specified points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawLine(Pen pen, PointF pt1, PointF pt2)
         {
             DrawLine(pen, pt1.X, pt1.Y, pt2.X, pt2.Y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawLines"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a series of line segments that
         ///       connect an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawLines(Pen pen, PointF[] points)
         {
             if (pen == null)
@@ -1264,13 +1215,12 @@ namespace System.Drawing
 
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawLine2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a line connecting the two
         ///       specified points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawLine(Pen pen, int x1, int y1, int x2, int y2)
         {
             if (pen == null)
@@ -1282,25 +1232,23 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawLine3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a line connecting the two
         ///       specified points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawLine(Pen pen, Point pt1, Point pt2)
         {
             DrawLine(pen, pt1.X, pt1.Y, pt2.X, pt2.Y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawLines1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a series of line segments that connect an array of
         ///       points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawLines(Pen pen, Point[] points)
         {
             if (pen == null)
@@ -1319,12 +1267,11 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawArc"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws an arc from the specified ellipse.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawArc(Pen pen, float x, float y, float width, float height,
                             float startAngle, float sweepAngle)
         {
@@ -1338,25 +1285,23 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawArc1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws an arc from the specified
         ///       ellipse.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawArc(Pen pen, RectangleF rect, float startAngle, float sweepAngle)
         {
             DrawArc(pen, rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawArc2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws an arc from the specified ellipse.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawArc(Pen pen, int x, int y, int width, int height,
                             int startAngle, int sweepAngle)
         {
@@ -1370,24 +1315,22 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawArc3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws an arc from the specified ellipse.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawArc(Pen pen, Rectangle rect, float startAngle, float sweepAngle)
         {
             DrawArc(pen, rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawBezier"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a cubic bezier curve defined by
         ///       four ordered pairs that represent points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawBezier(Pen pen, float x1, float y1, float x2, float y2,
                                float x3, float y3, float x4, float y4)
         {
@@ -1402,25 +1345,23 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawBezier1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a cubic bezier curve defined by
         ///       four points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawBezier(Pen pen, PointF pt1, PointF pt2, PointF pt3, PointF pt4)
         {
             DrawBezier(pen, pt1.X, pt1.Y, pt2.X, pt2.Y, pt3.X, pt3.Y, pt4.X, pt4.Y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawBeziers"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a series of cubic Bezier curves
         ///       from an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawBeziers(Pen pen, PointF[] points)
         {
             if (pen == null)
@@ -1439,24 +1380,22 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawBezier2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a cubic bezier curve defined by four points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawBezier(Pen pen, Point pt1, Point pt2, Point pt3, Point pt4)
         {
             DrawBezier(pen, pt1.X, pt1.Y, pt2.X, pt2.Y, pt3.X, pt3.Y, pt4.X, pt4.Y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawBeziers1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a series of cubic Bezier curves from an array of
         ///       points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawBeziers(Pen pen, Point[] points)
         {
             if (pen == null)
@@ -1473,26 +1412,24 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawRectangle"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of a rectangle specified by
         ///    <paramref term="rect"/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawRectangle(Pen pen, Rectangle rect)
         {
             DrawRectangle(pen, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawRectangle1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of the specified
         ///       rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawRectangle(Pen pen, float x, float y, float width, float height)
         {
             if (pen == null)
@@ -1508,12 +1445,11 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawRectangle2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of the specified rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawRectangle(Pen pen, int x, int y, int width, int height)
         {
             if (pen == null)
@@ -1527,13 +1463,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawRectangles"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outlines of a series of
         ///       rectangles.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawRectangles(Pen pen, RectangleF[] rects)
         {
             if (pen == null)
@@ -1555,12 +1490,11 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawRectangles1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outlines of a series of rectangles.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawRectangles(Pen pen, Rectangle[] rects)
         {
             if (pen == null)
@@ -1583,25 +1517,23 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawEllipse"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of an
         ///       ellipse defined by a bounding rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawEllipse(Pen pen, RectangleF rect)
         {
             DrawEllipse(pen, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawEllipse1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of an
         ///       ellipse defined by a bounding rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawEllipse(Pen pen, float x, float y, float width, float height)
         {
             if (pen == null)
@@ -1615,24 +1547,22 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawEllipse2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of an ellipse specified by a bounding
         ///       rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawEllipse(Pen pen, Rectangle rect)
         {
             DrawEllipse(pen, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawEllipse3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of an ellipse defined by a bounding rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawEllipse(Pen pen, int x, int y, int width, int height)
         {
             if (pen == null)
@@ -1646,26 +1576,24 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawPie"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of a pie section
         ///       defined by an ellipse and two radial lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawPie(Pen pen, RectangleF rect, float startAngle, float sweepAngle)
         {
             DrawPie(pen, rect.X, rect.Y, rect.Width, rect.Height, startAngle,
                     sweepAngle);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawPie1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of a pie section
         ///       defined by an ellipse and two radial lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawPie(Pen pen, float x, float y, float width,
                             float height, float startAngle, float sweepAngle)
         {
@@ -1680,26 +1608,24 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawPie2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of a pie section defined by an ellipse
         ///       and two radial lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawPie(Pen pen, Rectangle rect, float startAngle, float sweepAngle)
         {
             DrawPie(pen, rect.X, rect.Y, rect.Width, rect.Height, startAngle,
                     sweepAngle);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawPie3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the outline of a pie section defined by an ellipse and two radial
         ///       lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawPie(Pen pen, int x, int y, int width, int height,
                             int startAngle, int sweepAngle)
         {
@@ -1714,11 +1640,10 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawPolygon"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Draws the outline of a polygon defined
         ///    by an array of points.
-        /// </devdoc>
+        /// </summary>
         public void DrawPolygon(Pen pen, PointF[] points)
         {
             if (pen == null)
@@ -1737,11 +1662,10 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawPolygon1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Draws the outline of a polygon defined
         ///    by an array of points.
-        /// </devdoc>
+        /// </summary>
         public void DrawPolygon(Pen pen, Point[] points)
         {
             if (pen == null)
@@ -1759,13 +1683,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawPath"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the lines and curves defined by a
         ///    <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawPath(Pen pen, GraphicsPath path)
         {
             if (pen == null)
@@ -1781,13 +1704,12 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawCurve"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a curve defined by an array of
         ///       points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawCurve(Pen pen, PointF[] points)
         {
             if (pen == null)
@@ -1805,13 +1727,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawCurve1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a curve defined by an array of
         ///       points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawCurve(Pen pen, PointF[] points, float tension)
         {
             if (pen == null)
@@ -1829,22 +1750,20 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawCurve2"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void DrawCurve(Pen pen, PointF[] points, int offset, int numberOfSegments)
         {
             DrawCurve(pen, points, offset, numberOfSegments, 0.5f);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawCurve3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a curve defined by an array of
         ///       points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawCurve(Pen pen, PointF[] points, int offset, int numberOfSegments,
                               float tension)
         {
@@ -1865,12 +1784,11 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawCurve4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a curve defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawCurve(Pen pen, Point[] points)
         {
             if (pen == null)
@@ -1888,12 +1806,11 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawCurve5"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a curve defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawCurve(Pen pen, Point[] points, float tension)
         {
             if (pen == null)
@@ -1911,12 +1828,11 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawCurve6"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a curve defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawCurve(Pen pen, Point[] points, int offset, int numberOfSegments,
                               float tension)
         {
@@ -1937,13 +1853,12 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawClosedCurve"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a closed curve defined by an
         ///       array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawClosedCurve(Pen pen, PointF[] points)
         {
             if (pen == null)
@@ -1961,13 +1876,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawClosedCurve1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a closed curve defined by an
         ///       array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawClosedCurve(Pen pen, PointF[] points, float tension, FillMode fillmode)
         {
             if (pen == null)
@@ -1986,12 +1900,11 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawClosedCurve2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a closed curve defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawClosedCurve(Pen pen, Point[] points)
         {
             if (pen == null)
@@ -2009,12 +1922,11 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawClosedCurve3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a closed curve defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawClosedCurve(Pen pen, Point[] points, float tension, FillMode fillmode)
         {
             if (pen == null)
@@ -2032,11 +1944,10 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Clear"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Fills the entire drawing surface with the
         ///    specified color.
-        /// </devdoc>
+        /// </summary>
         public void Clear(Color color)
         {
             int status = SafeNativeMethods.Gdip.GdipGraphicsClear(new HandleRef(this, NativeGraphics), color.ToArgb());
@@ -2048,24 +1959,22 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillRectangle"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a rectangle with a <see cref='System.Drawing.Brush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillRectangle(Brush brush, RectangleF rect)
         {
             FillRectangle(brush, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillRectangle1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a rectangle with a
         ///    <see cref='System.Drawing.Brush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillRectangle(Brush brush, float x, float y, float width, float height)
         {
             if (brush == null)
@@ -2081,23 +1990,21 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillRectangle2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a rectangle with a <see cref='System.Drawing.Brush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillRectangle(Brush brush, Rectangle rect)
         {
             FillRectangle(brush, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillRectangle3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a rectangle with a <see cref='System.Drawing.Brush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillRectangle(Brush brush, int x, int y, int width, int height)
         {
             if (brush == null)
@@ -2111,13 +2018,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillRectangles"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interiors of a series of
         ///       rectangles with a <see cref='System.Drawing.Brush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillRectangles(Brush brush, RectangleF[] rects)
         {
             if (brush == null)
@@ -2139,12 +2045,11 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillRectangles1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interiors of a series of rectangles with a <see cref='System.Drawing.Brush'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillRectangles(Brush brush, Rectangle[] rects)
         {
             if (brush == null)
@@ -2167,24 +2072,22 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillPolygon"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a polygon defined
         ///       by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillPolygon(Brush brush, PointF[] points)
         {
             FillPolygon(brush, points, FillMode.Alternate);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillPolygon1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a polygon defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillPolygon(Brush brush, PointF[] points, FillMode fillMode)
         {
             if (brush == null)
@@ -2203,23 +2106,21 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillPolygon2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a polygon defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillPolygon(Brush brush, Point[] points)
         {
             FillPolygon(brush, points, FillMode.Alternate);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillPolygon3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a polygon defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillPolygon(Brush brush, Point[] points, FillMode fillMode)
         {
             if (brush == null)
@@ -2238,24 +2139,22 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillEllipse"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of an ellipse
         ///       defined by a bounding rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillEllipse(Brush brush, RectangleF rect)
         {
             FillEllipse(brush, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillEllipse1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of an ellipse defined by a bounding rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillEllipse(Brush brush, float x, float y, float width,
                                 float height)
         {
@@ -2270,24 +2169,22 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillEllipse2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of an ellipse defined by a bounding rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillEllipse(Brush brush, Rectangle rect)
         {
             FillEllipse(brush, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillEllipse3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of an ellipse defined by a bounding
         ///       rectangle.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillEllipse(Brush brush, int x, int y, int width, int height)
         {
             if (brush == null)
@@ -2300,13 +2197,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillPie"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a pie section defined by an ellipse and two radial
         ///       lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillPie(Brush brush, Rectangle rect, float startAngle,
                             float sweepAngle)
         {
@@ -2315,13 +2211,12 @@ namespace System.Drawing
         }
 
         // float verison
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillPie1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a pie section defined by an ellipse and two radial
         ///       lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillPie(Brush brush, float x, float y, float width,
                             float height, float startAngle, float sweepAngle)
         {
@@ -2336,13 +2231,12 @@ namespace System.Drawing
         }
 
         // int verison
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillPie2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a pie section defined by an ellipse
         ///       and two radial lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillPie(Brush brush, int x, int y, int width,
                             int height, int startAngle, int sweepAngle)
         {
@@ -2356,12 +2250,11 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillPath"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a path.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillPath(Brush brush, GraphicsPath path)
         {
             if (brush == null)
@@ -2377,14 +2270,13 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillClosedCurve"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior a closed
         ///       curve defined by an
         ///       array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillClosedCurve(Brush brush, PointF[] points)
         {
             if (brush == null)
@@ -2402,22 +2294,20 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillClosedCurve1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the
         ///       interior of a closed curve defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillClosedCurve(Brush brush, PointF[] points, FillMode fillmode)
         {
             FillClosedCurve(brush, points, fillmode, 0.5f);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillClosedCurve2"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void FillClosedCurve(Brush brush, PointF[] points, FillMode fillmode, float tension)
         {
             if (brush == null)
@@ -2437,12 +2327,11 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillClosedCurve3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior a closed curve defined by an array of points.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillClosedCurve(Brush brush, Point[] points)
         {
             if (brush == null)
@@ -2460,19 +2349,17 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillClosedCurve4"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void FillClosedCurve(Brush brush, Point[] points, FillMode fillmode)
         {
             FillClosedCurve(brush, points, fillmode, 0.5f);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillClosedCurve5"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void FillClosedCurve(Brush brush, Point[] points, FillMode fillmode, float tension)
         {
             if (brush == null)
@@ -2491,12 +2378,11 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.FillRegion"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Fills the interior of a <see cref='System.Drawing.Region'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void FillRegion(Brush brush, Region region)
         {
             if (brush == null)
@@ -2519,52 +2405,46 @@ namespace System.Drawing
          */
 
         // Without clipping rectangle
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawString"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws a string with the specified font.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void DrawString(String s, Font font, Brush brush, float x, float y)
         {
             DrawString(s, font, brush, new RectangleF(x, y, 0, 0), null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawString1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawString(String s, Font font, Brush brush, PointF point)
         {
             DrawString(s, font, brush, new RectangleF(point.X, point.Y, 0, 0), null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawString2"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawString(String s, Font font, Brush brush, float x, float y, StringFormat format)
         {
             DrawString(s, font, brush, new RectangleF(x, y, 0, 0), format);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawString3"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawString(String s, Font font, Brush brush, PointF point, StringFormat format)
         {
             DrawString(s, font, brush, new RectangleF(point.X, point.Y, 0, 0), format);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawString4"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawString(String s, Font font, Brush brush, RectangleF layoutRectangle)
         {
             DrawString(s, font, brush, layoutRectangle, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawString5"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawString(String s, Font font, Brush brush,
                                RectangleF layoutRectangle, StringFormat format)
         {
@@ -2585,9 +2465,8 @@ namespace System.Drawing
 
         // MeasureString
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MeasureString"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public SizeF MeasureString(String text, Font font, SizeF layoutArea, StringFormat stringFormat,
                                    out int charactersFitted, out int linesFilled)
         {
@@ -2617,9 +2496,8 @@ namespace System.Drawing
             return grfboundingBox.SizeF;
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MeasureString1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public SizeF MeasureString(String text, Font font, PointF origin, StringFormat stringFormat)
         {
             if (text == null || text.Length == 0)
@@ -2649,17 +2527,15 @@ namespace System.Drawing
             return grfboundingBox.SizeF;
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MeasureString2"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public SizeF MeasureString(String text, Font font, SizeF layoutArea)
         {
             return MeasureString(text, font, layoutArea, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MeasureString3"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public SizeF MeasureString(String text, Font font, SizeF layoutArea, StringFormat stringFormat)
         {
             if (text == null || text.Length == 0)
@@ -2689,33 +2565,29 @@ namespace System.Drawing
             return grfboundingBox.SizeF;
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MeasureString4"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public SizeF MeasureString(String text, Font font)
         {
             return MeasureString(text, font, new SizeF(0, 0));
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MeasureString5"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public SizeF MeasureString(String text, Font font, int width)
         {
             return MeasureString(text, font, new SizeF(width, 999999));
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MeasureString6"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public SizeF MeasureString(String text, Font font, int width, StringFormat format)
         {
             return MeasureString(text, font, new SizeF(width, 999999), format);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.MeasureCharacterRanges"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public Region[] MeasureCharacterRanges(String text, Font font, RectangleF layoutRect,
                                           StringFormat stringFormat)
         {
@@ -2762,9 +2634,8 @@ namespace System.Drawing
             return regions;
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawIcon"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawIcon(Icon icon, int x, int y)
         {
             if (icon == null)
@@ -2785,13 +2656,12 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawIcon1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Draws this image to a graphics object.  The drawing command originates on the graphics
         ///    object, but a graphics object generally has no idea how to render a given image.  So,
         ///    it passes the call to the actual image.  This version crops the image to the given
         ///    dimensions and allows the user to specify a rectangle within the image to draw.
-        /// </devdoc>
+        /// </summary>
         public void DrawIcon(Icon icon, Rectangle targetRect)
         {
             if (icon == null)
@@ -2812,13 +2682,12 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawIconUnstretched"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Draws this image to a graphics object.  The drawing command originates on the graphics
         ///    object, but a graphics object generally has no idea how to render a given image.  So,
         ///    it passes the call to the actual image.  This version stretches the image to the given
         ///    dimensions and allows the user to specify a rectangle within the image to draw.
-        /// </devdoc>
+        /// </summary>
         public void DrawIconUnstretched(Icon icon, Rectangle targetRect)
         {
             if (icon == null)
@@ -2839,22 +2708,20 @@ namespace System.Drawing
         /**
          * Draw images (both bitmap and vector)
          */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Draws the specified image at the
         ///       specified location.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF point)
         {
             DrawImage(image, point.X, point.Y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, float x, float y)
         {
@@ -2871,18 +2738,16 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage2"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, RectangleF rect)
         {
             DrawImage(image, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage3"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, float x, float y, float width,
                               float height)
@@ -2903,18 +2768,16 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage4"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Point point)
         {
             DrawImage(image, point.X, point.Y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage5"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, int x, int y)
         {
@@ -2931,18 +2794,16 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage6"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle rect)
         {
             DrawImage(image, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage7"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, int x, int y, int width, int height)
         {
@@ -2966,41 +2827,36 @@ namespace System.Drawing
 
 
         // unscaled versions
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImageUnscaled"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawImageUnscaled(Image image, Point point)
         {
             DrawImage(image, point.X, point.Y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImageUnscaled1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawImageUnscaled(Image image, int x, int y)
         {
             DrawImage(image, x, y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImageUnscaled2"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawImageUnscaled(Image image, Rectangle rect)
         {
             DrawImage(image, rect.X, rect.Y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImageUnscaled3"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawImageUnscaled(Image image, int x, int y, int width, int height)
         {
             DrawImage(image, x, y);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImageUnscaledAndClipped"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void DrawImageUnscaledAndClipped(Image image, Rectangle rect)
         {
             if (image == null)
@@ -3026,9 +2882,8 @@ namespace System.Drawing
          *
          *  @notes Perspective blt only works for bitmap images.
          */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage8"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF[] destPoints)
         {
@@ -3057,9 +2912,8 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage9"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Point[] destPoints)
         {
@@ -3093,9 +2947,8 @@ namespace System.Drawing
          * portion of the source image to be drawn.
          */
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage10"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, float x, float y, RectangleF srcRect,
                               GraphicsUnit srcUnit)
@@ -3122,9 +2975,8 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage11"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, int x, int y, Rectangle srcRect,
                               GraphicsUnit srcUnit)
@@ -3151,9 +3003,8 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage12"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, RectangleF destRect, RectangleF srcRect,
                               GraphicsUnit srcUnit)
@@ -3186,9 +3037,8 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage13"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, Rectangle srcRect,
                               GraphicsUnit srcUnit)
@@ -3220,7 +3070,6 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage14"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF[] destPoints, RectangleF srcRect,
                               GraphicsUnit srcUnit)
@@ -3260,7 +3109,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage15"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF[] destPoints, RectangleF srcRect,
                               GraphicsUnit srcUnit, ImageAttributes imageAttr)
@@ -3268,7 +3116,6 @@ namespace System.Drawing
             DrawImage(image, destPoints, srcRect, srcUnit, imageAttr, null, 0);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage16"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF[] destPoints, RectangleF srcRect,
                               GraphicsUnit srcUnit, ImageAttributes imageAttr,
@@ -3277,7 +3124,6 @@ namespace System.Drawing
             DrawImage(image, destPoints, srcRect, srcUnit, imageAttr, callback, 0);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage17"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF[] destPoints, RectangleF srcRect,
                               GraphicsUnit srcUnit, ImageAttributes imageAttr,
@@ -3319,14 +3165,12 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage18"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Point[] destPoints, Rectangle srcRect, GraphicsUnit srcUnit)
         {
             DrawImage(image, destPoints, srcRect, srcUnit, null, null, 0);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage19"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Point[] destPoints, Rectangle srcRect,
                               GraphicsUnit srcUnit, ImageAttributes imageAttr)
@@ -3334,7 +3178,6 @@ namespace System.Drawing
             DrawImage(image, destPoints, srcRect, srcUnit, imageAttr, null, 0);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage20"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Point[] destPoints, Rectangle srcRect,
                               GraphicsUnit srcUnit, ImageAttributes imageAttr,
@@ -3343,7 +3186,6 @@ namespace System.Drawing
             DrawImage(image, destPoints, srcRect, srcUnit, imageAttr, callback, 0);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage21"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Point[] destPoints, Rectangle srcRect,
                               GraphicsUnit srcUnit, ImageAttributes imageAttr,
@@ -3385,7 +3227,6 @@ namespace System.Drawing
         }
 
         // float version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage22"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, float srcX, float srcY,
                               float srcWidth, float srcHeight, GraphicsUnit srcUnit)
@@ -3393,7 +3234,6 @@ namespace System.Drawing
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage23"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, float srcX, float srcY,
                               float srcWidth, float srcHeight, GraphicsUnit srcUnit,
@@ -3402,7 +3242,6 @@ namespace System.Drawing
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, imageAttrs, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage24"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, float srcX, float srcY,
                               float srcWidth, float srcHeight, GraphicsUnit srcUnit,
@@ -3412,7 +3251,6 @@ namespace System.Drawing
         }
 
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage25"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, float srcX, float srcY,
                               float srcWidth, float srcHeight, GraphicsUnit srcUnit, ImageAttributes imageAttrs,
@@ -3445,7 +3283,6 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage26"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, int srcX, int srcY,
                               int srcWidth, int srcHeight, GraphicsUnit srcUnit)
@@ -3453,7 +3290,6 @@ namespace System.Drawing
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage27"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, int srcX, int srcY,
                               int srcWidth, int srcHeight, GraphicsUnit srcUnit,
@@ -3462,7 +3298,6 @@ namespace System.Drawing
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, imageAttr, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage28"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, int srcX, int srcY,
                               int srcWidth, int srcHeight, GraphicsUnit srcUnit,
@@ -3471,7 +3306,6 @@ namespace System.Drawing
             DrawImage(image, destRect, srcX, srcY, srcWidth, srcHeight, srcUnit, imageAttr, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.DrawImage29"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, int srcX, int srcY,
                               int srcWidth, int srcHeight, GraphicsUnit srcUnit, ImageAttributes imageAttrs,
@@ -3503,7 +3337,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF destPoint,
                                       EnumerateMetafileProc callback)
@@ -3511,7 +3344,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoint, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile1"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF destPoint,
                                       EnumerateMetafileProc callback, IntPtr callbackData)
@@ -3519,7 +3351,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoint, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile2"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, PointF destPoint,
@@ -3542,7 +3373,6 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile3"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point destPoint,
                                       EnumerateMetafileProc callback)
@@ -3550,7 +3380,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoint, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile4"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point destPoint,
                                       EnumerateMetafileProc callback, IntPtr callbackData)
@@ -3558,7 +3387,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoint, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile5"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, Point destPoint,
@@ -3581,7 +3409,6 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile6"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, RectangleF destRect,
                                       EnumerateMetafileProc callback)
@@ -3589,7 +3416,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile7"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, RectangleF destRect,
                                       EnumerateMetafileProc callback, IntPtr callbackData)
@@ -3597,7 +3423,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile8"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, RectangleF destRect,
@@ -3623,7 +3448,6 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile9"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Rectangle destRect,
                                       EnumerateMetafileProc callback)
@@ -3631,7 +3455,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile10"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Rectangle destRect,
                                       EnumerateMetafileProc callback, IntPtr callbackData)
@@ -3639,7 +3462,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile11"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, Rectangle destRect,
@@ -3663,7 +3485,6 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile12"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
                                       EnumerateMetafileProc callback)
@@ -3671,7 +3492,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile13"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
                                       EnumerateMetafileProc callback, IntPtr callbackData)
@@ -3679,7 +3499,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, callback, IntPtr.Zero, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile14"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
@@ -3714,7 +3533,6 @@ namespace System.Drawing
         }
 
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile15"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
                                       EnumerateMetafileProc callback)
@@ -3722,7 +3540,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile16"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
                                       EnumerateMetafileProc callback, IntPtr callbackData)
@@ -3730,7 +3547,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile17"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
@@ -3764,7 +3580,6 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile18"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF destPoint,
                                       RectangleF srcRect, GraphicsUnit srcUnit,
@@ -3773,7 +3588,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoint, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile19"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF destPoint,
                                       RectangleF srcRect, GraphicsUnit srcUnit,
@@ -3782,7 +3596,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoint, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile20"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, PointF destPoint,
@@ -3810,7 +3623,6 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile21"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point destPoint,
                                       Rectangle srcRect, GraphicsUnit srcUnit,
@@ -3819,7 +3631,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoint, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile22"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point destPoint,
                                       Rectangle srcRect, GraphicsUnit srcUnit,
@@ -3828,7 +3639,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoint, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile23"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, Point destPoint,
@@ -3857,7 +3667,6 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile24"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, RectangleF destRect,
                                       RectangleF srcRect, GraphicsUnit srcUnit,
@@ -3866,7 +3675,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile25"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, RectangleF destRect,
                                       RectangleF srcRect, GraphicsUnit srcUnit,
@@ -3875,7 +3683,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile26"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void EnumerateMetafile(Metafile metafile, RectangleF destRect,
@@ -3905,7 +3712,6 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile27"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Rectangle destRect,
                                       Rectangle srcRect, GraphicsUnit srcUnit,
@@ -3914,7 +3720,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile28"]/*' />
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Rectangle destRect,
                                       Rectangle srcRect, GraphicsUnit srcUnit,
@@ -3923,10 +3728,9 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile29"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Rectangle destRect,
@@ -3955,10 +3759,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile30"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
                                       RectangleF srcRect, GraphicsUnit srcUnit,
@@ -3967,10 +3770,9 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile31"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
                                       RectangleF srcRect, GraphicsUnit srcUnit,
@@ -3979,10 +3781,9 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile32"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
@@ -4022,10 +3823,9 @@ namespace System.Drawing
         }
 
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile33"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
                                       Rectangle srcRect, GraphicsUnit srcUnit,
@@ -4034,10 +3834,9 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile34"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
                                       Rectangle srcRect, GraphicsUnit srcUnit,
@@ -4046,10 +3845,9 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EnumerateMetafile35"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
@@ -4095,17 +3893,15 @@ namespace System.Drawing
          * @notes Simply incredible redundancy here.
          */
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(Graphics g)
         {
             SetClip(g, CombineMode.Replace);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(Graphics g, CombineMode combineMode)
         {
             if (g == null)
@@ -4121,17 +3917,15 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip2"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(Rectangle rect)
         {
             SetClip(rect, CombineMode.Replace);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip3"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(Rectangle rect, CombineMode combineMode)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRectI(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -4143,17 +3937,15 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip4"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(RectangleF rect)
         {
             SetClip(rect, CombineMode.Replace);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip5"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(RectangleF rect, CombineMode combineMode)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRect(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -4165,17 +3957,15 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip6"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(GraphicsPath path)
         {
             SetClip(path, CombineMode.Replace);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip7"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(GraphicsPath path, CombineMode combineMode)
         {
             if (path == null)
@@ -4190,9 +3980,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.SetClip8"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void SetClip(Region region, CombineMode combineMode)
         {
             if (region == null)
@@ -4208,9 +3997,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IntersectClip"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void IntersectClip(Rectangle rect)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRectI(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -4222,9 +4010,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IntersectClip1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void IntersectClip(RectangleF rect)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRect(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -4236,9 +4023,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IntersectClip2"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void IntersectClip(Region region)
         {
             if (region == null)
@@ -4253,9 +4039,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ExcludeClip"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void ExcludeClip(Rectangle rect)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRectI(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -4267,9 +4052,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ExcludeClip1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void ExcludeClip(Region region)
         {
             if (region == null)
@@ -4285,9 +4069,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ResetClip"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void ResetClip()
         {
             int status = SafeNativeMethods.Gdip.GdipResetClip(new HandleRef(this, NativeGraphics));
@@ -4298,9 +4081,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.TranslateClip"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void TranslateClip(float dx, float dy)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateClip(new HandleRef(this, NativeGraphics), dx, dy);
@@ -4311,9 +4093,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.TranslateClip1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void TranslateClip(int dx, int dy)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateClip(new HandleRef(this, NativeGraphics), dx, dy);
@@ -4324,7 +4105,7 @@ namespace System.Drawing
             }
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Combines current Graphics context with all previous contexts.
         ///     When BeginContainer() is called, a copy of the current context is pushed into the GDI+ context stack, it keeps track of the
         ///     absolute clipping and transform but reset the public properties so it looks like a brand new context.
@@ -4334,7 +4115,7 @@ namespace System.Drawing
         ///     The return value is an object array where the first element contains the cumulative clip region and the second the cumulative
         ///     translate transform matrix.
         ///     WARNING: This method is for internal FX support only.
-        ///     </devdoc>
+        ///     </summary>
         [StrongNameIdentityPermissionAttribute(SecurityAction.LinkDemand, Name = "System.Windows.Forms", PublicKey = "0x00000000000000000400000000000000")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public object GetContextInfo()
@@ -4403,9 +4184,8 @@ namespace System.Drawing
         /**
          *  GetClip region from graphics context
          */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Clip"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public Region Clip
         {
             get
@@ -4427,9 +4207,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.ClipBounds"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public RectangleF ClipBounds
         {
             get
@@ -4447,9 +4226,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsClipEmpty"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsClipEmpty
         {
             get
@@ -4470,9 +4248,8 @@ namespace System.Drawing
         /**
          * Hit testing operations
          */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.VisibleClipBounds"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public RectangleF VisibleClipBounds
         {
             get
@@ -4502,9 +4279,8 @@ namespace System.Drawing
         /**
           * @notes atomic operation?  status needed?
           */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisibleClipEmpty"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisibleClipEmpty
         {
             get
@@ -4523,17 +4299,15 @@ namespace System.Drawing
         }
 
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisible"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisible(int x, int y)
         {
             return IsVisible(new Point(x, y));
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisible1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisible(Point point)
         {
             int isVisible;
@@ -4548,17 +4322,15 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisible2"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisible(float x, float y)
         {
             return IsVisible(new PointF(x, y));
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisible3"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisible(PointF point)
         {
             int isVisible;
@@ -4573,17 +4345,15 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisible4"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisible(int x, int y, int width, int height)
         {
             return IsVisible(new Rectangle(x, y, width, height));
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisible5"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisible(Rectangle rect)
         {
             int isVisible;
@@ -4599,17 +4369,15 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisible6"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisible(float x, float y, float width, float height)
         {
             return IsVisible(new RectangleF(x, y, width, height));
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.IsVisible7"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public bool IsVisible(RectangleF rect)
         {
             int isVisible;
@@ -4625,9 +4393,9 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Saves the current context into the context stack.
-        /// </devdoc>
+        /// </summary>
         private void PushContext(GraphicsContext context)
         {
             Debug.Assert(context != null && context.State != 0, "GraphicsContext object is null or not valid.");
@@ -4641,9 +4409,9 @@ namespace System.Drawing
             _previousContext = context;
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Pops all contexts from the specified one included.  The specified context is becoming the current context.
-        /// </devdoc>
+        /// </summary>
         private void PopContext(int currentContextState)
         {
             Debug.Assert(_previousContext != null, "Trying to restore a context when the stack is empty");
@@ -4666,9 +4434,8 @@ namespace System.Drawing
         /**
          * Save/restore graphics state
          */
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Save"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public GraphicsState Save()
         {
             GraphicsContext context = new GraphicsContext(this);
@@ -4689,9 +4456,8 @@ namespace System.Drawing
             return new GraphicsState(state);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.Restore"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void Restore(GraphicsState gstate)
         {
             int status = SafeNativeMethods.Gdip.GdipRestoreGraphics(new HandleRef(this, NativeGraphics), gstate.nativeState);
@@ -4709,9 +4475,8 @@ namespace System.Drawing
          */
         // float version
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.BeginContainer"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public GraphicsContainer BeginContainer(RectangleF dstrect, RectangleF srcrect, GraphicsUnit unit)
         {
             GraphicsContext context = new GraphicsContext(this);
@@ -4735,9 +4500,8 @@ namespace System.Drawing
             return new GraphicsContainer(state);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.BeginContainer1"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public GraphicsContainer BeginContainer()
         {
             GraphicsContext context = new GraphicsContext(this);
@@ -4757,9 +4521,8 @@ namespace System.Drawing
             return new GraphicsContainer(state);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.EndContainer"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void EndContainer(GraphicsContainer container)
         {
             if (container == null)
@@ -4778,9 +4541,8 @@ namespace System.Drawing
         }
 
         // int version
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.BeginContainer2"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public GraphicsContainer BeginContainer(Rectangle dstrect, Rectangle srcrect, GraphicsUnit unit)
         {
             GraphicsContext context = new GraphicsContext(this);
@@ -4804,9 +4566,8 @@ namespace System.Drawing
             return new GraphicsContainer(state);
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.AddMetafileComment"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void AddMetafileComment(byte[] data)
         {
             if (data == null)
@@ -4822,9 +4583,8 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Graphics.uex' path='docs/doc[@for="Graphics.GetHalftonePalette"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public static IntPtr GetHalftonePalette()
         {
             if (s_halftonePalette == IntPtr.Zero)
@@ -4860,7 +4620,7 @@ namespace System.Drawing
         }
 
 
-        /// <devdoc>
+        /// <summary>
         ///     GDI+ will return a 'generic error' with specific win32 last error codes when
         ///     a terminal server session has been closed, minimized, etc...  We don't want 
         ///     to throw when this happens, so we'll guard against this by looking at the
@@ -4872,7 +4632,7 @@ namespace System.Drawing
         ///     on the secure desktop). Not sure if there's anything you can do, short of catching 
         ///     the desktop switch message and absorbing all the exceptions that get thrown while 
         ///     it's the secure desktop.
-        /// </devdoc>
+        /// </summary>
         private void CheckErrorStatus(int status)
         {
             if (status != SafeNativeMethods.Gdip.Ok)
@@ -4894,13 +4654,13 @@ namespace System.Drawing
             }
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     GDI+ will return a 'generic error' when we attempt to draw an Emf 
         ///     image with width/height == 1.  Here, we will hack around this by 
         ///     resetting the errorstatus.  Note that we don't do simple arg checking
         ///     for height || width == 1 here because transforms can be applied to
         ///     the Graphics object making it difficult to identify this scenario.
-        /// </devdoc>
+        /// </summary>
         private void IgnoreMetafileErrors(Image image, ref int errorStatus)
         {
             if (errorStatus != SafeNativeMethods.Gdip.Ok)

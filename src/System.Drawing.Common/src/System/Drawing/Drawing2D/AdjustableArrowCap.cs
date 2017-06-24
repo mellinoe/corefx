@@ -6,34 +6,31 @@ namespace System.Drawing.Drawing2D
 {
     using System.Runtime.InteropServices;
 
-    /// <include file='doc\AdjustableArrowCap.uex' path='docs/doc[@for="AdjustableArrowCap"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Represents an adjustable arrow-shaped line
     ///    cap.
-    /// </devdoc>
+    /// </summary>
     public sealed class AdjustableArrowCap : CustomLineCap
     {
         internal AdjustableArrowCap(IntPtr nativeCap) :
             base(nativeCap)
         { }
 
-        /// <include file='doc\AdjustableArrowCap.uex' path='docs/doc[@for="AdjustableArrowCap.AdjustableArrowCap"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.AdjustableArrowCap'/> class with the specified width and
         ///    height.
-        /// </devdoc>
+        /// </summary>
         public AdjustableArrowCap(float width,
                                   float height) :
             this(width, height, true)
         { }
 
-        /// <include file='doc\AdjustableArrowCap.uex' path='docs/doc[@for="AdjustableArrowCap.AdjustableArrowCap1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.AdjustableArrowCap'/> class with the specified width,
         ///       height, and fill property.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public AdjustableArrowCap(float width,
                                   float height,
                                   bool isFilled)
@@ -68,10 +65,9 @@ namespace System.Drawing.Drawing2D
             return height;
         }
 
-        /// <include file='doc\AdjustableArrowCap.uex' path='docs/doc[@for="AdjustableArrowCap.Height"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the height of the arrow cap.
-        /// </devdoc>
+        /// </summary>
         public float Height
         {
             get { return _GetHeight(); }
@@ -97,10 +93,9 @@ namespace System.Drawing.Drawing2D
             return width;
         }
 
-        /// <include file='doc\AdjustableArrowCap.uex' path='docs/doc[@for="AdjustableArrowCap.Width"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the width of the arrow cap.
-        /// </devdoc>
+        /// </summary>
         public float Width
         {
             get { return _GetWidth(); }
@@ -126,12 +121,11 @@ namespace System.Drawing.Drawing2D
             return middleInset;
         }
 
-        /// <include file='doc\AdjustableArrowCap.uex' path='docs/doc[@for="AdjustableArrowCap.MiddleInset"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Gets or set the number of pixels between the outline of the arrow cap and the fill.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public float MiddleInset
         {
             get { return _GetMiddleInset(); }
@@ -157,11 +151,10 @@ namespace System.Drawing.Drawing2D
             return isFilled;
         }
 
-        /// <include file='doc\AdjustableArrowCap.uex' path='docs/doc[@for="AdjustableArrowCap.Filled"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets a value indicating whether the
         ///    arrow cap is filled.
-        /// </devdoc>
+        /// </summary>
         public bool Filled
         {
             get { return _IsFilled(); }

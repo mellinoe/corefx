@@ -6,11 +6,10 @@ namespace System.Drawing.Imaging
 {
     using System.Runtime.InteropServices;
 
-    /// <include file='doc\ColorPalette.uex' path='docs/doc[@for="ColorPalette"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Defines an array of colors that make up a
     ///    color palette.
-    /// </devdoc>
+    /// </summary>
     public sealed class ColorPalette
     {
         ///    Note (From VSWhidbey#444618): We don't provide a public constructor for ColorPalette because if we allow 
@@ -21,13 +20,12 @@ namespace System.Drawing.Imaging
         private int _flags;
         private Color[] _entries;
 
-        /// <include file='doc\ColorPalette.uex' path='docs/doc[@for="ColorPalette.Flags"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies how to interpret the color
         ///       information in the array of colors.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public int Flags
         {
             get
@@ -36,10 +34,9 @@ namespace System.Drawing.Imaging
             }
         }
 
-        /// <include file='doc\ColorPalette.uex' path='docs/doc[@for="ColorPalette.Entries"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies an array of <see cref='System.Drawing.Color'/> objects.
-        /// </devdoc>
+        /// </summary>
         public Color[] Entries
         {
             get

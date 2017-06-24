@@ -10,8 +10,7 @@ namespace System.Drawing.Internal
     using System.Diagnostics;
     using System.Drawing.Drawing2D;
 
-    /// <include file='doc\WindowsGraphics.uex' path='docs/doc[@for="WindowsGraphics"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///     WindowsGraphics is a library for rendering text and drawing using GDI; it was
     ///     created to address performance and compatibility issues found in GDI+ Graphics
     ///     class.
@@ -22,7 +21,7 @@ namespace System.Drawing.Internal
     ///     The underlying hdc is always saved and restored on dispose so external HDCs won't
     ///     be modified by WindowsGraphics.  So we don't need to restore previous objects into 
     ///     the dc in method calls.
-    ///</devdoc>
+    ///</summary>
     internal sealed partial class WindowsGraphics : MarshalByRefObject, IDisposable, IDeviceContext
     {
         // Wrapper around the window dc this object refers to.
@@ -37,7 +36,6 @@ namespace System.Drawing.Internal
 
         // Construction/destruction API
 
-        /// <include file='doc\WindowsGraphics.uex' path='docs/doc[@for="WindowsGraphics.WindowsGraphics"]/*' />
         public WindowsGraphics(DeviceContext dc)
         {
             Debug.Assert(dc != null, "null dc!");
@@ -46,11 +44,11 @@ namespace System.Drawing.Internal
             //this.disposeDc = false; // the dc is not owned by this object.
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Creates a WindowsGraphics from a memory DeviceContext object compatible with the primary screen device.
         ///     This object is suitable for performing text measuring but not for drawing into it because it does 
         ///     not have a backup bitmap.
-        /// </devdoc>
+        /// </summary>
         public static WindowsGraphics CreateMeasurementWindowsGraphics()
         {
             DeviceContext dc = DeviceContext.FromCompatibleDC(IntPtr.Zero);
@@ -60,7 +58,6 @@ namespace System.Drawing.Internal
             return wg;
         }
 
-        /// <include file='doc\WindowsGraphics.uex' path='docs/doc[@for="WindowsGraphics.FromHwnd"]/*' />
         public static WindowsGraphics FromHwnd(IntPtr hWnd)
         {
             DeviceContext dc = DeviceContext.FromHwnd(hWnd);
@@ -70,7 +67,6 @@ namespace System.Drawing.Internal
             return wg;
         }
 
-        /// <include file='doc\WindowsGraphics.uex' path='docs/doc[@for="WindowsGraphics.FromHwnd"]/*' />
         public static WindowsGraphics FromHdc(IntPtr hDc)
         {
             Debug.Assert(hDc != IntPtr.Zero, "null hDc");
@@ -82,7 +78,7 @@ namespace System.Drawing.Internal
             return wg;
         }
 
-        /// <devdoc>
+        /// <summary>
         ///     Creates a WindowsGraphics object from a Graphics object.  Clipping and coordinate transforms
         ///     are preserved.
         ///     
@@ -104,7 +100,7 @@ namespace System.Drawing.Internal
         ///     (But the state changes between the GetHdc and ReleaseHdc are not applied to the Graphics).
         ///     Please note that this only applies the HDC created graphics, for Bitmap derived graphics, GetHdc creates a new DIBSection and 
         ///     things get a lot more complicated.
-        /// </devdoc>
+        /// </summary>
         public static WindowsGraphics FromGraphics(Graphics g)
         {
             ApplyGraphicsProperties properties = ApplyGraphicsProperties.All;
@@ -182,7 +178,6 @@ namespace System.Drawing.Internal
             return wg;
         }
 
-        /// <include file='doc\WindowsGraphics.uex' path='docs/doc[@for="WindowsGraphics.Finalize"]/*' />
         ~WindowsGraphics()
         {
             Dispose(false);
@@ -197,7 +192,6 @@ namespace System.Drawing.Internal
         }
 
 
-        /// <include file='doc\WindowsGraphics.uex' path='docs/doc[@for="WindowsGraphics.Dispose"]/*' />
         // Okay to suppress.
         //"WindowsGraphics object does not own the Graphics object.  For instance in a control’s Paint event we pass the 
         //GraphicsContainer object to TextRenderer, which uses WindowsGraphics; 
@@ -245,13 +239,11 @@ namespace System.Drawing.Internal
             }
         }
 
-        /// <include file='doc\WindowsGraphics.uex' path='docs/doc[@for="WindowsGraphics.GetHdc"]/*' />
         public IntPtr GetHdc()
         {
             return _dc.Hdc;
         }
 
-        /// <include file='doc\WindowsGraphics.uex' path='docs/doc[@for="WindowsGraphics.ReleaseHdc"]/*' />
         public void ReleaseHdc()
         {
             _dc.Dispose();

@@ -7,52 +7,46 @@ namespace System.Drawing.Drawing2D
     /**
      * Pen alignment constants
      */
-    /// <include file='doc\PenAlignment.uex' path='docs/doc[@for="PenAlignment"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the algnment of a <see cref='System.Drawing.Pen'/> in relation
     ///    to the line being drawn.
-    /// </devdoc>
+    /// </summary>
     public enum PenAlignment
     {
-        /// <include file='doc\PenAlignment.uex' path='docs/doc[@for="PenAlignment.Center"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies that the <see cref='System.Drawing.Pen'/> is positioned at the center of
         ///       the line being drawn.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Center = 0,
-        /// <include file='doc\PenAlignment.uex' path='docs/doc[@for="PenAlignment.Inset"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies that the <see cref='System.Drawing.Pen'/> is positioned on the insede of
         ///       the line being drawn.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Inset = 1,
-        /// <include file='doc\PenAlignment.uex' path='docs/doc[@for="PenAlignment.Outset"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies that the <see cref='System.Drawing.Pen'/> is positioned on the outside
         ///       of the line being drawn.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Outset = 2,
-        /// <include file='doc\PenAlignment.uex' path='docs/doc[@for="PenAlignment.Left"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies that the <see cref='System.Drawing.Pen'/> is positioned to the left of
         ///       the line being drawn.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Left = 3,
-        /// <include file='doc\PenAlignment.uex' path='docs/doc[@for="PenAlignment.Right"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies that the <see cref='System.Drawing.Pen'/> is positioned to the right of
         ///       the line being drawn.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Right = 4
     }
 }

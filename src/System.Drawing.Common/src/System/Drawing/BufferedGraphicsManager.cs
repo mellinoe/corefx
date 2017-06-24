@@ -6,26 +6,23 @@ namespace System.Drawing
 {
     using System.Runtime.ConstrainedExecution;
 
-    /// <include file='doc\BufferedGraphicsManager.uex' path='docs/doc[@for="BufferedGraphicsManager"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///         The BufferedGraphicsManager is used for accessing a BufferedGraphicsContext.
-    /// </devdoc>
+    /// </summary>
     public sealed class BufferedGraphicsManager
     {
         private static BufferedGraphicsContext s_bufferedGraphicsContext;
 
-        /// <include file='doc\BufferedGraphicsManager.uex' path='docs/doc[@for="BufferedGraphicsManager.BufferedGraphicsManager"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///         Private constructor.
-        /// </devdoc>
+        /// </summary>
         private BufferedGraphicsManager()
         {
         }
 
-        /// <include file='doc\BufferedGraphicsManager.uex' path='docs/doc[@for="BufferedGraphicsManager.BufferedGraphicsManager"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///         Static constructor.  Here, we hook the exit & unload events so we can clean up our context buffer.
-        /// </devdoc>
+        /// </summary>
         static BufferedGraphicsManager()
         {
             AppDomain.CurrentDomain.ProcessExit += new EventHandler(BufferedGraphicsManager.OnShutdown);
@@ -33,10 +30,9 @@ namespace System.Drawing
             s_bufferedGraphicsContext = new BufferedGraphicsContext();
         }
 
-        /// <include file='doc\BufferedGraphicsManager.uex' path='docs/doc[@for="BufferedGraphicsManager.Current"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///         Retrieves the context associated with the app domain.
-        /// </devdoc>
+        /// </summary>
         public static BufferedGraphicsContext Current
         {
             get
@@ -45,10 +41,9 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\BufferedGraphicsManager.uex' path='docs/doc[@for="BufferedGraphicsManager.OnProcessExit"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///         Called on process exit
-        /// </devdoc>
+        /// </summary>
         [PrePrepareMethod]
         private static void OnShutdown(object sender, EventArgs e)
         {

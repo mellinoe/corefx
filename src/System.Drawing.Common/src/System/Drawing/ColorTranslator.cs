@@ -7,10 +7,9 @@ namespace System.Drawing
     using System.Collections;
     using System.Globalization;
 
-    /// <include file='doc\ColorTranslator.uex' path='docs/doc[@for="ColorTranslator"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Translates colors to and from GDI+ <see cref='System.Drawing.Color'/> objects.
-    /// </devdoc>
+    /// </summary>
     public sealed class ColorTranslator
     {
         private const int Win32RedShift = 0;
@@ -19,21 +18,19 @@ namespace System.Drawing
 
         private static Hashtable s_htmlSysColorTable;
 
-        /// <include file='doc\ColorTranslator.uex' path='docs/doc[@for="ColorTranslator.ToWin32"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Translates the specified <see cref='System.Drawing.Color'/> to a
         ///    Win32 color.
-        /// </devdoc>
+        /// </summary>
         public static int ToWin32(Color c)
         {
             return c.R << Win32RedShift | c.G << Win32GreenShift | c.B << Win32BlueShift;
         }
 
-        /// <include file='doc\ColorTranslator.uex' path='docs/doc[@for="ColorTranslator.ToOle"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Translates the specified <see cref='System.Drawing.Color'/> to
         ///    an Ole color.
-        /// </devdoc>
+        /// </summary>
         public static int ToOle(Color c)
         {
             //    WARNING!!! WARNING!!! WARNING!!! WARNING!!! 
@@ -116,11 +113,10 @@ namespace System.Drawing
 
             return ToWin32(c);
         }
-        /// <include file='doc\ColorTranslator.uex' path='docs/doc[@for="ColorTranslator.FromOle"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Translates an Ole color value to a GDI+
         /// <see cref='System.Drawing.Color'/>.
-        /// </devdoc>
+        /// </summary>
         public static Color FromOle(int oleColor)
         {
             //    WARNING!!! WARNING!!! WARNING!!! WARNING!!! 
@@ -199,21 +195,19 @@ namespace System.Drawing
             return KnownColorTable.ArgbToKnownColor(color.ToArgb());
         }
 
-        /// <include file='doc\ColorTranslator.uex' path='docs/doc[@for="ColorTranslator.FromWin32"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Translates an Win32 color value to a
         ///    GDI+ <see cref='System.Drawing.Color'/>.
-        /// </devdoc>
+        /// </summary>
         public static Color FromWin32(int win32Color)
         {
             return FromOle(win32Color);
         }
 
-        /// <include file='doc\ColorTranslator.uex' path='docs/doc[@for="ColorTranslator.FromHtml"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Translates an Html color representation to
         ///    a GDI+ <see cref='System.Drawing.Color'/>.
-        /// </devdoc>
+        /// </summary>
         public static Color FromHtml(string htmlColor)
         {
             Color c = Color.Empty;
@@ -274,12 +268,11 @@ namespace System.Drawing
             return c;
         }
 
-        /// <include file='doc\ColorTranslator.uex' path='docs/doc[@for="ColorTranslator.ToHtml"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Translates the specified <see cref='System.Drawing.Color'/> to an Html string color representation.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public static string ToHtml(Color c)
         {
             string colorString = String.Empty;

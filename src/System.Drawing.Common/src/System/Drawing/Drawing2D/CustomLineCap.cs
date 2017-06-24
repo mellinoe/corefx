@@ -6,11 +6,10 @@ namespace System.Drawing.Drawing2D
 {
     using System.Runtime.InteropServices;
 
-    /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Encapsulates a custom user-defined line
     ///    cap.
-    /// </devdoc>
+    /// </summary>
     public class CustomLineCap : MarshalByRefObject, ICloneable, IDisposable
     {
 #if FINALIZATION_WATCH
@@ -28,40 +27,37 @@ namespace System.Drawing.Drawing2D
         // For subclass creation
         internal CustomLineCap() { }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.CustomLineCap"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.CustomLineCap'/> class with the specified outline
         ///       and fill.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public CustomLineCap(GraphicsPath fillPath,
                              GraphicsPath strokePath) :
             this(fillPath, strokePath, LineCap.Flat)
         { }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.CustomLineCap1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.CustomLineCap'/> class from the
         ///       specified existing <see cref='System.Drawing.Drawing2D.LineCap'/> with the specified outline and
         ///       fill.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public CustomLineCap(GraphicsPath fillPath,
                              GraphicsPath strokePath,
                              LineCap baseCap) :
             this(fillPath, strokePath, baseCap, 0)
         { }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.CustomLineCap2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.CustomLineCap'/> class from the
         ///       specified existing <see cref='System.Drawing.Drawing2D.LineCap'/> with the specified outline, fill, and
         ///       inset.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public CustomLineCap(GraphicsPath fillPath,
                              GraphicsPath strokePath,
                              LineCap baseCap,
@@ -93,18 +89,16 @@ namespace System.Drawing.Drawing2D
             nativeCap = new SafeCustomLineCapHandle(handle);
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.Dispose"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Cleans up Windows resources for this
         /// <see cref='System.Drawing.Drawing2D.CustomLineCap'/>.
-        /// </devdoc>
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
             GC.SuppressFinalize(this);
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.Dispose2"]/*' />
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed)
@@ -123,20 +117,18 @@ namespace System.Drawing.Drawing2D
             _disposed = true;
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.Finalize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Cleans up Windows resources for this
         /// <see cref='System.Drawing.Drawing2D.CustomLineCap'/>.
-        /// </devdoc>
+        /// </summary>
         ~CustomLineCap()
         {
             Dispose(false);
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.Clone"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.CustomLineCap'/>.
-        /// </devdoc>
+        /// </summary>
         public object Clone()
         {
             IntPtr cloneCap = IntPtr.Zero;
@@ -174,10 +166,9 @@ namespace System.Drawing.Drawing2D
             throw SafeNativeMethods.Gdip.StatusException(SafeNativeMethods.Gdip.NotImplemented);
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.SetStrokeCaps"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Sets the caps used to start and end lines.
-        /// </devdoc>
+        /// </summary>
         public void SetStrokeCaps(LineCap startCap, LineCap endCap)
         {
             int status = SafeNativeMethods.Gdip.GdipSetCustomLineCapStrokeCaps(new HandleRef(this, nativeCap), startCap, endCap);
@@ -186,10 +177,9 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.GetStrokeCaps"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the caps used to start and end lines.
-        /// </devdoc>
+        /// </summary>
         public void GetStrokeCaps(out LineCap startCap, out LineCap endCap)
         {
             int status = SafeNativeMethods.Gdip.GdipGetCustomLineCapStrokeCaps(new HandleRef(this, nativeCap), out startCap, out endCap);
@@ -218,10 +208,9 @@ namespace System.Drawing.Drawing2D
             return lineJoin;
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.StrokeJoin"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the <see cref='System.Drawing.Drawing2D.LineJoin'/> used by this custom cap.
-        /// </devdoc>
+        /// </summary>
         public LineJoin StrokeJoin
         {
             get { return _GetStrokeJoin(); }
@@ -247,10 +236,9 @@ namespace System.Drawing.Drawing2D
             return baseCap;
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.BaseCap"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the <see cref='System.Drawing.Drawing2D.LineCap'/> on which this <see cref='System.Drawing.Drawing2D.CustomLineCap'/> is based.
-        /// </devdoc>
+        /// </summary>
         public LineCap BaseCap
         {
             get { return _GetBaseCap(); }
@@ -276,11 +264,10 @@ namespace System.Drawing.Drawing2D
             return inset;
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.BaseInset"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the distance between the cap
         ///    and the line.
-        /// </devdoc>
+        /// </summary>
         public float BaseInset
         {
             get { return _GetBaseInset(); }
@@ -306,11 +293,10 @@ namespace System.Drawing.Drawing2D
             return widthScale;
         }
 
-        /// <include file='doc\CustomLineCap.uex' path='docs/doc[@for="CustomLineCap.WidthScale"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets the amount by which to scale
         ///    the width of the cap.
-        /// </devdoc>
+        /// </summary>
         public float WidthScale
         {
             get { return _GetWidthScale(); }

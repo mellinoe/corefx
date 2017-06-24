@@ -7,59 +7,50 @@ namespace System.Drawing.Drawing2D
     /**
      * Path Point Type
      */
-    /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies the type of graphical point
     ///       contained at a specific point in a <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum PathPointType
     {
-        /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType.Start"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the starting point of a <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         Start = 0,    // move
-        /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType.Line"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a line segment.
-        /// </devdoc>
+        /// </summary>
         Line = 1,    // line
-        /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType.Bezier"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a default Bezier curve.
-        /// </devdoc>
+        /// </summary>
         Bezier = 3,    // default Beizer (= cubic Bezier)
-        /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType.PathTypeMask"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a mask point.
-        /// </devdoc>
+        /// </summary>
         PathTypeMask = 0x07, // type mask (lowest 3 bits).
-        /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType.DashMode"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies that the corresponding segment is dashed.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         DashMode = 0x10, // currently in dash mode.
-        /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType.PathMarker"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a path marker.
-        /// </devdoc>
+        /// </summary>
         PathMarker = 0x20, // a marker for the path.
-        /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType.CloseSubpath"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies the ending point of a subpath.
-        /// </devdoc>
+        /// </summary>
         CloseSubpath = 0x80, // closed flag
 
         // Path types used for advanced path.
 
-        /// <include file='doc\PathPointType.uex' path='docs/doc[@for="PathPointType.Bezier3"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a cubic Bezier curve.
-        /// </devdoc>
+        /// </summary>
         Bezier3 = 3,    // cubic Bezier
     }
 }

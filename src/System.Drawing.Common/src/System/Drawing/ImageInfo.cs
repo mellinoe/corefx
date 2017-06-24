@@ -7,15 +7,15 @@ namespace System.Drawing
     using System.Diagnostics;
     using System.Drawing.Imaging;
 
-    /// <devdoc>
+    /// <summary>
     ///     Animates one or more images that have time-based frames.
     ///     This file contains the nested ImageInfo class - See ImageAnimator.cs for the definition of the outer class.
-    /// </devdoc>                                   
+    /// </summary>                                   
     public sealed partial class ImageAnimator
     {
-        /// <devdoc> 
+        /// <summary> 
         ///     ImageAnimator nested helper class used to store extra image state info.
-        /// </devdoc>  
+        /// </summary>  
         private class ImageInfo
         {
             private const int PropertyTagFrameDelay = 0x5100;
@@ -29,8 +29,8 @@ namespace System.Drawing
             private int[] _frameDelay;
             private int _frameTimer;
 
-            /// <devdoc> 
-            /// </devdoc>  
+            /// <summary> 
+            /// </summary>  
             public ImageInfo(Image image)
             {
                 _image = image;
@@ -67,9 +67,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
+            /// <summary> 
             ///     Whether the image supports animation.
-            /// </devdoc>  
+            /// </summary>  
             public bool Animated
             {
                 get
@@ -78,9 +78,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
+            /// <summary> 
             ///     The current frame.
-            /// </devdoc> 
+            /// </summary> 
             public int Frame
             {
                 get
@@ -107,9 +107,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
+            /// <summary> 
             ///     The current frame has not been updated.
-            /// </devdoc> 
+            /// </summary> 
             public bool FrameDirty
             {
                 get
@@ -118,8 +118,8 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
-            /// </devdoc> 
+            /// <summary> 
+            /// </summary> 
             public EventHandler FrameChangedHandler
             {
                 get
@@ -132,9 +132,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
+            /// <summary> 
             ///     The number of frames in the image.
-            /// </devdoc> 
+            /// </summary> 
             public int FrameCount
             {
                 get
@@ -143,16 +143,16 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
+            /// <summary> 
             ///     The delay associated with the frame at the specified index.
-            /// </devdoc> 
+            /// </summary> 
             public int FrameDelay(int frame)
             {
                 return _frameDelay[frame];
             }
 
-            /// <devdoc> 
-            /// </devdoc> 
+            /// <summary> 
+            /// </summary> 
             internal int FrameTimer
             {
                 get
@@ -165,9 +165,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
+            /// <summary> 
             ///     The image this object wraps.
-            /// </devdoc> 
+            /// </summary> 
             internal Image Image
             {
                 get
@@ -176,9 +176,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
+            /// <summary> 
             ///     Selects the current frame as the active frame in the image.
-            /// </devdoc> 
+            /// </summary> 
             internal void UpdateFrame()
             {
                 if (_frameDirty)
@@ -188,9 +188,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <devdoc> 
+            /// <summary> 
             ///     Raises the FrameChanged event.
-            /// </devdoc> 
+            /// </summary> 
             protected void OnFrameChanged(EventArgs e)
             {
                 if (_onFrameChangedHandler != null)

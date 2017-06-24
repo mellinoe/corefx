@@ -4,52 +4,45 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\SmoothingMode.uex' path='docs/doc[@for="SmoothingMode"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies the overall quality of rendering of graphics
     ///       shapes.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum SmoothingMode
     {
-        /// <include file='doc\SmoothingMode.uex' path='docs/doc[@for="SmoothingMode.Invalid"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies an invalid mode.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Invalid = QualityMode.Invalid,
-        /// <include file='doc\SmoothingMode.uex' path='docs/doc[@for="SmoothingMode.Default"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies the default mode.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Default = QualityMode.Default,
-        /// <include file='doc\SmoothingMode.uex' path='docs/doc[@for="SmoothingMode.HighSpeed"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies low quality, high performance rendering.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         HighSpeed = QualityMode.Low,
-        /// <include file='doc\SmoothingMode.uex' path='docs/doc[@for="SmoothingMode.HighQuality"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies high quality, lower performance rendering.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         HighQuality = QualityMode.High,
-        /// <include file='doc\SmoothingMode.uex' path='docs/doc[@for="SmoothingMode.None"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies no anti-aliasing.
-        /// </devdoc>
+        /// </summary>
         None,
-        /// <include file='doc\SmoothingMode.uex' path='docs/doc[@for="SmoothingMode.AntiAlias"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies anti-aliased rendering.
-        /// </devdoc>
+        /// </summary>
         AntiAlias
     }
 }

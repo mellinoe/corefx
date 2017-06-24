@@ -4,355 +4,298 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the different patterns available
     ///    for <see cref='System.Drawing.Drawing2D.HatchBrush'/> objects.
-    /// </devdoc>
+    /// </summary>
     public enum HatchStyle
     {
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Horizontal"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       A pattern of horizontal lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Horizontal = 0,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Vertical"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       A pattern of vertical lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Vertical = 1,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.ForwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       A pattern of lines on a diagonal from top-left to bottom-right.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         ForwardDiagonal = 2,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.BackwardDiagonal"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    A pattern of lines on a diagonal from
         ///    top-right to bottom-left.
-        /// </devdoc>
+        /// </summary>
         BackwardDiagonal = 3,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Cross"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       A pattern of criss-cross horizontal and vertical lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Cross = 4,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DiagonalCross"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       A pattern of criss-cross diagonal lines.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         DiagonalCross = 5,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent05"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent05 = 6,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent10"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent10 = 7,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent20"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent20 = 8,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent25"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent25 = 9,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent30"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent30 = 10,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent40"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent40 = 11,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent50"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent50 = 12,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent60"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent60 = 13,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent70"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent70 = 14,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent75"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent75 = 15,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent80"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent80 = 16,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Percent90"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Percent90 = 17,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.LightDownwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         LightDownwardDiagonal = 18,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.LightUpwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         LightUpwardDiagonal = 19,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DarkDownwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DarkDownwardDiagonal = 20,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DarkUpwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DarkUpwardDiagonal = 21,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.WideDownwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         WideDownwardDiagonal = 22,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.WideUpwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         WideUpwardDiagonal = 23,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.LightVertical"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         LightVertical = 24,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.LightHorizontal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         LightHorizontal = 25,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.NarrowVertical"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         NarrowVertical = 26,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.NarrowHorizontal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         NarrowHorizontal = 27,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DarkVertical"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DarkVertical = 28,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DarkHorizontal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DarkHorizontal = 29,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DashedDownwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DashedDownwardDiagonal = 30,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DashedUpwardDiagonal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DashedUpwardDiagonal = 31,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DashedHorizontal"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DashedHorizontal = 32,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DashedVertical"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DashedVertical = 33,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.SmallConfetti"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         SmallConfetti = 34,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.LargeConfetti"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         LargeConfetti = 35,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.ZigZag"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         ZigZag = 36,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Wave"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Wave = 37,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DiagonalBrick"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DiagonalBrick = 38,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.HorizontalBrick"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         HorizontalBrick = 39,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Weave"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Weave = 40,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Plaid"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Plaid = 41,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Divot"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Divot = 42,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DottedGrid"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DottedGrid = 43,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.DottedDiamond"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         DottedDiamond = 44,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Shingle"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Shingle = 45,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Trellis"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Trellis = 46,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Sphere"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Sphere = 47,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.SmallGrid"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         SmallGrid = 48,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.SmallCheckerBoard"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         SmallCheckerBoard = 49,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.LargeCheckerBoard"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         LargeCheckerBoard = 50,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.OutlinedDiamond"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         OutlinedDiamond = 51,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.SolidDiamond"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         SolidDiamond = 52,
 
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.LargeGrid"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         LargeGrid = Cross,
 
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Min"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Min = Horizontal,
-        /// <include file='doc\HatchStyle.uex' path='docs/doc[@for="HatchStyle.Max"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        ///    
+        ///    
+        /// </summary>
         Max = LargeGrid
     };
 }

@@ -6,11 +6,11 @@ namespace System.Drawing.Internal
 {
     using System.Runtime.InteropServices;
 
-    /// <devdoc>
+    /// <summary>
     ///   This is an extract of the System.Drawing IntNativeMethods in the CommonUI tree.
     ///   This is done to be able to compile the GDI code in both assemblies System.Drawing
     ///   and System.Windows.Forms.
-    /// </devdoc>
+    /// </summary>
     [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
     internal static partial class IntSafeNativeMethods
     {
@@ -18,20 +18,20 @@ namespace System.Drawing.Internal
         {
             static CommonHandles() { }
 
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for enhanced metafiles.
-            /// </devdoc>
+            /// </summary>
             public static readonly int EMF = System.Internal.HandleCollector.RegisterType("EnhancedMetaFile", 20, 500);
 
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for GDI objects.
-            /// </devdoc>
+            /// </summary>
             public static readonly int GDI = System.Internal.HandleCollector.RegisterType("GDI", 90, 50);
 
-            /// <devdoc>
+            /// <summary>
             ///     Handle type for HDC's that count against the Win98 limit of five DC's.  HDC's
             ///     which are not scarce, such as HDC's for bitmaps, are counted as GDIHANDLE's.
-            /// </devdoc>
+            /// </summary>
             public static readonly int HDC = System.Internal.HandleCollector.RegisterType("HDC", 100, 2); // wait for 2 dc's before collecting
         }
 

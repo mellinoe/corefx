@@ -7,27 +7,23 @@ namespace System.Drawing.Drawing2D
     /**
      * Line cap constants
      */
-    /// <include file='doc\DashCap.uex' path='docs/doc[@for="DashCap"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the available dash cap
     ///    styles with which a <see cref='System.Drawing.Pen'/> can end a line.
-    /// </devdoc>
+    /// </summary>
     public enum DashCap
     {
-        /// <include file='doc\DashCap.uex' path='docs/doc[@for="DashCap.Flat"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Flat = 0,
-        /// <include file='doc\DashCap.uex' path='docs/doc[@for="DashCap.Round"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Round = 2,
-        /// <include file='doc\DashCap.uex' path='docs/doc[@for="DashCap.Triangle"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         Triangle = 3
     }
 }

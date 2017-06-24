@@ -4,48 +4,44 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <include file='doc\Blend.uex' path='docs/doc[@for="Blend"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Defines a blend pattern for a <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>
     ///       .
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public sealed class Blend
     {
         private float[] _factors;
         private float[] _positions;
 
-        /// <include file='doc\Blend.uex' path='docs/doc[@for="Blend.Blend"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Blend'/>
         ///       class.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Blend()
         {
             _factors = new float[1];
             _positions = new float[1];
         }
 
-        /// <include file='doc\Blend.uex' path='docs/doc[@for="Blend.Blend1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Blend'/>
         ///       class with the specified number of factors and positions.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public Blend(int count)
         {
             _factors = new float[count];
             _positions = new float[count];
         }
-        /// <include file='doc\Blend.uex' path='docs/doc[@for="Blend.Factors"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies an array of blend factors for the
         ///    gradient.
-        /// </devdoc>
+        /// </summary>
         public float[] Factors
         {
             get
@@ -58,12 +54,11 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\Blend.uex' path='docs/doc[@for="Blend.Positions"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies an array of blend positions for the gradient.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public float[] Positions
         {
             get

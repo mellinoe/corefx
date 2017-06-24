@@ -13,11 +13,10 @@ namespace System.Drawing.Drawing2D
     /**
      * Represent a Path object
      */
-    /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Represents a series of connected lines and
     ///    curves.
-    /// </devdoc>
+    /// </summary>
     public sealed class GraphicsPath : MarshalByRefObject, ICloneable, IDisposable
     {
         /*
@@ -28,22 +27,20 @@ namespace System.Drawing.Drawing2D
         /**
          * Create a new path object with the default fill mode
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GraphicsPath"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> class with a <see cref='System.Drawing.Drawing2D.FillMode'/> of <see cref='System.Drawing.Drawing2D.FillMode.Alternate'/>
         ///       .
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public GraphicsPath() : this(System.Drawing.Drawing2D.FillMode.Alternate) { }
 
         /**
          * Create a new path object with the specified fill mode
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GraphicsPath1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> class with the specified <see cref='System.Drawing.Drawing2D.FillMode'/>.
-        /// </devdoc>
+        /// </summary>
         public GraphicsPath(FillMode fillMode)
         {
             IntPtr nativePath = IntPtr.Zero;
@@ -57,27 +54,25 @@ namespace System.Drawing.Drawing2D
         }
 
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GraphicsPath2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///    Initializes a new instance of the
         ///    <see cref='System.Drawing.Drawing2D.GraphicsPath'/> array with the
         ///    specified <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/>
         ///    and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> arrays.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public GraphicsPath(PointF[] pts, byte[] types) :
           this(pts, types, System.Drawing.Drawing2D.FillMode.Alternate)
         { }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GraphicsPath3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> array with the
         ///       specified <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/> and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> arrays and with the
         ///       specified <see cref='System.Drawing.Drawing2D.FillMode'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public GraphicsPath(PointF[] pts, byte[] types, FillMode fillMode)
         {
             if (pts == null)
@@ -111,27 +106,25 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GraphicsPath4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///    Initializes a new instance of the
         ///    <see cref='System.Drawing.Drawing2D.GraphicsPath'/> array with the
         ///    specified <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/>
         ///    and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> arrays.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public GraphicsPath(Point[] pts, byte[] types) :
           this(pts, types, System.Drawing.Drawing2D.FillMode.Alternate)
         { }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GraphicsPath5"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> array with the
         ///       specified <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/> and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> arrays and with the
         ///       specified <see cref='System.Drawing.Drawing2D.FillMode'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public GraphicsPath(Point[] pts, byte[] types, FillMode fillMode)
         {
             if (pts == null)
@@ -165,10 +158,9 @@ namespace System.Drawing.Drawing2D
         /**
          * Make a copy of the current path object
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Clone"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public object Clone()
         {
             IntPtr clonePath = IntPtr.Zero;
@@ -197,10 +189,9 @@ namespace System.Drawing.Drawing2D
         /**
          * Dispose of resources associated with the
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Dispose"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Eliminates resources for this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -236,10 +227,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Finalize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Eliminates resources for this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         ~GraphicsPath()
         {
             Dispose(false);
@@ -248,13 +238,12 @@ namespace System.Drawing.Drawing2D
         /**
          * Reset the path object to empty
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Reset"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Empties the <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/>
         ///    and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/> arrays
         ///    and sets the <see cref='System.Drawing.Drawing2D.GraphicsPath.FillMode'/> to
         ///    <see cref='System.Drawing.Drawing2D.FillMode.Alternate'/>.
-        /// </devdoc>
+        /// </summary>
         public void Reset()
         {
             int status = SafeNativeMethods.Gdip.GdipResetPath(new HandleRef(this, nativePath));
@@ -266,11 +255,10 @@ namespace System.Drawing.Drawing2D
         /**
          * Get path fill mode information
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.FillMode"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets or sets a <see cref='System.Drawing.Drawing2D.FillMode'/> that determines how the interiors of
         ///    shapes in this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> are filled.
-        /// </devdoc>
+        /// </summary>
         public FillMode FillMode
         {
             get
@@ -346,11 +334,10 @@ namespace System.Drawing.Drawing2D
             return pathData;
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.PathData"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets a <see cref='System.Drawing.Drawing2D.PathData'/> object that
         ///    encapsulates both the <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/> arrays of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public PathData PathData
         {
             get
@@ -359,14 +346,13 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.StartFigure"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Starts a new figure without closing the
         ///       current figure. All subsequent points added to the path are added to this new
         ///       figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void StartFigure()
         {
             int status = SafeNativeMethods.Gdip.GdipStartPathFigure(new HandleRef(this, nativePath));
@@ -375,13 +361,12 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.CloseFigure"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Closes the current figure and starts a new
         ///    figure. If the current figure contains a sequence of connected lines and curves,
         ///    it closes the loop by connecting a line from the ending point to the starting
         ///    point.
-        /// </devdoc>
+        /// </summary>
         public void CloseFigure()
         {
             int status = SafeNativeMethods.Gdip.GdipClosePathFigure(new HandleRef(this, nativePath));
@@ -390,12 +375,11 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.CloseAllFigures"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Closes all open figures in a path and
         ///    starts a new figure. It closes each open figure by connecting a line from it's
         ///    ending point to it's starting point.
-        /// </devdoc>
+        /// </summary>
         public void CloseAllFigures()
         {
             int status = SafeNativeMethods.Gdip.GdipClosePathFigures(new HandleRef(this, nativePath));
@@ -404,12 +388,11 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.SetMarkers"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Sets a marker on this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> .
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void SetMarkers()
         {
             int status = SafeNativeMethods.Gdip.GdipSetPathMarker(new HandleRef(this, nativePath));
@@ -418,10 +401,9 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.ClearMarkers"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Clears all markers from this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public void ClearMarkers()
         {
             int status = SafeNativeMethods.Gdip.GdipClearPathMarkers(new HandleRef(this, nativePath));
@@ -430,10 +412,9 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Reverse"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Reverses the order of points in the <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> array of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public void Reverse()
         {
             int status = SafeNativeMethods.Gdip.GdipReversePath(new HandleRef(this, nativePath));
@@ -442,10 +423,9 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GetLastPoint"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Gets the last point in the <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> array of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public PointF GetLastPoint()
         {
             GPPOINTF gppt = new GPPOINTF();
@@ -462,49 +442,45 @@ namespace System.Drawing.Drawing2D
          * Hit testing
          */
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsVisible"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether the specified point is contained
         ///       within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>
         ///       .
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsVisible(float x, float y)
         {
             return IsVisible(new PointF(x, y), (Graphics)null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsVisible1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether the specified point is contained
         ///       within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsVisible(PointF point)
         {
             return IsVisible(point, (Graphics)null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsVisible2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> in the visible clip region of the
         ///       specified <see cref='System.Drawing.Graphics'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsVisible(float x, float y, Graphics graphics)
         {
             return IsVisible(new PointF(x, y), graphics);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsVisible3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsVisible(PointF pt, Graphics graphics)
         {
             int isVisible;
@@ -522,46 +498,42 @@ namespace System.Drawing.Drawing2D
             return isVisible != 0;
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsVisible4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> .
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsVisible(int x, int y)
         {
             return IsVisible(new Point(x, y), (Graphics)null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsVisible5"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsVisible(Point point)
         {
             return IsVisible(point, (Graphics)null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsVisible6"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> in the visible clip region of the
         ///       specified <see cref='System.Drawing.Graphics'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsVisible(int x, int y, Graphics graphics)
         {
             return IsVisible(new Point(x, y), graphics);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsVisible7"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsVisible(Point pt, Graphics graphics)
         {
             int isVisible;
@@ -579,51 +551,47 @@ namespace System.Drawing.Drawing2D
             return isVisible != 0;
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsOutlineVisible"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Indicates whether an outline drawn by the
         ///    specified <see cref='System.Drawing.Pen'/> at the specified location is contained
         ///    within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public bool IsOutlineVisible(float x, float y, Pen pen)
         {
             return IsOutlineVisible(new PointF(x, y), pen, (Graphics)null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsOutlineVisible1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
         ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsOutlineVisible(PointF point, Pen pen)
         {
             return IsOutlineVisible(point, pen, (Graphics)null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsOutlineVisible2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
         ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> and within the visible clip region of
         ///       the specified <see cref='System.Drawing.Graphics'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsOutlineVisible(float x, float y, Pen pen, Graphics graphics)
         {
             return IsOutlineVisible(new PointF(x, y), pen, graphics);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsOutlineVisible3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether an outline drawn by the specified
         ///    <see cref='System.Drawing.Pen'/> at the specified 
         ///       location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> and within the visible clip region of
         ///       the specified <see cref='System.Drawing.Graphics'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsOutlineVisible(PointF pt, Pen pen, Graphics graphics)
         {
             int isVisible;
@@ -645,52 +613,48 @@ namespace System.Drawing.Drawing2D
             return isVisible != 0;
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsOutlineVisible4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
         ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsOutlineVisible(int x, int y, Pen pen)
         {
             return IsOutlineVisible(new Point(x, y), pen, (Graphics)null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsOutlineVisible5"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
         ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsOutlineVisible(Point point, Pen pen)
         {
             return IsOutlineVisible(point, pen, (Graphics)null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsOutlineVisible6"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
         ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> and within the visible clip region of
         ///       the specified <see cref='System.Drawing.Graphics'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsOutlineVisible(int x, int y, Pen pen, Graphics graphics)
         {
             return IsOutlineVisible(new Point(x, y), pen, graphics);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.IsOutlineVisible7"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Indicates whether an outline drawn by the specified
         ///    <see cref='System.Drawing.Pen'/> at the specified 
         ///       location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> and within the visible clip region of
         ///       the specified <see cref='System.Drawing.Graphics'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public bool IsOutlineVisible(Point pt, Pen pen, Graphics graphics)
         {
             int isVisible;
@@ -716,19 +680,17 @@ namespace System.Drawing.Drawing2D
          * Add lines to the path object
          */
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddLine"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Appends a line segment to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public void AddLine(PointF pt1, PointF pt2)
         {
             AddLine(pt1.X, pt1.Y, pt2.X, pt2.Y);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddLine1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Appends a line segment to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public void AddLine(float x1, float y1, float x2, float y2)
         {
             int status = SafeNativeMethods.Gdip.GdipAddPathLine(new HandleRef(this, nativePath), x1, y1, x2, y2);
@@ -737,11 +699,10 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddLines"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Appends a series of connected line
         ///    segments to the end of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public void AddLines(PointF[] points)
         {
             if (points == null)
@@ -760,23 +721,21 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddLine2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Appends a line segment to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddLine(Point pt1, Point pt2)
         {
             AddLine(pt1.X, pt1.Y, pt2.X, pt2.Y);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddLine3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Appends a line segment to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddLine(int x1, int y1, int x2, int y2)
         {
             int status = SafeNativeMethods.Gdip.GdipAddPathLineI(new HandleRef(this, nativePath), x1, y1, x2, y2);
@@ -785,12 +744,11 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddLines1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Appends a series of connected line segments to the end of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddLines(Point[] points)
         {
             if (points == null)
@@ -812,24 +770,22 @@ namespace System.Drawing.Drawing2D
          * Add an arc to the path object
          */
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddArc"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Appends an elliptical arc to the current
         ///       figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddArc(RectangleF rect, float startAngle, float sweepAngle)
         {
             AddArc(rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddArc1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Appends an elliptical arc to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddArc(float x, float y, float width, float height,
                            float startAngle, float sweepAngle)
         {
@@ -841,23 +797,21 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddArc2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Appends an elliptical arc to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddArc(Rectangle rect, float startAngle, float sweepAngle)
         {
             AddArc(rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddArc3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Appends an elliptical arc to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddArc(int x, int y, int width, int height,
                            float startAngle, float sweepAngle)
         {
@@ -872,25 +826,23 @@ namespace System.Drawing.Drawing2D
         * Add Bezier curves to the path object
         */
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddBezier"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a cubic Bzier curve to the current
         ///       figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddBezier(PointF pt1, PointF pt2, PointF pt3, PointF pt4)
         {
             AddBezier(pt1.X, pt1.Y, pt2.X, pt2.Y, pt3.X, pt3.Y, pt4.X, pt4.Y);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddBezier1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a cubic Bzier curve to the current
         ///       figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddBezier(float x1, float y1, float x2, float y2,
                               float x3, float y3, float x4, float y4)
         {
@@ -901,13 +853,12 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddBeziers"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a sequence of connected cubic Bzier
         ///       curves to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddBeziers(PointF[] points)
         {
             if (points == null)
@@ -926,24 +877,22 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddBezier2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a cubic Bzier curve to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddBezier(Point pt1, Point pt2, Point pt3, Point pt4)
         {
             AddBezier(pt1.X, pt1.Y, pt2.X, pt2.Y, pt3.X, pt3.Y, pt4.X, pt4.Y);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddBezier3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a cubic Bzier curve to the current
         ///       figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddBezier(int x1, int y1, int x2, int y2,
                               int x3, int y3, int x4, int y4)
         {
@@ -954,13 +903,12 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddBeziers1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a sequence of connected cubic Bzier curves to the
         ///       current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddBeziers(params Point[] points)
         {
             if (points == null)
@@ -982,14 +930,13 @@ namespace System.Drawing.Drawing2D
          * Add cardinal splines to the path object
          */
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddCurve"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a spline curve to the current figure.
         ///       A Cardinal spline curve is used because the curve travels through each of the
         ///       points in the array.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddCurve(PointF[] points)
         {
             if (points == null)
@@ -1007,10 +954,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddCurve1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Adds a spline curve to the current figure.
-        /// </devdoc>
+        /// </summary>
         public void AddCurve(PointF[] points, float tension)
         {
             if (points == null)
@@ -1029,12 +975,11 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddCurve2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a spline curve to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddCurve(PointF[] points, int offset, int numberOfSegments,
                              float tension)
         {
@@ -1056,13 +1001,12 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddCurve3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a spline curve to the current figure. A Cardinal spline curve is used
         ///       because the curve travels through each of the points in the array.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddCurve(Point[] points)
         {
             if (points == null)
@@ -1080,12 +1024,11 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddCurve4"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a spline curve to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddCurve(Point[] points, float tension)
         {
             if (points == null)
@@ -1104,12 +1047,11 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddCurve5"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a spline curve to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddCurve(Point[] points, int offset, int numberOfSegments,
                              float tension)
         {
@@ -1131,13 +1073,12 @@ namespace System.Drawing.Drawing2D
         }
 
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddClosedCurve"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a closed curve to the current figure. A Cardinal spline curve is
         ///       used because the curve travels through each of the points in the array.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddClosedCurve(PointF[] points)
         {
             if (points == null)
@@ -1155,13 +1096,12 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddClosedCurve1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a closed curve to the current figure. A Cardinal spline curve is
         ///       used because the curve travels through each of the points in the array.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddClosedCurve(PointF[] points, float tension)
         {
             if (points == null)
@@ -1180,13 +1120,12 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddClosedCurve2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a closed curve to the current figure. A Cardinal spline curve is used
         ///       because the curve travels through each of the points in the array.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddClosedCurve(Point[] points)
         {
             if (points == null)
@@ -1204,13 +1143,12 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddClosedCurve3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a closed curve to the current figure. A Cardinal spline curve is used
         ///       because the curve travels through each of the points in the array.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddClosedCurve(Point[] points, float tension)
         {
             if (points == null)
@@ -1228,10 +1166,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddRectangle"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Adds a rectangle to the current figure.
-        /// </devdoc>
+        /// </summary>
         public void AddRectangle(RectangleF rect)
         {
             int status = SafeNativeMethods.Gdip.GdipAddPathRectangle(new HandleRef(this, nativePath), rect.X, rect.Y,
@@ -1241,13 +1178,12 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddRectangles"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a series of rectangles to the current
         ///       figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddRectangles(RectangleF[] rects)
         {
             if (rects == null)
@@ -1266,12 +1202,11 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddRectangle1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a rectangle to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddRectangle(Rectangle rect)
         {
             int status = SafeNativeMethods.Gdip.GdipAddPathRectangleI(new HandleRef(this, nativePath), rect.X, rect.Y,
@@ -1281,12 +1216,11 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddRectangles1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a series of rectangles to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddRectangles(Rectangle[] rects)
         {
             if (rects == null)
@@ -1305,10 +1239,9 @@ namespace System.Drawing.Drawing2D
         }
 
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddEllipse"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Adds an ellipse to the current figure.
-        /// </devdoc>
+        /// </summary>
         public void AddEllipse(RectangleF rect)
         {
             AddEllipse(rect.X, rect.Y, rect.Width, rect.Height);
@@ -1320,10 +1253,9 @@ namespace System.Drawing.Drawing2D
          * !!! Need to handle the status code returned
          *  by the native GDI+ APIs.
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddEllipse1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Adds an ellipse to the current figure.
-        /// </devdoc>
+        /// </summary>
         public void AddEllipse(float x, float y, float width, float height)
         {
             int status = SafeNativeMethods.Gdip.GdipAddPathEllipse(new HandleRef(this, nativePath), x, y, width, height);
@@ -1333,12 +1265,11 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddEllipse2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds an ellipse to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddEllipse(Rectangle rect)
         {
             AddEllipse(rect.X, rect.Y, rect.Width, rect.Height);
@@ -1350,12 +1281,11 @@ namespace System.Drawing.Drawing2D
          * !!! Need to handle the status code returned
          *  by the native GDI+ APIs.
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddEllipse3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds an ellipse to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddEllipse(int x, int y, int width, int height)
         {
             int status = SafeNativeMethods.Gdip.GdipAddPathEllipseI(new HandleRef(this, nativePath), x, y, width, height);
@@ -1364,26 +1294,24 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddPie"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds the outline of a pie shape to the
         ///       current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddPie(Rectangle rect, float startAngle, float sweepAngle)
         {
             AddPie(rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
         }
 
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddPie1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds the outline of a pie shape to the current
         ///       figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddPie(float x, float y, float width, float height,
                            float startAngle, float sweepAngle)
         {
@@ -1395,13 +1323,12 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddPie2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds the outline of a pie shape to the current
         ///       figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddPie(int x, int y, int width, int height,
                            float startAngle, float sweepAngle)
         {
@@ -1413,10 +1340,9 @@ namespace System.Drawing.Drawing2D
         }
 
         // float version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddPolygon"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Adds a polygon to the current figure.
-        /// </devdoc>
+        /// </summary>
         public void AddPolygon(PointF[] points)
         {
             if (points == null)
@@ -1435,10 +1361,9 @@ namespace System.Drawing.Drawing2D
         }
 
         // int version
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddPolygon1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Adds a polygon to the current figure.
-        /// </devdoc>
+        /// </summary>
         public void AddPolygon(Point[] points)
         {
             if (points == null)
@@ -1456,10 +1381,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddPath"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Appends the specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/> to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public void AddPath(GraphicsPath addingPath,
                             bool connect)
         {
@@ -1479,12 +1403,11 @@ namespace System.Drawing.Drawing2D
          * @notes What are the choices for the format parameter?
          */
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddString"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a text string to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddString(String s, FontFamily family, int style, float emSize,
                               PointF origin, StringFormat format)
         {
@@ -1503,12 +1426,11 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddString1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a text string to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddString(String s, FontFamily family, int style, float emSize,
                               Point origin, StringFormat format)
         {
@@ -1527,12 +1449,11 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddString2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a text string to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddString(String s, FontFamily family, int style, float emSize,
                               RectangleF layoutRect, StringFormat format)
         {
@@ -1550,12 +1471,11 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.AddString3"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Adds a text string to the current figure.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public void AddString(String s, FontFamily family, int style, float emSize,
                               Rectangle layoutRect, StringFormat format)
         {
@@ -1573,10 +1493,9 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Transform"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Applies a transform matrix to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public void Transform(Matrix matrix)
         {
             if (matrix == null)
@@ -1593,36 +1512,33 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GetBounds"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Returns a rectangle that bounds this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public RectangleF GetBounds()
         {
             return GetBounds(null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GetBounds1"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Returns a rectangle that bounds this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> when it
         ///       is transformed by the specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public RectangleF GetBounds(Matrix matrix)
         {
             return GetBounds(matrix, null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.GetBounds2"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Returns a rectangle that bounds this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> when it is
         ///       transformed by the specified <see cref='System.Drawing.Drawing2D.Matrix'/>. and drawn with the specified <see cref='System.Drawing.Pen'/>.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public RectangleF GetBounds(Matrix matrix, Pen pen)
         {
             GPRECTF gprectf = new GPRECTF();
@@ -1650,31 +1566,28 @@ namespace System.Drawing.Drawing2D
          * Flatten the path object
          */
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Flatten"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Converts each curve in this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> into a sequence of connected line
         ///    segments.
-        /// </devdoc>
+        /// </summary>
         public void Flatten()
         {
             Flatten(null);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Flatten1"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Converts each curve in this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> into a sequence of connected line
         ///    segments.
-        /// </devdoc>
+        /// </summary>
         public void Flatten(Matrix matrix)
         {
             Flatten(matrix, 0.25f);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Flatten2"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Converts each curve in this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> into a sequence of connected line
         ///    segments.
-        /// </devdoc>
+        /// </summary>
         public void Flatten(Matrix matrix, float flatness)
         {
             int status = SafeNativeMethods.Gdip.GdipFlattenPath(new HandleRef(this, nativePath),
@@ -1692,29 +1605,26 @@ namespace System.Drawing.Drawing2D
          * @notes We don't have an API yet.
          *  Should we just take in a GeometricPen as parameter?
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Widen"]/*' />
-        /// <devdoc>
-        /// </devdoc>
+        /// <summary>
+        /// </summary>
         public void Widen(Pen pen)
         {
             float flatness = (float)2.0 / (float)3.0;
             Widen(pen, (Matrix)null, flatness);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Widen1"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void Widen(Pen pen, Matrix matrix)
         {
             float flatness = (float)2.0 / (float)3.0;
             Widen(pen, matrix, flatness);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Widen2"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void Widen(Pen pen,
                           Matrix matrix,
                           float flatness)
@@ -1748,32 +1658,28 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Warp"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void Warp(PointF[] destPoints, RectangleF srcRect)
         { Warp(destPoints, srcRect, null); }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Warp1"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void Warp(PointF[] destPoints, RectangleF srcRect, Matrix matrix)
         { Warp(destPoints, srcRect, matrix, WarpMode.Perspective); }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Warp2"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void Warp(PointF[] destPoints, RectangleF srcRect, Matrix matrix,
                          WarpMode warpMode)
         { Warp(destPoints, srcRect, matrix, warpMode, 0.25f); }
 
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.Warp3"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void Warp(PointF[] destPoints, RectangleF srcRect, Matrix matrix,
                          WarpMode warpMode, float flatness)
         {
@@ -1805,10 +1711,9 @@ namespace System.Drawing.Drawing2D
         /**
          * Return the number of points in the current path
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.PointCount"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int PointCount
         {
             get
@@ -1827,10 +1732,9 @@ namespace System.Drawing.Drawing2D
         /**
          * Return the path point type information
          */
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.PathTypes"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public byte[] PathTypes
         {
             get
@@ -1854,10 +1758,9 @@ namespace System.Drawing.Drawing2D
          *        for get & set purposes.
          */
         // float points
-        /// <include file='doc\GraphicsPath.uex' path='docs/doc[@for="GraphicsPath.PathPoints"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public PointF[] PathPoints
         {
             get

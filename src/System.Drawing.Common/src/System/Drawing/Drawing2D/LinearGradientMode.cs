@@ -7,38 +7,33 @@ namespace System.Drawing.Drawing2D
     /**
      * Linear Gradient mode constants
      */
-    /// <include file='doc\LinearGradientMode.uex' path='docs/doc[@for="LinearGradientMode"]/*' />
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the direction of a linear
     ///    gradient.
-    /// </devdoc>
+    /// </summary>
     public enum LinearGradientMode
     {
-        /// <include file='doc\LinearGradientMode.uex' path='docs/doc[@for="LinearGradientMode.Horizontal"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies a gradient from left to right.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Horizontal = 0,
-        /// <include file='doc\LinearGradientMode.uex' path='docs/doc[@for="LinearGradientMode.Vertical"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///       Specifies a gradient from top to bottom.
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         Vertical = 1,
-        /// <include file='doc\LinearGradientMode.uex' path='docs/doc[@for="LinearGradientMode.ForwardDiagonal"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a gradient from upper-left to
         ///    lower-right.
-        /// </devdoc>
+        /// </summary>
         ForwardDiagonal = 2,
-        /// <include file='doc\LinearGradientMode.uex' path='docs/doc[@for="LinearGradientMode.BackwardDiagonal"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Specifies a gradient from upper-right to
         ///    lower-left.
-        /// </devdoc>
+        /// </summary>
         BackwardDiagonal = 3
     }
 }

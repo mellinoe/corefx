@@ -2,39 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics;
+using System.Drawing.Drawing2D;
+using System.Drawing.Internal;
+using System.Globalization;
+using System.Runtime.InteropServices;
+
 namespace System.Drawing
 {
-    using System.Diagnostics;
-    using System.Drawing.Drawing2D;
-    using System.Drawing.Internal;
-    using System.Globalization;
-    using System.Runtime.InteropServices;
-
-    /**
-     * Represent a Region object
-     */
-    /// <include file='doc\Region.uex' path='docs/doc[@for="Region"]/*' />
-    /// <devdoc>
-    ///    <para>
-    ///       Describes the interior of a graphics shape
-    ///       composed of rectangles and paths.
-    ///    </para>
-    /// </devdoc>
+    /// <summary>
+    /// Describes the interior of a graphics shape composed of rectangles and paths.
+    /// </summary>
     public sealed class Region : MarshalByRefObject, IDisposable
     {
 #if FINALIZATION_WATCH
         private string allocationSite = Graphics.GetAllocationStack();
 #endif
 
-        /**
-         * Construct a new region object
-         */
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Region"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Drawing.Region'/> class.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Initializes a new instance of the <see cref='Region'/> class.
+        /// </summary>
         public Region()
         {
             IntPtr region = IntPtr.Zero;
@@ -47,12 +34,9 @@ namespace System.Drawing
             SetNativeRegion(region);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Region1"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Drawing.Region'/> class from the specified <see cref='System.Drawing.RectangleF'/> .
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Initializes a new instance of the <see cref='Region'/> class from the specified <see cref='RectangleF'/> .
+        /// </summary>
         public Region(RectangleF rect)
         {
             IntPtr region = IntPtr.Zero;
@@ -67,12 +51,9 @@ namespace System.Drawing
             SetNativeRegion(region);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Region2"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Drawing.Region'/> class from the specified <see cref='System.Drawing.Rectangle'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Initializes a new instance of the <see cref='Region'/> class from the specified <see cref='Rectangle'/>.
+        /// </summary>
         public Region(Rectangle rect)
         {
             IntPtr region = IntPtr.Zero;
@@ -87,13 +68,9 @@ namespace System.Drawing
             SetNativeRegion(region);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Region3"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Initializes a new instance of the <see cref='System.Drawing.Region'/> class
-        ///       with the specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Initializes a new instance of the <see cref='Region'/> class with the specified <see cref='GraphicsPath'/>.
+        /// </summary>
         public Region(GraphicsPath path)
         {
             if (path == null)
@@ -109,11 +86,9 @@ namespace System.Drawing
             SetNativeRegion(region);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Region4"]/*' />
-        /// <devdoc>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Region'/> class
-        ///    from the specified data.
-        /// </devdoc>
+        /// <summary>
+        /// Initializes a new instance of the <see cref='Region'/> class from the specified data.
+        /// </summary>
         public Region(RegionData rgnData)
         {
             if (rgnData == null)
@@ -135,11 +110,9 @@ namespace System.Drawing
             SetNativeRegion(nativeRegion);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.FromHrgn"]/*' />
-        /// <devdoc>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Region'/> class
-        ///    from the specified existing <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Initializes a new instance of the <see cref='Region'/> class from the specified existing <see cref='Region'/>.
+        /// </summary>
         public static Region FromHrgn(IntPtr hrgn)
         {
             IntPtr region = IntPtr.Zero;
@@ -160,13 +133,9 @@ namespace System.Drawing
             this.nativeRegion = nativeRegion;
         }
 
-        /**
-         * Make a copy of the region object
-         */
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Clone"]/*' />
-        /// <devdoc>
-        ///    Creates an exact copy if this <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Creates an exact copy if this <see cref='Region'/>.
+        /// </summary>
         public Region Clone()
         {
             IntPtr region = IntPtr.Zero;
@@ -179,16 +148,9 @@ namespace System.Drawing
             return new Region(region);
         }
 
-        /**
-         * Dispose of resources associated with the
-         */
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Dispose"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Cleans up Windows resources for this
-        ///    <see cref='System.Drawing.Region'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Cleans up Windows resources for this <see cref='Region'/>.
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -228,25 +190,19 @@ namespace System.Drawing
             }
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Finalize"]/*' />
-        /// <devdoc>
-        ///    Cleans up Windows resources for this
-        /// <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Cleans up Windows resources for this <see cref='Region'/>.
+        /// </summary>
         ~Region()
         {
             Dispose(false);
         }
 
-        /*
-         * Region operations
-         */
+        // Region operations
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.MakeInfinite"]/*' />
-        /// <devdoc>
-        ///    Initializes this <see cref='System.Drawing.Region'/> to an
-        ///    infinite interior.
-        /// </devdoc>
+        /// <summary>
+        /// Initializes this <see cref='Region'/> to an infinite interior.
+        /// </summary>
         public void MakeInfinite()
         {
             int status = SafeNativeMethods.Gdip.GdipSetInfinite(new HandleRef(this, nativeRegion));
@@ -255,11 +211,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.MakeEmpty"]/*' />
-        /// <devdoc>
-        ///    Initializes this <see cref='System.Drawing.Region'/> to an
-        ///    empty interior.
-        /// </devdoc>
+        /// <summary>
+        /// Initializes this <see cref='Region'/> to an empty interior.
+        /// </summary>
         public void MakeEmpty()
         {
             int status = SafeNativeMethods.Gdip.GdipSetEmpty(new HandleRef(this, nativeRegion));
@@ -268,12 +222,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // float version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Intersect"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the intersection of itself
-        ///    with the specified <see cref='System.Drawing.RectangleF'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the intersection of itself with the specified <see cref='RectangleF'/>.
+        /// </summary>
         public void Intersect(RectangleF rect)
         {
             GPRECTF gprectf = rect.ToGPRECTF();
@@ -283,14 +234,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // int version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Intersect1"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Updates this <see cref='System.Drawing.Region'/> to the intersection of itself with the specified
-        ///    <see cref='System.Drawing.Rectangle'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the intersection of itself with the specified <see cref='Rectangle'/>.
+        /// </summary>
         public void Intersect(Rectangle rect)
         {
             GPRECT gprect = new GPRECT(rect);
@@ -300,13 +246,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Intersect2"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Updates this <see cref='System.Drawing.Region'/> to the intersection of itself with the specified
-        ///    <see cref='System.Drawing.Drawing2D.GraphicsPath'/>. 
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the intersection of itself with the specified <see cref='GraphicsPath'/>. 
+        /// </summary>
         public void Intersect(GraphicsPath path)
         {
             if (path == null)
@@ -318,13 +260,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Intersect3"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Updates this <see cref='System.Drawing.Region'/> to the intersection of itself with the specified
-        ///    <see cref='System.Drawing.Region'/>. 
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the intersection of itself with the specified <see cref='Region'/>. 
+        /// </summary>
         public void Intersect(Region region)
         {
             if (region == null)
@@ -336,11 +274,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.ReleaseHrgn"]/*' />
-        /// <devdoc>
-        ///     Releases the handle to the region handle.
-        /// </devdoc>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
+        /// <summary>
+        /// Releases the handle to the region handle.
+        /// </summary>
         public void ReleaseHrgn(IntPtr regionHandle)
         {
             if (regionHandle == IntPtr.Zero)
@@ -351,14 +287,9 @@ namespace System.Drawing
             SafeNativeMethods.IntDeleteObject(new HandleRef(this, regionHandle));
         }
 
-        // float version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Union"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Updates this <see cref='System.Drawing.Region'/> to the union of itself and the
-        ///       specified <see cref='System.Drawing.RectangleF'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the union of itself and the specified <see cref='RectangleF'/>.
+        /// </summary>
         public void Union(RectangleF rect)
         {
             GPRECTF gprectf = new GPRECTF(rect);
@@ -368,12 +299,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // int version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Union1"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the union of itself and the
-        ///    specified <see cref='System.Drawing.Rectangle'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the union of itself and the specified <see cref='Rectangle'/>.
+        /// </summary>
         public void Union(Rectangle rect)
         {
             GPRECT gprect = new GPRECT(rect);
@@ -383,11 +311,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Union2"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the union of itself and the
-        ///    specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the union of itself and the specified <see cref='GraphicsPath'/>.
+        /// </summary>
         public void Union(GraphicsPath path)
         {
             if (path == null)
@@ -399,12 +325,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Union3"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Updates this <see cref='System.Drawing.Region'/> to the union of itself and the specified <see cref='System.Drawing.Region'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the union of itself and the specified <see cref='Region'/>.
+        /// </summary>
         public void Union(Region region)
         {
             if (region == null)
@@ -416,12 +339,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // float version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Xor"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the union minus the
-        ///    intersection of itself with the specified <see cref='System.Drawing.RectangleF'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the union minus the intersection of itself with the specified <see cref='RectangleF'/>.
+        /// </summary>
         public void Xor(RectangleF rect)
         {
             GPRECTF gprectf = new GPRECTF(rect);
@@ -431,12 +351,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // int version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Xor1"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the union minus the
-        ///    intersection of itself with the specified <see cref='System.Drawing.Rectangle'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the union minus the intersection of itself with the specified <see cref='Rectangle'/>.
+        /// </summary>
         public void Xor(Rectangle rect)
         {
             GPRECT gprect = new GPRECT(rect);
@@ -446,11 +363,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Xor2"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the union minus the
-        ///    intersection of itself with the specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the union minus the intersection of itself with the specified
+        /// <see cref='GraphicsPath'/>.
+        /// </summary>
         public void Xor(GraphicsPath path)
         {
             if (path == null)
@@ -462,11 +378,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Xor3"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the union minus the
-        ///    intersection of itself with the specified <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the union minus the intersection of itself with the specified
+        /// <see cref='Region'/>.
+        /// </summary>
         public void Xor(Region region)
         {
             if (region == null)
@@ -478,12 +393,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // float version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Exclude"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the portion of its interior
-        ///    that does not intersect with the specified <see cref='System.Drawing.RectangleF'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the portion of its interior that does not intersect with the specified
+        /// <see cref='RectangleF'/>.
+        /// </summary>
         public void Exclude(RectangleF rect)
         {
             GPRECTF gprectf = new GPRECTF(rect);
@@ -493,12 +406,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // int version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Exclude1"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the portion of its interior
-        ///    that does not intersect with the specified <see cref='System.Drawing.Rectangle'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the portion of its interior that does not intersect with the specified
+        /// <see cref='Rectangle'/>.
+        /// </summary>
         public void Exclude(Rectangle rect)
         {
             GPRECT gprect = new GPRECT(rect);
@@ -508,11 +419,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Exclude2"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the portion of its interior
-        ///    that does not intersect with the specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the portion of its interior that does not intersect with the specified
+        /// <see cref='GraphicsPath'/>.
+        /// </summary>
         public void Exclude(GraphicsPath path)
         {
             if (path == null)
@@ -525,11 +435,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Exclude3"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the portion of its interior
-        ///    that does not intersect with the specified <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the portion of its interior that does not intersect with the specified
+        /// <see cref='Region'/>.
+        /// </summary>
         public void Exclude(Region region)
         {
             if (region == null)
@@ -542,12 +451,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // float version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Complement"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the portion of the
-        ///    specified <see cref='System.Drawing.RectangleF'/> that does not intersect with this <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the portion of the specified <see cref='RectangleF'/> that does not
+        /// intersect with this <see cref='Region'/>.
+        /// </summary>
         public void Complement(RectangleF rect)
         {
             GPRECTF gprectf = rect.ToGPRECTF();
@@ -557,12 +464,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // int version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Complement1"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the portion of the
-        ///    specified <see cref='System.Drawing.Rectangle'/> that does not intersect with this <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the portion of the specified <see cref='Rectangle'/> that does not
+        /// intersect with this <see cref='Region'/>.
+        /// </summary>
         public void Complement(Rectangle rect)
         {
             GPRECT gprect = new GPRECT(rect);
@@ -572,12 +477,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Complement2"]/*' />
-        /// <devdoc>
-        ///    Updates this <see cref='System.Drawing.Region'/> to the portion of the
-        ///    specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/> that does not intersect with this
-        /// <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the portion of the specified <see cref='GraphicsPath'/> that does not
+        /// intersect with this <see cref='Region'/>.
+        /// </summary>
         public void Complement(GraphicsPath path)
         {
             if (path == null)
@@ -589,13 +492,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Complement3"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Updates this <see cref='System.Drawing.Region'/> to the portion of the
-        ///       specified <see cref='System.Drawing.Region'/> that does not intersect with this <see cref='System.Drawing.Region'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Updates this <see cref='Region'/> to the portion of the specified <see cref='Region'/> that does not intersect
+        /// with this <see cref='Region'/>.
+        /// </summary>
         public void Complement(Region region)
         {
             if (region == null)
@@ -607,14 +507,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /**
-         * Transform operations
-         */
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Translate"]/*' />
-        /// <devdoc>
-        ///    Offsets the coordinates of this <see cref='System.Drawing.Region'/> by the
-        ///    specified amount.
-        /// </devdoc>
+        /// <summary>
+        /// Offsets the coordinates of this <see cref='Region'/> by the specified amount.
+        /// </summary>
         public void Translate(float dx, float dy)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateRegion(new HandleRef(this, nativeRegion), dx, dy);
@@ -623,11 +518,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Translate1"]/*' />
-        /// <devdoc>
-        ///    Offsets the coordinates of this <see cref='System.Drawing.Region'/> by the
-        ///    specified amount.
-        /// </devdoc>
+        /// <summary>
+        /// Offsets the coordinates of this <see cref='Region'/> by the specified amount.
+        /// </summary>
         public void Translate(int dx, int dy)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateRegionI(new HandleRef(this, nativeRegion), dx, dy);
@@ -636,11 +529,9 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Transform"]/*' />
-        /// <devdoc>
-        ///    Transforms this <see cref='System.Drawing.Region'/> by the
-        ///    specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Transforms this <see cref='Region'/> by the specified <see cref='Matrix'/>.
+        /// </summary>
         public void Transform(Matrix matrix)
         {
             if (matrix == null)
@@ -653,14 +544,10 @@ namespace System.Drawing
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /**
-         * Get region attributes
-         */
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.GetBounds"]/*' />
-        /// <devdoc>
-        ///    Returns a <see cref='System.Drawing.RectangleF'/> that represents a rectangular
-        ///    region that bounds this <see cref='System.Drawing.Region'/> on the drawing surface of a <see cref='System.Drawing.Graphics'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Returns a <see cref='System.Drawing.RectangleF'/> that represents a rectangular region that bounds this
+        /// <see cref='Region'/> on the drawing surface of a <see cref='Graphics'/>.
+        /// </summary>
         public RectangleF GetBounds(Graphics g)
         {
             if (g == null)
@@ -676,15 +563,12 @@ namespace System.Drawing
             return gprectf.ToRectangleF();
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.GetHrgn"]/*' />
-        /// <devdoc>
-        ///    Returns a Windows handle to this <see cref='System.Drawing.Region'/> in the
-        ///    specified graphics context.
-        ///    
-        ///    Remarks from MSDN: 
-        ///         It is the caller's responsibility to call the GDI function 
-        ///         DeleteObject to free the GDI region when it is no longer needed.
-        /// </devdoc>
+        /// <summary>
+        /// Returns a Windows handle to this <see cref='Region'/> in the specified graphics context.
+        /// Remarks from MSDN: 
+        ///   It is the caller's responsibility to call the GDI function 
+        ///   DeleteObject to free the GDI region when it is no longer needed.
+        /// </summary>
         public IntPtr GetHrgn(Graphics g)
         {
             if (g == null)
@@ -700,13 +584,9 @@ namespace System.Drawing
             return hrgn;
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsEmpty"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether this <see cref='System.Drawing.Region'/> has an
-        ///       empty interior on the specified drawing surface.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether this <see cref='Region'/> has an empty interior on the specified drawing surface.
+        /// </summary>
         public bool IsEmpty(Graphics g)
         {
             if (g == null)
@@ -721,13 +601,9 @@ namespace System.Drawing
             return isEmpty != 0;
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsInfinite"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether this <see cref='System.Drawing.Region'/> has
-        ///       an infinite interior on the specified drawing surface.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether this <see cref='Region'/> has an infinite interior on the specified drawing surface.
+        /// </summary>
         public bool IsInfinite(Graphics g)
         {
             if (g == null)
@@ -742,14 +618,9 @@ namespace System.Drawing
             return isInfinite != 0;
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.Equals"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.Region'/> is
-        ///       identical to this <see cref='System.Drawing.Region'/>
-        ///       on the specified drawing surface.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='Region'/> is identical to this <see cref='Region'/> on the specified drawing surface.
+        /// </summary>
         public bool Equals(Region region, Graphics g)
         {
             if (g == null)
@@ -767,11 +638,9 @@ namespace System.Drawing
             return isEqual != 0;
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.GetRegionData"]/*' />
-        /// <devdoc>
-        ///    Returns a <see cref='System.Drawing.Drawing2D.RegionData'/> that represents the
-        ///    information that describes this <see cref='System.Drawing.Region'/>.
-        /// </devdoc>
+        /// <summary>
+        /// Returns a <see cref='RegionData'/> that represents the information that describes this <see cref='Region'/>.
+        /// </summary>
         public RegionData GetRegionData()
         {
             int regionSize = 0;
@@ -794,52 +663,33 @@ namespace System.Drawing
             return new RegionData(regionData);
         }
 
-        /*
-         * Hit testing operations
-         */
-        // float version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified point is
-        ///       contained within this <see cref='System.Drawing.Region'/> in the specified graphics context.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified point is contained within this <see cref='Region'/> in the specified graphics context.
+        /// </summary>
         public bool IsVisible(float x, float y)
         {
             return IsVisible(new PointF(x, y), null);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible1"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.PointF'/> is contained within this <see cref='System.Drawing.Region'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='PointF'/> is contained within this <see cref='Region'/>.
+        /// </summary>
         public bool IsVisible(PointF point)
         {
             return IsVisible(point, null);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible2"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified point is contained within this <see cref='System.Drawing.Region'/> in the
-        ///       specified graphics context.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified point is contained within this <see cref='Region'/> in the specified graphics context.
+        /// </summary>
         public bool IsVisible(float x, float y, Graphics g)
         {
             return IsVisible(new PointF(x, y), g);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible3"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.PointF'/> is
-        ///       contained within this <see cref='System.Drawing.Region'/> in the specified graphics context.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='PointF'/> is contained within this <see cref='Region'/> in the specified graphics context.
+        /// </summary>
         public bool IsVisible(PointF point, Graphics g)
         {
             int isVisible;
@@ -854,48 +704,34 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible4"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified rectangle is contained within this <see cref='System.Drawing.Region'/>
-        ///       .
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified rectangle is contained within this <see cref='Region'/>.
+        /// </summary>
         public bool IsVisible(float x, float y, float width, float height)
         {
             return IsVisible(new RectangleF(x, y, width, height), null);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible5"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.RectangleF'/> is contained within this
-        ///    <see cref='System.Drawing.Region'/>. 
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='RectangleF'/> is contained within this <see cref='Region'/>. 
+        /// </summary>
         public bool IsVisible(RectangleF rect)
         {
             return IsVisible(rect, null);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible6"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified rectangle is contained within this <see cref='System.Drawing.Region'/> in the
-        ///       specified graphics context.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified rectangle is contained within this <see cref='Region'/> in the specified graphics context.
+        /// </summary>
         public bool IsVisible(float x, float y, float width, float height, Graphics g)
         {
             return IsVisible(new RectangleF(x, y, width, height), g);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible7"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.RectangleF'/> is contained within this <see cref='System.Drawing.Region'/> in the specified graphics context.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='RectangleF'/> is contained within this <see cref='Region'/> in the
+        /// specified graphics context.
+        /// </summary>
         public bool IsVisible(RectangleF rect, Graphics g)
         {
             int isVisible = 0;
@@ -910,38 +746,26 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        // int version
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible8"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified point is contained within this <see cref='System.Drawing.Region'/> in the
-        ///       specified graphics context.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified point is contained within this <see cref='Region'/> in the specified graphics context.
+        /// </summary>
         public bool IsVisible(int x, int y, Graphics g)
         {
             return IsVisible(new Point(x, y), g);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible9"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.Point'/> is contained within this <see cref='System.Drawing.Region'/>.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='Point'/> is contained within this <see cref='Region'/>.
+        /// </summary>
         public bool IsVisible(Point point)
         {
             return IsVisible(point, null);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible10"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.Point'/> is contained within this
-        ///    <see cref='System.Drawing.Region'/> in the specified 
-        ///       graphics context.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='System.Drawing.Point'/> is contained within this <see cref='Region'/>
+        /// in the specified graphics context.
+        /// </summary>
         public bool IsVisible(Point point, Graphics g)
         {
             int isVisible = 0;
@@ -955,50 +779,34 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible11"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified rectangle is contained within this <see cref='System.Drawing.Region'/>
-        ///       .
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified rectangle is contained within this <see cref='Region'/>.
+        /// </summary>
         public bool IsVisible(int x, int y, int width, int height)
         {
             return IsVisible(new Rectangle(x, y, width, height), null);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible12"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.Rectangle'/> is contained within this
-        ///    <see cref='System.Drawing.Region'/>. 
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='Rectangle'/> is contained within this <see cref='Region'/>. 
+        /// </summary>
         public bool IsVisible(Rectangle rect)
         {
             return IsVisible(rect, null);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible13"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified rectangle is contained within this <see cref='System.Drawing.Region'/> in the
-        ///       specified graphics context.
-        ///    </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified rectangle is contained within this <see cref='Region'/> in the specified graphics context.
+        /// </summary>
         public bool IsVisible(int x, int y, int width, int height, Graphics g)
         {
             return IsVisible(new Rectangle(x, y, width, height), g);
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.IsVisible14"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Tests whether the specified <see cref='System.Drawing.Rectangle'/> is contained within this
-        ///    <see cref='System.Drawing.Region'/> 
-        ///    in the specified graphics context.
-        /// </para>
-        /// </devdoc>
+        /// <summary>
+        /// Tests whether the specified <see cref='Rectangle'/> is contained within this <see cref='Region'/> in the specified
+        /// graphics context.
+        /// </summary>
         public bool IsVisible(Rectangle rect, Graphics g)
         {
             int isVisible = 0;
@@ -1013,13 +821,9 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <include file='doc\Region.uex' path='docs/doc[@for="Region.GetRegionScans"]/*' />
-        /// <devdoc>
-        ///    <para>
-        ///       Returns an array of <see cref='System.Drawing.RectangleF'/>
-        ///       objects that approximate this Region on the specified
-        ///    </para>
-        /// </devdoc>        
+        /// <summary>
+        /// Returns an array of <see cref='RectangleF'/> objects that approximate this Region on the specified
+        /// </summary>        
         public RectangleF[] GetRegionScans(Matrix matrix)
         {
             if (matrix == null)
@@ -1071,9 +875,6 @@ namespace System.Drawing
             return rectangles;
         }
 
-        /*
-         * handle to native region object
-         */
         internal IntPtr nativeRegion;
     }
 }

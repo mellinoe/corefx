@@ -7,43 +7,37 @@ namespace System.Drawing.Drawing2D
     /**
      * Various wrap modes for brushes
      */
-    /// <include file='doc\WrapMode.uex' path='docs/doc[@for="WrapMode"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Specifies how a texture or gradient is tiled when it is
     ///       larger than the area being filled.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public enum WrapMode
     {
-        /// <include file='doc\WrapMode.uex' path='docs/doc[@for="WrapMode.Tile"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Tiles the gradient or texture.
-        /// </devdoc>
+        /// </summary>
         Tile = 0,
-        /// <include file='doc\WrapMode.uex' path='docs/doc[@for="WrapMode.TileFlipX"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Reverses the texture or gradient
         ///    horizontally and then tiles the texture or gradient.
-        /// </devdoc>
+        /// </summary>
         TileFlipX = 1,
-        /// <include file='doc\WrapMode.uex' path='docs/doc[@for="WrapMode.TileFlipY"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Reverses the texture or
         ///    gradient vertically and then tiles the texture or gradient.
-        /// </devdoc>
+        /// </summary>
         TileFlipY = 2,
-        /// <include file='doc\WrapMode.uex' path='docs/doc[@for="WrapMode.TileFlipXY"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Reverses the texture or gradient
         ///    horizontally and vertically and then tiles the texture or gradient.
-        /// </devdoc>
+        /// </summary>
         TileFlipXY = 3,
-        /// <include file='doc\WrapMode.uex' path='docs/doc[@for="WrapMode.Clamp"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Clamps the texture or gradient to the
         ///    object boundary.
-        /// </devdoc>
+        /// </summary>
         Clamp = 4
     }
 }

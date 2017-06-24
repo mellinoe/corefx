@@ -4,9 +4,9 @@
 
 namespace System.Drawing.Internal
 {
-    /// <devdoc>
+    /// <summary>
     ///    Specifies the graphics mode of a device context.
-    /// </devdoc>
+    /// </summary>
     internal enum DeviceContextGraphicsMode
     {
         /*

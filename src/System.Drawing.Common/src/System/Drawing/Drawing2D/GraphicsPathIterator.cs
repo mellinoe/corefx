@@ -12,21 +12,19 @@ namespace System.Drawing.Drawing2D
     /**
      * Represent a Path Iterator object
      */
-    /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator"]/*' />
-    /// <devdoc>
-    ///    <para>
+    /// <summary>
+    ///    
     ///       Provides helper functions for the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> class.
-    ///    </para>
-    /// </devdoc>
+    ///    
+    /// </summary>
     public sealed class GraphicsPathIterator : MarshalByRefObject, IDisposable
     {
         /**
          * Create a new path iterator object
          */
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.GraphicsPathIterator"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPathIterator'/> class with the specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        /// </devdoc>
+        /// </summary>
         public GraphicsPathIterator(GraphicsPath path)
         {
             IntPtr nativeIter = IntPtr.Zero;
@@ -42,11 +40,10 @@ namespace System.Drawing.Drawing2D
         /**
          * Dispose of resources associated with the
          */
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.Dispose"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Cleans up Windows resources for this
         /// <see cref='System.Drawing.Drawing2D.GraphicsPathIterator'/>.
-        /// </devdoc>
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);
@@ -83,11 +80,10 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.Finalize"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Cleans up Windows resources for this
         /// <see cref='System.Drawing.Drawing2D.GraphicsPathIterator'/>.
-        /// </devdoc>
+        /// </summary>
         ~GraphicsPathIterator()
         {
             Dispose(false);
@@ -96,12 +92,11 @@ namespace System.Drawing.Drawing2D
         /**
          * Next subpath in path
          */
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.NextSubpath"]/*' />
-        /// <devdoc>
+        /// <summary>
         ///    Returns the number of subpaths in the
         /// <see cref='System.Drawing.Drawing2D.GraphicsPath'/>. The start index and end index of the 
         ///    next subpath are contained in out parameters.
-        /// </devdoc>
+        /// </summary>
         public int NextSubpath(out int startIndex, out int endIndex, out bool isClosed)
         {
             int resultCount = 0;
@@ -124,10 +119,9 @@ namespace System.Drawing.Drawing2D
         /**
          * Next subpath in path
          */
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.NextSubpath1"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int NextSubpath(GraphicsPath path, out bool isClosed)
         {
             int resultCount = 0;
@@ -143,10 +137,9 @@ namespace System.Drawing.Drawing2D
         /**
          * Next type in subpath
          */
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.NextPathType"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int NextPathType(out byte pathType, out int startIndex, out int endIndex)
         {
             int resultCount = 0;
@@ -162,10 +155,9 @@ namespace System.Drawing.Drawing2D
         /**
          * Next marker in subpath
          */
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.NextMarker"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int NextMarker(out int startIndex, out int endIndex)
         {
             int resultCount = 0;
@@ -181,10 +173,9 @@ namespace System.Drawing.Drawing2D
         /**
          * Next marker in subpath
          */
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.NextMarker1"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int NextMarker(GraphicsPath path)
         {
             int resultCount = 0;
@@ -197,10 +188,9 @@ namespace System.Drawing.Drawing2D
             return resultCount;
         }
 
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.Count"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int Count
         {
             get
@@ -215,10 +205,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.SubpathCount"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int SubpathCount
         {
             get
@@ -233,10 +222,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.HasCurve"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public bool HasCurve()
         {
             bool hasCurve = false;
@@ -249,10 +237,9 @@ namespace System.Drawing.Drawing2D
             return hasCurve;
         }
 
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.Rewind"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public void Rewind()
         {
             int status = SafeNativeMethods.Gdip.GdipPathIterRewind(new HandleRef(this, nativeIter));
@@ -261,10 +248,9 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.Enumerate"]/*' />
-        /// <devdoc>
-        ///    <para>[To be supplied.]</para>
-        /// </devdoc>
+        /// <summary>
+        ///    [To be supplied.]
+        /// </summary>
         public int Enumerate(ref PointF[] points, ref byte[] types)
         {
             if (points.Length != types.Length)
@@ -302,15 +288,14 @@ namespace System.Drawing.Drawing2D
             return resultCount;
         }
 
-        /// <include file='doc\GraphicsPathIterator.uex' path='docs/doc[@for="GraphicsPathIterator.CopyData"]/*' />
-        /// <devdoc>
-        ///    <para>
+        /// <summary>
+        ///    
         ///     points - pointF array to copy the retrieved point data
         ///     types - type array to copy the retrieved type data
         ///     startIndex - start index of the origianl data
         ///     endIndex - end index of the origianl data
-        ///    </para>
-        /// </devdoc>
+        ///    
+        /// </summary>
         public int CopyData(ref PointF[] points, ref byte[] types, int startIndex, int endIndex)
         {
             if ((points.Length != types.Length) || (endIndex - startIndex + 1 > points.Length))
