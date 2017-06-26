@@ -4,26 +4,13 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /**
-     * Line cap constants
-     */
     /// <summary>
-    ///    Specifies the available dash cap
-    ///    styles with which a <see cref='System.Drawing.Pen'/> can end a line.
+    /// Specifies the available dash cap styles with which a <see cref='Pen'/> can end a line.
     /// </summary>
     public enum DashCap
     {
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         Flat = 0,
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         Round = 2,
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         Triangle = 3
     }
 }

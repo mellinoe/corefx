@@ -5,9 +5,7 @@
 namespace System.Drawing.Drawing2D
 {
     /// <summary>
-    ///    
-    ///       Encapsulates the data that makes up a <see cref='System.Drawing.Region'/>.
-    ///    
+    /// Encapsulates the data that makes up a <see cref='Region'/>.
     /// </summary>
     public sealed class RegionData
     {
@@ -19,9 +17,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       An array of characters that contain the data that makes up a <see cref='System.Drawing.Region'/>.
-        ///    
+        /// An array of characters that contain the data that makes up a <see cref='Region'/>.
         /// </summary>
         public byte[] Data
         {

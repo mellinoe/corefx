@@ -5,33 +5,32 @@
 namespace System.Drawing.Drawing2D
 {
     /// <summary>
-    ///    Specifies the quality level to use during
-    ///    compositing.
+    /// Specifies the quality level to use during compositing.
     /// </summary>
     public enum CompositingQuality
     {
         /// <summary>
-        ///    Invalid quality.
+        /// Invalid quality.
         /// </summary>
         Invalid = QualityMode.Invalid,
         /// <summary>
-        ///    Default quality.
+        /// Default quality.
         /// </summary>
         Default = QualityMode.Default,
         /// <summary>
-        ///    Low quality, high speed.
+        /// Low quality, high speed.
         /// </summary>
         HighSpeed = QualityMode.Low,
         /// <summary>
-        ///    High quality, low speed.
+        /// High quality, low speed.
         /// </summary>
         HighQuality = QualityMode.High,
         /// <summary>
-        ///    Gamma correction is used.
+        /// Gamma correction is used.
         /// </summary>
         GammaCorrected,
         /// <summary>
-        ///    Assume linear values.
+        /// Assume linear values.
         /// </summary>
         AssumeLinear
     }

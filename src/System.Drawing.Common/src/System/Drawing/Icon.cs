@@ -2,20 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.Drawing.Internal;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Text;
+
 namespace System.Drawing
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing.Imaging;
-    using System.Drawing.Internal;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Text;
-
     /// <summary>
-    ///     This class represents a Windows icon, which is a small bitmap image used to
-    ///     represent an object.  Icons can be thought of as transparent bitmaps, although
-    ///     their size is determined by the system.
+    /// This class represents a Windows icon, which is a small bitmap image used to represent an object.  Icons can
+    /// be thought of as transparent bitmaps, although their size is determined by the system.
     /// </summary>
     public sealed partial class Icon : MarshalByRefObject, ICloneable, IDisposable
     {
@@ -31,7 +30,6 @@ namespace System.Drawing
         private const int PNGSignature2 = 13 + (10 << 8) + (26 << 16) + (10 << 24);
 
         // Icon data
-        //
         private readonly byte[] _iconData;
         private int _bestImageOffset;
         private int _bestBitDepth;
@@ -59,10 +57,8 @@ namespace System.Drawing
             _ownHandle = takeOwnership;
         }
 
-
-
         /// <summary>
-        ///     Loads an icon object from the given filename.
+        /// Loads an icon object from the given filename.
         /// </summary>
         public Icon(string fileName) : this(fileName, 0, 0)
         {
@@ -85,24 +81,20 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Duplicates the given icon, attempting to find a version of the icon
-        ///     that matches the requested size.  If a version cannot be found that
-        ///     exactally matches the size, the closest match will be used.  Note
-        ///     that if original is an icon with a single size, this will
-        ///     merely create a dupicate icon.  You can use the stretching modes
-        ///     of drawImage to force the icon to the size you want.
+        /// Duplicates the given icon, attempting to find a version of the icon that matches the requested size.
+        /// If a version cannot be found that exactally matches the size, the closest match will be used.
+        /// Note that if original is an icon with a single size, this will merely create a dupicate icon.
+        /// You can use the stretching modes of drawImage to force the icon to the size you want.
         /// </summary>
         public Icon(Icon original, Size size) : this(original, size.Width, size.Height)
         {
         }
 
         /// <summary>
-        ///     Duplicates the given icon, attempting to find a version of the icon
-        ///     that matches the requested size.  If a version cannot be found that
-        ///     exactally matches the size, the closest match will be used.  Note
-        ///     that if original is an icon with a single size, this will
-        ///     merely create a dupicate icon.  You can use the stretching modes
-        ///     of drawImage to force the icon to the size you want.
+        /// Duplicates the given icon, attempting to find a version of the icon that matches the requested size.
+        /// If a version cannot be found that exactally matches the size, the closest match will be used.
+        /// Note that if original is an icon with a single size, this willmerely create a dupicate icon.
+        /// You can use the stretching modes of drawImage to force the icon to the size you want.
         /// </summary>
         public Icon(Icon original, int width, int height) : this()
         {
@@ -125,7 +117,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Loads an icon object from the given resource.
+        /// Loads an icon object from the given resource.
         /// </summary>
         public Icon(Type type, string resource) : this()
         {
@@ -141,7 +133,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Loads an icon object from the given data stream.
+        /// Loads an icon object from the given data stream.
         /// </summary>
         public Icon(Stream stream) : this(stream, 0, 0)
         {
@@ -150,9 +142,6 @@ namespace System.Drawing
         {
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public Icon(Stream stream, int width, int height) : this()
         {
             if (stream == null)
@@ -166,7 +155,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Extracts an icon object from the given filename.
+        /// Extracts an icon object from the given filename.
         /// </summary>
         public static Icon ExtractAssociatedIcon(string filePath)
         {
@@ -174,7 +163,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Extracts an icon object from the given filename.
+        /// Extracts an icon object from the given filename.
         /// </summary>
         private static Icon ExtractAssociatedIcon(string filePath, int index)
         {
@@ -219,8 +208,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     The Win32 handle for this object.  This is not a copy of the handle; do
-        ///     not free it.
+        /// The Win32 handle for this object.  This is not a copy of the handle; do not free it.
         /// </summary>
         [Browsable(false)]
         public IntPtr Handle
@@ -235,9 +223,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [Browsable(false)]
         public int Height
         {
@@ -245,7 +230,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     The size of this icon object.
+        /// The size of this icon object.
         /// </summary>
         public Size Size
         {
@@ -279,9 +264,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [Browsable(false)]
         public int Width
         {
@@ -289,7 +271,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Clones the icon object, creating a duplicate image.
+        /// Clones the icon object, creating a duplicate image.
         /// </summary>
         public object Clone()
         {
@@ -297,16 +279,12 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Called when this object is going to destroy it's Win32 handle.  You
-        ///     may override this if there is something special you need to do to
-        ///     destroy the handle.  This will be called even if the handle is not
-        ///     owned by this object, which is handy if you want to create a
-        ///     derived class that has it's own create/destroy semantics.
+        /// Called when this object is going to destroy it's Win32 handle. You may override this if there is something
+        /// special you need to do to destroy the handle. This will be called even if the handle is not owned by this
+        /// object, which is handy if you want to create a derived class that has it's own create/destroy semantics.
         ///
-        ///     The default implementation will call the appropriate Win32
-        ///     call to destroy the handle if this object currently owns the
-        ///     handle.  It will do nothing if the object does not currently
-        ///     own the handle.
+        /// The default implementation will call the appropriate Win32 call to destroy the handle if this object
+        /// currently owns the handle. It will do nothing if the object does not currently own the handle.
         /// </summary>
         internal void DestroyHandle()
         {
@@ -318,8 +296,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Cleans up the resources allocated by this object.  Once called, the cursor
-        ///     object is no longer useful.
+        /// Cleans up the resources allocated by this object. Once called, the cursor object is no longer useful.
         /// </summary>
         public void Dispose()
         {
@@ -341,12 +318,11 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Draws this image to a graphics object.  The drawing command originates on the graphics
-        ///     object, but a graphics object generally has no idea how to render a given image.  So,
-        ///     it passes the call to the actual image.  This version crops the image to the given
-        ///     dimensions and allows the user to specify a rectangle within the image to draw.
+        /// Draws this image to a graphics object. The drawing command originates on the graphics object, but a
+        /// graphics object generally has no idea how to render a given image. So, it passes the call to the actual
+        /// image. This version crops the image to the givendimensions and allows the user to specify a rectangle
+        /// within the image to draw.
         /// </summary>
-        // This method is way more powerful than what we expose, but I'll leave it in place.
         private void DrawIcon(IntPtr dc, Rectangle imageRect, Rectangle targetRect, bool stretch)
         {
             int imageX = 0;
@@ -361,7 +337,6 @@ namespace System.Drawing
             Size cursorSize = Size;
 
             // compute the dimensions of the icon, if needed
-            //
             if (!imageRect.IsEmpty)
             {
                 imageX = imageRect.X;
@@ -409,7 +384,6 @@ namespace System.Drawing
             // The ROP is SRCCOPY, so we can be simple here and take
             // advantage of clipping regions.  Drawing the cursor
             // is merely a matter of offsetting and clipping.
-            //
             IntPtr hSaveRgn = SafeNativeMethods.SaveClipRgn(dc);
             try
             {
@@ -437,10 +411,10 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Draws this image to a graphics object.  The drawing command originates on the graphics
-        ///     object, but a graphics object generally has no idea how to render a given image.  So,
-        ///     it passes the call to the actual image.  This version stretches the image to the given
-        ///     dimensions and allows the user to specify a rectangle within the image to draw.
+        /// Draws this image to a graphics object. The drawing command originates on the graphics object, but a
+        /// graphics object generally has no idea how to render a given image. So, it passes the call to the actual
+        /// image. This version stretches the image to the givendimensions and allows the user to specify a rectangle
+        /// within the image to draw.
         /// </summary>
         internal void Draw(Graphics graphics, Rectangle targetRect)
         {
@@ -462,10 +436,10 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Draws this image to a graphics object.  The drawing command originates on the graphics
-        ///     object, but a graphics object generally has no idea how to render a given image.  So,
-        ///     it passes the call to the actual image.  This version crops the image to the given
-        ///     dimensions and allows the user to specify a rectangle within the image to draw.
+        /// Draws this image to a graphics object. The drawing command originates on the graphics object, but a
+        /// graphics object generally has no idea how to render a given image. So, it passes the call to the actual
+        /// image. This version crops the image to the given dimensions and allows the user to specify a rectangle
+        /// within the image to draw.
         /// </summary>
         internal void DrawUnstretched(Graphics graphics, Rectangle targetRect)
         {
@@ -485,18 +459,14 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///     Cleans up Windows resources for this object.
-        /// </summary>
         ~Icon()
         {
             Dispose(false);
         }
 
         /// <summary>
-        ///     Creates an icon object from a given Win32 icon handle.  The Icon object
-        ///     does not claim ownership of the icon handle; you must free it when you are
-        ///     done.
+        /// Creates an icon object from a given Win32 icon handle. The Icon object does not claim ownership of the
+        /// icon handle; you must free it when you are done.
         /// </summary>
         public static Icon FromHandle(IntPtr handle)
         {
@@ -524,9 +494,12 @@ namespace System.Drawing
             int retval = 0;
             if (0 != (unchecked((byte)pb) & 3))
             {
-                retval = *pb; pb++;
-                retval = retval | (*pb << 8); pb++;
-                retval = retval | (*pb << 16); pb++;
+                retval = *pb;
+                pb++;
+                retval = retval | (*pb << 8);
+                pb++;
+                retval = retval | (*pb << 16);
+                pb++;
                 retval = unchecked(retval | (*pb << 24));
             }
             else
@@ -538,9 +511,8 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///     Initializes this Image object.  This is identical to calling the image's
-        ///     constructor with picture, but this allows non-constructor initialization,
-        ///     which may be necessary in some instances.
+        /// Initializes this Image object.  This is identical to calling the image's constructor with picture, but this
+        /// allows non-constructor initialization, which may be necessary in some instances.
         /// </summary>
         private unsafe void Initialize(int width, int height)
         {
@@ -556,7 +528,6 @@ namespace System.Drawing
             }
 
             // Get the correct width / height
-            //
             if (width == 0)
             {
                 width = UnsafeNativeMethods.GetSystemMetrics(SafeNativeMethods.SM_CXICON);
@@ -578,8 +549,8 @@ namespace System.Drawing
                 // If the bitdepth is 8, make it 4.  Why?  Because windows does not
                 // choose a 256 color icon if the display is running in 256 color mode
                 // because of palette flicker.  
-                //
-                if (s_bitDepth == 8) s_bitDepth = 4;
+                if (s_bitDepth == 8)
+                    s_bitDepth = 4;
             }
 
             fixed (byte* pbIconData = _iconData)
@@ -610,9 +581,7 @@ namespace System.Drawing
 
                 for (int i = 0; i < idCount; i++)
                 {
-                    //
                     // Fill in EntryTemp
-                    //
                     EntryTemp.bWidth = pbIconDirEntry[0];
                     EntryTemp.bHeight = pbIconDirEntry[1];
                     EntryTemp.bColorCount = pbIconDirEntry[2];
@@ -621,15 +590,14 @@ namespace System.Drawing
                     EntryTemp.wBitCount = GetShort(pbIconDirEntry + 6);
                     EntryTemp.dwBytesInRes = GetInt(pbIconDirEntry + 8);
                     EntryTemp.dwImageOffset = GetInt(pbIconDirEntry + 12);
-                    //
-                    //
-                    //
+
                     bool fUpdateBestFit = false;
                     int iconBitDepth = 0;
                     if (EntryTemp.bColorCount != 0)
                     {
                         iconBitDepth = 4;
-                        if (EntryTemp.bColorCount < 0x10) iconBitDepth = 1;
+                        if (EntryTemp.bColorCount < 0x10)
+                            iconBitDepth = 1;
                     }
                     else
                     {
@@ -648,7 +616,6 @@ namespace System.Drawing
                     //  4.  If all icon color depth > display, lowest color depth is chosen.
                     //  5.  color depth of > 8bpp are all equal.
                     //  6.  Never choose an 8bpp icon on an 8bpp system.
-                    //
 
                     if (0 == _bestBytesInRes)
                     {
@@ -703,7 +670,7 @@ namespace System.Drawing
                     throw new ArgumentException(SR.Format(SR.InvalidPictureType, "picture", "Icon"));
                 }
 
-                // See DevDivBugs 17509. Copying bytes into an aligned buffer if needed
+                // Copying bytes into an aligned buffer if needed
                 if ((_bestImageOffset % IntPtr.Size) != 0)
                 {
                     // Beginning of icon's content is misaligned
@@ -734,7 +701,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Saves this image to the given output stream.
+        /// Saves this image to the given output stream.
         /// </summary>
         public void Save(Stream outputStream)
         {
@@ -749,7 +716,6 @@ namespace System.Drawing
                 // converting them to DIBS and saving them into the file.
                 // But, in the interest of simplicity, we just call to 
                 // OLE to do it for us.
-                //
                 SafeNativeMethods.IPicture picture;
                 SafeNativeMethods.PICTDESC pictdesc = SafeNativeMethods.PICTDESC.CreateIconPICTDESC(Handle);
                 Guid g = typeof(SafeNativeMethods.IPicture).GUID;
@@ -818,17 +784,11 @@ namespace System.Drawing
                     }
                 }
             }
-        Found:
+Found:
             return hasAlpha;
         }
 
-        // If you're concerned about performance, you probably shouldn't call this method,
-        // since you will probably turn it into an HBITMAP sooner or later anyway.
-
-
-
-
- // supressing here since the call within the assert is safe
+        // supressing here since the call within the assert is safe
         public Bitmap ToBitmap()
         {
             // DontSupportPngFramesInIcons is true when the application is targeting framework version below 4.6
@@ -885,8 +845,8 @@ namespace System.Drawing
                 }
             }
             else if (_bestBitDepth == 0 || _bestBitDepth == 32)
-            { // we don't know or we are 32bpp for sure
-                //we don't have any icon data, let's fish out the data from the handle that we got...
+            {   // we don't know or we are 32bpp for sure
+                // we don't have any icon data, let's fish out the data from the handle that we got...
                 // we have to fish out the data for this icon if the icon is a 32bpp icon
                 SafeNativeMethods.ICONINFO info = new SafeNativeMethods.ICONINFO();
                 SafeNativeMethods.GetIconInfo(new HandleRef(this, _handle), info);
@@ -969,7 +929,7 @@ namespace System.Drawing
                         }
                     }
                     catch (ArgumentException)
-                    { // GDI+ weirdness episode MMMCLXXXXIVI, sometime FromHicon crash with no real reason,
+                    {   // GDI+ weirdness episode MMMCLXXXXIVI, sometime FromHicon crash with no real reason,
                         // backup plan is to just draw the image like we used to. 
                         // NOTE: FromHIcon is also where we have the buffer overrun
                         // if width and height are mismatched
@@ -980,7 +940,6 @@ namespace System.Drawing
                 {
                     graphics?.Dispose();
                 }
-
 
                 // gpr: GDI+ is filling the surface with a sentinel color for GetDC,
                 // but is not correctly cleaning it up again, so we have to for it.
@@ -1022,7 +981,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Retrieves a human readable string representing the cursor.
+        /// Retrieves a human readable string representing the cursor.
         /// </summary>
         public override string ToString()
         {
@@ -1030,4 +989,3 @@ namespace System.Drawing
         }
     }
 }
-

@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections;
+using System.Globalization;
+
 namespace System.Drawing
 {
-    using System.Collections;
-    using System.Globalization;
-
     /// <summary>
-    ///    Translates colors to and from GDI+ <see cref='System.Drawing.Color'/> objects.
+    /// Translates colors to and from GDI+ <see cref='Color'/> objects.
     /// </summary>
     public sealed class ColorTranslator
     {
@@ -19,8 +19,7 @@ namespace System.Drawing
         private static Hashtable s_htmlSysColorTable;
 
         /// <summary>
-        ///    Translates the specified <see cref='System.Drawing.Color'/> to a
-        ///    Win32 color.
+        /// Translates the specified <see cref='Color'/> to a Win32 color.
         /// </summary>
         public static int ToWin32(Color c)
         {
@@ -28,8 +27,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Translates the specified <see cref='System.Drawing.Color'/> to
-        ///    an Ole color.
+        /// Translates the specified <see cref='Color'/> to an Ole color.
         /// </summary>
         public static int ToOle(Color c)
         {
@@ -113,9 +111,9 @@ namespace System.Drawing
 
             return ToWin32(c);
         }
+
         /// <summary>
-        ///    Translates an Ole color value to a GDI+
-        /// <see cref='System.Drawing.Color'/>.
+        /// Translates an Ole color value to a GDI+ <see cref='Color'/>.
         /// </summary>
         public static Color FromOle(int oleColor)
         {
@@ -123,7 +121,7 @@ namespace System.Drawing
             //    WARNING!!! WARNING!!! WARNING!!! WARNING!!!
             //    We must never have another method called ToOle() with a different signature.
             //    This is so that we can push into the runtime a custom marshaller for OLE_COLOR to Color.
-            
+
             switch (oleColor)
             {
                 case unchecked((int)0x8000000A):
@@ -196,8 +194,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Translates an Win32 color value to a
-        ///    GDI+ <see cref='System.Drawing.Color'/>.
+        /// Translates an Win32 color value to a GDI+ <see cref='Color'/>.
         /// </summary>
         public static Color FromWin32(int win32Color)
         {
@@ -205,8 +202,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Translates an Html color representation to
-        ///    a GDI+ <see cref='System.Drawing.Color'/>.
+        /// Translates an Html color representation to a GDI+ <see cref='Color'/>.
         /// </summary>
         public static Color FromHtml(string htmlColor)
         {
@@ -269,9 +265,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Translates the specified <see cref='System.Drawing.Color'/> to an Html string color representation.
-        ///    
+        /// Translates the specified <see cref='Color'/> to an Html string color representation.
         /// </summary>
         public static string ToHtml(Color c)
         {
@@ -284,36 +278,86 @@ namespace System.Drawing
             {
                 switch (c.ToKnownColor())
                 {
-                    case KnownColor.ActiveBorder: colorString = "activeborder"; break;
+                    case KnownColor.ActiveBorder:
+                        colorString = "activeborder";
+                        break;
                     case KnownColor.GradientActiveCaption:
-                    case KnownColor.ActiveCaption: colorString = "activecaption"; break;
-                    case KnownColor.AppWorkspace: colorString = "appworkspace"; break;
-                    case KnownColor.Desktop: colorString = "background"; break;
-                    case KnownColor.Control: colorString = "buttonface"; break;
-                    case KnownColor.ControlLight: colorString = "buttonface"; break;
-                    case KnownColor.ControlDark: colorString = "buttonshadow"; break;
-                    case KnownColor.ControlText: colorString = "buttontext"; break;
-                    case KnownColor.ActiveCaptionText: colorString = "captiontext"; break;
-                    case KnownColor.GrayText: colorString = "graytext"; break;
+                    case KnownColor.ActiveCaption:
+                        colorString = "activecaption";
+                        break;
+                    case KnownColor.AppWorkspace:
+                        colorString = "appworkspace";
+                        break;
+                    case KnownColor.Desktop:
+                        colorString = "background";
+                        break;
+                    case KnownColor.Control:
+                        colorString = "buttonface";
+                        break;
+                    case KnownColor.ControlLight:
+                        colorString = "buttonface";
+                        break;
+                    case KnownColor.ControlDark:
+                        colorString = "buttonshadow";
+                        break;
+                    case KnownColor.ControlText:
+                        colorString = "buttontext";
+                        break;
+                    case KnownColor.ActiveCaptionText:
+                        colorString = "captiontext";
+                        break;
+                    case KnownColor.GrayText:
+                        colorString = "graytext";
+                        break;
                     case KnownColor.HotTrack:
-                    case KnownColor.Highlight: colorString = "highlight"; break;
+                    case KnownColor.Highlight:
+                        colorString = "highlight";
+                        break;
                     case KnownColor.MenuHighlight:
-                    case KnownColor.HighlightText: colorString = "highlighttext"; break;
-                    case KnownColor.InactiveBorder: colorString = "inactiveborder"; break;
+                    case KnownColor.HighlightText:
+                        colorString = "highlighttext";
+                        break;
+                    case KnownColor.InactiveBorder:
+                        colorString = "inactiveborder";
+                        break;
                     case KnownColor.GradientInactiveCaption:
-                    case KnownColor.InactiveCaption: colorString = "inactivecaption"; break;
-                    case KnownColor.InactiveCaptionText: colorString = "inactivecaptiontext"; break;
-                    case KnownColor.Info: colorString = "infobackground"; break;
-                    case KnownColor.InfoText: colorString = "infotext"; break;
+                    case KnownColor.InactiveCaption:
+                        colorString = "inactivecaption";
+                        break;
+                    case KnownColor.InactiveCaptionText:
+                        colorString = "inactivecaptiontext";
+                        break;
+                    case KnownColor.Info:
+                        colorString = "infobackground";
+                        break;
+                    case KnownColor.InfoText:
+                        colorString = "infotext";
+                        break;
                     case KnownColor.MenuBar:
-                    case KnownColor.Menu: colorString = "menu"; break;
-                    case KnownColor.MenuText: colorString = "menutext"; break;
-                    case KnownColor.ScrollBar: colorString = "scrollbar"; break;
-                    case KnownColor.ControlDarkDark: colorString = "threeddarkshadow"; break;
-                    case KnownColor.ControlLightLight: colorString = "buttonhighlight"; break;
-                    case KnownColor.Window: colorString = "window"; break;
-                    case KnownColor.WindowFrame: colorString = "windowframe"; break;
-                    case KnownColor.WindowText: colorString = "windowtext"; break;
+                    case KnownColor.Menu:
+                        colorString = "menu";
+                        break;
+                    case KnownColor.MenuText:
+                        colorString = "menutext";
+                        break;
+                    case KnownColor.ScrollBar:
+                        colorString = "scrollbar";
+                        break;
+                    case KnownColor.ControlDarkDark:
+                        colorString = "threeddarkshadow";
+                        break;
+                    case KnownColor.ControlLightLight:
+                        colorString = "buttonhighlight";
+                        break;
+                    case KnownColor.Window:
+                        colorString = "window";
+                        break;
+                    case KnownColor.WindowFrame:
+                        colorString = "windowframe";
+                        break;
+                    case KnownColor.WindowText:
+                        colorString = "windowtext";
+                        break;
                 }
             }
             else if (c.IsNamedColor)

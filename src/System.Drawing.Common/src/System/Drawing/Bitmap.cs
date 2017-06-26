@@ -2,22 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.ComponentModel;
+using System.Diagnostics.Contracts;
+using System.Drawing.Imaging;
+using System.Drawing.Internal;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
+
 namespace System.Drawing
 {
-    using System.ComponentModel;
-    using System.Diagnostics.Contracts;
-    using System.Drawing.Imaging;
-    using System.Drawing.Internal;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Security.Permissions;
-
     /// <summary>
-    ///    Encapsultates a GDI+ bitmap.
+    /// Encapsultates a GDI+ bitmap.
     /// </summary>
-    /**
-     * Represent a bitmap image
-     */
     [ComVisible(true)]
     public sealed partial class Bitmap : Image
     {
@@ -28,18 +25,12 @@ namespace System.Drawing
          */
 
         /// <summary>
-        ///    Initializes a new instance of the
-        /// <see cref='System.Drawing.Bitmap'/> 
-        /// class from the specified file.
+        /// Initializes a new instance of the <see cref='Bitmap'/>  class from the specified file.
         /// </summary>
-        /**
-         * Create a new bitmap object from URL
-         */
         public Bitmap(String filename)
         {
             //GDI+ will read this file multiple times.  Get the fully qualified path
             //so if our app changes default directory we won't get an error
-            //
             filename = Path.GetFullPath(filename);
 
             IntPtr bitmap = IntPtr.Zero;
@@ -63,10 +54,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Bitmap'/> class from the specified
-        ///       file.
-        ///    
+        /// Initializes a new instance of the <see cref='Bitmap'/> class from the specified file.
         /// </summary>
         public Bitmap(String filename, bool useIcm)
         {
@@ -104,9 +92,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Bitmap'/> class from a specified resource.
-        ///    
+        /// Initializes a new instance of the <see cref='Bitmap'/> class from a specified resource.
         /// </summary>
         public Bitmap(Type type, string resource)
         {
@@ -135,13 +121,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the
-        /// <see cref='System.Drawing.Bitmap'/> 
-        /// class from the specified data stream.
+        /// Initializes a new instance of the <see cref='Bitmap'/> class from the specified data stream.
         /// </summary>
-        /**
-         * Create a new bitmap object from a stream
-         */
         public Bitmap(Stream stream)
         {
             if (stream == null)
@@ -168,10 +149,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Bitmap'/> class from the specified data
-        ///       stream.
-        ///    
+        /// Initializes a new instance of the <see cref='Bitmap'/> class from the specified data stream.
         /// </summary>
         public Bitmap(Stream stream, bool useIcm)
         {
@@ -207,10 +185,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the
-        ///       Bitmap class with the specified size, pixel format, and pixel data.
-        ///    
+        /// Initializes a new instance of the Bitmap class with the specified size, pixel format, and pixel data.
         /// </summary>
         public Bitmap(int width, int height, int stride, PixelFormat format, IntPtr scan0)
         {
@@ -225,10 +200,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the Bitmap class with the specified
-        ///       size and format.
-        ///    
+        /// Initializes a new instance of the Bitmap class with the specified size and format.
         /// </summary>
         public Bitmap(int width, int height, PixelFormat format)
         {
@@ -243,18 +215,15 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the
-        /// <see cref='System.Drawing.Bitmap'/> 
-        /// class with the specified size.
+        /// Initializes a new instance of the <see cref='Bitmap'/> class with the specified size.
         /// </summary>
         public Bitmap(int width, int height) : this(width, height, System.Drawing.Imaging.PixelFormat.Format32bppArgb)
         {
         }
 
         /// <summary>
-        ///    Initializes a new instance of the
-        /// <see cref='System.Drawing.Bitmap'/> 
-        /// class with the specified size and target <see cref='System.Drawing.Graphics'/>.
+        /// Initializes a new instance of the <see cref='Bitmap'/>  class with the specified size and target
+        /// <see cref='Graphics'/>.
         /// </summary>
         public Bitmap(int width, int height, Graphics g)
         {
@@ -272,18 +241,16 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the
-        /// <see cref='System.Drawing.Bitmap'/> 
-        /// class, from the specified existing image, with the specified size.
+        /// Initializes a new instance of the <see cref='Bitmap'/> class, from the specified existing image, with the
+        /// specified size.
         /// </summary>
         public Bitmap(Image original) : this(original, original.Width, original.Height)
         {
         }
 
         /// <summary>
-        ///    Initializes a new instance of the
-        /// <see cref='System.Drawing.Bitmap'/> 
-        /// class, from the specified existing image, with the specified size.
+        /// Initializes a new instance of the <see cref='Bitmap'/>  class, from the specified existing image, with the
+        /// specified size.
         /// </summary>
         public Bitmap(Image original, int width, int height) : this(width, height)
         {
@@ -304,8 +271,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Creates a <see cref='System.Drawing.Bitmap'/> from a Windows handle to an
-        ///    Icon.
+        /// Creates a <see cref='Bitmap'/> from a Windows handle to an Icon.
         /// </summary>
         public static Bitmap FromHicon(IntPtr hicon)
         {
@@ -319,8 +285,6 @@ namespace System.Drawing
             return Bitmap.FromGDIplus(bitmap);
         }
 
-        /// <summary>
-        /// </summary>
         public static Bitmap FromResource(IntPtr hinstance, String bitmapName)
         {
             IntPtr bitmap;
@@ -341,12 +305,9 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Creates a Win32 HBITMAP out of the image. You are responsible for
-        ///       de-allocating the HBITMAP with Windows.DeleteObject(handle). If the image uses
-        ///       transparency, the background will be filled with the specified background
-        ///       color.
-        ///    
+        /// Creates a Win32 HBITMAP out of the image. You are responsible for de-allocating the HBITMAP with
+        /// Windows.DeleteObject(handle). If the image usestransparency, the background will be filled with the
+        /// specified background color.
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -356,9 +317,9 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Creates a Win32 HBITMAP out of the image.  You are responsible for
-        ///     de-allocating the HBITMAP with Windows.DeleteObject(handle).
-        ///     If the image uses transparency, the background will be filled with the specified background color.
+        /// Creates a Win32 HBITMAP out of the image.  You are responsible for de-allocating the HBITMAP with
+        /// Windows.DeleteObject(handle). If the image uses transparency, the background will be filled with the
+        /// specified background color.
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -380,7 +341,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Returns the handle to an icon.
+        /// Returns the handle to an icon.
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -397,10 +358,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Bitmap'/> class, from the specified
-        ///       existing image, with the specified size.
-        ///    
+        /// Initializes a new instance of the <see cref='Bitmap'/> class, from the specified existing image, with the
+        /// specified size.
         /// </summary>
         public Bitmap(Image original, Size newSize) :
         this(original, (object)newSize != null ? newSize.Width : 0, (object)newSize != null ? newSize.Height : 0)
@@ -424,10 +383,9 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Creates a copy of the section of this
-        ///    Bitmap defined by <paramref term="rect"/> with a specified <see cref='System.Drawing.Imaging.PixelFormat'/>.
+        /// Creates a copy of the section of this Bitmap defined by <paramref name="rect"/> with a specified
+        /// <see cref='PixelFormat'/>.
         /// </summary>
-        // int version
         public Bitmap Clone(Rectangle rect, PixelFormat format)
         {
             //validate the rect
@@ -454,12 +412,9 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Creates a copy of the section of this
-        ///       Bitmap defined by <paramref term="rect"/> with a specified <see cref='System.Drawing.Imaging.PixelFormat'/>.
-        ///    
+        /// Creates a copy of the section of this Bitmap defined by <paramref name="rect"/> with a specified
+        /// <see cref='PixelFormat'/>.
         /// </summary>
-        // float version
         public Bitmap Clone(RectangleF rect, PixelFormat format)
         {
             //validate the rect
@@ -486,10 +441,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Makes the default transparent color transparent for this <see cref='System.Drawing.Bitmap'/>
-        ///       .
-        ///    
+        /// Makes the default transparent color transparent for this <see cref='Bitmap'/>.
         /// </summary>
         public void MakeTransparent()
         {
@@ -506,9 +458,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Makes the specified color transparent
-        ///    for this <see cref='System.Drawing.Bitmap'/>.
-        /// </summary>        
+        /// Makes the specified color transparent for this <see cref='Bitmap'/>.
+        /// </summary>
         public void MakeTransparent(Color transparentColor)
         {
             if (RawFormat.Guid == ImageFormat.Icon.Guid)
@@ -571,7 +522,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Locks a Bitmap into system memory.
+        /// Locks a Bitmap into system memory.
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public BitmapData LockBits(Rectangle rect, ImageLockMode flags, PixelFormat format)
@@ -584,8 +535,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Locks a Bitmap into system memory.  This overload takes a user-defined
-        ///    BitmapData object and is intended to be used with an ImageLockMode.UserInputBuffer.
+        /// Locks a Bitmap into system memory.  This overload takes a user-defined BitmapData object and is intended
+        /// to be used with an ImageLockMode.UserInputBuffer.
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public BitmapData LockBits(Rectangle rect, ImageLockMode flags, PixelFormat format, BitmapData bitmapData)
@@ -604,7 +555,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///    Unlocks this <see cref='System.Drawing.Bitmap'/> from system memory.
+        /// Unlocks this <see cref='Bitmap'/> from system memory.
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public void UnlockBits(BitmapData bitmapdata)
@@ -616,10 +567,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets the color of the specified pixel
-        ///       in this <see cref='System.Drawing.Bitmap'/>.
-        ///    
+        /// Gets the color of the specified pixel in this <see cref='Bitmap'/>.
         /// </summary>
         public Color GetPixel(int x, int y)
         {
@@ -644,9 +592,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Sets the color of the specified pixel in this <see cref='System.Drawing.Bitmap'/> .
-        ///    
+        /// Sets the color of the specified pixel in this <see cref='Bitmap'/> .
         /// </summary>
         public void SetPixel(int x, int y, Color color)
         {
@@ -672,7 +618,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Sets the resolution for this <see cref='System.Drawing.Bitmap'/>.
+        /// Sets the resolution for this <see cref='Bitmap'/>.
         /// </summary>
         public void SetResolution(float xDpi, float yDpi)
         {

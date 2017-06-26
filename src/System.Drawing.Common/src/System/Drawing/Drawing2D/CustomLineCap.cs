@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.InteropServices;
+
 namespace System.Drawing.Drawing2D
 {
-    using System.Runtime.InteropServices;
-
     /// <summary>
-    ///    Encapsulates a custom user-defined line
-    ///    cap.
+    /// Encapsulates a custom user-defined line cap.
     /// </summary>
     public class CustomLineCap : MarshalByRefObject, ICloneable, IDisposable
     {
@@ -28,10 +27,7 @@ namespace System.Drawing.Drawing2D
         internal CustomLineCap() { }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.CustomLineCap'/> class with the specified outline
-        ///       and fill.
-        ///    
+        /// Initializes a new instance of the <see cref='CustomLineCap'/> class with the specified outline and fill.
         /// </summary>
         public CustomLineCap(GraphicsPath fillPath,
                              GraphicsPath strokePath) :
@@ -39,11 +35,8 @@ namespace System.Drawing.Drawing2D
         { }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.CustomLineCap'/> class from the
-        ///       specified existing <see cref='System.Drawing.Drawing2D.LineCap'/> with the specified outline and
-        ///       fill.
-        ///    
+        /// Initializes a new instance of the <see cref='CustomLineCap'/> class from the specified existing
+        /// <see cref='LineCap'/> with the specified outline and fill.
         /// </summary>
         public CustomLineCap(GraphicsPath fillPath,
                              GraphicsPath strokePath,
@@ -52,11 +45,8 @@ namespace System.Drawing.Drawing2D
         { }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.CustomLineCap'/> class from the
-        ///       specified existing <see cref='System.Drawing.Drawing2D.LineCap'/> with the specified outline, fill, and
-        ///       inset.
-        ///    
+        /// Initializes a new instance of the <see cref='CustomLineCap'/> class from the specified existing
+        /// <see cref='LineCap'/> with the specified outline, fill, and inset.
         /// </summary>
         public CustomLineCap(GraphicsPath fillPath,
                              GraphicsPath strokePath,
@@ -90,8 +80,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Cleans up Windows resources for this
-        /// <see cref='System.Drawing.Drawing2D.CustomLineCap'/>.
+        /// Cleans up Windows resources for this <see cref='CustomLineCap'/>.
         /// </summary>
         public void Dispose()
         {
@@ -118,8 +107,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Cleans up Windows resources for this
-        /// <see cref='System.Drawing.Drawing2D.CustomLineCap'/>.
+        /// Cleans up Windows resources for this <see cref='CustomLineCap'/>.
         /// </summary>
         ~CustomLineCap()
         {
@@ -127,7 +115,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.CustomLineCap'/>.
+        /// Creates an exact copy of this <see cref='CustomLineCap'/>.
         /// </summary>
         public object Clone()
         {
@@ -167,7 +155,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Sets the caps used to start and end lines.
+        /// Sets the caps used to start and end lines.
         /// </summary>
         public void SetStrokeCaps(LineCap startCap, LineCap endCap)
         {
@@ -178,7 +166,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets the caps used to start and end lines.
+        /// Gets the caps used to start and end lines.
         /// </summary>
         public void GetStrokeCaps(out LineCap startCap, out LineCap endCap)
         {
@@ -209,7 +197,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets the <see cref='System.Drawing.Drawing2D.LineJoin'/> used by this custom cap.
+        /// Gets or sets the <see cref='LineJoin'/> used by this custom cap.
         /// </summary>
         public LineJoin StrokeJoin
         {
@@ -237,7 +225,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets the <see cref='System.Drawing.Drawing2D.LineCap'/> on which this <see cref='System.Drawing.Drawing2D.CustomLineCap'/> is based.
+        /// Gets or sets the <see cref='LineCap'/> on which this <see cref='CustomLineCap'/> is based.
         /// </summary>
         public LineCap BaseCap
         {
@@ -265,8 +253,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets the distance between the cap
-        ///    and the line.
+        /// Gets or sets the distance between the cap and the line.
         /// </summary>
         public float BaseInset
         {
@@ -294,8 +281,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets the amount by which to scale
-        ///    the width of the cap.
+        /// Gets or sets the amount by which to scale the width of the cap.
         /// </summary>
         public float WidthScale
         {

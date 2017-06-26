@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
 namespace System.Drawing.Internal
 {
-    using System.Diagnostics;
-    using System.Runtime.InteropServices;
-
     internal partial class IntNativeMethods
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2006:UseSafeHandleToEncapsulateNativeResources")]
@@ -221,9 +221,9 @@ namespace System.Drawing.Internal
             public int iRightMargin;
 
             /// <summary>
-            ///     Receives the number of characters processed by DrawTextEx, including white-space characters. 
-            ///     The number can be the length of the string or the index of the first line that falls below the drawing area. 
-            ///     Note that DrawTextEx always processes the entire string if the DT_NOCLIP formatting flag is specified. 
+            /// Receives the number of characters processed by DrawTextEx, including white-space characters.
+            /// The number can be the length of the string or the index of the first line that falls below the drawing area.
+            /// Note that DrawTextEx always processes the entire string if the DT_NOCLIP formatting flag is specified.
             /// </summary>
             public int uiLengthDrawn;
 

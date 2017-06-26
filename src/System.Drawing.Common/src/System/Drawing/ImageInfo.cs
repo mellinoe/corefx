@@ -2,20 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics;
+using System.Drawing.Imaging;
+
 namespace System.Drawing
 {
-    using System.Diagnostics;
-    using System.Drawing.Imaging;
-
     /// <summary>
-    ///     Animates one or more images that have time-based frames.
-    ///     This file contains the nested ImageInfo class - See ImageAnimator.cs for the definition of the outer class.
-    /// </summary>                                   
+    /// Animates one or more images that have time-based frames. This file contains the nested ImageInfo class
+    /// - See ImageAnimator.cs for the definition of the outer class.
+    /// </summary>
     public sealed partial class ImageAnimator
     {
-        /// <summary> 
-        ///     ImageAnimator nested helper class used to store extra image state info.
-        /// </summary>  
+        /// <summary>
+        /// ImageAnimator nested helper class used to store extra image state info.
+        /// </summary>
         private class ImageInfo
         {
             private const int PropertyTagFrameDelay = 0x5100;
@@ -29,8 +29,6 @@ namespace System.Drawing
             private int[] _frameDelay;
             private int _frameTimer;
 
-            /// <summary> 
-            /// </summary>  
             public ImageInfo(Image image)
             {
                 _image = image;
@@ -67,9 +65,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            ///     Whether the image supports animation.
-            /// </summary>  
+            /// <summary>
+            /// Whether the image supports animation.
+            /// </summary>
             public bool Animated
             {
                 get
@@ -78,9 +76,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            ///     The current frame.
-            /// </summary> 
+            /// <summary>
+            /// The current frame.
+            /// </summary>
             public int Frame
             {
                 get
@@ -107,9 +105,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            ///     The current frame has not been updated.
-            /// </summary> 
+            /// <summary>
+            /// The current frame has not been updated.
+            /// </summary>
             public bool FrameDirty
             {
                 get
@@ -118,8 +116,6 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            /// </summary> 
             public EventHandler FrameChangedHandler
             {
                 get
@@ -132,9 +128,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            ///     The number of frames in the image.
-            /// </summary> 
+            /// <summary>
+            /// The number of frames in the image.
+            /// </summary>
             public int FrameCount
             {
                 get
@@ -143,16 +139,14 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            ///     The delay associated with the frame at the specified index.
-            /// </summary> 
+            /// <summary>
+            /// The delay associated with the frame at the specified index.
+            /// </summary>
             public int FrameDelay(int frame)
             {
                 return _frameDelay[frame];
             }
 
-            /// <summary> 
-            /// </summary> 
             internal int FrameTimer
             {
                 get
@@ -165,9 +159,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            ///     The image this object wraps.
-            /// </summary> 
+            /// <summary>
+            /// The image this object wraps.
+            /// </summary>
             internal Image Image
             {
                 get
@@ -176,9 +170,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            ///     Selects the current frame as the active frame in the image.
-            /// </summary> 
+            /// <summary>
+            /// Selects the current frame as the active frame in the image.
+            /// </summary>
             internal void UpdateFrame()
             {
                 if (_frameDirty)
@@ -188,9 +182,9 @@ namespace System.Drawing
                 }
             }
 
-            /// <summary> 
-            ///     Raises the FrameChanged event.
-            /// </summary> 
+            /// <summary>
+            /// Raises the FrameChanged event.
+            /// </summary>
             protected void OnFrameChanged(EventArgs e)
             {
                 if (_onFrameChangedHandler != null)

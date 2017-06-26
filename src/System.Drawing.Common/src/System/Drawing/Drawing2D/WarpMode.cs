@@ -4,20 +4,17 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /**
-     * Various wrap modes for brushes
-     */
     /// <summary>
-    ///    Specifies the warp style.
+    /// Specifies the warp style.
     /// </summary>
     public enum WarpMode
     {
         /// <summary>
-        ///    Specifies a perspective warp.
+        /// Specifies a perspective warp.
         /// </summary>
         Perspective = 0,
         /// <summary>
-        ///    Specifies a bilinear warp.
+        /// Specifies a bilinear warp.
         /// </summary>
         Bilinear = 1
     }

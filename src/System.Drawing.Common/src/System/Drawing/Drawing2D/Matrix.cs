@@ -2,28 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.InteropServices;
+using System.Drawing.Internal;
+
 namespace System.Drawing.Drawing2D
 {
-    using System.Runtime.InteropServices;
-    using System.Drawing.Internal;
-
-    /**
-     * Represent a Matrix object
-     */
     /// <summary>
-    ///    Encapsulates a 3 X 3 affine matrix that
-    ///    represents a geometric transform.
+    /// Encapsulates a 3 X 3 affine matrix that represents a geometric transform.
     /// </summary>
     public sealed class Matrix : MarshalByRefObject, IDisposable
     {
         internal IntPtr nativeMatrix;
 
-        /*
-         * Create a new identity matrix
-         */
-
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Matrix'/> class.
+        /// Initializes a new instance of the <see cref='Matrix'/> class.
         /// </summary>
         public Matrix()
         {
@@ -38,10 +30,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Initialized a new instance of the <see cref='System.Drawing.Drawing2D.Matrix'/> class with the specified
-        ///       elements.
-        ///    
+        /// Initialized a new instance of the <see cref='Matrix'/> class with the specified elements.
         /// </summary>
         public Matrix(float m11,
                       float m12,
@@ -61,12 +50,9 @@ namespace System.Drawing.Drawing2D
             nativeMatrix = matrix;
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Matrix'/> class to the geometrical transform
-        ///       defined by the specified rectangle and array of points.
-        ///    
+        /// Initializes a new instance of the <see cref='Matrix'/> class to the geometrical transform defined by the
+        /// specified rectangle and array of points.
         /// </summary>
         public Matrix(RectangleF rect, PointF[] plgpts)
         {
@@ -101,12 +87,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Matrix'/> class to the geometrical transform
-        ///       defined by the specified rectangle and array of points.
-        ///    
+        /// Initializes a new instance of the <see cref='Matrix'/> class to the geometrical transform defined by the
+        /// specified rectangle and array of points.
         /// </summary>
         public Matrix(Rectangle rect, Point[] plgpts)
         {
@@ -142,8 +125,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Cleans up resources allocated for this
-        /// <see cref='System.Drawing.Drawing2D.Matrix'/>.
+        /// Cleans up resources allocated for this <see cref='Matrix'/>.
         /// </summary>
         public void Dispose()
         {
@@ -161,8 +143,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Cleans up resources allocated for this
-        /// <see cref='System.Drawing.Drawing2D.Matrix'/>.
+        /// Cleans up resources allocated for this <see cref='Matrix'/>.
         /// </summary>
         ~Matrix()
         {
@@ -170,7 +151,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.Matrix'/>.
+        /// Creates an exact copy of this <see cref='Matrix'/>.
         /// </summary>
         public Matrix Clone()
         {
@@ -185,8 +166,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets an array of floating-point values that
-        ///    represent the elements of this <see cref='System.Drawing.Drawing2D.Matrix'/>.
+        /// Gets an array of floating-point values that represent the elements of this <see cref='Matrix'/>.
         /// </summary>
         public float[] Elements
         {
@@ -219,8 +199,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets the x translation value (the dx value,
-        ///    or the element in the third row and first column) of this <see cref='System.Drawing.Drawing2D.Matrix'/>.
+        /// Gets the x translation value (the dx value, or the element in the third row and first column) of this
+        /// <see cref='Matrix'/>.
         /// </summary>
         public float OffsetX
         {
@@ -228,8 +208,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets the y translation value (the dy
-        ///    value, or the element in the third row and second column) of this <see cref='System.Drawing.Drawing2D.Matrix'/>.
+        /// Gets the y translation value (the dy value, or the element in the third row and second column) of this
+        /// <see cref='Matrix'/>.
         /// </summary>
         public float OffsetY
         {
@@ -237,7 +217,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Resets this <see cref='System.Drawing.Drawing2D.Matrix'/> to identity.
+        /// Resets this <see cref='Matrix'/> to identity.
         /// </summary>
         public void Reset()
         {
@@ -250,9 +230,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Multiplies this <see cref='System.Drawing.Drawing2D.Matrix'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    
+        /// Multiplies this <see cref='Matrix'/> by the specified <see cref='Matrix'/> by prepending the specified
+        /// <see cref='Matrix'/>.
         /// </summary>
         public void Multiply(Matrix matrix)
         {
@@ -260,9 +239,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Multiplies this <see cref='System.Drawing.Drawing2D.Matrix'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    
+        /// Multiplies this <see cref='Matrix'/> by the specified <see cref='Matrix'/> in the specified order.
         /// </summary>
         public void Multiply(Matrix matrix, MatrixOrder order)
         {
@@ -279,11 +256,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Applies the specified translation vector to
-        ///       the this <see cref='System.Drawing.Drawing2D.Matrix'/> by
-        ///       prepending the translation vector.
-        ///    
+        /// Applies the specified translation vector to the this <see cref='Matrix'/> by prepending the translation vector.
         /// </summary>
         public void Translate(float offsetX, float offsetY)
         {
@@ -291,10 +264,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Applies the specified translation vector to
-        ///       the this <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    
+        /// Applies the specified translation vector to the this <see cref='Matrix'/> in the specified order.
         /// </summary>
         public void Translate(float offsetX, float offsetY, MatrixOrder order)
         {
@@ -306,8 +276,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Applies the specified scale vector to this
-        /// <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the scale vector.
+        /// Applies the specified scale vector to this <see cref='Matrix'/> by prepending the scale vector.
         /// </summary>
         public void Scale(float scaleX, float scaleY)
         {
@@ -315,10 +284,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Applies the specified scale vector to this
-        ///    <see cref='System.Drawing.Drawing2D.Matrix'/> using the specified order.
-        ///    
+        /// Applies the specified scale vector to this <see cref='Matrix'/> using the specified order.
         /// </summary>
         public void Scale(float scaleX, float scaleY, MatrixOrder order)
         {
@@ -329,10 +295,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Rotates this <see cref='System.Drawing.Drawing2D.Matrix'/> clockwise about the
-        ///       origin by the specified angle.
-        ///    
+        /// Rotates this <see cref='Matrix'/> clockwise about the origin by the specified angle.
         /// </summary>
         public void Rotate(float angle)
         {
@@ -340,11 +303,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Rotates this <see cref='System.Drawing.Drawing2D.Matrix'/> clockwise about the
-        ///       origin by the specified
-        ///       angle in the specified order.
-        ///    
+        /// Rotates this <see cref='Matrix'/> clockwise about the origin by the specified angle in the specified order.
         /// </summary>
         public void Rotate(float angle, MatrixOrder order)
         {
@@ -355,10 +314,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Applies a clockwise rotation about the
-        ///       specified point to this <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the rotation.
-        ///    
+        /// Applies a clockwise rotation about the specified point to this <see cref='Matrix'/> by prepending the rotation.
         /// </summary>
         public void RotateAt(float angle, PointF point)
         {
@@ -366,17 +322,12 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Applies a clockwise rotation about the specified point
-        ///       to this <see cref='System.Drawing.Drawing2D.Matrix'/> in the
-        ///       specified order.
-        ///    
+        /// Applies a clockwise rotation about the specified point to this <see cref='Matrix'/> in the specified order.
         /// </summary>
         public void RotateAt(float angle, PointF point, MatrixOrder order)
         {
             int status;
 
-            // !! TO DO: We cheat with error codes here...
             if (order == MatrixOrder.Prepend)
             {
                 status = SafeNativeMethods.Gdip.GdipTranslateMatrix(new HandleRef(this, nativeMatrix), point.X, point.Y, order);
@@ -395,8 +346,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Applies the specified shear
-        ///    vector to this <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the shear vector.
+        /// Applies the specified shear vector to this <see cref='Matrix'/> by prepending the shear vector.
         /// </summary>
         public void Shear(float shearX, float shearY)
         {
@@ -407,10 +357,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Applies the specified shear
-        ///       vector to this <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    
+        /// Applies the specified shear vector to this <see cref='Matrix'/> in the specified order.
         /// </summary>
         public void Shear(float shearX, float shearY, MatrixOrder order)
         {
@@ -421,8 +368,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Inverts this <see cref='System.Drawing.Drawing2D.Matrix'/>, if it is
-        ///    invertible.
+        /// Inverts this <see cref='Matrix'/>, if it is invertible.
         /// </summary>
         public void Invert()
         {
@@ -432,12 +378,8 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Applies the geometrical transform this <see cref='System.Drawing.Drawing2D.Matrix'/>represents to an
-        ///       array of points.
-        ///    
+        /// Applies the geometrical transform this <see cref='Matrix'/>represents to an array of points.
         /// </summary>
         public void TransformPoints(PointF[] pts)
         {
@@ -469,11 +411,8 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Applies the geometrical transform this <see cref='System.Drawing.Drawing2D.Matrix'/> represents to an array of points.
-        ///    
+        /// Applies the geometrical transform this <see cref='Matrix'/> represents to an array of points.
         /// </summary>
         public void TransformPoints(Point[] pts)
         {
@@ -506,9 +445,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void TransformVectors(PointF[] pts)
         {
             if (pts == null)
@@ -543,18 +479,11 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void VectorTransformPoints(Point[] pts)
         {
             TransformVectors(pts);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void TransformVectors(Point[] pts)
         {
             if (pts == null)
@@ -590,8 +519,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets a value indicating whether this
-        /// <see cref='System.Drawing.Drawing2D.Matrix'/> is invertible.
+        /// Gets a value indicating whether this <see cref='Matrix'/> is invertible.
         /// </summary>
         public bool IsInvertible
         {
@@ -609,7 +537,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets a value indicating whether this <see cref='System.Drawing.Drawing2D.Matrix'/> is the identity matrix.
+        /// Gets a value indicating whether this <see cref='Matrix'/> is the identity matrix.
         /// </summary>
         public bool IsIdentity
         {
@@ -627,15 +555,13 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Tests whether the specified object is a
-        ///    <see cref='System.Drawing.Drawing2D.Matrix'/> and is identical to this <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    
+        /// Tests whether the specified object is a <see cref='Matrix'/> and is identical to this <see cref='Matrix'/>.
         /// </summary>
         public override bool Equals(object obj)
         {
             Matrix matrix2 = obj as Matrix;
-            if (matrix2 == null) return false;
+            if (matrix2 == null)
+                return false;
 
             int isEqual;
 
@@ -650,9 +576,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Returns a hash code.
-        ///    
+        /// Returns a hash code.
         /// </summary>
         public override int GetHashCode()
         {

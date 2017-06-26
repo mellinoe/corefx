@@ -8,29 +8,20 @@ namespace System.Drawing.Drawing2D
     // the hardware, and that the final results will be shown as soon as the hardware finishes
     // its rendering.  FlushIntentionSync means to wait for the hardware to actually finish its
     // rendering before returning - this is important for animation and timing loops.
+
     /// <summary>
-    ///    
-    ///       Specifies whether commands in the graphics stack are terminated (flushed)
-    ///       immediately or executed as soon as possible.
-    ///    
+    /// Specifies whether commands in the graphics stack are terminated (flushed) immediately or executed as soon as possible.
     /// </summary>
     public enum FlushIntention
     {
-        // Flush all batched rendering operations
         /// <summary>
-        ///    Specifies the stack of all graphics
-        ///    operations is flushed immediately.
+        /// Specifies the stack of all graphics operations is flushed immediately.
         /// </summary>
         Flush = 0,
 
-        // Flush all batched rendering operations and wait for them to complete
         /// <summary>
-        ///    
-        ///       Specifies that all graphics operations on the stack are execyted as soon as
-        ///       possible. This synchronizes the graphics state.
-        ///    
+        /// Specifies that all graphics operations on the stack are execyted as soon as possible. This synchronizes the graphics state.
         /// </summary>
         Sync = 1
     }
 }
-

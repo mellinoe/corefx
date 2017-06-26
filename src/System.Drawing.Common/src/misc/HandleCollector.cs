@@ -24,9 +24,8 @@ namespace System.Internal
         private static object s_internalSyncObject = new object();
 
         /// <summary>
-        ///     Adds the given handle to the handle collector.  This keeps the
-        ///     handle on a "hot list" of objects that may need to be garbage
-        ///     collected.
+        /// Adds the given handle to the handle collector. This keeps the handle on a "hot list" of objects that may
+        /// need to be garbage collected.
         /// </summary>
         internal static IntPtr Add(IntPtr handle, int type)
         {
@@ -35,7 +34,7 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Suspends GC.Collect
+        /// Suspends GC.Collect
         /// </summary>
         internal static void SuspendCollect()
         {
@@ -46,7 +45,7 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Resumes GC.Collect
+        /// Resumes GC.Collect
         /// </summary>        
         internal static void ResumeCollect()
         {
@@ -80,7 +79,7 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Registers a new type of handle with the handle collector.
+        /// Registers a new type of handle with the handle collector.
         /// </summary>
         internal static int RegisterType(string typeName, int expense, int initialThreshold)
         {
@@ -102,9 +101,8 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Removes the given handle from the handle collector.  Removing a
-        ///     handle removes it from our "hot list" of objects that should be
-        ///     frequently garbage collected.
+        /// Removes the given handle from the handle collector. Removing a handle removes it from our "hot list" of
+        /// objects that should be frequently garbage collected.
         /// </summary>
         internal static IntPtr Remove(IntPtr handle, int type)
         {
@@ -112,7 +110,7 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Represents a specific type of handle.
+        /// Represents a specific type of handle.
         /// </summary>
         private class HandleType
         {
@@ -128,7 +126,7 @@ namespace System.Internal
 #endif
 
             /// <summary>
-            ///     Creates a new handle type.
+            /// Creates a new handle type.
             /// </summary>
             internal HandleType(string name, int expense, int initialThreshHold)
             {
@@ -139,7 +137,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Adds a handle to this handle type for monitoring.
+            /// Adds a handle to this handle type for monitoring.
             /// </summary>            
             internal void Add(IntPtr handle)
             {
@@ -200,8 +198,7 @@ namespace System.Internal
 
 
             /// <summary>
-            ///     Retrieves the outstanding handle count for this
-            ///     handle type.
+            /// Retrieves the outstanding handle count for this handle type.
             /// </summary>
             internal int GetHandleCount()
             {
@@ -212,7 +209,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Determines if this handle type needs a garbage collection pass.
+            /// Determines if this handle type needs a garbage collection pass.
             /// </summary>
             internal bool NeedCollection()
             {
@@ -233,7 +230,6 @@ namespace System.Internal
                 // need to collect, but if it 10% below the next lowest threshhold we
                 // will bump down a rung.  We need to choose a percentage here or else
                 // we will oscillate.
-                //
                 int oldThreshHold = (100 * _threshHold) / (100 + _deltaPercent);
                 if (oldThreshHold >= _initialThreshHold && _handleCount < (int)(oldThreshHold * .9F))
                 {
@@ -247,7 +243,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Removes the given handle from our monitor list.
+            /// Removes the given handle from our monitor list.
             /// </summary>
             internal IntPtr Remove(IntPtr handle)
             {

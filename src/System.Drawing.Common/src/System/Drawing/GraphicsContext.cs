@@ -2,52 +2,49 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Drawing.Drawing2D;
+
 namespace System.Drawing
 {
-    using System.Drawing.Drawing2D;
-
     /// <summary>
-    ///     Contains information about the context of a Graphics object.
+    /// Contains information about the context of a Graphics object.
     /// </summary>
     internal class GraphicsContext : IDisposable
     {
         /// <summary>
-        ///     The state that identifies the context.
+        /// The state that identifies the context.
         /// </summary>
         private int _contextState;
 
         /// <summary>
-        ///     The context's translate transform.
+        /// The context's translate transform.
         /// </summary>
         private PointF _transformOffset;
 
         /// <summary>
-        ///     The context's clip region.
+        /// The context's clip region.
         /// </summary>
         private Region _clipRegion;
 
         /// <summary>
-        ///     The next context up the stack.
+        /// The next context up the stack.
         /// </summary>
         private GraphicsContext _nextContext;
 
         /// <summary>
-        ///     The previous context down the stack.
+        /// The previous context down the stack.
         /// </summary>
         private GraphicsContext _prevContext;
 
         /// <summary>
-        ///     Flags that determines whether the context was created for a Graphics.Save() operation.
-        ///     This kind of contexts are cumulative across subsequent Save() calls so the top context
-        ///     info is cumulative.  This is not the same for contexts created for a Graphics.BeginContainer()
-        ///     operation, in this case the new context information is reset.  See Graphics.BeginContainer()
-        ///     and Graphics.Save() for more information.
+        /// Flags that determines whether the context was created for a Graphics.Save() operation.
+        /// This kind of contexts are cumulative across subsequent Save() calls so the top context
+        /// info is cumulative.  This is not the same for contexts created for a Graphics.BeginContainer()
+        /// operation, in this case the new context information is reset.  See Graphics.BeginContainer()
+        /// and Graphics.Save() for more information.
         /// </summary>
         private bool _isCumulative;
 
-        /// <summary>
-        ///     Private constructor disallowed.
-        /// </summary>
         private GraphicsContext()
         {
         }
@@ -75,7 +72,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Disposes this and all contexts up the stack.
+        /// Disposes this and all contexts up the stack.
         /// </summary>
         public void Dispose()
         {
@@ -84,7 +81,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Disposes this and all contexts up the stack.
+        /// Disposes this and all contexts up the stack.
         /// </summary>
         public void Dispose(bool disposing)
         {
@@ -103,7 +100,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     The state id representing the GraphicsContext.
+        /// The state id representing the GraphicsContext.
         /// </summary>
         public int State
         {
@@ -118,7 +115,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     The translate transform in the GraphicsContext.
+        /// The translate transform in the GraphicsContext.
         /// </summary>
         public PointF TransformOffset
         {
@@ -140,7 +137,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     The next GraphicsContext object in the stack.
+        /// The next GraphicsContext object in the stack.
         /// </summary>
         public GraphicsContext Next
         {
@@ -155,7 +152,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     The previous GraphicsContext object in the stack.
+        /// The previous GraphicsContext object in the stack.
         /// </summary>
         public GraphicsContext Previous
         {
@@ -170,7 +167,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Determines whether this context is cumulative or not.  See filed for more info.
+        /// Determines whether this context is cumulative or not.  See filed for more info.
         /// </summary>
         public bool IsCumulative
         {

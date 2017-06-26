@@ -4,26 +4,17 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /**
-     * Various wrap modes for brushes
-     */
     /// <summary>
-    ///    Specifies the order for matrix transform
-    ///    operations.
+    /// Specifies the order for matrix transform operations.
     /// </summary>
     public enum MatrixOrder
     {
         /// <summary>
-        ///    
-        ///       The new operation is applied before the old
-        ///       operation.
-        ///    
+        /// The new operation is applied before the old operation.
         /// </summary>
         Prepend = 0,
         /// <summary>
-        ///    
-        ///       The new operation is applied after the old operation.
-        ///    
+        /// The new operation is applied after the old operation.
         /// </summary>
         Append = 1
     }

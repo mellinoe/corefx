@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.InteropServices;
+
 namespace System.Drawing.Imaging
 {
-    using System.Runtime.InteropServices;
-
     /// <summary>
-    ///    Defines a 5 x 5 matrix that that
-    ///    contains the homogenous coordinates for the RGBA space.
+    /// Defines a 5 x 5 matrix that that contains the homogenous coordinates for the RGBA space.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public sealed class ColorMatrix
@@ -40,9 +39,7 @@ namespace System.Drawing.Imaging
         private float _matrix44;
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Imaging.ColorMatrix'/> class.
-        ///    
+        /// Initializes a new instance of the <see cref='ColorMatrix'/> class.
         /// </summary>
         public ColorMatrix()
         {
@@ -78,10 +75,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the
-        ///       0th row and 0th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 0th row and 0th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix00
         {
@@ -89,9 +83,7 @@ namespace System.Drawing.Imaging
             set { _matrix00 = value; }
         }
         /// <summary>
-        ///    
-        ///       Represents the element at the 0th row and 1st column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 0th row and 1st column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix01
         {
@@ -100,9 +92,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 0th row and 2nd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 0th row and 2nd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix02
         {
@@ -111,9 +101,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 0th row and 3rd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 0th row and 3rd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix03
         {
@@ -122,9 +110,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 0th row and 4th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 0th row and 4th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix04
         {
@@ -133,9 +119,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 1st row and 0th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 1st row and 0th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix10
         {
@@ -144,8 +128,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Represents the element at the 1st row and
-        ///    1st column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
+        /// Represents the element at the 1st row and 1st column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix11
         {
@@ -154,8 +137,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Represents the element at the 1st row
-        ///    and 2nd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
+        /// Represents the element at the 1st row and 2nd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix12
         {
@@ -164,8 +146,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Represents the element at the 1st row
-        ///    and 3rd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
+        /// Represents the element at the 1st row and 3rd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix13
         {
@@ -174,8 +155,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Represents the element at the 1st row
-        ///    and 4th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
+        /// Represents the element at the 1st row and 4th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix14
         {
@@ -184,10 +164,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 2nd row and
-        ///       0th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 2nd row and 0th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix20
         {
@@ -196,9 +173,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 2nd row and 1st column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 2nd row and 1st column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix21
         {
@@ -207,9 +182,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 2nd row and 2nd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 2nd row and 2nd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix22
         {
@@ -218,9 +191,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 2nd row and 3rd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 2nd row and 3rd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix23
         {
@@ -229,9 +200,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 2nd row and 4th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 2nd row and 4th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix24
         {
@@ -240,9 +209,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 3rd row and 0th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 3rd row and 0th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix30
         {
@@ -251,9 +218,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 3rd row and 1st column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 3rd row and 1st column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix31
         {
@@ -262,9 +227,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 3rd row and 2nd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 3rd row and 2nd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix32
         {
@@ -273,9 +236,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 3rd row and 3rd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 3rd row and 3rd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix33
         {
@@ -284,9 +245,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 3rd row and 4th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 3rd row and 4th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix34
         {
@@ -295,9 +254,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 4th row and 0th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 4th row and 0th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix40
         {
@@ -306,9 +263,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 4th row and 1st column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 4th row and 1st column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix41
         {
@@ -317,9 +272,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 4th row and 2nd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 4th row and 2nd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix42
         {
@@ -328,9 +281,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 4th row and 3rd column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 4th row and 3rd column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix43
         {
@@ -339,9 +290,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Represents the element at the 4th row and 4th column of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Represents the element at the 4th row and 4th column of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float Matrix44
         {
@@ -351,10 +300,7 @@ namespace System.Drawing.Imaging
 
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Imaging.ColorMatrix'/> class with the
-        ///       elements in the specified matrix.
-        ///    
+        /// Initializes a new instance of the <see cref='ColorMatrix'/> class with the elements in the specified matrix.
         /// </summary>
         [CLSCompliant(false)]
         public ColorMatrix(float[][] newColorMatrix)
@@ -428,9 +374,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets the value of the specified element of this <see cref='System.Drawing.Imaging.ColorMatrix'/>.
-        ///    
+        /// Gets or sets the value of the specified element of this <see cref='ColorMatrix'/>.
         /// </summary>
         public float this[int row, int column]
         {

@@ -4,12 +4,8 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /**
-     * Represent the internal data of a path object
-     */
     /// <summary>
-    ///    Contains the graphical data that makes up a
-    /// <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+    /// Contains the graphical data that makes up a <see cref='GraphicsPath'/>.
     /// </summary>
     public sealed class PathData
     {
@@ -17,15 +13,14 @@ namespace System.Drawing.Drawing2D
         private byte[] _types;
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathData'/> class.
+        /// Initializes a new instance of the <see cref='PathData'/> class.
         /// </summary>
         public PathData()
         {
         }
 
         /// <summary>
-        ///    Contains an array of <see cref='System.Drawing.PointF'/> objects
-        ///    that represent the points through which the path is constructed.
+        /// Contains an array of <see cref='PointF'/> objects that represent the points through which the path is constructed.
         /// </summary>
         public PointF[] Points
         {
@@ -40,10 +35,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Contains an array of <see cref='System.Drawing.Drawing2D.PathPointType'/> objects that represent the types of
-        ///       data in the corresponding elements of the <see cref='System.Drawing.Drawing2D.PathData. _points'/> array.
-        ///    
+        /// Contains an array of <see cref='PathPointType'/> objects that represent the types of data in the
+        /// corresponding elements of the <see cref='_points'/> array.
         /// </summary>
         public byte[] Types
         {

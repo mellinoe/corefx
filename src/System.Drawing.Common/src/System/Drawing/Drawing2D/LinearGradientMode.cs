@@ -4,35 +4,25 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /**
-     * Linear Gradient mode constants
-     */
     /// <summary>
-    ///    Specifies the direction of a linear
-    ///    gradient.
+    /// Specifies the direction of a linear gradient.
     /// </summary>
     public enum LinearGradientMode
     {
         /// <summary>
-        ///    
-        ///       Specifies a gradient from left to right.
-        ///    
+        /// Specifies a gradient from left to right.
         /// </summary>
         Horizontal = 0,
         /// <summary>
-        ///    
-        ///       Specifies a gradient from top to bottom.
-        ///    
+        /// Specifies a gradient from top to bottom.
         /// </summary>
         Vertical = 1,
         /// <summary>
-        ///    Specifies a gradient from upper-left to
-        ///    lower-right.
+        /// Specifies a gradient from upper-left to lower-right.
         /// </summary>
         ForwardDiagonal = 2,
         /// <summary>
-        ///    Specifies a gradient from upper-right to
-        ///    lower-left.
+        /// Specifies a gradient from upper-right to lower-left.
         /// </summary>
         BackwardDiagonal = 3
     }

@@ -4,8 +4,6 @@
 
 namespace System.Drawing.Internal
 {
-    /// <summary>
-    /// </summary>
     internal enum RegionCombineMode
     {
         AND = 1,

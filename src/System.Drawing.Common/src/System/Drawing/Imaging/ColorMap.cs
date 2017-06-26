@@ -5,7 +5,7 @@
 namespace System.Drawing.Imaging
 {
     /// <summary>
-    ///    Defines a map for converting colors.
+    /// Defines a map for converting colors.
     /// </summary>
     public sealed class ColorMap
     {
@@ -13,9 +13,7 @@ namespace System.Drawing.Imaging
         private Color _newColor;
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Imaging.ColorMap'/> class.
-        ///    
+        /// Initializes a new instance of the <see cref='ColorMap'/> class.
         /// </summary>
         public ColorMap()
         {
@@ -24,10 +22,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    
-        ///       Specifies the existing <see cref='System.Drawing.Color'/> to be
-        ///       converted.
-        ///    
+        /// Specifies the existing <see cref='Color'/> to be converted.
         /// </summary>
         public Color OldColor
         {
@@ -35,9 +30,7 @@ namespace System.Drawing.Imaging
             set { _oldColor = value; }
         }
         /// <summary>
-        ///    
-        ///       Specifes the new <see cref='System.Drawing.Color'/> to which to convert.
-        ///    
+        /// Specifes the new <see cref='Color'/> to which to convert.
         /// </summary>
         public Color NewColor
         {

@@ -2,12 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.InteropServices;
+
 namespace System.Drawing.Imaging
 {
-    using System.Runtime.InteropServices;
-
     /// <summary>
-    ///    Specifies the attributes of a bitmap image.
+    /// Specifies the attributes of a bitmap image.
     /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public sealed class BitmapData
@@ -20,7 +20,7 @@ namespace System.Drawing.Imaging
         private int _reserved;
 
         /// <summary>
-        ///    Specifies the pixel width of the <see cref='System.Drawing.Bitmap'/>.
+        /// Specifies the pixel width of the <see cref='Bitmap'/>.
         /// </summary>
         public int Width
         {
@@ -29,7 +29,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Specifies the pixel height of the <see cref='System.Drawing.Bitmap'/>.
+        /// Specifies the pixel height of the <see cref='Bitmap'/>.
         /// </summary>
         public int Height
         {
@@ -38,7 +38,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Specifies the stride width of the <see cref='System.Drawing.Bitmap'/>.
+        /// Specifies the stride width of the <see cref='Bitmap'/>.
         /// </summary>
         public int Stride
         {
@@ -47,8 +47,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Specifies the format of the pixel
-        ///    information in this <see cref='System.Drawing.Bitmap'/>.
+        /// Specifies the format of the pixel information in this <see cref='Bitmap'/>.
         /// </summary>
         public PixelFormat PixelFormat
         {
@@ -91,7 +90,7 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Specifies the address of the pixel data.
+        /// Specifies the address of the pixel data.
         /// </summary>
         public IntPtr Scan0
         {
@@ -100,12 +99,10 @@ namespace System.Drawing.Imaging
         }
 
         /// <summary>
-        ///    Reserved. Do not use.
+        /// Reserved. Do not use.
         /// </summary>
         public int Reserved
         {
-            // why make public??
-            //
             get { return _reserved; }
             set { _reserved = value; }
         }

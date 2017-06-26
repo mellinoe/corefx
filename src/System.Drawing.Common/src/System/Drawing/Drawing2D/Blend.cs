@@ -5,10 +5,7 @@
 namespace System.Drawing.Drawing2D
 {
     /// <summary>
-    ///    
-    ///       Defines a blend pattern for a <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>
-    ///       .
-    ///    
+    /// Defines a blend pattern for a <see cref='LinearGradientBrush'/>.
     /// </summary>
     public sealed class Blend
     {
@@ -16,10 +13,7 @@ namespace System.Drawing.Drawing2D
         private float[] _positions;
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Blend'/>
-        ///       class.
-        ///    
+        /// Initializes a new instance of the <see cref='Blend'/> class.
         /// </summary>
         public Blend()
         {
@@ -28,10 +22,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.Blend'/>
-        ///       class with the specified number of factors and positions.
-        ///    
+        /// Initializes a new instance of the <see cref='Blend'/> class with the specified number of factors and positions.
         /// </summary>
         public Blend(int count)
         {
@@ -39,8 +30,7 @@ namespace System.Drawing.Drawing2D
             _positions = new float[count];
         }
         /// <summary>
-        ///    Specifies an array of blend factors for the
-        ///    gradient.
+        /// Specifies an array of blend factors for the gradient.
         /// </summary>
         public float[] Factors
         {
@@ -55,9 +45,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Specifies an array of blend positions for the gradient.
-        ///    
+        /// Specifies an array of blend positions for the gradient.
         /// </summary>
         public float[] Positions
         {

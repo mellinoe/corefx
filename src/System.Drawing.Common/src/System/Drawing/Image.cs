@@ -2,24 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+using System.Drawing.Internal;
+using System.Globalization;
+using System.IO;
+using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
+
 namespace System.Drawing
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing.Imaging;
-    using System.Drawing.Internal;
-    using System.Globalization;
-    using System.IO;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Serialization;
-    using System.Security.Permissions;
-
-    /**
-     * Represent an image object (could be bitmap or vector)
-     */
     /// <summary>
-    ///    An abstract base class that provides
-    ///    functionality for 'Bitmap', 'Icon', 'Cursor', and 'Metafile' descended classes.
+    /// An abstract base class that provides functionality for 'Bitmap', 'Icon', 'Cursor', and 'Metafile' descended classes.
     /// </summary>
     [ImmutableObject(true)]
     [ComVisible(true)]
@@ -29,10 +25,6 @@ namespace System.Drawing
         private string allocationSite = Graphics.GetAllocationStack();
 #endif
 
-
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         // The signature of this delegate is incorrect. The signature of the corresponding 
         // native callback function is:
         // extern "C" {
@@ -41,24 +33,17 @@ namespace System.Drawing
         //     typedef ImageAbort GetThumbnailImageAbort;
         // }
         // However, as this delegate is not used in both GDI 1.0 and 1.1, we choose not
-        // to modify it in Dev10, in order not to break exsiting code
+        // to modify it, in order to preserve compatibility.
         public delegate bool GetThumbnailImageAbort();
 
-        /*
-         * Handle to native image object
-         */
         internal IntPtr nativeImage;
 
         // used to work around lack of animated gif encoder... rarely set...
-        //
         private byte[] _rawData;
 
         //userData : so that user can use TAGS with IMAGES..
         private object _userData;
 
-        /**
-         * Constructor can't be invoked directly
-         */
         internal Image()
         {
         }
@@ -79,21 +64,14 @@ namespace System.Drawing
             }
         }
 
-        /**
-        * Create an image object from a URL
-        */
         /// <summary>
-        ///    Creates an <see cref='System.Drawing.Image'/> from the specified file.
+        /// Creates an <see cref='Image'/> from the specified file.
         /// </summary>
-        // [Obsolete("Use Image.FromFile(string, useEmbeddedColorManagement)")]
         public static Image FromFile(String filename)
         {
             return Image.FromFile(filename, false);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public static Image FromFile(String filename,
                                      bool useEmbeddedColorManagement)
         {
@@ -137,31 +115,20 @@ namespace System.Drawing
         }
 
 
-        /**
-         * Create an image object from a data stream
-         */
         /// <summary>
-        ///    Creates an <see cref='System.Drawing.Image'/> from the specified data
-        ///    stream.
+        /// Creates an <see cref='Image'/> from the specified data stream.
         /// </summary>
-        // [Obsolete("Use Image.FromStream(stream, useEmbeddedColorManagement)")]
         public static Image FromStream(Stream stream)
         {
             return Image.FromStream(stream, false);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public static Image FromStream(Stream stream,
                                        bool useEmbeddedColorManagement)
         {
             return FromStream(stream, useEmbeddedColorManagement, true);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public static Image FromStream(Stream stream, bool useEmbeddedColorManagement, bool validateImageData)
         {
             if (stream == null)
@@ -239,11 +206,8 @@ namespace System.Drawing
             SetNativeImage(nativeImage);
         }
 
-        /**
-         * Make a copy of the image object
-         */
         /// <summary>
-        ///    Creates an exact copy of this <see cref='System.Drawing.Image'/>.
+        /// Creates an exact copy of this <see cref='Image'/>.
         /// </summary>
         public object Clone()
         {
@@ -265,12 +229,8 @@ namespace System.Drawing
             return CreateImageObject(cloneImage);
         }
 
-        /**
-         * Dispose of resources associated with the Image object
-         */
         /// <summary>
-        ///    Cleans up Windows resources for this
-        /// <see cref='System.Drawing.Image'/>.
+        /// Cleans up Windows resources for this <see cref='Image'/>.
         /// </summary>
         public void Dispose()
         {
@@ -313,8 +273,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Cleans up Windows resources for this
-        /// <see cref='System.Drawing.Image'/>.
+        /// Cleans up Windows resources for this <see cref='Image'/>.
         /// </summary>
         ~Image()
         {
@@ -404,22 +363,6 @@ namespace System.Drawing
             Metafile = 2,
         }
 
-        /* FxCop rule 'AvoidBuildingNonCallableCode' - Left here in case it is needed in the future.
-        private ImageTypeEnum ImageType
-        {
-            get { 
-                int type = -1;
-
-                int status = SafeNativeMethods.Gdip.GdipGetImageType(new HandleRef(this, nativeImage), out type);
-
-                if (status != SafeNativeMethods.Gdip.Ok)
-                    throw SafeNativeMethods.Gdip.StatusException(status);
-
-                return(ImageTypeEnum) type;
-            }
-        }
-        */
-
         internal static Image CreateImageObject(IntPtr nativeImage)
         {
             Image image;
@@ -449,8 +392,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Returns information about the codecs used
-        ///    for this <see cref='System.Drawing.Image'/>.
+        /// Returns information about the codecs used for this <see cref='Image'/>.
         /// </summary>
         public EncoderParameters GetEncoderParameterList(Guid encoder)
         {
@@ -491,7 +433,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Saves this <see cref='System.Drawing.Image'/> to the specified file.
+        /// Saves this <see cref='Image'/> to the specified file.
         /// </summary>
         public void Save(string filename)
         {
@@ -499,8 +441,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Saves this <see cref='System.Drawing.Image'/> to the specified file in the
-        ///    specified format.
+        /// Saves this <see cref='Image'/> to the specified file in the specified format.
         /// </summary>
         public void Save(string filename, ImageFormat format)
         {
@@ -516,10 +457,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Saves this <see cref='System.Drawing.Image'/> to the specified file in the specified format
-        ///       and with the specified encoder parameters.
-        ///    
+        /// Saves this <see cref='Image'/> to the specified file in the specified format and with the specified encoder parameters.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void Save(string filename, ImageCodecInfo encoder, EncoderParameters encoderParams)
@@ -581,7 +519,6 @@ namespace System.Drawing
         internal void Save(MemoryStream stream)
         {
             // Jpeg loses data, so we don't want to use it to serialize...
-            //
             ImageFormat dest = RawFormat;
             if (dest == ImageFormat.Jpeg)
             {
@@ -591,7 +528,6 @@ namespace System.Drawing
 
             // If we don't find an Encoder (for things like Icon), we
             // just switch back to PNG...
-            //
             if (codec == null)
             {
                 codec = ImageFormat.Png.FindEncoder();
@@ -600,10 +536,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Saves this <see cref='System.Drawing.Image'/> to the specified stream in the specified
-        ///       format.
-        ///    
+        /// Saves this <see cref='Image'/> to the specified stream in the specified format.
         /// </summary>
         public void Save(Stream stream, ImageFormat format)
         {
@@ -615,10 +548,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Saves this <see cref='System.Drawing.Image'/> to the specified stream in the specified
-        ///       format.
-        ///    
+        /// Saves this <see cref='Image'/> to the specified stream in the specified format.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void Save(Stream stream, ImageCodecInfo encoder, EncoderParameters encoderParams)
@@ -680,10 +610,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Adds an <see cref='System.Drawing.Imaging.EncoderParameters'/> to this
-        ///    <see cref='System.Drawing.Image'/>.
-        ///    
+        /// Adds an <see cref='EncoderParameters'/> to this <see cref='Image'/>.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void SaveAdd(EncoderParameters encoderParams)
@@ -708,10 +635,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Adds an <see cref='System.Drawing.Imaging.EncoderParameters'/> to the
-        ///       specified <see cref='System.Drawing.Image'/>.
-        ///    
+        /// Adds an <see cref='EncoderParameters'/> to the specified <see cref='Image'/>.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void SaveAdd(Image image, EncoderParameters encoderParams)
@@ -740,9 +664,6 @@ namespace System.Drawing
             }
         }
 
-        /**
-         * Return; image size information
-         */
         private SizeF _GetPhysicalDimension()
         {
             float width;
@@ -757,10 +678,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets the width and height of this
-        ///    <see cref='System.Drawing.Image'/>.
-        ///    
+        /// Gets the width and height of this <see cref='Image'/>.
         /// </summary>
         public SizeF PhysicalDimension
         {
@@ -768,9 +686,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets the width and height of this <see cref='System.Drawing.Image'/>.
-        ///    
+        /// Gets the width and height of this <see cref='Image'/>.
         /// </summary>
         public Size Size
         {
@@ -781,7 +697,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the width of this <see cref='System.Drawing.Image'/>.
+        /// Gets the width of this <see cref='Image'/>.
         /// </summary>
         [
         DefaultValue(false),
@@ -804,7 +720,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the height of this <see cref='System.Drawing.Image'/>.
+        /// Gets the height of this <see cref='Image'/>.
         /// </summary>
         [
         DefaultValue(false),
@@ -827,8 +743,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the horizontal resolution, in
-        ///    pixels-per-inch, of this <see cref='System.Drawing.Image'/>.
+        /// Gets the horizontal resolution, in pixels-per-inch, of this <see cref='Image'/>.
         /// </summary>
         public float HorizontalResolution
         {
@@ -846,8 +761,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the vertical resolution, in
-        ///    pixels-per-inch, of this <see cref='System.Drawing.Image'/>.
+        /// Gets the vertical resolution, in pixels-per-inch, of this <see cref='Image'/>.
         /// </summary>
         public float VerticalResolution
         {
@@ -865,7 +779,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets attribute flags for this <see cref='System.Drawing.Image'/>.
+        /// Gets attribute flags for this <see cref='Image'/>.
         /// </summary>
         [Browsable(false)]
         public int Flags
@@ -884,7 +798,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the format of this <see cref='System.Drawing.Image'/>.
+        /// Gets the format of this <see cref='Image'/>.
         /// </summary>
         public ImageFormat RawFormat
         {
@@ -903,7 +817,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the pixel format for this <see cref='System.Drawing.Image'/>.
+        /// Gets the pixel format for this <see cref='Image'/>.
         /// </summary>
         public PixelFormat PixelFormat
         {
@@ -921,8 +835,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets a bounding rectangle in
-        ///    the specified units for this <see cref='System.Drawing.Image'/>.
+        /// Gets a bounding rectangle in the specified units for this <see cref='Image'/>.
         /// </summary>        
         public RectangleF GetBounds(ref GraphicsUnit pageUnit)
         {
@@ -994,8 +907,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets or sets the color
-        ///    palette used for this <see cref='System.Drawing.Image'/>.
+        /// Gets or sets the color palette used for this <see cref='Image'/>.
         /// </summary>
         [Browsable(false)]
         public ColorPalette Palette
@@ -1013,7 +925,7 @@ namespace System.Drawing
         // Thumbnail support
 
         /// <summary>
-        ///    Returns the thumbnail for this <see cref='System.Drawing.Image'/>.
+        /// Returns the thumbnail for this <see cref='Image'/>.
         /// </summary>
         public Image GetThumbnailImage(int thumbWidth, int thumbHeight,
                                        GetThumbnailImageAbort callback, IntPtr callbackData)
@@ -1031,10 +943,7 @@ namespace System.Drawing
         // Multi-frame support
 
         /// <summary>
-        ///    
-        ///       Gets an array of GUIDs that represent the
-        ///       dimensions of frames within this <see cref='System.Drawing.Image'/>.
-        ///    
+        /// Gets an array of GUIDs that represent the dimensions of frames within this <see cref='Image'/>.
         /// </summary>        
         [Browsable(false)]
         public Guid[] FrameDimensionsList
@@ -1091,10 +1000,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Returns the number of frames of the given
-        ///       dimension.
-        ///    
+        /// Returns the number of frames of the given dimension.
         /// </summary>
         public int GetFrameCount(FrameDimension dimension)
         {
@@ -1110,10 +1016,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Selects the frame specified by the given
-        ///       dimension and index.
-        ///    
+        /// Selects the frame specified by the given dimension and index.
         /// </summary>
         public int SelectActiveFrame(FrameDimension dimension, int frameIndex)
         {
@@ -1128,10 +1031,6 @@ namespace System.Drawing
             return count[0];
         }
 
-        /// <summary>
-        ///    
-        ///    
-        /// </summary>
         public void RotateFlip(RotateFlipType rotateFlipType)
         {
             int status = SafeNativeMethods.Gdip.GdipImageRotateFlip(new HandleRef(this, nativeImage), unchecked((int)rotateFlipType));
@@ -1141,8 +1040,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets an array of the property IDs stored in
-        ///    this <see cref='System.Drawing.Image'/>.
+        /// Gets an array of the property IDs stored in this <see cref='Image'/>.
         /// </summary>
         [Browsable(false)]
         public int[] PropertyIdList
@@ -1172,8 +1070,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the specified property item from this
-        /// <see cref='System.Drawing.Image'/>.
+        /// Gets the specified property item from this <see cref='Image'/>.
         /// </summary>
         public PropertyItem GetPropertyItem(int propid)
         {
@@ -1213,8 +1110,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Removes the specified property item from
-        ///    this <see cref='System.Drawing.Image'/>.
+        /// Removes the specified property item from this <see cref='Image'/>.
         /// </summary>
         public void RemovePropertyItem(int propid)
         {
@@ -1224,10 +1120,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Sets the specified property item to the
-        ///       specified value.
-        ///    
+        /// Sets the specified property item to the specified value.
         /// </summary>
         public void SetPropertyItem(PropertyItem propitem)
         {
@@ -1242,7 +1135,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets an array of <see cref='System.Drawing.Imaging.PropertyItem'/> objects that describe this <see cref='System.Drawing.Image'/>.
+        /// Gets an array of <see cref='PropertyItem'/> objects that describe this <see cref='Image'/>.
         /// </summary>
         [Browsable(false)]
         public PropertyItem[] PropertyItems
@@ -1297,9 +1190,8 @@ namespace System.Drawing
             nativeImage = handle;
         }
 
-        // !! Ambiguous to offer constructor for 'FromHbitmap'
         /// <summary>
-        ///    Creates a <see cref='System.Drawing.Bitmap'/> from a Windows handle.
+        /// Creates a <see cref='Bitmap'/> from a Windows handle.
         /// </summary>
         public static Bitmap FromHbitmap(IntPtr hbitmap)
         {
@@ -1307,10 +1199,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Creates a <see cref='System.Drawing.Bitmap'/> from the specified Windows
-        ///       handle with the specified color palette.
-        ///    
+        /// Creates a <see cref='Bitmap'/> from the specified Windows handle with the specified color palette.
         /// </summary>
         public static Bitmap FromHbitmap(IntPtr hbitmap, IntPtr hpalette)
         {
@@ -1323,40 +1212,24 @@ namespace System.Drawing
             return Bitmap.FromGDIplus(bitmap);
         }
 
-        /*
-         * Return the pixel size for the specified format (in bits)
-         */
         /// <summary>
-        ///    Returns the size of the specified pixel
-        ///    format.
+        /// Returns the size of the specified pixel format.
         /// </summary>
         public static int GetPixelFormatSize(PixelFormat pixfmt)
         {
             return (unchecked((int)pixfmt) >> 8) & 0xFF;
         }
 
-        /*
-         * Determine if the pixel format can have alpha channel
-         */
         /// <summary>
-        ///    
-        ///       Returns a value indicating whether the
-        ///       pixel format contains alpha information.
-        ///    
+        /// Returns a value indicating whether the pixel format contains alpha information.
         /// </summary>
         public static bool IsAlphaPixelFormat(PixelFormat pixfmt)
         {
             return (pixfmt & PixelFormat.Alpha) != 0;
         }
 
-        /*
-         * Determine if the pixel format is an extended format,
-         * i.e. supports 16-bit per channel
-         */
         /// <summary>
-        ///    
-        ///       Returns a value indicating whether the pixel format is extended.
-        ///    
+        /// Returns a value indicating whether the pixel format is extended.
         /// </summary>
         public static bool IsExtendedPixelFormat(PixelFormat pixfmt)
         {
@@ -1371,9 +1244,7 @@ namespace System.Drawing
          *   PixelFormat64bppPARGB
          */
         /// <summary>
-        ///    
-        ///       Returns a value indicating whether the pixel format is canonical.
-        ///    
+        /// Returns a value indicating whether the pixel format is canonical.
         /// </summary>
         public static bool IsCanonicalPixelFormat(PixelFormat pixfmt)
         {

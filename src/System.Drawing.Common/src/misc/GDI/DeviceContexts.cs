@@ -5,9 +5,8 @@
 namespace System.Drawing.Internal
 {
     /// <summary>
-    ///     Keeps a cache of some graphics primitives.
-    ///     Created to improve performance of TextRenderer.MeasureText methods that don't receive a WindowsGraphics.
-    ///     This class mantains a cache of MRU WindowsFont objects in the process.
+    /// Keeps a cache of some graphics primitives. Created to improve performance of TextRenderer.MeasureText methods
+    /// that don't receive a WindowsGraphics. This class mantains a cache of MRU WindowsFont objects in the process.
     /// </summary>
     internal static class DeviceContexts
     {
@@ -15,9 +14,8 @@ namespace System.Drawing.Internal
         private static ClientUtils.WeakRefCollection t_activeDeviceContexts;
 
         /// <summary>
-        /// WindowsGraphicsCacheManager needs to track DeviceContext
-        /// objects so it can ask them if a font is in use before they 
-        /// it's deleted.  
+        /// WindowsGraphicsCacheManager needs to track DeviceContext objects so it can ask them if a font is in use
+        /// before they it's deleted.  
         internal static void AddDeviceContext(DeviceContext dc)
         {
             if (t_activeDeviceContexts == null)

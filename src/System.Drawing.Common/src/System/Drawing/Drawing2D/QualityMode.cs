@@ -5,29 +5,24 @@
 namespace System.Drawing.Drawing2D
 {
     /// <summary>
-    ///    
-    ///       Specifies the overall quality of rendering
-    ///       of graphics shapes.
-    ///    
+    /// Specifies the overall quality of rendering of graphics shapes.
     /// </summary>
     public enum QualityMode
     {
         /// <summary>
-        ///    Specifies an invalid mode.
+        /// Specifies an invalid mode.
         /// </summary>
         Invalid = -1,
         /// <summary>
-        ///    Specifies the default mode.
+        /// Specifies the default mode.
         /// </summary>
         Default = 0,
         /// <summary>
-        ///    Specifies low quality, high performance
-        ///    rendering.
+        /// Specifies low quality, high performance rendering.
         /// </summary>
         Low = 1,             // for apps that need the best performance
         /// <summary>
-        ///    Specifies high quality, lower performance
-        ///    rendering.
+        /// Specifies high quality, lower performance rendering.
         /// </summary>
         High = 2             // for apps that need the best rendering quality                                          
     }

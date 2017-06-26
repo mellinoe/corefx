@@ -2,21 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Internal;
+using System.Globalization;
+using System.Runtime.InteropServices;
+
 namespace System.Drawing
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing.Internal;
-    using System.Globalization;
-    using System.Runtime.InteropServices;
-
-    /*
-    * Represent a font object
-    */
-
     /// <summary>
-    ///    Defines a particular format for text,
-    ///    including font face, size, and style attributes.
+    /// Defines a particular format for text, including font face, size, and style attributes.
     /// </summary>
     [ComVisible(true)]
     public sealed partial class Font : MarshalByRefObject, ICloneable, IDisposable
@@ -35,7 +30,7 @@ namespace System.Drawing
         private string _originalFontName;
 
         ///<summary>
-        ///     Creates the GDI+ native font object.
+        /// Creates the GDI+ native font object.
         ///</summary>
         private void CreateNativeFont()
         {
@@ -63,10 +58,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Font'/> class from
-        ///       the specified existing <see cref='System.Drawing.Font'/> and <see cref='System.Drawing.FontStyle'/>.
-        ///    
+        /// Initializes a new instance of the <see cref='Font'/> class from the specified existing <see cref='Font'/>
+        /// and <see cref='FontStyle'/>.
         /// </summary>
         public Font(Font prototype, FontStyle newStyle)
         {
@@ -76,8 +69,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(FontFamily family, float emSize, FontStyle style, GraphicsUnit unit)
         {
@@ -85,8 +77,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(FontFamily family, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet)
         {
@@ -94,8 +85,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(FontFamily family, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont)
         {
@@ -103,8 +93,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(string familyName, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet)
         {
@@ -113,8 +102,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(string familyName, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont)
         {
@@ -127,8 +115,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(FontFamily family, float emSize, FontStyle style)
         {
@@ -136,8 +123,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(FontFamily family, float emSize, GraphicsUnit unit)
         {
@@ -145,8 +131,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(FontFamily family, float emSize)
         {
@@ -154,8 +139,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(string familyName, float emSize, FontStyle style, GraphicsUnit unit)
         {
@@ -163,11 +147,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///       the specified
-        ///       attributes.
-        ///    
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(string familyName, float emSize, FontStyle style)
         {
@@ -175,8 +155,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(string familyName, float emSize, GraphicsUnit unit)
         {
@@ -184,8 +163,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Font'/> class with
-        ///    the specified attributes.
+        /// Initializes a new instance of the <see cref='Font'/> class with the specified attributes.
         /// </summary>
         public Font(string familyName, float emSize)
         {
@@ -193,8 +171,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Constructor to initialize fields from an exisiting native GDI+ object reference.
-        ///     Used by ToLogFont.
+        /// Constructor to initialize fields from an exisiting native GDI+ object reference. Used by ToLogFont.
         /// </summary>
         private Font(IntPtr nativeFont, byte gdiCharSet, bool gdiVerticalFont)
         {
@@ -235,7 +212,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Initializes this object's fields.
+        /// Initializes this object's fields.
         /// </summary>
         private void Initialize(string familyName, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont)
         {
@@ -246,7 +223,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Initializes this object's fields.
+        /// Initializes this object's fields.
         /// </summary>
         private void Initialize(FontFamily family, float emSize, FontStyle style, GraphicsUnit unit, byte gdiCharSet, bool gdiVerticalFont)
         {
@@ -287,8 +264,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Creates a <see cref='System.Drawing.Font'/> from the specified Windows
-        ///    handle.
+        /// Creates a <see cref='System.Drawing.Font'/> from the specified Windows handle.
         /// </summary>
         public static Font FromHfont(IntPtr hfont)
         {
@@ -309,10 +285,6 @@ namespace System.Drawing
             return result;
         }
 
-
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public static Font FromLogFont(object lf)
         {
             IntPtr screenDC = UnsafeNativeMethods.GetDC(NativeMethods.NullHandleRef);
@@ -328,9 +300,6 @@ namespace System.Drawing
             return result;
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public static Font FromLogFont(object lf, IntPtr hdc)
         {
             IntPtr font = IntPtr.Zero;
@@ -370,8 +339,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Creates a Font from the specified Windows
-        ///    handle to a device context.
+        /// Creates a Font from the specified Windows handle to a device context.
         /// </summary>
         public static Font FromHdc(IntPtr hdc)
         {
@@ -390,7 +358,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///    Creates an exact copy of this <see cref='System.Drawing.Font'/>.
+        /// Creates an exact copy of this <see cref='Font'/>.
         /// </summary>
         public object Clone()
         {
@@ -408,8 +376,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///     Get native GDI+ object pointer.
-        ///     This property triggers the creation of the GDI+ native object if not initialized yet.
+        /// Get native GDI+ object pointer. This property triggers the creation of the GDI+ native object if not initialized yet.
         /// </summary>
         internal IntPtr NativeFont
         {
@@ -421,7 +388,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the <see cref='System.Drawing.FontFamily'/> of this <see cref='System.Drawing.Font'/>.
+        /// Gets the <see cref='Drawing.FontFamily'/> of this <see cref='Font'/>.
         /// </summary>
         [Browsable(false)]
         public FontFamily FontFamily
@@ -445,7 +412,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Cleans up Windows resources for this <see cref='System.Drawing.Font'/>.
+        /// Cleans up Windows resources for this <see cref='Font'/>.
         /// </summary>
         ~Font()
         {
@@ -453,7 +420,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Cleans up Windows resources for this <see cref='System.Drawing.Font'/>.
+        /// Cleans up Windows resources for this <see cref='Font'/>.
         /// </summary>
         public void Dispose()
         {
@@ -497,9 +464,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets a value indicating whether this <see cref='System.Drawing.Font'/> is bold.
-        ///    
+        /// Gets a value indicating whether this <see cref='System.Drawing.Font'/> is bold.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Bold
@@ -528,13 +493,10 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Determines if this font was created to represt a GDI vertical font.
-        ///     his will only be valid if this font was created from a classic GDI
-        ///     font definition, like a LOGFONT or HFONT, or it was passed into the 
-        ///     constructor.
+        /// Determines if this font was created to represt a GDI vertical font. This will only be valid if this font
+        /// was created from a classic GDIfont definition, like a LOGFONT or HFONT, or it was passed into the constructor.
         ///
-        ///     This is here for compatability with native Win32 intrinsic controls
-        ///     on non-Unicode platforms.
+        /// This is here for compatability with native Win32 intrinsic controls on non-Unicode platforms.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool GdiVerticalFont
@@ -546,9 +508,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets a value indicating whether this <see cref='System.Drawing.Font'/> is Italic.
-        ///    
+        /// Gets a value indicating whether this <see cref='Font'/> is Italic.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Italic
@@ -560,9 +520,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets the face name of this <see cref='System.Drawing.Font'/> .
-        ///    
+        /// Gets the face name of this <see cref='Font'/> .
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public string Name
@@ -571,9 +529,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       This property is required by the framework and not intended to be used directly.
-        ///    
+        /// This property is required by the framework and not intended to be used directly.
         /// </summary>
         [Browsable(false)]
         public string OriginalFontName
@@ -582,10 +538,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets a value indicating whether this <see cref='System.Drawing.Font'/> is strikeout (has a line
-        ///       through it).
-        ///    
+        /// Gets a value indicating whether this <see cref='Font'/> is strikeout (has a line through it).
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Strikeout
@@ -597,9 +550,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets a value indicating whether this <see cref='System.Drawing.Font'/> is underlined.
-        ///    
+        /// Gets a value indicating whether this <see cref='Font'/> is underlined.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool Underline
@@ -611,8 +562,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Returns a value indicating whether the
-        ///    specified object is a <see cref='System.Drawing.Font'/> equivalent to this <see cref='System.Drawing.Font'/>.
+        /// Returns a value indicating whether the specified object is a <see cref='Font'/> equivalent to this
+        /// <see cref='Font'/>.
         /// </summary>
         public override bool Equals(object obj)
         {
@@ -644,7 +595,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///    Gets the hash code for this <see cref='System.Drawing.Font'/>.
+        /// Gets the hash code for this <see cref='Font'/>.
         /// </summary>
         public override int GetHashCode()
         {
@@ -663,8 +614,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Returns a human-readable string
-        ///    representation of this <see cref='System.Drawing.Font'/>.
+        /// Returns a human-readable string representation of this <see cref='Font'/>.
         /// </summary>
         public override string ToString()
         {
@@ -677,13 +627,6 @@ namespace System.Drawing
                                     _gdiVerticalFont);
         }
 
-
-
-        // Operations
-
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void ToLogFont(object logFont)
         {
             IntPtr screenDC = UnsafeNativeMethods.GetDC(NativeMethods.NullHandleRef);
@@ -706,9 +649,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public unsafe void ToLogFont(object logFont, Graphics graphics)
         {
             if (graphics == null)
@@ -778,7 +718,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Returns a handle to this <see cref='System.Drawing.Font'/>.
+        /// Returns a handle to this <see cref='Font'/>.
         /// </summary>
         public IntPtr ToHfont()
         {
@@ -797,8 +737,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Returns the height of this Font in the
-        ///    specified graphics context.
+        /// Returns the height of this Font in the specified graphics context.
         /// </summary>
         public float GetHeight(Graphics graphics)
         {
@@ -815,8 +754,6 @@ namespace System.Drawing
             return ht;
         }
 
-        /// <summary>
-        /// </summary>
         public float GetHeight()
         {
             IntPtr screenDC = UnsafeNativeMethods.GetDC(NativeMethods.NullHandleRef);
@@ -836,9 +773,6 @@ namespace System.Drawing
             return height;
         }
 
-
-        /// <summary>
-        /// </summary>
         public float GetHeight(float dpi)
         {
             float ht;
@@ -851,9 +785,8 @@ namespace System.Drawing
             return ht;
         }
 
-
         /// <summary>
-        ///    Gets style information for this <see cref='System.Drawing.Font'/>.
+        /// Gets style information for this <see cref='Font'/>.
         /// </summary>
         [
         Browsable(false)
@@ -868,7 +801,7 @@ namespace System.Drawing
 
         // Return value is in Unit (the unit the font was created in)
         /// <summary>
-        ///    Gets the size of this <see cref='System.Drawing.Font'/>.
+        /// Gets the size of this <see cref='Font'/>.
         /// </summary>
         public float Size
         {
@@ -879,7 +812,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the size, in points, of this <see cref='System.Drawing.Font'/>.
+        /// Gets the size, in points, of this <see cref='Font'/>.
         /// </summary>
         [Browsable(false)]
         public float SizeInPoints
@@ -916,7 +849,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the unit of measure for this <see cref='System.Drawing.Font'/>.
+        /// Gets the unit of measure for this <see cref='Font'/>.
         /// </summary>
         public GraphicsUnit Unit
         {
@@ -927,7 +860,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the height of this <see cref='System.Drawing.Font'/>.
+        /// Gets the height of this <see cref='Font'/>.
         /// </summary>
         [
         Browsable(false)
@@ -941,7 +874,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Returns true if this <see cref='System.Drawing.Font'/> is a SystemFont.
+        /// Returns true if this <see cref='Font'/> is a SystemFont.
         /// </summary>
         [
         Browsable(false)
@@ -955,7 +888,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets the name of this <see cref='System.Drawing.SystemFont'/>.
+        /// Gets the name of this <see cref='Drawing.SystemFont'/>.
         /// </summary>
         [
         Browsable(false)
@@ -975,4 +908,3 @@ namespace System.Drawing
         }
     }
 }
-

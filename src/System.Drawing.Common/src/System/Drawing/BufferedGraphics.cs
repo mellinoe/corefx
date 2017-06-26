@@ -2,17 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+
 namespace System.Drawing
 {
-    using System.Diagnostics;
-    using System.Runtime.InteropServices;
-
     /// <summary>
-    ///         The BufferedGraphics class can be thought of as a "Token" or "Reference" to the
-    ///         buffer that a BufferedGraphicsContext creates. While a BufferedGraphics is 
-    ///         outstanding, the memory associated with the buffer is locked. The general design
-    ///         is such that under normal conditions a single BufferedGraphics will be in use at
-    ///         one time for a given BufferedGraphicsContext.
+    /// The BufferedGraphics class can be thought of as a "Token" or "Reference" to the buffer that a
+    /// BufferedGraphicsContext creates. While a BufferedGraphics is outstanding, the memory associated with the
+    /// buffer is locked. The general designis such that under normal conditions a single BufferedGraphics will be in
+    /// use at one time for a given BufferedGraphicsContext.
     /// </summary>
     public sealed class BufferedGraphics : IDisposable
     {
@@ -26,7 +25,7 @@ namespace System.Drawing
         private static int s_rop = 0xcc0020; // RasterOp.SOURCE.GetRop();
 
         /// <summary>
-        ///         Internal constructor, this class is created by the BufferedGraphicsContext.
+        /// Internal constructor, this class is created by the BufferedGraphicsContext.
         /// </summary>
         internal BufferedGraphics(Graphics bufferedGraphicsSurface, BufferedGraphicsContext context, Graphics targetGraphics,
                                   IntPtr targetDC, Point targetLoc, Size virtualSize)
@@ -45,7 +44,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///         Disposes the object and releases the lock on the memory.
+        /// Disposes the object and releases the lock on the memory.
         /// </summary>
         public void Dispose()
         {
@@ -75,7 +74,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///         Internal property - determines if we need to dispose of the Context when this is disposed
+        /// Determines if we need to dispose of the Context when this is disposed
         /// </summary>
         internal bool DisposeContext
         {
@@ -90,7 +89,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///         Allows access to the Graphics wrapper for the buffer.
+        /// Allows access to the Graphics wrapper for the buffer.
         /// </summary>
         public Graphics Graphics
         {
@@ -102,7 +101,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///         Renders the buffer to the original graphics used to allocate the buffer.
+        /// Renders the buffer to the original graphics used to allocate the buffer.
         /// </summary>
         public void Render()
         {
@@ -117,7 +116,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///         Renders the buffer to the specified target graphics.
+        /// Renders the buffer to the specified target graphics.
         /// </summary>
         public void Render(Graphics target)
         {
@@ -137,7 +136,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///         Renders the buffer to the specified target HDC.
+        /// Renders the buffer to the specified target HDC.
         /// </summary>
         public void Render(IntPtr targetDC)
         {
@@ -145,7 +144,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///         Internal method that renders the specified buffer into the target.
+        /// Internal method that renders the specified buffer into the target.
         /// </summary>
         private void RenderInternal(HandleRef refTargetDC, BufferedGraphics buffer)
         {

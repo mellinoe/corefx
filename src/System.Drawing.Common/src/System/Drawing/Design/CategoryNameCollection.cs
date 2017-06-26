@@ -2,22 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Collections;
+
 namespace System.Drawing.Design
 {
-    using System.Collections;
-
     /// <summary>
-    ///     
-    ///       A collection that stores <see cref='System.String'/> objects.
-    ///    
+    /// A collection that stores <see cref='string'/> objects.
     /// </summary>
     [System.Security.Permissions.PermissionSetAttribute(System.Security.Permissions.SecurityAction.LinkDemand, Name = "FullTrust")]
     public sealed class CategoryNameCollection : ReadOnlyCollectionBase
     {
         /// <summary>
-        ///     
-        ///       Initializes a new instance of <see cref='System.Drawing.Design.CategoryNameCollection'/> based on another <see cref='System.Drawing.Design.CategoryNameCollection'/>.
-        ///    
+        /// Initializes a new instance of <see cref='CategoryNameCollection'/> based on another
+        /// <see cref='CategoryNameCollection'/>.
         /// </summary>
         public CategoryNameCollection(CategoryNameCollection value)
         {
@@ -25,9 +22,8 @@ namespace System.Drawing.Design
         }
 
         /// <summary>
-        ///     
-        ///       Initializes a new instance of <see cref='System.Drawing.Design.CategoryNameCollection'/> containing any array of <see cref='System.String'/> objects.
-        ///    
+        /// Initializes a new instance of <see cref='CategoryNameCollection'/> containing any array of
+        /// <see cref='string'/> objects.
         /// </summary>
         public CategoryNameCollection(String[] value)
         {
@@ -35,7 +31,7 @@ namespace System.Drawing.Design
         }
 
         /// <summary>
-        /// Represents the entry at the specified index of the <see cref='System.String'/>.
+        /// Represents the entry at the specified index of the <see cref='string'/>.
         /// </summary>
         public string this[int index]
         {
@@ -46,8 +42,8 @@ namespace System.Drawing.Design
         }
 
         /// <summary>
-        /// Gets a value indicating whether the 
-        ///    <see cref='System.Drawing.Design.CategoryNameCollection'/> contains the specified <see cref='System.String'/>.
+        /// Gets a value indicating whether the  <see cref='CategoryNameCollection'/> contains the specified
+        /// <see cref='string'/>.
         /// </summary>
         public bool Contains(string value)
         {
@@ -55,8 +51,8 @@ namespace System.Drawing.Design
         }
 
         /// <summary>
-        /// Copies the <see cref='System.Drawing.Design.CategoryNameCollection'/> values to a one-dimensional <see cref='System.Array'/> instance at the 
-        ///    specified index.
+        /// Copies the <see cref='CategoryNameCollection'/> values to a one-dimensional <see cref='Array'/> instance
+        /// at the specified index.
         /// </summary>
         public void CopyTo(String[] array, int index)
         {
@@ -64,8 +60,7 @@ namespace System.Drawing.Design
         }
 
         /// <summary>
-        ///    Returns the index of a <see cref='System.String'/> in 
-        ///       the <see cref='System.Drawing.Design.CategoryNameCollection'/> .
+        /// Returns the index of a <see cref='string'/> in  the <see cref='CategoryNameCollection'/> .
         /// </summary>
         public int IndexOf(string value)
         {
@@ -73,4 +68,3 @@ namespace System.Drawing.Design
         }
     }
 }
-

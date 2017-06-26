@@ -2,25 +2,22 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Diagnostics.Contracts;
+using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using System.Drawing.Internal;
+using System.Drawing.Text;
+using System.Globalization;
+using System.Runtime.ConstrainedExecution;
+using System.Runtime.InteropServices;
+using System.Security.Permissions;
+
 namespace System.Drawing
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Diagnostics.Contracts;
-    using System.Drawing.Drawing2D;
-    using System.Drawing.Imaging;
-    using System.Drawing.Internal;
-    using System.Drawing.Text;
-    using System.Globalization;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.InteropServices;
-    using System.Security.Permissions;
-
-    /**
-     * Represent a graphics drawing context
-     */
     /// <summary>
-    ///    Encapsulates a GDI+ drawing surface.
+    /// Encapsulates a GDI+ drawing surface.
     /// </summary>
     public sealed class Graphics : MarshalByRefObject, IDisposable, IDeviceContext
     {
@@ -38,30 +35,26 @@ namespace System.Drawing
 #endif
 
         /// <summary>
-        ///     The context state previous to the current Graphics context (the head of the stack).
-        ///     We don't keep a GraphicsContext for the current context since it is available at any time from GDI+ and
-        ///     we don't want to keep track of changes in it.
+        /// The context state previous to the current Graphics context (the head of the stack).
+        /// We don't keep a GraphicsContext for the current context since it is available at any time from GDI+ and
+        /// we don't want to keep track of changes in it.
         /// </summary>
         private GraphicsContext _previousContext;
-
-        /// <summary>
-        ///     Object to lock on for static methods. 
 
         private static readonly object s_syncObject = new Object();
 
         /// <summary>
-        ///     Handle to native GDI+ graphics object.  This object is created on demand.
+        /// Handle to native GDI+ graphics object.  This object is created on demand.
         /// </summary>
         private IntPtr _nativeGraphics;
 
         /// <summary>
-        ///     Handle to native DC - obtained from the GDI+ graphics object.
-        ///     We need to cache it to implement IDeviceContext interface.
+        /// Handle to native DC - obtained from the GDI+ graphics object. We need to cache it to implement IDeviceContext interface.
         /// </summary>
         private IntPtr _nativeHdc;
 
-        // Object reference used for printing; it could point to a PrintPreviewGraphics to obtain the VisibleClipBounds, or 
-        // a DeviceContext holding a printer DC.
+        // Object reference used for printing; it could point to a PrintPreviewGraphics to obtain the
+        // VisibleClipBounds, or a DeviceContext holding a printer DC.
         private object _printingHelper;
 
         // GDI+'s preferred HPALETTE.
@@ -70,8 +63,6 @@ namespace System.Drawing
         // pointer back to the Image backing a specific graphic object
         private Image _backingImage;
 
-        /// <summary>
-        /// </summary>
         public delegate bool DrawImageAbort(IntPtr callbackdata);
 
         // Callback for EnumerateMetafile methods.  The parameters are:
@@ -86,8 +77,6 @@ namespace System.Drawing
         // record that was just enumerated.  If this method  returns
         // FALSE, the enumeration process is aborted.  Otherwise, it continues.        
 
-        /// <summary>
-        /// </summary>
         public delegate bool EnumerateMetafileProc(EmfPlusRecordType recordType,
                                                    int flags,
                                                    int dataSize,
@@ -96,7 +85,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///     Constructor to initialize this object from a native GDI+ Graphics pointer.
+        /// Constructor to initialize this object from a native GDI+ Graphics pointer.
         /// </summary>
         private Graphics(IntPtr gdipNativeGraphics)
         {
@@ -108,10 +97,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Creates a new instance of the <see cref='System.Drawing.Graphics'/> class from the specified
-        ///       handle to a device context.
-        ///    
+        /// Creates a new instance of the <see cref='Graphics'/> class from the specified handle to a device context.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHdc(IntPtr hdc)
@@ -142,10 +128,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Creates a new instance of the Graphics class from the specified handle to 
-        ///       a device context and handle to a device.
-        ///    
+        /// Creates a new instance of the Graphics class from the specified handle to  a device context and handle to a device.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHdc(IntPtr hdc, IntPtr hdevice)
@@ -165,8 +148,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Creates a new instance of the <see cref='System.Drawing.Graphics'/> class
-        ///    from a window handle.
+        /// Creates a new instance of the <see cref='Graphics'/> class from a window handle.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHwnd(IntPtr hwnd)
@@ -174,9 +156,6 @@ namespace System.Drawing
             return FromHwndInternal(hwnd);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public static Graphics FromHwndInternal(IntPtr hwnd)
@@ -194,8 +173,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Creates an instance of the <see cref='System.Drawing.Graphics'/> class
-        ///    from an existing <see cref='System.Drawing.Image'/>.
+        /// Creates an instance of the <see cref='Graphics'/> class from an existing <see cref='Image'/>.
         /// </summary>
         public static Graphics FromImage(Image image)
         {
@@ -225,7 +203,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///     Gets the GDI+ native graphics pointer.
+        /// Gets the GDI+ native graphics pointer.
         /// </summary>
         internal IntPtr NativeGraphics
         {
@@ -237,7 +215,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Implementation of IDeviceContext.GetHdc().
+        /// Implementation of IDeviceContext.GetHdc().
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public IntPtr GetHdc()
@@ -258,9 +236,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///    
-        ///       Releases the memory allocated for the handle to a device context.
-        ///    
+        /// Releases the memory allocated for the handle to a device context.
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Advanced)]
         public void ReleaseHdc(IntPtr hdc)
@@ -269,7 +245,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Implementation of IDeviceContext.ReleaseHdc().
+        /// Implementation of IDeviceContext.ReleaseHdc().
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public void ReleaseHdc()
@@ -278,8 +254,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    This method is public but is meant to be used by the .Net Framework only.
-        ///    From MSDN: Internal method. Do not use.
+        /// This method is public but is meant to be used by the .Net Framework only. From MSDN: Internal method. Do not use.
         /// </summary>
         [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.UnmanagedCode)]
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -298,15 +273,8 @@ namespace System.Drawing
             _nativeHdc = IntPtr.Zero;
         }
 
-        /**
-         * Dispose of resources associated with the graphics context
-         *
-         * @notes How do we set up delegates to notice others
-         *  when a Graphics object is disposed.
-         */
         /// <summary>
-        ///    Deletes this <see cref='System.Drawing.Graphics'/>, and
-        ///    frees the memory allocated for it.
+        /// Deletes this <see cref='Graphics'/>, and frees the memory allocated for it.
         /// </summary>        
         public void Dispose()
         {
@@ -382,8 +350,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Deletes this <see cref='System.Drawing.Graphics'/>, and
-        ///    frees the memory allocated for it.
+        /// Deletes this <see cref='Graphics'/>, and frees the memory allocated for it.
         /// </summary>
         ~Graphics()
         {
@@ -391,9 +358,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Forces immediate execution of all operations currently on the stack.
-        ///    
+        /// Forces immediate execution of all operations currently on the stack.
         /// </summary>
         public void Flush()
         {
@@ -401,9 +366,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Forces execution of all operations currently on the stack.
-        ///    
+        /// Forces execution of all operations currently on the stack.
         /// </summary>
         public void Flush(FlushIntention intention)
         {
@@ -415,19 +378,8 @@ namespace System.Drawing
             }
         }
 
-
-        /*
-        * Methods for setting/getting:
-        *  compositing mode
-        *  rendering quality hint
-        *
-        * @notes We should probably separate rendering hints
-        *  into several categories, e.g. antialiasing, image
-        *  filtering, etc.
-        */
-
         /// <summary>
-        ///    Gets or sets the <see cref='System.Drawing.Drawing2D.CompositingMode'/> associated with this <see cref='System.Drawing.Graphics'/>.
+        /// Gets or sets the <see cref='Drawing2D.CompositingMode'/> associated with this <see cref='Graphics'/>.
         /// </summary>
         public CompositingMode CompositingMode
         {
@@ -462,9 +414,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public Point RenderingOrigin
         {
             get
@@ -491,9 +440,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public CompositingQuality CompositingQuality
         {
             get
@@ -528,11 +474,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets the rendering mode for text associated with
-        ///       this <see cref='System.Drawing.Graphics'/>
-        ///       .
-        ///    
+        /// Gets or sets the rendering mode for text associated with this <see cref='Graphics'/>.
         /// </summary>
         public TextRenderingHint TextRenderingHint
         {
@@ -566,9 +508,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int TextContrast
         {
             get
@@ -595,9 +534,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public SmoothingMode SmoothingMode
         {
             get
@@ -630,9 +566,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public PixelOffsetMode PixelOffsetMode
         {
             get
@@ -666,8 +599,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Represents an object used in conection with the printing API, it is used to hold a reference to a PrintPreviewGraphics (fake graphics)
-        ///    or a printer DeviceContext (and maybe more in the future).
+        /// Represents an object used in conection with the printing API, it is used to hold a reference to a
+        /// PrintPreviewGraphics (fake graphics) or a printer DeviceContext (and maybe more in the future).
         /// </summary>
         internal object PrintingHelper
         {
@@ -683,8 +616,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Gets or sets the interpolation mode
-        ///    associated with this Graphics.
+        /// Gets or sets the interpolation mode associated with this Graphics.
         /// </summary>
         public InterpolationMode InterpolationMode
         {
@@ -719,12 +651,8 @@ namespace System.Drawing
             }
         }
 
-        /**
-         * Return the current world transform
-         */
         /// <summary>
-        ///    Gets or sets the world transform
-        ///    for this <see cref='System.Drawing.Graphics'/>.
+        /// Gets or sets the world transform for this <see cref='Graphics'/>.
         /// </summary>
         public Matrix Transform
         {
@@ -755,12 +683,6 @@ namespace System.Drawing
         }
 
 
-        /**
-         * Retrieve the current page transform information
-         * notes @ these are atomic
-         */
-        /// <summary>
-        /// </summary>
         public GraphicsUnit PageUnit
         {
             get
@@ -793,8 +715,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public float PageScale
         {
             get
@@ -822,8 +742,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public float DpiX
         {
             get
@@ -841,8 +759,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public float DpiY
         {
             get
@@ -862,8 +778,7 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///     CopyPixels will perform a gdi "bitblt" operation to the source from the destination
-        ///     with the given size.
+        /// CopyPixels will perform a gdi "bitblt" operation to the source from the destination with the given size.
         /// </summary>
         public void CopyFromScreen(Point upperLeftSource, Point upperLeftDestination, Size blockRegionSize)
         {
@@ -871,8 +786,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     CopyPixels will perform a gdi "bitblt" operation to the source from the destination
-        ///     with the given size.
+        /// CopyPixels will perform a gdi "bitblt" operation to the source from the destination with the given size.
         /// </summary>
         public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize)
         {
@@ -880,8 +794,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     CopyPixels will perform a gdi "bitblt" operation to the source from the destination
-        ///     with the given size and specified raster operation.
+        /// CopyPixels will perform a gdi "bitblt" operation to the source from the destination with the given size
+        /// and specified raster operation.
         /// </summary>
         public void CopyFromScreen(Point upperLeftSource, Point upperLeftDestination, Size blockRegionSize, CopyPixelOperation copyPixelOperation)
         {
@@ -889,8 +803,8 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     CopyPixels will perform a gdi "bitblt" operation to the source from the destination
-        ///     with the given size and specified raster operation.
+        /// CopyPixels will perform a gdi "bitblt" operation to the source from the destination with the given size
+        /// and specified raster operation.
         /// </summary>        
         public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize, CopyPixelOperation copyPixelOperation)
         {
@@ -944,15 +858,8 @@ namespace System.Drawing
             }
         }
 
-        /*
-         * Manipulate the current transform
-         *
-         * @notes For get methods, we return copies of our internal objects.
-         *  For set methods, we make copies of the objects passed in.
-         */
-
         /// <summary>
-        ///    Resets the world transform to identity.
+        /// Resets the world transform to identity.
         /// </summary>
         public void ResetTransform()
         {
@@ -965,10 +872,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that
-        ///       represents the world transform and <paramref term="matrix"/>.
-        ///    
+        /// Multiplies the <see cref='Matrix'/> that represents the world transform and <paramref name="matrix"/>.
         /// </summary>
         public void MultiplyTransform(Matrix matrix)
         {
@@ -976,8 +880,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that
-        ///    represents the world transform and <paramref term="matrix"/>.
+        /// Multiplies the <see cref='Matrix'/> that represents the world transform and <paramref name="matrix"/>.
         /// </summary>
         public void MultiplyTransform(Matrix matrix, MatrixOrder order)
         {
@@ -995,15 +898,11 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void TranslateTransform(float dx, float dy)
         {
             TranslateTransform(dx, dy, MatrixOrder.Prepend);
         }
 
-        /// <summary>
-        /// </summary>
         public void TranslateTransform(float dx, float dy, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateWorldTransform(new HandleRef(this, NativeGraphics), dx, dy, order);
@@ -1014,24 +913,11 @@ namespace System.Drawing
             }
         }
 
-        // can be called during the creation of NativeGraphics
-        /*private void TranslateTransform(float dx, float dy, MatrixOrder order, IntPtr nativeGraphics) {
-            int status = SafeNativeMethods.Gdip.GdipTranslateWorldTransform(new HandleRef(this, nativeGraphics), dx, dy, order);
-
-            if (status != SafeNativeMethods.Gdip.Ok) {
-                throw SafeNativeMethods.Gdip.StatusException(status);
-            }
-        }*/
-
-        /// <summary>
-        /// </summary>
         public void ScaleTransform(float sx, float sy)
         {
             ScaleTransform(sx, sy, MatrixOrder.Prepend);
         }
 
-        /// <summary>
-        /// </summary>
         public void ScaleTransform(float sx, float sy, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipScaleWorldTransform(new HandleRef(this, NativeGraphics), sx, sy, order);
@@ -1042,15 +928,11 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void RotateTransform(float angle)
         {
             RotateTransform(angle, MatrixOrder.Prepend);
         }
 
-        /// <summary>
-        /// </summary>
         public void RotateTransform(float angle, MatrixOrder order)
         {
             int status = SafeNativeMethods.Gdip.GdipRotateWorldTransform(new HandleRef(this, NativeGraphics), angle, order);
@@ -1061,12 +943,6 @@ namespace System.Drawing
             }
         }
 
-        /*
-         * Transform points in the current graphics context
-         */
-        // float version
-        /// <summary>
-        /// </summary
         public void TransformPoints(CoordinateSpace destSpace,
                                      CoordinateSpace srcSpace,
                                      PointF[] pts)
@@ -1101,9 +977,6 @@ namespace System.Drawing
             }
         }
 
-        // int version
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void TransformPoints(CoordinateSpace destSpace,
                                     CoordinateSpace srcSpace,
@@ -1138,8 +1011,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public Color GetNearestColor(Color color)
         {
             int nearest = color.ToArgb();
@@ -1154,19 +1025,8 @@ namespace System.Drawing
             return Color.FromArgb(nearest);
         }
 
-        /*
-         * Vector drawing methods
-         *
-         * @notes Do we need a set of methods that take
-         *  integer coordinate parameters?
-         */
-
-        // float version
         /// <summary>
-        ///    
-        ///       Draws a line connecting the two
-        ///       specified points.
-        ///    
+        /// Draws a line connecting the two specified points.
         /// </summary>
         public void DrawLine(Pen pen, float x1, float y1, float x2, float y2)
         {
@@ -1180,10 +1040,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a line connecting the two
-        ///       specified points.
-        ///    
+        /// Draws a line connecting the two specified points.
         /// </summary>
         public void DrawLine(Pen pen, PointF pt1, PointF pt2)
         {
@@ -1191,10 +1048,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a series of line segments that
-        ///       connect an array of points.
-        ///    
+        /// Draws a series of line segments that connect an array of points.
         /// </summary>
         public void DrawLines(Pen pen, PointF[] points)
         {
@@ -1214,12 +1068,8 @@ namespace System.Drawing
         }
 
 
-        // int version
         /// <summary>
-        ///    
-        ///       Draws a line connecting the two
-        ///       specified points.
-        ///    
+        /// Draws a line connecting the two specified points.
         /// </summary>
         public void DrawLine(Pen pen, int x1, int y1, int x2, int y2)
         {
@@ -1233,10 +1083,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a line connecting the two
-        ///       specified points.
-        ///    
+        /// Draws a line connecting the two specified points.
         /// </summary>
         public void DrawLine(Pen pen, Point pt1, Point pt2)
         {
@@ -1244,10 +1091,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a series of line segments that connect an array of
-        ///       points.
-        ///    
+        /// Draws a series of line segments that connect an array of points.
         /// </summary>
         public void DrawLines(Pen pen, Point[] points)
         {
@@ -1266,11 +1110,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Draws an arc from the specified ellipse.
-        ///    
+        /// Draws an arc from the specified ellipse.
         /// </summary>
         public void DrawArc(Pen pen, float x, float y, float width, float height,
                             float startAngle, float sweepAngle)
@@ -1286,21 +1127,15 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws an arc from the specified
-        ///       ellipse.
-        ///    
+        /// Draws an arc from the specified ellipse.
         /// </summary>
         public void DrawArc(Pen pen, RectangleF rect, float startAngle, float sweepAngle)
         {
             DrawArc(pen, rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Draws an arc from the specified ellipse.
-        ///    
+        /// Draws an arc from the specified ellipse.
         /// </summary>
         public void DrawArc(Pen pen, int x, int y, int width, int height,
                             int startAngle, int sweepAngle)
@@ -1316,9 +1151,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws an arc from the specified ellipse.
-        ///    
+        /// Draws an arc from the specified ellipse.
         /// </summary>
         public void DrawArc(Pen pen, Rectangle rect, float startAngle, float sweepAngle)
         {
@@ -1326,10 +1159,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a cubic bezier curve defined by
-        ///       four ordered pairs that represent points.
-        ///    
+        /// Draws a cubic bezier curve defined by four ordered pairs that represent points.
         /// </summary>
         public void DrawBezier(Pen pen, float x1, float y1, float x2, float y2,
                                float x3, float y3, float x4, float y4)
@@ -1344,12 +1174,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Draws a cubic bezier curve defined by
-        ///       four points.
-        ///    
+        /// Draws a cubic bezier curve defined by four points.
         /// </summary>
         public void DrawBezier(Pen pen, PointF pt1, PointF pt2, PointF pt3, PointF pt4)
         {
@@ -1357,10 +1183,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a series of cubic Bezier curves
-        ///       from an array of points.
-        ///    
+        /// Draws a series of cubic Bezier curves from an array of points.
         /// </summary>
         public void DrawBeziers(Pen pen, PointF[] points)
         {
@@ -1379,11 +1202,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Draws a cubic bezier curve defined by four points.
-        ///    
+        /// Draws a cubic bezier curve defined by four points.
         /// </summary>
         public void DrawBezier(Pen pen, Point pt1, Point pt2, Point pt3, Point pt4)
         {
@@ -1391,10 +1211,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a series of cubic Bezier curves from an array of
-        ///       points.
-        ///    
+        /// Draws a series of cubic Bezier curves from an array of points.
         /// </summary>
         public void DrawBeziers(Pen pen, Point[] points)
         {
@@ -1413,22 +1230,15 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws the outline of a rectangle specified by
-        ///    <paramref term="rect"/>.
-        ///    
+        /// Draws the outline of a rectangle specified by <paramref term="rect"/>.
         /// </summary>
         public void DrawRectangle(Pen pen, Rectangle rect)
         {
             DrawRectangle(pen, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Draws the outline of the specified
-        ///       rectangle.
-        ///    
+        /// Draws the outline of the specified rectangle.
         /// </summary>
         public void DrawRectangle(Pen pen, float x, float y, float width, float height)
         {
@@ -1444,11 +1254,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Draws the outline of the specified rectangle.
-        ///    
+        /// Draws the outline of the specified rectangle.
         /// </summary>
         public void DrawRectangle(Pen pen, int x, int y, int width, int height)
         {
@@ -1464,10 +1271,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws the outlines of a series of
-        ///       rectangles.
-        ///    
+        /// Draws the outlines of a series of rectangles.
         /// </summary>
         public void DrawRectangles(Pen pen, RectangleF[] rects)
         {
@@ -1491,9 +1295,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws the outlines of a series of rectangles.
-        ///    
+        /// Draws the outlines of a series of rectangles.
         /// </summary>
         public void DrawRectangles(Pen pen, Rectangle[] rects)
         {
@@ -1516,12 +1318,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Draws the outline of an
-        ///       ellipse defined by a bounding rectangle.
-        ///    
+        /// Draws the outline of an ellipse defined by a bounding rectangle.
         /// </summary>
         public void DrawEllipse(Pen pen, RectangleF rect)
         {
@@ -1529,10 +1327,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws the outline of an
-        ///       ellipse defined by a bounding rectangle.
-        ///    
+        /// Draws the outline of an ellipse defined by a bounding rectangle.
         /// </summary>
         public void DrawEllipse(Pen pen, float x, float y, float width, float height)
         {
@@ -1546,12 +1341,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Draws the outline of an ellipse specified by a bounding
-        ///       rectangle.
-        ///    
+        /// Draws the outline of an ellipse specified by a bounding rectangle.
         /// </summary>
         public void DrawEllipse(Pen pen, Rectangle rect)
         {
@@ -1559,9 +1350,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws the outline of an ellipse defined by a bounding rectangle.
-        ///    
+        /// Draws the outline of an ellipse defined by a bounding rectangle.
         /// </summary>
         public void DrawEllipse(Pen pen, int x, int y, int width, int height)
         {
@@ -1575,12 +1364,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Draws the outline of a pie section
-        ///       defined by an ellipse and two radial lines.
-        ///    
+        /// Draws the outline of a pie section defined by an ellipse and two radial lines.
         /// </summary>
         public void DrawPie(Pen pen, RectangleF rect, float startAngle, float sweepAngle)
         {
@@ -1589,10 +1374,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws the outline of a pie section
-        ///       defined by an ellipse and two radial lines.
-        ///    
+        /// Draws the outline of a pie section defined by an ellipse and two radial lines.
         /// </summary>
         public void DrawPie(Pen pen, float x, float y, float width,
                             float height, float startAngle, float sweepAngle)
@@ -1607,12 +1389,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Draws the outline of a pie section defined by an ellipse
-        ///       and two radial lines.
-        ///    
+        /// Draws the outline of a pie section defined by an ellipse and two radial lines.
         /// </summary>
         public void DrawPie(Pen pen, Rectangle rect, float startAngle, float sweepAngle)
         {
@@ -1621,10 +1399,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws the outline of a pie section defined by an ellipse and two radial
-        ///       lines.
-        ///    
+        /// Draws the outline of a pie section defined by an ellipse and two radial lines.
         /// </summary>
         public void DrawPie(Pen pen, int x, int y, int width, int height,
                             int startAngle, int sweepAngle)
@@ -1639,10 +1414,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    Draws the outline of a polygon defined
-        ///    by an array of points.
+        /// Draws the outline of a polygon defined by an array of points.
         /// </summary>
         public void DrawPolygon(Pen pen, PointF[] points)
         {
@@ -1661,10 +1434,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    Draws the outline of a polygon defined
-        ///    by an array of points.
+        /// Draws the outline of a polygon defined by an array of points.
         /// </summary>
         public void DrawPolygon(Pen pen, Point[] points)
         {
@@ -1684,10 +1455,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws the lines and curves defined by a
-        ///    <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Draws the lines and curves defined by a <see cref='GraphicsPath'/>.
         /// </summary>
         public void DrawPath(Pen pen, GraphicsPath path)
         {
@@ -1703,12 +1471,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Draws a curve defined by an array of
-        ///       points.
-        ///    
+        /// Draws a curve defined by an array of points.
         /// </summary>
         public void DrawCurve(Pen pen, PointF[] points)
         {
@@ -1728,10 +1492,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a curve defined by an array of
-        ///       points.
-        ///    
+        /// Draws a curve defined by an array of points.
         /// </summary>
         public void DrawCurve(Pen pen, PointF[] points, float tension)
         {
@@ -1750,19 +1511,13 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void DrawCurve(Pen pen, PointF[] points, int offset, int numberOfSegments)
         {
             DrawCurve(pen, points, offset, numberOfSegments, 0.5f);
         }
 
         /// <summary>
-        ///    
-        ///       Draws a curve defined by an array of
-        ///       points.
-        ///    
+        /// Draws a curve defined by an array of points.
         /// </summary>
         public void DrawCurve(Pen pen, PointF[] points, int offset, int numberOfSegments,
                               float tension)
@@ -1783,11 +1538,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Draws a curve defined by an array of points.
-        ///    
+        /// Draws a curve defined by an array of points.
         /// </summary>
         public void DrawCurve(Pen pen, Point[] points)
         {
@@ -1807,9 +1559,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a curve defined by an array of points.
-        ///    
+        /// Draws a curve defined by an array of points.
         /// </summary>
         public void DrawCurve(Pen pen, Point[] points, float tension)
         {
@@ -1829,9 +1579,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a curve defined by an array of points.
-        ///    
+        /// Draws a curve defined by an array of points.
         /// </summary>
         public void DrawCurve(Pen pen, Point[] points, int offset, int numberOfSegments,
                               float tension)
@@ -1852,12 +1600,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Draws a closed curve defined by an
-        ///       array of points.
-        ///    
+        /// Draws a closed curve defined by an array of points.
         /// </summary>
         public void DrawClosedCurve(Pen pen, PointF[] points)
         {
@@ -1877,10 +1621,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a closed curve defined by an
-        ///       array of points.
-        ///    
+        /// Draws a closed curve defined by an array of points.
         /// </summary>
         public void DrawClosedCurve(Pen pen, PointF[] points, float tension, FillMode fillmode)
         {
@@ -1899,11 +1640,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Draws a closed curve defined by an array of points.
-        ///    
+        /// Draws a closed curve defined by an array of points.
         /// </summary>
         public void DrawClosedCurve(Pen pen, Point[] points)
         {
@@ -1923,9 +1661,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Draws a closed curve defined by an array of points.
-        ///    
+        /// Draws a closed curve defined by an array of points.
         /// </summary>
         public void DrawClosedCurve(Pen pen, Point[] points, float tension, FillMode fillmode)
         {
@@ -1945,8 +1681,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Fills the entire drawing surface with the
-        ///    specified color.
+        /// Fills the entire drawing surface with the specified color.
         /// </summary>
         public void Clear(Color color)
         {
@@ -1958,11 +1693,8 @@ namespace System.Drawing
             }
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Fills the interior of a rectangle with a <see cref='System.Drawing.Brush'/>.
-        ///    
+        /// Fills the interior of a rectangle with a <see cref='Brush'/>.
         /// </summary>
         public void FillRectangle(Brush brush, RectangleF rect)
         {
@@ -1970,10 +1702,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of a rectangle with a
-        ///    <see cref='System.Drawing.Brush'/>.
-        ///    
+        /// Fills the interior of a rectangle with a <see cref='Brush'/>.
         /// </summary>
         public void FillRectangle(Brush brush, float x, float y, float width, float height)
         {
@@ -1989,11 +1718,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Fills the interior of a rectangle with a <see cref='System.Drawing.Brush'/>.
-        ///    
+        /// Fills the interior of a rectangle with a <see cref='Brush'/>.
         /// </summary>
         public void FillRectangle(Brush brush, Rectangle rect)
         {
@@ -2001,9 +1727,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of a rectangle with a <see cref='System.Drawing.Brush'/>.
-        ///    
+        /// Fills the interior of a rectangle with a <see cref='Brush'/>.
         /// </summary>
         public void FillRectangle(Brush brush, int x, int y, int width, int height)
         {
@@ -2019,10 +1743,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interiors of a series of
-        ///       rectangles with a <see cref='System.Drawing.Brush'/>.
-        ///    
+        /// Fills the interiors of a series of rectangles with a <see cref='Brush'/>.
         /// </summary>
         public void FillRectangles(Brush brush, RectangleF[] rects)
         {
@@ -2046,9 +1767,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interiors of a series of rectangles with a <see cref='System.Drawing.Brush'/>.
-        ///    
+        /// Fills the interiors of a series of rectangles with a <see cref='Brush'/>.
         /// </summary>
         public void FillRectangles(Brush brush, Rectangle[] rects)
         {
@@ -2071,12 +1790,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Fills the interior of a polygon defined
-        ///       by an array of points.
-        ///    
+        /// Fills the interior of a polygon defined by an array of points.
         /// </summary>
         public void FillPolygon(Brush brush, PointF[] points)
         {
@@ -2084,9 +1799,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of a polygon defined by an array of points.
-        ///    
+        /// Fills the interior of a polygon defined by an array of points.
         /// </summary>
         public void FillPolygon(Brush brush, PointF[] points, FillMode fillMode)
         {
@@ -2105,11 +1818,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Fills the interior of a polygon defined by an array of points.
-        ///    
+        /// Fills the interior of a polygon defined by an array of points.
         /// </summary>
         public void FillPolygon(Brush brush, Point[] points)
         {
@@ -2117,9 +1827,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of a polygon defined by an array of points.
-        ///    
+        /// Fills the interior of a polygon defined by an array of points.
         /// </summary>
         public void FillPolygon(Brush brush, Point[] points, FillMode fillMode)
         {
@@ -2138,12 +1846,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Fills the interior of an ellipse
-        ///       defined by a bounding rectangle.
-        ///    
+        /// Fills the interior of an ellipse defined by a bounding rectangle.
         /// </summary>
         public void FillEllipse(Brush brush, RectangleF rect)
         {
@@ -2151,9 +1855,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of an ellipse defined by a bounding rectangle.
-        ///    
+        /// Fills the interior of an ellipse defined by a bounding rectangle.
         /// </summary>
         public void FillEllipse(Brush brush, float x, float y, float width,
                                 float height)
@@ -2168,11 +1870,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Fills the interior of an ellipse defined by a bounding rectangle.
-        ///    
+        /// Fills the interior of an ellipse defined by a bounding rectangle.
         /// </summary>
         public void FillEllipse(Brush brush, Rectangle rect)
         {
@@ -2180,10 +1879,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of an ellipse defined by a bounding
-        ///       rectangle.
-        ///    
+        /// Fills the interior of an ellipse defined by a bounding rectangle.
         /// </summary>
         public void FillEllipse(Brush brush, int x, int y, int width, int height)
         {
@@ -2198,10 +1894,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of a pie section defined by an ellipse and two radial
-        ///       lines.
-        ///    
+        /// Fills the interior of a pie section defined by an ellipse and two radial lines.
         /// </summary>
         public void FillPie(Brush brush, Rectangle rect, float startAngle,
                             float sweepAngle)
@@ -2210,12 +1903,8 @@ namespace System.Drawing
                     sweepAngle);
         }
 
-        // float verison
         /// <summary>
-        ///    
-        ///       Fills the interior of a pie section defined by an ellipse and two radial
-        ///       lines.
-        ///    
+        /// Fills the interior of a pie section defined by an ellipse and two radial lines.
         /// </summary>
         public void FillPie(Brush brush, float x, float y, float width,
                             float height, float startAngle, float sweepAngle)
@@ -2230,12 +1919,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int verison
         /// <summary>
-        ///    
-        ///       Fills the interior of a pie section defined by an ellipse
-        ///       and two radial lines.
-        ///    
+        /// Fills the interior of a pie section defined by an ellipse and two radial lines.
         /// </summary>
         public void FillPie(Brush brush, int x, int y, int width,
                             int height, int startAngle, int sweepAngle)
@@ -2251,9 +1936,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of a path.
-        ///    
+        /// Fills the interior of a path.
         /// </summary>
         public void FillPath(Brush brush, GraphicsPath path)
         {
@@ -2269,13 +1952,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Fills the interior a closed
-        ///       curve defined by an
-        ///       array of points.
-        ///    
+        /// Fills the interior a closed curve defined by an array of points.
         /// </summary>
         public void FillClosedCurve(Brush brush, PointF[] points)
         {
@@ -2295,19 +1973,13 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the
-        ///       interior of a closed curve defined by an array of points.
-        ///    
+        /// Fills the interior of a closed curve defined by an array of points.
         /// </summary>
         public void FillClosedCurve(Brush brush, PointF[] points, FillMode fillmode)
         {
             FillClosedCurve(brush, points, fillmode, 0.5f);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void FillClosedCurve(Brush brush, PointF[] points, FillMode fillmode, float tension)
         {
             if (brush == null)
@@ -2326,11 +1998,8 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Fills the interior a closed curve defined by an array of points.
-        ///    
+        /// Fills the interior a closed curve defined by an array of points.
         /// </summary>
         public void FillClosedCurve(Brush brush, Point[] points)
         {
@@ -2349,17 +2018,11 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void FillClosedCurve(Brush brush, Point[] points, FillMode fillmode)
         {
             FillClosedCurve(brush, points, fillmode, 0.5f);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void FillClosedCurve(Brush brush, Point[] points, FillMode fillmode, float tension)
         {
             if (brush == null)
@@ -2379,9 +2042,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    
-        ///       Fills the interior of a <see cref='System.Drawing.Region'/>.
-        ///    
+        /// Fills the interior of a <see cref='Region'/>.
         /// </summary>
         public void FillRegion(Brush brush, Region region)
         {
@@ -2398,60 +2059,42 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /*
-         * Text drawing methods
-         *
-         * @notes Should there be integer versions, also?
-         */
-
-        // Without clipping rectangle
         /// <summary>
-        ///    
-        ///       Draws a string with the specified font.
-        ///    
+        /// Draws a string with the specified font.
         /// </summary>
         public void DrawString(String s, Font font, Brush brush, float x, float y)
         {
             DrawString(s, font, brush, new RectangleF(x, y, 0, 0), null);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawString(String s, Font font, Brush brush, PointF point)
         {
             DrawString(s, font, brush, new RectangleF(point.X, point.Y, 0, 0), null);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawString(String s, Font font, Brush brush, float x, float y, StringFormat format)
         {
             DrawString(s, font, brush, new RectangleF(x, y, 0, 0), format);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawString(String s, Font font, Brush brush, PointF point, StringFormat format)
         {
             DrawString(s, font, brush, new RectangleF(point.X, point.Y, 0, 0), format);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawString(String s, Font font, Brush brush, RectangleF layoutRectangle)
         {
             DrawString(s, font, brush, layoutRectangle, null);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawString(String s, Font font, Brush brush,
                                RectangleF layoutRectangle, StringFormat format)
         {
             if (brush == null)
                 throw new ArgumentNullException("brush");
 
-            if (s == null || s.Length == 0) return;
+            if (s == null || s.Length == 0)
+                return;
             if (font == null)
                 throw new ArgumentNullException("font");
 
@@ -2463,10 +2106,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // MeasureString
-
-        /// <summary>
-        /// </summary>
         public SizeF MeasureString(String text, Font font, SizeF layoutArea, StringFormat stringFormat,
                                    out int charactersFitted, out int linesFilled)
         {
@@ -2496,8 +2135,6 @@ namespace System.Drawing
             return grfboundingBox.SizeF;
         }
 
-        /// <summary>
-        /// </summary>
         public SizeF MeasureString(String text, Font font, PointF origin, StringFormat stringFormat)
         {
             if (text == null || text.Length == 0)
@@ -2527,15 +2164,11 @@ namespace System.Drawing
             return grfboundingBox.SizeF;
         }
 
-        /// <summary>
-        /// </summary>
         public SizeF MeasureString(String text, Font font, SizeF layoutArea)
         {
             return MeasureString(text, font, layoutArea, null);
         }
 
-        /// <summary>
-        /// </summary>
         public SizeF MeasureString(String text, Font font, SizeF layoutArea, StringFormat stringFormat)
         {
             if (text == null || text.Length == 0)
@@ -2565,29 +2198,21 @@ namespace System.Drawing
             return grfboundingBox.SizeF;
         }
 
-        /// <summary>
-        /// </summary>
         public SizeF MeasureString(String text, Font font)
         {
             return MeasureString(text, font, new SizeF(0, 0));
         }
 
-        /// <summary>
-        /// </summary>
         public SizeF MeasureString(String text, Font font, int width)
         {
             return MeasureString(text, font, new SizeF(width, 999999));
         }
 
-        /// <summary>
-        /// </summary>
         public SizeF MeasureString(String text, Font font, int width, StringFormat format)
         {
             return MeasureString(text, font, new SizeF(width, 999999), format);
         }
 
-        /// <summary>
-        /// </summary>
         public Region[] MeasureCharacterRanges(String text, Font font, RectangleF layoutRect,
                                           StringFormat stringFormat)
         {
@@ -2634,8 +2259,6 @@ namespace System.Drawing
             return regions;
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawIcon(Icon icon, int x, int y)
         {
             if (icon == null)
@@ -2657,10 +2280,10 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Draws this image to a graphics object.  The drawing command originates on the graphics
-        ///    object, but a graphics object generally has no idea how to render a given image.  So,
-        ///    it passes the call to the actual image.  This version crops the image to the given
-        ///    dimensions and allows the user to specify a rectangle within the image to draw.
+        /// Draws this image to a graphics object. The drawing command originates on the graphics object, but a
+        /// graphics object generally has no idea how to render a given image. So, it passes the call to the actual
+        /// image. This version crops the image to the given dimensions and allows the user to specify a rectangle
+        /// within the image to draw.
         /// </summary>
         public void DrawIcon(Icon icon, Rectangle targetRect)
         {
@@ -2683,10 +2306,10 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///    Draws this image to a graphics object.  The drawing command originates on the graphics
-        ///    object, but a graphics object generally has no idea how to render a given image.  So,
-        ///    it passes the call to the actual image.  This version stretches the image to the given
-        ///    dimensions and allows the user to specify a rectangle within the image to draw.
+        /// Draws this image to a graphics object. The drawing command originates on the graphics object, but a
+        /// graphics object generally has no idea how to render a given image. So, it passes the call to the actual
+        /// image. This version stretches the image to the givendimensions and allows the user to specify a rectangle
+        /// within the image to draw.
         /// </summary>
         public void DrawIconUnstretched(Icon icon, Rectangle targetRect)
         {
@@ -2705,14 +2328,8 @@ namespace System.Drawing
             }
         }
 
-        /**
-         * Draw images (both bitmap and vector)
-         */
         /// <summary>
-        ///    
-        ///       Draws the specified image at the
-        ///       specified location.
-        ///    
+        /// Draws the specified image at the specified location.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF point)
@@ -2720,8 +2337,6 @@ namespace System.Drawing
             DrawImage(image, point.X, point.Y);
         }
 
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, float x, float y)
         {
@@ -2738,16 +2353,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, RectangleF rect)
         {
             DrawImage(image, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, float x, float y, float width,
                               float height)
@@ -2767,17 +2378,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Point point)
         {
             DrawImage(image, point.X, point.Y);
         }
 
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, int x, int y)
         {
@@ -2794,16 +2400,12 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle rect)
         {
             DrawImage(image, rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, int x, int y, int width, int height)
         {
@@ -2824,39 +2426,26 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-
-
-        // unscaled versions
-        /// <summary>
-        /// </summary>
         public void DrawImageUnscaled(Image image, Point point)
         {
             DrawImage(image, point.X, point.Y);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawImageUnscaled(Image image, int x, int y)
         {
             DrawImage(image, x, y);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawImageUnscaled(Image image, Rectangle rect)
         {
             DrawImage(image, rect.X, rect.Y);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawImageUnscaled(Image image, int x, int y, int width, int height)
         {
             DrawImage(image, x, y);
         }
 
-        /// <summary>
-        /// </summary>
         public void DrawImageUnscaledAndClipped(Image image, Rectangle rect)
         {
             if (image == null)
@@ -2880,10 +2469,8 @@ namespace System.Drawing
          *  destPoints.Length = 4: rect => quad
          *      destPoints[3] <=> bottom-right corner
          *
-         *  @notes Perspective blt only works for bitmap images.
+         *  Perspective blt only works for bitmap images.
          */
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF[] destPoints)
         {
@@ -2911,9 +2498,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Point[] destPoints)
         {
@@ -2941,14 +2525,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        /*
-         * We need another set of methods similar to the ones above
-         * that take an additional Rectangle parameter to specify the
-         * portion of the source image to be drawn.
-         */
-        // float version
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, float x, float y, RectangleF srcRect,
                               GraphicsUnit srcUnit)
@@ -2974,9 +2550,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, int x, int y, Rectangle srcRect,
                               GraphicsUnit srcUnit)
@@ -3002,9 +2575,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, RectangleF destRect, RectangleF srcRect,
                               GraphicsUnit srcUnit)
@@ -3036,9 +2606,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
-        /// <summary>
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, Rectangle srcRect,
                               GraphicsUnit srcUnit)
@@ -3069,7 +2636,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, PointF[] destPoints, RectangleF srcRect,
                               GraphicsUnit srcUnit)
@@ -3226,7 +2792,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // float version
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, float srcX, float srcY,
                               float srcWidth, float srcHeight, GraphicsUnit srcUnit)
@@ -3282,7 +2847,6 @@ namespace System.Drawing
             CheckErrorStatus(status);
         }
 
-        // int version
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void DrawImage(Image image, Rectangle destRect, int srcX, int srcY,
                               int srcWidth, int srcHeight, GraphicsUnit srcUnit)
@@ -3728,9 +3292,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destRect, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Rectangle destRect,
@@ -3759,9 +3320,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
                                       RectangleF srcRect, GraphicsUnit srcUnit,
@@ -3770,9 +3328,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
                                       RectangleF srcRect, GraphicsUnit srcUnit,
@@ -3781,9 +3336,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, PointF[] destPoints,
@@ -3822,10 +3374,6 @@ namespace System.Drawing
             }
         }
 
-
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
                                       Rectangle srcRect, GraphicsUnit srcUnit,
@@ -3834,9 +3382,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, IntPtr.Zero);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
                                       Rectangle srcRect, GraphicsUnit srcUnit,
@@ -3845,9 +3390,6 @@ namespace System.Drawing
             EnumerateMetafile(metafile, destPoints, srcRect, srcUnit, callback, callbackData, null);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public void EnumerateMetafile(Metafile metafile, Point[] destPoints,
@@ -3886,22 +3428,11 @@ namespace System.Drawing
             }
         }
 
-
-        /*
-         * Clipping region operations
-         *
-         * @notes Simply incredible redundancy here.
-         */
-
-        /// <summary>
-        /// </summary>
         public void SetClip(Graphics g)
         {
             SetClip(g, CombineMode.Replace);
         }
 
-        /// <summary>
-        /// </summary>
         public void SetClip(Graphics g, CombineMode combineMode)
         {
             if (g == null)
@@ -3917,15 +3448,11 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void SetClip(Rectangle rect)
         {
             SetClip(rect, CombineMode.Replace);
         }
 
-        /// <summary>
-        /// </summary>
         public void SetClip(Rectangle rect, CombineMode combineMode)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRectI(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -3937,15 +3464,11 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void SetClip(RectangleF rect)
         {
             SetClip(rect, CombineMode.Replace);
         }
 
-        /// <summary>
-        /// </summary>
         public void SetClip(RectangleF rect, CombineMode combineMode)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRect(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -3957,15 +3480,11 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void SetClip(GraphicsPath path)
         {
             SetClip(path, CombineMode.Replace);
         }
 
-        /// <summary>
-        /// </summary>
         public void SetClip(GraphicsPath path, CombineMode combineMode)
         {
             if (path == null)
@@ -3980,8 +3499,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void SetClip(Region region, CombineMode combineMode)
         {
             if (region == null)
@@ -3997,8 +3514,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void IntersectClip(Rectangle rect)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRectI(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -4010,8 +3525,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void IntersectClip(RectangleF rect)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRect(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -4023,8 +3536,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void IntersectClip(Region region)
         {
             if (region == null)
@@ -4039,8 +3550,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void ExcludeClip(Rectangle rect)
         {
             int status = SafeNativeMethods.Gdip.GdipSetClipRectI(new HandleRef(this, NativeGraphics), rect.X, rect.Y,
@@ -4052,8 +3561,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void ExcludeClip(Region region)
         {
             if (region == null)
@@ -4069,8 +3576,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void ResetClip()
         {
             int status = SafeNativeMethods.Gdip.GdipResetClip(new HandleRef(this, NativeGraphics));
@@ -4081,8 +3586,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void TranslateClip(float dx, float dy)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateClip(new HandleRef(this, NativeGraphics), dx, dy);
@@ -4093,8 +3596,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public void TranslateClip(int dx, int dy)
         {
             int status = SafeNativeMethods.Gdip.GdipTranslateClip(new HandleRef(this, NativeGraphics), dx, dy);
@@ -4106,16 +3607,16 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Combines current Graphics context with all previous contexts.
-        ///     When BeginContainer() is called, a copy of the current context is pushed into the GDI+ context stack, it keeps track of the
-        ///     absolute clipping and transform but reset the public properties so it looks like a brand new context.
-        ///     When Save() is called, a copy of the current context is also pushed in the GDI+ stack but the public clipping and transform
-        ///     properties are not reset (cumulative).  Consecutive Save context are ignored with the exception of the top one which contains 
-        ///     all previous information.
-        ///     The return value is an object array where the first element contains the cumulative clip region and the second the cumulative
-        ///     translate transform matrix.
-        ///     WARNING: This method is for internal FX support only.
-        ///     </summary>
+        /// Combines current Graphics context with all previous contexts.
+        /// When BeginContainer() is called, a copy of the current context is pushed into the GDI+ context stack, it keeps track of the
+        /// absolute clipping and transform but reset the public properties so it looks like a brand new context.
+        /// When Save() is called, a copy of the current context is also pushed in the GDI+ stack but the public clipping and transform
+        /// properties are not reset (cumulative).  Consecutive Save context are ignored with the exception of the top one which contains 
+        /// all previous information.
+        /// The return value is an object array where the first element contains the cumulative clip region and the second the cumulative
+        /// translate transform matrix.
+        /// WARNING: This method is for internal FX support only.
+        /// </summary>
         [StrongNameIdentityPermissionAttribute(SecurityAction.LinkDemand, Name = "System.Windows.Forms", PublicKey = "0x00000000000000000400000000000000")]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public object GetContextInfo()
@@ -4180,12 +3681,6 @@ namespace System.Drawing
             return new object[] { cumulClip, cumulTransform };
         }
 
-
-        /**
-         *  GetClip region from graphics context
-         */
-        /// <summary>
-        /// </summary>
         public Region Clip
         {
             get
@@ -4207,8 +3702,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public RectangleF ClipBounds
         {
             get
@@ -4226,8 +3719,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public bool IsClipEmpty
         {
             get
@@ -4245,11 +3736,6 @@ namespace System.Drawing
             }
         }
 
-        /**
-         * Hit testing operations
-         */
-        /// <summary>
-        /// </summary>
         public RectangleF VisibleClipBounds
         {
             get
@@ -4276,11 +3762,6 @@ namespace System.Drawing
             }
         }
 
-        /**
-          * @notes atomic operation?  status needed?
-          */
-        /// <summary>
-        /// </summary>
         public bool IsVisibleClipEmpty
         {
             get
@@ -4298,16 +3779,11 @@ namespace System.Drawing
             }
         }
 
-
-        /// <summary>
-        /// </summary>
         public bool IsVisible(int x, int y)
         {
             return IsVisible(new Point(x, y));
         }
 
-        /// <summary>
-        /// </summary>
         public bool IsVisible(Point point)
         {
             int isVisible;
@@ -4322,15 +3798,11 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <summary>
-        /// </summary>
         public bool IsVisible(float x, float y)
         {
             return IsVisible(new PointF(x, y));
         }
 
-        /// <summary>
-        /// </summary>
         public bool IsVisible(PointF point)
         {
             int isVisible;
@@ -4345,15 +3817,11 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <summary>
-        /// </summary>
         public bool IsVisible(int x, int y, int width, int height)
         {
             return IsVisible(new Rectangle(x, y, width, height));
         }
 
-        /// <summary>
-        /// </summary>
         public bool IsVisible(Rectangle rect)
         {
             int isVisible;
@@ -4369,15 +3837,11 @@ namespace System.Drawing
             return isVisible != 0;
         }
 
-        /// <summary>
-        /// </summary>
         public bool IsVisible(float x, float y, float width, float height)
         {
             return IsVisible(new RectangleF(x, y, width, height));
         }
 
-        /// <summary>
-        /// </summary>
         public bool IsVisible(RectangleF rect)
         {
             int isVisible;
@@ -4394,7 +3858,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Saves the current context into the context stack.
+        /// Saves the current context into the context stack.
         /// </summary>
         private void PushContext(GraphicsContext context)
         {
@@ -4410,7 +3874,7 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     Pops all contexts from the specified one included.  The specified context is becoming the current context.
+        /// Pops all contexts from the specified one included. The specified context is becoming the current context.
         /// </summary>
         private void PopContext(int currentContextState)
         {
@@ -4431,11 +3895,6 @@ namespace System.Drawing
             Debug.Fail("Warning: context state not found!");
         }
 
-        /**
-         * Save/restore graphics state
-         */
-        /// <summary>
-        /// </summary>
         public GraphicsState Save()
         {
             GraphicsContext context = new GraphicsContext(this);
@@ -4456,8 +3915,6 @@ namespace System.Drawing
             return new GraphicsState(state);
         }
 
-        /// <summary>
-        /// </summary>
         public void Restore(GraphicsState gstate)
         {
             int status = SafeNativeMethods.Gdip.GdipRestoreGraphics(new HandleRef(this, NativeGraphics), gstate.nativeState);
@@ -4470,13 +3927,6 @@ namespace System.Drawing
             PopContext(gstate.nativeState);
         }
 
-        /*
-         * Begin and end container drawing
-         */
-        // float version
-
-        /// <summary>
-        /// </summary>
         public GraphicsContainer BeginContainer(RectangleF dstrect, RectangleF srcrect, GraphicsUnit unit)
         {
             GraphicsContext context = new GraphicsContext(this);
@@ -4500,8 +3950,6 @@ namespace System.Drawing
             return new GraphicsContainer(state);
         }
 
-        /// <summary>
-        /// </summary>
         public GraphicsContainer BeginContainer()
         {
             GraphicsContext context = new GraphicsContext(this);
@@ -4521,8 +3969,6 @@ namespace System.Drawing
             return new GraphicsContainer(state);
         }
 
-        /// <summary>
-        /// </summary>
         public void EndContainer(GraphicsContainer container)
         {
             if (container == null)
@@ -4540,9 +3986,6 @@ namespace System.Drawing
             PopContext(container.nativeGraphicsContainer);
         }
 
-        // int version
-        /// <summary>
-        /// </summary>
         public GraphicsContainer BeginContainer(Rectangle dstrect, Rectangle srcrect, GraphicsUnit unit)
         {
             GraphicsContext context = new GraphicsContext(this);
@@ -4566,8 +4009,6 @@ namespace System.Drawing
             return new GraphicsContainer(state);
         }
 
-        /// <summary>
-        /// </summary>
         public void AddMetafileComment(byte[] data)
         {
             if (data == null)
@@ -4583,8 +4024,6 @@ namespace System.Drawing
             }
         }
 
-        /// <summary>
-        /// </summary>
         public static IntPtr GetHalftonePalette()
         {
             if (s_halftonePalette == IntPtr.Zero)
@@ -4606,9 +4045,7 @@ namespace System.Drawing
             return s_halftonePalette;
         }
 
-        //This will get called for ProcessExit in case for WinNT..
-        //This will get called for ProcessExit AND DomainUnLoad for Win9X...
-        //
+        // This will get called for ProcessExit in case for WinNT..
         [PrePrepareMethod]
         private static void OnDomainUnload(object sender, EventArgs e)
         {
@@ -4621,17 +4058,15 @@ namespace System.Drawing
 
 
         /// <summary>
-        ///     GDI+ will return a 'generic error' with specific win32 last error codes when
-        ///     a terminal server session has been closed, minimized, etc...  We don't want 
-        ///     to throw when this happens, so we'll guard against this by looking at the
-        ///     'last win32 error code' and checking to see if it is either 1) access denied
-        ///     or 2) proc not found and then ignore it.
+        /// GDI+ will return a 'generic error' with specific win32 last error codes when a terminal server session has
+        /// been closed, minimized, etc...  We don't want  to throw when this happens, so we'll guard against this by
+        /// looking at the'last win32 error code' and checking to see if it is either 1) access denied or 2) proc not
+        /// found and then ignore it.
         /// 
-        ///     The problem is that when you lock the machine, the secure desktop is enabled and 
-        ///     rendering fails which is expected (since the app doesn't have permission to draw 
-        ///     on the secure desktop). Not sure if there's anything you can do, short of catching 
-        ///     the desktop switch message and absorbing all the exceptions that get thrown while 
-        ///     it's the secure desktop.
+        /// The problem is that when you lock the machine, the secure desktop is enabled and rendering fails which is
+        /// expected (since the app doesn't have permission to draw  on the secure desktop). Not sure if there's
+        /// anything you can do, short of catching the desktop switch message and absorbing all the exceptions that get
+        /// thrown while it's the secure desktop.
         /// </summary>
         private void CheckErrorStatus(int status)
         {
@@ -4655,11 +4090,10 @@ namespace System.Drawing
         }
 
         /// <summary>
-        ///     GDI+ will return a 'generic error' when we attempt to draw an Emf 
-        ///     image with width/height == 1.  Here, we will hack around this by 
-        ///     resetting the errorstatus.  Note that we don't do simple arg checking
-        ///     for height || width == 1 here because transforms can be applied to
-        ///     the Graphics object making it difficult to identify this scenario.
+        /// GDI+ will return a 'generic error' when we attempt to draw an Emf image with width/height == 1. Here, we
+        /// will hack around this by resetting the errorstatus.  Note that we don't do simple arg checking for
+        /// height || width == 1 here because transforms can be applied to the Graphics object making it difficult to
+        /// identify this scenario.
         /// </summary>
         private void IgnoreMetafileErrors(Image image, ref int errorStatus)
         {

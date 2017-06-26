@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.InteropServices;
+
 namespace System.Drawing.Drawing2D
 {
-    using System.Runtime.InteropServices;
-
     /// <summary>
-    ///    Represents an adjustable arrow-shaped line
-    ///    cap.
+    /// Represents an adjustable arrow-shaped line cap.
     /// </summary>
     public sealed class AdjustableArrowCap : CustomLineCap
     {
@@ -17,8 +16,7 @@ namespace System.Drawing.Drawing2D
         { }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.AdjustableArrowCap'/> class with the specified width and
-        ///    height.
+        /// Initializes a new instance of the <see cref='AdjustableArrowCap'/> class with the specified width and height.
         /// </summary>
         public AdjustableArrowCap(float width,
                                   float height) :
@@ -26,10 +24,8 @@ namespace System.Drawing.Drawing2D
         { }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.AdjustableArrowCap'/> class with the specified width,
-        ///       height, and fill property.
-        ///    
+        /// Initializes a new instance of the <see cref='AdjustableArrowCap'/> class with the specified width, height,
+        /// and fill property.
         /// </summary>
         public AdjustableArrowCap(float width,
                                   float height,
@@ -66,7 +62,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets the height of the arrow cap.
+        /// Gets or sets the height of the arrow cap.
         /// </summary>
         public float Height
         {
@@ -94,7 +90,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets the width of the arrow cap.
+        /// Gets or sets the width of the arrow cap.
         /// </summary>
         public float Width
         {
@@ -122,9 +118,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or set the number of pixels between the outline of the arrow cap and the fill.
-        ///    
+        /// Gets or set the number of pixels between the outline of the arrow cap and the fill.
         /// </summary>
         public float MiddleInset
         {
@@ -152,8 +146,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets a value indicating whether the
-        ///    arrow cap is filled.
+        /// Gets or sets a value indicating whether the arrow cap is filled.
         /// </summary>
         public bool Filled
         {

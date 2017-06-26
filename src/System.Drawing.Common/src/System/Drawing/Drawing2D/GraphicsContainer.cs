@@ -4,21 +4,11 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /**
-     * Represent the internal data of a Graphics Container object
-     */
     /// <summary>
-    ///    Represents the internal data of a graphics
-    ///    container.
+    /// Represents the internal data of a graphics container.
     /// </summary>
     public sealed class GraphicsContainer : MarshalByRefObject
     {
-        /**
-         * @notes How do we want to expose region data?
-         *
-         * @notes Need serialization methods too.  Needs to be defined.
-         */
-
         internal GraphicsContainer(int graphicsContainer)
         {
             nativeGraphicsContainer = graphicsContainer;

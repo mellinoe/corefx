@@ -4,55 +4,40 @@
 
 namespace System.Drawing.Imaging
 {
-    /**
-     * Color adjust type constants
-     */
     /// <summary>
-    ///    Specifies which GDI+ objects use color
-    ///    adjustment information.
+    /// Specifies which GDI+ objects use color adjustment information.
     /// </summary>
     public enum ColorAdjustType
     {
         /// <summary>
-        ///    Defines color adjustment information that is
-        ///    used by all GDI+ objects that do not have their own color adjustment
-        ///    information.
+        /// Defines color adjustment information that is used by all GDI+ objects that do not have their own color
+        /// adjustment information.
         /// </summary>
         Default = 0,
         /// <summary>
-        ///    Defines color adjustment information for
-        /// <see cref='System.Drawing.Bitmap'/> 
+        /// Defines color adjustment information for <see cref='Drawing.Bitmap'/> 
         /// objects.
         /// </summary>
         Bitmap,
         /// <summary>
-        ///    
-        ///       Defines color adjustment information for <see cref='System.Drawing.Brush'/> objects.
-        ///    
+        /// Defines color adjustment information for <see cref='Drawing.Brush'/> objects.
         /// </summary>
         Brush,
         /// <summary>
-        ///    
-        ///       Defines color adjustment information for <see cref='System.Drawing.Pen'/> objects.
-        ///    
+        /// Defines color adjustment information for <see cref='Drawing.Pen'/> objects.
         /// </summary>
         Pen,
         /// <summary>
-        ///    
-        ///       Defines color adjustment information for text.
-        ///    
+        /// Defines color adjustment information for text.
         /// </summary>
         Text,
         /// <summary>
-        ///    Specifies the number of types specified.
+        /// Specifies the number of types specified.
         /// </summary>
         Count,
         /// <summary>
-        ///    
-        ///       Specifies the number of types specified.
-        ///    
+        /// Specifies the number of types specified.
         /// </summary>
         Any
     }
 }
-

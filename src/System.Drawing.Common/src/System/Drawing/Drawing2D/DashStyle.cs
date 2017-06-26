@@ -4,47 +4,33 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /**
-     * Dash style constants (sdkinc\GDIplusEnums.h)
-     */
     /// <summary>
-    ///    
-    ///       Specifies the style of dashed lines drawn with a <see cref='System.Drawing.Pen'/> .
-    ///    
+    /// Specifies the style of dashed lines drawn with a <see cref='Pen'/> .
     /// </summary>
     public enum DashStyle
     {
         /// <summary>
-        ///    Specifies a solid line.
+        /// Specifies a solid line.
         /// </summary>
         Solid = 0,
         /// <summary>
-        ///    
-        ///       Specifies a line comprised of dashes.
-        ///    
+        /// Specifies a line comprised of dashes.
         /// </summary>
         Dash = 1,
         /// <summary>
-        ///    
-        ///       Specifies a line comprised of dots.
-        ///    
+        /// Specifies a line comprised of dots.
         /// </summary>
         Dot = 2,
         /// <summary>
-        ///    Specifies a line comprised of an alternating
-        ///    pattern of dash-dot-dash-dot.
+        /// Specifies a line comprised of an alternating pattern of dash-dot-dash-dot.
         /// </summary>
         DashDot = 3,
         /// <summary>
-        ///    Specifies a line comprised of an alternating
-        ///    pattern of dash-dot-dot-dash-dot-dot.
+        /// Specifies a line comprised of an alternating pattern of dash-dot-dot-dash-dot-dot.
         /// </summary>
         DashDotDot = 4,
         /// <summary>
-        ///    
-        ///       Specifies a user-defined custom dash
-        ///       style.
-        ///    
+        /// Specifies a user-defined custom dash style.
         /// </summary>
         Custom = 5
     }

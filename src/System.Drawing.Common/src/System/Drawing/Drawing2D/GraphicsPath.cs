@@ -2,44 +2,30 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing.Internal;
+using System.Globalization;
+using System.Runtime.InteropServices;
+
 namespace System.Drawing.Drawing2D
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-    using System.Drawing.Internal;
-    using System.Globalization;
-    using System.Runtime.InteropServices;
-
-    /**
-     * Represent a Path object
-     */
     /// <summary>
-    ///    Represents a series of connected lines and
-    ///    curves.
+    /// Represents a series of connected lines and curves.
     /// </summary>
     public sealed class GraphicsPath : MarshalByRefObject, ICloneable, IDisposable
     {
-        /*
-         * handle to native path object
-         */
         internal IntPtr nativePath;
 
-        /**
-         * Create a new path object with the default fill mode
-         */
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> class with a <see cref='System.Drawing.Drawing2D.FillMode'/> of <see cref='System.Drawing.Drawing2D.FillMode.Alternate'/>
-        ///       .
-        ///    
+        /// Initializes a new instance of the <see cref='GraphicsPath'/> class with a <see cref='Drawing2D.FillMode'/>
+        /// of <see cref='Drawing2D.FillMode.Alternate'/>.
         /// </summary>
         public GraphicsPath() : this(System.Drawing.Drawing2D.FillMode.Alternate) { }
 
-        /**
-         * Create a new path object with the specified fill mode
-         */
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> class with the specified <see cref='System.Drawing.Drawing2D.FillMode'/>.
+        /// Initializes a new instance of the <see cref='GraphicsPath'/> class with the specified
+        /// <see cref='Drawing2D.FillMode'/>.
         /// </summary>
         public GraphicsPath(FillMode fillMode)
         {
@@ -53,25 +39,18 @@ namespace System.Drawing.Drawing2D
             this.nativePath = nativePath;
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///    Initializes a new instance of the
-        ///    <see cref='System.Drawing.Drawing2D.GraphicsPath'/> array with the
-        ///    specified <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/>
-        ///    and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> arrays.
-        ///    
+        /// Initializes a new instance of the <see cref='GraphicsPath'/> array with the specified
+        /// <see cref='PathTypes'/> and <see cref='PathPoints'/> arrays.
         /// </summary>
         public GraphicsPath(PointF[] pts, byte[] types) :
           this(pts, types, System.Drawing.Drawing2D.FillMode.Alternate)
         { }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> array with the
-        ///       specified <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/> and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> arrays and with the
-        ///       specified <see cref='System.Drawing.Drawing2D.FillMode'/>.
-        ///    
+        /// Initializes a new instance of the <see cref='GraphicsPath'/> array with the specified
+        /// <see cref='PathTypes'/> and <see cref='PathPoints'/> arrays and with the specified
+        /// <see cref='Drawing2D.FillMode'/>.
         /// </summary>
         public GraphicsPath(PointF[] pts, byte[] types, FillMode fillMode)
         {
@@ -105,25 +84,18 @@ namespace System.Drawing.Drawing2D
             this.nativePath = nativePath;
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///    Initializes a new instance of the
-        ///    <see cref='System.Drawing.Drawing2D.GraphicsPath'/> array with the
-        ///    specified <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/>
-        ///    and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> arrays.
-        ///    
+        /// Initializes a new instance of the <see cref='GraphicsPath'/> array with thespecified<see cref='PathTypes'/>
+        /// and <see cref='PathPoints'/> arrays.
         /// </summary>
         public GraphicsPath(Point[] pts, byte[] types) :
           this(pts, types, System.Drawing.Drawing2D.FillMode.Alternate)
         { }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> array with the
-        ///       specified <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/> and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> arrays and with the
-        ///       specified <see cref='System.Drawing.Drawing2D.FillMode'/>.
-        ///    
+        /// Initializes a new instance of the <see cref='GraphicsPath'/> array with the specified
+        /// <see cref='PathTypes'/> and <see cref='PathPoints'/> arrays and with the specified
+        /// <see cref='Drawing2D.FillMode'/>.
         /// </summary>
         public GraphicsPath(Point[] pts, byte[] types, FillMode fillMode)
         {
@@ -155,11 +127,8 @@ namespace System.Drawing.Drawing2D
             this.nativePath = nativePath;
         }
 
-        /**
-         * Make a copy of the current path object
-         */
         /// <summary>
-        ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Creates an exact copy of this <see cref='GraphicsPath'/>.
         /// </summary>
         public object Clone()
         {
@@ -173,11 +142,7 @@ namespace System.Drawing.Drawing2D
             return new GraphicsPath(clonePath, 0);
         }
 
-        /**
-         * 'extra' parameter is necessary to avoid conflict with
-         * other constructor GraphicsPath(int fillmode)
-         */
-
+        // 'extra' parameter is necessary to avoid conflict with other constructor GraphicsPath(int fillmode)
         private GraphicsPath(IntPtr nativePath, int extra)
         {
             if (nativePath == IntPtr.Zero)
@@ -186,11 +151,8 @@ namespace System.Drawing.Drawing2D
             this.nativePath = nativePath;
         }
 
-        /**
-         * Dispose of resources associated with the
-         */
         /// <summary>
-        ///    Eliminates resources for this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Eliminates resources for this <see cref='GraphicsPath'/>.
         /// </summary>
         public void Dispose()
         {
@@ -228,21 +190,16 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Eliminates resources for this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Eliminates resources for this <see cref='GraphicsPath'/>.
         /// </summary>
         ~GraphicsPath()
         {
             Dispose(false);
         }
 
-        /**
-         * Reset the path object to empty
-         */
         /// <summary>
-        ///    Empties the <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/>
-        ///    and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/> arrays
-        ///    and sets the <see cref='System.Drawing.Drawing2D.GraphicsPath.FillMode'/> to
-        ///    <see cref='System.Drawing.Drawing2D.FillMode.Alternate'/>.
+        /// Empties the <see cref='PathPoints'/> and <see cref='PathTypes'/> arrays and sets the <see cref='FillMode'/>
+        /// to <see cref='Drawing2D.FillMode.Alternate'/>.
         /// </summary>
         public void Reset()
         {
@@ -252,12 +209,9 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /**
-         * Get path fill mode information
-         */
         /// <summary>
-        ///    Gets or sets a <see cref='System.Drawing.Drawing2D.FillMode'/> that determines how the interiors of
-        ///    shapes in this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> are filled.
+        /// Gets or sets a <see cref='Drawing2D.FillMode'/> that determines how the interiors of shapes in this
+        /// <see cref='GraphicsPath'/> are filled.
         /// </summary>
         public FillMode FillMode
         {
@@ -335,8 +289,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets a <see cref='System.Drawing.Drawing2D.PathData'/> object that
-        ///    encapsulates both the <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> and <see cref='System.Drawing.Drawing2D.GraphicsPath.PathTypes'/> arrays of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Gets a <see cref='Drawing2D.PathData'/> object that encapsulates both the <see cref='PathPoints'/>
+        /// and <see cref='PathTypes'/> arrays of this <see cref='GraphicsPath'/>.
         /// </summary>
         public PathData PathData
         {
@@ -347,11 +301,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Starts a new figure without closing the
-        ///       current figure. All subsequent points added to the path are added to this new
-        ///       figure.
-        ///    
+        /// Starts a new figure without closing the current figure. All subsequent points added to the path are added
+        /// to this new figure.
         /// </summary>
         public void StartFigure()
         {
@@ -362,10 +313,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Closes the current figure and starts a new
-        ///    figure. If the current figure contains a sequence of connected lines and curves,
-        ///    it closes the loop by connecting a line from the ending point to the starting
-        ///    point.
+        /// Closes the current figure and starts a new figure. If the current figure contains a sequence of connected
+        /// lines and curves, it closes the loop by connecting a line from the ending point to the startingpoint.
         /// </summary>
         public void CloseFigure()
         {
@@ -376,9 +325,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Closes all open figures in a path and
-        ///    starts a new figure. It closes each open figure by connecting a line from it's
-        ///    ending point to it's starting point.
+        /// Closes all open figures in a path and starts a new figure. It closes each open figure by connecting a line
+        /// from it's ending point to it's starting point.
         /// </summary>
         public void CloseAllFigures()
         {
@@ -389,9 +337,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Sets a marker on this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> .
-        ///    
+        /// Sets a marker on this <see cref='GraphicsPath'/>.
         /// </summary>
         public void SetMarkers()
         {
@@ -402,7 +348,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Clears all markers from this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Clears all markers from this <see cref='GraphicsPath'/>.
         /// </summary>
         public void ClearMarkers()
         {
@@ -413,7 +359,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Reverses the order of points in the <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> array of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Reverses the order of points in the <see cref='PathPoints'/> array of this <see cref='GraphicsPath'/>.
         /// </summary>
         public void Reverse()
         {
@@ -424,7 +370,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets the last point in the <see cref='System.Drawing.Drawing2D.GraphicsPath.PathPoints'/> array of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Gets the last point in the <see cref='PathPoints'/> array of this <see cref='GraphicsPath'/>.
         /// </summary>
         public PointF GetLastPoint()
         {
@@ -438,16 +384,8 @@ namespace System.Drawing.Drawing2D
             return gppt.ToPoint();
         }
 
-        /*
-         * Hit testing
-         */
-
         /// <summary>
-        ///    
-        ///       Indicates whether the specified point is contained
-        ///       within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>
-        ///       .
-        ///    
+        /// Indicates whether the specified point is contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsVisible(float x, float y)
         {
@@ -455,10 +393,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether the specified point is contained
-        ///       within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Indicates whether the specified point is contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsVisible(PointF point)
         {
@@ -466,10 +401,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> in the visible clip region of the
-        ///       specified <see cref='System.Drawing.Graphics'/>.
-        ///    
+        /// Indicates whether the specified point is contained within this <see cref='GraphicsPath'/> in the visible
+        /// clip region of the specified <see cref='Graphics'/>.
         /// </summary>
         public bool IsVisible(float x, float y, Graphics graphics)
         {
@@ -477,9 +410,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Indicates whether the specified point is contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsVisible(PointF pt, Graphics graphics)
         {
@@ -499,9 +430,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> .
-        ///    
+        /// Indicates whether the specified point is contained within this <see cref='GraphicsPath'/> .
         /// </summary>
         public bool IsVisible(int x, int y)
         {
@@ -509,9 +438,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Indicates whether the specified point is contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsVisible(Point point)
         {
@@ -519,10 +446,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> in the visible clip region of the
-        ///       specified <see cref='System.Drawing.Graphics'/>.
-        ///    
+        /// Indicates whether the specified point is contained within this <see cref='GraphicsPath'/> in the visible
+        /// clip region of the specified <see cref='Graphics'/>.
         /// </summary>
         public bool IsVisible(int x, int y, Graphics graphics)
         {
@@ -530,9 +455,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether the specified point is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Indicates whether the specified point is contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsVisible(Point pt, Graphics graphics)
         {
@@ -552,9 +475,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Indicates whether an outline drawn by the
-        ///    specified <see cref='System.Drawing.Pen'/> at the specified location is contained
-        ///    within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Indicates whether an outline drawn by the specified <see cref='Pen'/> at the specified location is
+        /// contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsOutlineVisible(float x, float y, Pen pen)
         {
@@ -562,10 +484,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
-        ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Indicates whether an outline drawn by the specified <see cref='Pen'/> at the specified location is
+        /// contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsOutlineVisible(PointF point, Pen pen)
         {
@@ -573,11 +493,9 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
-        ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> and within the visible clip region of
-        ///       the specified <see cref='System.Drawing.Graphics'/>.
-        ///    
+        /// Indicates whether an outline drawn by the specified <see cref='Pen'/> at the specified location is
+        /// contained within this <see cref='GraphicsPath'/> and within the visible clip region of the specified
+        /// <see cref='Graphics'/>.
         /// </summary>
         public bool IsOutlineVisible(float x, float y, Pen pen, Graphics graphics)
         {
@@ -585,12 +503,9 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether an outline drawn by the specified
-        ///    <see cref='System.Drawing.Pen'/> at the specified 
-        ///       location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> and within the visible clip region of
-        ///       the specified <see cref='System.Drawing.Graphics'/>.
-        ///    
+        /// Indicates whether an outline drawn by the specified <see cref='Pen'/> at the specified location is
+        /// contained within this <see cref='GraphicsPath'/> and within the visible clip region of the specified
+        /// <see cref='Graphics'/>.
         /// </summary>
         public bool IsOutlineVisible(PointF pt, Pen pen, Graphics graphics)
         {
@@ -614,10 +529,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
-        ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Indicates whether an outline drawn by the specified <see cref='Pen'/> at the specified location is
+        /// contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsOutlineVisible(int x, int y, Pen pen)
         {
@@ -625,10 +538,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
-        ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Indicates whether an outline drawn by the specified <see cref='Pen'/> at the specified location is
+        /// contained within this <see cref='GraphicsPath'/>.
         /// </summary>
         public bool IsOutlineVisible(Point point, Pen pen)
         {
@@ -636,11 +547,9 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether an outline drawn by the specified <see cref='System.Drawing.Pen'/> at the
-        ///       specified location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> and within the visible clip region of
-        ///       the specified <see cref='System.Drawing.Graphics'/>.
-        ///    
+        /// Indicates whether an outline drawn by the specified <see cref='Pen'/> at the specified location is
+        /// contained within this <see cref='GraphicsPath'/> and within the visible clip region of the specified
+        /// <see cref='Graphics'/>.
         /// </summary>
         public bool IsOutlineVisible(int x, int y, Pen pen, Graphics graphics)
         {
@@ -648,12 +557,9 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Indicates whether an outline drawn by the specified
-        ///    <see cref='System.Drawing.Pen'/> at the specified 
-        ///       location is contained within this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> and within the visible clip region of
-        ///       the specified <see cref='System.Drawing.Graphics'/>.
-        ///    
+        /// Indicates whether an outline drawn by the specified <see cref='Pen'/> at the specified location is
+        /// contained within this <see cref='GraphicsPath'/> and within the visible clip region of the specified
+        /// <see cref='Graphics'/>.
         /// </summary>
         public bool IsOutlineVisible(Point pt, Pen pen, Graphics graphics)
         {
@@ -676,12 +582,8 @@ namespace System.Drawing.Drawing2D
             return isVisible != 0;
         }
 
-        /*
-         * Add lines to the path object
-         */
-        // float version
         /// <summary>
-        ///    Appends a line segment to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Appends a line segment to this <see cref='GraphicsPath'/>.
         /// </summary>
         public void AddLine(PointF pt1, PointF pt2)
         {
@@ -689,7 +591,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Appends a line segment to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Appends a line segment to this <see cref='GraphicsPath'/>.
         /// </summary>
         public void AddLine(float x1, float y1, float x2, float y2)
         {
@@ -700,8 +602,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Appends a series of connected line
-        ///    segments to the end of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Appends a series of connected line segments to the end of this <see cref='GraphicsPath'/>.
         /// </summary>
         public void AddLines(PointF[] points)
         {
@@ -720,11 +621,8 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Appends a line segment to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Appends a line segment to this <see cref='GraphicsPath'/>.
         /// </summary>
         public void AddLine(Point pt1, Point pt2)
         {
@@ -732,9 +630,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Appends a line segment to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Appends a line segment to this <see cref='GraphicsPath'/>.
         /// </summary>
         public void AddLine(int x1, int y1, int x2, int y2)
         {
@@ -745,9 +641,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Appends a series of connected line segments to the end of this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Appends a series of connected line segments to the end of this <see cref='GraphicsPath'/>.
         /// </summary>
         public void AddLines(Point[] points)
         {
@@ -766,15 +660,8 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /*
-         * Add an arc to the path object
-         */
-        // float version
         /// <summary>
-        ///    
-        ///       Appends an elliptical arc to the current
-        ///       figure.
-        ///    
+        /// Appends an elliptical arc to the current figure.
         /// </summary>
         public void AddArc(RectangleF rect, float startAngle, float sweepAngle)
         {
@@ -782,9 +669,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Appends an elliptical arc to the current figure.
-        ///    
+        /// Appends an elliptical arc to the current figure.
         /// </summary>
         public void AddArc(float x, float y, float width, float height,
                            float startAngle, float sweepAngle)
@@ -796,11 +681,8 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Appends an elliptical arc to the current figure.
-        ///    
+        /// Appends an elliptical arc to the current figure.
         /// </summary>
         public void AddArc(Rectangle rect, float startAngle, float sweepAngle)
         {
@@ -808,9 +690,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Appends an elliptical arc to the current figure.
-        ///    
+        /// Appends an elliptical arc to the current figure.
         /// </summary>
         public void AddArc(int x, int y, int width, int height,
                            float startAngle, float sweepAngle)
@@ -822,15 +702,8 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /*
-        * Add Bezier curves to the path object
-        */
-        // float version
         /// <summary>
-        ///    
-        ///       Adds a cubic Bzier curve to the current
-        ///       figure.
-        ///    
+        /// Adds a cubic Bezier curve to the current figure.
         /// </summary>
         public void AddBezier(PointF pt1, PointF pt2, PointF pt3, PointF pt4)
         {
@@ -838,10 +711,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a cubic Bzier curve to the current
-        ///       figure.
-        ///    
+        /// Adds a cubic Bezier curve to the current figure.
         /// </summary>
         public void AddBezier(float x1, float y1, float x2, float y2,
                               float x3, float y3, float x4, float y4)
@@ -854,10 +724,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a sequence of connected cubic Bzier
-        ///       curves to the current figure.
-        ///    
+        /// Adds a sequence of connected cubic Bzier curves to the current figure.
         /// </summary>
         public void AddBeziers(PointF[] points)
         {
@@ -876,11 +743,8 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Adds a cubic Bzier curve to the current figure.
-        ///    
+        /// Adds a cubic Bzier curve to the current figure.
         /// </summary>
         public void AddBezier(Point pt1, Point pt2, Point pt3, Point pt4)
         {
@@ -888,10 +752,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a cubic Bzier curve to the current
-        ///       figure.
-        ///    
+        /// Adds a cubic Bzier curve to the current figure.
         /// </summary>
         public void AddBezier(int x1, int y1, int x2, int y2,
                               int x3, int y3, int x4, int y4)
@@ -904,10 +765,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a sequence of connected cubic Bzier curves to the
-        ///       current figure.
-        ///    
+        /// Adds a sequence of connected cubic Bzier curves to the current figure.
         /// </summary>
         public void AddBeziers(params Point[] points)
         {
@@ -926,16 +784,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /*
-         * Add cardinal splines to the path object
-         */
-        // float version
         /// <summary>
-        ///    
-        ///       Adds a spline curve to the current figure.
-        ///       A Cardinal spline curve is used because the curve travels through each of the
-        ///       points in the array.
-        ///    
+        /// Adds a spline curve to the current figure. A Cardinal spline curve is used because the curve travels
+        /// through each of the points in the array.
         /// </summary>
         public void AddCurve(PointF[] points)
         {
@@ -955,7 +806,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Adds a spline curve to the current figure.
+        /// Adds a spline curve to the current figure.
         /// </summary>
         public void AddCurve(PointF[] points, float tension)
         {
@@ -976,9 +827,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a spline curve to the current figure.
-        ///    
+        /// Adds a spline curve to the current figure.
         /// </summary>
         public void AddCurve(PointF[] points, int offset, int numberOfSegments,
                              float tension)
@@ -1000,12 +849,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Adds a spline curve to the current figure. A Cardinal spline curve is used
-        ///       because the curve travels through each of the points in the array.
-        ///    
+        /// Adds a spline curve to the current figure. A Cardinal spline curve is used because the curve travels
+        /// through each of the points in the array.
         /// </summary>
         public void AddCurve(Point[] points)
         {
@@ -1025,9 +871,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a spline curve to the current figure.
-        ///    
+        /// Adds a spline curve to the current figure.
         /// </summary>
         public void AddCurve(Point[] points, float tension)
         {
@@ -1048,9 +892,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a spline curve to the current figure.
-        ///    
+        /// Adds a spline curve to the current figure.
         /// </summary>
         public void AddCurve(Point[] points, int offset, int numberOfSegments,
                              float tension)
@@ -1072,12 +914,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Adds a closed curve to the current figure. A Cardinal spline curve is
-        ///       used because the curve travels through each of the points in the array.
-        ///    
+        /// Adds a closed curve to the current figure. A Cardinal spline curve is used because the curve travels
+        /// through each of the points in the array.
         /// </summary>
         public void AddClosedCurve(PointF[] points)
         {
@@ -1097,10 +936,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a closed curve to the current figure. A Cardinal spline curve is
-        ///       used because the curve travels through each of the points in the array.
-        ///    
+        /// Adds a closed curve to the current figure. A Cardinal spline curve is used because the curve travels
+        /// through each of the points in the array.
         /// </summary>
         public void AddClosedCurve(PointF[] points, float tension)
         {
@@ -1119,12 +956,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Adds a closed curve to the current figure. A Cardinal spline curve is used
-        ///       because the curve travels through each of the points in the array.
-        ///    
+        /// Adds a closed curve to the current figure. A Cardinal spline curve is used because the curve travels
+        /// through each of the points in the array.
         /// </summary>
         public void AddClosedCurve(Point[] points)
         {
@@ -1144,10 +978,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a closed curve to the current figure. A Cardinal spline curve is used
-        ///       because the curve travels through each of the points in the array.
-        ///    
+        /// Adds a closed curve to the current figure. A Cardinal spline curve is used because the curve travels
+        /// through each of the points in the array.
         /// </summary>
         public void AddClosedCurve(Point[] points, float tension)
         {
@@ -1167,7 +999,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Adds a rectangle to the current figure.
+        /// Adds a rectangle to the current figure.
         /// </summary>
         public void AddRectangle(RectangleF rect)
         {
@@ -1179,10 +1011,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a series of rectangles to the current
-        ///       figure.
-        ///    
+        /// Adds a series of rectangles to the current figure.
         /// </summary>
         public void AddRectangles(RectangleF[] rects)
         {
@@ -1201,11 +1030,8 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Adds a rectangle to the current figure.
-        ///    
+        /// Adds a rectangle to the current figure.
         /// </summary>
         public void AddRectangle(Rectangle rect)
         {
@@ -1217,9 +1043,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a series of rectangles to the current figure.
-        ///    
+        /// Adds a series of rectangles to the current figure.
         /// </summary>
         public void AddRectangles(Rectangle[] rects)
         {
@@ -1238,23 +1062,16 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // float version
         /// <summary>
-        ///    Adds an ellipse to the current figure.
+        /// Adds an ellipse to the current figure.
         /// </summary>
         public void AddEllipse(RectangleF rect)
         {
             AddEllipse(rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /**
-         * Add an ellipse to the current path
-         *
-         * !!! Need to handle the status code returned
-         *  by the native GDI+ APIs.
-         */
         /// <summary>
-        ///    Adds an ellipse to the current figure.
+        /// Adds an ellipse to the current figure.
         /// </summary>
         public void AddEllipse(float x, float y, float width, float height)
         {
@@ -1264,27 +1081,16 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Adds an ellipse to the current figure.
-        ///    
+        /// Adds an ellipse to the current figure.
         /// </summary>
         public void AddEllipse(Rectangle rect)
         {
             AddEllipse(rect.X, rect.Y, rect.Width, rect.Height);
         }
 
-        /**
-         * Add an ellipse to the current path
-         *
-         * !!! Need to handle the status code returned
-         *  by the native GDI+ APIs.
-         */
         /// <summary>
-        ///    
-        ///       Adds an ellipse to the current figure.
-        ///    
+        /// Adds an ellipse to the current figure.
         /// </summary>
         public void AddEllipse(int x, int y, int width, int height)
         {
@@ -1295,22 +1101,15 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds the outline of a pie shape to the
-        ///       current figure.
-        ///    
+        /// Adds the outline of a pie shape to the current figure.
         /// </summary>
         public void AddPie(Rectangle rect, float startAngle, float sweepAngle)
         {
             AddPie(rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
         }
 
-        // float version
         /// <summary>
-        ///    
-        ///       Adds the outline of a pie shape to the current
-        ///       figure.
-        ///    
+        /// Adds the outline of a pie shape to the current figure.
         /// </summary>
         public void AddPie(float x, float y, float width, float height,
                            float startAngle, float sweepAngle)
@@ -1322,12 +1121,8 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // int version
         /// <summary>
-        ///    
-        ///       Adds the outline of a pie shape to the current
-        ///       figure.
-        ///    
+        /// Adds the outline of a pie shape to the current figure.
         /// </summary>
         public void AddPie(int x, int y, int width, int height,
                            float startAngle, float sweepAngle)
@@ -1339,9 +1134,8 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        // float version
         /// <summary>
-        ///    Adds a polygon to the current figure.
+        /// Adds a polygon to the current figure.
         /// </summary>
         public void AddPolygon(PointF[] points)
         {
@@ -1360,9 +1154,8 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        // int version
         /// <summary>
-        ///    Adds a polygon to the current figure.
+        /// Adds a polygon to the current figure.
         /// </summary>
         public void AddPolygon(Point[] points)
         {
@@ -1382,7 +1175,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Appends the specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/> to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Appends the specified <see cref='GraphicsPath'/> to this <see cref='GraphicsPath'/>.
         /// </summary>
         public void AddPath(GraphicsPath addingPath,
                             bool connect)
@@ -1396,17 +1189,8 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /*
-         * Add text string to the path object
-         *
-         * @notes The final form of this API is yet to be defined.
-         * @notes What are the choices for the format parameter?
-         */
-
         /// <summary>
-        ///    
-        ///       Adds a text string to the current figure.
-        ///    
+        /// Adds a text string to the current figure.
         /// </summary>
         public void AddString(String s, FontFamily family, int style, float emSize,
                               PointF origin, StringFormat format)
@@ -1427,9 +1211,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a text string to the current figure.
-        ///    
+        /// Adds a text string to the current figure.
         /// </summary>
         public void AddString(String s, FontFamily family, int style, float emSize,
                               Point origin, StringFormat format)
@@ -1450,9 +1232,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a text string to the current figure.
-        ///    
+        /// Adds a text string to the current figure.
         /// </summary>
         public void AddString(String s, FontFamily family, int style, float emSize,
                               RectangleF layoutRect, StringFormat format)
@@ -1472,9 +1252,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Adds a text string to the current figure.
-        ///    
+        /// Adds a text string to the current figure.
         /// </summary>
         public void AddString(String s, FontFamily family, int style, float emSize,
                               Rectangle layoutRect, StringFormat format)
@@ -1494,7 +1272,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Applies a transform matrix to this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Applies a transform matrix to this <see cref='GraphicsPath'/>.
         /// </summary>
         public void Transform(Matrix matrix)
         {
@@ -1513,9 +1291,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Returns a rectangle that bounds this <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
-        ///    
+        /// Returns a rectangle that bounds this <see cref='GraphicsPath'/>.
         /// </summary>
         public RectangleF GetBounds()
         {
@@ -1523,10 +1299,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Returns a rectangle that bounds this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> when it
-        ///       is transformed by the specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    
+        /// Returns a rectangle that bounds this <see cref='GraphicsPath'/> when it is transformed by the specified
+        /// <see cref='Matrix'/>.
         /// </summary>
         public RectangleF GetBounds(Matrix matrix)
         {
@@ -1534,10 +1308,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Returns a rectangle that bounds this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> when it is
-        ///       transformed by the specified <see cref='System.Drawing.Drawing2D.Matrix'/>. and drawn with the specified <see cref='System.Drawing.Pen'/>.
-        ///    
+        /// Returns a rectangle that bounds this <see cref='GraphicsPath'/> when it is transformed by the specified
+        /// <see cref='Matrix'/>. and drawn with the specified <see cref='Pen'/>.
         /// </summary>
         public RectangleF GetBounds(Matrix matrix, Pen pen)
         {
@@ -1562,13 +1334,8 @@ namespace System.Drawing.Drawing2D
             return gprectf.ToRectangleF();
         }
 
-        /*
-         * Flatten the path object
-         */
-
         /// <summary>
-        ///    Converts each curve in this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> into a sequence of connected line
-        ///    segments.
+        /// Converts each curve in this <see cref='GraphicsPath'/> into a sequence of connected line segments.
         /// </summary>
         public void Flatten()
         {
@@ -1576,8 +1343,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Converts each curve in this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> into a sequence of connected line
-        ///    segments.
+        /// Converts each curve in this <see cref='GraphicsPath'/> into a sequence of connected line segments.
         /// </summary>
         public void Flatten(Matrix matrix)
         {
@@ -1585,8 +1351,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Converts each curve in this <see cref='System.Drawing.Drawing2D.GraphicsPath'/> into a sequence of connected line
-        ///    segments.
+        /// Converts each curve in this <see cref='GraphicsPath'/> into a sequence of connected line segments.
         /// </summary>
         public void Flatten(Matrix matrix, float flatness)
         {
@@ -1598,33 +1363,18 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-
-        /**
-         * Widen the path object
-         *
-         * @notes We don't have an API yet.
-         *  Should we just take in a GeometricPen as parameter?
-         */
-        /// <summary>
-        /// </summary>
         public void Widen(Pen pen)
         {
             float flatness = (float)2.0 / (float)3.0;
             Widen(pen, (Matrix)null, flatness);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void Widen(Pen pen, Matrix matrix)
         {
             float flatness = (float)2.0 / (float)3.0;
             Widen(pen, matrix, flatness);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void Widen(Pen pen,
                           Matrix matrix,
                           float flatness)
@@ -1658,28 +1408,16 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void Warp(PointF[] destPoints, RectangleF srcRect)
         { Warp(destPoints, srcRect, null); }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void Warp(PointF[] destPoints, RectangleF srcRect, Matrix matrix)
         { Warp(destPoints, srcRect, matrix, WarpMode.Perspective); }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void Warp(PointF[] destPoints, RectangleF srcRect, Matrix matrix,
                          WarpMode warpMode)
         { Warp(destPoints, srcRect, matrix, warpMode, 0.25f); }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void Warp(PointF[] destPoints, RectangleF srcRect, Matrix matrix,
                          WarpMode warpMode, float flatness)
         {
@@ -1708,12 +1446,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /**
-         * Return the number of points in the current path
-         */
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int PointCount
         {
             get
@@ -1729,12 +1461,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /**
-         * Return the path point type information
-         */
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public byte[] PathTypes
         {
             get
@@ -1752,15 +1478,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /*
-         * Return the path point coordinate information
-         * @notes Should there be PathData that contains types[] and points[]
-         *        for get & set purposes.
-         */
-        // float points
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public PointF[] PathPoints
         {
             get

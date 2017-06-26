@@ -2,28 +2,21 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Drawing.Internal;
+using System.Globalization;
+
 namespace System.Drawing.Drawing2D
 {
-    using System.Diagnostics;
-    using System.Runtime.InteropServices;
-    using System.Drawing.Internal;
-    using System.Globalization;
-
-    /**
-     * Represent a Path Iterator object
-     */
     /// <summary>
-    ///    
-    ///       Provides helper functions for the <see cref='System.Drawing.Drawing2D.GraphicsPath'/> class.
-    ///    
+    /// Provides helper functions for the <see cref='GraphicsPath'/> class.
     /// </summary>
     public sealed class GraphicsPathIterator : MarshalByRefObject, IDisposable
     {
-        /**
-         * Create a new path iterator object
-         */
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.GraphicsPathIterator'/> class with the specified <see cref='System.Drawing.Drawing2D.GraphicsPath'/>.
+        /// Initializes a new instance of the <see cref='GraphicsPathIterator'/> class with the specified
+        /// <see cref='GraphicsPath'/>.
         /// </summary>
         public GraphicsPathIterator(GraphicsPath path)
         {
@@ -37,12 +30,8 @@ namespace System.Drawing.Drawing2D
             this.nativeIter = nativeIter;
         }
 
-        /**
-         * Dispose of resources associated with the
-         */
         /// <summary>
-        ///    Cleans up Windows resources for this
-        /// <see cref='System.Drawing.Drawing2D.GraphicsPathIterator'/>.
+        /// Cleans up Windows resources for this <see cref='GraphicsPathIterator'/>.
         /// </summary>
         public void Dispose()
         {
@@ -81,21 +70,16 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Cleans up Windows resources for this
-        /// <see cref='System.Drawing.Drawing2D.GraphicsPathIterator'/>.
+        /// Cleans up Windows resources for this <see cref='GraphicsPathIterator'/>.
         /// </summary>
         ~GraphicsPathIterator()
         {
             Dispose(false);
         }
 
-        /**
-         * Next subpath in path
-         */
         /// <summary>
-        ///    Returns the number of subpaths in the
-        /// <see cref='System.Drawing.Drawing2D.GraphicsPath'/>. The start index and end index of the 
-        ///    next subpath are contained in out parameters.
+        /// Returns the number of subpaths in the <see cref='GraphicsPath'/>. The start index and end index of the next
+        /// subpath are contained in out parameters.
         /// </summary>
         public int NextSubpath(out int startIndex, out int endIndex, out bool isClosed)
         {
@@ -116,12 +100,6 @@ namespace System.Drawing.Drawing2D
             return resultCount;
         }
 
-        /**
-         * Next subpath in path
-         */
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int NextSubpath(GraphicsPath path, out bool isClosed)
         {
             int resultCount = 0;
@@ -134,12 +112,6 @@ namespace System.Drawing.Drawing2D
             return resultCount;
         }
 
-        /**
-         * Next type in subpath
-         */
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int NextPathType(out byte pathType, out int startIndex, out int endIndex)
         {
             int resultCount = 0;
@@ -152,12 +124,6 @@ namespace System.Drawing.Drawing2D
             return resultCount;
         }
 
-        /**
-         * Next marker in subpath
-         */
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int NextMarker(out int startIndex, out int endIndex)
         {
             int resultCount = 0;
@@ -170,12 +136,6 @@ namespace System.Drawing.Drawing2D
             return resultCount;
         }
 
-        /**
-         * Next marker in subpath
-         */
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int NextMarker(GraphicsPath path)
         {
             int resultCount = 0;
@@ -188,9 +148,6 @@ namespace System.Drawing.Drawing2D
             return resultCount;
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int Count
         {
             get
@@ -205,9 +162,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int SubpathCount
         {
             get
@@ -222,9 +176,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public bool HasCurve()
         {
             bool hasCurve = false;
@@ -237,9 +188,6 @@ namespace System.Drawing.Drawing2D
             return hasCurve;
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public void Rewind()
         {
             int status = SafeNativeMethods.Gdip.GdipPathIterRewind(new HandleRef(this, nativeIter));
@@ -248,9 +196,6 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /// <summary>
-        ///    [To be supplied.]
-        /// </summary>
         public int Enumerate(ref PointF[] points, ref byte[] types)
         {
             if (points.Length != types.Length)
@@ -289,12 +234,10 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///     points - pointF array to copy the retrieved point data
-        ///     types - type array to copy the retrieved type data
-        ///     startIndex - start index of the origianl data
-        ///     endIndex - end index of the origianl data
-        ///    
+        /// points - pointF array to copy the retrieved point data
+        /// types - type array to copy the retrieved type data
+        /// startIndex - start index of the origianl data
+        /// endIndex - end index of the origianl data
         /// </summary>
         public int CopyData(ref PointF[] points, ref byte[] types, int startIndex, int endIndex)
         {
@@ -333,9 +276,6 @@ namespace System.Drawing.Drawing2D
             return resultCount;
         }
 
-        /*
-         * handle to native path iterator object
-         */
         internal IntPtr nativeIter;
     }
 }

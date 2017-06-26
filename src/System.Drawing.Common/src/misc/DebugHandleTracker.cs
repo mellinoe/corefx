@@ -2,27 +2,23 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.ComponentModel;
+using System.Diagnostics;
+
+using Hashtable = System.Collections.Hashtable;
+
 namespace System.Internal
 {
-    using System.ComponentModel;
-    using System.Diagnostics;
-
-    using Hashtable = System.Collections.Hashtable;
-
     /// <summary>
-    ///     The job of this class is to collect and track handle usage in
-    ///     windows forms.  Ideally, a developer should never have to call dispose() on
-    ///     any windows forms object.  The problem in making this happen is in objects that
-    ///     are very small to the VM garbage collector, but take up huge amounts
-    ///     of resources to the system.  A good example of this is a Win32 region
-    ///     handle.  To the VM, a Region object is a small six ubyte object, so there
-    ///     isn't much need to garbage collect it anytime soon.  To Win32, however,
-    ///     a region handle consumes expensive USER and GDI resources.  Ideally we
-    ///     would like to be able to mark an object as "expensive" so it uses a different
-    ///     garbage collection algorithm.  In absence of that, we use the HandleCollector class, which
-    ///     runs a daemon thread to garbage collect when handle usage goes up.
+    /// The job of this class is to collect and track handle usage in windows forms. Ideally, a developer should never
+    /// have to call dispose() on any windows forms object. The problem in making this happen is in objects that are
+    /// very small to the VM garbage collector, but take up huge amounts of resources to the system. A good example of
+    /// this is a Win32 region handle. To the VM, a Region object is a small six ubyte object, so there isn't much need
+    /// to garbage collect it anytime soon. To Win32, however, a region handle consumes expensive USER and GDI
+    /// resources. Ideally we would like to be able to mark an object as "expensive" so it uses a different garbage
+    /// collection algorithm. In absence of that, we use the HandleCollector class, which runs a daemon thread to
+    /// garbage collect when handle usage goes up.
     /// </summary>
-    /// <internalonly/>
     internal class DebugHandleTracker
     {
         private static Hashtable s_handleTypes = new Hashtable();
@@ -46,10 +42,8 @@ namespace System.Internal
         private static object s_internalSyncObject = new object();
 
         /// <summary>
-        ///     All handles available at this time will be not be considered as leaks
-        ///     when CheckLeaks is called to report leaks.
+        /// All handles available at this time will be not be considered as leaks when CheckLeaks is called to report leaks.
         /// </summary>
-        /** @conditional(DEBUG) */
         public static void IgnoreCurrentHandlesAsLeaks()
         {
             lock (s_internalSyncObject)
@@ -71,11 +65,9 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Called at shutdown to check for handles that are currently allocated.
-        ///     Normally, there should be none.  This will print a list of all
-        ///     handle leaks.
+        /// Called at shutdown to check for handles that are currently allocated. Normally, there should be none. 
+        /// This will print a list of all handle leaks.
         /// </summary>
-        /** @conditional(DEBUG) */
         public static void CheckLeaks()
         {
             lock (s_internalSyncObject)
@@ -101,9 +93,8 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Ensures leak detection has been initialized.
+        /// Ensures leak detection has been initialized.
         /// </summary>
-        /** @conditional(DEBUG) */
         public static void Initialize()
         {
             // Calling this method forces the class to be loaded, thus running the
@@ -111,9 +102,8 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Called by the Win32 handle collector when a new handle is created.
+        /// Called by the Win32 handle collector when a new handle is created.
         /// </summary>
-        /** @conditional(DEBUG) */
         private void OnHandleAdd(string handleName, IntPtr handle, int handleCount)
         {
             HandleType type = (HandleType)s_handleTypes[handleName];
@@ -126,9 +116,8 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Called by the Win32 handle collector when a new handle is created.
+        /// Called by the Win32 handle collector when a new handle is created.
         /// </summary>
-        /** @conditional(DEBUG) */
         private void OnHandleRemove(string handleName, IntPtr handle, int HandleCount)
         {
             HandleType type = (HandleType)s_handleTypes[handleName];
@@ -156,7 +145,7 @@ namespace System.Internal
         }
 
         /// <summary>
-        ///     Represents a specific type of handle.
+        /// Represents a specific type of handle.
         /// </summary>
         private class HandleType
         {
@@ -168,7 +157,7 @@ namespace System.Internal
             private const int BUCKETS = 10;
 
             /// <summary>
-            ///     Creates a new handle type.
+            /// Creates a new handle type.
             /// </summary>
             public HandleType(string name)
             {
@@ -177,7 +166,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Adds a handle to this handle type for monitoring.
+            /// Adds a handle to this handle type for monitoring.
             /// </summary>
             public void Add(IntPtr handle)
             {
@@ -207,7 +196,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Checks and reports leaks for handle monitoring.
+            /// Checks and reports leaks for handle monitoring.
             /// </summary>
             public void CheckLeaks()
             {
@@ -238,7 +227,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Marks all the handles currently stored, as ignorable, so that they will not be reported as leaks later.
+            /// Marks all the handles currently stored, as ignorable, so that they will not be reported as leaks later.
             /// </summary>
             public void IgnoreCurrentHandlesAsLeaks()
             {
@@ -260,7 +249,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Computes the hash bucket for this handle.
+            /// Computes the hash bucket for this handle.
             /// </summary>
             private int ComputeHash(IntPtr handle)
             {
@@ -268,7 +257,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Removes the given handle from our monitor list.
+            /// Removes the given handle from our monitor list.
             /// </summary>
             public bool Remove(IntPtr handle)
             {
@@ -308,7 +297,7 @@ namespace System.Internal
             }
 
             /// <summary>
-            ///     Denotes a single entry in our handle list.
+            /// Denotes a single entry in our handle list.
             /// </summary>
             private class HandleEntry
             {
@@ -318,7 +307,7 @@ namespace System.Internal
                 public bool ignorableAsLeak;
 
                 /// <summary>
-                ///     Creates a new handle entry
+                /// Creates a new handle entry
                 /// </summary>
                 public HandleEntry(HandleEntry next, IntPtr handle)
                 {
@@ -336,53 +325,29 @@ namespace System.Internal
                 }
 
                 /// <summary>
-                ///     Converts this handle to a printable string.  the string consists
-                ///     of the handle value along with the callstack for it's
-                ///     allocation.
+                /// Converts this handle to a printable string.  the string consists of the handle value along with
+                /// the callstack for it's allocation.
                 /// </summary>
                 public string ToString(HandleType type)
                 {
                     StackParser sp = new StackParser(callStack);
 
                     // Discard all of the stack up to and including the "Handle.create" call
-                    //
                     sp.DiscardTo("HandleCollector.Add");
 
                     // Skip the next call as it is always a debug wrapper
-                    //
                     sp.DiscardNext();
 
                     // Now recreate the leak list with a lot of stack entries
-                    //
                     sp.Truncate(40);
 
                     string description = "";
-                    /*if (type.name.Equals("GDI") || type.name.Equals("HDC")) {
-                        int objectType = UnsafeNativeMethods.GetObjectType(new HandleRef(null, handle));
-                        switch (objectType) {
-                            case NativeMethods.OBJ_DC: description = "normal DC"; break;
-                            case NativeMethods.OBJ_MEMDC: description = "memory DC"; break;
-                            case NativeMethods.OBJ_METADC: description = "metafile DC"; break;
-                            case NativeMethods.OBJ_ENHMETADC: description = "enhanced metafile DC"; break;
-
-                            case NativeMethods.OBJ_PEN: description = "Pen"; break;
-                            case NativeMethods.OBJ_BRUSH: description = "Brush"; break;
-                            case NativeMethods.OBJ_PAL: description = "Palette"; break;
-                            case NativeMethods.OBJ_FONT: description = "Font"; break;
-                            case NativeMethods.OBJ_BITMAP: description = "Bitmap"; break;
-                            case NativeMethods.OBJ_REGION: description = "Region"; break;
-                            case NativeMethods.OBJ_METAFILE: description = "Metafile"; break;
-                            case NativeMethods.OBJ_EXTPEN: description = "Extpen"; break;
-                            default: description = "?"; break;
-                        }
-                        description = " (" + description + ")";
-                    }*/
 
                     return Convert.ToString(unchecked((int)handle), 16) + description + ": " + sp.ToString();
                 }
 
                 /// <summary>
-                ///     Simple stack parsing class to manipulate our callstack.
+                /// Simple stack parsing class to manipulate our callstack.
                 /// </summary>
                 private class StackParser
                 {
@@ -392,7 +357,7 @@ namespace System.Internal
                     internal int length;
 
                     /// <summary>
-                    ///     Creates a new stackparser with the given callstack
+                    /// Creates a new stackparser with the given callstack
                     /// </summary>
                     public StackParser(string callStack)
                     {
@@ -401,8 +366,7 @@ namespace System.Internal
                     }
 
                     /// <summary>
-                    ///     Determines if the given string contains token.  This is a case
-                    ///     sensitive match.
+                    /// Determines if the given string contains token.  This is a case sensitive match.
                     /// </summary>
                     private static bool ContainsString(string str, string token)
                     {
@@ -425,7 +389,7 @@ namespace System.Internal
                     }
 
                     /// <summary>
-                    ///     Discards the next line of the stack trace.
+                    /// Discards the next line of the stack trace.
                     /// </summary>
                     public void DiscardNext()
                     {
@@ -433,8 +397,7 @@ namespace System.Internal
                     }
 
                     /// <summary>
-                    ///     Discards all lines up to and including the line that contains
-                    ///     discardText.
+                    /// Discards all lines up to and including the line that contains discardText.
                     /// </summary>
                     public void DiscardTo(string discardText)
                     {
@@ -449,7 +412,7 @@ namespace System.Internal
                     }
 
                     /// <summary>
-                    ///     Retrieves the next line of the stack.
+                    /// Retrieves the next line of the stack.
                     /// </summary>
                     private string GetLine()
                     {
@@ -473,7 +436,7 @@ namespace System.Internal
                     }
 
                     /// <summary>
-                    ///     Rereives the string of the parsed stack trace
+                    /// Rereives the string of the parsed stack trace
                     /// </summary>
                     public override string ToString()
                     {
@@ -481,7 +444,7 @@ namespace System.Internal
                     }
 
                     /// <summary>
-                    ///     Truncates the stack trace, saving the given # of lines.
+                    /// Truncates the stack trace, saving the given # of lines.
                     /// </summary>
                     public void Truncate(int lines)
                     {
@@ -508,7 +471,5 @@ namespace System.Internal
                 }
             }
         }
-
-        //#endif // DEBUG
     }
 }

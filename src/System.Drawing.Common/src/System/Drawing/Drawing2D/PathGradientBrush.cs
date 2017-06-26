@@ -2,29 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.ComponentModel;
+using System.Drawing.Internal;
+
 namespace System.Drawing.Drawing2D
 {
-    using System.Runtime.InteropServices;
-    using System.Diagnostics;
-    using System.ComponentModel;
-    using System.Drawing.Internal;
-
-    /**
-     * Represent a PathGradient brush object
-     */
     /// <summary>
-    ///    Encapsulates a <see cref='System.Drawing.Brush'/> that fills the interior of a
-    /// <see cref='System.Drawing.Drawing2D.GraphicsPath'/> with a gradient.
+    /// Encapsulates a <see cref='Brush'/> that fills the interior of a <see cref='GraphicsPath'/> with a gradient.
     /// </summary>
     public sealed class PathGradientBrush : Brush
     {
-        /**
-         * Create a new rectangle gradient brush object
-         */
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> class with the specified points.
-        ///    
+        /// Initializes a new instance of the <see cref='PathGradientBrush'/> class with the specified points.
         /// </summary>
         public PathGradientBrush(PointF[] points)
             : this(points, System.Drawing.Drawing2D.WrapMode.Clamp)
@@ -32,8 +23,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> class with the specified points and
-        ///    wrap mode.
+        /// Initializes a new instance of the <see cref='PathGradientBrush'/> class with the specified points and wrap mode.
         /// </summary>
         public PathGradientBrush(PointF[] points, WrapMode wrapMode)
         {
@@ -74,10 +64,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> class with the
-        ///       specified points.
-        ///    
+        /// Initializes a new instance of the <see cref='PathGradientBrush'/> class with the specified points.
         /// </summary>
         public PathGradientBrush(Point[] points)
             : this(points, System.Drawing.Drawing2D.WrapMode.Clamp)
@@ -85,10 +72,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> class with the
-        ///       specified points and wrap mode.
-        ///    
+        /// Initializes a new instance of the <see cref='PathGradientBrush'/> class with the specified points and wrap mode.
         /// </summary>
         public PathGradientBrush(Point[] points, WrapMode wrapMode)
         {
@@ -128,10 +112,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>
-        ///       class with the specified path.
-        ///    
+        /// Initializes a new instance of the <see cref='PathGradientBrush'/> class with the specified path.
         /// </summary>
         public PathGradientBrush(GraphicsPath path)
         {
@@ -149,7 +130,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///     Constructor to initialized this object to be owned by GDI+.
+        /// Constructor to initialized this object to be owned by GDI+.
         /// </summary>
         internal PathGradientBrush(IntPtr nativeBrush)
         {
@@ -158,7 +139,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>.
+        /// Creates an exact copy of this <see cref='PathGradientBrush'/>.
         /// </summary>
         public override object Clone()
         {
@@ -172,12 +153,8 @@ namespace System.Drawing.Drawing2D
             return new PathGradientBrush(cloneBrush);
         }
 
-        /**
-         * Set/get center color attributes
-         */
         /// <summary>
-        ///    Gets or sets the color at the center of the
-        ///    path gradient.
+        /// Gets or sets the color at the center of the path gradient.
         /// </summary>
         public Color CenterColor
         {
@@ -201,12 +178,6 @@ namespace System.Drawing.Drawing2D
                     throw SafeNativeMethods.Gdip.StatusException(status);
             }
         }
-
-        /**
-         * Get/set colors
-         * !! NOTE: We do not have methods for GetSurroundColor or SetSurroundColor,
-         *    May need to add usage of Collection class
-         */
 
         private void _SetSurroundColors(Color[] colors)
         {
@@ -262,10 +233,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets an array of colors that
-        ///       correspond to the points in the path this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> fills.
-        ///    
+        /// Gets or sets an array of colors that correspond to the points in the path this
+        /// <see cref='LinearGradientBrush'/> fills.
         /// </summary>
         public Color[] SurroundColors
         {
@@ -273,14 +242,8 @@ namespace System.Drawing.Drawing2D
             set { _SetSurroundColors(value); }
         }
 
-        /**
-          * Set/get center point
-          */
         /// <summary>
-        ///    
-        ///       Gets or sets the center point of the path
-        ///       gradient.
-        ///    
+        /// Gets or sets the center point of the path gradient.
         /// </summary>
         public PointF CenterPoint
         {
@@ -305,9 +268,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /**
-         * Get source rectangle
-         */
         private RectangleF _GetRectangle()
         {
             GPRECTF rect = new GPRECTF();
@@ -321,18 +281,13 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets a bounding rectangle for this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>.
-        ///    
+        /// Gets a bounding rectangle for this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>.
         /// </summary>
         public RectangleF Rectangle
         {
             get { return _GetRectangle(); }
         }
 
-        /**
-         * Set/get blend factors
-         */
         private Blend _GetBlend()
         {
             Blend blend;
@@ -432,10 +387,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets a <see cref='System.Drawing.Drawing2D.Blend'/> that specifies positions and factors
-        ///       that define a custom falloff for the gradient.
-        ///    
+        /// Gets or sets a <see cref='Drawing2D.Blend'/> that specifies positions and factors that define a custom
+        /// falloff for the gradient.
         /// </summary>
         public Blend Blend
         {
@@ -443,14 +396,8 @@ namespace System.Drawing.Drawing2D
             set { _SetBlend(value); }
         }
 
-        /*
-         * SigmaBlend & LinearBlend
-         */
-
         /// <summary>
-        ///    
-        ///       Creates a gradient falloff based on a bell-shaped curve.
-        ///    
+        /// Creates a gradient falloff based on a bell-shaped curve.
         /// </summary>
         public void SetSigmaBellShape(float focus)
         {
@@ -458,9 +405,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Creates a gradient falloff based on a bell-shaped curve.
-        ///    
+        /// Creates a gradient falloff based on a bell-shaped curve.
         /// </summary>
         public void SetSigmaBellShape(float focus, float scale)
         {
@@ -471,9 +416,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Creates a triangular gradient.
-        ///    
+        ///  Creates a triangular gradient.
         /// </summary>
         public void SetBlendTriangularShape(float focus)
         {
@@ -481,9 +424,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Creates a triangular gradient.
-        ///    
+        /// Creates a triangular gradient.
         /// </summary>
         public void SetBlendTriangularShape(float focus, float scale)
         {
@@ -492,10 +433,6 @@ namespace System.Drawing.Drawing2D
             if (status != SafeNativeMethods.Gdip.Ok)
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
-
-        /*
-         * Preset Color Blend
-         */
 
         private ColorBlend _GetInterpolationColors()
         {
@@ -619,10 +556,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets a <see cref='System.Drawing.Drawing2D.ColorBlend'/> that defines a multi-color linear
-        ///       gradient.
-        ///    
+        /// Gets or sets a <see cref='ColorBlend'/> that defines a multi-color linear gradient.
         /// </summary>
         public ColorBlend InterpolationColors
         {
@@ -630,9 +564,6 @@ namespace System.Drawing.Drawing2D
             set { _SetInterpolationColors(value); }
         }
 
-        /**
-         * Set/get brush transform
-         */
         private void _SetTransform(Matrix matrix)
         {
             if (matrix == null)
@@ -657,10 +588,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets a <see cref='System.Drawing.Drawing2D.Matrix'/> that defines a local geometrical
-        ///       transform for this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>.
-        ///    
+        /// Gets or sets a <see cref='Matrix'/> that defines a local geometrical transform for this
+        /// <see cref='PathGradientBrush'/>.
         /// </summary>
         public Matrix Transform
         {
@@ -669,10 +598,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Resets the <see cref='System.Drawing.Drawing2D.PathGradientBrush.Transform'/> property to
-        ///       identity.
-        ///    
+        /// Resets the <see cref='Transform'/> property to identity.
         /// </summary>
         public void ResetTransform()
         {
@@ -683,10 +609,9 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that represents the local geometrical
-        ///       transform of this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    
+        /// Multiplies the <see cref='Matrix'/> that represents the local geometrical transform of this
+        /// <see cref='PathGradientBrush'/> by the specified <see cref='Matrix'/> by prepending the specified
+        /// <see cref='Matrix'/>.
         /// </summary>
         public void MultiplyTransform(Matrix matrix)
         {
@@ -694,10 +619,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that represents the local geometrical
-        ///       transform of this <see cref='System.Drawing.Drawing2D.PathGradientBrush'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    
+        /// Multiplies the <see cref='Matrix'/> that represents the local geometrical transform of this
+        /// <see cref='PathGradientBrush'/> by the specified <see cref='Matrix'/> in the specified order.
         /// </summary>
         public void MultiplyTransform(Matrix matrix, MatrixOrder order)
         {
@@ -713,10 +636,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Translates the local geometrical transform by the specified dimmensions. This
-        ///       method prepends the translation to the transform.
-        ///    
+        /// Translates the local geometrical transform by the specified dimmensions. This method prepends the translation to the transform.
         /// </summary>
         public void TranslateTransform(float dx, float dy)
         {
@@ -724,10 +644,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Translates the local geometrical transform by the specified dimmensions in
-        ///       the specified order.
-        ///    
+        /// Translates the local geometrical transform by the specified dimmensions in the specified order.
         /// </summary>
         public void TranslateTransform(float dx, float dy, MatrixOrder order)
         {
@@ -739,10 +656,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Scales the local geometric transform by the specified amounts. This method
-        ///       prepends the scaling matrix to the transform.
-        ///    
+        /// Scales the local geometric transform by the specified amounts. This method prepends the scaling matrix to the
+        /// transform.
         /// </summary>
         public void ScaleTransform(float sx, float sy)
         {
@@ -750,10 +665,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Scales the local geometric transform by the specified amounts in the
-        ///       specified order.
-        ///    
+        /// Scales the local geometric transform by the specified amounts in the specified order.
         /// </summary>
         public void ScaleTransform(float sx, float sy, MatrixOrder order)
         {
@@ -765,10 +677,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Rotates the local geometric transform by the specified amount. This method
-        ///       prepends the rotation to the transform.
-        ///    
+        /// Rotates the local geometric transform by the specified amount. This method prepends the rotation to the transform.
         /// </summary>
         public void RotateTransform(float angle)
         {
@@ -776,10 +685,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Rotates the local geometric transform by the specified amount in the
-        ///       specified order.
-        ///    
+        /// Rotates the local geometric transform by the specified amount in the specified order.
         /// </summary>
         public void RotateTransform(float angle, MatrixOrder order)
         {
@@ -790,12 +696,8 @@ namespace System.Drawing.Drawing2D
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
 
-        /**
-         * Set/get brush focus scales
-         */
         /// <summary>
-        ///    Gets or sets the focus point for the
-        ///    gradient falloff.
+        /// Gets or sets the focus point for the gradient falloff.
         /// </summary>
         public PointF FocusScales
         {
@@ -820,9 +722,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /**
-         * Set/get brush wrapping mode
-         */
         private void _SetWrapMode(WrapMode wrapMode)
         {
             int status = SafeNativeMethods.Gdip.GdipSetPathGradientWrapMode(new HandleRef(this, NativeBrush), unchecked((int)wrapMode));
@@ -844,10 +743,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets a <see cref='System.Drawing.Drawing2D.WrapMode'/> that indicates the wrap mode for this
-        ///    <see cref='System.Drawing.Drawing2D.PathGradientBrush'/>. 
-        ///    
+        /// Gets or sets a <see cref='Drawing2D.WrapMode'/> that indicates the wrap mode for this
+        /// <see cref='PathGradientBrush'/>. 
         /// </summary>
         public WrapMode WrapMode
         {

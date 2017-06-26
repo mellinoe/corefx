@@ -4,20 +4,17 @@
 
 namespace System.Drawing.Imaging
 {
-    /**
-     * Color Map type constants
-     */
     /// <summary>
-    ///    Specifies the types of color maps.
+    /// Specifies the types of color maps.
     /// </summary>
     public enum ColorMapType
     {
         /// <summary>
-        ///    A default color map.
+        /// A default color map.
         /// </summary>
         Default = 0,
         /// <summary>
-        ///    Specifies a color map for a <see cref='System.Drawing.Brush'/>.
+        /// Specifies a color map for a <see cref='Drawing.Brush'/>.
         /// </summary>
         Brush
     }

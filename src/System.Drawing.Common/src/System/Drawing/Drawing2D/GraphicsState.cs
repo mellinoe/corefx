@@ -4,9 +4,6 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /// <summary>
-    ///    [To be supplied.]
-    /// </summary>
     public sealed class GraphicsState : MarshalByRefObject
     {
         internal int nativeState;
@@ -17,4 +14,3 @@ namespace System.Drawing.Drawing2D
         }
     }
 }
-

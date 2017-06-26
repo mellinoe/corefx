@@ -4,53 +4,45 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /**
-     * Various wrap modes for brushes
-     */
     /// <summary>
-    ///    Specifies how data is interpolated between
-    ///    endpoints.
+    /// Specifies how data is interpolated between endpoints.
     /// </summary>
     public enum InterpolationMode
     {
         /// <summary>
-        ///    
-        ///       Equivalent to <see cref='System.Drawing.Drawing2D.QualityMode.Invalid'/>
-        ///    
+        /// Equivalent to <see cref='QualityMode.Invalid'/>
         /// </summary>
         Invalid = QualityMode.Invalid,
         /// <summary>
-        ///    Specifies default mode.
+        /// Specifies default mode.
         /// </summary>
         Default = QualityMode.Default,
         /// <summary>
-        ///    Specifies low quality.
+        /// Specifies low quality.
         /// </summary>
         Low = QualityMode.Low,
         /// <summary>
-        ///    Specifies high quality.
+        /// Specifies high quality.
         /// </summary>
         High = QualityMode.High,
         /// <summary>
-        ///    Specifies bilinear interpolation.
+        /// Specifies bilinear interpolation.
         /// </summary>
         Bilinear,
         /// <summary>
-        ///    Specifies bicubic interpolation.
+        /// Specifies bicubic interpolation.
         /// </summary>
         Bicubic,
         /// <summary>
-        ///    Specifies nearest neighbor interpolation.
+        /// Specifies nearest neighbor interpolation.
         /// </summary>
         NearestNeighbor,
         /// <summary>
-        ///    Specifies high qulaity bilenear
-        ///    interpolation.
+        /// Specifies high qulaity bilenear interpolation.
         /// </summary>
         HighQualityBilinear,
         /// <summary>
-        ///    Specifies high quality bicubic
-        ///    interpolation.
+        /// Specifies high quality bicubic interpolation.
         /// </summary>
         HighQualityBicubic
     }

@@ -5,8 +5,7 @@
 namespace System.Drawing.Drawing2D
 {
     /// <summary>
-    ///    Defines arrays of colors and positions used
-    ///    for interpolating color blending in a gradient.
+    /// Defines arrays of colors and positions used for interpolating color blending in a gradient.
     /// </summary>
     public sealed class ColorBlend
     {
@@ -14,7 +13,7 @@ namespace System.Drawing.Drawing2D
         private float[] _positions;
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.ColorBlend'/> class.
+        /// Initializes a new instance of the <see cref='ColorBlend'/> class.
         /// </summary>
         public ColorBlend()
         {
@@ -23,10 +22,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.ColorBlend'/> class with the specified number of
-        ///       colors and positions.
-        ///    
+        /// Initializes a new instance of the <see cref='ColorBlend'/> class with the specified number of colors and positions.
         /// </summary>
         public ColorBlend(int count)
         {
@@ -35,7 +31,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Represents an array of colors.
+        /// Represents an array of colors.
         /// </summary>
         public Color[] Colors
         {
@@ -50,8 +46,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Represents the positions along a gradient
-        ///    line.
+        /// Represents the positions along a gradient line.
         /// </summary>
         public float[] Positions
         {

@@ -4,29 +4,17 @@
 
 namespace System.Drawing.Drawing2D
 {
-    /*
-     * Alpha compositing mode constants
-     *
-     * @notes Should we scrap this for the first version
-     *  and support only SrcOver instead?
-     */
-
     /// <summary>
-    ///    
-    ///       Defines how the source image is composited with the background image.
-    ///    
+    /// Defines how the source image is composited with the background image.
     /// </summary>
     public enum CompositingMode
     {
         /// <summary>
-        ///    
-        ///       The source pixels overwrite the background pixels.
-        ///    
+        /// The source pixels overwrite the background pixels.
         /// </summary>
         SourceOver = 0,
         /// <summary>
-        ///    The source pixels are combined with the
-        ///    background pixels.
+        /// The source pixels are combined with the background pixels.
         /// </summary>
         SourceCopy = 1
     }

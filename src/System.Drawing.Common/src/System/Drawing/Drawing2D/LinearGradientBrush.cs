@@ -2,31 +2,22 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System.Diagnostics;
+using System.ComponentModel;
+using System.Runtime.InteropServices;
+using System.Drawing.Internal;
+
 namespace System.Drawing.Drawing2D
 {
-    using System.Diagnostics;
-    using System.ComponentModel;
-    using System.Runtime.InteropServices;
-    using System.Drawing.Internal;
-
-    /**
-     * Represent a LinearGradient brush object
-     */
     /// <summary>
-    ///    
-    ///       Encapsulates a <see cref='System.Drawing.Brush'/> with a linear gradient.
-    ///    
+    /// Encapsulates a <see cref='Brush'/> with a linear gradient.
     /// </summary>
     public sealed class LinearGradientBrush : Brush
     {
         private bool _interpolationColorsWasSet;
 
-        /**
-         * Create a new rectangle gradient brush object
-         */
         /// <summary>
-        ///    Initializes a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the specified points and
-        ///    colors.
+        /// Initializes a new instance of the <see cref='LinearGradientBrush'/> class with the specified points and colors.
         /// </summary>
         public LinearGradientBrush(PointF point1, PointF point2,
                                    Color color1, Color color2)
@@ -47,10 +38,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Initializes a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
-        ///       specified points and colors.
-        ///    
+        /// Initializes a new instance of the <see cref='LinearGradientBrush'/> class with the specified points and colors.
         /// </summary>
         public LinearGradientBrush(Point point1, Point point2,
                                    Color color1, Color color2)
@@ -71,10 +59,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with
-        ///       the specified points, colors, and orientation.
-        ///    
+        /// Encapsulates a new instance of the <see cref='LinearGradientBrush'/> class with the specified points,
+        /// colors, and orientation.
         /// </summary>
         public LinearGradientBrush(RectangleF rect, Color color1, Color color2,
                                    LinearGradientMode linearGradientMode)
@@ -109,10 +95,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
-        ///       specified points, colors, and orientation.
-        ///    
+        /// Encapsulates a new instance of the <see cref='LinearGradientBrush'/> class with the specified points,
+        /// colors, and orientation.
         /// </summary>
         public LinearGradientBrush(Rectangle rect, Color color1, Color color2,
                                    LinearGradientMode linearGradientMode)
@@ -147,10 +131,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
-        ///       specified points, colors, and orientation.
-        ///    
+        /// Encapsulates a new instance of the <see cref='LinearGradientBrush'/> class with the specified points,
+        /// colors, and orientation.
         /// </summary>
         public LinearGradientBrush(RectangleF rect, Color color1, Color color2,
                                  float angle)
@@ -158,10 +140,8 @@ namespace System.Drawing.Drawing2D
         { }
 
         /// <summary>
-        ///    
-        ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
-        ///       specified points, colors, and orientation.
-        ///    
+        /// Encapsulates a new instance of the <see cref='LinearGradientBrush'/> class with the specified points,
+        /// colors, and orientation.
         /// </summary>
         public LinearGradientBrush(RectangleF rect, Color color1, Color color2,
                                  float angle, bool isAngleScaleable)
@@ -190,10 +170,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
-        ///       specified points, colors, and orientation.
-        ///    
+        /// Encapsulates a new instance of the <see cref='LinearGradientBrush'/> class with the specified points,
+        /// colors, and orientation.
         /// </summary>
         public LinearGradientBrush(Rectangle rect, Color color1, Color color2,
                                    float angle)
@@ -202,10 +180,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Encapsulates a new instance of the <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> class with the
-        ///       specified points, colors, and orientation.
-        ///    
+        /// Encapsulates a new instance of the <see cref='LinearGradientBrush'/> class with the specified points,
+        /// colors, and orientation.
         /// </summary>
         public LinearGradientBrush(Rectangle rect, Color color1, Color color2,
                                  float angle, bool isAngleScaleable)
@@ -234,7 +210,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///     Constructor to initialized this object to be owned by GDI+.
+        /// Constructor to initialized this object to be owned by GDI+.
         /// </summary>
         internal LinearGradientBrush(IntPtr nativeBrush)
         {
@@ -243,7 +219,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Creates an exact copy of this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>.
+        /// Creates an exact copy of this <see cref='LinearGradientBrush'/>.
         /// </summary>
         public override object Clone()
         {
@@ -256,10 +232,6 @@ namespace System.Drawing.Drawing2D
 
             return new LinearGradientBrush(cloneBrush);
         }
-
-        /**
-         * Get/set colors
-         */
 
         private void _SetLinearColors(Color color1, Color color2)
         {
@@ -294,8 +266,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets the starting and ending colors of the
-        ///    gradient.
+        /// Gets or sets the starting and ending colors of the gradient.
         /// </summary>
         public Color[] LinearColors
         {
@@ -303,9 +274,6 @@ namespace System.Drawing.Drawing2D
             set { _SetLinearColors(value[0], value[1]); }
         }
 
-        /**
-         * Get source rectangle
-         */
         private RectangleF _GetRectangle()
         {
             GPRECTF rect = new GPRECTF();
@@ -319,10 +287,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets a rectangular region that defines the
-        ///       starting and ending points of the gradient.
-        ///    
+        /// Gets a rectangular region that defines the starting and ending points of the gradient.
         /// </summary>
         public RectangleF Rectangle
         {
@@ -330,10 +295,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets a value indicating whether
-        ///       gamma correction is enabled for this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>.
-        ///    
+        /// Gets or sets a value indicating whether gamma correction is enabled for this <see cref='LinearGradientBrush'/>.
         /// </summary>
         public bool GammaCorrection
         {
@@ -357,17 +319,9 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /**
-         * Get/set blend factors
-         *
-         * @notes If the blendFactors.Length = 1, then it's treated
-         *  as the falloff parameter. Otherwise, it's the array
-         *  of blend factors.
-         */
-
         private Blend _GetBlend()
         {
-            // VSWHidbey 518309 - interpolation colors and blends don't get along.  Just getting
+            // Interpolation colors and blends don't get along.  Just getting
             // the Blend when InterpolationColors was set puts the Brush into an unusable state afterwards.
             // so to avoid that (mostly the problem of having Blend pop up in the debugger window and cause this problem)
             // we just bail here.
@@ -475,8 +429,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Gets or sets a <see cref='System.Drawing.Drawing2D.Blend'/> that specifies
-        ///    positions and factors that define a custom falloff for the gradient.
+        /// Gets or sets a <see cref='Drawing2D.Blend'/> that specifies positions and factors that define a custom
+        /// falloff for the gradient.
         /// </summary>
         public Blend Blend
         {
@@ -484,13 +438,8 @@ namespace System.Drawing.Drawing2D
             set { _SetBlend(value); }
         }
 
-        /*
-         * SigmaBlend & LinearBlend not yet implemented
-         */
-
         /// <summary>
-        ///    Creates a gradient falloff based on a
-        ///    bell-shaped curve.
+        /// Creates a gradient falloff based on a bell-shaped curve.
         /// </summary>
         public void SetSigmaBellShape(float focus)
         {
@@ -498,8 +447,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Creates a gradient falloff based on a
-        ///    bell-shaped curve.
+        /// Creates a gradient falloff based on a bell-shaped curve.
         /// </summary>
         public void SetSigmaBellShape(float focus, float scale)
         {
@@ -510,9 +458,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Creates a triangular gradient.
-        ///    
+        /// Creates a triangular gradient.
         /// </summary>
         public void SetBlendTriangularShape(float focus)
         {
@@ -520,9 +466,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Creates a triangular gradient.
-        ///    
+        /// Creates a triangular gradient.
         /// </summary>
         public void SetBlendTriangularShape(float focus, float scale)
         {
@@ -531,10 +475,6 @@ namespace System.Drawing.Drawing2D
             if (status != SafeNativeMethods.Gdip.Ok)
                 throw SafeNativeMethods.Gdip.StatusException(status);
         }
-
-        /*
-         * Preset Color Blend
-         */
 
         private ColorBlend _GetInterpolationColors()
         {
@@ -690,10 +630,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets a <see cref='System.Drawing.Drawing2D.ColorBlend'/> that defines a multi-color linear
-        ///       gradient.
-        ///    
+        /// Gets or sets a <see cref='ColorBlend'/> that defines a multi-color linear gradient.
         /// </summary>
         public ColorBlend InterpolationColors
         {
@@ -701,9 +638,6 @@ namespace System.Drawing.Drawing2D
             set { _SetInterpolationColors(value); }
         }
 
-        /**
-         * Set/get brush wrapping mode
-         */
         private void _SetWrapMode(WrapMode wrapMode)
         {
             int status = SafeNativeMethods.Gdip.GdipSetLineWrapMode(new HandleRef(this, NativeBrush), unchecked((int)wrapMode));
@@ -725,9 +659,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets a <see cref='System.Drawing.Drawing2D.WrapMode'/> that indicates the wrap mode for this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>.
-        ///    
+        /// Gets or sets a <see cref='Drawing2D.WrapMode'/> that indicates the wrap mode for this <see cref='LinearGradientBrush'/>.
         /// </summary>
         public WrapMode WrapMode
         {
@@ -748,9 +680,6 @@ namespace System.Drawing.Drawing2D
             }
         }
 
-        /**
-         * Set/get brush transform
-         */
         private void _SetTransform(Matrix matrix)
         {
             if (matrix == null)
@@ -766,8 +695,6 @@ namespace System.Drawing.Drawing2D
         {
             Matrix matrix = new Matrix();
 
-            // NOTE: new Matrix() will throw an exception if matrix == null.
-
             int status = SafeNativeMethods.Gdip.GdipGetLineTransform(new HandleRef(this, NativeBrush), new HandleRef(matrix, matrix.nativeMatrix));
 
             if (status != SafeNativeMethods.Gdip.Ok)
@@ -777,10 +704,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Gets or sets a <see cref='System.Drawing.Drawing2D.Matrix'/> that defines a local geometrical transform for
-        ///       this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/>.
-        ///    
+        /// Gets or sets a <see cref='Matrix'/> that defines a local geometrical transform for this
+        /// <see cref='LinearGradientBrush'/>.
         /// </summary>
         public Matrix Transform
         {
@@ -789,7 +714,7 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Resets the <see cref='System.Drawing.Drawing2D.LinearGradientBrush.Transform'/> property to identity.
+        /// Resets the <see cref='Transform'/> property to identity.
         /// </summary>
         public void ResetTransform()
         {
@@ -800,10 +725,9 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that represents the local geometrical
-        ///       transform of this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> by prepending the specified <see cref='System.Drawing.Drawing2D.Matrix'/>.
-        ///    
+        /// Multiplies the <see cref='Matrix'/> that represents the local geometrical transform of this
+        /// <see cref='LinearGradientBrush'/> by the specified <see cref='Matrix'/> by prepending the specified
+        /// <see cref='Matrix'/>.
         /// </summary>
         public void MultiplyTransform(Matrix matrix)
         {
@@ -811,10 +735,8 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    
-        ///       Multiplies the <see cref='System.Drawing.Drawing2D.Matrix'/> that represents the local geometrical
-        ///       transform of this <see cref='System.Drawing.Drawing2D.LinearGradientBrush'/> by the specified <see cref='System.Drawing.Drawing2D.Matrix'/> in the specified order.
-        ///    
+        /// Multiplies the <see cref='Matrix'/> that represents the local geometrical transform of this
+        /// <see cref='LinearGradientBrush'/> by the specified <see cref='Matrix'/> in the specified order.
         /// </summary>
         public void MultiplyTransform(Matrix matrix, MatrixOrder order)
         {
@@ -833,16 +755,14 @@ namespace System.Drawing.Drawing2D
 
 
         /// <summary>
-        ///    Translates the local geometrical transform
-        ///    by the specified dimmensions. This method prepends the translation to the
-        ///    transform.
+        /// Translates the local geometrical transform by the specified dimmensions.
+        /// This method prepends the translation to the transform.
         /// </summary>
         public void TranslateTransform(float dx, float dy)
         { TranslateTransform(dx, dy, MatrixOrder.Prepend); }
 
         /// <summary>
-        ///    Translates the local geometrical transform
-        ///    by the specified dimmensions in the specified order.
+        /// Translates the local geometrical transform by the specified dimmensions in the specified order.
         /// </summary>
         public void TranslateTransform(float dx, float dy, MatrixOrder order)
         {
@@ -855,17 +775,14 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Scales the local geometric transform by the
-        ///    specified amounts. This method prepends the scaling matrix to the transform.
+        /// Scales the local geometric transform by the specified amounts.
+        /// This method prepends the scaling matrix to the transform.
         /// </summary>
         public void ScaleTransform(float sx, float sy)
         { ScaleTransform(sx, sy, MatrixOrder.Prepend); }
 
         /// <summary>
-        ///    
-        ///       Scales the local geometric transform by the
-        ///       specified amounts in the specified order.
-        ///    
+        /// Scales the local geometric transform by the specified amounts in the specified order.
         /// </summary>
         public void ScaleTransform(float sx, float sy, MatrixOrder order)
         {
@@ -879,17 +796,14 @@ namespace System.Drawing.Drawing2D
         }
 
         /// <summary>
-        ///    Rotates the local geometric transform by the
-        ///    specified amount. This method prepends the rotation to the transform.
+        /// Rotates the local geometric transform by the specified amount.
+        /// This method prepends the rotation to the transform.
         /// </summary>
         public void RotateTransform(float angle)
         { RotateTransform(angle, MatrixOrder.Prepend); }
 
         /// <summary>
-        ///    
-        ///       Rotates the local geometric transform by the specified
-        ///       amount in the specified order.
-        ///    
+        /// Rotates the local geometric transform by the specified amount in the specified order.
         /// </summary>
         public void RotateTransform(float angle, MatrixOrder order)
         {
