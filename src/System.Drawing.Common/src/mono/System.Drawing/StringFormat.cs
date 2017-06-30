@@ -290,6 +290,8 @@ namespace System.Drawing
             }
         }
 
+        internal IntPtr nativeFormat => nativeStrFmt;
+
         public void SetTabStops(float firstTabOffset, float[] tabStops)
         {
             Status status = GDIPlus.GdipSetStringFormatTabStops(nativeStrFmt, firstTabOffset, tabStops.Length, tabStops);

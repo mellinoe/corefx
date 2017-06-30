@@ -198,7 +198,7 @@ namespace System.Drawing
             {
                 if (isModifiable)
                 {
-                    Status status = GDIPlus.GdipSetPenCustomEndCap(nativeObject, value.nativeObject);
+                    Status status = GDIPlus.GdipSetPenCustomEndCap(nativeObject, value.nativeCap);
                     GDIPlus.CheckStatus(status);
                     endCap = value;
                 }
@@ -218,7 +218,7 @@ namespace System.Drawing
             {
                 if (isModifiable)
                 {
-                    Status status = GDIPlus.GdipSetPenCustomStartCap(nativeObject, value.nativeObject);
+                    Status status = GDIPlus.GdipSetPenCustomStartCap(nativeObject, value.nativeCap);
                     GDIPlus.CheckStatus(status);
                     startCap = value;
                 }
@@ -510,6 +510,8 @@ namespace System.Drawing
                     throw new ArgumentException("This Pen object can't be modified.");
             }
         }
+
+        internal IntPtr NativePen => nativeObject;
 
         public object Clone()
         {

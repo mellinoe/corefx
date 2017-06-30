@@ -78,6 +78,14 @@ namespace System.Drawing
             }
         }
 
+        internal IntPtr NativeFamily
+        {            
+            get	
+            {
+                return nativeFontFamily;
+            }
+        }
+
         public FontFamily(GenericFontFamilies genericFamily)
         {
             Status status;
@@ -103,7 +111,7 @@ namespace System.Drawing
 
         public FontFamily(string name, FontCollection fontCollection)
         {
-            IntPtr handle = (fontCollection == null) ? IntPtr.Zero : fontCollection.nativeFontCollection;
+            IntPtr handle = (fontCollection == null) ? IntPtr.Zero : fontCollection._nativeFontCollection;
             Status status = GDIPlus.GdipCreateFontFamilyFromName(name, handle, out nativeFontFamily);
             GDIPlus.CheckStatus(status);
         }
