@@ -122,10 +122,10 @@ namespace System.Drawing.Printing
                     default_pagesettings = new PageSettings(this,
                         SupportsColor,
                         false,
-                        // Real defaults are set by LoadPrinterSettings				
+                        // Real defaults are set by LoadPrinterSettings
                         new PaperSize("A4", 827, 1169),
-                        new PaperSource("Tray", PaperSourceKind.FormSource),
-                        new PrinterResolution(200, 200, PrinterResolutionKind.Medium));
+                        new PaperSource(PaperSourceKind.FormSource, "Tray"),
+                        new PrinterResolution(PrinterResolutionKind.Medium, 200, 200));
                 }
 
                 return default_pagesettings;

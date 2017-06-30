@@ -309,29 +309,18 @@
     <Compile Include="mono\System.Drawing.Imaging\MetafileFrameUnit.cs" />
     <Compile Include="mono\System.Drawing.Imaging\MetafileHeader.cs" />
     <Compile Include="mono\System.Drawing.Imaging\MetaHeader.cs" />
-    <Compile Include="mono\System.Drawing.Printing\Duplex.cs" />
-    <Compile Include="mono\System.Drawing.Printing\InvalidPrinterException.cs" />
-    <Compile Include="mono\System.Drawing.Printing\Margins.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrintingServices.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrintingServicesWin32.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrintingServicesUnix.cs" />
     <Compile Include="mono\System.Drawing.Printing\PageSettings.cs" />
-    <Compile Include="mono\System.Drawing.Printing\PaperKind.cs" />
-    <Compile Include="mono\System.Drawing.Printing\PaperSize.cs" />
-    <Compile Include="mono\System.Drawing.Printing\PaperSource.cs" />
-    <Compile Include="mono\System.Drawing.Printing\PaperSourceKind.cs" />
     <Compile Include="mono\System.Drawing.Printing\PreviewPrintController.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrintController.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrintDocument.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="mono\System.Drawing.Printing\PrinterResolution.cs" />
-    <Compile Include="mono\System.Drawing.Printing\PrinterResolutionKind.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrinterSettings.cs" />
-    <Compile Include="mono\System.Drawing.Printing\PrinterUnitConvert.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrintEventArgs.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrintPageEventArgs.cs" />
-    <Compile Include="mono\System.Drawing.Printing\PrintRange.cs" />
     <Compile Include="mono\System.Drawing.Printing\StandardPrintController.cs" />
     <Compile Include="mono\System.Drawing.Text\FontCollection.cs" />
     <Compile Include="mono\System.Drawing.Text\PrivateFontCollection.cs" />
@@ -411,7 +400,7 @@
     <Compile Include="misc/ClientUtils.cs" />
     <Compile Include="misc/CompModSwitches.cs" />
     <Compile Include="misc/DebugHandleTracker.cs" />
-    <Compile Include="misc/ExternDll.cs" />    
+    <Compile Include="misc/ExternDll.Unix.cs" />    
     <Compile Include="misc/HandleCollector.cs" />
     <Compile Include="System/Drawing/Gdiplus.cs" />
     <Compile Include="System/Drawing/NativeMethods.cs" />
@@ -430,6 +419,17 @@
     <Compile Include="System/Drawing/Imaging/MetafileHeaderWmf.cs" />
     <Compile Include="System/Drawing/Imaging/MetafileHeaderEmf.cs" />
     <Compile Include="System/Drawing/PropertyItemInternal.cs" />
+    <Compile Include="System/Drawing/Printing/Duplex.cs" />
+    <Compile Include="System/Drawing/Printing/InvalidPrinterException.cs" />
+    <Compile Include="System/Drawing/Printing/Margins.cs" />
+    <Compile Include="System/Drawing/Printing/PaperKinds.cs" />
+    <Compile Include="System/Drawing/Printing/PaperSize.cs" />
+    <Compile Include="System/Drawing/Printing/PaperSource.cs" />
+    <Compile Include="System/Drawing/Printing/PaperSourceKind.cs" />
+    <Compile Include="System/Drawing/Printing/PrinterResolution.cs" />
+    <Compile Include="System/Drawing/Printing/PrinterResolutionKind.cs" />
+    <Compile Include="System/Drawing/Printing/PrinterUnitConvert.cs" />
+    <Compile Include="System/Drawing/Printing/PrintRange.cs" />
     <!-- Shared Common -->
     <Compile Include="$(CommonPath)\System\Drawing\ColorConverterCommon.cs">
       <Link>System\Drawing\ColorConverterCommon.cs</Link>

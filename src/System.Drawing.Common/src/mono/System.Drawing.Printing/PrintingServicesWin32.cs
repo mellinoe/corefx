@@ -149,7 +149,7 @@ namespace System.Drawing.Printing
                     y = Marshal.ReadInt32(ptr);
                     ptr = new IntPtr(ptr.ToInt64() + Marshal.SizeOf(y));
                     settings.PrinterResolutions.Add(new PrinterResolution
-                        (x, y, PrinterResolutionKind.Custom));
+                        (PrinterResolutionKind.Custom, x, y));
                 }
             }
             Marshal.FreeHGlobal(buff);
@@ -210,7 +210,7 @@ namespace System.Drawing.Printing
                     ptr_sizes_enum = new IntPtr(ptr_sizes_enum.ToInt64() + 2);
 
                     ps = new PaperSize(name, x, y);
-                    ps.SetKind(kind);
+                    ps.RawKind = (int)kind;
                     settings.PaperSizes.Add(ps);
                 }
             }
@@ -278,7 +278,7 @@ namespace System.Drawing.Printing
                 {
                     name = Marshal.PtrToStringUni(ptr_names);
                     kind = (PaperSourceKind)Marshal.ReadInt16(ptr_bins);
-                    settings.PaperSources.Add(new PaperSource(name, kind));
+                    settings.PaperSources.Add(new PaperSource(kind, name));
 
                     ptr_names = new IntPtr(ptr_names.ToInt64() + 24 * 2);
                     ptr_bins = new IntPtr(ptr_bins.ToInt64() + 2);
