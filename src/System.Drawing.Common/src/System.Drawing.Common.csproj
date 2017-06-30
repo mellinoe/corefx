@@ -269,7 +269,6 @@
     <Compile Include="mono\System.Drawing\CopyPixelOperation.cs" />
     <Compile Include="mono\System.Drawing\Font.cs" />
     <Compile Include="mono\System.Drawing\FontFamily.cs" />
-    <Compile Include="mono\System.Drawing\FontStyle.cs" />
     <Compile Include="mono\System.Drawing\Graphics.cs" />
     <Compile Include="mono\System.Drawing\GraphicsUnit.cs" />
     <Compile Include="mono\System.Drawing\gdipEnums.cs" />
@@ -284,12 +283,7 @@
     <Compile Include="mono\System.Drawing\Region.cs" />
     <Compile Include="mono\System.Drawing\SolidBrush.cs" />
     <Compile Include="mono\System.Drawing\SRDescriptionAttribute.cs" />
-    <Compile Include="mono\System.Drawing\StringAligment.cs" />
-    <Compile Include="mono\System.Drawing\StringDigitSubstitute.cs" />
     <Compile Include="mono\System.Drawing\StringFormat.cs" />
-    <Compile Include="mono\System.Drawing\StringFormatFlags.cs" />
-    <Compile Include="mono\System.Drawing\StringTrimming.cs" />
-    <Compile Include="mono\System.Drawing\StringUnit.cs" />
     <Compile Include="mono\System.Drawing\SystemBrushes.cs" />
     <Compile Include="mono\System.Drawing\SystemColors.cs" />
     <Compile Include="mono\System.Drawing\SystemFonts.cs" />
@@ -346,10 +340,7 @@
     <Compile Include="mono\System.Drawing.Printing\StandardPrintController.cs" />
     <Compile Include="mono\System.Drawing.Text\FontCollection.cs" />
     <Compile Include="mono\System.Drawing.Text\PrivateFontCollection.cs" />
-    <Compile Include="mono\System.Drawing.Text\GenericFontFamilies.cs" />
-    <Compile Include="mono\System.Drawing.Text\HotkeyPrefix.cs" />
     <Compile Include="mono\System.Drawing.Text\InstalledFontCollection.cs" />
-    <Compile Include="mono\System.Drawing.Text\TextRenderingHint.cs" />
     <Compile Include="mono\MonoTODOAttribute.cs" />
     <!-- Shared with Windows -->
     <Compile Include="System/Drawing/BitmapSuffixInSameAssemblyAttribute.cs" />
@@ -412,6 +403,15 @@
     <Compile Include="System/Drawing/Imaging/PlayRecordCallback.cs" />
     <Compile Include="System/Drawing/Imaging/PropertyItem.cs" />
     <Compile Include="System/Drawing/Imaging/WmfPlaceableFileHeader.cs" />
+    <Compile Include="System/Drawing/FontStyle.cs" />
+    <Compile Include="System/Drawing/StringAlignment.cs" />
+    <Compile Include="System/Drawing/StringDigitSubstitute.cs" />
+    <Compile Include="System/Drawing/StringFormatFlags.cs" />
+    <Compile Include="System/Drawing/StringTrimming.cs" />
+    <Compile Include="System/Drawing/StringUnit.cs" />
+    <Compile Include="System/Drawing/Text/GenericFontFamilies.cs" />
+    <Compile Include="System/Drawing/Text/HotkeyPrefix.cs" />
+    <Compile Include="System/Drawing/Text/TextRenderingHint.cs" />
     <!-- Shared Common -->
     <Compile Include="$(CommonPath)\System\Drawing\ColorConverterCommon.cs">
       <Link>System\Drawing\ColorConverterCommon.cs</Link>
