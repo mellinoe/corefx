@@ -556,8 +556,7 @@ namespace System.Drawing
             status = GDIPlus.GdipGetRegionData(nativeRegion, buff, size, out filled);
             GDIPlus.CheckStatus(status);
 
-            RegionData rgndata = new RegionData();
-            rgndata.Data = buff;
+            RegionData rgndata = new RegionData(buff);
 
             return rgndata;
         }
