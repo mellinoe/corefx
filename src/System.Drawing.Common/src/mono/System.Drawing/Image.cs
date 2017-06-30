@@ -355,7 +355,7 @@ namespace System.Drawing
             try
             {
                 status = GDIPlus.GdipGetEncoderParameterList(nativeObject, ref encoder, sz, rawEPList);
-                eps = EncoderParameters.FromNativePtr(rawEPList);
+                eps = EncoderParameters.ConvertFromMemory(rawEPList);
                 GDIPlus.CheckStatus(status);
             }
             finally
@@ -492,7 +492,7 @@ namespace System.Drawing
             }
             else
             {
-                IntPtr nativeEncoderParams = encoderParams.ToNativePtr();
+                IntPtr nativeEncoderParams = encoderParams.ConvertToMemory();
                 st = GDIPlus.GdipSaveImageToFile(nativeObject, filename, ref guid, nativeEncoderParams);
                 Marshal.FreeHGlobal(nativeEncoderParams);
             }
@@ -519,7 +519,7 @@ namespace System.Drawing
             if (encoderParams == null)
                 nativeEncoderParams = IntPtr.Zero;
             else
-                nativeEncoderParams = encoderParams.ToNativePtr();
+                nativeEncoderParams = encoderParams.ConvertToMemory();
 
             try
             {
@@ -548,7 +548,7 @@ namespace System.Drawing
         {
             Status st;
 
-            IntPtr nativeEncoderParams = encoderParams.ToNativePtr();
+            IntPtr nativeEncoderParams = encoderParams.ConvertToMemory();
             st = GDIPlus.GdipSaveAdd(nativeObject, nativeEncoderParams);
             Marshal.FreeHGlobal(nativeEncoderParams);
             GDIPlus.CheckStatus(st);
@@ -558,7 +558,7 @@ namespace System.Drawing
         {
             Status st;
 
-            IntPtr nativeEncoderParams = encoderParams.ToNativePtr();
+            IntPtr nativeEncoderParams = encoderParams.ConvertToMemory();
             st = GDIPlus.GdipSaveAddImage(nativeObject, image.NativeObject, nativeEncoderParams);
             Marshal.FreeHGlobal(nativeEncoderParams);
             GDIPlus.CheckStatus(st);
@@ -687,7 +687,7 @@ namespace System.Drawing
             {
                 st = GDIPlus.GdipGetImagePalette(nativeObject, palette_data, bytes);
                 GDIPlus.CheckStatus(st);
-                ret.setFromGDIPalette(palette_data);
+                ret.ConvertFromMemory(palette_data);
                 return ret;
             }
 
@@ -703,7 +703,7 @@ namespace System.Drawing
             {
                 throw new ArgumentNullException("palette");
             }
-            IntPtr palette_data = palette.getGDIPalette();
+            IntPtr palette_data = palette.ConvertToMemory();
             if (palette_data == IntPtr.Zero)
             {
                 return;

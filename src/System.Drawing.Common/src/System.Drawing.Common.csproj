@@ -293,15 +293,8 @@
     <Compile Include="mono\System.Drawing.Drawing2D\Matrix.cs" />
     <Compile Include="mono\System.Drawing.Drawing2D\PathGradientBrush.cs" />
     <Compile Include="mono\System.Drawing.Imaging\BitmapData.cs" />
-    <Compile Include="mono\System.Drawing.Imaging\ColorMatrix.cs" />
-    <Compile Include="mono\System.Drawing.Imaging\ColorPalette.cs" />
-    <Compile Include="mono\System.Drawing.Imaging\EncoderParameter.cs" />
-    <Compile Include="mono\System.Drawing.Imaging\EncoderParameters.cs" />
-    <Compile Include="mono\System.Drawing.Imaging\ImageAttributes.cs" />
-    <Compile Include="mono\System.Drawing.Imaging\ImageCodecInfo.cs" />
     <Compile Include="mono\System.Drawing.Imaging\ImageFormat.cs" />
     <Compile Include="mono\System.Drawing.Imaging\Metafile.cs" />
-    <Compile Include="mono\System.Drawing.Imaging\MetafileFrameUnit.cs" />
     <Compile Include="mono\System.Drawing.Imaging\MetafileHeader.cs" />
     <Compile Include="mono\System.Drawing.Imaging\MetaHeader.cs" />
     <Compile Include="mono\System.Drawing.Printing\PrintingServices.cs" />
@@ -431,6 +424,14 @@
     <Compile Include="System/Drawing/Drawing2D/SafeCustomLineCapHandle.cs" />
     <Compile Include="System/Drawing/Text/FontCollection.cs" />
     <Compile Include="System/Drawing/Text/InstalledFontCollection.cs" />
+    <Compile Include="System/Drawing/Imaging/ColorMatrix.cs" />
+    <Compile Include="System/Drawing/Imaging/ColorPalette.cs" />
+    <Compile Include="System/Drawing/Imaging/EncoderParameter.cs" />
+    <Compile Include="System/Drawing/Imaging/EncoderParameters.cs" />
+    <Compile Include="System/Drawing/Imaging/ImageAttributes.cs" />
+    <Compile Include="System/Drawing/Imaging/ImageCodecInfo.cs" />
+    <Compile Include="System/Drawing/Imaging/ImageCodecInfoPrivate.cs" />
+    <Compile Include="System/Drawing/Imaging/MetafileFrameUnit.cs" />
     <!-- Shared Common -->
     <Compile Include="$(CommonPath)\System\Drawing\ColorConverterCommon.cs">
       <Link>System\Drawing\ColorConverterCommon.cs</Link>
