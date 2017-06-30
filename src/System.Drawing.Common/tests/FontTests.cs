@@ -7,6 +7,7 @@ namespace System.Drawing.Tests
 {
     public class FontTests
     {
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(null)]
         [InlineData("")]

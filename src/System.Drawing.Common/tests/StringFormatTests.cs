@@ -136,6 +136,7 @@ namespace System.Drawing.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => format.Clone());
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(0, StringDigitSubstitute.None, 0)]
         [InlineData(EnglishLanguageCode, StringDigitSubstitute.Traditional, EnglishLanguageCode)]
@@ -183,6 +184,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void SetTabStops_NegativeFirstTabOffset_ThrowsArgumentException()
         {
@@ -192,6 +194,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void SetTabStops_NegativeInfinityInTabStops_ThrowsNotImplementedException()
         {
@@ -276,6 +279,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(StringAlignment.Near - 1)]
         [InlineData(StringAlignment.Far + 1)]
@@ -297,8 +301,9 @@ namespace System.Drawing.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => format.Alignment = StringAlignment.Center);
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
-        public void DigitSubstituionMethod_GetSetWhenDisposed_ThrowsArgumentException()
+        public void DigitSubstitutionMethod_GetSetWhenDisposed_ThrowsArgumentException()
         {
             var format = new StringFormat();
             format.Dispose();
@@ -306,8 +311,9 @@ namespace System.Drawing.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => format.DigitSubstitutionMethod);
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
-        public void DigitSubstituionLanguage_GetSetWhenDisposed_ThrowsArgumentException()
+        public void DigitSubstitutionLanguage_GetSetWhenDisposed_ThrowsArgumentException()
         {
             var format = new StringFormat();
             format.Dispose();
@@ -349,6 +355,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(StringAlignment.Near - 1)]
         [InlineData(StringAlignment.Far + 1)]
@@ -382,6 +389,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(HotkeyPrefix.None - 1)]
         [InlineData(HotkeyPrefix.Hide + 1)]
@@ -413,6 +421,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(StringTrimming.None - 1)]
         [InlineData(StringTrimming.EllipsisPath + 1)]

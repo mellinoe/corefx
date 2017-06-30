@@ -79,6 +79,7 @@ namespace System.Drawing.Text.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void AddFontFile_Directory_ThrowsExternalException()
         {
@@ -94,6 +95,7 @@ namespace System.Drawing.Text.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void AddFontFile_Disposed_ThrowsArgumentException()
         {
@@ -135,6 +137,7 @@ namespace System.Drawing.Text.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(0)]
         [InlineData(-1)]
@@ -163,6 +166,7 @@ namespace System.Drawing.Text.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void AddMemoryFont_Disposed_ThrowsArgumentException()
         {

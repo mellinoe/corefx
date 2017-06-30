@@ -21,6 +21,7 @@ namespace System.Drawing.Tests
             yield return new object[] { Helpers.GetTestBitmapPath("invalid.ico"), new Size(0, 0) };
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(Ctor_FileName_TestData))]
         public void Ctor_FileName(string fileName, Size size)
@@ -40,6 +41,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(null, -1, -1)]
         [InlineData(typeof(ClassWithNoNamespace), -1, -1)]
@@ -61,6 +63,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(null, null, -1, -1)]
         [InlineData(null, "invalid.ico", -1, -1)]
@@ -107,6 +110,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void GetImage_NullComponent_ReturnsNull()
         {
@@ -131,6 +135,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void GetImage_Default_ReturnsExpected()
         {
@@ -156,6 +161,7 @@ namespace System.Drawing.Tests
             yield return new object[] { ToolboxBitmapAttribute.Default, null, false };
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(Equals_TestData))]
         public void Equals_Other_ReturnsExpected(ToolboxBitmapAttribute attribute, object other, bool expected)

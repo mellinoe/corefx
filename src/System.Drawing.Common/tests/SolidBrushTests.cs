@@ -14,6 +14,7 @@ namespace System.Drawing.Tests
             yield return new object[] { Color.PapayaWhip, Color.PapayaWhip };
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(Colors_TestData))]
         public void Ctor_Color(Color color, Color expectedColor)
@@ -59,6 +60,7 @@ namespace System.Drawing.Tests
             AssertExtensions.Throws<ArgumentException>(null, () => brush.Clone());
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void Color_EmptyAndGetDisposed_ThrowsArgumentException()
         {

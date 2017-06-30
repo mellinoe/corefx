@@ -19,6 +19,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(InvalidBytes_TestData))]
         public void FromFile_InvalidBytes_ThrowsOutOfMemoryException(byte[] bytes)
@@ -30,6 +31,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [Fact]
         public void FromFile_NullFileName_ThrowsArgumentNullException()
         {
@@ -37,6 +39,7 @@ namespace System.Drawing.Tests
             AssertExtensions.Throws<ArgumentNullException>("path", () => Image.FromFile(null, useEmbeddedColorManagement: true));
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [Fact]
         public void FromFile_EmptyFileName_ThrowsArgumentNullException()
         {
@@ -44,6 +47,7 @@ namespace System.Drawing.Tests
             AssertExtensions.Throws<ArgumentException>("path", null, () => Image.FromFile(string.Empty, useEmbeddedColorManagement: true));
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [Fact]
         public void FromFile_LongFile_ThrowsPathTooLongException()
         {
@@ -60,6 +64,7 @@ namespace System.Drawing.Tests
             Assert.Throws<FileNotFoundException>(() => Image.FromFile("NoSuchFile", useEmbeddedColorManagement: true));
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(InvalidBytes_TestData))]
         public void FromStream_InvalidBytes_ThrowsArgumentException(byte[] bytes)

@@ -11,6 +11,7 @@ namespace System.Drawing.Tests
 {
     public class GraphicsTests
     {
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void GetHdc_FromHdc_Roundtrips()
         {
@@ -34,6 +35,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void GetHdc_SameImage_ReturnsSame()
         {
@@ -53,6 +55,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void GetHdc_NotReleased_ThrowsInvalidOperationException()
         {
@@ -71,6 +74,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void GetHdc_Disposed_ThrowsObjectDisposedException()
         {
@@ -92,6 +96,7 @@ namespace System.Drawing.Tests
             yield return new object[] { Helpers.GetDC(foregroundWindow) };
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(FromHdc_TestData))]
         public void FromHdc_ValidHdc_ReturnsExpected(IntPtr hdc)
@@ -103,6 +108,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(FromHdc_TestData))]
         public void FromHdc_ValidHdcWithContext_ReturnsExpected(IntPtr hdc)
@@ -114,6 +120,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(FromHdc_TestData))]
         public void FromHdcInternal_GetDC_ReturnsExpected(IntPtr hdc)
@@ -125,24 +132,28 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void FromHdc_ZeroHdc_ThrowsArgumentNullException()
         {
             AssertExtensions.Throws<ArgumentNullException>("hdc", () => Graphics.FromHdc(IntPtr.Zero));
         }
-        
+
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void FromHdcInternal_ZeroHdc_ThrowsOutOfMemoryException()
         {
             Assert.Throws<OutOfMemoryException>(() => Graphics.FromHdcInternal(IntPtr.Zero));
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void FromHdc_ZeroHdc_ThrowsOutOfMemoryException()
         {
             Assert.Throws<OutOfMemoryException>(() => Graphics.FromHdc(IntPtr.Zero, (IntPtr)10));
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void FromHdc_InvalidHdc_ThrowsOutOfMemoryException()
         {
@@ -150,6 +161,7 @@ namespace System.Drawing.Tests
             Assert.Throws<OutOfMemoryException>(() => Graphics.FromHwndInternal((IntPtr)10));
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void ReleaseHdc_ValidHdc_ResetsHdc()
         {
@@ -173,6 +185,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void ReleaseHdc_NoSuchHdc_ResetsHdc()
         {
@@ -189,6 +202,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void ReleaseHdc_OtherGraphicsHdc_Success()
         {
@@ -221,6 +235,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void ReleaseHdc_Disposed_ThrowsObjectDisposedException()
         {
@@ -241,6 +256,7 @@ namespace System.Drawing.Tests
             yield return new object[] { Helpers.GetForegroundWindow() };
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(Hwnd_TestData))]
         public void FromHwnd_ValidHwnd_ReturnsExpected(IntPtr hWnd)
@@ -252,6 +268,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [MemberData(nameof(Hwnd_TestData))]
         public void FromHwndInternal_ValidHwnd_ReturnsExpected(IntPtr hWnd)
@@ -263,6 +280,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void FromHwnd_InvalidHwnd_ThrowsOutOfMemoryException()
         {
@@ -270,6 +288,7 @@ namespace System.Drawing.Tests
             Assert.Throws<OutOfMemoryException>(() => Graphics.FromHdcInternal((IntPtr)10));
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(PixelFormat.Format16bppRgb555)]
         [InlineData(PixelFormat.Format16bppRgb565)]
@@ -289,6 +308,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalFact(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         public void FromImage_NullImage_ThrowsArgumentNullException()
         {
@@ -325,6 +345,7 @@ namespace System.Drawing.Tests
             }
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(PixelFormat.Format16bppArgb1555)]
         [InlineData(PixelFormat.Format16bppGrayScale)]

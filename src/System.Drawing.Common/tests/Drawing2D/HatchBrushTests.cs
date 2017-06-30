@@ -47,6 +47,7 @@ namespace System.Drawing.Drawing2D.Tests
             Assert.Equal(backColor.ToArgb(), brush.BackgroundColor.ToArgb());
         }
 
+        [ActiveIssue(20884, TestPlatforms.AnyUnix)]
         [ConditionalTheory(nameof(PlatformDetection) + "." + nameof(PlatformDetection.IsNotWindowsNanoServer))]
         [InlineData(HatchStyle.Horizontal -1 )]
         [InlineData(HatchStyle.SolidDiamond + 1)]
