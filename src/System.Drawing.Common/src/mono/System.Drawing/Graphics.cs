@@ -1210,7 +1210,7 @@ namespace System.Drawing
             if (s == null || s.Length == 0)
                 return;
 
-            Status status = GDIPlus.GdipDrawString(nativeObject, s, s.Length, font.NativeObject, ref layoutRectangle, format != null ? format.NativeObject : IntPtr.Zero, brush.nativeObject);
+            Status status = GDIPlus.GdipDrawString(nativeObject, s, s.Length, font.NativeObject, ref layoutRectangle, format != null ? format.NativeObject : IntPtr.Zero, brush.NativeBrush);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1461,7 +1461,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (points == null)
                 throw new ArgumentNullException("points");
-            Status status = GDIPlus.GdipFillClosedCurve(nativeObject, brush.NativeObject, points, points.Length);
+            Status status = GDIPlus.GdipFillClosedCurve(nativeObject, brush.NativeBrush, points, points.Length);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1471,7 +1471,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (points == null)
                 throw new ArgumentNullException("points");
-            Status status = GDIPlus.GdipFillClosedCurveI(nativeObject, brush.NativeObject, points, points.Length);
+            Status status = GDIPlus.GdipFillClosedCurveI(nativeObject, brush.NativeBrush, points, points.Length);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1500,7 +1500,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (points == null)
                 throw new ArgumentNullException("points");
-            Status status = GDIPlus.GdipFillClosedCurve2(nativeObject, brush.NativeObject, points, points.Length, tension, fillmode);
+            Status status = GDIPlus.GdipFillClosedCurve2(nativeObject, brush.NativeBrush, points, points.Length, tension, fillmode);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1510,7 +1510,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (points == null)
                 throw new ArgumentNullException("points");
-            Status status = GDIPlus.GdipFillClosedCurve2I(nativeObject, brush.NativeObject, points, points.Length, tension, fillmode);
+            Status status = GDIPlus.GdipFillClosedCurve2I(nativeObject, brush.NativeBrush, points, points.Length, tension, fillmode);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1532,7 +1532,7 @@ namespace System.Drawing
         {
             if (brush == null)
                 throw new ArgumentNullException("brush");
-            Status status = GDIPlus.GdipFillEllipse(nativeObject, brush.nativeObject, x, y, width, height);
+            Status status = GDIPlus.GdipFillEllipse(nativeObject, brush.NativeBrush, x, y, width, height);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1540,7 +1540,7 @@ namespace System.Drawing
         {
             if (brush == null)
                 throw new ArgumentNullException("brush");
-            Status status = GDIPlus.GdipFillEllipseI(nativeObject, brush.nativeObject, x, y, width, height);
+            Status status = GDIPlus.GdipFillEllipseI(nativeObject, brush.NativeBrush, x, y, width, height);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1550,7 +1550,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (path == null)
                 throw new ArgumentNullException("path");
-            Status status = GDIPlus.GdipFillPath(nativeObject, brush.NativeObject, path.NativeObject);
+            Status status = GDIPlus.GdipFillPath(nativeObject, brush.NativeBrush, path.NativeObject);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1558,7 +1558,7 @@ namespace System.Drawing
         {
             if (brush == null)
                 throw new ArgumentNullException("brush");
-            Status status = GDIPlus.GdipFillPie(nativeObject, brush.NativeObject, rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
+            Status status = GDIPlus.GdipFillPie(nativeObject, brush.NativeBrush, rect.X, rect.Y, rect.Width, rect.Height, startAngle, sweepAngle);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1566,7 +1566,7 @@ namespace System.Drawing
         {
             if (brush == null)
                 throw new ArgumentNullException("brush");
-            Status status = GDIPlus.GdipFillPieI(nativeObject, brush.NativeObject, x, y, width, height, startAngle, sweepAngle);
+            Status status = GDIPlus.GdipFillPieI(nativeObject, brush.NativeBrush, x, y, width, height, startAngle, sweepAngle);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1574,7 +1574,7 @@ namespace System.Drawing
         {
             if (brush == null)
                 throw new ArgumentNullException("brush");
-            Status status = GDIPlus.GdipFillPie(nativeObject, brush.NativeObject, x, y, width, height, startAngle, sweepAngle);
+            Status status = GDIPlus.GdipFillPie(nativeObject, brush.NativeBrush, x, y, width, height, startAngle, sweepAngle);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1584,7 +1584,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (points == null)
                 throw new ArgumentNullException("points");
-            Status status = GDIPlus.GdipFillPolygon2(nativeObject, brush.nativeObject, points, points.Length);
+            Status status = GDIPlus.GdipFillPolygon2(nativeObject, brush.NativeBrush, points, points.Length);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1594,7 +1594,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (points == null)
                 throw new ArgumentNullException("points");
-            Status status = GDIPlus.GdipFillPolygon2I(nativeObject, brush.nativeObject, points, points.Length);
+            Status status = GDIPlus.GdipFillPolygon2I(nativeObject, brush.NativeBrush, points, points.Length);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1604,7 +1604,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (points == null)
                 throw new ArgumentNullException("points");
-            Status status = GDIPlus.GdipFillPolygonI(nativeObject, brush.nativeObject, points, points.Length, fillMode);
+            Status status = GDIPlus.GdipFillPolygonI(nativeObject, brush.NativeBrush, points, points.Length, fillMode);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1614,7 +1614,7 @@ namespace System.Drawing
                 throw new ArgumentNullException("brush");
             if (points == null)
                 throw new ArgumentNullException("points");
-            Status status = GDIPlus.GdipFillPolygon(nativeObject, brush.nativeObject, points, points.Length, fillMode);
+            Status status = GDIPlus.GdipFillPolygon(nativeObject, brush.NativeBrush, points, points.Length, fillMode);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1637,7 +1637,7 @@ namespace System.Drawing
             if (brush == null)
                 throw new ArgumentNullException("brush");
 
-            Status status = GDIPlus.GdipFillRectangleI(nativeObject, brush.nativeObject, x, y, width, height);
+            Status status = GDIPlus.GdipFillRectangleI(nativeObject, brush.NativeBrush, x, y, width, height);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1646,7 +1646,7 @@ namespace System.Drawing
             if (brush == null)
                 throw new ArgumentNullException("brush");
 
-            Status status = GDIPlus.GdipFillRectangle(nativeObject, brush.nativeObject, x, y, width, height);
+            Status status = GDIPlus.GdipFillRectangle(nativeObject, brush.NativeBrush, x, y, width, height);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1657,7 +1657,7 @@ namespace System.Drawing
             if (rects == null)
                 throw new ArgumentNullException("rects");
 
-            Status status = GDIPlus.GdipFillRectanglesI(nativeObject, brush.nativeObject, rects, rects.Length);
+            Status status = GDIPlus.GdipFillRectanglesI(nativeObject, brush.NativeBrush, rects, rects.Length);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1668,7 +1668,7 @@ namespace System.Drawing
             if (rects == null)
                 throw new ArgumentNullException("rects");
 
-            Status status = GDIPlus.GdipFillRectangles(nativeObject, brush.nativeObject, rects, rects.Length);
+            Status status = GDIPlus.GdipFillRectangles(nativeObject, brush.NativeBrush, rects, rects.Length);
             GDIPlus.CheckStatus(status);
         }
 
@@ -1680,7 +1680,7 @@ namespace System.Drawing
             if (region == null)
                 throw new ArgumentNullException("region");
 
-            Status status = GDIPlus.GdipFillRegion(nativeObject, brush.NativeObject, region.NativeObject);
+            Status status = GDIPlus.GdipFillRegion(nativeObject, brush.NativeBrush, region.NativeObject);
             GDIPlus.CheckStatus(status);
         }
 

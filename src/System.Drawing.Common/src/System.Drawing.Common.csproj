@@ -255,7 +255,6 @@
   </ItemGroup>
   <ItemGroup Condition="'$(TargetsUnix)' == 'true'">
     <Compile Include="mono\System.Drawing\Bitmap.cs" />
-    <Compile Include="mono\System.Drawing\Brush.cs" />
     <Compile Include="mono\System.Drawing\Brushes.cs" />
     <Compile Include="mono\System.Drawing\BufferedGraphics.cs" />
     <Compile Include="mono\System.Drawing\BufferedGraphicsManager.cs" />
@@ -281,15 +280,12 @@
     <Compile Include="mono\System.Drawing\Pen.cs" />
     <Compile Include="mono\System.Drawing\Pens.cs" />
     <Compile Include="mono\System.Drawing\Region.cs" />
-    <Compile Include="mono\System.Drawing\SolidBrush.cs" />
     <Compile Include="mono\System.Drawing\SRDescriptionAttribute.cs" />
     <Compile Include="mono\System.Drawing\StringFormat.cs" />
-    <Compile Include="mono\System.Drawing\SystemBrushes.cs" />
     <Compile Include="mono\System.Drawing\SystemColors.cs" />
     <Compile Include="mono\System.Drawing\SystemFonts.cs" />
     <Compile Include="mono\System.Drawing\SystemIcons.cs" />
     <Compile Include="mono\System.Drawing\SystemPens.cs" />
-    <Compile Include="mono\System.Drawing\TextureBrush.cs" />
     <Compile Include="mono\System.Drawing\ToolboxBitmapAttribute.cs" />
     <Compile Include="mono\System.Drawing.Drawing2D\AdjustableArrowCap.cs" />
     <Compile Include="mono\System.Drawing.Drawing2D\CustomLineCap.cs" />
@@ -298,7 +294,6 @@
     <Compile Include="mono\System.Drawing.Drawing2D\GraphicsPath.cs" />
     <Compile Include="mono\System.Drawing.Drawing2D\GraphicsPathIterator.cs" />
     <Compile Include="mono\System.Drawing.Drawing2D\GraphicsState.cs" />
-    <Compile Include="mono\System.Drawing.Drawing2D\HatchBrush.cs" />
     <Compile Include="mono\System.Drawing.Drawing2D\LinearGradientBrush.cs" />
     <Compile Include="mono\System.Drawing.Drawing2D\Matrix.cs" />
     <Compile Include="mono\System.Drawing.Drawing2D\PathGradientBrush.cs" />
@@ -366,6 +361,7 @@
     <Compile Include="System/Drawing/Drawing2D/DashStyle.cs" />
     <Compile Include="System/Drawing/Drawing2D/FillMode.cs" />
     <Compile Include="System/Drawing/Drawing2D/FlushIntention.cs" />
+    <Compile Include="System/Drawing/Drawing2D/HatchBrush.cs" />
     <Compile Include="System/Drawing/Drawing2D/HatchStyle.cs" />
     <Compile Include="System/Drawing/Drawing2D/InterpolationMode.cs" />
     <Compile Include="System/Drawing/Drawing2D/LinearGradientMode.cs" />
@@ -412,6 +408,28 @@
     <Compile Include="System/Drawing/Text/GenericFontFamilies.cs" />
     <Compile Include="System/Drawing/Text/HotkeyPrefix.cs" />
     <Compile Include="System/Drawing/Text/TextRenderingHint.cs" />
+    <Compile Include="misc/ClientUtils.cs" />
+    <Compile Include="misc/CompModSwitches.cs" />
+    <Compile Include="misc/DebugHandleTracker.cs" />
+    <Compile Include="misc/ExternDll.cs" />    
+    <Compile Include="misc/HandleCollector.cs" />
+    <Compile Include="System/Drawing/Gdiplus.cs" />
+    <Compile Include="System/Drawing/NativeMethods.cs" />
+    <Compile Include="System/Drawing/UnsafeNativeMethods.cs" />
+    <Compile Include="System/Drawing/Internal/GPPOINT.cs" />
+    <Compile Include="System/Drawing/Internal/GPPOINTF.cs" />
+    <Compile Include="System/Drawing/Internal/GPRECT.cs" />
+    <Compile Include="System/Drawing/Internal/GPRECTF.cs" />
+    <Compile Include="System/Drawing/Internal/ISystemEventTracker.cs" />
+    <Compile Include="System/Drawing/Brush.cs" />
+    <Compile Include="System/Drawing/SolidBrush.cs" />
+    <Compile Include="System/Drawing/SystemBrushes.cs" />
+    <Compile Include="System/Drawing/TextureBrush.cs" />
+    <Compile Include="System/Drawing/Drawing2D/CustomLineCapType.cs" />
+    <Compile Include="System/Drawing/Imaging/EmfPlusFlags.cs" />
+    <Compile Include="System/Drawing/Imaging/MetafileHeaderWmf.cs" />
+    <Compile Include="System/Drawing/Imaging/MetafileHeaderEmf.cs" />
+    <Compile Include="System/Drawing/PropertyItemInternal.cs" />
     <!-- Shared Common -->
     <Compile Include="$(CommonPath)\System\Drawing\ColorConverterCommon.cs">
       <Link>System\Drawing\ColorConverterCommon.cs</Link>

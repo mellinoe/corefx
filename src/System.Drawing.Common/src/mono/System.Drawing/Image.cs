@@ -184,6 +184,11 @@ namespace System.Drawing
             return img;
         }
 
+        internal static Image CreateImageObject (IntPtr nativeImage)
+        {
+            return CreateFromHandle (nativeImage);
+        }
+
         internal static Image CreateFromHandle(IntPtr handle)
         {
             ImageType type;
@@ -875,6 +880,14 @@ namespace System.Drawing
             set
             {
                 nativeObject = value;
+            }
+        }
+
+        internal IntPtr nativeImage
+        {
+            get
+            {
+                return nativeObject;
             }
         }
 

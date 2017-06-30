@@ -64,7 +64,7 @@ namespace System.Drawing
             if (brush == null)
                 throw new ArgumentNullException("brush");
 
-            Status status = GDIPlus.GdipCreatePen2(brush.nativeObject, width, GraphicsUnit.World, out nativeObject);
+            Status status = GDIPlus.GdipCreatePen2(brush.NativeBrush, width, GraphicsUnit.World, out nativeObject);
             GDIPlus.CheckStatus(status);
             color = Color.Empty;
         }
@@ -122,7 +122,7 @@ namespace System.Drawing
                 if (!isModifiable)
                     throw new ArgumentException("This Pen object can't be modified.");
 
-                Status status = GDIPlus.GdipSetPenBrushFill(nativeObject, value.nativeObject);
+                Status status = GDIPlus.GdipSetPenBrushFill(nativeObject, value.NativeBrush);
                 GDIPlus.CheckStatus(status);
                 color = Color.Empty;
             }

@@ -52,6 +52,8 @@ namespace System.Drawing.Imaging
             }
         }
 
+        internal IntPtr nativeImageAttributes => nativeImageAttr;
+
         internal ImageAttributes(IntPtr native)
         {
             nativeImageAttr = native;
