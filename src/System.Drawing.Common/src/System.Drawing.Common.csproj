@@ -11,6 +11,9 @@
     <EnablePInvokeAnalyzer>false</EnablePInvokeAnalyzer>
     <WarningsNotAsErrors>CS0618</WarningsNotAsErrors>
     <DefineConstants Condition="'$(TargetsWindows)' == 'true'">$(DefineConstants);FEATURE_WINDOWS_SYSTEM_COLORS</DefineConstants>
+    <GeneratePlatformNotSupportedAssemblyMessage Condition="'$(TargetsWindows)' != 'true'">System.Drawing.Common is not yet implemented on this platform.</GeneratePlatformNotSupportedAssemblyMessage>
+    <!-- Ignore empty finalizer warnings in the PlatformNotSupported assembly. -->
+    <NoWarn Condition="'$(TargetsWindows)' != 'true'">CA1821</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcoreapp-Windows_NT-Debug|AnyCPU'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcoreapp-Windows_NT-Release|AnyCPU'" />
@@ -36,7 +39,7 @@
     <Reference Include="System.Threading" />
     <Reference Include="System.Threading.Thread" />
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetsWindows)' == 'true'">
     <Compile Include="AssemblyRef.cs" />
     <Compile Include="SRDescriptionAttribute.cs" />
     <Compile Include="System\Drawing\Bitmap.cs" />
@@ -247,7 +250,7 @@
       <Link>System\Drawing\KnownColorTable.cs</Link>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
+  <ItemGroup Condition="'$(TargetsWindows)' == 'true'">
     <EmbeddedResource Include="Resources\System\Drawing\DefaultComponent.bmp">
       <LogicalName>System.Drawing.DefaultComponent.bmp</LogicalName>
     </EmbeddedResource>
