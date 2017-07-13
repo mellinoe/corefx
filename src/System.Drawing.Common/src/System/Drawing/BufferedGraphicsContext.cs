@@ -79,7 +79,6 @@ namespace System.Drawing
             {
                 return _maximumBuffer;
             }
-            [UIPermission(SecurityAction.Demand, Window = UIPermissionWindow.AllWindows)]
             set
             {
                 if (value.Width <= 0 || value.Height <= 0)

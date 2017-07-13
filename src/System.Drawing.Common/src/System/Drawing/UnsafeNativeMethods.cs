@@ -67,21 +67,11 @@ namespace System.Drawing
         [DllImport(ExternDll.Gdi32, SetLastError = true, ExactSpelling = true, CharSet = CharSet.Auto)]
         public static extern int GetObjectType(HandleRef hObject);
 
-        // SECUNDONE : For some reason "PtrToStructure" requires super high permission.. put this 
-        //           : assert here until we can get a resolution on this.
-        //           : this is ok as long as the lparam is not obtained from external code.
-        [ReflectionPermission(SecurityAction.Assert, Unrestricted = true),
-         SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public static object PtrToStructure(IntPtr lparam, Type cls)
         {
             return Marshal.PtrToStructure(lparam, cls);
         }
 
-        // SECUNDONE : For some reason "PtrToStructure" requires super high permission.. put this 
-        //           : assert here until we can get a resolution on this.
-        //           : this is ok as long as the lparam is not obtained from external code.
-        [ReflectionPermission(SecurityAction.Assert, Unrestricted = true),
-         SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.UnmanagedCode)]
         public static void PtrToStructure(IntPtr lparam, object data)
         {
             Marshal.PtrToStructure(lparam, data);
