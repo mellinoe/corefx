@@ -36,9 +36,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-#if !NETCOREAPP2_0
-using System.Runtime.Serialization.Formatters.Soap;
-#endif
 using System.Security.Cryptography;
 using System.Security.Permissions;
 using System.Text;
@@ -47,7 +44,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing {
 
-	[TestFixture]
 	public class TestBitmap {
 		
 		[Fact]
@@ -71,10 +67,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				BitmapData data = bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format32bppRgb, data.PixelFormat, "PixelFormat");
-				Assert.Equal (400, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format32bppRgb, data.PixelFormat);
+				Assert.Equal (400, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -85,10 +81,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				BitmapData data = bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat, "PixelFormat");
-				Assert.Equal (300, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat);
+				Assert.Equal (300, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -99,10 +95,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format24bppRgb)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				BitmapData data = bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat, "PixelFormat");
-				Assert.Equal (300, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat);
+				Assert.Equal (300, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -113,10 +109,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format24bppRgb)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				BitmapData data = bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format32bppRgb, data.PixelFormat, "PixelFormat");
-				Assert.Equal (400, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format32bppRgb, data.PixelFormat);
+				Assert.Equal (400, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -139,7 +135,7 @@ namespace MonoTests.System.Drawing {
 				Assert.Throws<ArgumentException> (() => bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed, bd));
 
 				// test to see if there's a leak or not in this case
-				Assert.Equal (IntPtr.Zero, bd.Scan0, "Scan0");
+				Assert.Equal (IntPtr.Zero, bd.Scan0);
 			}
 		}
 
@@ -149,10 +145,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format8bppIndexed)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				BitmapData data = bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format8bppIndexed, data.PixelFormat, "PixelFormat");
-				Assert.Equal (100, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format8bppIndexed, data.PixelFormat);
+				Assert.Equal (100, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -164,11 +160,11 @@ namespace MonoTests.System.Drawing {
 				Rectangle r = new Rectangle (4, 4, 4, 4);
 				BitmapData data = bmp.LockBits (r, (ImageLockMode)0, PixelFormat.Format24bppRgb);
 				try {
-					Assert.Equal (4, data.Height, "Height");
-					Assert.Equal (4, data.Width, "Width");
-					Assert.True (data.Stride >= 12, "Stride");
-					Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat, "PixelFormat");
-					Assert.False (IntPtr.Zero.Equals (data.Scan0), "Scan0");
+					Assert.Equal (4, data.Height);
+					Assert.Equal (4, data.Width);
+					Assert.True (data.Stride >= 12);
+					Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat);
+					Assert.False (IntPtr.Zero.Equals (data.Scan0));
 				}
 				finally {
 					bmp.UnlockBits (data);
@@ -223,10 +219,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb, data);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format32bppRgb, data.PixelFormat, "PixelFormat");
-				Assert.Equal (400, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format32bppRgb, data.PixelFormat);
+				Assert.Equal (400, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -238,10 +234,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb, data);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat, "PixelFormat");
-				Assert.Equal (300, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat);
+				Assert.Equal (300, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -253,10 +249,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format24bppRgb)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb, data);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat, "PixelFormat");
-				Assert.Equal (300, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat);
+				Assert.Equal (300, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -268,10 +264,10 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format24bppRgb)) {
 				Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
 				bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb, data);
-				Assert.Equal (100, data.Height, "Height");
-				Assert.Equal (PixelFormat.Format32bppRgb, data.PixelFormat, "PixelFormat");
-				Assert.Equal (400, data.Stride, "Stride");
-				Assert.Equal (100, data.Width, "Width");
+				Assert.Equal (100, data.Height);
+				Assert.Equal (PixelFormat.Format32bppRgb, data.PixelFormat);
+				Assert.Equal (400, data.Stride);
+				Assert.Equal (100, data.Width);
 				bmp.UnlockBits (data);
 			}
 		}
@@ -281,7 +277,7 @@ namespace MonoTests.System.Drawing {
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format1bppIndexed)) {
 				Color c = bmp.GetPixel (0, 0);
-				Assert.Equal (-16777216, c.ToArgb (), "Color");
+				Assert.Equal (-16777216, c.ToArgb ());
 				Assert.Throws<InvalidOperationException> (() => bmp.SetPixel (0, 0, c));
 			}
 		}
@@ -291,7 +287,7 @@ namespace MonoTests.System.Drawing {
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format4bppIndexed)) {
 				Color c = bmp.GetPixel (0, 0);
-				Assert.Equal (-16777216, c.ToArgb (), "Color");
+				Assert.Equal (-16777216, c.ToArgb ());
 				Assert.Throws<InvalidOperationException> (() => bmp.SetPixel (0, 0, c));
 			}
 		}
@@ -301,7 +297,7 @@ namespace MonoTests.System.Drawing {
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format8bppIndexed)) {
 				Color c = bmp.GetPixel (0, 0);
-				Assert.Equal (-16777216, c.ToArgb (), "Color");
+				Assert.Equal (-16777216, c.ToArgb ());
 				Assert.Throws<InvalidOperationException> (() => bmp.SetPixel (0, 0, c));
 			}
 		}
@@ -318,91 +314,91 @@ namespace MonoTests.System.Drawing {
 				Color c = bmp.GetPixel (0, 0);
 				Color d = bmp.GetPixel (1, 0);
 				if (size == 4) {
-					Assert.Equal (255, c.A, "0,0-16bpp-A");
-					Assert.Equal (66, c.R, "0,0-16bpp-R");
+					Assert.Equal (255, c.A);
+					Assert.Equal (66, c.R);
 					if (format == PixelFormat.Format16bppRgb565) {
-						Assert.Equal (32, c.G, "0,0-16bpp-G");
+						Assert.Equal (32, c.G);
 					} else {
-						Assert.Equal (33, c.G, "0,0-16bpp-G");
+						Assert.Equal (33, c.G);
 					}
-					Assert.Equal (16, c.B, "0,0-16bpp-B");
+					Assert.Equal (16, c.B);
 
-					Assert.Equal (255, d.A, "1,0-16bpp-A");
-					Assert.Equal (99, d.R, "1,0-16bpp-R");
+					Assert.Equal (255, d.A);
+					Assert.Equal (99, d.R);
 					if (format == PixelFormat.Format16bppRgb565) {
-						Assert.Equal (48, d.G, "1,0-16bpp-G");
+						Assert.Equal (48, d.G);
 					} else {
-						Assert.Equal (49, d.G, "1,0-16bpp-G");
+						Assert.Equal (49, d.G);
 					}
-					Assert.Equal (24, d.B, "1,0-16bpp-B");
+					Assert.Equal (24, d.B);
 				} else if (alpha) {
 					if (format == PixelFormat.Format32bppPArgb) {
-						Assert.Equal (a.A, c.A, "0,0-alpha-A");
+						Assert.Equal (a.A, c.A);
 						// note sure why the -1
-						Assert.Equal (a.R - 1, c.R, "0,0-alpha-premultiplied-R");
-						Assert.Equal (a.G - 1, c.G, "0,0-alpha-premultiplied-G");
-						Assert.Equal (a.B - 1, c.B, "0,0-alpha-premultiplied-B");
+						Assert.Equal (a.R - 1, c.R);
+						Assert.Equal (a.G - 1, c.G);
+						Assert.Equal (a.B - 1, c.B);
 
-						Assert.Equal (b.A, d.A, "1,0-alpha-A");
+						Assert.Equal (b.A, d.A);
 						// note sure why the -1
-						Assert.Equal (b.R - 1, d.R, "1,0-alpha-premultiplied-R");
-						Assert.Equal (b.G - 1, d.G, "1,0-alpha-premultiplied-G");
-						Assert.Equal (b.B - 1, d.B, "1,0-alpha-premultiplied-B");
+						Assert.Equal (b.R - 1, d.R);
+						Assert.Equal (b.G - 1, d.G);
+						Assert.Equal (b.B - 1, d.B);
 					} else {
-						Assert.Equal (a, c, "0,0-alpha");
-						Assert.Equal (b, d, "1,0-alpha");
+						Assert.Equal (a, c);
+						Assert.Equal (b, d);
 					}
 				} else {
-					Assert.Equal (Color.FromArgb (255, 64, 32, 16), c, "0,0-non-alpha");
-					Assert.Equal (Color.FromArgb (255, 96, 48, 24), d, "1,0-non-alpha");
+					Assert.Equal (Color.FromArgb (255, 64, 32, 16), c);
+					Assert.Equal (Color.FromArgb (255, 96, 48, 24), d);
 				}
 				BitmapData bd = bmp.LockBits (new Rectangle (0, 0, 2, 1), ImageLockMode.ReadOnly, format);
 				try {
 					byte[] data = new byte[size];
 					Marshal.Copy (bd.Scan0, data, 0, size);
 					if (format == PixelFormat.Format32bppPArgb) {
-						Assert.Equal (Math.Ceiling ((float)c.B * c.A / 255), data[0], "0.alpha-premultiplied-B");
-						Assert.Equal (Math.Ceiling ((float)c.G * c.A / 255), data[1], "0.alpha-premultiplied-R");
-						Assert.Equal (Math.Ceiling ((float)c.R * c.A / 255), data[2], "0.alpha-premultiplied-G");
-						Assert.Equal (c.A, data[3], "0.alpha-A");
-						Assert.Equal (Math.Ceiling ((float)d.B * d.A / 255), data[4], "1.alpha-premultiplied-B");
-						Assert.Equal (Math.Ceiling ((float)d.G * d.A / 255), data[5], "1.alpha-premultiplied-R");
-						Assert.Equal (Math.Ceiling ((float)d.R * d.A / 255), data[6], "1.alpha-premultiplied-G");
-						Assert.Equal (d.A, data[7], "1.alpha-A");
+						Assert.Equal (Math.Ceiling ((float)c.B * c.A / 255), data[0]);
+						Assert.Equal (Math.Ceiling ((float)c.G * c.A / 255), data[1]);
+						Assert.Equal (Math.Ceiling ((float)c.R * c.A / 255), data[2]);
+						Assert.Equal (c.A, data[3]);
+						Assert.Equal (Math.Ceiling ((float)d.B * d.A / 255), data[4]);
+						Assert.Equal (Math.Ceiling ((float)d.G * d.A / 255), data[5]);
+						Assert.Equal (Math.Ceiling ((float)d.R * d.A / 255), data[6]);
+						Assert.Equal (d.A, data[7]);
 					} else if (size == 4) {
 						int n = 0;
 						switch (format) {
 						case PixelFormat.Format16bppRgb565:
-							Assert.Equal (2, data[n++], "0");
-							Assert.Equal (65, data[n++], "1");
-							Assert.Equal (131, data[n++], "2");
-							Assert.Equal (97, data[n++], "3");
+							Assert.Equal (2, data[n++]);
+							Assert.Equal (65, data[n++]);
+							Assert.Equal (131, data[n++]);
+							Assert.Equal (97, data[n++]);
 							break;
 						case PixelFormat.Format16bppArgb1555:
-							Assert.Equal (130, data[n++], "0");
-							Assert.Equal (160, data[n++], "1");
-							Assert.Equal (195, data[n++], "2");
-							Assert.Equal (176, data[n++], "3");
+							Assert.Equal (130, data[n++]);
+							Assert.Equal (160, data[n++]);
+							Assert.Equal (195, data[n++]);
+							Assert.Equal (176, data[n++]);
 							break;
 						case PixelFormat.Format16bppRgb555:
-							Assert.Equal (130, data[n++], "0");
-							Assert.Equal (32, data[n++], "1");
-							Assert.Equal (195, data[n++], "2");
-							Assert.Equal (48, data[n++], "3");
+							Assert.Equal (130, data[n++]);
+							Assert.Equal (32, data[n++]);
+							Assert.Equal (195, data[n++]);
+							Assert.Equal (48, data[n++]);
 							break;
 						}
 					} else {
 						int n = 0;
-						Assert.Equal (c.B, data[n++], "0.B");
-						Assert.Equal (c.G, data[n++], "0.R");
-						Assert.Equal (c.R, data[n++], "0.G");
+						Assert.Equal (c.B, data[n++]);
+						Assert.Equal (c.G, data[n++]);
+						Assert.Equal (c.R, data[n++]);
 						if (size % 4 == 0)
-							Assert.Equal (c.A, data[n++], "0.A");
-						Assert.Equal (d.B, data[n++], "1.B");
-						Assert.Equal (d.G, data[n++], "1.R");
-						Assert.Equal (d.R, data[n++], "1.G");
+							Assert.Equal (c.A, data[n++]);
+						Assert.Equal (d.B, data[n++]);
+						Assert.Equal (d.G, data[n++]);
+						Assert.Equal (d.R, data[n++]);
 						if (size % 4 == 0)
-							Assert.Equal (d.A, data[n++], "1.A");
+							Assert.Equal (d.A, data[n++]);
 					}
 				}
 				finally {
@@ -637,12 +633,9 @@ namespace MonoTests.System.Drawing {
 			resulting pixels using MD5
 		*/
 		[Fact]
+        [PlatformSpecific(TestPlatforms.AnyUnix)]
 		public void Rotate1bit4bit()
 		{
-			if ((Environment.OSVersion.Platform != (PlatformID)4)
-			 && (Environment.OSVersion.Platform != (PlatformID)128))
-				Assert.Ignore("This does not work with Microsoft's GDIPLUS.DLL due to off-by-1 errors in their GdipBitmapRotateFlip function.");
-
 			string[] files = {
 			                   getInFile ("bitmaps/1bit.png"),
 			                   getInFile ("bitmaps/4bit.png")
@@ -784,11 +777,11 @@ namespace MonoTests.System.Drawing {
 		public void LockBitmap_Format32bppArgb_Format32bppArgb_ReadWrite_Whole ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
-				Assert.Equal (DefaultBitmapHash, HashPixels (bmp), "Initial");
+				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
 				byte[] expected = { 0x89, 0x6A, 0x6B, 0x35, 0x5C, 0x89, 0xD9, 0xE9, 0xF4, 0x51, 0xD5, 0x89, 0xED, 0x28, 0x68, 0x5C };
 				byte[] actual = HashLock (bmp, bmp.Width, bmp.Height, PixelFormat.Format32bppArgb, ImageLockMode.ReadWrite);
-				Assert.Equal (expected, actual, "Full-Format32bppArgb");
-				Assert.Equal (FinalWholeBitmapHash, HashPixels (bmp), "Final");
+				Assert.Equal (expected, actual);
+				Assert.Equal (FinalWholeBitmapHash, HashPixels (bmp));
 			}
 		}
 
@@ -796,11 +789,11 @@ namespace MonoTests.System.Drawing {
 		public void LockBitmap_Format32bppArgb_Format32bppPArgb_ReadWrite_Whole ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
-				Assert.Equal (DefaultBitmapHash, HashPixels (bmp), "Initial");
+				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
 				byte[] expected = { 0x89, 0x6A, 0x6B, 0x35, 0x5C, 0x89, 0xD9, 0xE9, 0xF4, 0x51, 0xD5, 0x89, 0xED, 0x28, 0x68, 0x5C };
 				byte[] actual = HashLock (bmp, bmp.Width, bmp.Height, PixelFormat.Format32bppPArgb, ImageLockMode.ReadWrite);
-				Assert.Equal (expected, actual, "Full-Format32bppPArgb");
-				Assert.Equal (FinalWholeBitmapHash, HashPixels (bmp), "Final");
+				Assert.Equal (expected, actual);
+				Assert.Equal (FinalWholeBitmapHash, HashPixels (bmp));
 			}
 		}
 
@@ -808,11 +801,11 @@ namespace MonoTests.System.Drawing {
 		public void LockBitmap_Format32bppArgb_Format32bppRgb_ReadWrite_Whole ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
-				Assert.Equal (DefaultBitmapHash, HashPixels (bmp), "Initial");
+				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
 				byte[] expected = { 0xC0, 0x28, 0xB5, 0x2E, 0x86, 0x90, 0x6F, 0x37, 0x09, 0x5F, 0x49, 0xA4, 0x91, 0xDA, 0xEE, 0xB9 };
 				byte[] actual = HashLock (bmp, bmp.Width, bmp.Height, PixelFormat.Format32bppRgb, ImageLockMode.ReadWrite);
-				Assert.Equal (expected, actual, "Full-Format32bppRgb");
-				Assert.Equal (FinalWholeBitmapHash, HashPixels (bmp), "Final");
+				Assert.Equal (expected, actual);
+				Assert.Equal (FinalWholeBitmapHash, HashPixels (bmp));
 			}
 		}
 
@@ -820,11 +813,11 @@ namespace MonoTests.System.Drawing {
 		public void LockBitmap_Format32bppArgb_Format24bppRgb_ReadWrite_Whole ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
-				Assert.Equal (DefaultBitmapHash, HashPixels (bmp), "Initial");
+				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
 				byte[] expected = { 0xA7, 0xB2, 0x50, 0x04, 0x11, 0x12, 0x64, 0x68, 0x6B, 0x7D, 0x2F, 0x6E, 0x69, 0x24, 0xCB, 0x14 };
 				byte[] actual = HashLock (bmp, bmp.Width, bmp.Height, PixelFormat.Format24bppRgb, ImageLockMode.ReadWrite);
-				Assert.Equal (expected, actual, "Full-Format24bppRgb");
-				Assert.Equal (FinalWholeBitmapHash, HashPixels (bmp), "Final");
+				Assert.Equal (expected, actual);
+				Assert.Equal (FinalWholeBitmapHash, HashPixels (bmp));
 			}
 		}
 
@@ -834,11 +827,11 @@ namespace MonoTests.System.Drawing {
 		public void LockBitmap_Format32bppArgb_Format32bppArgb_ReadWrite_Partial ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
-				Assert.Equal (DefaultBitmapHash, HashPixels (bmp), "Initial");
+				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
 				byte[] expected = { 0x5D, 0xFF, 0x02, 0x34, 0xEB, 0x7C, 0xF7, 0x42, 0xD4, 0xB7, 0x70, 0x49, 0xB4, 0x06, 0x79, 0xBC };
 				byte[] actual = HashLock (bmp, 50, 50, PixelFormat.Format32bppArgb, ImageLockMode.ReadWrite);
-				Assert.Equal (expected, actual, "Partial-Format32bppArgb");
-				Assert.Equal (FinalPartialBitmapHash, HashPixels (bmp), "Final");
+				Assert.Equal (expected, actual);
+				Assert.Equal (FinalPartialBitmapHash, HashPixels (bmp));
 			}
 		}
 
@@ -846,11 +839,11 @@ namespace MonoTests.System.Drawing {
 		public void LockBitmap_Format32bppArgb_Format32bppPArgb_ReadWrite_Partial ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
-				Assert.Equal (DefaultBitmapHash, HashPixels (bmp), "Initial");
+				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
 				byte[] expected = { 0x5D, 0xFF, 0x02, 0x34, 0xEB, 0x7C, 0xF7, 0x42, 0xD4, 0xB7, 0x70, 0x49, 0xB4, 0x06, 0x79, 0xBC };
 				byte[] actual = HashLock (bmp, 50, 50, PixelFormat.Format32bppPArgb, ImageLockMode.ReadWrite);
-				Assert.Equal (expected, actual, "Partial-Format32bppPArgb");
-				Assert.Equal (FinalPartialBitmapHash, HashPixels (bmp), "Final");
+				Assert.Equal (expected, actual);
+				Assert.Equal (FinalPartialBitmapHash, HashPixels (bmp));
 			}
 		}
 
@@ -858,11 +851,11 @@ namespace MonoTests.System.Drawing {
 		public void LockBitmap_Format32bppArgb_Format32bppRgb_ReadWrite_Partial ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
-				Assert.Equal (DefaultBitmapHash, HashPixels (bmp), "Initial");
+				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
 				byte[] expected = { 0x72, 0x33, 0x09, 0x67, 0x53, 0x65, 0x38, 0xF9, 0xE4, 0x58, 0xE1, 0x0A, 0xAA, 0x6A, 0xCC, 0xB8 };
 				byte[] actual = HashLock (bmp, 50, 50, PixelFormat.Format32bppRgb, ImageLockMode.ReadWrite);
-				Assert.Equal (expected, actual, "Partial-Format32bppRgb");
-				Assert.Equal (FinalPartialBitmapHash, HashPixels (bmp), "Final");
+				Assert.Equal (expected, actual);
+				Assert.Equal (FinalPartialBitmapHash, HashPixels (bmp));
 			}
 		}
 
@@ -870,11 +863,11 @@ namespace MonoTests.System.Drawing {
 		public void LockBitmap_Format32bppArgb_Format24bppRgb_ReadWrite_Partial ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
-				Assert.Equal (DefaultBitmapHash, HashPixels (bmp), "Initial");
+				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
 				byte[] expected = { 0x4D, 0x39, 0x21, 0x88, 0xC2, 0x17, 0x14, 0x5F, 0x89, 0x9E, 0x02, 0x75, 0xF3, 0x64, 0xD8, 0xF0 };
 				byte[] actual = HashLock (bmp, 50, 50, PixelFormat.Format24bppRgb, ImageLockMode.ReadWrite);
-				Assert.Equal (expected, actual, "Partial-Format24bppRgb");
-				Assert.Equal (FinalPartialBitmapHash, HashPixels (bmp), "Final");
+				Assert.Equal (expected, actual);
+				Assert.Equal (FinalPartialBitmapHash, HashPixels (bmp));
 			}
 		}
 
@@ -895,7 +888,7 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format32bppRgb)) {
 				bmp.SetPixel (0, 0, red);
 				pixel_colour = bmp.GetPixel (0, 0);
-				Assert.Equal (red, pixel_colour, "Set/Get-Red");
+				Assert.Equal (red, pixel_colour);
 
 				data = bmp.LockBits (new Rectangle (0, 0, 1, 1), ImageLockMode.ReadOnly, PixelFormat.Format32bppArgb);
 				try {
@@ -907,7 +900,7 @@ namespace MonoTests.System.Drawing {
 					pixel_colour = Color.FromArgb (pixel_value);
 					// Disregard alpha information in the test
 					pixel_colour = Color.FromArgb (red.A, pixel_colour.R, pixel_colour.G, pixel_colour.B);
-					Assert.Equal (red, pixel_colour, "32RGB/32ARGB-ReadOnly-Red-Original");
+					Assert.Equal (red, pixel_colour);
 
 					// write blue but we're locked in read-only...
 					Marshal.WriteByte (data.Scan0, 0, blue.B);
@@ -921,7 +914,7 @@ namespace MonoTests.System.Drawing {
 					// Disregard alpha information in the test
 					pixel_colour = Color.FromArgb (red.A, pixel_colour.R, pixel_colour.G, pixel_colour.B);
 					// ...so we still read red after unlocking
-					Assert.Equal (red, pixel_colour, "32RGB/32ARGB-ReadOnly-Red-Unlocked");
+					Assert.Equal (red, pixel_colour);
 				}
 
 				data = bmp.LockBits (new Rectangle (0, 0, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format32bppArgb);
@@ -938,7 +931,7 @@ namespace MonoTests.System.Drawing {
 					// Disregard alpha information in the test
 					pixel_colour = Color.FromArgb(blue.A, pixel_colour.R, pixel_colour.G, pixel_colour.B);
 					// read blue
-					Assert.Equal (blue, pixel_colour, "32RGB/32ARGB-ReadWrite-Blue-Unlock");
+					Assert.Equal (blue, pixel_colour);
 				}
 			}
 
@@ -951,7 +944,7 @@ namespace MonoTests.System.Drawing {
 					byte g = Marshal.ReadByte (data.Scan0, 1);
 					byte r = Marshal.ReadByte (data.Scan0, 2);
 					pixel_colour = Color.FromArgb (red.A, r, g, b);
-					Assert.Equal (red, pixel_colour, "32ARGB/24RGB-ReadOnly-Red-Original");
+					Assert.Equal (red, pixel_colour);
 					// write blue but we're locked in read-only...
 					Marshal.WriteByte (data.Scan0, 0, blue.B);
 					Marshal.WriteByte (data.Scan0, 1, blue.G);
@@ -960,7 +953,7 @@ namespace MonoTests.System.Drawing {
 				finally {
 					bmp.UnlockBits (data);
 					// ...so we still read red after unlocking
-					Assert.Equal (red, bmp.GetPixel (0, 0), "32ARGB/24RGB-ReadOnly-Red-Unlock");
+					Assert.Equal (red, bmp.GetPixel (0, 0));
 				}
 
 				data = bmp.LockBits (new Rectangle (0, 0, 1, 1), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
@@ -973,7 +966,7 @@ namespace MonoTests.System.Drawing {
 				finally {
 					bmp.UnlockBits (data);
 					// read blue
-					Assert.Equal (blue, bmp.GetPixel (0, 0), "32ARGB/24RGB-ReadWrite-Blue-Unlock");
+					Assert.Equal (blue, bmp.GetPixel (0, 0));
 				}
 			}
 		}
@@ -1034,84 +1027,15 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap icon = new Bitmap (filename)) {
 				using (Stream s = Serialize (icon)) {
 					using (Bitmap copy = (Bitmap)Deserialize (s)) {
-						Assert.Equal (icon.Height, copy.Height, "Height");
-						Assert.Equal (icon.Width, copy.Width, "Width");
-						Assert.Equal (icon.PixelFormat, copy.PixelFormat, "PixelFormat");
-						Assert.True (icon.RawFormat.Equals (ImageFormat.Icon), "Icon");
-						Assert.True (copy.RawFormat.Equals (ImageFormat.Png), "Png");
+						Assert.Equal (icon.Height, copy.Height);
+						Assert.Equal (icon.Width, copy.Width);
+						Assert.Equal (icon.PixelFormat, copy.PixelFormat);
+						Assert.True (icon.RawFormat.Equals (ImageFormat.Icon));
+						Assert.True (copy.RawFormat.Equals (ImageFormat.Png));
 					}
 				}
 			}
 		}
-
-#if !NETCOREAPP2_0
-		private Stream SoapSerialize (object o)
-		{
-			MemoryStream ms = new MemoryStream ();
-			IFormatter formatter = new SoapFormatter ();
-			formatter.Serialize (ms, o);
-			ms.Position = 0;
-			return ms;
-		}
-
-		private object SoapDeserialize (Stream s)
-		{
-			return new SoapFormatter ().Deserialize (s);
-		}
-
-		[Fact]
-		public void SoapSerialize_Icon ()
-		{
-			string filename = getInFile ("bitmaps/16x16x16.ico");
-			using (Bitmap icon = new Bitmap (filename)) {
-				using (Stream s = SoapSerialize (icon)) {
-					using (Bitmap copy = (Bitmap) SoapDeserialize (s)) {
-						Assert.Equal (icon.Height, copy.Height, "Height");
-						Assert.Equal (icon.Width, copy.Width, "Width");
-						Assert.Equal (icon.PixelFormat, copy.PixelFormat, "PixelFormat");
-						Assert.Equal (16, icon.Palette.Entries.Length, "icon Palette");
-						Assert.True (icon.RawFormat.Equals (ImageFormat.Icon), "Icon");
-						Assert.Equal (0, copy.Palette.Entries.Length, "copy Palette");
-						Assert.True (copy.RawFormat.Equals (ImageFormat.Png), "Png");
-					}
-				}
-			}
-		}
-
-		[Fact]
-		public void SoapSerialize_Bitmap8 ()
-		{
-			string filename = getInFile ("bitmaps/almogaver8bits.bmp");
-			using (Bitmap bmp = new Bitmap (filename)) {
-				using (Stream s = SoapSerialize (bmp)) {
-					using (Bitmap copy = (Bitmap) SoapDeserialize (s)) {
-						Assert.Equal (bmp.Height, copy.Height, "Height");
-						Assert.Equal (bmp.Width, copy.Width, "Width");
-						Assert.Equal (bmp.PixelFormat, copy.PixelFormat, "PixelFormat");
-						Assert.Equal (256, copy.Palette.Entries.Length, "Palette");
-						Assert.Equal (bmp.RawFormat, copy.RawFormat, "RawFormat");
-					}
-				}
-			}
-		}
-
-		[Fact]
-		public void SoapSerialize_Bitmap24 ()
-		{
-			string filename = getInFile ("bitmaps/almogaver24bits.bmp");
-			using (Bitmap bmp = new Bitmap (filename)) {
-				using (Stream s = SoapSerialize (bmp)) {
-					using (Bitmap copy = (Bitmap) SoapDeserialize (s)) {
-						Assert.Equal (bmp.Height, copy.Height, "Height");
-						Assert.Equal (bmp.Width, copy.Width, "Width");
-						Assert.Equal (bmp.PixelFormat, copy.PixelFormat, "PixelFormat");
-						Assert.Equal (bmp.Palette.Entries.Length, copy.Palette.Entries.Length, "Palette");
-						Assert.Equal (bmp.RawFormat, copy.RawFormat, "RawFormat");
-					}
-				}
-			}
-		}
-#endif
 
 		static int[] palette1 = {
 			-16777216,
@@ -1123,11 +1047,11 @@ namespace MonoTests.System.Drawing {
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format1bppIndexed)) {
 				ColorPalette pal = bmp.Palette;
-				Assert.Equal (2, pal.Entries.Length, "Length");
+				Assert.Equal (2, pal.Entries.Length);
 				for (int i = 0; i < pal.Entries.Length; i++) {
-					Assert.Equal (palette1[i], pal.Entries[i].ToArgb (), i.ToString ());
+					Assert.Equal (palette1[i], pal.Entries[i].ToArgb ());
 				}
-				Assert.Equal (2, pal.Flags, "Flags");
+				Assert.Equal (2, pal.Flags);
 			}
 		}
 
@@ -1155,11 +1079,11 @@ namespace MonoTests.System.Drawing {
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format4bppIndexed)) {
 				ColorPalette pal = bmp.Palette;
-				Assert.Equal (16, pal.Entries.Length, "Length");
+				Assert.Equal (16, pal.Entries.Length);
 				for (int i = 0; i < pal.Entries.Length; i++) {
-					Assert.Equal (palette16 [i], pal.Entries[i].ToArgb (), i.ToString ());
+					Assert.Equal (palette16 [i], pal.Entries[i].ToArgb ());
 				}
-				Assert.Equal (0, pal.Flags, "Flags");
+				Assert.Equal (0, pal.Flags);
 			}
 		}
 
@@ -1427,11 +1351,11 @@ namespace MonoTests.System.Drawing {
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format8bppIndexed)) {
 				ColorPalette pal = bmp.Palette;
-				Assert.Equal (256, pal.Entries.Length, "Length");
+				Assert.Equal (256, pal.Entries.Length);
 				for (int i = 0; i < pal.Entries.Length; i++) {
-					Assert.Equal (palette256[i], pal.Entries[i].ToArgb (), i.ToString ());
+					Assert.Equal (palette256[i], pal.Entries[i].ToArgb ());
 				}
-				Assert.Equal (4, pal.Flags, "Flags");
+				Assert.Equal (4, pal.Flags);
 			}
 		}
 
@@ -1563,7 +1487,6 @@ namespace MonoTests.System.Drawing {
 		}
 	}
 
-	[TestFixture]
 	public class BitmapFullTrustTest {
 		[Fact]
 		public void BitmapIntIntIntPixelFormatIntPtrCtor ()
@@ -1576,13 +1499,13 @@ namespace MonoTests.System.Drawing {
 
 		private void HiconTest (string msg, Bitmap b, int size)
 		{
-			Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat, msg + ".PixelFormat");
+			Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat);
 			// unlike the GDI+ icon decoder the palette isn't kept
-			Assert.Equal (0, b.Palette.Entries.Length, msg + ".Palette");
-			Assert.Equal (size, b.Height, msg + ".Height");
-			Assert.Equal (size, b.Width, msg + ".Width");
-			Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), msg + ".RawFormat");
-			Assert.Equal (335888, b.Flags, msg + ".Flags");
+			Assert.Equal (0, b.Palette.Entries.Length);
+			Assert.Equal (size, b.Height);
+			Assert.Equal (size, b.Width);
+			Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+			Assert.Equal (335888, b.Flags);
 		}
 
 		[Fact]
@@ -1663,22 +1586,22 @@ namespace MonoTests.System.Drawing {
 			IntPtr hbitmap;
 			string sInFile = TestBitmap.getInFile ("bitmaps/almogaver24bits.bmp");
 			using (Bitmap bitmap = new Bitmap (sInFile)) {
-				Assert.Equal (PixelFormat.Format24bppRgb, bitmap.PixelFormat, "Original.PixelFormat");
-				Assert.Equal (0, bitmap.Palette.Entries.Length, "Original.Palette");
-				Assert.Equal (183, bitmap.Height, "Original.Height");
-				Assert.Equal (173, bitmap.Width, "Original.Width");
-				Assert.Equal (73744, bitmap.Flags, "Original.Flags");
-				Assert.True (bitmap.RawFormat.Equals (ImageFormat.Bmp), "Original.RawFormat");
+				Assert.Equal (PixelFormat.Format24bppRgb, bitmap.PixelFormat);
+				Assert.Equal (0, bitmap.Palette.Entries.Length);
+				Assert.Equal (183, bitmap.Height);
+				Assert.Equal (173, bitmap.Width);
+				Assert.Equal (73744, bitmap.Flags);
+				Assert.True (bitmap.RawFormat.Equals (ImageFormat.Bmp));
 				hbitmap = bitmap.GetHbitmap ();
 			}
 			// hbitmap survives original bitmap disposal
 			using (Image image = Image.FromHbitmap (hbitmap)) {
-				//Assert.Equal (PixelFormat.Format32bppRgb, image.PixelFormat, "FromHbitmap.PixelFormat");
-				Assert.Equal (0, image.Palette.Entries.Length, "FromHbitmap.Palette");
-				Assert.Equal (183, image.Height, "FromHbitmap.Height");
-				Assert.Equal (173, image.Width, "FromHbitmap.Width");
-				Assert.Equal (335888, image.Flags, "FromHbitmap.Flags");
-				Assert.True (image.RawFormat.Equals (ImageFormat.MemoryBmp), "FromHbitmap.RawFormat");
+				//Assert.Equal (PixelFormat.Format32bppRgb, image.PixelFormat);
+				Assert.Equal (0, image.Palette.Entries.Length);
+				Assert.Equal (183, image.Height);
+				Assert.Equal (173, image.Width);
+				Assert.Equal (335888, image.Flags);
+				Assert.True (image.RawFormat.Equals (ImageFormat.MemoryBmp));
 			}
 		}
 
@@ -1688,30 +1611,30 @@ namespace MonoTests.System.Drawing {
 			IntPtr hbitmap;
 			string sInFile = TestBitmap.getInFile ("bitmaps/almogaver24bits.bmp");
 			using (Bitmap bitmap = new Bitmap (sInFile)) {
-				Assert.Equal (PixelFormat.Format24bppRgb, bitmap.PixelFormat, "Original.PixelFormat");
-				Assert.Equal (0, bitmap.Palette.Entries.Length, "Original.Palette");
-				Assert.Equal (183, bitmap.Height, "Original.Height");
-				Assert.Equal (173, bitmap.Width, "Original.Width");
-				Assert.Equal (73744, bitmap.Flags, "Original.Flags");
-				Assert.True (bitmap.RawFormat.Equals (ImageFormat.Bmp), "Original.RawFormat");
+				Assert.Equal (PixelFormat.Format24bppRgb, bitmap.PixelFormat);
+				Assert.Equal (0, bitmap.Palette.Entries.Length);
+				Assert.Equal (183, bitmap.Height);
+				Assert.Equal (173, bitmap.Width);
+				Assert.Equal (73744, bitmap.Flags);
+				Assert.True (bitmap.RawFormat.Equals (ImageFormat.Bmp));
 				hbitmap = bitmap.GetHbitmap ();
 			}
 			// hbitmap survives original bitmap disposal
 			using (Image image = Image.FromHbitmap (hbitmap)) {
-				//Assert.Equal (PixelFormat.Format32bppRgb, image.PixelFormat, "1.PixelFormat");
-				Assert.Equal (0, image.Palette.Entries.Length, "1.Palette");
-				Assert.Equal (183, image.Height, "1.Height");
-				Assert.Equal (173, image.Width, "1.Width");
-				Assert.Equal (335888, image.Flags, "1.Flags");
-				Assert.True (image.RawFormat.Equals (ImageFormat.MemoryBmp), "1.RawFormat");
+				//Assert.Equal (PixelFormat.Format32bppRgb, image.PixelFormat);
+				Assert.Equal (0, image.Palette.Entries.Length);
+				Assert.Equal (183, image.Height);
+				Assert.Equal (173, image.Width);
+				Assert.Equal (335888, image.Flags);
+				Assert.True (image.RawFormat.Equals (ImageFormat.MemoryBmp));
 			}
 			using (Image image2 = Image.FromHbitmap (hbitmap)) {
-				//Assert.Equal (PixelFormat.Format32bppRgb, image2.PixelFormat, "2.PixelFormat");
-				Assert.Equal (0, image2.Palette.Entries.Length, "2.Palette");
-				Assert.Equal (183, image2.Height, "2.Height");
-				Assert.Equal (173, image2.Width, "2.Width");
-				Assert.Equal (335888, image2.Flags, "2.Flags");
-				Assert.True (image2.RawFormat.Equals (ImageFormat.MemoryBmp), "2.RawFormat");
+				//Assert.Equal (PixelFormat.Format32bppRgb, image2.PixelFormat);
+				Assert.Equal (0, image2.Palette.Entries.Length);
+				Assert.Equal (183, image2.Height);
+				Assert.Equal (173, image2.Width);
+				Assert.Equal (335888, image2.Flags);
+				Assert.True (image2.RawFormat.Equals (ImageFormat.MemoryBmp));
 			}
 		}
 	}

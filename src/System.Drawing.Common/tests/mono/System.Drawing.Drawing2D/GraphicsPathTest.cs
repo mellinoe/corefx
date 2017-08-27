@@ -674,7 +674,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		public void AddLines_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
-			gp.AddLines (new PointF[1] { new PointF (1f, 1f) };
+			gp.AddLines (new PointF[1] { new PointF (1f, 1f) });
 			// Special case - a line with a single point is valid
 			Assert.Equal (1, gp.PointCount);
 			Assert.Equal (0, gp.PathTypes[0]);
@@ -1512,7 +1512,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				return FontFamily.GenericMonospace;
 			}
 			catch (ArgumentException) {
-				Assert.Ignore ("GenericMonospace FontFamily couldn't be found");
+				Assert.True (false, "GenericMonospace FontFamily couldn't be found");
 				return null;
 			}
 		}
@@ -1676,7 +1676,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		private void ComparePaths (GraphicsPath expected, GraphicsPath actual)
 		{
 			Assert.Equal (expected.PointCount, actual.PointCount);
-			for (int i = 0; i < expected.PointCount; i++ {
+			for (int i = 0; i < expected.PointCount; i++) {
 				Assert.Equal (expected.PathPoints[i], actual.PathPoints[i]);
 				Assert.Equal (expected.PathTypes[i], actual.PathTypes[i]);
 			}

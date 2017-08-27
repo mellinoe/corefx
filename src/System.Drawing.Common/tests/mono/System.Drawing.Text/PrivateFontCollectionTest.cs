@@ -37,7 +37,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Text {
 
-	[TestFixture]
 	public class PrivateFontCollectionTest {
 
 		[Fact]

@@ -35,7 +35,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging {
 
-	[TestFixture]
 	public class ColorMatrixTest {
 
 		[Fact]
@@ -83,31 +82,31 @@ namespace MonoTests.System.Drawing.Imaging {
 				new float[] { 5.0f, 5.1f, 5.2f, 5.3f, 5.4f, 5.5f }
 			});
 
-			Assert.Equal (0.0f, cm.Matrix00, "00");
-			Assert.Equal (0.1f, cm.Matrix01, "01");
-			Assert.Equal (0.2f, cm.Matrix02, "02");
-			Assert.Equal (0.3f, cm.Matrix03, "03");
-			Assert.Equal (0.4f, cm.Matrix04, "04");
-			Assert.Equal (1.0f, cm.Matrix10, "10");
-			Assert.Equal (1.1f, cm.Matrix11, "11");
-			Assert.Equal (1.2f, cm.Matrix12, "12");
-			Assert.Equal (1.3f, cm.Matrix13, "13");
-			Assert.Equal (1.4f, cm.Matrix14, "14");
-			Assert.Equal (2.0f, cm.Matrix20, "20");
-			Assert.Equal (2.1f, cm.Matrix21, "21");
-			Assert.Equal (2.2f, cm.Matrix22, "22");
-			Assert.Equal (2.3f, cm.Matrix23, "23");
-			Assert.Equal (2.4f, cm.Matrix24, "24");
-			Assert.Equal (3.0f, cm.Matrix30, "30");
-			Assert.Equal (3.1f, cm.Matrix31, "31");
-			Assert.Equal (3.2f, cm.Matrix32, "32");
-			Assert.Equal (3.3f, cm.Matrix33, "33");
-			Assert.Equal (3.4f, cm.Matrix34, "34");
-			Assert.Equal (4.0f, cm.Matrix40, "40");
-			Assert.Equal (4.1f, cm.Matrix41, "41");
-			Assert.Equal (4.2f, cm.Matrix42, "42");
-			Assert.Equal (4.3f, cm.Matrix43, "43");
-			Assert.Equal (4.4f, cm.Matrix44, "44");
+			Assert.Equal (0.0f, cm.Matrix00);
+			Assert.Equal (0.1f, cm.Matrix01);
+			Assert.Equal (0.2f, cm.Matrix02);
+			Assert.Equal (0.3f, cm.Matrix03);
+			Assert.Equal (0.4f, cm.Matrix04);
+			Assert.Equal (1.0f, cm.Matrix10);
+			Assert.Equal (1.1f, cm.Matrix11);
+			Assert.Equal (1.2f, cm.Matrix12);
+			Assert.Equal (1.3f, cm.Matrix13);
+			Assert.Equal (1.4f, cm.Matrix14);
+			Assert.Equal (2.0f, cm.Matrix20);
+			Assert.Equal (2.1f, cm.Matrix21);
+			Assert.Equal (2.2f, cm.Matrix22);
+			Assert.Equal (2.3f, cm.Matrix23);
+			Assert.Equal (2.4f, cm.Matrix24);
+			Assert.Equal (3.0f, cm.Matrix30);
+			Assert.Equal (3.1f, cm.Matrix31);
+			Assert.Equal (3.2f, cm.Matrix32);
+			Assert.Equal (3.3f, cm.Matrix33);
+			Assert.Equal (3.4f, cm.Matrix34);
+			Assert.Equal (4.0f, cm.Matrix40);
+			Assert.Equal (4.1f, cm.Matrix41);
+			Assert.Equal (4.2f, cm.Matrix42);
+			Assert.Equal (4.3f, cm.Matrix43);
+			Assert.Equal (4.4f, cm.Matrix44);
 		}
 
 		[Fact]
@@ -129,33 +128,33 @@ namespace MonoTests.System.Drawing.Imaging {
 		{
 			ColorMatrix cm = new ColorMatrix ();
 
-			Assert.Equal (1, cm.Matrix00, "0,0");
-			Assert.Equal (1, cm.Matrix11, "1,1");
-			Assert.Equal (1, cm.Matrix22, "2,2");
-			Assert.Equal (1, cm.Matrix33, "3,3");
-			Assert.Equal (1, cm.Matrix44, "4,4");
-			Assert.Equal (0, cm.Matrix01, "0,1");
-			Assert.Equal (0, cm.Matrix02, "0,2");
-			Assert.Equal (0, cm.Matrix03, "0,3");
-			Assert.Equal (0, cm.Matrix04, "0,4");
-			Assert.Equal (0, cm.Matrix10, "1,0");
-			Assert.Equal (0, cm.Matrix12, "1,2");
-			Assert.Equal (0, cm.Matrix13, "1,3");
-			Assert.Equal (0, cm.Matrix14, "1,4");
-			Assert.Equal (0, cm.Matrix20, "2,0");
-			Assert.Equal (0, cm.Matrix21, "2,1");
-			Assert.Equal (0, cm.Matrix23, "2,3");
-			Assert.Equal (0, cm.Matrix24, "2,4");
-			Assert.Equal (0, cm.Matrix30, "3,0");
-			Assert.Equal (0, cm.Matrix31, "3,1");
-			Assert.Equal (0, cm.Matrix32, "3,2");
-			Assert.Equal (0, cm.Matrix34, "3,4");
-			Assert.Equal (0, cm.Matrix40, "4,0");
-			Assert.Equal (0, cm.Matrix41, "4,1");
-			Assert.Equal (0, cm.Matrix42, "4,2");
-			Assert.Equal (0, cm.Matrix43, "4,3");
-			Assert.Equal (100, Marshal.SizeOf (cm), "object");
-			Assert.Equal (100, Marshal.SizeOf (typeof (ColorMatrix)), "type");
+			Assert.Equal (1, cm.Matrix00);
+			Assert.Equal (1, cm.Matrix11);
+			Assert.Equal (1, cm.Matrix22);
+			Assert.Equal (1, cm.Matrix33);
+			Assert.Equal (1, cm.Matrix44);
+			Assert.Equal (0, cm.Matrix01);
+			Assert.Equal (0, cm.Matrix02);
+			Assert.Equal (0, cm.Matrix03);
+			Assert.Equal (0, cm.Matrix04);
+			Assert.Equal (0, cm.Matrix10);
+			Assert.Equal (0, cm.Matrix12);
+			Assert.Equal (0, cm.Matrix13);
+			Assert.Equal (0, cm.Matrix14);
+			Assert.Equal (0, cm.Matrix20);
+			Assert.Equal (0, cm.Matrix21);
+			Assert.Equal (0, cm.Matrix23);
+			Assert.Equal (0, cm.Matrix24);
+			Assert.Equal (0, cm.Matrix30);
+			Assert.Equal (0, cm.Matrix31);
+			Assert.Equal (0, cm.Matrix32);
+			Assert.Equal (0, cm.Matrix34);
+			Assert.Equal (0, cm.Matrix40);
+			Assert.Equal (0, cm.Matrix41);
+			Assert.Equal (0, cm.Matrix42);
+			Assert.Equal (0, cm.Matrix43);
+			Assert.Equal (100, Marshal.SizeOf (cm));
+			Assert.Equal (100, Marshal.SizeOf (typeof (ColorMatrix)));
 		}
 
 		[Fact]
@@ -169,35 +168,35 @@ namespace MonoTests.System.Drawing.Imaging {
 				new float[] {     0,      0,      0, 0, 1}
 			});
 
-			Assert.Equal (0.393f, cm.Matrix00, "00");
-			Assert.Equal (0.349f, cm.Matrix01, "01");
-			Assert.Equal (0.272f, cm.Matrix02, "02");
-			Assert.Equal (0, cm.Matrix03, "03");
-			Assert.Equal (0, cm.Matrix04, "04");
+			Assert.Equal (0.393f, cm.Matrix00);
+			Assert.Equal (0.349f, cm.Matrix01);
+			Assert.Equal (0.272f, cm.Matrix02);
+			Assert.Equal (0, cm.Matrix03);
+			Assert.Equal (0, cm.Matrix04);
 
-			Assert.Equal (0.769f, cm.Matrix10, "10");
-			Assert.Equal (0.686f, cm.Matrix11, "11");
-			Assert.Equal (0.534f, cm.Matrix12, "12");
-			Assert.Equal (0, cm.Matrix13, "13");
-			Assert.Equal (0, cm.Matrix14, "14");
+			Assert.Equal (0.769f, cm.Matrix10);
+			Assert.Equal (0.686f, cm.Matrix11);
+			Assert.Equal (0.534f, cm.Matrix12);
+			Assert.Equal (0, cm.Matrix13);
+			Assert.Equal (0, cm.Matrix14);
 
-			Assert.Equal (0.189f, cm.Matrix20, "20");
-			Assert.Equal (0.168f, cm.Matrix21, "21");
-			Assert.Equal (0.131f, cm.Matrix22, "22");
-			Assert.Equal (0, cm.Matrix23, "23");
-			Assert.Equal (0, cm.Matrix24, "24");
+			Assert.Equal (0.189f, cm.Matrix20);
+			Assert.Equal (0.168f, cm.Matrix21);
+			Assert.Equal (0.131f, cm.Matrix22);
+			Assert.Equal (0, cm.Matrix23);
+			Assert.Equal (0, cm.Matrix24);
 
-			Assert.Equal (0, cm.Matrix30, "30");
-			Assert.Equal (0, cm.Matrix31, "31");
-			Assert.Equal (0, cm.Matrix32, "32");
-			Assert.Equal (1, cm.Matrix33, "33");
-			Assert.Equal (0, cm.Matrix34, "34");
+			Assert.Equal (0, cm.Matrix30);
+			Assert.Equal (0, cm.Matrix31);
+			Assert.Equal (0, cm.Matrix32);
+			Assert.Equal (1, cm.Matrix33);
+			Assert.Equal (0, cm.Matrix34);
 
-			Assert.Equal (0, cm.Matrix40, "40");
-			Assert.Equal (0, cm.Matrix41, "41");
-			Assert.Equal (0, cm.Matrix42, "42");
-			Assert.Equal (0, cm.Matrix43, "43");
-			Assert.Equal (1, cm.Matrix44, "44");
+			Assert.Equal (0, cm.Matrix40);
+			Assert.Equal (0, cm.Matrix41);
+			Assert.Equal (0, cm.Matrix42);
+			Assert.Equal (0, cm.Matrix43);
+			Assert.Equal (1, cm.Matrix44);
 		}
 
 		[Fact]
@@ -211,35 +210,35 @@ namespace MonoTests.System.Drawing.Imaging {
 				new float[] 	{0,	0,	0, 	0, 	0}
 			});
 
-			Assert.Equal (1, cm[0,0], "0,0");
-			Assert.Equal (0, cm[0,1], "0,1");
-			Assert.Equal (0, cm[0,2], "0,2");
-			Assert.Equal (0, cm[0,3], "0,3");
-			Assert.Equal (0, cm[0,4], "0,4");
+			Assert.Equal (1, cm[0,0]);
+			Assert.Equal (0, cm[0,1]);
+			Assert.Equal (0, cm[0,2]);
+			Assert.Equal (0, cm[0,3]);
+			Assert.Equal (0, cm[0,4]);
 			
-			Assert.Equal (0.5f, cm[1,0], "1,0");
-			Assert.Equal (1, cm[1,1], "1,1");
-			Assert.Equal (0, cm[1,2], "1,2");
-			Assert.Equal (0, cm[1,3], "1,3");
-			Assert.Equal (0, cm[1,4], "1,4");
+			Assert.Equal (0.5f, cm[1,0]);
+			Assert.Equal (1, cm[1,1]);
+			Assert.Equal (0, cm[1,2]);
+			Assert.Equal (0, cm[1,3]);
+			Assert.Equal (0, cm[1,4]);
 			
-			Assert.Equal (0, cm[2,0], "2,0");
-			Assert.Equal (0.1f, cm[2,1], "2,1");
-			Assert.Equal (1.5f, cm[2,2], "2,2");
-			Assert.Equal (0, cm[2,3], "2,3");
-			Assert.Equal (0, cm[2,4], "2,4");
+			Assert.Equal (0, cm[2,0]);
+			Assert.Equal (0.1f, cm[2,1]);
+			Assert.Equal (1.5f, cm[2,2]);
+			Assert.Equal (0, cm[2,3]);
+			Assert.Equal (0, cm[2,4]);
 			
-			Assert.Equal (0.5f, cm[3,0], "3,0");
-			Assert.Equal (3, cm[3,1], "3,1");
-			Assert.Equal (0.5f, cm[3,2], "3,2");
-			Assert.Equal (1, cm[3,3], "3,3");
-			Assert.Equal (0, cm[3,4], "3,4");
+			Assert.Equal (0.5f, cm[3,0]);
+			Assert.Equal (3, cm[3,1]);
+			Assert.Equal (0.5f, cm[3,2]);
+			Assert.Equal (1, cm[3,3]);
+			Assert.Equal (0, cm[3,4]);
 			
-			Assert.Equal (0, cm[4,0], "4,0");
-			Assert.Equal (0, cm[4,1], "4,1");
-			Assert.Equal (0, cm[4,2], "4,2");
-			Assert.Equal (0, cm[4,3], "4,3");
-			Assert.Equal (0, cm[4,4], "4,4");
+			Assert.Equal (0, cm[4,0]);
+			Assert.Equal (0, cm[4,1]);
+			Assert.Equal (0, cm[4,2]);
+			Assert.Equal (0, cm[4,3]);
+			Assert.Equal (0, cm[4,4]);
 		}
 
 		[Fact]
@@ -253,35 +252,35 @@ namespace MonoTests.System.Drawing.Imaging {
 				new float[] 	{0,	0,	0, 	0, 	0}
 			});
 
-			Assert.Equal (1, cm.Matrix00, "0,0");
-			Assert.Equal (0, cm.Matrix01, "0,1");
-			Assert.Equal (0, cm.Matrix02, "0,2");
-			Assert.Equal (0, cm.Matrix03, "0,3");
-			Assert.Equal (0, cm.Matrix04, "0,4");
+			Assert.Equal (1, cm.Matrix00);
+			Assert.Equal (0, cm.Matrix01);
+			Assert.Equal (0, cm.Matrix02);
+			Assert.Equal (0, cm.Matrix03);
+			Assert.Equal (0, cm.Matrix04);
 			
-			Assert.Equal (0.5f, cm.Matrix10, "1,0");
-			Assert.Equal (1, cm.Matrix11, "1,1");
-			Assert.Equal (0, cm.Matrix12, "1,2");
-			Assert.Equal (0, cm.Matrix13, "1,3");
-			Assert.Equal (0, cm.Matrix14, "1,4");
+			Assert.Equal (0.5f, cm.Matrix10);
+			Assert.Equal (1, cm.Matrix11);
+			Assert.Equal (0, cm.Matrix12);
+			Assert.Equal (0, cm.Matrix13);
+			Assert.Equal (0, cm.Matrix14);
 			
-			Assert.Equal (0, cm.Matrix20, "2,0");
-			Assert.Equal (0.1f, cm.Matrix21, "2,1");
-			Assert.Equal (1.5f, cm.Matrix22, "2,2");
-			Assert.Equal (0, cm.Matrix23, "2,3");
-			Assert.Equal (0, cm.Matrix24, "2,4");
+			Assert.Equal (0, cm.Matrix20);
+			Assert.Equal (0.1f, cm.Matrix21);
+			Assert.Equal (1.5f, cm.Matrix22);
+			Assert.Equal (0, cm.Matrix23);
+			Assert.Equal (0, cm.Matrix24);
 			
-			Assert.Equal (0.5f, cm.Matrix30, "3,0");
-			Assert.Equal (3, cm.Matrix31, "3,1");
-			Assert.Equal (0.5f, cm.Matrix32, "3,2");
-			Assert.Equal (1, cm.Matrix33, "3,3");
-			Assert.Equal (0, cm.Matrix34, "3,4");
+			Assert.Equal (0.5f, cm.Matrix30);
+			Assert.Equal (3, cm.Matrix31);
+			Assert.Equal (0.5f, cm.Matrix32);
+			Assert.Equal (1, cm.Matrix33);
+			Assert.Equal (0, cm.Matrix34);
 			
-			Assert.Equal (0, cm.Matrix40, "4,0");
-			Assert.Equal (0, cm.Matrix41, "4,1");
-			Assert.Equal (0, cm.Matrix42, "4,2");
-			Assert.Equal (0, cm.Matrix43, "4,3");
-			Assert.Equal (0, cm.Matrix44, "4,4");
+			Assert.Equal (0, cm.Matrix40);
+			Assert.Equal (0, cm.Matrix41);
+			Assert.Equal (0, cm.Matrix42);
+			Assert.Equal (0, cm.Matrix43);
+			Assert.Equal (0, cm.Matrix44);
 		}
 	}
 }

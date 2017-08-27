@@ -31,7 +31,6 @@ using System.Drawing.Printing;
 
 namespace MonoTests.System.Drawing.Printing
 {
-	[TestFixture]
 	public class PaperSizeTest
 	{
 		[Fact]
@@ -44,90 +43,90 @@ namespace MonoTests.System.Drawing.Printing
 
 			//
 			// Zero == Custom
-			Assert.Equal(PaperKind.Custom, ps.Kind, "Kind #1");
-			Assert.Equal(0, ps.RawKind, "RawKind #1");
+			Assert.Equal(PaperKind.Custom, ps.Kind);
+			Assert.Equal(0, ps.RawKind);
 
 			try {
 				ps.Height = 1;
-				Assert.Equal (1 , ps.Height, "get_Height #1");
+				Assert.Equal (1 , ps.Height);
 			} catch (ArgumentException) {
-				Assert.Fail ("should not have thrown #1");
+				Assert.True(false);
 			}
 
 			//
 			// Well-known
 			ps.RawKind = (int)PaperKind.A4;
-			Assert.Equal (PaperKind.A4, ps.Kind, "Kind #2");
-			Assert.Equal ((int)PaperKind.A4, ps.RawKind, "RawKind #2");
+			Assert.Equal (PaperKind.A4, ps.Kind);
+			Assert.Equal ((int)PaperKind.A4, ps.RawKind);
 
 			try {
 				ps.Height = 2;
-				Assert.Fail("should have thrown #2");
+				Assert.True(false);
 			} catch (ArgumentException) {
 			}
 
 			//
 			ps.RawKind = (int)PaperKind.JapaneseEnvelopeKakuNumber3;
-			Assert.Equal (PaperKind.JapaneseEnvelopeKakuNumber3, ps.Kind, "Kind #3");
-			Assert.Equal ((int)PaperKind.JapaneseEnvelopeKakuNumber3, ps.RawKind, "RawKind #3");
+			Assert.Equal (PaperKind.JapaneseEnvelopeKakuNumber3, ps.Kind);
+			Assert.Equal ((int)PaperKind.JapaneseEnvelopeKakuNumber3, ps.RawKind);
 
 			//
 			// Too Big
 			ps.RawKind = 999999;
-			Assert.Equal (PaperKind.Custom, ps.Kind, "Kind #4");
-			Assert.Equal (999999, ps.RawKind, "RawKind #4");
+			Assert.Equal (PaperKind.Custom, ps.Kind);
+			Assert.Equal (999999, ps.RawKind);
 
 			// The properties can be changed only when the *real* Kind is Custom 
 			// and not when is 'effectively' Custom.
 			try {
 				ps.Height = 4;
-				Assert.Fail("should have thrown #4");
+				Assert.True(false);
 			} catch (ArgumentException) {
 			}
 
 			//
 			ps.RawKind = int.MaxValue;
-			Assert.Equal (PaperKind.Custom, ps.Kind, "Kind #5");
-			Assert.Equal (int.MaxValue, ps.RawKind, "RawKind #5");
+			Assert.Equal (PaperKind.Custom, ps.Kind);
+			Assert.Equal (int.MaxValue, ps.RawKind);
 
 			//
 			// Negative -- Looks as if MSFT forgot to check for negative!
 			ps.RawKind = -1;
-			Assert.Equal ((PaperKind)(-1), ps.Kind, "Kind #6");
-			Assert.Equal (-1, ps.RawKind, "RawKind #6");
+			Assert.Equal ((PaperKind)(-1), ps.Kind);
+			Assert.Equal (-1, ps.RawKind);
 
 			//
 			ps.RawKind = int.MinValue;
-			Assert.Equal ((PaperKind)(int.MinValue), ps.Kind, "Kind #7");
-			Assert.Equal (int.MinValue, ps.RawKind, "RawKind #7");
+			Assert.Equal ((PaperKind)(int.MinValue), ps.Kind);
+			Assert.Equal (int.MinValue, ps.RawKind);
 
 			//
 			// Where's the top limit?
 			ps.RawKind = (int)PaperKind.PrcEnvelopeNumber10Rotated;
-			Assert.Equal (PaperKind.PrcEnvelopeNumber10Rotated, ps.Kind, "Kind #8");
-			Assert.Equal ((int)PaperKind.PrcEnvelopeNumber10Rotated, ps.RawKind, "RawKind #8");
+			Assert.Equal (PaperKind.PrcEnvelopeNumber10Rotated, ps.Kind);
+			Assert.Equal ((int)PaperKind.PrcEnvelopeNumber10Rotated, ps.RawKind);
 
 			// +1
 			ps.RawKind = 1 + (int)PaperKind.PrcEnvelopeNumber10Rotated;
-			Assert.Equal (PaperKind.Custom, ps.Kind, "Kind #9");
-			Assert.Equal (1 + (int)PaperKind.PrcEnvelopeNumber10Rotated, ps.RawKind, "RawKind #9");
+			Assert.Equal (PaperKind.Custom, ps.Kind);
+			Assert.Equal (1 + (int)PaperKind.PrcEnvelopeNumber10Rotated, ps.RawKind);
 
 			try {
 				ps.Height = 9;
-				Assert.Fail("should have thrown #9");
+				Assert.True(false);
 			} catch (ArgumentException) {
 			}
 
 			// Set Custom
 			ps.RawKind = (int)PaperKind.Custom;
-			Assert.Equal (PaperKind.Custom, ps.Kind, "Kind #1b");
-			Assert.Equal (0, ps.RawKind, "RawKind #1b");
+			Assert.Equal (PaperKind.Custom, ps.Kind);
+			Assert.Equal (0, ps.RawKind);
 
 			try {
 				ps.Height = 1;
-				Assert.Equal (1 , ps.Height, "get_Height #1b");
+				Assert.Equal (1 , ps.Height);
 			} catch (ArgumentException) {
-				Assert.Fail ("should not have thrown #1b");
+				Assert.True(false);
 			}
 		}
 	

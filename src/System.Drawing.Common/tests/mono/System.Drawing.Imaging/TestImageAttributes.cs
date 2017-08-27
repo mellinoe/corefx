@@ -35,7 +35,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging {
 
-	[TestFixture]
 	public class ImageAttributesTest {
 
 		static ColorMatrix global_color_matrix = new ColorMatrix (new float[][] {
@@ -85,7 +84,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			clr_src = Color.FromArgb (255, 100, 20, 50);
 			clr_rslt = ProcessColorMatrix (clr_src, cm);
 
-			Assert.Equal (Color.FromArgb (255, 251, 20, 50), clr_rslt, "Color");
+			Assert.Equal (Color.FromArgb (255, 251, 20, 50), clr_rslt);
 		}
 
 		[Fact]
@@ -103,7 +102,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 			clr_src = Color.FromArgb (255, 100, 40, 25);
 			clr_rslt = ProcessColorMatrix (clr_src, cm);
-			Assert.Equal (Color.FromArgb (255, 100, 40, 165), clr_rslt, "Color");
+			Assert.Equal (Color.FromArgb (255, 100, 40, 165), clr_rslt);
 		}
 
 		private void Bug80323 (Color c)
@@ -135,8 +134,8 @@ namespace MonoTests.System.Drawing.Imaging {
 							g.DrawImage (bmp, new Rectangle (100, 0, 100, 100), 0, 0, 100, 100, GraphicsUnit.Pixel, ia);
 						}
 						b.Save (fileName);
-						Assert.Equal (Color.FromArgb (255, 255, 155, 155), b.GetPixel (50, 50), "50,50");
-						Assert.Equal (Color.FromArgb (255, 255, 205, 205), b.GetPixel (150, 50), "150,50");
+						Assert.Equal (Color.FromArgb (255, 255, 155, 155), b.GetPixel (50, 50));
+						Assert.Equal (Color.FromArgb (255, 255, 205, 205), b.GetPixel (150, 50));
 					}
 				}
 			}
@@ -359,26 +358,26 @@ namespace MonoTests.System.Drawing.Imaging {
 		public void SetColorMatrices_Gray ()
 		{
 			Color c = ProcessColorMatrices (Color.Gray, global_color_matrix, global_gray_matrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
-			Assert.Equal (0xFFFF8080, (uint)c.ToArgb (), "Gray|Default|Default");
+			Assert.Equal (0xFFFF8080, (uint)c.ToArgb ());
 
 			c = ProcessColorMatrices (Color.Gray, global_color_matrix, global_gray_matrix, ColorMatrixFlag.SkipGrays, ColorAdjustType.Default);
-			Assert.Equal (0xFF808080, (uint) c.ToArgb (), "Gray|SkipGrays|Default");
+			Assert.Equal (0xFF808080, (uint) c.ToArgb ());
 
 			c = ProcessColorMatrices (Color.Gray, global_color_matrix, global_gray_matrix, ColorMatrixFlag.AltGrays, ColorAdjustType.Default);
-			Assert.Equal (0xFFFFFFFF, (uint) c.ToArgb (), "Gray|AltGrays|Default");
+			Assert.Equal (0xFFFFFFFF, (uint) c.ToArgb ());
 		}
 
 		[Fact]
 		public void SetColorMatrices_Color ()
 		{
 			Color c = ProcessColorMatrices (Color.MidnightBlue, global_color_matrix, global_gray_matrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
-			Assert.Equal (0xFF651970, (uint) c.ToArgb (), "Color|Default|Default");
+			Assert.Equal (0xFF651970, (uint) c.ToArgb ());
 
 			c = ProcessColorMatrices (Color.MidnightBlue, global_color_matrix, global_gray_matrix, ColorMatrixFlag.SkipGrays, ColorAdjustType.Default);
-			Assert.Equal (0xFF651970, (uint) c.ToArgb (), "Color|SkipGrays|Default");
+			Assert.Equal (0xFF651970, (uint) c.ToArgb ());
 
 			c = ProcessColorMatrices (Color.MidnightBlue, global_color_matrix, global_gray_matrix, ColorMatrixFlag.AltGrays, ColorAdjustType.Default);
-			Assert.Equal (0xFF651970, (uint) c.ToArgb (), "Color|AltGrays|Default");
+			Assert.Equal (0xFF651970, (uint) c.ToArgb ());
 		}
 
 		[Fact]
@@ -418,11 +417,11 @@ namespace MonoTests.System.Drawing.Imaging {
 						ia.SetColorMatrix (cm);
 						g.FillRectangle (Brushes.White, new Rectangle (0, 0, 1, 4));
 						g.DrawImage (bmp, new Rectangle (0, 0, 1, 4), 0, 0, 1, 4, GraphicsUnit.Pixel, ia);
-						Assert.Equal (Color.FromArgb (255, 255, 255, 255), b.GetPixel (0,0), prefix + "-0,0");
+						Assert.Equal (Color.FromArgb (255, 255, 255, 255), b.GetPixel (0,0));
 						int val = 255 - n;
-						Assert.Equal (Color.FromArgb (255, 255, val, val), b.GetPixel (0, 1), prefix + "-0,1");
-						Assert.Equal (Color.FromArgb (255, val, 255, val), b.GetPixel (0, 2), prefix + "-0,2");
-						Assert.Equal (Color.FromArgb (255, val, val, 255), b.GetPixel (0, 3), prefix + "-0,3");
+						Assert.Equal (Color.FromArgb (255, 255, val, val), b.GetPixel (0, 1));
+						Assert.Equal (Color.FromArgb (255, val, 255, val), b.GetPixel (0, 2));
+						Assert.Equal (Color.FromArgb (255, val, val, 255), b.GetPixel (0, 3));
 					}
 				}
 			}

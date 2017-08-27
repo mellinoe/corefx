@@ -35,14 +35,13 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Text {
 
-	[TestFixture]
 	public class InstalledFontCollectionTest {
 
 		[Fact]
 		public void Family ()
 		{
 			InstalledFontCollection ifc = new InstalledFontCollection ();
-			Assert.NotNull (ifc.Families, "Families");
+			Assert.NotNull (ifc.Families);
 		}
 
 		[Fact]
@@ -51,7 +50,7 @@ namespace MonoTests.System.Drawing.Text {
 			InstalledFontCollection ifc = new InstalledFontCollection ();
 			int count = ifc.Families.Length;
 			ifc.Dispose ();
-			Assert.Equal (count, ifc.Families.Length, "Families");
+			Assert.Equal (count, ifc.Families.Length);
 			// there is *no* exception here
 		}
 	}

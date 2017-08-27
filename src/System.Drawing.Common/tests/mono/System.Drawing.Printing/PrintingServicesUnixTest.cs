@@ -35,22 +35,7 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Printing {
 
-	[TestFixture]
 	public class PrintingServicesUnixTest {
-
-		[DllImport ("gdiplus.dll")]
-		static extern Status GdipGetPostScriptSavePage (IntPtr graphics);
-
-		[Fact]
-		public void BuiltInPrinting ()
-		{
-			// ensure libgdiplus is built with printing support enabled
-			if (GDIPlus.RunningOnWindows ())
-				Assert.Ignore ("Running on Windows.");
-
-			Assert.Equal (Status.InvalidParameter, GdipGetPostScriptSavePage (IntPtr.Zero), "Missing printing support");
-		}
-
 		#region Novell Bug #602934
 
 		#region CUPS methods and structs
@@ -103,20 +88,17 @@ namespace MonoTests.System.Drawing.Printing {
 		}
 
 		[Fact]
-		[Platform (Exclude = "Win", Reason = "Depends on CUPS which is usually not installed on Windows")]
 		public void Bug602934_PrinterSettingsReturnActualValues ()
 		{
 			if (PrinterSettings.InstalledPrinters.Count < 1)
-				Assert.Ignore ("Need at least one printer installed.");
+				Assert.True (false, "Need at least one printer installed.");
 
 			var options = GetOptionsOfFirstPrinterThroughCups ();
 
 			var settings = new PrinterSettings () { PrinterName = PrinterSettings.InstalledPrinters [0] };
-			Assert.Equal (options ["PageSize"], settings.DefaultPageSettings.PaperSize.PaperName,
-				"Bug #602934 (https://bugzilla.novell.com/show_bug.cgi?id=602934) not fixed (PaperSize)");
+			Assert.Equal (options ["PageSize"], settings.DefaultPageSettings.PaperSize.PaperName);
 			if (options.ContainsKey("Resolution"))
-				Assert.Equal (options ["Resolution"], string.Format ("{0}dpi", settings.DefaultPageSettings.PrinterResolution.X),
-					"Bug #602934 (https://bugzilla.novell.com/show_bug.cgi?id=602934) not fixed (Resolution)");
+				Assert.Equal (options ["Resolution"], string.Format ("{0}dpi", settings.DefaultPageSettings.PrinterResolution.X));
 		}
 
 		#endregion

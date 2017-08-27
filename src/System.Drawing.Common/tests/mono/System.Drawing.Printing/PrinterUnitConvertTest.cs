@@ -34,7 +34,6 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing.Printing {
 
-	[TestFixture]
 	public class PrinterUnitConvertTest
 	{
 		static int n = 100, r;
@@ -45,22 +44,22 @@ namespace MonoTests.System.Drawing.Printing {
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
 				PrinterUnit.Display);
 
-			Assert.Equal (100, r, "CFD#1");
+			Assert.Equal (100, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
 				PrinterUnit.HundredthsOfAMillimeter);
 
-			Assert.Equal (2540, r, "CFD#2");
+			Assert.Equal (2540, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
 				PrinterUnit.TenthsOfAMillimeter);
 
-			Assert.Equal (254, r, "CFD#3");
+			Assert.Equal (254, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
 				PrinterUnit.ThousandthsOfAnInch);
 
-			Assert.Equal (1000, r, "CFD#4");
+			Assert.Equal (1000, r);
 		}
 
 		[Fact]
@@ -69,22 +68,22 @@ namespace MonoTests.System.Drawing.Printing {
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
 				PrinterUnit.Display);
 
-			Assert.Equal (4, r, "CFH#1");
+			Assert.Equal (4, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
 				PrinterUnit.HundredthsOfAMillimeter);
 
-			Assert.Equal (100, r, "CFH#2");
+			Assert.Equal (100, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
 				PrinterUnit.TenthsOfAMillimeter);
 
-			Assert.Equal (10, r, "CFH#3");
+			Assert.Equal (10, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
 				PrinterUnit.ThousandthsOfAnInch);
 
-			Assert.Equal (39, r, "CFH#4");
+			Assert.Equal (39, r);
 		}
 
 		[Fact]
@@ -93,22 +92,22 @@ namespace MonoTests.System.Drawing.Printing {
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
 				PrinterUnit.Display);
 
-			Assert.Equal (39, r, "CFT#1");
+			Assert.Equal (39, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
 				PrinterUnit.HundredthsOfAMillimeter);
 
-			Assert.Equal (1000, r, "CFT#2");
+			Assert.Equal (1000, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
 				PrinterUnit.TenthsOfAMillimeter);
 
-			Assert.Equal (100, r, "CFT#3");
+			Assert.Equal (100, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
 				PrinterUnit.ThousandthsOfAnInch);
 
-			Assert.Equal (394, r, "CFT#4");
+			Assert.Equal (394, r);
 		}
 
 		[Fact]
@@ -117,22 +116,22 @@ namespace MonoTests.System.Drawing.Printing {
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
 				PrinterUnit.Display);
 
-			Assert.Equal (10, r, "CFI#1");
+			Assert.Equal (10, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
 				PrinterUnit.HundredthsOfAMillimeter);
 
-			Assert.Equal (254, r, "CFI#2");
+			Assert.Equal (254, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
 				PrinterUnit.TenthsOfAMillimeter);
 
-			Assert.Equal (25, r, "CFI#3");
+			Assert.Equal (25, r);
 
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
 				PrinterUnit.ThousandthsOfAnInch);
 
-			Assert.Equal (100, r, "CFI#4");
+			Assert.Equal (100, r);
 		}
 	}
 }

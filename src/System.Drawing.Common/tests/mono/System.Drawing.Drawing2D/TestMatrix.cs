@@ -35,40 +35,39 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing.Drawing2D
 {
-	[TestFixture]
 	public class MatrixTest {
 
 		[Fact]
 		public void Constructor_Default ()
 		{
 			Matrix matrix = new Matrix ();
-			Assert.Equal (6, matrix.Elements.Length, "C#1");
+			Assert.Equal (6, matrix.Elements.Length);
 		}
 
 		[Fact]
 		public void Constructor_SixFloats ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
-			Assert.Equal (6, matrix.Elements.Length, "C#2");
-			Assert.Equal (10, matrix.Elements[0], "C#3");
-			Assert.Equal (20, matrix.Elements[1], "C#4");
-			Assert.Equal (30, matrix.Elements[2], "C#5");
-			Assert.Equal (40, matrix.Elements[3], "C#6");
-			Assert.Equal (50, matrix.Elements[4], "C#7");
-			Assert.Equal (60, matrix.Elements[5], "C#8");
+			Assert.Equal (6, matrix.Elements.Length);
+			Assert.Equal (10, matrix.Elements[0]);
+			Assert.Equal (20, matrix.Elements[1]);
+			Assert.Equal (30, matrix.Elements[2]);
+			Assert.Equal (40, matrix.Elements[3]);
+			Assert.Equal (50, matrix.Elements[4]);
+			Assert.Equal (60, matrix.Elements[5]);
 		}
 
 		[Fact]
 		public void Constructor_Float ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
-			Assert.Equal (6, matrix.Elements.Length, "C#2");
-			Assert.Equal (10, matrix.Elements[0], "C#3");
-			Assert.Equal (20, matrix.Elements[1], "C#4");
-			Assert.Equal (30, matrix.Elements[2], "C#5");
-			Assert.Equal (40, matrix.Elements[3], "C#6");
-			Assert.Equal (50, matrix.Elements[4], "C#7");
-			Assert.Equal (60, matrix.Elements[5], "C#8");
+			Assert.Equal (6, matrix.Elements.Length);
+			Assert.Equal (10, matrix.Elements[0]);
+			Assert.Equal (20, matrix.Elements[1]);
+			Assert.Equal (30, matrix.Elements[2]);
+			Assert.Equal (40, matrix.Elements[3]);
+			Assert.Equal (50, matrix.Elements[4]);
+			Assert.Equal (60, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -95,12 +94,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Rectangle r = new Rectangle (100, 200, 300, 400);
 			Matrix m = new Matrix (r, new Point[3] { new Point (10, 20), new Point (30, 40), new Point (50, 60) });
 			float[] elements = m.Elements;
-			Assert.Equal (0.06666666, elements[0], 0.00001, "0");
-			Assert.Equal (0.06666666, elements[1], 0.00001, "1");
-			Assert.Equal (0.09999999, elements[2], 0.00001, "2");
-			Assert.Equal (0.09999999, elements[3], 0.00001, "3");
-			Assert.Equal (-16.6666679, elements[4], 0.00001, "4");
-			Assert.Equal (-6.666667, elements[5], 0.00001, "5");
+			Assert.Equal (0.06666666, elements[0], 5);
+			Assert.Equal (0.06666666, elements[1], 5);
+			Assert.Equal (0.09999999, elements[2], 5);
+			Assert.Equal (0.09999999, elements[3], 5);
+			Assert.Equal (-16.6666679, elements[4], 5);
+			Assert.Equal (-6.666667, elements[5], 5);
 		}
 
 		[Fact]
@@ -127,12 +126,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			RectangleF r = new RectangleF (100, 200, 300, 400);
 			Matrix m = new Matrix (r, new PointF[3] { new PointF (10, 20), new PointF (30, 40), new PointF (50, 60) });
 			float[] elements = m.Elements;
-			Assert.Equal (0.06666666, elements[0], 0.00001, "0");
-			Assert.Equal (0.06666666, elements[1], 0.00001, "1");
-			Assert.Equal (0.09999999, elements[2], 0.00001, "2");
-			Assert.Equal (0.09999999, elements[3], 0.00001, "3");
-			Assert.Equal (-16.6666679, elements[4], 0.00001, "4");
-			Assert.Equal (-6.666667, elements[5], 0.00001, "5");
+			Assert.Equal (0.06666666, elements[0], 5);
+			Assert.Equal (0.06666666, elements[1], 5);
+			Assert.Equal (0.09999999, elements[2], 5);
+			Assert.Equal (0.09999999, elements[3], 5);
+			Assert.Equal (-16.6666679, elements[4], 5);
+			Assert.Equal (-6.666667, elements[5], 5);
 		}
 
 		// Properties
@@ -141,16 +140,16 @@ namespace MonoTests.System.Drawing.Drawing2D
 		public void Invertible ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
-			Assert.Equal (false, matrix.IsInvertible, "I#1");
+			Assert.Equal (false, matrix.IsInvertible);
 
 			matrix = new Matrix (156, 46, 0, 0, 106, 19);
-			Assert.Equal (false, matrix.IsInvertible, "I#2");
+			Assert.Equal (false, matrix.IsInvertible);
 
 			matrix = new Matrix (146, 66, 158, 104, 42, 150);
-			Assert.Equal (true, matrix.IsInvertible, "I#3");
+			Assert.Equal (true, matrix.IsInvertible);
 
 			matrix = new Matrix (119, 140, 145, 74, 102, 58);
-			Assert.Equal (true, matrix.IsInvertible, "I#4");
+			Assert.Equal (true, matrix.IsInvertible);
 		}
 		
 		[Fact]
@@ -158,49 +157,49 @@ namespace MonoTests.System.Drawing.Drawing2D
 		{
 			Matrix identity = new Matrix ();
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
-			Assert.Equal (false, matrix.IsIdentity, "N#1-identity");
-			Assert.True (!identity.Equals (matrix), "N#1-equals");
+			Assert.Equal (false, matrix.IsIdentity);
+			Assert.True (!identity.Equals (matrix));
 			
 			matrix = new Matrix (1, 0, 0, 1, 0, 0);
-			Assert.Equal (true, matrix.IsIdentity, "N#2-identity");
-			Assert.True (identity.Equals (matrix), "N#2-equals");
+			Assert.Equal (true, matrix.IsIdentity);
+			Assert.True (identity.Equals (matrix));
 
 			// so what's the required precision ?
 
 			matrix = new Matrix (1.1f, 0.1f, -0.1f, 0.9f, 0, 0);
-			Assert.True (!matrix.IsIdentity, "N#3-identity");
-			Assert.True (!identity.Equals (matrix), "N#3-equals");
+			Assert.True (!matrix.IsIdentity);
+			Assert.True (!identity.Equals (matrix));
 
 			matrix = new Matrix (1.01f, 0.01f, -0.01f, 0.99f, 0, 0);
-			Assert.True (!matrix.IsIdentity, "N#4-identity");
-			Assert.True (!identity.Equals (matrix), "N#4-equals");
+			Assert.True (!matrix.IsIdentity);
+			Assert.True (!identity.Equals (matrix));
 
 			matrix = new Matrix (1.001f, 0.001f, -0.001f, 0.999f, 0, 0);
-			Assert.True (!matrix.IsIdentity, "N#5-identity");
-			Assert.True (!identity.Equals (matrix), "N#5-equals");
+			Assert.True (!matrix.IsIdentity);
+			Assert.True (!identity.Equals (matrix));
 
 			matrix = new Matrix (1.0001f, 0.0001f, -0.0001f, 0.9999f, 0, 0);
-			Assert.True (matrix.IsIdentity, "N#6-identity");
+			Assert.True (matrix.IsIdentity);
 			// note: NOT equal
-			Assert.True (!identity.Equals (matrix), "N#6-equals");
+			Assert.True (!identity.Equals (matrix));
 
 			matrix = new Matrix (1.0009f, 0.0009f, -0.0009f, 0.99995f, 0, 0);
-			Assert.True (!matrix.IsIdentity, "N#7-identity");
-			Assert.True (!identity.Equals (matrix), "N#7-equals");
+			Assert.True (!matrix.IsIdentity);
+			Assert.True (!identity.Equals (matrix));
 		}
 		
 		[Fact]
 		public void IsOffsetX ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
-			Assert.Equal (47, matrix.OffsetX, "X#1");
+			Assert.Equal (47, matrix.OffsetX);
 		}
 		
 		[Fact]
 		public void IsOffsetY ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
-			Assert.Equal (30, matrix.OffsetY, "Y#1");
+			Assert.Equal (30, matrix.OffsetY);
 		}
 		
 		// Elements Property is checked implicity in other test
@@ -216,13 +215,13 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matsrc = new Matrix (10, 20, 30, 40, 50, 60);
 			Matrix matrix  = matsrc.Clone ();
 
-			Assert.Equal (6, matrix.Elements.Length, "D#1");
-			Assert.Equal (10, matrix.Elements[0], "D#2");
-			Assert.Equal (20, matrix.Elements[1], "D#3");
-			Assert.Equal (30, matrix.Elements[2], "D#4");
-			Assert.Equal (40, matrix.Elements[3], "D#5");
-			Assert.Equal (50, matrix.Elements[4], "D#6");
-			Assert.Equal (60, matrix.Elements[5], "D#7");
+			Assert.Equal (6, matrix.Elements.Length);
+			Assert.Equal (10, matrix.Elements[0]);
+			Assert.Equal (20, matrix.Elements[1]);
+			Assert.Equal (30, matrix.Elements[2]);
+			Assert.Equal (40, matrix.Elements[3]);
+			Assert.Equal (50, matrix.Elements[4]);
+			Assert.Equal (60, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -230,10 +229,10 @@ namespace MonoTests.System.Drawing.Drawing2D
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			Matrix clone = matrix.Clone ();
-			Assert.True (matrix.GetHashCode () != clone.GetHashCode (), "HashCode/Clone");
+			Assert.True (matrix.GetHashCode () != clone.GetHashCode ());
 
 			Matrix matrix2 = new Matrix (10, 20, 30, 40, 50, 60);
-			Assert.True (matrix.GetHashCode () != matrix2.GetHashCode (), "HashCode/Identical");
+			Assert.True (matrix.GetHashCode () != matrix2.GetHashCode ());
 		}
 
 		[Fact]
@@ -242,13 +241,13 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (51, 52, 53, 54, 55, 56);
 			matrix.Reset ();
 
-			Assert.Equal (6, matrix.Elements.Length, "F#1");
-			Assert.Equal (1, matrix.Elements[0], "F#2");
-			Assert.Equal (0, matrix.Elements[1], "F#3");
-			Assert.Equal (0, matrix.Elements[2], "F#4");
-			Assert.Equal (1, matrix.Elements[3], "F#5");
-			Assert.Equal (0, matrix.Elements[4], "F#6");
-			Assert.Equal (0, matrix.Elements[5], "F#7");
+			Assert.Equal (6, matrix.Elements.Length);
+			Assert.Equal (1, matrix.Elements[0]);
+			Assert.Equal (0, matrix.Elements[1]);
+			Assert.Equal (0, matrix.Elements[2]);
+			Assert.Equal (1, matrix.Elements[3]);
+			Assert.Equal (0, matrix.Elements[4]);
+			Assert.Equal (0, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -257,61 +256,61 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			matrix.Rotate (180);
 
-			Assert.Equal (-10.0f, matrix.Elements[0], 0.0001, "H#1");
-			Assert.Equal (-20, matrix.Elements[1], 0.0001, "H#2");
-			Assert.Equal (-30.0000019f, matrix.Elements[2], 0.0001, "H#3");
-			Assert.Equal (-40.0000038f, matrix.Elements[3], 0.0001, "H#4");
-			Assert.Equal (50, matrix.Elements[4], "H#5");
-			Assert.Equal (60, matrix.Elements[5], "H#6");
+			Assert.Equal (-10.0f, matrix.Elements[0], 4);
+			Assert.Equal (-20, matrix.Elements[1], 4);
+			Assert.Equal (-30.0000019f, matrix.Elements[2], 4);
+			Assert.Equal (-40.0000038f, matrix.Elements[3], 4);
+			Assert.Equal (50, matrix.Elements[4]);
+			Assert.Equal (60, matrix.Elements[5]);
 		}
 
 		[Fact]
 		public void Rotate_45_135 ()
 		{
 			Matrix matrix = new Matrix ();
-			Assert.True (matrix.IsIdentity, "original.IsIdentity");
+			Assert.True (matrix.IsIdentity);
 
 			matrix.Rotate (45);
-			Assert.True (!matrix.IsIdentity, "+45.!IsIdentity");
+			Assert.True (!matrix.IsIdentity);
 			float[] elements = matrix.Elements;
-			Assert.Equal (0.707106769f, elements[0], 0.0001, "45#1");
-			Assert.Equal (0.707106769f, elements[1], 0.0001, "45#2");
-			Assert.Equal (-0.707106829f, elements[2], 0.0001, "45#3");
-			Assert.Equal (0.707106769f, elements[3], 0.0001, "45#4");
-			Assert.Equal (0, elements[4], 0.001f, "45#5");
-			Assert.Equal (0, elements[5], 0.001f, "45#6");
+			Assert.Equal (0.707106769f, elements[0], 4);
+			Assert.Equal (0.707106769f, elements[1], 4);
+			Assert.Equal (-0.707106829f, elements[2], 4);
+			Assert.Equal (0.707106769f, elements[3], 4);
+			Assert.Equal (0, elements[4], 3);
+			Assert.Equal (0, elements[5], 3);
 
 			matrix.Rotate (135);
-			Assert.True (!matrix.IsIdentity, "+135.!IsIdentity");
+			Assert.True (!matrix.IsIdentity);
 			elements = matrix.Elements;
-			Assert.Equal (-1, elements[0], 0.0001, "180#1");
-			Assert.Equal (0, elements[1], 0.0001, "180#2");
-			Assert.Equal (0, elements[2], 0.0001, "180#3");
-			Assert.Equal (-1, elements[3], 0.0001, "180#4");
-			Assert.Equal (0, elements[4], "180#5");
-			Assert.Equal (0, elements[5], "180#6");
+			Assert.Equal (-1, elements[0], 4);
+			Assert.Equal (0, elements[1], 4);
+			Assert.Equal (0, elements[2], 4);
+			Assert.Equal (-1, elements[3], 4);
+			Assert.Equal (0, elements[4]);
+			Assert.Equal (0, elements[5]);
 		}
 
 		[Fact]
 		public void Rotate_90_270_Matrix ()
 		{
 			Matrix matrix = new Matrix ();
-			Assert.True (matrix.IsIdentity, "original.IsIdentity");
+			Assert.True (matrix.IsIdentity);
 
 			matrix.Rotate (90);
-			Assert.True (!matrix.IsIdentity, "+90.!IsIdentity");
+			Assert.True (!matrix.IsIdentity);
 			float[] elements = matrix.Elements;
-			Assert.Equal (0, elements[0], 0.0001, "90#1");
-			Assert.Equal (1, elements[1], 0.0001, "90#2");
-			Assert.Equal (-1, elements[2], 0.0001, "90#3");
-			Assert.Equal (0, elements[3], 0.0001, "90#4");
-			Assert.Equal (0, elements[4], "90#5");
-			Assert.Equal (0, elements[5], "90#6");
+			Assert.Equal (0, elements[0], 4);
+			Assert.Equal (1, elements[1], 4);
+			Assert.Equal (-1, elements[2], 4);
+			Assert.Equal (0, elements[3], 4);
+			Assert.Equal (0, elements[4]);
+			Assert.Equal (0, elements[5]);
 
 			matrix.Rotate (270);
 			// this isn't a perfect 1, 0, 0, 1, 0, 0 matrix - but close enough
-			Assert.True (matrix.IsIdentity, "360.IsIdentity");
-			Assert.True (!new Matrix ().Equals (matrix), "360.Equals");
+			Assert.True (matrix.IsIdentity);
+			Assert.True (!new Matrix ().Equals (matrix));
 		}
 
 		[Fact]
@@ -326,12 +325,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			matrix.RotateAt (180, new PointF (10, 10));
 
-			Assert.Equal (-10, matrix.Elements[0], 0.01, "I#1");
-			Assert.Equal (-20, matrix.Elements[1], 0.01, "I#2");
-			Assert.Equal (-30, matrix.Elements[2], 0.01, "I#3");
-			Assert.Equal (-40, matrix.Elements[3], 0.01, "I#4");
-			Assert.Equal (850, matrix.Elements[4], 0.01, "I#5");
-			Assert.Equal (1260, matrix.Elements[5], 0.01, "I#6");
+			Assert.Equal (-10, matrix.Elements[0], 2);
+			Assert.Equal (-20, matrix.Elements[1], 2);
+			Assert.Equal (-30, matrix.Elements[2], 2);
+			Assert.Equal (-40, matrix.Elements[3], 2);
+			Assert.Equal (850, matrix.Elements[4], 2);
+			Assert.Equal (1260, matrix.Elements[5], 2);
 		}
 
 		[Fact]
@@ -352,12 +351,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			matrix.Multiply (new Matrix (10, 20, 30, 40, 50, 60));
 
-			Assert.Equal (700, matrix.Elements[0], "J#1");
-			Assert.Equal (1000, matrix.Elements[1], "J#2");
-			Assert.Equal (1500, matrix.Elements[2], "J#3");
-			Assert.Equal (2200, matrix.Elements[3], "J#4");
-			Assert.Equal (2350, matrix.Elements[4], "J#5");
-			Assert.Equal (3460, matrix.Elements[5], "J#6");
+			Assert.Equal (700, matrix.Elements[0]);
+			Assert.Equal (1000, matrix.Elements[1]);
+			Assert.Equal (1500, matrix.Elements[2]);
+			Assert.Equal (2200, matrix.Elements[3]);
+			Assert.Equal (2350, matrix.Elements[4]);
+			Assert.Equal (3460, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -372,12 +371,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			matrix.Multiply (new Matrix (10, 20, 30, 40, 50, 60), MatrixOrder.Append);
 
-			Assert.Equal (700, matrix.Elements[0], "J#1");
-			Assert.Equal (1000, matrix.Elements[1], "J#2");
-			Assert.Equal (1500, matrix.Elements[2], "J#3");
-			Assert.Equal (2200, matrix.Elements[3], "J#4");
-			Assert.Equal (2350, matrix.Elements[4], "J#5");
-			Assert.Equal (3460, matrix.Elements[5], "J#6");
+			Assert.Equal (700, matrix.Elements[0]);
+			Assert.Equal (1000, matrix.Elements[1]);
+			Assert.Equal (1500, matrix.Elements[2]);
+			Assert.Equal (2200, matrix.Elements[3]);
+			Assert.Equal (2350, matrix.Elements[4]);
+			Assert.Equal (3460, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -386,12 +385,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			matrix.Multiply (new Matrix (10, 20, 30, 40, 50, 60), MatrixOrder.Prepend);
 
-			Assert.Equal (700, matrix.Elements[0], "J#1");
-			Assert.Equal (1000, matrix.Elements[1], "J#2");
-			Assert.Equal (1500, matrix.Elements[2], "J#3");
-			Assert.Equal (2200, matrix.Elements[3], "J#4");
-			Assert.Equal (2350, matrix.Elements[4], "J#5");
-			Assert.Equal (3460, matrix.Elements[5], "J#6");
+			Assert.Equal (700, matrix.Elements[0]);
+			Assert.Equal (1000, matrix.Elements[1]);
+			Assert.Equal (1500, matrix.Elements[2]);
+			Assert.Equal (2200, matrix.Elements[3]);
+			Assert.Equal (2350, matrix.Elements[4]);
+			Assert.Equal (3460, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -408,9 +407,9 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix mat2 = new Matrix (10, 20, 30, 40, 50, 60);
 			Matrix mat3 = new Matrix (10, 20, 30, 40, 50, 10);
 
-			Assert.Equal (true, mat1.Equals (mat2), "E#1");
-			Assert.Equal (false, mat2.Equals (mat3), "E#2");
-			Assert.Equal (false, mat1.Equals (mat3), "E#3");
+			Assert.Equal (true, mat1.Equals (mat2));
+			Assert.Equal (false, mat2.Equals (mat3));
+			Assert.Equal (false, mat1.Equals (mat3));
 		}
 		
 		[Fact]
@@ -419,12 +418,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (1, 2, 3, 4, 5, 6);
 			matrix.Invert ();
 			
-			Assert.Equal (-2, matrix.Elements[0], "V#1");
-			Assert.Equal (1, matrix.Elements[1], "V#2");
-			Assert.Equal (1.5, matrix.Elements[2], "V#3");
-			Assert.Equal (-0.5, matrix.Elements[3], "V#4");
-			Assert.Equal (1, matrix.Elements[4], "V#5");
-			Assert.Equal (-2, matrix.Elements[5], "V#6");
+			Assert.Equal (-2, matrix.Elements[0]);
+			Assert.Equal (1, matrix.Elements[1]);
+			Assert.Equal (1.5, matrix.Elements[2]);
+			Assert.Equal (-0.5, matrix.Elements[3]);
+			Assert.Equal (1, matrix.Elements[4]);
+			Assert.Equal (-2, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -434,23 +433,23 @@ namespace MonoTests.System.Drawing.Drawing2D
 			matrix.Invert ();
 
 			float[] elements = matrix.Elements;
-			Assert.Equal (1, elements[0], "#1");
-			Assert.Equal (0, elements[1], "#2");
-			Assert.Equal (0, elements[2], "#3");
-			Assert.Equal (1, elements[3], "#4");
-			Assert.Equal (-8, elements[4], "#5");
-			Assert.Equal (-8, elements[5], "#6");
+			Assert.Equal (1, elements[0]);
+			Assert.Equal (0, elements[1]);
+			Assert.Equal (0, elements[2]);
+			Assert.Equal (1, elements[3]);
+			Assert.Equal (-8, elements[4]);
+			Assert.Equal (-8, elements[5]);
 		}
 
 		[Fact]
 		public void Invert_Identity ()
 		{
 			Matrix matrix = new Matrix ();
-			Assert.True (matrix.IsIdentity, "IsIdentity");
-			Assert.True (matrix.IsInvertible, "IsInvertible");
+			Assert.True (matrix.IsIdentity);
+			Assert.True (matrix.IsInvertible);
 			matrix.Invert ();
-			Assert.True (matrix.IsIdentity, "IsIdentity-2");
-			Assert.True (matrix.IsInvertible, "IsInvertible-2");
+			Assert.True (matrix.IsIdentity);
+			Assert.True (matrix.IsInvertible);
 		}
 
 		[Fact]
@@ -459,21 +458,21 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			matrix.Scale (2, 4);
 
-			Assert.Equal (20, matrix.Elements[0], "S#1");
-			Assert.Equal (40, matrix.Elements[1], "S#2");
-			Assert.Equal (120, matrix.Elements[2], "S#3");
-			Assert.Equal (160, matrix.Elements[3], "S#4");
-			Assert.Equal (50, matrix.Elements[4], "S#5");
-			Assert.Equal (60, matrix.Elements[5], "S#6");
+			Assert.Equal (20, matrix.Elements[0]);
+			Assert.Equal (40, matrix.Elements[1]);
+			Assert.Equal (120, matrix.Elements[2]);
+			Assert.Equal (160, matrix.Elements[3]);
+			Assert.Equal (50, matrix.Elements[4]);
+			Assert.Equal (60, matrix.Elements[5]);
 
 			matrix.Scale (0.5f, 0.25f);
 
-			Assert.Equal (10, matrix.Elements[0], "SB#1");
-			Assert.Equal (20, matrix.Elements[1], "SB#2");
-			Assert.Equal (30, matrix.Elements[2], "SB#3");
-			Assert.Equal (40, matrix.Elements[3], "SB#4");
-			Assert.Equal (50, matrix.Elements[4], "SB#5");
-			Assert.Equal (60, matrix.Elements[5], "SB#6");
+			Assert.Equal (10, matrix.Elements[0]);
+			Assert.Equal (20, matrix.Elements[1]);
+			Assert.Equal (30, matrix.Elements[2]);
+			Assert.Equal (40, matrix.Elements[3]);
+			Assert.Equal (50, matrix.Elements[4]);
+			Assert.Equal (60, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -482,12 +481,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			matrix.Scale (-2, -4);
 
-			Assert.Equal (-20, matrix.Elements[0], "S#1");
-			Assert.Equal (-40, matrix.Elements[1], "S#2");
-			Assert.Equal (-120, matrix.Elements[2], "S#3");
-			Assert.Equal (-160, matrix.Elements[3], "S#4");
-			Assert.Equal (50, matrix.Elements[4], "S#5");
-			Assert.Equal (60, matrix.Elements[5], "S#6");
+			Assert.Equal (-20, matrix.Elements[0]);
+			Assert.Equal (-40, matrix.Elements[1]);
+			Assert.Equal (-120, matrix.Elements[2]);
+			Assert.Equal (-160, matrix.Elements[3]);
+			Assert.Equal (50, matrix.Elements[4]);
+			Assert.Equal (60, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -502,22 +501,22 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			matrix.Shear (2, 4);
 
-			Assert.Equal (130, matrix.Elements[0], "H#1");
-			Assert.Equal (180, matrix.Elements[1], "H#2");
-			Assert.Equal (50, matrix.Elements[2], "H#3");
-			Assert.Equal (80, matrix.Elements[3], "H#4");
-			Assert.Equal (50, matrix.Elements[4], "H#5");
-			Assert.Equal (60, matrix.Elements[5], "H#6");
+			Assert.Equal (130, matrix.Elements[0]);
+			Assert.Equal (180, matrix.Elements[1]);
+			Assert.Equal (50, matrix.Elements[2]);
+			Assert.Equal (80, matrix.Elements[3]);
+			Assert.Equal (50, matrix.Elements[4]);
+			Assert.Equal (60, matrix.Elements[5]);
 			
 			matrix = new Matrix (5, 3, 9, 2, 2, 1);
 			matrix.Shear  (10, 20);			
 			
-			Assert.Equal (185, matrix.Elements[0], "H#7");
-			Assert.Equal (43, matrix.Elements[1], "H#8");
-			Assert.Equal (59, matrix.Elements[2], "H#9");
-			Assert.Equal (32, matrix.Elements[3], "H#10");
-			Assert.Equal (2, matrix.Elements[4], "H#11");
-			Assert.Equal (1, matrix.Elements[5], "H#12");
+			Assert.Equal (185, matrix.Elements[0]);
+			Assert.Equal (43, matrix.Elements[1]);
+			Assert.Equal (59, matrix.Elements[2]);
+			Assert.Equal (32, matrix.Elements[3]);
+			Assert.Equal (2, matrix.Elements[4]);
+			Assert.Equal (1, matrix.Elements[5]);
 		}
 
 		[Fact]
@@ -533,17 +532,17 @@ namespace MonoTests.System.Drawing.Drawing2D
 			PointF [] pointsF = new PointF [] {new PointF (2, 4), new PointF (4, 8)};
 			matrix.TransformPoints (pointsF);
 						
-			Assert.Equal (38, pointsF[0].X, "K#1");
-			Assert.Equal (52, pointsF[0].Y, "K#2");
-			Assert.Equal (66, pointsF[1].X, "K#3");
-			Assert.Equal (92, pointsF[1].Y, "K#4");
+			Assert.Equal (38, pointsF[0].X);
+			Assert.Equal (52, pointsF[0].Y);
+			Assert.Equal (66, pointsF[1].X);
+			Assert.Equal (92, pointsF[1].Y);
 			
 			Point [] points = new Point [] {new Point (2, 4), new Point (4, 8)};
 			matrix.TransformPoints (points);
-			Assert.Equal (38, pointsF[0].X, "K#5");
-			Assert.Equal (52, pointsF[0].Y, "K#6");
-			Assert.Equal (66, pointsF[1].X, "K#7");
-			Assert.Equal (92, pointsF[1].Y, "K#8");
+			Assert.Equal (38, pointsF[0].X);
+			Assert.Equal (52, pointsF[0].Y);
+			Assert.Equal (66, pointsF[1].X);
+			Assert.Equal (92, pointsF[1].Y);
 		}
 
 		[Fact]
@@ -577,17 +576,17 @@ namespace MonoTests.System.Drawing.Drawing2D
 			PointF [] pointsF = new PointF [] {new PointF (2, 4), new PointF (4, 8)};
 			matrix.TransformVectors (pointsF);
 						
-			Assert.Equal (28, pointsF[0].X, "N#1");
-			Assert.Equal (40, pointsF[0].Y, "N#2");
-			Assert.Equal (56, pointsF[1].X, "N#3");
-			Assert.Equal (80, pointsF[1].Y, "N#4");
+			Assert.Equal (28, pointsF[0].X);
+			Assert.Equal (40, pointsF[0].Y);
+			Assert.Equal (56, pointsF[1].X);
+			Assert.Equal (80, pointsF[1].Y);
 			
 			Point [] points = new Point [] {new Point (2, 4), new Point (4, 8)};
 			matrix.TransformVectors (points);
-			Assert.Equal (28, pointsF[0].X, "N#5");
-			Assert.Equal (40, pointsF[0].Y, "N#6");
-			Assert.Equal (56, pointsF[1].X, "N#7");
-			Assert.Equal (80, pointsF[1].Y, "N#8");
+			Assert.Equal (28, pointsF[0].X);
+			Assert.Equal (40, pointsF[0].Y);
+			Assert.Equal (56, pointsF[1].X);
+			Assert.Equal (80, pointsF[1].Y);
 		}
 
 		[Fact]
@@ -620,12 +619,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Matrix matrix = new Matrix (2, 4, 6, 8, 10, 12);			
 			matrix.Translate (5, 10);
 						
-			Assert.Equal (2, matrix.Elements[0], "Y#1");
-			Assert.Equal (4, matrix.Elements[1], "Y#2");
-			Assert.Equal (6, matrix.Elements[2], "Y#3");
-			Assert.Equal (8, matrix.Elements[3], "Y#4");
-			Assert.Equal (80, matrix.Elements[4], "Y#5");
-			Assert.Equal (112, matrix.Elements[5], "Y#6");
+			Assert.Equal (2, matrix.Elements[0]);
+			Assert.Equal (4, matrix.Elements[1]);
+			Assert.Equal (6, matrix.Elements[2]);
+			Assert.Equal (8, matrix.Elements[3]);
+			Assert.Equal (80, matrix.Elements[4]);
+			Assert.Equal (112, matrix.Elements[5]);
 		}
 
 		[Fact]

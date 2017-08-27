@@ -47,8 +47,8 @@ namespace MonoTests.System.Drawing.Printing {
 			Assert.Equal ("[Margins Left=100 Right=100 Top=100 Bottom=100]", m.ToString ());
 			Margins clone = (Margins) m.Clone ();
 			Assert.Equal (m, clone);
-			Assert.True (m == clone, "==");
-			Assert.False (m != clone, "!=");
+			Assert.True (m == clone);
+			Assert.False (m != clone);
 		}
 
 		[Fact]
@@ -63,45 +63,41 @@ namespace MonoTests.System.Drawing.Printing {
 			Margins m2 = new Margins (Int32.MaxValue, 0, 10, 20);
 			// bottom smaller than top
 			Margins m3 = new Margins (10, 20, Int32.MaxValue, 0);
-			Assert.False (m2.GetHashCode () == m3.GetHashCode (), "GetHashCode");
-			Assert.True (m1 != m2, "m1 != m2");
-			Assert.False (m1 == m2, "m1 == m2");
+			Assert.False (m2.GetHashCode () == m3.GetHashCode ());
+			Assert.True (m1 != m2);
+			Assert.False (m1 == m2);
 		}
 
 		[Fact]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Ctor_BadLeft ()
 		{
-			new Margins (-1, 0, 0, 0); 
+            Assert.Throws<ArgumentException>(() => new Margins(-1, 0, 0, 0)); 
 		}
 
 		[Fact]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Ctor_BadRight ()
 		{
-			new Margins (0, Int32.MinValue, 0, 0);
+			Assert.Throws<ArgumentException>(() => new Margins (0, Int32.MinValue, 0, 0));
 		}
 
 		[Fact]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Ctor_BadTop ()
 		{
-			new Margins (0, 0, Int32.MinValue, 0);
+			Assert.Throws<ArgumentException>(() => new Margins (0, 0, Int32.MinValue, 0));
 		}
 
 		[Fact]
-		[ExpectedException (typeof (ArgumentException))]
 		public void Ctor_BadBottom ()
 		{
-			new Margins (0, 0, 0, -1);
+			Assert.Throws<ArgumentException>(() => new Margins (0, 0, 0, -1));
 		}
 
 		[Fact]
 		public void Equals ()
 		{
 			Margins m = new Margins ();
-			Assert.True (m.Equals (m), "Equals(m)");
-			Assert.False (m.Equals (null), "Equals(null)");
+			Assert.True (m.Equals (m));
+			Assert.False (m.Equals (null));
 		}
 
 		[Fact]
@@ -109,8 +105,8 @@ namespace MonoTests.System.Drawing.Printing {
 		{
 			Margins m1 = null;
 			Margins m2 = null;
-			Assert.True (m1 == m2, "null==null");
-			Assert.False (m1 != m2, "null!=null");
+			Assert.True (m1 == m2);
+			Assert.False (m1 != m2);
 		}
 	}
 }

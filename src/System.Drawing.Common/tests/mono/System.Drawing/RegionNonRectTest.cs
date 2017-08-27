@@ -38,7 +38,6 @@ namespace MonoTests.System.Drawing {
 	/* NOTE: General tests and rectangular region tests are located in TestRegion.cs */
 	/*       Here we exclusively tests non-rectangular (GraphicsPath based) regions. */
 
-	[TestFixture]
 	public class RegionNonRectTest {
 
 		private Bitmap bitmap;
@@ -46,8 +45,7 @@ namespace MonoTests.System.Drawing {
 		private Matrix matrix;
 		private GraphicsPath sp1, sp2, sp3, sp4;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
+		public RegionNonRectTest()
 		{
 			bitmap = new Bitmap (10, 10);
 			graphic = Graphics.FromImage (bitmap);
@@ -73,10 +71,10 @@ namespace MonoTests.System.Drawing {
 			Assert.False (region.IsInfinite (graphic), prefix + "graphic");
 
 			RectangleF rect = region.GetBounds (graphic);
-			Assert.Equal (0f, rect.X, prefix + "GetBounds.X");
-			Assert.Equal (0f, rect.Y, prefix + "GetBounds.Y");
-			Assert.Equal (0f, rect.Width, prefix + "GetBounds.Width");
-			Assert.Equal (0f, rect.Height, prefix + "GetBounds.Height");
+			Assert.Equal (0f, rect.X);
+			Assert.Equal (0f, rect.Y);
+			Assert.Equal (0f, rect.Width);
+			Assert.Equal (0f, rect.Height);
 		}
 
 		[Fact]
@@ -87,16 +85,6 @@ namespace MonoTests.System.Drawing {
 
 			Region clone = region.Clone ();
 			CheckEmpty ("Clone.", region);
-		}
-
-		[Fact]
-		[Ignore ("this does not work when using MS GDI+ - with or without Mono")]
-		public void Region_Ctor_RegionData ()
-		{
-			Region region = new Region (new GraphicsPath ());
-			RegionData data = region.GetRegionData ();
-			Region r2 = new Region (data);
-			CheckEmpty ("RegionData.", region);
 		}
 
 		[Fact]
@@ -113,10 +101,10 @@ namespace MonoTests.System.Drawing {
 		private void CheckInfiniteBounds (GraphicsPath path)
 		{
 			RectangleF rect = path.GetBounds ();
-			Assert.Equal (-4194304f, rect.X, "Bounds.X");
-			Assert.Equal (-4194304f, rect.Y, "Bounds.Y");
-			Assert.Equal (8388608f, rect.Width, "Bounds.Width");
-			Assert.Equal (8388608f, rect.Height, "Bounds.Height");
+			Assert.Equal (-4194304f, rect.X);
+			Assert.Equal (-4194304f, rect.Y);
+			Assert.Equal (8388608f, rect.Width);
+			Assert.Equal (8388608f, rect.Height);
 		}
 
 		[Fact]
@@ -128,7 +116,7 @@ namespace MonoTests.System.Drawing {
 			CheckInfiniteBounds (gp);
 
 			Region region = new Region (gp);
-			Assert.False (region.IsInfinite (graphic), "IsInfinite");
+			Assert.False (region.IsInfinite (graphic));
 			// note: infinity isn't based on the bounds
 		}
 
@@ -140,7 +128,7 @@ namespace MonoTests.System.Drawing {
 			gp.AddCurve (points);
 			Region region = new Region (gp);
 			// too big, returns 0
-			Assert.Equal (0, region.GetRegionScans (matrix).Length, "GetRegionScans");
+			Assert.Equal (0, region.GetRegionScans (matrix).Length);
 		}
 
 		private void DisplaySmallRegion (Region region, int ox, int oy, int width, int height)
@@ -167,7 +155,7 @@ namespace MonoTests.System.Drawing {
 			int p = 0;
 			for (int y = oy; y < height + oy; y++) {
 				for (int x = ox; x < width + ox; x++) {
-					Assert.Equal (expected[p], region.IsVisible (x, y), String.Format ("{0},{1}", x, y));
+					Assert.Equal (expected[p], region.IsVisible (x, y));
 					p++;
 				}
 			}
@@ -180,10 +168,10 @@ namespace MonoTests.System.Drawing {
 
 		private void CheckRectF (string msg, int x, int y, int w, int h, RectangleF rect)
 		{
-			Assert.Equal (x, rect.X, msg + ".X");
-			Assert.Equal (y, rect.Y, msg + ".Y");
-			Assert.Equal (w, rect.Width, msg + ".Width");
-			Assert.Equal (h, rect.Height, msg + ".Height");
+			Assert.Equal (x, rect.X);
+			Assert.Equal (y, rect.Y);
+			Assert.Equal (w, rect.Width);
+			Assert.Equal (h, rect.Height);
 		}
 
 		static bool[] sunion = new bool[49] {
@@ -204,7 +192,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sunion, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (3, scans.Length, "GetRegionScans");
+			Assert.Equal (3, scans.Length);
 			CheckRectF ("[0]", 0, 0, 3, 2, scans[0]);
 			CheckRectF ("[1]", 0, 2, 5, 1, scans[1]);
 			CheckRectF ("[2]", 2, 3, 3, 2, scans[2]);
@@ -218,7 +206,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sunion, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (3, scans.Length, "GetRegionScans");
+			Assert.Equal (3, scans.Length);
 			CheckRectF ("[0]", 0, 0, 3, 2, scans[0]);
 			CheckRectF ("[1]", 0, 2, 5, 1, scans[1]);
 			CheckRectF ("[2]", 2, 3, 3, 2, scans[2]);
@@ -242,7 +230,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, self1, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (1, scans.Length, "GetRegionScans");
+			Assert.Equal (1, scans.Length);
 			CheckRectF ("[0]", 0, 0, 3, 3, scans[0]);
 		}
 
@@ -264,7 +252,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, self2, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (1, scans.Length, "GetRegionScans");
+			Assert.Equal (1, scans.Length);
 			CheckRectF ("[0]", 2, 2, 3, 3, scans[0]);
 		}
 
@@ -286,7 +274,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sintersection, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (1, scans.Length, "GetRegionScans");
+			Assert.Equal (1, scans.Length);
 			CheckRectF ("[0]", 2, 2, 1, 1, scans[0]);
 		}
 
@@ -298,7 +286,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sintersection, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (1, scans.Length, "GetRegionScans");
+			Assert.Equal (1, scans.Length);
 			CheckRectF ("[0]", 2, 2, 1, 1, scans[0]);
 		}
 
@@ -310,7 +298,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, self1, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (1, scans.Length, "GetRegionScans");
+			Assert.Equal (1, scans.Length);
 			CheckRectF ("[0]", 0, 0, 3, 3, scans[0]);
 		}
 
@@ -322,7 +310,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, self2, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (1, scans.Length, "GetRegionScans");
+			Assert.Equal (1, scans.Length);
 			CheckRectF ("[0]", 2, 2, 3, 3, scans[0]);
 		}
 
@@ -344,7 +332,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sexclude1, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (2, scans.Length, "GetRegionScans");
+			Assert.Equal (2, scans.Length);
 			CheckRectF ("[0]", 0, 0, 3, 2, scans[0]);
 			CheckRectF ("[1]", 0, 2, 2, 1, scans[1]);
 		}
@@ -367,7 +355,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sexclude2, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (2, scans.Length, "GetRegionScans");
+			Assert.Equal (2, scans.Length);
 			CheckRectF ("[0]", 3, 2, 2, 1, scans[0]);
 			CheckRectF ("[1]", 2, 3, 3, 2, scans[1]);
 		}
@@ -390,7 +378,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sempty, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (0, scans.Length, "GetRegionScans");
+			Assert.Equal (0, scans.Length);
 		}
 
 		[Fact]
@@ -401,7 +389,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sempty, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (0, scans.Length, "GetRegionScans");
+			Assert.Equal (0, scans.Length);
 		}
 
 		[Fact]
@@ -412,7 +400,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sexclude2, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (2, scans.Length, "GetRegionScans");
+			Assert.Equal (2, scans.Length);
 			CheckRectF ("[0]", 3, 2, 2, 1, scans[0]);
 			CheckRectF ("[1]", 2, 3, 3, 2, scans[1]);
 		}
@@ -425,7 +413,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sexclude1, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (2, scans.Length, "GetRegionScans");
+			Assert.Equal (2, scans.Length);
 			CheckRectF ("[0]", 0, 0, 3, 2, scans[0]);
 			CheckRectF ("[1]", 0, 2, 2, 1, scans[1]);
 		}
@@ -438,7 +426,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sempty, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (0, scans.Length, "GetRegionScans");
+			Assert.Equal (0, scans.Length);
 		}
 
 		[Fact]
@@ -449,7 +437,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sempty, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (0, scans.Length, "GetRegionScans");
+			Assert.Equal (0, scans.Length);
 		}
 
 		static bool[] sxor = new bool[49] {
@@ -470,7 +458,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sxor, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (4, scans.Length, "GetRegionScans");
+			Assert.Equal (4, scans.Length);
 			CheckRectF ("[0]", 0, 0, 3, 2, scans[0]);
 			CheckRectF ("[1]", 0, 2, 2, 1, scans[1]);
 			CheckRectF ("[2]", 3, 2, 2, 1, scans[2]);
@@ -485,7 +473,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sxor, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (4, scans.Length, "GetRegionScans");
+			Assert.Equal (4, scans.Length);
 			CheckRectF ("[0]", 0, 0, 3, 2, scans[0]);
 			CheckRectF ("[1]", 0, 2, 2, 1, scans[1]);
 			CheckRectF ("[2]", 3, 2, 2, 1, scans[2]);
@@ -500,7 +488,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sempty, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (0, scans.Length, "GetRegionScans");
+			Assert.Equal (0, scans.Length);
 		}
 
 		[Fact]
@@ -511,7 +499,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sempty, 7, 7);
 
 			RectangleF[] scans = region.GetRegionScans (matrix);
-			Assert.Equal (0, scans.Length, "GetRegionScans");
+			Assert.Equal (0, scans.Length);
 		}
 
 		[Fact]
@@ -639,22 +627,22 @@ namespace MonoTests.System.Drawing {
 			Region r3 = new Region (sp3);
 			Region r4 = new Region (sp4);
 			// with self
-			Assert.True (r1.Equals (r1, graphic), "r1-r1");
-			Assert.True (r2.Equals (r2, graphic), "r2-r2");
-			Assert.True (r3.Equals (r3, graphic), "r3-r3");
-			Assert.True (r4.Equals (r4, graphic), "r4-r4");
+			Assert.True (r1.Equals (r1, graphic));
+			Assert.True (r2.Equals (r2, graphic));
+			Assert.True (r3.Equals (r3, graphic));
+			Assert.True (r4.Equals (r4, graphic));
 			// with a different
-			Assert.False (r1.Equals (r4, graphic), "r1-r4");
-			Assert.False (r2.Equals (r3, graphic), "r2-r3");
-			Assert.False (r3.Equals (r2, graphic), "r3-r2");
-			Assert.False (r4.Equals (r1, graphic), "r4-r1");
+			Assert.False (r1.Equals (r4, graphic));
+			Assert.False (r2.Equals (r3, graphic));
+			Assert.False (r3.Equals (r2, graphic));
+			Assert.False (r4.Equals (r1, graphic));
 			// with same (not self)
 			Region r5 = r1.Clone ();
 			r1.Exclude (r4);
-			Assert.True (r1.Equals (r5, graphic), "r1-r5");
-			Assert.True (r5.Equals (r1, graphic), "r5-r1");
-			Assert.False (r5.Equals (r4, graphic), "r5-r4");
-			Assert.False (r4.Equals (r5, graphic), "r4-r5");
+			Assert.True (r1.Equals (r5, graphic));
+			Assert.True (r5.Equals (r1, graphic));
+			Assert.False (r5.Equals (r4, graphic));
+			Assert.False (r4.Equals (r5, graphic));
 		}
 
 		[Fact]
@@ -682,23 +670,23 @@ namespace MonoTests.System.Drawing {
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Region region = new Region ();
-			Assert.True (region.IsInfinite (graphic), "IsInfinite");
+			Assert.True (region.IsInfinite (graphic));
 
 			region.Union (gp);
-			Assert.True (region.IsInfinite (graphic), "Union-IsInfinite");
+			Assert.True (region.IsInfinite (graphic));
 
 			region.Xor (gp);
-			Assert.True (region.IsInfinite (graphic), "Xor-IsInfinite");
+			Assert.True (region.IsInfinite (graphic));
 
 			region.Exclude (gp);
-			Assert.True (region.IsInfinite (graphic), "Exclude-IsInfinite");
+			Assert.True (region.IsInfinite (graphic));
 
 			region.Intersect (gp);
-			Assert.True (region.IsEmpty (graphic), "Intersect-IsEmpty");
+			Assert.True (region.IsEmpty (graphic));
 
 			region.MakeInfinite ();
 			region.Complement (gp);
-			Assert.True (region.IsEmpty (graphic), "Complement-IsEmpty");
+			Assert.True (region.IsEmpty (graphic));
 		}
 
 		[Fact]
@@ -706,26 +694,26 @@ namespace MonoTests.System.Drawing {
 		{
 			Region empty = new Region ();
 			empty.MakeEmpty ();
-			Assert.True (empty.IsEmpty (graphic), "IsEmpty");
+			Assert.True (empty.IsEmpty (graphic));
 
 			Region region = new Region ();
-			Assert.True (region.IsInfinite (graphic), "IsInfinite");
+			Assert.True (region.IsInfinite (graphic));
 
 			region.Union (empty);
-			Assert.True (region.IsInfinite (graphic), "Union-IsInfinite");
+			Assert.True (region.IsInfinite (graphic));
 
 			region.Xor (empty);
-			Assert.True (region.IsInfinite (graphic), "Xor-IsInfinite");
+			Assert.True (region.IsInfinite (graphic));
 
 			region.Exclude (empty);
-			Assert.True (region.IsInfinite (graphic), "Exclude-IsInfinite");
+			Assert.True (region.IsInfinite (graphic));
 
 			region.Intersect (empty);
-			Assert.True (region.IsEmpty (graphic), "Intersect-IsEmpty");
+			Assert.True (region.IsEmpty (graphic));
 
 			region.MakeInfinite ();
 			region.Complement (empty);
-			Assert.True (region.IsEmpty (graphic), "Complement-IsEmpty");
+			Assert.True (region.IsEmpty (graphic));
 		}
 	}
 }

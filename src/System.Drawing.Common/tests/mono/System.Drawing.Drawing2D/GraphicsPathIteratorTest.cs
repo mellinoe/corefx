@@ -34,7 +34,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Drawing2D {
 
-	[TestFixture]
 	public class GraphicsPathIteratorTest {
 
 		private PointF [] pts_2f = new PointF [2] { new PointF (1, 2), new PointF (20, 30) };
@@ -43,7 +42,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		public void Ctor_Null ()
 		{
 			using (GraphicsPathIterator gpi = new GraphicsPathIterator (null)) {
-				Assert.Equal (0, gpi.Count, "Count");
+				Assert.Equal (0, gpi.Count);
 			}
 		}
 
@@ -66,7 +65,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
 					bool closed;
 					Assert.Equal (0, gpi.NextSubpath (null, out closed));
-					Assert.True (closed, "Closed");
+					Assert.True (closed);
 				}
 			}
 		}

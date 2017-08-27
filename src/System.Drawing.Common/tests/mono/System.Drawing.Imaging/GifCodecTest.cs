@@ -37,7 +37,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging {
 
-	[TestFixture]
 	public class GifCodecTest {
 
 		/* Get suffix to add to the filename */
@@ -79,16 +78,16 @@ namespace MonoTests.System.Drawing.Imaging {
 				RectangleF rect = bmp.GetBounds (ref unit);
 
 				Assert.Equal (PixelFormat.Format8bppIndexed, bmp.PixelFormat);
-				Assert.Equal (110, bmp.Width, "bmp.Width");
-				Assert.Equal (100, bmp.Height, "bmp.Height");
+				Assert.Equal (110, bmp.Width);
+				Assert.Equal (100, bmp.Height);
 
-				Assert.Equal (0, rect.X, "rect.X");
-				Assert.Equal (0, rect.Y, "rect.Y");
-				Assert.Equal (110, rect.Width, "rect.Width");
-				Assert.Equal (100, rect.Height, "rect.Height");
+				Assert.Equal (0, rect.X);
+				Assert.Equal (0, rect.Y);
+				Assert.Equal (110, rect.Width);
+				Assert.Equal (100, rect.Height);
 
-				Assert.Equal (110, bmp.Size.Width, "bmp.Size.Width");
-				Assert.Equal (100, bmp.Size.Height, "bmp.Size.Height");
+				Assert.Equal (110, bmp.Size.Width);
+				Assert.Equal (100, bmp.Size.Height);
 			}
 		}
 
@@ -114,22 +113,22 @@ namespace MonoTests.System.Drawing.Imaging {
 				}
 #else
 				// sampling values from a well known bitmap
-				Assert.Equal (-10644802, bmp.GetPixel (0, 0).ToArgb (), "0,0");
-				Assert.Equal (-12630705, bmp.GetPixel (0, 32).ToArgb (), "0,32");
-				Assert.Equal (-14537409, bmp.GetPixel (0, 64).ToArgb (), "0,64");
-				Assert.Equal (-14672099, bmp.GetPixel (0, 96).ToArgb (), "0,96");
-				Assert.Equal (-526863, bmp.GetPixel (32, 0).ToArgb (), "32,0");
-				Assert.Equal (-10263970, bmp.GetPixel (32, 32).ToArgb (), "32,32");
-				Assert.Equal (-10461317, bmp.GetPixel (32, 64).ToArgb (), "32,64");
-				Assert.Equal (-9722415, bmp.GetPixel (32, 96).ToArgb (), "32,96");
-				Assert.Equal (-131076, bmp.GetPixel (64, 0).ToArgb (), "64,0");
-				Assert.Equal (-2702435, bmp.GetPixel (64, 32).ToArgb (), "64,32");
-				Assert.Equal (-6325922, bmp.GetPixel (64, 64).ToArgb (), "64,64");
-				Assert.Equal (-12411924, bmp.GetPixel (64, 96).ToArgb (), "64,96");
-				Assert.Equal (-131076, bmp.GetPixel (96, 0).ToArgb (), "96,0");
-				Assert.Equal (-7766649, bmp.GetPixel (96, 32).ToArgb (), "96,32");
-				Assert.Equal (-11512986, bmp.GetPixel (96, 64).ToArgb (), "96,64");
-				Assert.Equal (-12616230, bmp.GetPixel (96, 96).ToArgb (), "96,96");
+				Assert.Equal (-10644802, bmp.GetPixel (0, 0).ToArgb ());
+				Assert.Equal (-12630705, bmp.GetPixel (0, 32).ToArgb ());
+				Assert.Equal (-14537409, bmp.GetPixel (0, 64).ToArgb ());
+				Assert.Equal (-14672099, bmp.GetPixel (0, 96).ToArgb ());
+				Assert.Equal (-526863, bmp.GetPixel (32, 0).ToArgb ());
+				Assert.Equal (-10263970, bmp.GetPixel (32, 32).ToArgb ());
+				Assert.Equal (-10461317, bmp.GetPixel (32, 64).ToArgb ());
+				Assert.Equal (-9722415, bmp.GetPixel (32, 96).ToArgb ());
+				Assert.Equal (-131076, bmp.GetPixel (64, 0).ToArgb ());
+				Assert.Equal (-2702435, bmp.GetPixel (64, 32).ToArgb ());
+				Assert.Equal (-6325922, bmp.GetPixel (64, 64).ToArgb ());
+				Assert.Equal (-12411924, bmp.GetPixel (64, 96).ToArgb ());
+				Assert.Equal (-131076, bmp.GetPixel (96, 0).ToArgb ());
+				Assert.Equal (-7766649, bmp.GetPixel (96, 32).ToArgb ());
+				Assert.Equal (-11512986, bmp.GetPixel (96, 64).ToArgb ());
+				Assert.Equal (-12616230, bmp.GetPixel (96, 96).ToArgb ());
 #endif
 			}
 		}
@@ -153,10 +152,10 @@ namespace MonoTests.System.Drawing.Imaging {
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				BitmapData data = bmp.LockBits (new Rectangle (0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 				try {
-					Assert.Equal (bmp.Height, data.Height, "Height");
-					Assert.Equal (bmp.Width, data.Width, "Width");
-					Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat, "PixelFormat");
-					Assert.Equal (332, data.Stride, "Stride");
+					Assert.Equal (bmp.Height, data.Height);
+					Assert.Equal (bmp.Width, data.Width);
+					Assert.Equal (PixelFormat.Format24bppRgb, data.PixelFormat);
+					Assert.Equal (332, data.Stride);
 					int size = data.Height * data.Stride;
 					unsafe {
 						byte* scan = (byte*) data.Scan0;
@@ -167,39 +166,39 @@ namespace MonoTests.System.Drawing.Imaging {
 						}
 #else
 						// sampling values from a well known bitmap
-						Assert.Equal (190, *(scan + 0), "0");
-						Assert.Equal (217, *(scan + 1009), "1009");
-						Assert.Equal (120, *(scan + 2018), "2018");
-						Assert.Equal (253, *(scan + 3027), "3027");
-						Assert.Equal (233, *(scan + 4036), "4036");
-						Assert.Equal (176, *(scan + 5045), "5045");
-						Assert.Equal (151, *(scan + 6054), "6054");
-						Assert.Equal (220, *(scan + 7063), "7063");
-						Assert.Equal (139, *(scan + 8072), "8072");
-						Assert.Equal (121, *(scan + 9081), "9081");
-						Assert.Equal (160, *(scan + 10090), "10090");
-						Assert.Equal (92, *(scan + 11099), "11099");
-						Assert.Equal (96, *(scan + 12108), "12108");
-						Assert.Equal (64, *(scan + 13117), "13117");
-						Assert.Equal (156, *(scan + 14126), "14126");
-						Assert.Equal (68, *(scan + 15135), "15135");
-						Assert.Equal (156, *(scan + 16144), "16144");
-						Assert.Equal (84, *(scan + 17153), "17153");
-						Assert.Equal (55, *(scan + 18162), "18162");
-						Assert.Equal (68, *(scan + 19171), "19171");
-						Assert.Equal (116, *(scan + 20180), "20180");
-						Assert.Equal (61, *(scan + 21189), "21189");
-						Assert.Equal (69, *(scan + 22198), "22198");
-						Assert.Equal (75, *(scan + 23207), "23207");
-						Assert.Equal (61, *(scan + 24216), "24216");
-						Assert.Equal (66, *(scan + 25225), "25225");
-						Assert.Equal (40, *(scan + 26234), "26234");
-						Assert.Equal (55, *(scan + 27243), "27243");
-						Assert.Equal (53, *(scan + 28252), "28252");
-						Assert.Equal (215, *(scan + 29261), "29261");
-						Assert.Equal (99, *(scan + 30270), "30270");
-						Assert.Equal (67, *(scan + 31279), "31279");
-						Assert.Equal (142, *(scan + 32288), "32288");
+						Assert.Equal (190, *(scan + 0));
+						Assert.Equal (217, *(scan + 1009));
+						Assert.Equal (120, *(scan + 2018));
+						Assert.Equal (253, *(scan + 3027));
+						Assert.Equal (233, *(scan + 4036));
+						Assert.Equal (176, *(scan + 5045));
+						Assert.Equal (151, *(scan + 6054));
+						Assert.Equal (220, *(scan + 7063));
+						Assert.Equal (139, *(scan + 8072));
+						Assert.Equal (121, *(scan + 9081));
+						Assert.Equal (160, *(scan + 10090));
+						Assert.Equal (92, *(scan + 11099));
+						Assert.Equal (96, *(scan + 12108));
+						Assert.Equal (64, *(scan + 13117));
+						Assert.Equal (156, *(scan + 14126));
+						Assert.Equal (68, *(scan + 15135));
+						Assert.Equal (156, *(scan + 16144));
+						Assert.Equal (84, *(scan + 17153));
+						Assert.Equal (55, *(scan + 18162));
+						Assert.Equal (68, *(scan + 19171));
+						Assert.Equal (116, *(scan + 20180));
+						Assert.Equal (61, *(scan + 21189));
+						Assert.Equal (69, *(scan + 22198));
+						Assert.Equal (75, *(scan + 23207));
+						Assert.Equal (61, *(scan + 24216));
+						Assert.Equal (66, *(scan + 25225));
+						Assert.Equal (40, *(scan + 26234));
+						Assert.Equal (55, *(scan + 27243));
+						Assert.Equal (53, *(scan + 28252));
+						Assert.Equal (215, *(scan + 29261));
+						Assert.Equal (99, *(scan + 30270));
+						Assert.Equal (67, *(scan + 31279));
+						Assert.Equal (142, *(scan + 32288));
 #endif
 					}
 				}
@@ -216,10 +215,10 @@ namespace MonoTests.System.Drawing.Imaging {
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				for (int i = 0; i < 255; i++) {
 					Color c = bmp.GetPixel (0, i);
-					Assert.Equal (255, c.A, "A" + i.ToString ());
-					Assert.Equal (i, c.R, "R" + i.ToString ());
-					Assert.Equal (i, c.G, "G" + i.ToString ());
-					Assert.Equal (i, c.B, "B" + i.ToString ());
+					Assert.Equal (255, c.A);
+					Assert.Equal (i, c.R);
+					Assert.Equal (i, c.G);
+					Assert.Equal (i, c.B);
 				}
 			}
 		}
@@ -242,18 +241,18 @@ namespace MonoTests.System.Drawing.Imaging {
 
 				// Load
 				using (Bitmap bmpLoad = new Bitmap (sOutFile)) {
-					Assert.Equal (expected, bmpLoad.PixelFormat, "PixelFormat");
+					Assert.Equal (expected, bmpLoad.PixelFormat);
 					Color color = bmpLoad.GetPixel (10, 10);
 					if (exactColorCheck) {
-						Assert.Equal (Color.FromArgb (255, 255, 0, 0), color, "Red");
+						Assert.Equal (Color.FromArgb (255, 255, 0, 0), color);
 					} else {
 // FIXME: we don't save a pure red (F8 instead of FF) into the file so the color-check assert will fail
 // this is due to libgif's QuantizeBuffer. An alternative would be to make our own that checks if less than 256 colors
 // are used in the bitmap (or else use QuantizeBuffer).
-						Assert.Equal (255, color.A, "A");
-						Assert.True (color.R >= 248, "R");
-						Assert.Equal (0, color.G, "G");
-						Assert.Equal (0, color.B, "B");
+						Assert.Equal (255, color.A);
+						Assert.True (color.R >= 248);
+						Assert.Equal (0, color.G);
+						Assert.Equal (0, color.B);
 					}
 				}
 			}

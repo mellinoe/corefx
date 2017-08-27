@@ -36,7 +36,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing {
 
-	[TestFixture]
 	public class TextureBrushTest {
 
 		private Image image;
@@ -45,8 +44,7 @@ namespace MonoTests.System.Drawing {
 		private ImageAttributes attr;
 		private Bitmap bmp;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
+		public TextureBrushTest()
 		{
 			image = new Bitmap (10, 10);
 			rect = new Rectangle (0, 0, 10, 10);
@@ -58,11 +56,11 @@ namespace MonoTests.System.Drawing {
 		private void Common (TextureBrush t, WrapMode wm)
 		{
 			using (Image img = t.Image) {
-				Assert.NotNull (img, "Image");
+				Assert.NotNull (img);
 			}
-			Assert.False (Object.ReferenceEquals (image, t.Image), "Image-Equals");
-			Assert.True (t.Transform.IsIdentity, "Transform.IsIdentity");
-			Assert.Equal (wm, t.WrapMode, "WrapMode");
+			Assert.False (Object.ReferenceEquals (image, t.Image));
+			Assert.True (t.Transform.IsIdentity);
+			Assert.Equal (wm, t.WrapMode);
 		}
 
 		[Fact]
@@ -223,23 +221,23 @@ namespace MonoTests.System.Drawing {
 		public void TextureBush_RectangleInsideBitmap ()
 		{
 			Rectangle r = new Rectangle (10, 10, 40, 40);
-			Assert.True (r.Y + r.Height <= bmp.Height, "Height");
-			Assert.True (r.X + r.Width <= bmp.Width, "Width");
+			Assert.True (r.Y + r.Height <= bmp.Height);
+			Assert.True (r.X + r.Width <= bmp.Width);
 			TextureBrush b = new TextureBrush (bmp, r);
 			using (Image img = b.Image) {
-				Assert.Equal (r.Height, img.Height, "Image.Height");
-				Assert.Equal (r.Width, img.Width, "Image.Width");
+				Assert.Equal (r.Height, img.Height);
+				Assert.Equal (r.Width, img.Width);
 			}
-			Assert.True (b.Transform.IsIdentity, "Transform.IsIdentity");
-			Assert.Equal (WrapMode.Tile, b.WrapMode, "WrapMode");
+			Assert.True (b.Transform.IsIdentity);
+			Assert.Equal (WrapMode.Tile, b.WrapMode);
 		}
 
 		[Fact]
 		public void TextureBush_RectangleOutsideBitmap ()
 		{
 			Rectangle r = new Rectangle (50, 50, 50, 50);
-			Assert.False (r.Y + r.Height <= bmp.Height, "Height");
-			Assert.False (r.X + r.Width <= bmp.Width, "Width");
+			Assert.False (r.Y + r.Height <= bmp.Height);
+			Assert.False (r.X + r.Width <= bmp.Width);
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (bmp, r));
 		}
 
@@ -264,7 +262,7 @@ namespace MonoTests.System.Drawing {
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
 				TextureBrush t = new TextureBrush (image);
 				t.WrapMode = wm;
-				Assert.Equal (wm, t.WrapMode, wm.ToString ());
+				Assert.Equal (wm, t.WrapMode);
 			}
 		}
 
@@ -299,15 +297,6 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		[NUnit.Framework.Category ("NotDotNet")] // AccessViolationException under 2.0
-		public void Dispose_Image ()
-		{
-			TextureBrush t = new TextureBrush (image);
-			t.Dispose ();
-			Assert.Throws<ArgumentException> (() => Assert.NotNull (t.Image, "Image"));
-		}
-
-		[Fact]
 		public void MultiplyTransform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (image).MultiplyTransform (null));
@@ -339,9 +328,9 @@ namespace MonoTests.System.Drawing {
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.RotateTransform (90);
-			Assert.False (t.Transform.IsIdentity, "Transform.IsIdentity");
+			Assert.False (t.Transform.IsIdentity);
 			t.ResetTransform ();
-			Assert.True (t.Transform.IsIdentity, "Reset.IsIdentity");
+			Assert.True (t.Transform.IsIdentity);
 		}
 
 		[Fact]
@@ -350,15 +339,15 @@ namespace MonoTests.System.Drawing {
 			TextureBrush t = new TextureBrush (image);
 			t.RotateTransform (90);
 			float[] elements = t.Transform.Elements;
-			Assert.Equal (0, elements[0], 0.1, "matrix.0");
-			Assert.Equal (1, elements[1], 0.1, "matrix.1");
-			Assert.Equal (-1, elements[2], 0.1, "matrix.2");
-			Assert.Equal (0, elements[3], 0.1, "matrix.3");
-			Assert.Equal (0, elements[4], 0.1, "matrix.4");
-			Assert.Equal (0, elements[5], 0.1, "matrix.5");
+			Assert.Equal (0, elements[0], 1);
+			Assert.Equal (1, elements[1], 1);
+			Assert.Equal (-1, elements[2], 1);
+			Assert.Equal (0, elements[3], 1);
+			Assert.Equal (0, elements[4], 1);
+			Assert.Equal (0, elements[5], 1);
 
 			t.RotateTransform (270);
-			Assert.True (t.Transform.IsIdentity, "Transform.IsIdentity");
+			Assert.True (t.Transform.IsIdentity);
 		}
 
 		[Fact]
@@ -374,15 +363,15 @@ namespace MonoTests.System.Drawing {
 			TextureBrush t = new TextureBrush (image);
 			t.ScaleTransform (2, 4);
 			float[] elements = t.Transform.Elements;
-			Assert.Equal (2, elements[0], 0.1, "matrix.0");
-			Assert.Equal (0, elements[1], 0.1, "matrix.1");
-			Assert.Equal (0, elements[2], 0.1, "matrix.2");
-			Assert.Equal (4, elements[3], 0.1, "matrix.3");
-			Assert.Equal (0, elements[4], 0.1, "matrix.4");
-			Assert.Equal (0, elements[5], 0.1, "matrix.5");
+			Assert.Equal (2, elements[0], 1);
+			Assert.Equal (0, elements[1], 1);
+			Assert.Equal (0, elements[2], 1);
+			Assert.Equal (4, elements[3], 1);
+			Assert.Equal (0, elements[4], 1);
+			Assert.Equal (0, elements[5], 1);
 
 			t.ScaleTransform (0.5f, 0.25f);
-			Assert.True (t.Transform.IsIdentity, "Transform.IsIdentity");
+			Assert.True (t.Transform.IsIdentity);
 		}
 
 		[Fact]
@@ -391,12 +380,12 @@ namespace MonoTests.System.Drawing {
 			TextureBrush t = new TextureBrush (image);
 			t.ScaleTransform (Single.MaxValue, Single.MinValue);
 			float[] elements = t.Transform.Elements;
-			Assert.Equal (Single.MaxValue, elements[0], 1e33, "matrix.0");
-			Assert.Equal (0, elements[1], 0.1, "matrix.1");
-			Assert.Equal (0, elements[2], 0.1, "matrix.2");
-			Assert.Equal (Single.MinValue, elements[3], 1e33, "matrix.3");
-			Assert.Equal (0, elements[4], 0.1, "matrix.4");
-			Assert.Equal (0, elements[5], 0.1, "matrix.5");
+			Assert.Equal (Single.MaxValue, elements[0], -33);
+			Assert.Equal (0, elements[1], 1);
+			Assert.Equal (0, elements[2], 1);
+			Assert.Equal (Single.MinValue, elements[3], -33);
+			Assert.Equal (0, elements[4], 1);
+			Assert.Equal (0, elements[5], 1);
 		}
 
 		[Fact]
@@ -412,21 +401,21 @@ namespace MonoTests.System.Drawing {
 			TextureBrush t = new TextureBrush (image);
 			t.TranslateTransform (1, 1);
 			float[] elements = t.Transform.Elements;
-			Assert.Equal (1, elements[0], 0.1, "matrix.0");
-			Assert.Equal (0, elements[1], 0.1, "matrix.1");
-			Assert.Equal (0, elements[2], 0.1, "matrix.2");
-			Assert.Equal (1, elements[3], 0.1, "matrix.3");
-			Assert.Equal (1, elements[4], 0.1, "matrix.4");
-			Assert.Equal (1, elements[5], 0.1, "matrix.5");
+			Assert.Equal (1, elements[0], 1);
+			Assert.Equal (0, elements[1], 1);
+			Assert.Equal (0, elements[2], 1);
+			Assert.Equal (1, elements[3], 1);
+			Assert.Equal (1, elements[4], 1);
+			Assert.Equal (1, elements[5], 1);
 
 			t.TranslateTransform (-1, -1);
 			elements = t.Transform.Elements;
-			Assert.Equal (1, elements[0], 0.1, "revert.matrix.0");
-			Assert.Equal (0, elements[1], 0.1, "revert.matrix.1");
-			Assert.Equal (0, elements[2], 0.1, "revert.matrix.2");
-			Assert.Equal (1, elements[3], 0.1, "revert.matrix.3");
-			Assert.Equal (0, elements[4], 0.1, "revert.matrix.4");
-			Assert.Equal (0, elements[5], 0.1, "revert.matrix.5");
+			Assert.Equal (1, elements[0], 1);
+			Assert.Equal (0, elements[1], 1);
+			Assert.Equal (0, elements[2], 1);
+			Assert.Equal (1, elements[3], 1);
+			Assert.Equal (0, elements[4], 1);
+			Assert.Equal (0, elements[5], 1);
 		}
 
 		[Fact]
@@ -454,7 +443,7 @@ namespace MonoTests.System.Drawing {
 					if (equals)
 						Assert.Equal (c1, c2);
 					else
-						Assert.Equal (-16744448, c2.ToArgb (), "Green");
+						Assert.Equal (-16744448, c2.ToArgb ());
 				}
 			}
 		}

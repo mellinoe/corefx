@@ -35,7 +35,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing {
 
-	[TestFixture]
 	public class RegionDataTest {
 
 		private Bitmap bitmap;
@@ -43,8 +42,7 @@ namespace MonoTests.System.Drawing {
 		private GraphicsPath sp1;
 		private GraphicsPath sp2;
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
+		public RegionDataTest()
 		{
 			bitmap = new Bitmap (10, 10);
 			graphic = Graphics.FromImage (bitmap);
@@ -61,7 +59,7 @@ namespace MonoTests.System.Drawing {
 		{
 			RegionData data = new Region ().GetRegionData ();
 			data.Data = null;
-			Assert.Null (data.Data, "Data");
+			Assert.Null (data.Data);
 			Assert.Throws<NullReferenceException> (() => new Region (data));
 		}
 
@@ -70,7 +68,7 @@ namespace MonoTests.System.Drawing {
 		{
 			RegionData data = new Region ().GetRegionData ();
 			data.Data = new byte[0];
-			Assert.Equal (0, data.Data.Length, "Data");
+			Assert.Equal (0, data.Data.Length);
 			try {
 				new Region (data);
 			}
@@ -88,7 +86,7 @@ namespace MonoTests.System.Drawing {
 			// note: an empty region is (for libgdiplus) a rectangular based region
 			Region empty = new Region ();
 			RegionData data = empty.GetRegionData ();
-			Assert.NotNull (data.Data, "Data");
+			Assert.NotNull (data.Data);
 			Region region = new Region (data);
 		}
 
@@ -99,9 +97,9 @@ namespace MonoTests.System.Drawing {
 			path.AddCurve (new Point[2] { new Point (1, 1), new Point (2, 2) });
 			Region r = new Region (path);
 			RegionData data = r.GetRegionData ();
-			Assert.NotNull (data.Data, "Data");
+			Assert.NotNull (data.Data);
 			Region region = new Region (data);
-			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
+			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)));
 		}
 
 		[Fact]
@@ -111,9 +109,9 @@ namespace MonoTests.System.Drawing {
 			Region r = new Region (sp1);
 			r.Xor (sp2);
 			RegionData data = r.GetRegionData ();
-			Assert.NotNull (data.Data, "Data");
+			Assert.NotNull (data.Data);
 			Region region = new Region (data);
-			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
+			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)));
 		}
 
 		[Fact]
@@ -128,9 +126,9 @@ namespace MonoTests.System.Drawing {
 			Region r = r1.Clone ();
 			r.Union (r2);
 			RegionData data = r.GetRegionData ();
-			Assert.NotNull (data.Data, "Data");
+			Assert.NotNull (data.Data);
 			Region region = new Region (data);
-			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
+			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)));
 		}
 	}
 }

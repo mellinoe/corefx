@@ -33,14 +33,13 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing {
 
-	[TestFixture]
 	public class SystemIconsTest {
 
 		[Fact]
 		public void Same ()
 		{
 			// SystemIcons always return the same icon
-			Assert.True (Object.ReferenceEquals (SystemIcons.Application, SystemIcons.Application), "Same");
+			Assert.True (Object.ReferenceEquals (SystemIcons.Application, SystemIcons.Application));
 		}
 
 		[Fact]

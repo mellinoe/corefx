@@ -39,32 +39,24 @@ using Xunit;
 
 namespace MonoTests.System.Drawing{
 
-	[TestFixture]
-	public class ImageTest {
+	public class ImageTest : IDisposable {
 
 		private string fname;
 		private bool callback;
 
-		[TestFixtureSetUp]
-		public void FixtureSetup ()
+		public ImageTest()
 		{
 			fname = Path.GetTempFileName ();
-		}
+            callback = false;
+        }
 
-		[TestFixtureTearDown]
-		public void FixtureTearDown ()
+		public void Dispose ()
 		{
 			try {
 				File.Delete (fname);
 			}
 			catch {
 			}
-		}
-
-		[SetUp]
-		public void SetUp ()
-		{
-			callback = false;
 		}
 
 		[Fact]
@@ -91,9 +83,9 @@ namespace MonoTests.System.Drawing{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				// according to documentation a callback is mandatory
 				Image tn = bmp.GetThumbnailImage (10, 5, null, IntPtr.Zero);
-				Assert.Equal (5, tn.Height, "Height");
-				Assert.Equal (10, tn.Width, "Width");
-				Assert.False (callback, "Callback called");
+				Assert.Equal (5, tn.Height);
+				Assert.Equal (10, tn.Width);
+				Assert.False (callback);
 				tn.Save (fname, ImageFormat.Tiff);
 			}
 		}
@@ -120,9 +112,9 @@ namespace MonoTests.System.Drawing{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				// according to documentation IntPtr.Zero must be supplied as data
 				Image tn = bmp.GetThumbnailImage (5, 5, new Image.GetThumbnailImageAbort (CallbackFalse), (IntPtr)Int32.MaxValue);
-				Assert.Equal (5, tn.Height, "Height");
-				Assert.Equal (5, tn.Width, "Width");
-				Assert.False (callback, "Callback called");
+				Assert.Equal (5, tn.Height);
+				Assert.Equal (5, tn.Width);
+				Assert.False (callback);
 				tn.Save (fname, ImageFormat.Tiff);
 			}
 		}
@@ -132,9 +124,9 @@ namespace MonoTests.System.Drawing{
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				Image tn = bmp.GetThumbnailImage (10, 10, new Image.GetThumbnailImageAbort (CallbackFalse), IntPtr.Zero);
-				Assert.Equal (10, tn.Height, "Height");
-				Assert.Equal (10, tn.Width, "Width");
-				Assert.False (callback, "Callback called");
+				Assert.Equal (10, tn.Height);
+				Assert.Equal (10, tn.Width);
+				Assert.False (callback);
 				tn.Save (fname, ImageFormat.Bmp);
 			}
 		}
@@ -144,9 +136,9 @@ namespace MonoTests.System.Drawing{
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				Image tn = bmp.GetThumbnailImage (4, 4, new Image.GetThumbnailImageAbort (CallbackTrue), IntPtr.Zero);
-				Assert.Equal (4, tn.Height, "Height");
-				Assert.Equal (4, tn.Width, "Width");
-				Assert.False (callback, "Callback called");
+				Assert.Equal (4, tn.Height);
+				Assert.Equal (4, tn.Width);
+				Assert.False (callback);
 				tn.Save (fname, ImageFormat.Gif);
 			}
 		}
@@ -156,9 +148,9 @@ namespace MonoTests.System.Drawing{
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				Image tn = bmp.GetThumbnailImage (40, 40, new Image.GetThumbnailImageAbort (CallbackTrue), IntPtr.Zero);
-				Assert.Equal (40, tn.Height, "Height");
-				Assert.Equal (40, tn.Width, "Width");
-				Assert.False (callback, "Callback called");
+				Assert.Equal (40, tn.Height);
+				Assert.Equal (40, tn.Width);
+				Assert.False (callback);
 				tn.Save (fname, ImageFormat.Png);
 			}
 		}
@@ -204,12 +196,12 @@ namespace MonoTests.System.Drawing{
 
 		private void Wmf (Image img)
 		{
-			Assert.False (img is Bitmap, "Bitmap");
-			Assert.True (img is Metafile, "Metafile");
+			Assert.False (img is Bitmap);
+			Assert.True (img is Metafile);
 			// as Image
-			Assert.Equal (327683, img.Flags, "Flags");
-			Assert.True (img.RawFormat.Equals (ImageFormat.Wmf), "Wmf");
-			Assert.Null (img.Tag, "Tag");
+			Assert.Equal (327683, img.Flags);
+			Assert.True (img.RawFormat.Equals (ImageFormat.Wmf));
+			Assert.Null (img.Tag);
 		}
 
 		[Fact]
@@ -234,12 +226,12 @@ namespace MonoTests.System.Drawing{
 
 		private void Emf (Image img)
 		{
-			Assert.False (img is Bitmap, "Bitmap");
-			Assert.True (img is Metafile, "Metafile");
+			Assert.False (img is Bitmap);
+			Assert.True (img is Metafile);
 			// as Image
-			Assert.Equal (327683, img.Flags, "Flags");
-			Assert.True (img.RawFormat.Equals (ImageFormat.Emf), "Emf");
-			Assert.Null (img.Tag, "Tag");
+			Assert.Equal (327683, img.Flags);
+			Assert.True (img.RawFormat.Equals (ImageFormat.Emf));
+			Assert.Null (img.Tag);
 		}
 
 		[Fact]
@@ -294,20 +286,20 @@ namespace MonoTests.System.Drawing{
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
 				using (Bitmap bmp = GetBitmap ()) {
-					Assert.Equal (0, ms.Position, "Position-1");
+					Assert.Equal (0, ms.Position);
 					bmp.Save (ms, ImageFormat.Bmp);
-					Assert.True (ms.Position > 0, "Position-2");
+					Assert.True (ms.Position > 0);
 
 					ms.Position = ms.Length;
-					Assert.Equal (ms.Length, ms.Position, "Position-3");
+					Assert.Equal (ms.Length, ms.Position);
 
 					Bitmap bmp2 = (Bitmap)Image.FromStream (ms);
-					Assert.True (ms.Position > 20, "Position-4");
+					Assert.True (ms.Position > 20);
 
-					Assert.True (bmp2.RawFormat.Equals (ImageFormat.Bmp), "Bmp");
+					Assert.True (bmp2.RawFormat.Equals (ImageFormat.Bmp));
 
-					Assert.Equal (bmp.GetPixel (0, 0), bmp2.GetPixel (0, 0), "0,0");
-					Assert.Equal (bmp.GetPixel (10, 0), bmp2.GetPixel (10, 0), "10,0");
+					Assert.Equal (bmp.GetPixel (0, 0), bmp2.GetPixel (0, 0));
+					Assert.Equal (bmp.GetPixel (10, 0), bmp2.GetPixel (10, 0));
 				}
 			}
 		}
@@ -319,11 +311,11 @@ namespace MonoTests.System.Drawing{
 				// junk
 				ms.WriteByte (0xff);
 				ms.WriteByte (0xef);
-				Assert.Equal (2, ms.Position, "Position-1");
+				Assert.Equal (2, ms.Position);
 
 				using (Bitmap bmp = GetBitmap ()) {
 					bmp.Save (ms, ImageFormat.Bmp);
-					Assert.True (ms.Position > 2, "Position-2");
+					Assert.True (ms.Position > 2);
 					// exception here
 					Assert.Throws<ArgumentException> (() => Image.FromStream (ms));
 				}

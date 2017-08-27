@@ -35,7 +35,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Drawing2D {
 
-	[TestFixture]
 	public class PathGradientBrushTest {
 
 		private Point[] pts_2i;
@@ -44,45 +43,44 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private void CheckDefaultRectangle (string message, RectangleF rect)
 		{
-			Assert.Equal (1f, rect.X, message + ".Rectangle.X");
-			Assert.Equal (2f, rect.Y, message + ".Rectangle.Y");
-			Assert.Equal (19f, rect.Width, message + ".Rectangle.Width");
-			Assert.Equal (28f, rect.Height, message + ".Rectangle.Height");
+			Assert.Equal (1f, rect.X);
+			Assert.Equal (2f, rect.Y);
+			Assert.Equal (19f, rect.Width);
+			Assert.Equal (28f, rect.Height);
 		}
 
 		private void CheckDefaults (PathGradientBrush pgb)
 		{
-			Assert.Equal (1, pgb.Blend.Factors.Length, "Blend.Factors.Length");
-			Assert.Equal (1f, pgb.Blend.Factors[0], "Blend.Factors[0]");
-			Assert.Equal (1, pgb.Blend.Positions.Length, "Blend.Positions.Length");
-			Assert.Equal (0f, pgb.Blend.Positions[0], 1e-30, "Blend.Positions[0]");
-			Assert.Equal (10.5f, pgb.CenterPoint.X, "CenterPoint.X");
-			Assert.Equal (16f, pgb.CenterPoint.Y, "CenterPoint.Y");
-			Assert.True (pgb.FocusScales.IsEmpty, "FocusScales");
-			Assert.Equal (1, pgb.InterpolationColors.Colors.Length, "InterpolationColors.Colors.Length");
-			Assert.Equal (0, pgb.InterpolationColors.Colors[0].ToArgb (), "InterpolationColors.Colors[0]");
-			Assert.Equal (1, pgb.InterpolationColors.Positions.Length, "InterpolationColors.Positions.Length");
-			Assert.Equal (0f, pgb.InterpolationColors.Positions[0], 1e-38, "InterpolationColors.Positions[0]");
+			Assert.Equal (1, pgb.Blend.Factors.Length);
+			Assert.Equal (1f, pgb.Blend.Factors[0]);
+			Assert.Equal (1, pgb.Blend.Positions.Length);
+			Assert.Equal (0f, pgb.Blend.Positions[0], -30);
+			Assert.Equal (10.5f, pgb.CenterPoint.X);
+			Assert.Equal (16f, pgb.CenterPoint.Y);
+			Assert.True (pgb.FocusScales.IsEmpty);
+			Assert.Equal (1, pgb.InterpolationColors.Colors.Length);
+			Assert.Equal (0, pgb.InterpolationColors.Colors[0].ToArgb ());
+			Assert.Equal (1, pgb.InterpolationColors.Positions.Length);
+			Assert.Equal (0f, pgb.InterpolationColors.Positions[0], -38);
 			CheckDefaultRectangle (String.Empty, pgb.Rectangle);
-			Assert.Equal (1, pgb.SurroundColors.Length, "SurroundColors.Length");
-			Assert.Equal (-1, pgb.SurroundColors[0].ToArgb (), "SurroundColors[0]");
-			Assert.True (pgb.Transform.IsIdentity, "Transform");
+			Assert.Equal (1, pgb.SurroundColors.Length);
+			Assert.Equal (-1, pgb.SurroundColors[0].ToArgb ());
+			Assert.True (pgb.Transform.IsIdentity);
 		}
 
 		private void CheckPointsDefaults (PathGradientBrush pgb)
 		{
 			CheckDefaults (pgb);
-			Assert.Equal (-16777216, pgb.CenterColor.ToArgb (), "CenterColor");
+			Assert.Equal (-16777216, pgb.CenterColor.ToArgb ());
 		}
 
 		private void CheckPathDefaults (PathGradientBrush pgb)
 		{
 			CheckDefaults (pgb);
-			Assert.Equal (-1, pgb.CenterColor.ToArgb (), "CenterColor");
+			Assert.Equal (-1, pgb.CenterColor.ToArgb ());
 		}
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
+		public PathGradientBrushTest()
 		{
 			pts_2i = new Point[2] { new Point (1, 2), new Point (20, 30) };
 			pts_2f = new PointF[2] { new PointF (1, 2), new PointF (20, 30) };
@@ -121,7 +119,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				gp.AddLines (pts_2f);
 				using (PathGradientBrush pgb = new PathGradientBrush (gp)) {
 					CheckPathDefaults (pgb);
-					Assert.Equal (WrapMode.Clamp, pgb.WrapMode, "WrapMode");
+					Assert.Equal (WrapMode.Clamp, pgb.WrapMode);
 				}
 			}
 		}
@@ -152,7 +150,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.Clamp, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.Clamp, pgb.WrapMode);
 			}
 		}
 
@@ -161,7 +159,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.Clamp)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.Clamp, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.Clamp, pgb.WrapMode);
 			}
 		}
 
@@ -170,7 +168,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.Tile)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.Tile, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.Tile, pgb.WrapMode);
 			}
 		}
 
@@ -179,7 +177,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.TileFlipX)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.TileFlipX, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.TileFlipX, pgb.WrapMode);
 			}
 		}
 
@@ -188,7 +186,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.TileFlipY)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.TileFlipY, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.TileFlipY, pgb.WrapMode);
 			}
 		}
 
@@ -197,7 +195,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.TileFlipXY)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.TileFlipXY, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.TileFlipXY, pgb.WrapMode);
 			}
 		}
 
@@ -227,7 +225,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.Clamp, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.Clamp, pgb.WrapMode);
 			}
 		}
 
@@ -242,7 +240,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.Clamp, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.Clamp, pgb.WrapMode);
 			}
 		}
 
@@ -251,7 +249,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Tile)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.Tile, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.Tile, pgb.WrapMode);
 			}
 		}
 
@@ -260,7 +258,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipX)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.TileFlipX, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.TileFlipX, pgb.WrapMode);
 			}
 		}
 
@@ -269,7 +267,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipY)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.TileFlipY, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.TileFlipY, pgb.WrapMode);
 			}
 		}
 
@@ -278,7 +276,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
 				CheckPointsDefaults (pgb);
-				Assert.Equal (WrapMode.TileFlipXY, pgb.WrapMode, "WrapMode");
+				Assert.Equal (WrapMode.TileFlipXY, pgb.WrapMode);
 			}
 		}
 
@@ -288,15 +286,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
 				// change not accepted - but no exception is thrown
 				pgb.Blend.Factors = new float[0];
-				Assert.Equal (1, pgb.Blend.Factors.Length, "Factors-0");
+				Assert.Equal (1, pgb.Blend.Factors.Length);
 				pgb.Blend.Factors = new float[2];
-				Assert.Equal (1, pgb.Blend.Factors.Length, "Factors-1");
+				Assert.Equal (1, pgb.Blend.Factors.Length);
 
 				// change not accepted - but no exception is thrown
 				pgb.Blend.Positions = new float[0];
-				Assert.Equal (1, pgb.Blend.Positions.Length, "Positions-0");
+				Assert.Equal (1, pgb.Blend.Positions.Length);
 				pgb.Blend.Positions = new float[2];
-				Assert.Equal (1, pgb.Blend.Positions.Length, "Positions-1");
+				Assert.Equal (1, pgb.Blend.Positions.Length);
 			}
 		}
 
@@ -306,14 +304,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
 				PointF fs = new PointF (Single.MaxValue, Single.MinValue);
 				pgb.FocusScales = fs;
-				Assert.Equal (Single.MaxValue, pgb.FocusScales.X, "MaxValue");
-				Assert.Equal (Single.MinValue, pgb.FocusScales.Y, "MinValue");
+				Assert.Equal (Single.MaxValue, pgb.FocusScales.X);
+				Assert.Equal (Single.MinValue, pgb.FocusScales.Y);
 
 				fs.X = Single.NaN;
 				fs.Y = Single.NegativeInfinity;
 				pgb.FocusScales = fs;
-				Assert.Equal (Single.NaN, pgb.FocusScales.X, "NaN");
-				Assert.Equal (Single.NegativeInfinity, pgb.FocusScales.Y, "NegativeInfinity");
+				Assert.Equal (Single.NaN, pgb.FocusScales.X);
+				Assert.Equal (Single.NegativeInfinity, pgb.FocusScales.Y);
 			}
 		}
 
@@ -322,9 +320,9 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
 				pgb.CenterColor = Color.Black;
-				Assert.Equal (Color.Black.ToArgb (), pgb.CenterColor.ToArgb (), "Black");
+				Assert.Equal (Color.Black.ToArgb (), pgb.CenterColor.ToArgb ());
 				pgb.CenterColor = Color.Transparent;
-				Assert.Equal (Color.Transparent.ToArgb (), pgb.CenterColor.ToArgb (), "Transparent");
+				Assert.Equal (Color.Transparent.ToArgb (), pgb.CenterColor.ToArgb ());
 			}
 		}
 
@@ -334,14 +332,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
 				PointF cp = new PointF (Single.MaxValue, Single.MinValue);
 				pgb.CenterPoint = cp;
-				Assert.Equal (Single.MaxValue, pgb.CenterPoint.X, "MaxValue");
-				Assert.Equal (Single.MinValue, pgb.CenterPoint.Y, "MinValue");
+				Assert.Equal (Single.MaxValue, pgb.CenterPoint.X);
+				Assert.Equal (Single.MinValue, pgb.CenterPoint.Y);
 
 				cp.X = Single.NaN;
 				cp.Y = Single.NegativeInfinity;
 				pgb.CenterPoint = cp;
-				Assert.Equal (Single.NaN, pgb.CenterPoint.X, "NaN");
-				Assert.Equal (Single.NegativeInfinity, pgb.CenterPoint.Y, "NegativeInfinity");
+				Assert.Equal (Single.NaN, pgb.CenterPoint.X);
+				Assert.Equal (Single.NegativeInfinity, pgb.CenterPoint.Y);
 			}
 		}
 
@@ -351,15 +349,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
 				// change not accepted - but no exception is thrown
 				pgb.InterpolationColors.Colors = new Color[0];
-				Assert.Equal (1, pgb.InterpolationColors.Colors.Length, "Colors-0");
+				Assert.Equal (1, pgb.InterpolationColors.Colors.Length);
 				pgb.InterpolationColors.Colors = new Color[2];
-				Assert.Equal (1, pgb.InterpolationColors.Colors.Length, "Colors-1");
+				Assert.Equal (1, pgb.InterpolationColors.Colors.Length);
 
 				// change not accepted - but no exception is thrown
 				pgb.InterpolationColors.Positions = new float[0];
-				Assert.Equal (1, pgb.InterpolationColors.Positions.Length, "Positions-0");
+				Assert.Equal (1, pgb.InterpolationColors.Positions.Length);
 				pgb.InterpolationColors.Positions = new float[2];
-				Assert.Equal (1, pgb.InterpolationColors.Positions.Length, "Positions-1");
+				Assert.Equal (1, pgb.InterpolationColors.Positions.Length);
 			}
 		}
 
@@ -399,21 +397,21 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
 				// default values
-				Assert.Equal (1, pgb.SurroundColors.Length, "Length-0");
-				Assert.Equal (-1, pgb.SurroundColors[0].ToArgb (), "SurroundColors-0");
+				Assert.Equal (1, pgb.SurroundColors.Length);
+				Assert.Equal (-1, pgb.SurroundColors[0].ToArgb ());
 
 				// default can't be changed
 				pgb.SurroundColors[0] = Color.Gold;
-				Assert.Equal (-1, pgb.SurroundColors[0].ToArgb (), "SurroundColors-1");
+				Assert.Equal (-1, pgb.SurroundColors[0].ToArgb ());
 
 				// 2 empty color isn't valid, change isn't accepted
 				pgb.SurroundColors = new Color[2];
-				Assert.Equal (1, pgb.SurroundColors.Length, "Length-1");
+				Assert.Equal (1, pgb.SurroundColors.Length);
 
 				pgb.SurroundColors = new Color[2] { Color.Black, Color.White };
-				Assert.Equal (2, pgb.SurroundColors.Length, "Length-2");
-				Assert.Equal (-16777216, pgb.SurroundColors[0].ToArgb (), "SurroundColors-2");
-				Assert.Equal (-1, pgb.SurroundColors[1].ToArgb (), "SurroundColors-3");
+				Assert.Equal (2, pgb.SurroundColors.Length);
+				Assert.Equal (-16777216, pgb.SurroundColors[0].ToArgb ());
+				Assert.Equal (-1, pgb.SurroundColors[1].ToArgb ());
 			}
 		}
 
@@ -424,14 +422,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (points)) {
 				// 3 empty color isn't valid, change isn't accepted
 				pgb.SurroundColors = new Color[3] { Color.Empty, Color.Empty, Color.Empty };
-				Assert.Equal (1, pgb.SurroundColors.Length, "Length-1");
+				Assert.Equal (1, pgb.SurroundColors.Length);
 
 				pgb.SurroundColors = new Color[3] { Color.Red, Color.Green, Color.Blue };
 				// change not accepted - but no exception is thrown
-				Assert.Equal (3, pgb.SurroundColors.Length, "Length-1");
-				Assert.Equal (-65536, pgb.SurroundColors[0].ToArgb (), "SurroundColors-1");
-				Assert.Equal (-16744448, pgb.SurroundColors[1].ToArgb (), "SurroundColors-2");
-				Assert.Equal (-16776961, pgb.SurroundColors[2].ToArgb (), "SurroundColors-3");
+				Assert.Equal (3, pgb.SurroundColors.Length);
+				Assert.Equal (-65536, pgb.SurroundColors[0].ToArgb ());
+				Assert.Equal (-16744448, pgb.SurroundColors[1].ToArgb ());
+				Assert.Equal (-16776961, pgb.SurroundColors[2].ToArgb ());
 			}
 		}
 
@@ -446,7 +444,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.Transform = new Matrix ();
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity");
+				Assert.True (pgb.Transform.IsIdentity);
 			}
 		}
 
@@ -464,7 +462,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
 					pgb.WrapMode = wm;
-					Assert.Equal (wm, pgb.WrapMode, wm.ToString ());
+					Assert.Equal (wm, pgb.WrapMode);
 				}
 			}
 		}
@@ -485,7 +483,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				using (PathGradientBrush pgb = new PathGradientBrush (gp)) {
 					using (PathGradientBrush clone = (PathGradientBrush) pgb.Clone ()) {
 						CheckPathDefaults (clone);
-						Assert.Equal (WrapMode.Clamp, clone.WrapMode, "WrapMode");
+						Assert.Equal (WrapMode.Clamp, clone.WrapMode);
 					}
 				}
 			}
@@ -531,9 +529,9 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (Matrix m = new Matrix (2, 0, 0, 2, 10, -10)) {
 				using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 					pgb.Transform = m;
-					Assert.False (pgb.Transform.IsIdentity, "Transform.IsIdentity");
+					Assert.False (pgb.Transform.IsIdentity);
 					pgb.ResetTransform ();
-					Assert.True (pgb.Transform.IsIdentity, "Reset.IsIdentity");
+					Assert.True (pgb.Transform.IsIdentity);
 				}
 			}
 		}
@@ -544,47 +542,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.RotateTransform (90);
 				float[] elements = pgb.Transform.Elements;
-				Assert.Equal (0, elements[0], 0.1, "matrix.0");
-				Assert.Equal (1, elements[1], 0.1, "matrix.1");
-				Assert.Equal (-1, elements[2], 0.1, "matrix.2");
-				Assert.Equal (0, elements[3], 0.1, "matrix.3");
-				Assert.Equal (0, elements[4], 0.1, "matrix.4");
-				Assert.Equal (0, elements[5], 0.1, "matrix.5");
+				Assert.Equal (0, elements[0], 1);
+				Assert.Equal (1, elements[1], 1);
+				Assert.Equal (-1, elements[2], 1);
+				Assert.Equal (0, elements[3], 1);
+				Assert.Equal (0, elements[4], 1);
+				Assert.Equal (0, elements[5], 1);
 
 				pgb.RotateTransform (270);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity");
-			}
-		}
-
-		[Fact]
-		[NUnit.Framework.Category ("NotWorking")]
-		public void RotateTransform_Max ()
-		{
-			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
-				pgb.RotateTransform (Single.MaxValue);
-				float[] elements = pgb.Transform.Elements;
-				Assert.Equal (5.93904E+36, elements[0], 1e32, "matrix.0");
-				Assert.Equal (5.93904E+36, elements[1], 1e32, "matrix.1");
-				Assert.Equal (-5.93904E+36, elements[2], 1e32, "matrix.2");
-				Assert.Equal (5.93904E+36, elements[3], 1e32, "matrix.3");
-				Assert.Equal (0, elements[4], 0.1, "matrix.4");
-				Assert.Equal (0, elements[5], 0.1, "matrix.5");
-			}
-		}
-
-		[Fact]
-		[NUnit.Framework.Category ("NotWorking")]
-		public void RotateTransform_Min ()
-		{
-			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
-				pgb.RotateTransform (Single.MinValue);
-				float[] elements = pgb.Transform.Elements;
-				Assert.Equal (-5.93904E+36, elements[0], 1e32, "matrix.0");
-				Assert.Equal (-5.93904E+36, elements[1], 1e32, "matrix.1");
-				Assert.Equal (5.93904E+36, elements[2], 1e32, "matrix.2");
-				Assert.Equal (-5.93904E+36, elements[3], 1e32, "matrix.3");
-				Assert.Equal (0, elements[4], 0.1, "matrix.4");
-				Assert.Equal (0, elements[5], 0.1, "matrix.5");
+				Assert.True (pgb.Transform.IsIdentity);
 			}
 		}
 
@@ -602,15 +568,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.ScaleTransform (2, 4);
 				float[] elements = pgb.Transform.Elements;
-				Assert.Equal (2, elements[0], 0.1, "matrix.0");
-				Assert.Equal (0, elements[1], 0.1, "matrix.1");
-				Assert.Equal (0, elements[2], 0.1, "matrix.2");
-				Assert.Equal (4, elements[3], 0.1, "matrix.3");
-				Assert.Equal (0, elements[4], 0.1, "matrix.4");
-				Assert.Equal (0, elements[5], 0.1, "matrix.5");
+				Assert.Equal (2, elements[0], 1);
+				Assert.Equal (0, elements[1], 1);
+				Assert.Equal (0, elements[2], 1);
+				Assert.Equal (4, elements[3], 1);
+				Assert.Equal (0, elements[4], 1);
+				Assert.Equal (0, elements[5], 1);
 
 				pgb.ScaleTransform (0.5f, 0.25f);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity");
+				Assert.True (pgb.Transform.IsIdentity);
 			}
 		}
 
@@ -620,12 +586,12 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.ScaleTransform (Single.MaxValue, Single.MinValue);
 				float[] elements = pgb.Transform.Elements;
-				Assert.Equal (Single.MaxValue, elements[0], 1e33, "matrix.0");
-				Assert.Equal (0, elements[1], 0.1, "matrix.1");
-				Assert.Equal (0, elements[2], 0.1, "matrix.2");
-				Assert.Equal (Single.MinValue, elements[3], 1e33, "matrix.3");
-				Assert.Equal (0, elements[4], 0.1, "matrix.4");
-				Assert.Equal (0, elements[5], 0.1, "matrix.5");
+				Assert.Equal (Single.MaxValue, elements[0], -33);
+				Assert.Equal (0, elements[1], 1);
+				Assert.Equal (0, elements[2], 1);
+				Assert.Equal (Single.MinValue, elements[3], -33);
+				Assert.Equal (0, elements[4], 1);
+				Assert.Equal (0, elements[5], 1);
 			}
 		}
 
@@ -643,13 +609,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				// max valid
 				pgb.SetBlendTriangularShape (1);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// min valid
 				pgb.SetBlendTriangularShape (0);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// middle
 				pgb.SetBlendTriangularShape (0.5f);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// no impact on matrix
 			}
 		}
@@ -660,13 +626,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				// max valid
 				pgb.SetBlendTriangularShape (0, 1);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// min valid
 				pgb.SetBlendTriangularShape (1, 0);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// middle
 				pgb.SetBlendTriangularShape (0.5f, 0.5f);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// no impact on matrix
 			}
 		}
@@ -709,13 +675,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				// max valid
 				pgb.SetSigmaBellShape (1);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// min valid
 				pgb.SetSigmaBellShape (0);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// middle
 				pgb.SetSigmaBellShape (0.5f);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// no impact on matrix
 			}
 		}
@@ -726,13 +692,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				// max valid
 				pgb.SetSigmaBellShape (0, 1);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-1");
+				Assert.True (pgb.Transform.IsIdentity);
 				// min valid
 				pgb.SetSigmaBellShape (1, 0);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-2");
+				Assert.True (pgb.Transform.IsIdentity);
 				// middle
 				pgb.SetSigmaBellShape (0.5f, 0.5f);
-				Assert.True (pgb.Transform.IsIdentity, "Transform.IsIdentity-3");
+				Assert.True (pgb.Transform.IsIdentity);
 				// no impact on matrix
 			}
 		}
@@ -775,22 +741,22 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.TranslateTransform (1, 1);
 				float[] elements = pgb.Transform.Elements;
-				Assert.Equal (1, elements[0], 0.1, "matrix.0");
-				Assert.Equal (0, elements[1], 0.1, "matrix.1");
-				Assert.Equal (0, elements[2], 0.1, "matrix.2");
-				Assert.Equal (1, elements[3], 0.1, "matrix.3");
-				Assert.Equal (1, elements[4], 0.1, "matrix.4");
-				Assert.Equal (1, elements[5], 0.1, "matrix.5");
+				Assert.Equal (1, elements[0], 1);
+				Assert.Equal (0, elements[1], 1);
+				Assert.Equal (0, elements[2], 1);
+				Assert.Equal (1, elements[3], 1);
+				Assert.Equal (1, elements[4], 1);
+				Assert.Equal (1, elements[5], 1);
 
 				pgb.TranslateTransform (-1, -1);
 				// strangely lgb.Transform.IsIdentity is false
 				elements = pgb.Transform.Elements;
-				Assert.Equal (1, elements[0], 0.1, "revert.matrix.0");
-				Assert.Equal (0, elements[1], 0.1, "revert.matrix.1");
-				Assert.Equal (0, elements[2], 0.1, "revert.matrix.2");
-				Assert.Equal (1, elements[3], 0.1, "revert.matrix.3");
-				Assert.Equal (0, elements[4], 0.1, "revert.matrix.4");
-				Assert.Equal (0, elements[5], 0.1, "revert.matrix.5");
+				Assert.Equal (1, elements[0], 1);
+				Assert.Equal (0, elements[1], 1);
+				Assert.Equal (0, elements[2], 1);
+				Assert.Equal (1, elements[3], 1);
+				Assert.Equal (0, elements[4], 1);
+				Assert.Equal (0, elements[5], 1);
 			}
 		}
 
@@ -811,39 +777,39 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 				clone.Multiply (mul, MatrixOrder.Append);
 				pgb.MultiplyTransform (mul, MatrixOrder.Append);
-				Assert.Equal (pgb.Transform, clone, "Multiply/Append");
+				Assert.Equal (pgb.Transform, clone);
 
 				clone.Multiply (mul, MatrixOrder.Prepend);
 				pgb.MultiplyTransform (mul, MatrixOrder.Prepend);
-				Assert.Equal (pgb.Transform, clone, "Multiply/Prepend");
+				Assert.Equal (pgb.Transform, clone);
 
 				clone.Rotate (45, MatrixOrder.Append);
 				pgb.RotateTransform (45, MatrixOrder.Append);
-				Assert.Equal (pgb.Transform, clone, "Rotate/Append");
+				Assert.Equal (pgb.Transform, clone);
 
 				clone.Rotate (45, MatrixOrder.Prepend);
 				pgb.RotateTransform (45, MatrixOrder.Prepend);
-				Assert.Equal (pgb.Transform, clone, "Rotate/Prepend");
+				Assert.Equal (pgb.Transform, clone);
 
 				clone.Scale (0.25f, 2, MatrixOrder.Append);
 				pgb.ScaleTransform (0.25f, 2, MatrixOrder.Append);
-				Assert.Equal (pgb.Transform, clone, "Scale/Append");
+				Assert.Equal (pgb.Transform, clone);
 
 				clone.Scale (0.25f, 2, MatrixOrder.Prepend);
 				pgb.ScaleTransform (0.25f, 2, MatrixOrder.Prepend);
-				Assert.Equal (pgb.Transform, clone, "Scale/Prepend");
+				Assert.Equal (pgb.Transform, clone);
 
 				clone.Translate (10, 20, MatrixOrder.Append);
 				pgb.TranslateTransform (10, 20, MatrixOrder.Append);
-				Assert.Equal (pgb.Transform, clone, "Translate/Append");
+				Assert.Equal (pgb.Transform, clone);
 
 				clone.Translate (30, 40, MatrixOrder.Prepend);
 				pgb.TranslateTransform (30, 40, MatrixOrder.Prepend);
-				Assert.Equal (pgb.Transform, clone, "Translate/Prepend");
+				Assert.Equal (pgb.Transform, clone);
 
 				clone.Reset ();
 				pgb.ResetTransform ();
-				Assert.Equal (pgb.Transform, clone, "Reset");
+				Assert.Equal (pgb.Transform, clone);
 			}
 		}
 

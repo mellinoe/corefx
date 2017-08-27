@@ -36,8 +36,6 @@ using System.Security.Permissions;
 using Xunit;
 
 namespace MonoTests.System.Drawing{
-
-	[TestFixture]	
 	public class StringFormatTest {
 
 		private void CheckDefaults (StringFormat sf)

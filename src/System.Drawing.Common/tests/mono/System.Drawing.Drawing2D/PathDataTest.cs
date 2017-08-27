@@ -34,25 +34,24 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Drawing2D {
 
-	[TestFixture]
 	public class PathDataTest {
 
 		[Fact]
 		public void PathData_Empty ()
 		{
 			PathData data = new PathData ();
-			Assert.Null (data.Points, "Points");
-			Assert.Null (data.Types, "Types");
+			Assert.Null (data.Points);
+			Assert.Null (data.Types);
 
 			data.Points = new PointF[0];
 			data.Types = new byte[0];
-			Assert.Equal (0, data.Points.Length, "Points-0");
-			Assert.Equal (0, data.Types.Length, "Types-0");
+			Assert.Equal (0, data.Points.Length);
+			Assert.Equal (0, data.Types.Length);
 
 			data.Points = null;
 			data.Types = null;
-			Assert.Null (data.Points, "Points-1");
-			Assert.Null (data.Types, "Types-1");
+			Assert.Null (data.Points);
+			Assert.Null (data.Types);
 		}
 
 		[Fact]
@@ -61,8 +60,8 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			PathData data = new PathData ();
 			data.Points = new PointF[2];
 			data.Types = new byte[1];
-			Assert.Equal (2, data.Points.Length, "Points-2");
-			Assert.Equal (1, data.Types.Length, "Types-1");
+			Assert.Equal (2, data.Points.Length);
+			Assert.Equal (1, data.Types.Length);
 		}
 
 		[Fact]
@@ -71,16 +70,16 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			PathData data = new PathData ();
 			data.Points = new PointF[1] { new PointF (1f, 1f) };
 			data.Types = new byte[1] { 1 };
-			Assert.Equal (1f, data.Points[0].X, "Points.X");
-			Assert.Equal (1f, data.Points[0].Y, "Points.Y");
-			Assert.Equal (1, data.Types[0], "Types");
+			Assert.Equal (1f, data.Points[0].X);
+			Assert.Equal (1f, data.Points[0].Y);
+			Assert.Equal (1, data.Types[0]);
 
 			data.Points[0] = new PointF (0f, 0f);
-			Assert.Equal (0f, data.Points[0].X, "Points.X.1");
-			Assert.Equal (0f, data.Points[0].Y, "Points.Y.1");
+			Assert.Equal (0f, data.Points[0].X);
+			Assert.Equal (0f, data.Points[0].Y);
 
 			data.Types[0] = 0;
-			Assert.Equal (0, data.Types[0], "Types-1");
+			Assert.Equal (0, data.Types[0]);
 		}
 	}
 }

@@ -39,8 +39,7 @@ using Xunit;
 
 namespace MonoTests.System.Drawing {
 
-	[TestFixture]	
-	public class IconTest {
+	public class IconTest : IDisposable {
 		
 		Icon icon;
 		Icon icon16, icon32, icon48, icon64, icon96;
@@ -54,8 +53,7 @@ namespace MonoTests.System.Drawing {
 			filename_dll = Assembly.GetExecutingAssembly ().Location;
 		}
 		
-		[SetUp]
-		public void SetUp ()		
+		public IconTest()		
 		{
 			String path = TestBitmap.getInFile ("bitmaps/smiley.ico");
 			icon = new Icon (path);			
@@ -68,8 +66,7 @@ namespace MonoTests.System.Drawing {
 			icon96 = new Icon (TestBitmap.getInFile ("bitmaps/96x96x256.ico"));
 		}
 
-		[TearDown]
-		public void TearDown ()
+		public void Dispose ()
 		{
 			if (fs1 != null)
 				fs1.Close ();
@@ -80,16 +77,16 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 		public void TestConstructors ()
 		{
-			Assert.Equal (32, icon.Height, "C#0a");
-			Assert.Equal (32, icon.Width, "C#0b");
+			Assert.Equal (32, icon.Height);
+			Assert.Equal (32, icon.Width);
 
 			Icon newIcon = new Icon (fs1, 48, 48);
-			Assert.Equal (48, newIcon.Height, "C#1a"); 			
-			Assert.Equal (48, newIcon.Width, "C#1b");
+			Assert.Equal (48, newIcon.Height); 			
+			Assert.Equal (48, newIcon.Width);
 
 			newIcon = new Icon (icon, 16, 16);
-			Assert.Equal (16, newIcon.Height, "C#2a"); 			
-			Assert.Equal (16, newIcon.Width, "C#2b");
+			Assert.Equal (16, newIcon.Height); 			
+			Assert.Equal (16, newIcon.Width);
 		}
 
 		[Fact]
@@ -102,8 +99,8 @@ namespace MonoTests.System.Drawing {
 		public void Constructor_Icon_IntNegative_Int ()
 		{
 			Icon neg = new Icon (icon, -32, 32);
-			Assert.Equal (32, neg.Height, "Height");
-			Assert.Equal (32, neg.Width, "Width");
+			Assert.Equal (32, neg.Height);
+			Assert.Equal (32, neg.Width);
 		}
 
 		[Fact]
@@ -116,16 +113,16 @@ namespace MonoTests.System.Drawing {
 		public void Constructor_Icon_Size_Negative ()
 		{
 			Icon neg = new Icon (icon, new Size (-32, -32));
-			Assert.Equal (16, neg.Height, "Height");
-			Assert.Equal (16, neg.Width, "Width");
+			Assert.Equal (16, neg.Height);
+			Assert.Equal (16, neg.Width);
 		}
 
 		[Fact]
 		public void Constructor_Icon_Int_Int_NonSquare ()
 		{
 			Icon non_square = new Icon (icon, 32, 16);
-			Assert.Equal (32, non_square.Height, "Height");
-			Assert.Equal (32, non_square.Width, "Width");
+			Assert.Equal (32, non_square.Height);
+			Assert.Equal (32, non_square.Width);
 		}
 
 		[Fact]
@@ -152,8 +149,8 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (32,orig.Width);
 			
 			Icon ret = new Icon (orig, 0, 0);
-			Assert.AreNotEqual (0, ret.Height);
-			Assert.AreNotEqual (0, ret.Width);
+			Assert.NotEqual (0, ret.Height);
+			Assert.NotEqual (0, ret.Width);
 		}
 
 		[Fact]
@@ -166,8 +163,8 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (32,orig.Width);
 			
 			Icon ret = new Icon (orig, 1, 1);
-			Assert.AreNotEqual (0, ret.Height);
-			Assert.AreNotEqual (0, ret.Width);
+			Assert.NotEqual (0, ret.Height);
+			Assert.NotEqual (0, ret.Width);
 		}
 
 		[Fact]
@@ -220,30 +217,30 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 		public void TestProperties ()
 		{
-			Assert.Equal (32, icon.Height, "P#1");
-			Assert.Equal (32, icon.Width, "P#2");
-			Assert.Equal (32, icon.Size.Width, "P#3");
-			Assert.Equal (32, icon.Size.Height, "P#4");
+			Assert.Equal (32, icon.Height);
+			Assert.Equal (32, icon.Width);
+			Assert.Equal (32, icon.Size.Width);
+			Assert.Equal (32, icon.Size.Height);
 		}
 
 		[Fact]
 		public void Clone ()
 		{
 			Icon clone = (Icon) icon.Clone ();
-			Assert.Equal (32, clone.Height, "Height");
-			Assert.Equal (32, clone.Width, "Width");
-			Assert.Equal (32, clone.Size.Width, "Size.Width");
-			Assert.Equal (32, clone.Size.Height, "Size.Height");
+			Assert.Equal (32, clone.Height);
+			Assert.Equal (32, clone.Width);
+			Assert.Equal (32, clone.Size.Width);
+			Assert.Equal (32, clone.Size.Height);
 		}
 
 		[Fact]
 		public void CloneHandleIcon ()
 		{
 			Icon clone = (Icon) Icon.FromHandle (SystemIcons.Hand.Handle).Clone ();
-			Assert.Equal (SystemIcons.Hand.Height, clone.Height, "Height");
-			Assert.Equal (SystemIcons.Hand.Width, clone.Width, "Width");
-			Assert.Equal (SystemIcons.Hand.Size.Width, clone.Size.Width, "Size.Width");
-			Assert.Equal (SystemIcons.Hand.Size.Height, clone.Size.Height, "Size.Height");
+			Assert.Equal (SystemIcons.Hand.Height, clone.Height);
+			Assert.Equal (SystemIcons.Hand.Width, clone.Width);
+			Assert.Equal (SystemIcons.Hand.Size.Width, clone.Size.Width);
+			Assert.Equal (SystemIcons.Hand.Size.Height, clone.Size.Height);
 		}
 
 		private void XPIcon (int size)
@@ -251,16 +248,16 @@ namespace MonoTests.System.Drawing {
 			// note: the Icon(string,Size) or Icon(string,int,int) doesn't exists under 1.x
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/32bpp.ico"))) {
 				using (Icon xp = new Icon (fs, size, size)) {
-					Assert.Equal (size, xp.Height, "Height");
-					Assert.Equal (size, xp.Width, "Width");
-					Assert.Equal (size, xp.Size.Width, "Size.Width");
-					Assert.Equal (size, xp.Size.Height, "Size.Height");
+					Assert.Equal (size, xp.Height);
+					Assert.Equal (size, xp.Width);
+					Assert.Equal (size, xp.Size.Width);
+					Assert.Equal (size, xp.Size.Height);
 
 					Bitmap bmp = xp.ToBitmap ();
-					Assert.Equal (size, bmp.Height, "Bitmap.Height");
-					Assert.Equal (size, bmp.Width, "Bitmap.Width");
-					Assert.Equal (size, bmp.Size.Width, "Bitmap.Size.Width");
-					Assert.Equal (size, bmp.Size.Height, "Bitmap.Size.Height");
+					Assert.Equal (size, bmp.Height);
+					Assert.Equal (size, bmp.Width);
+					Assert.Equal (size, bmp.Size.Width);
+					Assert.Equal (size, bmp.Size.Height);
 				}
 			}
 		}
@@ -288,10 +285,10 @@ namespace MonoTests.System.Drawing {
 		{
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/80509.ico"))) {
 				using (Icon xp = new Icon (fs, 16, 16)) {
-					Assert.Equal (16, xp.Height, "Height");
-					Assert.Equal (10, xp.Width, "Width");
-					Assert.Equal (10, xp.Size.Width, "Size.Width");
-					Assert.Equal (16, xp.Size.Height, "Size.Height");
+					Assert.Equal (16, xp.Height);
+					Assert.Equal (10, xp.Width);
+					Assert.Equal (10, xp.Size.Width);
+					Assert.Equal (16, xp.Size.Height);
 				}
 			}
 		}
@@ -301,10 +298,10 @@ namespace MonoTests.System.Drawing {
 		{
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/80509.ico"))) {
 				using (Icon xp = new Icon (fs, 32, 32)) {
-					Assert.Equal (22, xp.Height, "Height");
-					Assert.Equal (11, xp.Width, "Width");
-					Assert.Equal (11, xp.Size.Width, "Size.Width");
-					Assert.Equal (22, xp.Size.Height, "Size.Height");
+					Assert.Equal (22, xp.Height);
+					Assert.Equal (11, xp.Width);
+					Assert.Equal (11, xp.Size.Width);
+					Assert.Equal (22, xp.Size.Height);
 				}
 			}
 		}
@@ -316,23 +313,23 @@ namespace MonoTests.System.Drawing {
 				ms.Position = 0;
 
 				using (Icon loaded = new Icon (ms)) {
-					Assert.Equal (icon.Height, loaded.Height, msg + ".Loaded.Height");
-					Assert.Equal (icon.Width, loaded.Width, msg + ".Loaded.Width");
+					Assert.Equal (icon.Height, loaded.Height);
+					Assert.Equal (icon.Width, loaded.Width);
 
 					using (Bitmap expected = icon.ToBitmap ()) {
 						using (Bitmap actual = loaded.ToBitmap ()) {
-							Assert.Equal (expected.Height, actual.Height, msg + ".Bitmap.Height");
-							Assert.Equal (expected.Width, actual.Width, msg + ".Bitmap.Width");
+							Assert.Equal (expected.Height, actual.Height);
+							Assert.Equal (expected.Width, actual.Width);
 
 							for (int y = 0; y < expected.Height; y++) {
 								for (int x = 0; x < expected.Width; x++) {
 									Color e = expected.GetPixel (x, y);
 									Color a = actual.GetPixel (x, y);
 									if (alpha)
-										Assert.Equal (e.A, a.A, String.Format ("{0}:{1}x{2}:A", msg, x, y));
-									Assert.Equal (e.R, a.R, String.Format ("{0}:{1}x{2}:R", msg, x, y));
-									Assert.Equal (e.G, a.G, String.Format ("{0}:{1}x{2}:G", msg, x, y));
-									Assert.Equal (e.B, a.B, String.Format ("{0}:{1}x{2}:B", msg, x, y));
+										Assert.Equal (e.A, a.A);
+									Assert.Equal (e.R, a.R);
+									Assert.Equal (e.G, a.G);
+									Assert.Equal (e.B, a.B);
 								}
 							}
 						}
@@ -366,7 +363,8 @@ namespace MonoTests.System.Drawing {
 			var saved = new MemoryStream ();
 			using (Icon icon = new Icon (filepath))
 				icon.Save (saved);
-			FileAssert.Equal (orig, saved, "binary comparison");
+
+            Assert.Equal(orig.ToArray(), saved.ToArray());
 		}
 
 		[Fact]
@@ -379,13 +377,13 @@ namespace MonoTests.System.Drawing {
 		public void Icon16ToBitmap ()
 		{
 			using (Bitmap b = icon16.ToBitmap ()) {
-				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat, "PixelFormat");
+				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat);
 				// unlike the GDI+ icon decoder the palette isn't kept
-				Assert.Equal (0, b.Palette.Entries.Length, "Palette");
-				Assert.Equal (icon16.Height, b.Height, "Height");
-				Assert.Equal (icon16.Width, b.Width, "Width");
-				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), "RawFormat");
-				Assert.Equal (2, b.Flags, "Flags");
+				Assert.Equal (0, b.Palette.Entries.Length);
+				Assert.Equal (icon16.Height, b.Height);
+				Assert.Equal (icon16.Width, b.Width);
+				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+				Assert.Equal (2, b.Flags);
 			}
 		}
 
@@ -393,13 +391,13 @@ namespace MonoTests.System.Drawing {
 		public void Icon32ToBitmap ()
 		{
 			using (Bitmap b = icon32.ToBitmap ()) {
-				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat, "PixelFormat");
+				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat);
 				// unlike the GDI+ icon decoder the palette isn't kept
-				Assert.Equal (0, b.Palette.Entries.Length, "Palette");
-				Assert.Equal (icon32.Height, b.Height, "Height");
-				Assert.Equal (icon32.Width, b.Width, "Width");
-				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), "RawFormat");
-				Assert.Equal (2, b.Flags, "Flags");
+				Assert.Equal (0, b.Palette.Entries.Length);
+				Assert.Equal (icon32.Height, b.Height);
+				Assert.Equal (icon32.Width, b.Width);
+				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+				Assert.Equal (2, b.Flags);
 			}
 		}
 
@@ -407,13 +405,13 @@ namespace MonoTests.System.Drawing {
 		public void Icon48ToBitmap ()
 		{
 			using (Bitmap b = icon48.ToBitmap ()) {
-				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat, "PixelFormat");
+				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat);
 				// unlike the GDI+ icon decoder the palette isn't kept
-				Assert.Equal (0, b.Palette.Entries.Length, "Palette");
-				Assert.Equal (icon48.Height, b.Height, "Height");
-				Assert.Equal (icon48.Width, b.Width, "Width");
-				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), "RawFormat");
-				Assert.Equal (2, b.Flags, "Flags");
+				Assert.Equal (0, b.Palette.Entries.Length);
+				Assert.Equal (icon48.Height, b.Height);
+				Assert.Equal (icon48.Width, b.Width);
+				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+				Assert.Equal (2, b.Flags);
 			}
 		}
 
@@ -421,13 +419,13 @@ namespace MonoTests.System.Drawing {
 		public void Icon64ToBitmap ()
 		{
 			using (Bitmap b = icon64.ToBitmap ()) {
-				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat, "PixelFormat");
+				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat);
 				// unlike the GDI+ icon decoder the palette isn't kept
-				Assert.Equal (0, b.Palette.Entries.Length, "Palette");
-				Assert.Equal (icon64.Height, b.Height, "Height");
-				Assert.Equal (icon64.Width, b.Width, "Width");
-				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), "RawFormat");
-				Assert.Equal (2, b.Flags, "Flags");
+				Assert.Equal (0, b.Palette.Entries.Length);
+				Assert.Equal (icon64.Height, b.Height);
+				Assert.Equal (icon64.Width, b.Width);
+				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+				Assert.Equal (2, b.Flags);
 			}
 		}
 
@@ -435,13 +433,13 @@ namespace MonoTests.System.Drawing {
 		public void Icon96ToBitmap ()
 		{
 			using (Bitmap b = icon96.ToBitmap ()) {
-				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat, "PixelFormat");
+				Assert.Equal (PixelFormat.Format32bppArgb, b.PixelFormat);
 				// unlike the GDI+ icon decoder the palette isn't kept
-				Assert.Equal (0, b.Palette.Entries.Length, "Palette");
-				Assert.Equal (icon96.Height, b.Height, "Height");
-				Assert.Equal (icon96.Width, b.Width, "Width");
-				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), "RawFormat");
-				Assert.Equal (2, b.Flags, "Flags");
+				Assert.Equal (0, b.Palette.Entries.Length);
+				Assert.Equal (icon96.Height, b.Height);
+				Assert.Equal (icon96.Width, b.Width);
+				Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+				Assert.Equal (2, b.Flags);
 			}
 		}
 
@@ -451,11 +449,11 @@ namespace MonoTests.System.Drawing {
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/415581.ico"))) {
 				Icon icon = new Icon (fs, 48, 48);
 				using (Bitmap b = icon.ToBitmap ()) {
-					Assert.Equal (0, b.Palette.Entries.Length, "#A1");
-					Assert.Equal (48, b.Height, "#A2");
-					Assert.Equal (48, b.Width, "#A3");
-					Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), "#A4");
-					Assert.Equal (2, b.Flags, "#A5");
+					Assert.Equal (0, b.Palette.Entries.Length);
+					Assert.Equal (48, b.Height);
+					Assert.Equal (48, b.Width);
+					Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+					Assert.Equal (2, b.Flags);
 				}
 				icon.Dispose ();
 			}
@@ -463,11 +461,11 @@ namespace MonoTests.System.Drawing {
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/415581.ico"))) {
 				Icon icon = new Icon (fs, 256, 256);
 				using (Bitmap b = icon.ToBitmap ()) {
-					Assert.Equal (0, b.Palette.Entries.Length, "#B1");
-					Assert.Equal (48, b.Height, "#B2");
-					Assert.Equal (48, b.Width, "#B3");
-					Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), "#B4");
-					Assert.Equal (2, b.Flags, "#B5");
+					Assert.Equal (0, b.Palette.Entries.Length);
+					Assert.Equal (48, b.Height);
+					Assert.Equal (48, b.Width);
+					Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+					Assert.Equal (2, b.Flags);
 				}
 			}
 		}
@@ -479,11 +477,11 @@ namespace MonoTests.System.Drawing {
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/415581.ico"))) {
 				Icon icon = new Icon (fs, 0, 0);
 				using (Bitmap b = icon.ToBitmap ()) {
-					Assert.Equal (0, b.Palette.Entries.Length, "#B1");
-					Assert.Equal (48, b.Height, "#B2");
-					Assert.Equal (48, b.Width, "#B3");
-					Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp), "#B4");
-					Assert.Equal (2, b.Flags, "#B5");
+					Assert.Equal (0, b.Palette.Entries.Length);
+					Assert.Equal (48, b.Height);
+					Assert.Equal (48, b.Width);
+					Assert.True (b.RawFormat.Equals (ImageFormat.MemoryBmp));
+					Assert.Equal (2, b.Flags);
 				}
 			}
 		}
@@ -524,13 +522,12 @@ namespace MonoTests.System.Drawing {
 		}
 	}
 
-	[TestFixture]
 	public class IconFullTrustTest {
 		[Fact]
 		public void ExtractAssociatedIcon ()
 		{
 			string filename_dll = Assembly.GetExecutingAssembly ().Location;
-			Assert.NotNull (Icon.ExtractAssociatedIcon (filename_dll), "dll");
+			Assert.NotNull (Icon.ExtractAssociatedIcon (filename_dll));
 		}
 
 		[Fact]
@@ -538,22 +535,22 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr handle;
 			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/16x16x16.ico"))) {
-				Assert.Equal (16, icon.Height, "Original.Height");
-				Assert.Equal (16, icon.Width, "Original.Width");
+				Assert.Equal (16, icon.Height);
+				Assert.Equal (16, icon.Width);
 				handle = icon.Handle;
 				using (Icon icon2 = Icon.FromHandle (handle)) {
-					Assert.Equal (16, icon2.Height, "FromHandle.Height");
-					Assert.Equal (16, icon2.Width, "FromHandle.Width");
-					Assert.Equal (handle, icon2.Handle, "FromHandle.Handle");
+					Assert.Equal (16, icon2.Height);
+					Assert.Equal (16, icon2.Width);
+					Assert.Equal (handle, icon2.Handle);
 					IconTest.SaveAndCompare ("Handle", icon2, false);
 				}
 			}
 			// unlike other cases (HICON, HBITMAP) handle DOESN'T survives original icon disposal
 			// commented / using freed memory is risky ;-)
 			/*using (Icon icon3 = Icon.FromHandle (handle)) {
-				Assert.Equal (0, icon3.Height, "Survivor.Height");
-				Assert.Equal (0, icon3.Width, "Survivor.Width");
-				Assert.Equal (handle, icon3.Handle, "Survivor.Handle");
+				Assert.Equal (0, icon3.Height);
+				Assert.Equal (0, icon3.Width);
+				Assert.Equal (handle, icon3.Handle);
 			}*/
 		}
 
@@ -562,19 +559,19 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr handle;
 			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/16x16x16.ico"))) {
-				Assert.Equal (16, icon.Height, "Original.Height");
-				Assert.Equal (16, icon.Width, "Original.Width");
+				Assert.Equal (16, icon.Height);
+				Assert.Equal (16, icon.Width);
 				handle = icon.Handle;
 				using (Icon icon2 = Icon.FromHandle (handle)) {
-					Assert.Equal (16, icon2.Height, "2.Height");
-					Assert.Equal (16, icon2.Width, "2.Width");
-					Assert.Equal (handle, icon2.Handle, "2.Handle");
+					Assert.Equal (16, icon2.Height);
+					Assert.Equal (16, icon2.Width);
+					Assert.Equal (handle, icon2.Handle);
 					IconTest.SaveAndCompare ("Handle2", icon2, false);
 				}
 				using (Icon icon3 = Icon.FromHandle (handle)) {
-					Assert.Equal (16, icon3.Height, "3.Height");
-					Assert.Equal (16, icon3.Width, "3.Width");
-					Assert.Equal (handle, icon3.Handle, "3.Handle");
+					Assert.Equal (16, icon3.Height);
+					Assert.Equal (16, icon3.Width);
+					Assert.Equal (handle, icon3.Handle);
 					IconTest.SaveAndCompare ("Handle3", icon3, false);
 				}
 			}
@@ -587,15 +584,15 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr handle;
 			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/16x16x16.ico"))) {
-				Assert.Equal (16, icon.Height, "Original.Height");
-				Assert.Equal (16, icon.Width, "Original.Width");
+				Assert.Equal (16, icon.Height);
+				Assert.Equal (16, icon.Width);
 				handle = icon.ToBitmap ().GetHicon ();
 			}
 			// HICON survives
 			using (Icon icon2 = Icon.FromHandle (handle)) {
-				Assert.Equal (16, icon2.Height, "Survivor.Height");
-				Assert.Equal (16, icon2.Width, "Survivor.Width");
-				Assert.Equal (handle, icon2.Handle, "Survivor.Handle");
+				Assert.Equal (16, icon2.Height);
+				Assert.Equal (16, icon2.Width);
+				Assert.Equal (handle, icon2.Handle);
 				IconTest.SaveAndCompare ("HICON", icon2, false);
 			}
 		}
@@ -605,21 +602,21 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr handle;
 			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/16x16x16.ico"))) {
-				Assert.Equal (16, icon.Height, "Original.Height");
-				Assert.Equal (16, icon.Width, "Original.Width");
+				Assert.Equal (16, icon.Height);
+				Assert.Equal (16, icon.Width);
 				handle = icon.ToBitmap ().GetHicon ();
 			}
 			// HICON survives
 			using (Icon icon2 = Icon.FromHandle (handle)) {
-				Assert.Equal (16, icon2.Height, "2.Height");
-				Assert.Equal (16, icon2.Width, "2.Width");
-				Assert.Equal (handle, icon2.Handle, "2.Handle");
+				Assert.Equal (16, icon2.Height);
+				Assert.Equal (16, icon2.Width);
+				Assert.Equal (handle, icon2.Handle);
 				IconTest.SaveAndCompare ("HICON2", icon2, false);
 			}
 			using (Icon icon3 = Icon.FromHandle (handle)) {
-				Assert.Equal (16, icon3.Height, "3.Height");
-				Assert.Equal (16, icon3.Width, "3.Width");
-				Assert.Equal (handle, icon3.Handle, "3.Handle");
+				Assert.Equal (16, icon3.Height);
+				Assert.Equal (16, icon3.Width);
+				Assert.Equal (handle, icon3.Handle);
 				IconTest.SaveAndCompare ("HICON", icon3, false);
 			}
 		}

@@ -32,35 +32,34 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging {
 
-	[TestFixture]
 	public class FrameDimensionTest {
 
 		[Fact]
 		public void Empty ()
 		{
 			FrameDimension fd = new FrameDimension (Guid.Empty);
-			Assert.Equal ("00000000-0000-0000-0000-000000000000", fd.Guid.ToString (), "Guid");
-			Assert.Equal (Guid.Empty.GetHashCode (), fd.GetHashCode (), "GetHashCode");
-			Assert.Equal ("[FrameDimension: 00000000-0000-0000-0000-000000000000]", fd.ToString (), "ToString");
+			Assert.Equal ("00000000-0000-0000-0000-000000000000", fd.Guid.ToString ());
+			Assert.Equal (Guid.Empty.GetHashCode (), fd.GetHashCode ());
+			Assert.Equal ("[FrameDimension: 00000000-0000-0000-0000-000000000000]", fd.ToString ());
 
-			Assert.True (fd.Equals (new FrameDimension (Guid.Empty)), "Equals(Empty)");
-			Assert.False (fd.Equals (null), "Equals(null)");
+			Assert.True (fd.Equals (new FrameDimension (Guid.Empty)));
+			Assert.False (fd.Equals (null));
 		}
 
 		[Fact]
 		public void WellKnownValues ()
 		{
-			Assert.Equal ("7462dc86-6180-4c7e-8e3f-ee7333a7a483", FrameDimension.Page.Guid.ToString (), "Page-Guid");
-			Assert.Equal ("Page", FrameDimension.Page.ToString (), "Page-ToString");
-			Assert.True (Object.ReferenceEquals (FrameDimension.Page, FrameDimension.Page), "Page-ReferenceEquals");
+			Assert.Equal ("7462dc86-6180-4c7e-8e3f-ee7333a7a483", FrameDimension.Page.Guid.ToString ());
+			Assert.Equal ("Page", FrameDimension.Page.ToString ());
+			Assert.True (Object.ReferenceEquals (FrameDimension.Page, FrameDimension.Page));
 
-			Assert.Equal ("84236f7b-3bd3-428f-8dab-4ea1439ca315", FrameDimension.Resolution.Guid.ToString (), "Resolution-Guid");
-			Assert.Equal ("Resolution", FrameDimension.Resolution.ToString (), "Resolution-ToString");
-			Assert.True (Object.ReferenceEquals (FrameDimension.Resolution, FrameDimension.Resolution), "Resolution-ReferenceEquals");
+			Assert.Equal ("84236f7b-3bd3-428f-8dab-4ea1439ca315", FrameDimension.Resolution.Guid.ToString ());
+			Assert.Equal ("Resolution", FrameDimension.Resolution.ToString ());
+			Assert.True (Object.ReferenceEquals (FrameDimension.Resolution, FrameDimension.Resolution));
 
-			Assert.Equal ("6aedbd6d-3fb5-418a-83a6-7f45229dc872", FrameDimension.Time.Guid.ToString (), "Time-Guid");
-			Assert.Equal ("Time", FrameDimension.Time.ToString (), "Time-ToString");
-			Assert.True (Object.ReferenceEquals (FrameDimension.Time, FrameDimension.Time), "Page-ReferenceEquals");
+			Assert.Equal ("6aedbd6d-3fb5-418a-83a6-7f45229dc872", FrameDimension.Time.Guid.ToString ());
+			Assert.Equal ("Time", FrameDimension.Time.ToString ());
+			Assert.True (Object.ReferenceEquals (FrameDimension.Time, FrameDimension.Time));
 		}
 
 		[Fact]
@@ -68,9 +67,9 @@ namespace MonoTests.System.Drawing.Imaging {
 		{
 			FrameDimension fd = new FrameDimension (new Guid ("7462dc86-6180-4c7e-8e3f-ee7333a7a483"));
 			// equals
-			Assert.True (fd.Equals (FrameDimension.Page), "Page");
+			Assert.True (fd.Equals (FrameDimension.Page));
 			// but ToString differs!
-			Assert.Equal ("[FrameDimension: 7462dc86-6180-4c7e-8e3f-ee7333a7a483]", fd.ToString (), "ToString");
+			Assert.Equal ("[FrameDimension: 7462dc86-6180-4c7e-8e3f-ee7333a7a483]", fd.ToString ());
 		}
 	}
 }

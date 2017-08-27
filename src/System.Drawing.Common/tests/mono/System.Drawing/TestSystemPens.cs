@@ -36,15 +36,8 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing
 {
-	[TestFixture]
 	public class SystemPensTest
 	{
-		[TearDown]
-		public void TearDown () {}
-
-		[SetUp]
-		public void SetUp () {}
-
 		[Fact]
 		public void TestActiveCaptionText ()
 		{
@@ -191,9 +184,9 @@ namespace MonoTests.System.Drawing
 
 			try {
 				pen = SystemPens.FromSystemColor (Color.Red);
-				Assert.Fail ("M17: must throw ArgumentException");
+				Assert.True(false);
 			} catch (ArgumentException) {
-				Assert.True (true, "M17");
+				Assert.True (true);
 			}
 		}
 
@@ -204,32 +197,32 @@ namespace MonoTests.System.Drawing
 			// ArgumentException must be thrown.
 
 			Assert.True (pen.Color.IsSystemColor, tag + "#1");
-			Assert.Equal (sysColor, pen.Color, tag + "#1");
+			Assert.Equal (sysColor, pen.Color);
 
 			try {
 				pen.Alignment = PenAlignment.Center;
-				Assert.Fail (tag + "#2: must throw ArgumentException");
+				Assert.True(false,  tag + "#2: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#2");
 			}
 
 			try {
 				pen.Brush = new SolidBrush(Color.Red);
-				Assert.Fail (tag + "#3: must throw ArgumentException");
+				Assert.True(false,  tag + "#3: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#3");
 			}
 
 			try {
 				pen.Color = Color.Red;
-				Assert.Fail (tag + "#4: must throw ArgumentException");
+				Assert.True(false,  tag + "#4: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#4");
 			}
 
 			try {
 				pen.Color = sysColor;
-				Assert.Fail (tag + "#5" + ": must throw ArgumentException");
+				Assert.True(false,  tag + "#5" + ": must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#5");
 			}
@@ -237,7 +230,7 @@ namespace MonoTests.System.Drawing
 			try {
 				// NotImplemented
 				pen.CompoundArray = new float[2];
-				Assert.Fail (tag + "#6: must throw ArgumentException");
+				Assert.True(false,  (tag + "#6: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#6");
 			}
@@ -245,7 +238,7 @@ namespace MonoTests.System.Drawing
 			try {
 				// NotImplemented
 				pen.CustomEndCap = null;
-				Assert.Fail (tag + "#7: must throw ArgumentException");
+				Assert.True(false,  (tag + "#7: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#7");
 			}
@@ -253,7 +246,7 @@ namespace MonoTests.System.Drawing
 			try {
 				// NotImplemented
 				pen.CustomStartCap = null;
-				Assert.Fail (tag + "#8: must throw ArgumentException");
+				Assert.True(false,  (tag + "#8: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#8");
 			}
@@ -261,28 +254,28 @@ namespace MonoTests.System.Drawing
 			try {
 				// NotImplemented
 				pen.DashCap = DashCap.Flat;
-				Assert.Fail (tag + "#9: must throw ArgumentException");
+				Assert.True(false,  (tag + "#9: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#9");
 			}
 */
 			try {
 				pen.DashOffset = 5.5F;
-				Assert.Fail (tag + "#10: must throw ArgumentException");
+				Assert.True(false,  tag + "#10: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#10");
 			}
 
 			try {
 				pen.DashPattern = null;
-				Assert.Fail (tag + "#11: must throw ArgumentException");
+				Assert.True(false,  tag + "#11: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#11");
 			}
 
 			try {
 				pen.DashStyle = DashStyle.Dot; // hangs!prob
-				Assert.Fail (tag + "#12: must throw ArgumentException");
+				Assert.True(false,  tag + "#12: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#12");
 			}
@@ -290,21 +283,21 @@ namespace MonoTests.System.Drawing
 			try {
 				// NotImplemented
 				pen.EndCap = LineCap.Round;
-				Assert.Fail (tag + "#13: must throw ArgumentException");
+				Assert.True(false,  (tag + "#13: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#13");
 			}
 */
 			try {
 				pen.LineJoin = LineJoin.Round;
-				Assert.Fail (tag + "#14: must throw ArgumentException");
+				Assert.True(false,  tag + "#14: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#14");
 			}
 
 			try {
 				pen.MiterLimit = 0.1f;
-				Assert.Fail (tag + "#15: must throw ArgumentException");
+				Assert.True(false,  tag + "#15: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#15");
 			}
@@ -312,21 +305,21 @@ namespace MonoTests.System.Drawing
 			try {
 				// NotImplemented
 				pen.StartCap = LineCap.Square;
-				Assert.Fail (tag + "#16: must throw ArgumentException");
+				Assert.True(false,  (tag + "#16: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#16");
 			}
 */
 			try {
 				pen.Transform = new Matrix (); //Matrix hangs!problem
-				Assert.Fail (tag + "#17: must throw ArgumentException");
+				Assert.True(false,  tag + "#17: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#17");
 			}
 
 			try {
 				pen.Width = 0.5F;
-				Assert.Fail (tag + "#18: must throw ArgumentException");
+				Assert.True(false,  tag + "#18: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#18");
 			}
@@ -340,7 +333,7 @@ namespace MonoTests.System.Drawing
 			try {
 				// NotImplemented
 				pen.SetLineCap (LineCap.Flat, LineCap.Round, DashCap.Triangle);
-				Assert.Fail (tag + "#1: must throw ArgumentException");
+				Assert.True(false,  (tag + "#1: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (tag + "#1", true);
 			}
@@ -354,7 +347,7 @@ namespace MonoTests.System.Drawing
 
 			try {
 				pen.Dispose ();
-				Assert.Fail (tag + "#8: must throw ArgumentException");
+				Assert.True(false,  tag + "#8: must throw ArgumentException");
 			} catch (ArgumentException) {
 				Assert.True (true, tag + "#8");
 			}

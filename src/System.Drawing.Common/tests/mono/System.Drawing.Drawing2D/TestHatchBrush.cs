@@ -37,7 +37,6 @@ using Xunit;
 
 namespace MonoTests.System.Drawing.Drawing2D
 {
-	[TestFixture]
 	public class HatchBrushTest {
 		Graphics gr;
 		Bitmap bmp;
@@ -72,15 +71,15 @@ namespace MonoTests.System.Drawing.Drawing2D
 		{
 			HatchBrush hbr = new HatchBrush(HatchStyle.SolidDiamond, fgColor);
 
-			Assert.Equal (hbr.HatchStyle, HatchStyle.SolidDiamond, "Props#1");
-			Assert.Equal (hbr.ForegroundColor.ToArgb (), fgColor.ToArgb (), "Props#2");
-			Assert.Equal (hbr.BackgroundColor.ToArgb (), Color.Black.ToArgb (), "Props#3");
+			Assert.Equal (hbr.HatchStyle, HatchStyle.SolidDiamond);
+			Assert.Equal (hbr.ForegroundColor.ToArgb (), fgColor.ToArgb ());
+			Assert.Equal (hbr.BackgroundColor.ToArgb (), Color.Black.ToArgb ());
 
 			hbr = new HatchBrush(HatchStyle.Cross, fgColor, bgColor);
 
-			Assert.Equal (hbr.HatchStyle, HatchStyle.Cross, "Props#4");
-			Assert.Equal (hbr.ForegroundColor.ToArgb (), fgColor.ToArgb (), "Props#5");
-			Assert.Equal (hbr.BackgroundColor.ToArgb (), bgColor.ToArgb (), "Props#6");
+			Assert.Equal (hbr.HatchStyle, HatchStyle.Cross);
+			Assert.Equal (hbr.ForegroundColor.ToArgb (), fgColor.ToArgb ());
+			Assert.Equal (hbr.BackgroundColor.ToArgb (), bgColor.ToArgb ());
 		}
 
 		[Fact]
@@ -90,9 +89,9 @@ namespace MonoTests.System.Drawing.Drawing2D
 
 			HatchBrush clone = (HatchBrush) hbr.Clone ();
 
-			Assert.Equal (hbr.HatchStyle, clone.HatchStyle, "Clone#1");
-			Assert.Equal (hbr.ForegroundColor, clone.ForegroundColor, "Clone#2");
-			Assert.Equal (hbr.BackgroundColor, clone.BackgroundColor, "Clone#3");
+			Assert.Equal (hbr.HatchStyle, clone.HatchStyle);
+			Assert.Equal (hbr.ForegroundColor, clone.ForegroundColor);
+			Assert.Equal (hbr.BackgroundColor, clone.BackgroundColor);
 		}
 
 		[Fact]
@@ -106,7 +105,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 				font = new Font (new FontFamily ("Arial"), fontSize);
 			}
 			catch (ArgumentException) {
-				Assert.Ignore ("Arial FontFamily couldn't be found");
+				Assert.True (false, "Arial FontFamily couldn't be found");
 			}
 
 			// make the background white
