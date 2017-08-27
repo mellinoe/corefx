@@ -24,7 +24,7 @@
 // 	Andy Hume <andyhume32@yahoo.co.uk>
 //
 
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -34,7 +34,7 @@ namespace MonoTests.System.Drawing.Printing
 	[TestFixture]
 	public class PaperSizeTest
 	{
-		[Test]
+		[Fact]
 		public void PaperSizeKindTest()
 		{
 			// set_RawKind seems to accept any value (no ArgEx seen), but get_Kind 
@@ -44,12 +44,12 @@ namespace MonoTests.System.Drawing.Printing
 
 			//
 			// Zero == Custom
-			Assert.AreEqual(PaperKind.Custom, ps.Kind, "Kind #1");
-			Assert.AreEqual(0, ps.RawKind, "RawKind #1");
+			Assert.Equal(PaperKind.Custom, ps.Kind, "Kind #1");
+			Assert.Equal(0, ps.RawKind, "RawKind #1");
 
 			try {
 				ps.Height = 1;
-				Assert.AreEqual (1 , ps.Height, "get_Height #1");
+				Assert.Equal (1 , ps.Height, "get_Height #1");
 			} catch (ArgumentException) {
 				Assert.Fail ("should not have thrown #1");
 			}
@@ -57,8 +57,8 @@ namespace MonoTests.System.Drawing.Printing
 			//
 			// Well-known
 			ps.RawKind = (int)PaperKind.A4;
-			Assert.AreEqual (PaperKind.A4, ps.Kind, "Kind #2");
-			Assert.AreEqual ((int)PaperKind.A4, ps.RawKind, "RawKind #2");
+			Assert.Equal (PaperKind.A4, ps.Kind, "Kind #2");
+			Assert.Equal ((int)PaperKind.A4, ps.RawKind, "RawKind #2");
 
 			try {
 				ps.Height = 2;
@@ -68,14 +68,14 @@ namespace MonoTests.System.Drawing.Printing
 
 			//
 			ps.RawKind = (int)PaperKind.JapaneseEnvelopeKakuNumber3;
-			Assert.AreEqual (PaperKind.JapaneseEnvelopeKakuNumber3, ps.Kind, "Kind #3");
-			Assert.AreEqual ((int)PaperKind.JapaneseEnvelopeKakuNumber3, ps.RawKind, "RawKind #3");
+			Assert.Equal (PaperKind.JapaneseEnvelopeKakuNumber3, ps.Kind, "Kind #3");
+			Assert.Equal ((int)PaperKind.JapaneseEnvelopeKakuNumber3, ps.RawKind, "RawKind #3");
 
 			//
 			// Too Big
 			ps.RawKind = 999999;
-			Assert.AreEqual (PaperKind.Custom, ps.Kind, "Kind #4");
-			Assert.AreEqual (999999, ps.RawKind, "RawKind #4");
+			Assert.Equal (PaperKind.Custom, ps.Kind, "Kind #4");
+			Assert.Equal (999999, ps.RawKind, "RawKind #4");
 
 			// The properties can be changed only when the *real* Kind is Custom 
 			// and not when is 'effectively' Custom.
@@ -87,30 +87,30 @@ namespace MonoTests.System.Drawing.Printing
 
 			//
 			ps.RawKind = int.MaxValue;
-			Assert.AreEqual (PaperKind.Custom, ps.Kind, "Kind #5");
-			Assert.AreEqual (int.MaxValue, ps.RawKind, "RawKind #5");
+			Assert.Equal (PaperKind.Custom, ps.Kind, "Kind #5");
+			Assert.Equal (int.MaxValue, ps.RawKind, "RawKind #5");
 
 			//
 			// Negative -- Looks as if MSFT forgot to check for negative!
 			ps.RawKind = -1;
-			Assert.AreEqual ((PaperKind)(-1), ps.Kind, "Kind #6");
-			Assert.AreEqual (-1, ps.RawKind, "RawKind #6");
+			Assert.Equal ((PaperKind)(-1), ps.Kind, "Kind #6");
+			Assert.Equal (-1, ps.RawKind, "RawKind #6");
 
 			//
 			ps.RawKind = int.MinValue;
-			Assert.AreEqual ((PaperKind)(int.MinValue), ps.Kind, "Kind #7");
-			Assert.AreEqual (int.MinValue, ps.RawKind, "RawKind #7");
+			Assert.Equal ((PaperKind)(int.MinValue), ps.Kind, "Kind #7");
+			Assert.Equal (int.MinValue, ps.RawKind, "RawKind #7");
 
 			//
 			// Where's the top limit?
 			ps.RawKind = (int)PaperKind.PrcEnvelopeNumber10Rotated;
-			Assert.AreEqual (PaperKind.PrcEnvelopeNumber10Rotated, ps.Kind, "Kind #8");
-			Assert.AreEqual ((int)PaperKind.PrcEnvelopeNumber10Rotated, ps.RawKind, "RawKind #8");
+			Assert.Equal (PaperKind.PrcEnvelopeNumber10Rotated, ps.Kind, "Kind #8");
+			Assert.Equal ((int)PaperKind.PrcEnvelopeNumber10Rotated, ps.RawKind, "RawKind #8");
 
 			// +1
 			ps.RawKind = 1 + (int)PaperKind.PrcEnvelopeNumber10Rotated;
-			Assert.AreEqual (PaperKind.Custom, ps.Kind, "Kind #9");
-			Assert.AreEqual (1 + (int)PaperKind.PrcEnvelopeNumber10Rotated, ps.RawKind, "RawKind #9");
+			Assert.Equal (PaperKind.Custom, ps.Kind, "Kind #9");
+			Assert.Equal (1 + (int)PaperKind.PrcEnvelopeNumber10Rotated, ps.RawKind, "RawKind #9");
 
 			try {
 				ps.Height = 9;
@@ -120,12 +120,12 @@ namespace MonoTests.System.Drawing.Printing
 
 			// Set Custom
 			ps.RawKind = (int)PaperKind.Custom;
-			Assert.AreEqual (PaperKind.Custom, ps.Kind, "Kind #1b");
-			Assert.AreEqual (0, ps.RawKind, "RawKind #1b");
+			Assert.Equal (PaperKind.Custom, ps.Kind, "Kind #1b");
+			Assert.Equal (0, ps.RawKind, "RawKind #1b");
 
 			try {
 				ps.Height = 1;
-				Assert.AreEqual (1 , ps.Height, "get_Height #1b");
+				Assert.Equal (1 , ps.Height, "get_Height #1b");
 			} catch (ArgumentException) {
 				Assert.Fail ("should not have thrown #1b");
 			}

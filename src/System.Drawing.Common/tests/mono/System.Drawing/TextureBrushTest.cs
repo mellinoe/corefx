@@ -32,7 +32,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing {
 
@@ -58,33 +58,33 @@ namespace MonoTests.System.Drawing {
 		private void Common (TextureBrush t, WrapMode wm)
 		{
 			using (Image img = t.Image) {
-				Assert.IsNotNull (img, "Image");
+				Assert.NotNull (img, "Image");
 			}
-			Assert.IsFalse (Object.ReferenceEquals (image, t.Image), "Image-Equals");
-			Assert.IsTrue (t.Transform.IsIdentity, "Transform.IsIdentity");
-			Assert.AreEqual (wm, t.WrapMode, "WrapMode");
+			Assert.False (Object.ReferenceEquals (image, t.Image), "Image-Equals");
+			Assert.True (t.Transform.IsIdentity, "Transform.IsIdentity");
+			Assert.Equal (wm, t.WrapMode, "WrapMode");
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImage_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImage ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImage_Null_WrapMode ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, WrapMode.Clamp));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageWrapMode ()
 		{
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
@@ -93,103 +93,103 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageWrapMode_Invalid ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new TextureBrush (image, (WrapMode) Int32.MinValue));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImage_Null_Rectangle ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, rect));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangle_Empty ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (image, new Rectangle ()));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangle ()
 		{
 			TextureBrush t = new TextureBrush (image, rect);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImage_Null_RectangleF ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, rectf));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangleF_Empty ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (image, new RectangleF ()));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangleF ()
 		{
 			TextureBrush t = new TextureBrush (image, rectf);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImage_Null_RectangleAttributes ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, rect, attr));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangle_Empty_Attributes ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (image, new Rectangle (), attr));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangleAttributes_Null ()
 		{
 			TextureBrush t = new TextureBrush (image, rect, null);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangleAttributes ()
 		{
 			TextureBrush t = new TextureBrush (image, rect, attr);
 			Common (t, WrapMode.Clamp);
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImage_Null_RectangleFAttributes ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, rectf, attr));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangleF_Empty_Attributes ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (image, new RectangleF ()));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangleFAttributes_Null ()
 		{
 			TextureBrush t = new TextureBrush (image, rectf, null);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageRectangleFAttributes ()
 		{
 			TextureBrush t = new TextureBrush (image, rectf, attr);
 			Common (t, WrapMode.Clamp);
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageWrapModeRectangle ()
 		{
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
@@ -198,13 +198,13 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageWrapMode_Invalid_Rectangle ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new TextureBrush (image, (WrapMode) Int32.MinValue, rect));
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageWrapModeRectangleF ()
 		{
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
@@ -213,68 +213,68 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void CtorImageWrapMode_Invalid_RectangleF ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new TextureBrush (image, (WrapMode) Int32.MinValue, rectf));
 		}
 
-		[Test]
+		[Fact]
 		public void TextureBush_RectangleInsideBitmap ()
 		{
 			Rectangle r = new Rectangle (10, 10, 40, 40);
-			Assert.IsTrue (r.Y + r.Height <= bmp.Height, "Height");
-			Assert.IsTrue (r.X + r.Width <= bmp.Width, "Width");
+			Assert.True (r.Y + r.Height <= bmp.Height, "Height");
+			Assert.True (r.X + r.Width <= bmp.Width, "Width");
 			TextureBrush b = new TextureBrush (bmp, r);
 			using (Image img = b.Image) {
-				Assert.AreEqual (r.Height, img.Height, "Image.Height");
-				Assert.AreEqual (r.Width, img.Width, "Image.Width");
+				Assert.Equal (r.Height, img.Height, "Image.Height");
+				Assert.Equal (r.Width, img.Width, "Image.Width");
 			}
-			Assert.IsTrue (b.Transform.IsIdentity, "Transform.IsIdentity");
-			Assert.AreEqual (WrapMode.Tile, b.WrapMode, "WrapMode");
+			Assert.True (b.Transform.IsIdentity, "Transform.IsIdentity");
+			Assert.Equal (WrapMode.Tile, b.WrapMode, "WrapMode");
 		}
 
-		[Test]
+		[Fact]
 		public void TextureBush_RectangleOutsideBitmap ()
 		{
 			Rectangle r = new Rectangle (50, 50, 50, 50);
-			Assert.IsFalse (r.Y + r.Height <= bmp.Height, "Height");
-			Assert.IsFalse (r.X + r.Width <= bmp.Width, "Width");
+			Assert.False (r.Y + r.Height <= bmp.Height, "Height");
+			Assert.False (r.X + r.Width <= bmp.Width, "Width");
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (bmp, r));
 		}
 
-		[Test]
+		[Fact]
 		public void Transform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (image).Transform = null);
 		}
 
-		[Test]
+		[Fact]
 		public void Transform ()
 		{
 			Matrix m = new Matrix ();
 			TextureBrush t = new TextureBrush (image);
 			t.Transform = m;
-			Assert.IsFalse (Object.ReferenceEquals (m, t.Transform));
+			Assert.False (Object.ReferenceEquals (m, t.Transform));
 		}
 
-		[Test]
+		[Fact]
 		public void WrapMode_Valid ()
 		{
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
 				TextureBrush t = new TextureBrush (image);
 				t.WrapMode = wm;
-				Assert.AreEqual (wm, t.WrapMode, wm.ToString ());
+				Assert.Equal (wm, t.WrapMode, wm.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void WrapMode_Invalid ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new TextureBrush (image).WrapMode = (WrapMode)Int32.MinValue);
 		}
 
-		[Test]
+		[Fact]
 		public void Clone ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -282,7 +282,7 @@ namespace MonoTests.System.Drawing {
 			Common (clone, t.WrapMode);
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_Clone ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -290,7 +290,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => t.Clone ());
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_Dispose ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -298,35 +298,35 @@ namespace MonoTests.System.Drawing {
 			t.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		[NUnit.Framework.Category ("NotDotNet")] // AccessViolationException under 2.0
 		public void Dispose_Image ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.Dispose ();
-			Assert.Throws<ArgumentException> (() => Assert.IsNotNull (t.Image, "Image"));
+			Assert.Throws<ArgumentException> (() => Assert.NotNull (t.Image, "Image"));
 		}
 
-		[Test]
+		[Fact]
 		public void MultiplyTransform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (image).MultiplyTransform (null));
 		}
 
-		[Test]
+		[Fact]
 		public void MultiplyTransform_Null_Order ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (image).MultiplyTransform (null, MatrixOrder.Append));
 		}
 
-		[Test]
+		[Fact]
 		public void MultiplyTransformOrder_Invalid ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.MultiplyTransform (new Matrix (), (MatrixOrder) Int32.MinValue);
 		}
 
-		[Test]
+		[Fact]
 		public void MultiplyTransform_NonInvertible ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -334,102 +334,102 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => t.MultiplyTransform (noninvertible));
 		}
 
-		[Test]
+		[Fact]
 		public void ResetTransform ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.RotateTransform (90);
-			Assert.IsFalse (t.Transform.IsIdentity, "Transform.IsIdentity");
+			Assert.False (t.Transform.IsIdentity, "Transform.IsIdentity");
 			t.ResetTransform ();
-			Assert.IsTrue (t.Transform.IsIdentity, "Reset.IsIdentity");
+			Assert.True (t.Transform.IsIdentity, "Reset.IsIdentity");
 		}
 
-		[Test]
+		[Fact]
 		public void RotateTransform ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.RotateTransform (90);
 			float[] elements = t.Transform.Elements;
-			Assert.AreEqual (0, elements[0], 0.1, "matrix.0");
-			Assert.AreEqual (1, elements[1], 0.1, "matrix.1");
-			Assert.AreEqual (-1, elements[2], 0.1, "matrix.2");
-			Assert.AreEqual (0, elements[3], 0.1, "matrix.3");
-			Assert.AreEqual (0, elements[4], 0.1, "matrix.4");
-			Assert.AreEqual (0, elements[5], 0.1, "matrix.5");
+			Assert.Equal (0, elements[0], 0.1, "matrix.0");
+			Assert.Equal (1, elements[1], 0.1, "matrix.1");
+			Assert.Equal (-1, elements[2], 0.1, "matrix.2");
+			Assert.Equal (0, elements[3], 0.1, "matrix.3");
+			Assert.Equal (0, elements[4], 0.1, "matrix.4");
+			Assert.Equal (0, elements[5], 0.1, "matrix.5");
 
 			t.RotateTransform (270);
-			Assert.IsTrue (t.Transform.IsIdentity, "Transform.IsIdentity");
+			Assert.True (t.Transform.IsIdentity, "Transform.IsIdentity");
 		}
 
-		[Test]
+		[Fact]
 		public void RotateTransform_InvalidOrder ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			Assert.Throws<ArgumentException> (() => t.RotateTransform (720, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Test]
+		[Fact]
 		public void ScaleTransform ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.ScaleTransform (2, 4);
 			float[] elements = t.Transform.Elements;
-			Assert.AreEqual (2, elements[0], 0.1, "matrix.0");
-			Assert.AreEqual (0, elements[1], 0.1, "matrix.1");
-			Assert.AreEqual (0, elements[2], 0.1, "matrix.2");
-			Assert.AreEqual (4, elements[3], 0.1, "matrix.3");
-			Assert.AreEqual (0, elements[4], 0.1, "matrix.4");
-			Assert.AreEqual (0, elements[5], 0.1, "matrix.5");
+			Assert.Equal (2, elements[0], 0.1, "matrix.0");
+			Assert.Equal (0, elements[1], 0.1, "matrix.1");
+			Assert.Equal (0, elements[2], 0.1, "matrix.2");
+			Assert.Equal (4, elements[3], 0.1, "matrix.3");
+			Assert.Equal (0, elements[4], 0.1, "matrix.4");
+			Assert.Equal (0, elements[5], 0.1, "matrix.5");
 
 			t.ScaleTransform (0.5f, 0.25f);
-			Assert.IsTrue (t.Transform.IsIdentity, "Transform.IsIdentity");
+			Assert.True (t.Transform.IsIdentity, "Transform.IsIdentity");
 		}
 
-		[Test]
+		[Fact]
 		public void ScaleTransform_MaxMin ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.ScaleTransform (Single.MaxValue, Single.MinValue);
 			float[] elements = t.Transform.Elements;
-			Assert.AreEqual (Single.MaxValue, elements[0], 1e33, "matrix.0");
-			Assert.AreEqual (0, elements[1], 0.1, "matrix.1");
-			Assert.AreEqual (0, elements[2], 0.1, "matrix.2");
-			Assert.AreEqual (Single.MinValue, elements[3], 1e33, "matrix.3");
-			Assert.AreEqual (0, elements[4], 0.1, "matrix.4");
-			Assert.AreEqual (0, elements[5], 0.1, "matrix.5");
+			Assert.Equal (Single.MaxValue, elements[0], 1e33, "matrix.0");
+			Assert.Equal (0, elements[1], 0.1, "matrix.1");
+			Assert.Equal (0, elements[2], 0.1, "matrix.2");
+			Assert.Equal (Single.MinValue, elements[3], 1e33, "matrix.3");
+			Assert.Equal (0, elements[4], 0.1, "matrix.4");
+			Assert.Equal (0, elements[5], 0.1, "matrix.5");
 		}
 
-		[Test]
+		[Fact]
 		public void ScaleTransform_InvalidOrder ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			Assert.Throws<ArgumentException> (() => t.ScaleTransform (1, 1, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Test]
+		[Fact]
 		public void TranslateTransform ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.TranslateTransform (1, 1);
 			float[] elements = t.Transform.Elements;
-			Assert.AreEqual (1, elements[0], 0.1, "matrix.0");
-			Assert.AreEqual (0, elements[1], 0.1, "matrix.1");
-			Assert.AreEqual (0, elements[2], 0.1, "matrix.2");
-			Assert.AreEqual (1, elements[3], 0.1, "matrix.3");
-			Assert.AreEqual (1, elements[4], 0.1, "matrix.4");
-			Assert.AreEqual (1, elements[5], 0.1, "matrix.5");
+			Assert.Equal (1, elements[0], 0.1, "matrix.0");
+			Assert.Equal (0, elements[1], 0.1, "matrix.1");
+			Assert.Equal (0, elements[2], 0.1, "matrix.2");
+			Assert.Equal (1, elements[3], 0.1, "matrix.3");
+			Assert.Equal (1, elements[4], 0.1, "matrix.4");
+			Assert.Equal (1, elements[5], 0.1, "matrix.5");
 
 			t.TranslateTransform (-1, -1);
 			elements = t.Transform.Elements;
-			Assert.AreEqual (1, elements[0], 0.1, "revert.matrix.0");
-			Assert.AreEqual (0, elements[1], 0.1, "revert.matrix.1");
-			Assert.AreEqual (0, elements[2], 0.1, "revert.matrix.2");
-			Assert.AreEqual (1, elements[3], 0.1, "revert.matrix.3");
-			Assert.AreEqual (0, elements[4], 0.1, "revert.matrix.4");
-			Assert.AreEqual (0, elements[5], 0.1, "revert.matrix.5");
+			Assert.Equal (1, elements[0], 0.1, "revert.matrix.0");
+			Assert.Equal (0, elements[1], 0.1, "revert.matrix.1");
+			Assert.Equal (0, elements[2], 0.1, "revert.matrix.2");
+			Assert.Equal (1, elements[3], 0.1, "revert.matrix.3");
+			Assert.Equal (0, elements[4], 0.1, "revert.matrix.4");
+			Assert.Equal (0, elements[5], 0.1, "revert.matrix.5");
 		}
 
-		[Test]
+		[Fact]
 		public void TranslateTransform_InvalidOrder ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -452,38 +452,38 @@ namespace MonoTests.System.Drawing {
 					Color c1 = bm.GetPixel (0, 0);
 					Color c2 = bm.GetPixel (1, 0);
 					if (equals)
-						Assert.AreEqual (c1, c2);
+						Assert.Equal (c1, c2);
 					else
-						Assert.AreEqual (-16744448, c2.ToArgb (), "Green");
+						Assert.Equal (-16744448, c2.ToArgb (), "Green");
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Alpha_81828_Clamp ()
 		{
 			Alpha_81828 (WrapMode.Clamp, false);
 		}
 
-		[Test]
+		[Fact]
 		public void Alpha_81828_Tile ()
 		{
 			Alpha_81828 (WrapMode.Tile, true);
 		}
 
-		[Test]
+		[Fact]
 		public void Alpha_81828_TileFlipX ()
 		{
 			Alpha_81828 (WrapMode.TileFlipX, true);
 		}
 
-		[Test]
+		[Fact]
 		public void Alpha_81828_TileFlipY ()
 		{
 			Alpha_81828 (WrapMode.TileFlipY, true);
 		}
 
-		[Test]
+		[Fact]
 		public void Alpha_81828_TileFlipXY ()
 		{
 			Alpha_81828 (WrapMode.TileFlipXY, true);

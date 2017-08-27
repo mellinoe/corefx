@@ -28,7 +28,7 @@
 //
 
 
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -45,7 +45,7 @@ namespace MonoTests.System.Drawing
 		[SetUp]
 		public void SetUp () {}
 
-		[Test]
+		[Fact]
 		public void TestActiveCaptionText ()
 		{
 			Pen pen;
@@ -54,7 +54,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M1");
 		}
 
-		[Test]
+		[Fact]
 		public void TestControl ()
 		{
 			Pen pen;
@@ -63,7 +63,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M2");
 		}
 
-		[Test]
+		[Fact]
 		public void TestControlDark ()
 		{
 			Pen pen;
@@ -72,7 +72,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M3");
 		}
 
-		[Test]
+		[Fact]
 		public void TestControlDarkDark ()
 		{
 			Pen pen;
@@ -81,7 +81,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M4");
 		}
 
-		[Test]
+		[Fact]
 		public void TestControlLight ()
 		{
 			Pen pen;
@@ -90,7 +90,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M5");
 		}
 
-		[Test]
+		[Fact]
 		public void TestControlLightLight ()
 		{
 			Pen pen;
@@ -99,7 +99,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M6");
 		}
 
-		[Test]
+		[Fact]
 		public void TestControlText ()
 		{
 			Pen pen;
@@ -108,7 +108,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M7");
 		}
 
-		[Test]
+		[Fact]
 		public void TestGrayText ()
 		{
 			Pen pen;
@@ -117,7 +117,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M8");
 		}
 
-		[Test]
+		[Fact]
 		public void TestHighlight ()
 		{
 			Pen pen;
@@ -126,7 +126,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M9");
 		}
 
-		[Test]
+		[Fact]
 		public void TestHighlightText ()
 		{
 			Pen pen;
@@ -135,7 +135,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M10");
 		}
 
-		[Test]
+		[Fact]
 		public void TestInactiveCaptionText ()
 		{
 			Pen pen;
@@ -144,7 +144,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M11");
 		}
 
-		[Test]
+		[Fact]
 		public void TestInfoText ()
 		{
 			Pen pen;
@@ -153,7 +153,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M12");
 		}
 
-		[Test]
+		[Fact]
 		public void TestMenuText ()
 		{
 			Pen pen;
@@ -162,7 +162,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M13");
 		}
 
-		[Test]
+		[Fact]
 		public void TestWindowFrame ()
 		{
 			Pen pen;
@@ -171,7 +171,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M14");
 		}
 
-		[Test]
+		[Fact]
 		public void TestWindowText ()
 		{
 			Pen pen;
@@ -180,7 +180,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M15");
 		}
 
-		[Test]
+		[Fact]
 		public void TestFromSystemColor ()
 		{
 			Pen pen;
@@ -193,7 +193,7 @@ namespace MonoTests.System.Drawing
 				pen = SystemPens.FromSystemColor (Color.Red);
 				Assert.Fail ("M17: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, "M17");
+				Assert.True (true, "M17");
 			}
 		}
 
@@ -203,35 +203,35 @@ namespace MonoTests.System.Drawing
 			// Try modifying properties of a SystemPen.
 			// ArgumentException must be thrown.
 
-			Assert.IsTrue (pen.Color.IsSystemColor, tag + "#1");
-			Assert.AreEqual (sysColor, pen.Color, tag + "#1");
+			Assert.True (pen.Color.IsSystemColor, tag + "#1");
+			Assert.Equal (sysColor, pen.Color, tag + "#1");
 
 			try {
 				pen.Alignment = PenAlignment.Center;
 				Assert.Fail (tag + "#2: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#2");
+				Assert.True (true, tag + "#2");
 			}
 
 			try {
 				pen.Brush = new SolidBrush(Color.Red);
 				Assert.Fail (tag + "#3: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#3");
+				Assert.True (true, tag + "#3");
 			}
 
 			try {
 				pen.Color = Color.Red;
 				Assert.Fail (tag + "#4: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#4");
+				Assert.True (true, tag + "#4");
 			}
 
 			try {
 				pen.Color = sysColor;
 				Assert.Fail (tag + "#5" + ": must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#5");
+				Assert.True (true, tag + "#5");
 			}
 /*
 			try {
@@ -239,7 +239,7 @@ namespace MonoTests.System.Drawing
 				pen.CompoundArray = new float[2];
 				Assert.Fail (tag + "#6: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#6");
+				Assert.True (true, tag + "#6");
 			}
 
 			try {
@@ -247,7 +247,7 @@ namespace MonoTests.System.Drawing
 				pen.CustomEndCap = null;
 				Assert.Fail (tag + "#7: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#7");
+				Assert.True (true, tag + "#7");
 			}
 
 			try {
@@ -255,7 +255,7 @@ namespace MonoTests.System.Drawing
 				pen.CustomStartCap = null;
 				Assert.Fail (tag + "#8: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#8");
+				Assert.True (true, tag + "#8");
 			}
 
 			try {
@@ -263,28 +263,28 @@ namespace MonoTests.System.Drawing
 				pen.DashCap = DashCap.Flat;
 				Assert.Fail (tag + "#9: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#9");
+				Assert.True (true, tag + "#9");
 			}
 */
 			try {
 				pen.DashOffset = 5.5F;
 				Assert.Fail (tag + "#10: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#10");
+				Assert.True (true, tag + "#10");
 			}
 
 			try {
 				pen.DashPattern = null;
 				Assert.Fail (tag + "#11: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#11");
+				Assert.True (true, tag + "#11");
 			}
 
 			try {
 				pen.DashStyle = DashStyle.Dot; // hangs!prob
 				Assert.Fail (tag + "#12: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#12");
+				Assert.True (true, tag + "#12");
 			}
 /*
 			try {
@@ -292,21 +292,21 @@ namespace MonoTests.System.Drawing
 				pen.EndCap = LineCap.Round;
 				Assert.Fail (tag + "#13: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#13");
+				Assert.True (true, tag + "#13");
 			}
 */
 			try {
 				pen.LineJoin = LineJoin.Round;
 				Assert.Fail (tag + "#14: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#14");
+				Assert.True (true, tag + "#14");
 			}
 
 			try {
 				pen.MiterLimit = 0.1f;
 				Assert.Fail (tag + "#15: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#15");
+				Assert.True (true, tag + "#15");
 			}
 /*
 			try {
@@ -314,21 +314,21 @@ namespace MonoTests.System.Drawing
 				pen.StartCap = LineCap.Square;
 				Assert.Fail (tag + "#16: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#16");
+				Assert.True (true, tag + "#16");
 			}
 */
 			try {
 				pen.Transform = new Matrix (); //Matrix hangs!problem
 				Assert.Fail (tag + "#17: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#17");
+				Assert.True (true, tag + "#17");
 			}
 
 			try {
 				pen.Width = 0.5F;
 				Assert.Fail (tag + "#18: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#18");
+				Assert.True (true, tag + "#18");
 			}
 		}
 
@@ -342,7 +342,7 @@ namespace MonoTests.System.Drawing
 				pen.SetLineCap (LineCap.Flat, LineCap.Round, DashCap.Triangle);
 				Assert.Fail (tag + "#1: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (tag + "#1", true);
+				Assert.True (tag + "#1", true);
 			}
 */
 			pen.ResetTransform ();
@@ -356,7 +356,7 @@ namespace MonoTests.System.Drawing
 				pen.Dispose ();
 				Assert.Fail (tag + "#8: must throw ArgumentException");
 			} catch (ArgumentException) {
-				Assert.IsTrue (true, tag + "#8");
+				Assert.True (true, tag + "#8");
 			}
 		}
 	}

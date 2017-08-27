@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 
 using System;
 using System.Drawing;
@@ -68,7 +68,7 @@ namespace MonoCasTests.System.Drawing {
 			return Graphics.FromImage (bitmap);
 		}
 
-		[Test]
+		[Fact]
 		public void FromHdcInternal ()
 		{
 			try {
@@ -81,7 +81,7 @@ namespace MonoCasTests.System.Drawing {
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void FromHwndInternal ()
 		{
@@ -95,7 +95,7 @@ namespace MonoCasTests.System.Drawing {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void ReleaseHdcInternal ()
 		{
 			try {
@@ -113,30 +113,30 @@ namespace MonoCasTests.System.Drawing {
 		// protected by a LinkDemand (which will be converted into full demand, 
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (SecurityException))]
 		public void FromHdcInternal_LinkDemand ()
 		{
 			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (fromHdcInternal, "FromHdcInternal");
+			Assert.NotNull (fromHdcInternal, "FromHdcInternal");
 			fromHdcInternal.Invoke (null, new object[1] { IntPtr.Zero });
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (SecurityException))]
 		public void FromHwndInternal_LinkDemand ()
 		{
 			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (fromHwndInternal, "FromHwndInternal");
+			Assert.NotNull (fromHwndInternal, "FromHwndInternal");
 			fromHwndInternal.Invoke (null, new object[1] { IntPtr.Zero });
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (SecurityException))]
 		public void ReleaseHdcInternal_LinkDemand ()
 		{
 			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (releaseHdcInternal, "ReleaseHdcInternal");
+			Assert.NotNull (releaseHdcInternal, "ReleaseHdcInternal");
 			Graphics g = GetGraphics ();
 			releaseHdcInternal.Invoke (g, new object[1] { IntPtr.Zero });
 		}

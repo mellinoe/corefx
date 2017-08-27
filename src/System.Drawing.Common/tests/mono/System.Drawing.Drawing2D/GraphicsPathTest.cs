@@ -31,96 +31,96 @@ using SC = System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Drawing2D {
 
-	[TestFixture]
 	public class GraphicsPathTest {
 
 		private const float Pi4 = (float) (Math.PI / 4);
 		// let's tolerate a few differences
-		private const float Delta = 0.0003f;
+		private const int Precision = 4;
+        private const int LowPrecision = 1;
 
-		private void CheckEmpty (string prefix, GraphicsPath gp)
+        private void CheckEmpty (string prefix, GraphicsPath gp)
 		{
-			Assert.AreEqual (0, gp.PathData.Points.Length, "PathData.Points");
-			Assert.AreEqual (0, gp.PathData.Types.Length, "PathData.Types");
-			Assert.AreEqual (0, gp.PointCount, prefix + "PointCount");
+			Assert.Equal (0, gp.PathData.Points.Length);
+			Assert.Equal (0, gp.PathData.Types.Length);
+			Assert.Equal (0, gp.PointCount);
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_InvalidFillMode ()
 		{
 			GraphicsPath gp = new GraphicsPath ((FillMode) Int32.MinValue);
-			Assert.AreEqual (Int32.MinValue, (int) gp.FillMode, "FillMode");
+			Assert.Equal (Int32.MinValue, (int) gp.FillMode);
 			CheckEmpty ("InvalidFillMode.", gp);
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_Point_Null_Byte ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ((Point[]) null, new byte[1]));
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_Point_Byte_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => new GraphicsPath (new Point[1], null));
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_Point_Byte_LengthMismatch ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath (new Point[1], new byte [2]));
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_PointF_Null_Byte ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ((PointF[])null, new byte [1]));
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_PointF_Byte_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => new GraphicsPath ( new PointF[1], null));
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_PointF_Byte_LengthMismatch ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath (new PointF[2], new byte [1]));
 		}
 
-		[Test]
+		[Fact]
 		public void GraphicsPath_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
-			Assert.AreEqual (FillMode.Alternate, gp.FillMode, "Empty.FillMode");
+			Assert.Equal (FillMode.Alternate, gp.FillMode);
 			CheckEmpty ("Empty.", gp);
 
 			GraphicsPath clone = (GraphicsPath) gp.Clone ();
-			Assert.AreEqual (FillMode.Alternate, gp.FillMode, "Clone.FillMode");
+			Assert.Equal (FillMode.Alternate, gp.FillMode);
 			CheckEmpty ("Clone.", gp);
 
 			gp.Reverse ();
 			CheckEmpty ("Reverse.", gp);
 		}
 
-		[Test]
+		[Fact]
 		public void GraphicsPath_Empty_PathPoints ()
 		{
-			Assert.Throws<ArgumentException> (() => Assert.IsNull (new GraphicsPath ().PathPoints));
+			Assert.Throws<ArgumentException> (() => Assert.Null (new GraphicsPath ().PathPoints));
 		}
 
-		[Test]
+		[Fact]
 		public void GraphicsPath_Empty_PathTypes ()
 		{
-			Assert.Throws<ArgumentException> (() => Assert.IsNull (new GraphicsPath ().PathTypes));
+			Assert.Throws<ArgumentException> (() => Assert.Null (new GraphicsPath ().PathTypes));
 		}
 
-		[Test]
+		[Fact]
 		public void GraphicsPath_SamePoint ()
 		{
 			Point[] points = new Point [] {
@@ -133,15 +133,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			};
 			byte [] types = new byte [6] { 0, 1, 1, 1, 1, 1 };
 			using (GraphicsPath gp = new GraphicsPath (points, types)) {
-				Assert.AreEqual (6, gp.PointCount, "0-PointCount");
+				Assert.Equal (6, gp.PointCount);
 			}
 			types [0] = 1;
 			using (GraphicsPath gp = new GraphicsPath (points, types)) {
-				Assert.AreEqual (6, gp.PointCount, "1-PointCount");
+				Assert.Equal (6, gp.PointCount);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GraphicsPath_SamePointF ()
 		{
 			PointF [] points = new PointF [] {
@@ -154,98 +154,98 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			};
 			byte [] types = new byte [6] { 0, 1, 1, 1, 1, 1 };
 			using (GraphicsPath gp = new GraphicsPath (points, types)) {
-				Assert.AreEqual (6, gp.PointCount, "0-PointCount");
+				Assert.Equal (6, gp.PointCount);
 			}
 			types [0] = 1;
 			using (GraphicsPath gp = new GraphicsPath (points, types)) {
-				Assert.AreEqual (6, gp.PointCount, "1-PointCount");
+				Assert.Equal (6, gp.PointCount);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void FillMode_Invalid ()
 		{
 			// constructor accept an invalid FillMode
 			GraphicsPath gp = new GraphicsPath ((FillMode) Int32.MaxValue);
-			Assert.AreEqual (Int32.MaxValue, (int) gp.FillMode, "MaxValue");
-			// but you can't set the FillMode property to an invalid value ;-)
+			Assert.Equal (Int32.MaxValue, (int) gp.FillMode);
+			// but you can't set the FillMode property to an invalid value );-)
 			Assert.Throws<SC.InvalidEnumArgumentException> (() => gp.FillMode = (FillMode) Int32.MaxValue);
 		}
 
-		[Test]
+		[Fact]
 		public void PathData_CannotChange ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangle (new Rectangle (1, 1, 2, 2));
 
-			Assert.AreEqual (1f, gp.PathData.Points[0].X, "Points[0].X");
-			Assert.AreEqual (1f, gp.PathData.Points[0].Y, "Points[0].Y");
+			Assert.Equal (1f, gp.PathData.Points[0].X);
+			Assert.Equal (1f, gp.PathData.Points[0].Y);
 
 			// now try to change the first point
 			gp.PathData.Points[0] = new Point (0, 0);
 			// the changes isn't reflected in the property
-			Assert.AreEqual (1f, gp.PathData.Points[0].X, "Points[0].X-1");
-			Assert.AreEqual (1f, gp.PathData.Points[0].Y, "Points[0].Y-1");
+			Assert.Equal (1f, gp.PathData.Points[0].X);
+			Assert.Equal (1f, gp.PathData.Points[0].Y);
 		}
 
-		[Test]
+		[Fact]
 		public void PathPoints_CannotChange ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangle (new Rectangle (1, 1, 2, 2));
 
-			Assert.AreEqual (1f, gp.PathPoints[0].X, "PathPoints[0].X");
-			Assert.AreEqual (1f, gp.PathPoints[0].Y, "PathPoints[0].Y");
+			Assert.Equal (1f, gp.PathPoints[0].X);
+			Assert.Equal (1f, gp.PathPoints[0].Y);
 
 			// now try to change the first point
 			gp.PathPoints[0] = new Point (0, 0);
 			// the changes isn't reflected in the property
-			Assert.AreEqual (1f, gp.PathPoints[0].X, "PathPoints[0].X-1");
-			Assert.AreEqual (1f, gp.PathPoints[0].Y, "PathPoints[0].Y-1");
+			Assert.Equal (1f, gp.PathPoints[0].X);
+			Assert.Equal (1f, gp.PathPoints[0].Y);
 		}
 
-		[Test]
+		[Fact]
 		public void PathTypes_CannotChange ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangle (new Rectangle (1, 1, 2, 2));
 
-			Assert.AreEqual (0, gp.PathTypes[0], "PathTypes[0]");
+			Assert.Equal (0, gp.PathTypes[0]);
 
 			// now try to change the first type
 			gp.PathTypes[0] = 1;
 			// the changes isn't reflected in the property
-			Assert.AreEqual (0, gp.PathTypes[0], "PathTypes[0]-1");
+			Assert.Equal (0, gp.PathTypes[0]);
 		}
 
 		private void CheckArc (GraphicsPath path)
 		{
-			Assert.AreEqual (4, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (4, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (4, path.PathData.Points.Length, "PathData");
+			Assert.Equal (4, path.PathPoints.Length);
+			Assert.Equal (4, path.PathTypes.Length);
+			Assert.Equal (4, path.PathData.Points.Length);
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't implemented
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (2.99962401f, rect.X, Delta, "Bounds.X");
-			Assert.AreEqual (2.01370716f, rect.Y, Delta, "Bounds.Y");
-			Assert.AreEqual (0f, rect.Width, Delta, "Bounds.Width");
-			Assert.AreEqual (0.0137047768f, rect.Height, "Bounds.Height");
+			Assert.Equal (2.99962401f, rect.X, Precision);
+			Assert.Equal (2.01370716f, rect.Y, Precision);
+			Assert.Equal (0f, rect.Width, Precision);
+			Assert.Equal (0.0137047768f, rect.Height);
 
-			Assert.AreEqual (2.99990582f, path.PathData.Points[0].X, Delta, "Points[0].X");
-			Assert.AreEqual (2.01370716f, path.PathPoints[0].Y, Delta, "Points[0].Y");
-			Assert.AreEqual (0, path.PathData.Types[0], "Types[0]");
-			Assert.AreEqual (2.99984312f, path.PathData.Points[1].X, Delta, "Points[1].X");
-			Assert.AreEqual (2.018276f, path.PathPoints[1].Y, Delta, "Points[1].Y");
-			Assert.AreEqual (3, path.PathTypes[1], "Types[1]");
-			Assert.AreEqual (2.99974918f, path.PathData.Points[2].X, Delta, "Points[2].X");
-			Assert.AreEqual (2.02284455f, path.PathPoints[2].Y, Delta, "Points[2].Y");
-			Assert.AreEqual (3, path.PathData.Types[2], "Types[2]");
-			Assert.AreEqual (2.999624f, path.PathData.Points[3].X, Delta, "Points[3].X");
-			Assert.AreEqual (2.027412f, path.PathPoints[3].Y, Delta, "Points[3].Y");
-			Assert.AreEqual (3, path.PathTypes[3], "Types[3]");
+			Assert.Equal (2.99990582f, path.PathData.Points[0].X, Precision);
+			Assert.Equal (2.01370716f, path.PathPoints[0].Y, Precision);
+			Assert.Equal (0, path.PathData.Types[0]);
+			Assert.Equal (2.99984312f, path.PathData.Points[1].X, Precision);
+			Assert.Equal (2.018276f, path.PathPoints[1].Y, Precision);
+			Assert.Equal (3, path.PathTypes[1]);
+			Assert.Equal (2.99974918f, path.PathData.Points[2].X, Precision);
+			Assert.Equal (2.02284455f, path.PathPoints[2].Y, Precision);
+			Assert.Equal (3, path.PathData.Types[2]);
+			Assert.Equal (2.999624f, path.PathData.Points[3].X, Precision);
+			Assert.Equal (2.027412f, path.PathPoints[3].Y, Precision);
+			Assert.Equal (3, path.PathTypes[3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddArc_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -253,7 +253,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckArc (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddArc_RectangleF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -261,7 +261,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckArc (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddArc_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -269,7 +269,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckArc (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddArc_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -279,33 +279,33 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private void CheckBezier (GraphicsPath path)
 		{
-			Assert.AreEqual (4, path.PointCount, "PointCount");
-			Assert.AreEqual (4, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (4, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (4, path.PathData.Points.Length, "PathData");
+			Assert.Equal (4, path.PointCount);
+			Assert.Equal (4, path.PathPoints.Length);
+			Assert.Equal (4, path.PathTypes.Length);
+			Assert.Equal (4, path.PathData.Points.Length);
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't implemented
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (1f, rect.X, "Bounds.X");
-			Assert.AreEqual (1f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (3f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (3f, rect.Height, "Bounds.Height");
+			Assert.Equal (1f, rect.X);
+			Assert.Equal (1f, rect.Y);
+			Assert.Equal (3f, rect.Width);
+			Assert.Equal (3f, rect.Height);
 
-			Assert.AreEqual (1f, path.PathData.Points[0].X, "Points[0].X");
-			Assert.AreEqual (1f, path.PathPoints[0].Y, "Points[0].Y");
-			Assert.AreEqual (0, path.PathData.Types[0], "Types[0]");
-			Assert.AreEqual (2f, path.PathData.Points[1].X, "Points[1].X");
-			Assert.AreEqual (2f, path.PathPoints[1].Y, "Points[1].Y");
-			Assert.AreEqual (3, path.PathTypes[1], "Types[1]");
-			Assert.AreEqual (3f, path.PathData.Points[2].X, "Points[2].X");
-			Assert.AreEqual (3f, path.PathPoints[2].Y, "Points[2].Y");
-			Assert.AreEqual (3, path.PathData.Types[2], "Types[2]");
-			Assert.AreEqual (4f, path.PathData.Points[3].X, "Points[3].X");
-			Assert.AreEqual (4f, path.PathPoints[3].Y, "Points[3].Y");
-			Assert.AreEqual (3, path.PathTypes[3], "Types[3]");
+			Assert.Equal (1f, path.PathData.Points[0].X);
+			Assert.Equal (1f, path.PathPoints[0].Y);
+			Assert.Equal (0, path.PathData.Types[0]);
+			Assert.Equal (2f, path.PathData.Points[1].X);
+			Assert.Equal (2f, path.PathPoints[1].Y);
+			Assert.Equal (3, path.PathTypes[1]);
+			Assert.Equal (3f, path.PathData.Points[2].X);
+			Assert.Equal (3f, path.PathPoints[2].Y);
+			Assert.Equal (3, path.PathData.Types[2]);
+			Assert.Equal (4f, path.PathData.Points[3].X);
+			Assert.Equal (4f, path.PathPoints[3].Y);
+			Assert.Equal (3, path.PathTypes[3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBezier_Point ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -313,7 +313,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBezier_PointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -321,7 +321,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBezier_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -329,7 +329,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBezier_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -337,60 +337,60 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBezier_SamePoint ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddBezier (1, 1, 1, 1, 1, 1, 1, 1);
 			// all points are present
-			Assert.AreEqual (4, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "1-PathTypes[0]");
-			Assert.AreEqual (3, gp.PathTypes [1], "1-PathTypes[1]");
-			Assert.AreEqual (3, gp.PathTypes [2], "1-PathTypes[2]");
-			Assert.AreEqual (3, gp.PathTypes [3], "1-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (3, gp.PathTypes [1]);
+			Assert.Equal (3, gp.PathTypes [2]);
+			Assert.Equal (3, gp.PathTypes [3]);
 
 			gp.AddBezier (new Point (1, 1), new Point (1, 1), new Point (1, 1), new Point (1, 1));
 			// the first point (move to) can be compressed (i.e. removed)
-			Assert.AreEqual (7, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (3, gp.PathTypes [4], "2-PathTypes[4]");
-			Assert.AreEqual (3, gp.PathTypes [5], "2-PathTypes[5]");
-			Assert.AreEqual (3, gp.PathTypes [6], "2-PathTypes[6]");
+			Assert.Equal (7, gp.PointCount);
+			Assert.Equal (3, gp.PathTypes [4]);
+			Assert.Equal (3, gp.PathTypes [5]);
+			Assert.Equal (3, gp.PathTypes [6]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBezier_SamePointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddBezier (new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f));
 			// all points are present
-			Assert.AreEqual (4, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "1-PathTypes[0]");
-			Assert.AreEqual (3, gp.PathTypes [1], "1-PathTypes[1]");
-			Assert.AreEqual (3, gp.PathTypes [2], "1-PathTypes[2]");
-			Assert.AreEqual (3, gp.PathTypes [3], "1-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (3, gp.PathTypes [1]);
+			Assert.Equal (3, gp.PathTypes [2]);
+			Assert.Equal (3, gp.PathTypes [3]);
 
 			gp.AddBezier (new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f));
 			// the first point (move to) can be compressed (i.e. removed)
-			Assert.AreEqual (7, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (3, gp.PathTypes [4], "2-PathTypes[4]");
-			Assert.AreEqual (3, gp.PathTypes [5], "2-PathTypes[5]");
-			Assert.AreEqual (3, gp.PathTypes [6], "2-PathTypes[6]");
+			Assert.Equal (7, gp.PointCount);
+			Assert.Equal (3, gp.PathTypes [4]);
+			Assert.Equal (3, gp.PathTypes [5]);
+			Assert.Equal (3, gp.PathTypes [6]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBeziers_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddBeziers ((Point[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddBeziers_3_Points ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddBeziers (new Point[3] { new Point (1, 1), new Point (2, 2), new Point (3, 3) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddBeziers_Point ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -398,20 +398,20 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBeziers_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddBeziers ((PointF[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddBeziers_3_PointFs ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddBeziers (new PointF[3] { new PointF (1f, 1f), new PointF (2f, 2f), new PointF (3f, 3f) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddBeziers_PointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -419,68 +419,68 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBeziers_SamePoint ()
 		{
 			Point [] points = new Point [4] { new Point (1, 1), new Point (1, 1), new Point (1, 1), new Point (1, 1) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddBeziers (points);
 			// all points are present
-			Assert.AreEqual (4, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "1-PathTypes[0]");
-			Assert.AreEqual (3, gp.PathTypes [1], "1-PathTypes[1]");
-			Assert.AreEqual (3, gp.PathTypes [2], "1-PathTypes[2]");
-			Assert.AreEqual (3, gp.PathTypes [3], "1-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (3, gp.PathTypes [1]);
+			Assert.Equal (3, gp.PathTypes [2]);
+			Assert.Equal (3, gp.PathTypes [3]);
 
 			gp.AddBeziers (points);
 			// the first point (move to) can be compressed (i.e. removed)
-			Assert.AreEqual (7, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (3, gp.PathTypes [4], "2-PathTypes[4]");
-			Assert.AreEqual (3, gp.PathTypes [5], "2-PathTypes[5]");
-			Assert.AreEqual (3, gp.PathTypes [6], "2-PathTypes[6]");
+			Assert.Equal (7, gp.PointCount);
+			Assert.Equal (3, gp.PathTypes [4]);
+			Assert.Equal (3, gp.PathTypes [5]);
+			Assert.Equal (3, gp.PathTypes [6]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddBeziers_SamePointF ()
 		{
 			PointF[] points = new PointF [4] { new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddBeziers (points);
 			// all points are present
-			Assert.AreEqual (4, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "1-PathTypes[0]");
-			Assert.AreEqual (3, gp.PathTypes [1], "1-PathTypes[1]");
-			Assert.AreEqual (3, gp.PathTypes [2], "1-PathTypes[2]");
-			Assert.AreEqual (3, gp.PathTypes [3], "1-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (3, gp.PathTypes [1]);
+			Assert.Equal (3, gp.PathTypes [2]);
+			Assert.Equal (3, gp.PathTypes [3]);
 
 			gp.AddBeziers (points);
 			// the first point (move to) can be compressed (i.e. removed)
-			Assert.AreEqual (7, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (3, gp.PathTypes [4], "2-PathTypes[4]");
-			Assert.AreEqual (3, gp.PathTypes [5], "2-PathTypes[5]");
-			Assert.AreEqual (3, gp.PathTypes [6], "2-PathTypes[6]");
+			Assert.Equal (7, gp.PointCount);
+			Assert.Equal (3, gp.PathTypes [4]);
+			Assert.Equal (3, gp.PathTypes [5]);
+			Assert.Equal (3, gp.PathTypes [6]);
 		}
 
 		private void CheckEllipse (GraphicsPath path)
 		{
-			Assert.AreEqual (13, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (13, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (13, path.PathData.Points.Length, "PathData");
+			Assert.Equal (13, path.PathPoints.Length);
+			Assert.Equal (13, path.PathTypes.Length);
+			Assert.Equal (13, path.PathData.Points.Length);
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't implemented
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (1f, rect.X, "Bounds.X");
-			Assert.AreEqual (1f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (2f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (2f, rect.Height, "Bounds.Height");
+			Assert.Equal (1f, rect.X);
+			Assert.Equal (1f, rect.Y);
+			Assert.Equal (2f, rect.Width);
+			Assert.Equal (2f, rect.Height);
 
-			Assert.AreEqual (0, path.PathData.Types[0], "PathData.Types[0]");
+			Assert.Equal (0, path.PathData.Types[0]);
 			for (int i = 1; i < 12; i++)
-				Assert.AreEqual (3, path.PathTypes[i], "PathTypes" + i.ToString ());
-			Assert.AreEqual (131, path.PathData.Types[12], "PathData.Types[12]");
+				Assert.Equal (3, path.PathTypes[i]);
+			Assert.Equal (131, path.PathData.Types[12]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddEllipse_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -488,7 +488,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckEllipse (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddEllipse_RectangleF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -496,7 +496,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckEllipse (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddEllipse_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -504,7 +504,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckEllipse (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddEllipse_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -514,26 +514,26 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private void CheckLine (GraphicsPath path)
 		{
-			Assert.AreEqual (2, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (2, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (2, path.PathData.Points.Length, "PathData");
+			Assert.Equal (2, path.PathPoints.Length);
+			Assert.Equal (2, path.PathTypes.Length);
+			Assert.Equal (2, path.PathData.Points.Length);
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't implemented
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (1f, rect.X, "Bounds.X");
-			Assert.AreEqual (1f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (1f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (1f, rect.Height, "Bounds.Height");
+			Assert.Equal (1f, rect.X);
+			Assert.Equal (1f, rect.Y);
+			Assert.Equal (1f, rect.Width);
+			Assert.Equal (1f, rect.Height);
 
-			Assert.AreEqual (1f, path.PathData.Points[0].X, "Points[0].X");
-			Assert.AreEqual (1f, path.PathPoints[0].Y, "Points[0].Y");
-			Assert.AreEqual (0, path.PathData.Types[0], "Types[0]");
-			Assert.AreEqual (2f, path.PathData.Points[1].X, "Points[1].X");
-			Assert.AreEqual (2f, path.PathPoints[1].Y, "Points[1].Y");
-			Assert.AreEqual (1, path.PathTypes[1], "Types[1]");
+			Assert.Equal (1f, path.PathData.Points[0].X);
+			Assert.Equal (1f, path.PathPoints[0].Y);
+			Assert.Equal (0, path.PathData.Types[0]);
+			Assert.Equal (2f, path.PathData.Points[1].X);
+			Assert.Equal (2f, path.PathPoints[1].Y);
+			Assert.Equal (1, path.PathTypes[1]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLine_Point ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -541,7 +541,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLine_PointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -549,7 +549,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLine_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -557,7 +557,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLine_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -565,91 +565,91 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLine_SamePoint ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddLine (new Point (1, 1), new Point (1, 1));
-			Assert.AreEqual (2, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes[0], "1-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes[1], "1-PathTypes[1]");
+			Assert.Equal (2, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes[0]);
+			Assert.Equal (1, gp.PathTypes[1]);
 
 			gp.AddLine (new Point (1, 1), new Point (1, 1));
 			// 3 not 4 points, the first point (only) is compressed
-			Assert.AreEqual (3, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "2-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "2-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "2-PathTypes[2]");
+			Assert.Equal (3, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
 
 			gp.AddLine (new Point (1, 1), new Point (1, 1));
 			// 4 not 5 (or 6) points, the first point (only) is compressed
-			Assert.AreEqual (4, gp.PointCount, "3-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "3-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "3-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "3-PathTypes[2]");
-			Assert.AreEqual (1, gp.PathTypes [3], "3-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (1, gp.PathTypes [3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLine_SamePointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddLine (new PointF (49.2f, 157f), new PointF (49.2f, 157f));
-			Assert.AreEqual (2, gp.PointCount, "PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "PathTypes[1]");
+			Assert.Equal (2, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
 
 			gp.AddLine (new PointF (49.2f, 157f), new PointF (49.2f, 157f));
 			// 3 not 4 points, the first point (only) is compressed
-			Assert.AreEqual (3, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "2-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "2-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "2-PathTypes[2]");
+			Assert.Equal (3, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLine_SamePointsF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddLine (new PointF (49.2f, 157f), new PointF (75.6f, 196f));
 			gp.AddLine (new PointF (75.6f, 196f), new PointF (102f, 209f));
-			Assert.AreEqual (3, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "1-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "1-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "1-PathTypes[2]");
+			Assert.Equal (3, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
 
 			gp.AddLine (new PointF (102f, 209f), new PointF (75.6f, 196f));
-			Assert.AreEqual (4, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "2-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "2-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "2-PathTypes[2]");
-			Assert.AreEqual (1, gp.PathTypes [3], "2-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (1, gp.PathTypes [3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddLines ((Point[])null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_Point_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddLines (new Point[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_Point_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddLines (new Point[1] { new Point (1, 1) });
 			// Special case - a line with a single point is valid
-			Assert.AreEqual (1, gp.PointCount, "PointCount");
-			Assert.AreEqual (0, gp.PathTypes[0], "PathTypes[0]");
+			Assert.Equal (1, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes[0]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_Point ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -657,30 +657,30 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddLines ((PointF[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_PointF_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddLines (new PointF[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
-			gp.AddLines (new PointF[1] { new PointF (1f, 1f) });
+			gp.AddLines (new PointF[1] { new PointF (1f, 1f) };
 			// Special case - a line with a single point is valid
-			Assert.AreEqual (1, gp.PointCount, "PointCount");
-			Assert.AreEqual (0, gp.PathTypes[0], "PathTypes[0]");
+			Assert.Equal (1, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes[0]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_PointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -688,91 +688,91 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_SamePoint ()
 		{
 			Point [] points = new Point [] { new Point (1, 1), new Point (1, 1) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddLines (points);
-			Assert.AreEqual (2, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "1-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "1-PathTypes[1]");
+			Assert.Equal (2, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
 
 			gp.AddLines (points);
 			// 3 not 4 points, the first point (only) is compressed
-			Assert.AreEqual (3, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "2-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "2-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "2-PathTypes[2]");
+			Assert.Equal (3, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
 
 			gp.AddLines (points);
 			// 4 not 5 (or 6) points, the first point (only) is compressed
-			Assert.AreEqual (4, gp.PointCount, "3-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "3-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "3-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "3-PathTypes[2]");
-			Assert.AreEqual (1, gp.PathTypes [3], "3-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (1, gp.PathTypes [3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddLines_SamePointF ()
 		{
 			PointF [] points = new PointF [] { new PointF (49.2f, 157f), new PointF (49.2f, 157f), new PointF (49.2f, 157f), new PointF (49.2f, 157f) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddLines (points);
 			// all identical points are added
-			Assert.AreEqual (4, gp.PointCount, "PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "PathTypes[2]");
-			Assert.AreEqual (1, gp.PathTypes [3], "PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (1, gp.PathTypes [3]);
 
 			gp.AddLines (points);
 			// only the first new point is compressed
-			Assert.AreEqual (7, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "2-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "2-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "2-PathTypes[2]");
-			Assert.AreEqual (1, gp.PathTypes [3], "2-PathTypes[3]");
-			Assert.AreEqual (1, gp.PathTypes [4], "2-PathTypes[4]");
-			Assert.AreEqual (1, gp.PathTypes [5], "2-PathTypes[5]");
-			Assert.AreEqual (1, gp.PathTypes [6], "2-PathTypes[6]");
+			Assert.Equal (7, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (1, gp.PathTypes [3]);
+			Assert.Equal (1, gp.PathTypes [4]);
+			Assert.Equal (1, gp.PathTypes [5]);
+			Assert.Equal (1, gp.PathTypes [6]);
 		}
 
 		private void CheckPie (GraphicsPath path)
 		{
 			// the number of points generated for a Pie isn't the same between Mono and MS
 #if false
-			Assert.AreEqual (5, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (5, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (5, path.PathData.Points.Length, "PathData");
+			Assert.Equal (5, path.PathPoints.Length);
+			Assert.Equal (5, path.PathTypes.Length);
+			Assert.Equal (5, path.PathData.Points.Length);
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't implemented
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (2f, rect.X, "Bounds.X");
-			Assert.AreEqual (2f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (0.9999058f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (0.0274119377f, rect.Height, "Bounds.Height");
+			Assert.Equal (2f, rect.X);
+			Assert.Equal (2f, rect.Y);
+			Assert.Equal (0.9999058f, rect.Width);
+			Assert.Equal (0.0274119377f, rect.Height);
 
-			Assert.AreEqual (2f, path.PathData.Points[0].X, "Points[0].X");
-			Assert.AreEqual (2f, path.PathPoints[0].Y, "Points[0].Y");
-			Assert.AreEqual (0, path.PathData.Types[0], "Types[0]");
-			Assert.AreEqual (2.99990582f, path.PathData.Points[1].X, "Points[1].X");
-			Assert.AreEqual (2.01370716f, path.PathPoints[1].Y, "Points[1].Y");
-			Assert.AreEqual (1, path.PathTypes[1], "Types[1]");
-			Assert.AreEqual (2.99984312f, path.PathData.Points[2].X, "Points[2].X");
-			Assert.AreEqual (2.018276f, path.PathPoints[2].Y, "Points[2].Y");
-			Assert.AreEqual (3, path.PathData.Types[2], "Types[2]");
-			Assert.AreEqual (2.99974918f, path.PathData.Points[3].X, "Points[2].X");
-			Assert.AreEqual (2.02284455f, path.PathPoints[3].Y, "Points[2].Y");
-			Assert.AreEqual (3, path.PathData.Types[3], "Types[2]");
-			Assert.AreEqual (2.999624f, path.PathData.Points[4].X, "Points[3].X");
-			Assert.AreEqual (2.027412f, path.PathPoints[4].Y, "Points[3].Y");
-			Assert.AreEqual (131, path.PathTypes[4], "Types[3]");
+			Assert.Equal (2f, path.PathData.Points[0].X);
+			Assert.Equal (2f, path.PathPoints[0].Y);
+			Assert.Equal (0, path.PathData.Types[0]);
+			Assert.Equal (2.99990582f, path.PathData.Points[1].X);
+			Assert.Equal (2.01370716f, path.PathPoints[1].Y);
+			Assert.Equal (1, path.PathTypes[1]);
+			Assert.Equal (2.99984312f, path.PathData.Points[2].X);
+			Assert.Equal (2.018276f, path.PathPoints[2].Y);
+			Assert.Equal (3, path.PathData.Types[2]);
+			Assert.Equal (2.99974918f, path.PathData.Points[3].X);
+			Assert.Equal (2.02284455f, path.PathPoints[3].Y);
+			Assert.Equal (3, path.PathData.Types[3]);
+			Assert.Equal (2.999624f, path.PathData.Points[4].X);
+			Assert.Equal (2.027412f, path.PathPoints[4].Y);
+			Assert.Equal (131, path.PathTypes[4]);
 #endif
 		}
 
-		[Test]
+		[Fact]
 		public void AddPie_Rect ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -780,7 +780,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckPie (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddPie_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -788,7 +788,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckPie (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddPie_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -800,58 +800,58 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			// an extra point is generated by Mono (libgdiplus)
 #if false
-			Assert.AreEqual (3, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (3, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (3, path.PathData.Points.Length, "PathData");
+			Assert.Equal (3, path.PathPoints.Length);
+			Assert.Equal (3, path.PathTypes.Length);
+			Assert.Equal (3, path.PathData.Points.Length);
 #endif
 			// GetBounds (well GdipGetPathWorldBounds) isn't implemented
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (1f, rect.X, "Bounds.X");
-			Assert.AreEqual (1f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (2f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (2f, rect.Height, "Bounds.Height");
+			Assert.Equal (1f, rect.X);
+			Assert.Equal (1f, rect.Y);
+			Assert.Equal (2f, rect.Width);
+			Assert.Equal (2f, rect.Height);
 
-			Assert.AreEqual (1f, path.PathData.Points[0].X, "Points[0].X");
-			Assert.AreEqual (1f, path.PathPoints[0].Y, "Points[0].Y");
-			Assert.AreEqual (0, path.PathData.Types[0], "Types[0]");
-			Assert.AreEqual (2f, path.PathData.Points[1].X, "Points[1].X");
-			Assert.AreEqual (2f, path.PathPoints[1].Y, "Points[1].Y");
-			Assert.AreEqual (1, path.PathTypes[1], "Types[1]");
-			Assert.AreEqual (3f, path.PathData.Points[2].X, "Points[2].X");
-			Assert.AreEqual (3f, path.PathPoints[2].Y, "Points[2].Y");
+			Assert.Equal (1f, path.PathData.Points[0].X);
+			Assert.Equal (1f, path.PathPoints[0].Y);
+			Assert.Equal (0, path.PathData.Types[0]);
+			Assert.Equal (2f, path.PathData.Points[1].X);
+			Assert.Equal (2f, path.PathPoints[1].Y);
+			Assert.Equal (1, path.PathTypes[1]);
+			Assert.Equal (3f, path.PathData.Points[2].X);
+			Assert.Equal (3f, path.PathPoints[2].Y);
 			// the extra point change the type of the last point
 #if false
-			Assert.AreEqual (129, path.PathData.Types[2], "Types[2]");
+			Assert.Equal (129, path.PathData.Types[2]);
 #endif
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddPolygon ((Point[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_Point_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath ().AddPolygon (new Point[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_Point_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddPolygon (new Point[1] { new Point (1, 1) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_Point_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddPolygon (new Point[2] { new Point (1, 1), new Point (2, 2) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_Point_3 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -859,33 +859,33 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckPolygon (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddPolygon ((PointF[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_PointF_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath ().AddPolygon (new PointF[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddPolygon (new PointF[1] { new PointF (1f, 1f) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_PointF_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddPolygon (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_PointF_3 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -893,103 +893,103 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckPolygon (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_SamePoint ()
 		{
 			Point [] points = new Point [3] { new Point (1, 1), new Point (1, 1), new Point (1, 1) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddPolygon (points);
 			// all identical points are added
-			Assert.AreEqual (3, gp.PointCount, "PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "PathTypes[1]");
-			Assert.AreEqual (129, gp.PathTypes [2], "PathTypes[2]");
+			Assert.Equal (3, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (129, gp.PathTypes [2]);
 
 			gp.AddPolygon (points);
 			// all identical points are added (again)
-			Assert.AreEqual (6, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [3], "2-PathTypes[3]");
-			Assert.AreEqual (1, gp.PathTypes [4], "2-PathTypes[4]");
-			Assert.AreEqual (129, gp.PathTypes [5], "2-PathTypes[5]");
+			Assert.Equal (6, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [3]);
+			Assert.Equal (1, gp.PathTypes [4]);
+			Assert.Equal (129, gp.PathTypes [5]);
 
 			gp.AddLines (points);
 			// all identical points are added as a line (because previous point is closed)
-			Assert.AreEqual (9, gp.PointCount, "3-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [6], "3-PathTypes[6]");
-			Assert.AreEqual (1, gp.PathTypes [7], "3-PathTypes[7]");
-			Assert.AreEqual (1, gp.PathTypes [8], "3-PathTypes[8]");
+			Assert.Equal (9, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [6]);
+			Assert.Equal (1, gp.PathTypes [7]);
+			Assert.Equal (1, gp.PathTypes [8]);
 
 			gp.AddPolygon (points);
 			// all identical points are added (again)
-			Assert.AreEqual (12, gp.PointCount, "4-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [9], "4-PathTypes[9]");
-			Assert.AreEqual (1, gp.PathTypes [10], "4-PathTypes[10]");
-			Assert.AreEqual (129, gp.PathTypes [11], "4-PathTypes[11]");
+			Assert.Equal (12, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [9]);
+			Assert.Equal (1, gp.PathTypes [10]);
+			Assert.Equal (129, gp.PathTypes [11]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddPolygon_SamePointF ()
 		{
 			PointF [] points = new PointF [3] { new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddPolygon (points);
 			// all identical points are added
-			Assert.AreEqual (3, gp.PointCount, "PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "PathTypes[1]");
-			Assert.AreEqual (129, gp.PathTypes [2], "PathTypes[2]");
+			Assert.Equal (3, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (129, gp.PathTypes [2]);
 
 			gp.AddPolygon (points);
 			// all identical points are added (again)
-			Assert.AreEqual (6, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [3], "2-PathTypes[3]");
-			Assert.AreEqual (1, gp.PathTypes [4], "2-PathTypes[4]");
-			Assert.AreEqual (129, gp.PathTypes [5], "2-PathTypes[5]");
+			Assert.Equal (6, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [3]);
+			Assert.Equal (1, gp.PathTypes [4]);
+			Assert.Equal (129, gp.PathTypes [5]);
 
 			gp.AddLines (points);
 			// all identical points are added as a line (because previous point is closed)
-			Assert.AreEqual (9, gp.PointCount, "3-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [6], "3-PathTypes[6]");
-			Assert.AreEqual (1, gp.PathTypes [7], "3-PathTypes[7]");
-			Assert.AreEqual (1, gp.PathTypes [8], "3-PathTypes[8]");
+			Assert.Equal (9, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [6]);
+			Assert.Equal (1, gp.PathTypes [7]);
+			Assert.Equal (1, gp.PathTypes [8]);
 
 			gp.AddPolygon (points);
 			// all identical points are added (again)
-			Assert.AreEqual (12, gp.PointCount, "4-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [9], "4-PathTypes[9]");
-			Assert.AreEqual (1, gp.PathTypes [10], "4-PathTypes[10]");
-			Assert.AreEqual (129, gp.PathTypes [11], "4-PathTypes[11]");
+			Assert.Equal (12, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [9]);
+			Assert.Equal (1, gp.PathTypes [10]);
+			Assert.Equal (129, gp.PathTypes [11]);
 		}
 
 		private void CheckRectangle (GraphicsPath path, int count)
 		{
-			Assert.AreEqual (count, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (count, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (count, path.PathData.Points.Length, "PathData");
+			Assert.Equal (count, path.PathPoints.Length);
+			Assert.Equal (count, path.PathTypes.Length);
+			Assert.Equal (count, path.PathData.Points.Length);
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't implemented
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (1f, rect.X, "Bounds.X");
-			Assert.AreEqual (1f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (2f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (2f, rect.Height, "Bounds.Height");
+			Assert.Equal (1f, rect.X);
+			Assert.Equal (1f, rect.Y);
+			Assert.Equal (2f, rect.Width);
+			Assert.Equal (2f, rect.Height);
 
 			// check first four points (first rectangle)
-			Assert.AreEqual (1f, path.PathData.Points[0].X, "Points[0].X");
-			Assert.AreEqual (1f, path.PathPoints[0].Y, "Points[0].Y");
-			Assert.AreEqual (0, path.PathData.Types[0], "Types[0]");
-			Assert.AreEqual (3f, path.PathData.Points[1].X, "Points[1].X");
-			Assert.AreEqual (1f, path.PathPoints[1].Y, "Points[1].Y");
-			Assert.AreEqual (1, path.PathTypes[1], "Types[1]");
-			Assert.AreEqual (3f, path.PathData.Points[2].X, "Points[2].X");
-			Assert.AreEqual (3f, path.PathPoints[2].Y, "Points[2].Y");
-			Assert.AreEqual (1, path.PathData.Types[2], "Types[2]");
-			Assert.AreEqual (1f, path.PathData.Points[3].X, "Points[3].X");
-			Assert.AreEqual (3f, path.PathPoints[3].Y, "Points[3].Y");
-			Assert.AreEqual (129, path.PathTypes[3], "Types[3]");
+			Assert.Equal (1f, path.PathData.Points[0].X);
+			Assert.Equal (1f, path.PathPoints[0].Y);
+			Assert.Equal (0, path.PathData.Types[0]);
+			Assert.Equal (3f, path.PathData.Points[1].X);
+			Assert.Equal (1f, path.PathPoints[1].Y);
+			Assert.Equal (1, path.PathTypes[1]);
+			Assert.Equal (3f, path.PathData.Points[2].X);
+			Assert.Equal (3f, path.PathPoints[2].Y);
+			Assert.Equal (1, path.PathData.Types[2]);
+			Assert.Equal (1f, path.PathData.Points[3].X);
+			Assert.Equal (3f, path.PathPoints[3].Y);
+			Assert.Equal (129, path.PathTypes[3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangle_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -997,7 +997,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangle_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1005,71 +1005,71 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangle_SamePoint ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangle (new Rectangle (1, 1, 0, 0));
-			Assert.AreEqual (0, gp.PointCount, "0-PointCount");
+			Assert.Equal (0, gp.PointCount);
 
 			gp.AddRectangle (new Rectangle (1, 1, 1, 1));
-			Assert.AreEqual (4, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "1-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "1-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "1-PathTypes[2]");
-			Assert.AreEqual (129, gp.PathTypes [3], "1-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (129, gp.PathTypes [3]);
 			PointF end = gp.PathPoints [3];
 
 			// add rectangle at the last path point
 			gp.AddRectangle (new Rectangle ((int)end.X, (int)end.Y, 1, 1));
 			// no compression (different type)
-			Assert.AreEqual (8, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "2-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "2-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "2-PathTypes[2]");
-			Assert.AreEqual (129, gp.PathTypes [3], "2-PathTypes[3]");
+			Assert.Equal (8, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (129, gp.PathTypes [3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangle_SamePointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangle (new RectangleF (1f, 1f, 0f, 0f));
-			Assert.AreEqual (0, gp.PointCount, "0-PointCount");
+			Assert.Equal (0, gp.PointCount);
 
 			gp.AddRectangle (new RectangleF (1f, 1f, 1f, 1f));
-			Assert.AreEqual (4, gp.PointCount, "1-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "1-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "1-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "1-PathTypes[2]");
-			Assert.AreEqual (129, gp.PathTypes [3], "1-PathTypes[3]");
+			Assert.Equal (4, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (129, gp.PathTypes [3]);
 			PointF end = gp.PathPoints [3];
 
 			// add rectangle at the last path point
 			gp.AddRectangle (new RectangleF (end.X, end.Y, 1f, 1f));
 			// no compression (different type)
-			Assert.AreEqual (8, gp.PointCount, "2-PointCount");
-			Assert.AreEqual (0, gp.PathTypes [0], "2-PathTypes[0]");
-			Assert.AreEqual (1, gp.PathTypes [1], "2-PathTypes[1]");
-			Assert.AreEqual (1, gp.PathTypes [2], "2-PathTypes[2]");
-			Assert.AreEqual (129, gp.PathTypes [3], "2-PathTypes[3]");
+			Assert.Equal (8, gp.PointCount);
+			Assert.Equal (0, gp.PathTypes [0]);
+			Assert.Equal (1, gp.PathTypes [1]);
+			Assert.Equal (1, gp.PathTypes [2]);
+			Assert.Equal (129, gp.PathTypes [3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangles_Int_Null ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentNullException> (() => gp.AddRectangles ((Rectangle[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangles_Int_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddRectangles (new Rectangle[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangles_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1077,21 +1077,21 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangles_Float_Null ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentNullException> (() => gp.AddRectangles ((RectangleF[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangles_Float_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddRectangles ( new RectangleF[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangles_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1099,7 +1099,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangles_Two ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1107,15 +1107,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				new RectangleF (1f, 1f, 2f, 2f),
 				new RectangleF (2f, 2f, 1f, 1f) } );
 			RectangleF rect = gp.GetBounds ();
-			Assert.AreEqual (1f, rect.X, "Bounds.X");
-			Assert.AreEqual (1f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (2f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (2f, rect.Height, "Bounds.Height");
+			Assert.Equal (1f, rect.X);
+			Assert.Equal (1f, rect.Y);
+			Assert.Equal (2f, rect.Width);
+			Assert.Equal (2f, rect.Height);
 			// second rectangle is completely within the first one
 			CheckRectangle (gp, 8);
 		}
 
-		[Test]
+		[Fact]
 		public void AddRectangles_SamePoint ()
 		{
 			Rectangle r1 = new Rectangle (1, 1, 0, 0);
@@ -1124,17 +1124,17 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangles (new Rectangle[] { r1, r2, r3 });
-			Assert.AreEqual (8, gp.PointCount, "1-PointCount");
+			Assert.Equal (8, gp.PointCount);
 			// first rect is ignore, then all other 2x4 (8) points are present, no compression
 		}
 
-		[Test]
+		[Fact]
 		public void AddPath_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddPath (null, false));
 		}
 
-		[Test]
+		[Fact]
 		public void AddPath ()
 		{
 			GraphicsPath gpr = new GraphicsPath ();
@@ -1146,51 +1146,51 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private void CheckClosedCurve (GraphicsPath path)
 		{
-			Assert.AreEqual (10, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (10, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (10, path.PathData.Points.Length, "PathData");
+			Assert.Equal (10, path.PathPoints.Length);
+			Assert.Equal (10, path.PathTypes.Length);
+			Assert.Equal (10, path.PathData.Points.Length);
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't very precise with curves
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (0.8333333f, rect.X, 0.2f, "Bounds.X");
-			Assert.AreEqual (0.8333333f, rect.Y, 0.2f, "Bounds.Y");
-			Assert.AreEqual (2.33333278f, rect.Width, 0.4f, "Bounds.Width");
-			Assert.AreEqual (2.33333278f, rect.Height, 0.4f, "Bounds.Height");
+			Assert.Equal (0.8333333f, rect.X, 1);
+			Assert.Equal (0.8333333f, rect.Y, 1);
+			Assert.Equal (2.33333278f, rect.Width, 1);
+			Assert.Equal (2.33333278f, rect.Height, 1);
 
-			Assert.AreEqual (0, path.PathData.Types[0], "PathData.Types[0]");
+			Assert.Equal (0, path.PathData.Types[0]);
 			for (int i = 1; i < 9; i++)
-				Assert.AreEqual (3, path.PathTypes[i], "PathTypes" + i.ToString ());
-			Assert.AreEqual (131, path.PathData.Types[9], "PathData.Types[9]");
+				Assert.Equal (3, path.PathTypes[i]);
+			Assert.Equal (131, path.PathData.Types[9]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddClosedCurve ((Point[])null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_Point_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new Point [0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_Point_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new Point[1] { new Point (1, 1) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_Point_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new Point[2] { new Point (1, 1), new Point (2, 2) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_Point_3 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1198,34 +1198,34 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckClosedCurve (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddClosedCurve ((PointF[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_PointF_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new PointF[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new PointF[1] { new PointF (1f, 1f) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_PointF_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_PointF_3 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1233,102 +1233,102 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckClosedCurve (gp);
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_SamePoint ()
 		{
 			Point [] points = new Point [3] { new Point (1, 1), new Point (1, 1), new Point (1, 1) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddClosedCurve (points);
-			Assert.AreEqual (10, gp.PointCount, "1-PointCount");
+			Assert.Equal (10, gp.PointCount);
 			gp.AddClosedCurve (points);
-			Assert.AreEqual (20, gp.PointCount, "2-PointCount");
+			Assert.Equal (20, gp.PointCount);
 		}
 
-		[Test]
+		[Fact]
 		public void AddClosedCurve_SamePointF ()
 		{
 			PointF [] points = new PointF [3] { new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddClosedCurve (points);
-			Assert.AreEqual (10, gp.PointCount, "1-PointCount");
+			Assert.Equal (10, gp.PointCount);
 			gp.AddClosedCurve (points);
-			Assert.AreEqual (20, gp.PointCount, "2-PointCount");
+			Assert.Equal (20, gp.PointCount);
 		}
 
 		private void CheckCurve (GraphicsPath path)
 		{
-			Assert.AreEqual (4, path.PathPoints.Length, "PathPoints");
-			Assert.AreEqual (4, path.PathTypes.Length, "PathPoints");
-			Assert.AreEqual (4, path.PathData.Points.Length, "PathData");
+			Assert.Equal (4, path.PathPoints.Length);
+			Assert.Equal (4, path.PathTypes.Length);
+			Assert.Equal (4, path.PathData.Points.Length);
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't implemented
 			RectangleF rect = path.GetBounds ();
-			Assert.AreEqual (1.0f, rect.X, "Bounds.X");
-			Assert.AreEqual (1.0f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (1.0f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (1.0f, rect.Height, "Bounds.Height");
+			Assert.Equal (1.0f, rect.X);
+			Assert.Equal (1.0f, rect.Y);
+			Assert.Equal (1.0f, rect.Width);
+			Assert.Equal (1.0f, rect.Height);
 
-			Assert.AreEqual (1f, path.PathData.Points[0].X, "Points[0].X");
-			Assert.AreEqual (1f, path.PathPoints[0].Y, "Points[0].Y");
-			Assert.AreEqual (0, path.PathData.Types[0], "Types[0]");
+			Assert.Equal (1f, path.PathData.Points[0].X);
+			Assert.Equal (1f, path.PathPoints[0].Y);
+			Assert.Equal (0, path.PathData.Types[0]);
 			// Mono has wrong? results
 #if false
-			Assert.AreEqual (1.16666663f, path.PathData.Points[1].X, "Points[1].X");
-			Assert.AreEqual (1.16666663f, path.PathPoints[1].Y, "Points[1].Y");
+			Assert.Equal (1.16666663f, path.PathData.Points[1].X);
+			Assert.Equal (1.16666663f, path.PathPoints[1].Y);
 #endif
-			Assert.AreEqual (3, path.PathTypes[1], "Types[1]");
+			Assert.Equal (3, path.PathTypes[1]);
 			// Mono has wrong? results
 #if false
-			Assert.AreEqual (1.83333325f, path.PathData.Points[2].X, "Points[2].X");
-			Assert.AreEqual (1.83333325f, path.PathPoints[2].Y, "Points[2].Y");
+			Assert.Equal (1.83333325f, path.PathData.Points[2].X);
+			Assert.Equal (1.83333325f, path.PathPoints[2].Y);
 #endif
-			Assert.AreEqual (3, path.PathData.Types[2], "Types[2]");
-			Assert.AreEqual (2f, path.PathData.Points[3].X, "Points[3].X");
-			Assert.AreEqual (2f, path.PathPoints[3].Y, "Points[3].Y");
-			Assert.AreEqual (3, path.PathTypes[3], "Types[3]");
+			Assert.Equal (3, path.PathData.Types[2]);
+			Assert.Equal (2f, path.PathData.Points[3].X);
+			Assert.Equal (2f, path.PathPoints[3].Y);
+			Assert.Equal (3, path.PathTypes[3]);
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddCurve ((Point[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_Point_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new Point[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_Point_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new Point[1] { new Point (1, 1) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_Point_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddCurve (new Point[2] { new Point (1, 1), new Point (2, 2) });
 			CheckCurve (gp);
-			// note: GdipAddPathCurveI allows adding a "curve" with only 2 points (a.k.a. a line ;-)
+			// note: GdipAddPathCurveI allows adding a "curve" with only 2 points (a.k.a. a line );-)
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_Point_2_Tension ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddCurve (new Point[2] { new Point (1, 1), new Point (2, 2) }, 1.0f);
 			CheckCurve (gp);
-			// note: GdipAddPathCurve2I allows adding a "curve" with only 2 points (a.k.a. a line ;-)
+			// note: GdipAddPathCurve2I allows adding a "curve" with only 2 points (a.k.a. a line );-)
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve3_Point_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1336,47 +1336,47 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// adding only two points isn't supported by GdipAddCurve3I
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddCurve ((PointF[]) null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_PointF_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[0]));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[1] { new PointF (1f, 1f) }));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_PointF_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddCurve (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) });
 			CheckCurve (gp);
-			// note: GdipAddPathCurve allows adding a "curve" with only 2 points (a.k.a. a line ;-)
+			// note: GdipAddPathCurve allows adding a "curve" with only 2 points (a.k.a. a line );-)
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_PoinFt_2_Tension ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddCurve (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }, 1.0f);
 			CheckCurve (gp);
-			// note: GdipAddPathCurve2 allows adding a "curve" with only 2 points (a.k.a. a line ;-)
+			// note: GdipAddPathCurve2 allows adding a "curve" with only 2 points (a.k.a. a line );-)
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve3_PointF_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1384,68 +1384,68 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// adding only two points isn't supported by GdipAddCurve3
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_LargeTension ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddCurve (new PointF[3] { new PointF (1f, 1f), new PointF (0f, 20f), new PointF (20f, 0f) }, 0, 2, Single.MaxValue);
-			Assert.AreEqual (7, gp.PointCount, "PointCount");
+			Assert.Equal (7, gp.PointCount);
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_ZeroSegments ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }, 0, 0, 0.5f));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_NegativeSegments ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }, 0, -1, 0.5f));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_OffsetTooLarge ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[3] { new PointF (1f, 1f), new PointF (0f, 20f), new PointF (20f, 0f) }, 1, 2, 0.5f));
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_Offset ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddCurve (new PointF[4] { new PointF (1f, 1f), new PointF (0f, 20f), new PointF (20f, 0f), new PointF (0f, 10f) }, 1, 2, 0.5f);
-			Assert.AreEqual (7, gp.PointCount, "PointCount");
+			Assert.Equal (7, gp.PointCount);
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_SamePoint ()
 		{
 			Point [] points = new Point [2] { new Point (1, 1), new Point (1, 1) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddCurve (points);
-			Assert.AreEqual (4, gp.PointCount, "1-PointCount");
+			Assert.Equal (4, gp.PointCount);
 			gp.AddCurve (points);
-			Assert.AreEqual (7, gp.PointCount, "2-PointCount");
+			Assert.Equal (7, gp.PointCount);
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve_SamePointF ()
 		{
 			PointF [] points = new PointF [2] { new PointF (1f, 1f), new PointF (1f, 1f) };
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddCurve (points);
-			Assert.AreEqual (4, gp.PointCount, "1-PointCount");
+			Assert.Equal (4, gp.PointCount);
 			gp.AddCurve (points);
-			Assert.AreEqual (7, gp.PointCount, "2-PointCount");
+			Assert.Equal (7, gp.PointCount);
 		}
 
-		[Test]
+		[Fact]
 		public void AddCurve ()
 		{
 			PointF [] points = new PointF [] {
@@ -1461,48 +1461,48 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				for (int i = 0; i < points.Length - 1; i++) {
 					gp.AddCurve (points, i, 1, 0.5f);
 					// all non-curves points are compressed expect the first one (positioning)
-					Assert.AreEqual (count [i], gp.PointCount, i.ToString ());
+					Assert.Equal (count [i], gp.PointCount);
 				}
 
-				Assert.AreEqual (0, gp.PathData.Types [0], "Types[0]");
-				Assert.AreEqual (37f, gp.PathData.Points [0].X, 0.001, "Points[0].X");
-				Assert.AreEqual (185f, gp.PathData.Points [1].Y, 0.001, "Points[0].Y");
-				Assert.AreEqual (3, gp.PathData.Types [1], "Types[1]");
-				Assert.AreEqual (47.3334f, gp.PathData.Points [1].X, 0.001, "Points[1].X");
-				Assert.AreEqual (185f, gp.PathData.Points [1].Y, 0.001, "Points[1].Y");
-				Assert.AreEqual (3, gp.PathData.Types [2], "Types[2]");
-				Assert.AreEqual (78.33333f, gp.PathData.Points [2].X, 0.001, "Points[2].X");
-				Assert.AreEqual (189.3333f, gp.PathData.Points [2].Y, 0.001, "Points[2].Y");
-				Assert.AreEqual (3, gp.PathData.Types [3], "Types[3]");
-				Assert.AreEqual (99f, gp.PathData.Points [3].X, 0.001, "Points[3].X");
-				Assert.AreEqual (185f, gp.PathData.Points [3].Y, 0.001, "Points[3].Y");
-				Assert.AreEqual (3, gp.PathData.Types [4], "Types[4]");
-				Assert.AreEqual (119.6667f, gp.PathData.Points [4].X, 0.001, "Points[4].X");
-				Assert.AreEqual (180.6667f, gp.PathData.Points [4].Y, 0.001, "Points[4].Y");
-				Assert.AreEqual (3, gp.PathData.Types [5], "Types[5]");
-				Assert.AreEqual (140.3333f, gp.PathData.Points [5].X, 0.001, "Points[5].X");
-				Assert.AreEqual (159f, gp.PathData.Points [5].Y, 0.001, "Points[5].Y");
-				Assert.AreEqual (3, gp.PathData.Types [6], "Types[6]");
-				Assert.AreEqual (161f, gp.PathData.Points [6].X, 0.001, "Points[6].X");
-				Assert.AreEqual (159f, gp.PathData.Points [6].Y, 0.001, "Points[6].Y");
-				Assert.AreEqual (3, gp.PathData.Types [7], "Types[7]");
-				Assert.AreEqual (181.6667f, gp.PathData.Points [7].X, 0.001, "Points[7].X");
-				Assert.AreEqual (159f, gp.PathData.Points [7].Y, 0.001, "Points[7].Y");
-				Assert.AreEqual (3, gp.PathData.Types [8], "Types[8]");
-				Assert.AreEqual (202.3333f, gp.PathData.Points [8].X, 0.001, "Points[8].X");
-				Assert.AreEqual (202.5f, gp.PathData.Points [8].Y, 0.001, "Points[8].Y");
-				Assert.AreEqual (3, gp.PathData.Types [9], "Types[9]");
-				Assert.AreEqual (223f, gp.PathData.Points [9].X, 0.001, "Points[9].X");
-				Assert.AreEqual (185f, gp.PathData.Points [9].Y, 0.001, "Points[9].Y");
-				Assert.AreEqual (3, gp.PathData.Types [10], "Types[10]");
-				Assert.AreEqual (243.6667f, gp.PathData.Points [10].X, 0.001, "Points[10].X");
-				Assert.AreEqual (167.5f, gp.PathData.Points [10].Y, 0.001, "Points[10].Y");
-				Assert.AreEqual (3, gp.PathData.Types [11], "Types[11]");
-				Assert.AreEqual (274.6667f, gp.PathData.Points [11].X, 0.001, "Points[11].X");
-				Assert.AreEqual (75.83334f, gp.PathData.Points [11].Y, 0.001, "Points[11].Y");
-				Assert.AreEqual (3, gp.PathData.Types [12], "Types[12]");
-				Assert.AreEqual (285f, gp.PathData.Points [12].X, 0.001, "Points[12].X");
-				Assert.AreEqual (54f, gp.PathData.Points [12].Y, 0.001, "Points[12].Y");
+				Assert.Equal (0, gp.PathData.Types [0]);
+				Assert.Equal (37f, gp.PathData.Points [0].X, Precision);
+				Assert.Equal (185f, gp.PathData.Points [1].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [1]);
+				Assert.Equal (47.3334f, gp.PathData.Points [1].X, Precision);
+				Assert.Equal (185f, gp.PathData.Points [1].Y, 3);
+				Assert.Equal (3, gp.PathData.Types [2]);
+				Assert.Equal (78.33333f, gp.PathData.Points [2].X, Precision);
+				Assert.Equal (189.3333f, gp.PathData.Points [2].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [3]);
+				Assert.Equal (99f, gp.PathData.Points [3].X, Precision);
+				Assert.Equal (185f, gp.PathData.Points [3].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [4]);
+				Assert.Equal (119.6667f, gp.PathData.Points [4].X, Precision);
+				Assert.Equal (180.6667f, gp.PathData.Points [4].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [5]);
+				Assert.Equal (140.3333f, gp.PathData.Points [5].X, Precision);
+				Assert.Equal (159f, gp.PathData.Points [5].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [6]);
+				Assert.Equal (161f, gp.PathData.Points [6].X, Precision);
+				Assert.Equal (159f, gp.PathData.Points [6].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [7]);
+				Assert.Equal (181.6667f, gp.PathData.Points [7].X, Precision);
+				Assert.Equal (159f, gp.PathData.Points [7].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [8]);
+				Assert.Equal (202.3333f, gp.PathData.Points [8].X, Precision);
+				Assert.Equal (202.5f, gp.PathData.Points [8].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [9]);
+				Assert.Equal (223f, gp.PathData.Points [9].X, Precision);
+				Assert.Equal (185f, gp.PathData.Points [9].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [10]);
+				Assert.Equal (243.6667f, gp.PathData.Points [10].X, Precision);
+				Assert.Equal (167.5f, gp.PathData.Points [10].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [11]);
+				Assert.Equal (274.6667f, gp.PathData.Points [11].X, Precision);
+				Assert.Equal (75.83334f, gp.PathData.Points [11].Y, Precision);
+				Assert.Equal (3, gp.PathData.Types [12]);
+				Assert.Equal (285f, gp.PathData.Points [12].X, Precision);
+				Assert.Equal (54f, gp.PathData.Points [12].Y, Precision);
 			}
 		}
 
@@ -1517,7 +1517,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void AddString_NullString ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1525,32 +1525,32 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Throws<NullReferenceException> (() => gp.AddString (null, ff, 0, 10, new Point (10, 10), StringFormat.GenericDefault));
 		}
 
-		[Test]
+		[Fact]
 		public void AddString_EmptyString ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			FontFamily ff = GetFontFamily ();
 			gp.AddString (String.Empty, ff, 0, 10, new Point (10, 10), StringFormat.GenericDefault);
-			Assert.AreEqual (0, gp.PointCount, "PointCount");
+			Assert.Equal (0, gp.PointCount);
 		}
 
-		[Test]
+		[Fact]
 		public void AddString_NullFontFamily ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddString ("mono", null, 0, 10, new Point (10, 10), StringFormat.GenericDefault));
 		}
 
-		[Test]
+		[Fact]
 		public void AddString_NegativeSize ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			FontFamily ff = GetFontFamily ();
 			gp.AddString ("mono", ff, 0, -10, new Point (10, 10), StringFormat.GenericDefault);
-			Assert.IsTrue (gp.PointCount > 0, "PointCount");
+			Assert.True (gp.PointCount > 0);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // StringFormat not yet supported in libgdiplus
 		public void AddString_StringFormat ()
 		{
@@ -1562,34 +1562,34 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// StringFormat.GenericDefault
 			GraphicsPath gp2 = new GraphicsPath ();
 			gp2.AddString ("mono", ff, 0, 10, new RectangleF (10, 10, 10, 10), StringFormat.GenericDefault);
-			Assert.AreEqual (gp1.PointCount, gp2.PointCount, "GenericDefault");
+			Assert.Equal (gp1.PointCount, gp2.PointCount);
 
 			// StringFormat.GenericTypographic
 			GraphicsPath gp3 = new GraphicsPath ();
 			gp3.AddString ("mono", ff, 0, 10, new RectangleF (10, 10, 10, 10), StringFormat.GenericTypographic);
-			Assert.IsFalse (gp1.PointCount == gp3.PointCount, "GenericTypographic");
+			Assert.False (gp1.PointCount == gp3.PointCount);
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_Empty_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			RectangleF rect = gp.GetBounds ();
-			Assert.AreEqual (0.0f, rect.X, "Bounds.X");
-			Assert.AreEqual (0.0f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (0.0f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (0.0f, rect.Height, "Bounds.Height");
+			Assert.Equal (0.0f, rect.X);
+			Assert.Equal (0.0f, rect.Y);
+			Assert.Equal (0.0f, rect.Width);
+			Assert.Equal (0.0f, rect.Height);
 		}
 
 		private void CheckRectangleBounds (RectangleF rect)
 		{
-			Assert.AreEqual (1.0f, rect.X, "Bounds.X");
-			Assert.AreEqual (1.0f, rect.Y, "Bounds.Y");
-			Assert.AreEqual (2.0f, rect.Width, "Bounds.Width");
-			Assert.AreEqual (2.0f, rect.Height, "Bounds.Height");
+			Assert.Equal (1.0f, rect.X);
+			Assert.Equal (1.0f, rect.Y);
+			Assert.Equal (2.0f, rect.Width);
+			Assert.Equal (2.0f, rect.Height);
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_Empty_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1597,7 +1597,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangleBounds (gp.GetBounds ());
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_Null_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1605,7 +1605,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangleBounds (gp.GetBounds (null));
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_MatrixEmpty_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1613,7 +1613,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangleBounds (gp.GetBounds (new Matrix ()));
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_NullNull_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1621,7 +1621,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangleBounds (gp.GetBounds (null, null));
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // can't/wont duplicate the lack of precision
 		public void GetBounds_WithPen ()
 		{
@@ -1633,44 +1633,44 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			RectangleF bounds = gp.GetBounds (null, p);
 			// those bounds doesn't make any sense (even visually)
 			// probably null gets mis-interpreted ???
-			Assert.AreEqual (-6.09999943f, bounds.X, "NullMatrix.Bounds.X");
-			Assert.AreEqual (-6.09999943f, bounds.Y, "NullMatrix.Bounds.Y");
-			Assert.AreEqual (16.1999989f, bounds.Width, "NullMatrix.Bounds.Width");
-			Assert.AreEqual (16.1999989f, bounds.Height, "NullMatrix.Bounds.Height");
+			Assert.Equal (-6.09999943f, bounds.X);
+			Assert.Equal (-6.09999943f, bounds.Y);
+			Assert.Equal (16.1999989f, bounds.Width);
+			Assert.Equal (16.1999989f, bounds.Height);
 
 			Matrix m = new Matrix ();
 			bounds = gp.GetBounds (m, p);
-			Assert.AreEqual (-0.419999957f, bounds.X, "EmptyMatrix.Bounds.X");
-			Assert.AreEqual (-0.419999957f, bounds.Y, "EmptyMatrix.Bounds.Y");
-			Assert.AreEqual (4.83999968f, bounds.Width, "EmptyMatrix.Bounds.Width");
-			Assert.AreEqual (4.83999968f, bounds.Height, "EmptyMatrix.Bounds.Height");
+			Assert.Equal (-0.419999957f, bounds.X);
+			Assert.Equal (-0.419999957f, bounds.Y);
+			Assert.Equal (4.83999968f, bounds.Width);
+			Assert.Equal (4.83999968f, bounds.Height);
 			// visually we can see the bounds just a pixel bigger than the rectangle
 
 			gp = new GraphicsPath ();
 			gp.AddRectangle (rect);
 			gp.Widen (p);
 			bounds = gp.GetBounds (null);
-			Assert.AreEqual (0.499999523f, bounds.X, "WidenNullMatrix.Bounds.X");
-			Assert.AreEqual (0.499999523f, bounds.Y, "WidenNullMatrix.Bounds.Y");
-			Assert.AreEqual (3.000001f, bounds.Width, "WidenNullMatrix.Bounds.Width");
-			Assert.AreEqual (3.000001f, bounds.Height, "WidenNullMatrix.Bounds.Height");
+			Assert.Equal (0.499999523f, bounds.X);
+			Assert.Equal (0.499999523f, bounds.Y);
+			Assert.Equal (3.000001f, bounds.Width);
+			Assert.Equal (3.000001f, bounds.Height);
 
 			bounds = gp.GetBounds (m);
-			Assert.AreEqual (0.499999523f, bounds.X, "WidenEmptyMatrix.Bounds.X");
-			Assert.AreEqual (0.499999523f, bounds.Y, "WidenEmptyMatrix.Bounds.Y");
-			Assert.AreEqual (3.000001f, bounds.Width, "WidenEmptyMatrix.Bounds.Width");
-			Assert.AreEqual (3.000001f, bounds.Height, "WidenEmptyMatrix.Bounds.Height");
+			Assert.Equal (0.499999523f, bounds.X);
+			Assert.Equal (0.499999523f, bounds.Y);
+			Assert.Equal (3.000001f, bounds.Width);
+			Assert.Equal (3.000001f, bounds.Height);
 		}
 
 		private void CheckPieBounds (RectangleF rect)
 		{
-			Assert.AreEqual (60.0f, rect.X, 1, "Bounds.X");
-			Assert.AreEqual (60.0f, rect.Y, 1, "Bounds.Y");
-			Assert.AreEqual (43.3f, rect.Width, 1, "Bounds.Width");
-			Assert.AreEqual (48.3f, rect.Height, 1, "Bounds.Height");
+			Assert.Equal (60.0f, rect.X, 1);
+			Assert.Equal (60.0f, rect.Y, 1);
+			Assert.Equal (43.3f, rect.Width, 1);
+			Assert.Equal (48.3f, rect.Height, 1);
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_Empty_Pie ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1679,7 +1679,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_Null_Pie ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1688,7 +1688,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_MatrixEmpty_Pie ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1697,7 +1697,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_NullNull_Pie ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1706,7 +1706,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_Empty_ClosedCurve ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1714,20 +1714,20 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				new Point (130, 200), new Point (180, 100) });
 #if false
 			// so far from reality that it's totally useless
-			Assert.AreEqual (1.666666f, rect.X, 0.00001, "Bounds.X");
-			Assert.AreEqual (-6.66666f, rect.Y, 1, "Bounds.Y");
-			Assert.AreEqual (196.6666f, rect.Width, 1, "Bounds.Width");
-			Assert.AreEqual (221.6666f, rect.Height, 1, "Bounds.Height");
+			Assert.Equal (1.666666f, rect.X, 0.00001);
+			Assert.Equal (-6.66666f, rect.Y, 1);
+			Assert.Equal (196.6666f, rect.Width, 1);
+			Assert.Equal (221.6666f, rect.Height, 1);
 #endif
 			gp.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void Transform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Transform (null));
 		}
-		[Test]
+		[Fact]
 		public void Transform_Empty ()
 		{
 			// no points in path and no exception
@@ -1736,22 +1736,22 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private void ComparePaths (GraphicsPath expected, GraphicsPath actual)
 		{
-			Assert.AreEqual (expected.PointCount, actual.PointCount, "PointCount");
-			for (int i = 0; i < expected.PointCount; i++) {
-				Assert.AreEqual (expected.PathPoints[i], actual.PathPoints[i], "PathPoints-" + i.ToString ());
-				Assert.AreEqual (expected.PathTypes[i], actual.PathTypes[i], "PathTypes-" + i.ToString ());
+			Assert.Equal (expected.PointCount, actual.PointCount);
+			for (int i = 0; i < expected.PointCount; i++ {
+				Assert.Equal (expected.PathPoints[i], actual.PathPoints[i]);
+				Assert.Equal (expected.PathTypes[i], actual.PathTypes[i]);
 			}
 		}
 
 		private void CompareFlats (GraphicsPath flat, GraphicsPath original)
 		{
-			Assert.IsTrue (flat.PointCount >= original.PointCount, "PointCount");
+			Assert.True (flat.PointCount >= original.PointCount);
 			for (int i = 0; i < flat.PointCount; i++) {
-				Assert.IsTrue (flat.PathTypes[i] != 3, "PathTypes-" + i.ToString ());
+				Assert.True (flat.PathTypes[i] != 3);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Empty ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1761,7 +1761,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Null ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1772,7 +1772,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_NullFloat ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1783,7 +1783,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Arc ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1793,7 +1793,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Bezier ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1803,7 +1803,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_ClosedCurve ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1816,7 +1816,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Curve ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1829,7 +1829,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Ellipse ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1839,7 +1839,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Line ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1849,7 +1849,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Pie ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1859,7 +1859,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Polygon ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1872,7 +1872,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Test]
+		[Fact]
 		public void Flatten_Rectangle ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1884,97 +1884,97 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private void CheckWrap (GraphicsPath path)
 		{
-			Assert.AreEqual (3, path.PointCount, "Count");
+			Assert.Equal (3, path.PointCount);
 
 			PointF[] pts = path.PathPoints;
-			Assert.AreEqual (0, pts[0].X, 1e-30, "0.X");
-			Assert.AreEqual (0, pts[0].Y, 1e-30, "0.Y");
-			Assert.AreEqual (0, pts[1].X, 1e-30, "1.X");
-			Assert.AreEqual (0, pts[1].Y, 1e-30, "1.Y");
-			Assert.AreEqual (0, pts[2].X, 1e-30, "2.X");
-			Assert.AreEqual (0, pts[2].Y, 1e-30, "2.Y");
+			Assert.Equal (0, pts[0].X, Precision);
+			Assert.Equal (0, pts[0].Y, Precision);
+			Assert.Equal (0, pts[1].X, Precision);
+			Assert.Equal (0, pts[1].Y, Precision);
+			Assert.Equal (0, pts[2].X, Precision);
+			Assert.Equal (0, pts[2].Y, Precision);
 
 			byte[] types = path.PathTypes;
-			Assert.AreEqual (0, types[0], "0");
-			Assert.AreEqual (1, types[1], "1");
-			Assert.AreEqual (129, types[2], "2");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[1]);
+			Assert.Equal (129, types[2]);
 		}
 
 		private void CheckWrapNaN (GraphicsPath path, bool closed)
 		{
-			Assert.AreEqual (3, path.PointCount, "Count");
+			Assert.Equal (3, path.PointCount);
 
 			PointF[] pts = path.PathPoints;
-			Assert.AreEqual (Single.NaN, pts[0].X, "0.X");
-			Assert.AreEqual (Single.NaN, pts[0].Y, "0.Y");
-			Assert.AreEqual (Single.NaN, pts[1].X, "1.X");
-			Assert.AreEqual (Single.NaN, pts[1].Y, "1.Y");
-			Assert.AreEqual (Single.NaN, pts[2].X, "2.X");
-			Assert.AreEqual (Single.NaN, pts[2].Y, "2.Y");
+			Assert.Equal (Single.NaN, pts[0].X);
+			Assert.Equal (Single.NaN, pts[0].Y);
+			Assert.Equal (Single.NaN, pts[1].X);
+			Assert.Equal (Single.NaN, pts[1].Y);
+			Assert.Equal (Single.NaN, pts[2].X);
+			Assert.Equal (Single.NaN, pts[2].Y);
 
 			byte[] types = path.PathTypes;
-			Assert.AreEqual (0, types[0], "0");
-			Assert.AreEqual (1, types[1], "1");
-			Assert.AreEqual (closed ? 129 : 1, types[2], "2");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[1]);
+			Assert.Equal (closed ? 129 : 1, types[2]);
 		}
 
-		[Test]
+		[Fact]
 		public void Warp_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Warp (null, new RectangleF ()));
 		}
 
-		[Test]
+		[Fact]
 		public void Warp_NoPoints ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath ().Warp (new PointF[0], new RectangleF ()));
 		}
 
-		[Test]
+		[Fact]
 		public void Wrap_NoPoint ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
-				Assert.AreEqual (0, gp.PointCount, "PointCount-1");
+				Assert.Equal (0, gp.PointCount);
 
 				PointF[] pts = new PointF[1] { new PointF (0, 0) };
 				RectangleF r = new RectangleF (10, 20, 30, 40);
 				gp.Warp (pts, r, new Matrix ());
-				Assert.AreEqual (0, gp.PointCount, "PointCount-2");
+				Assert.Equal (0, gp.PointCount);
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Wrap_SinglePoint ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (new Point[1] { new Point (1, 1) });
 				// Special case - a line with a single point is valid
-				Assert.AreEqual (1, gp.PointCount, "PointCount-1");
+				Assert.Equal (1, gp.PointCount);
 
 				PointF[] pts = new PointF[1] { new PointF (0, 0) };
 				RectangleF r = new RectangleF (10, 20, 30, 40);
 				gp.Warp (pts, r, new Matrix ());
-				Assert.AreEqual (0, gp.PointCount, "PointCount-2");
+				Assert.Equal (0, gp.PointCount);
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Wrap_Line ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLine (new Point (1, 1), new Point (20, 20));
-				Assert.AreEqual (2, gp.PointCount, "PointCount-1");
+				Assert.Equal (2, gp.PointCount);
 
 				PointF[] pts = new PointF[1] { new PointF (0, 0) };
 				RectangleF r = new RectangleF (10, 20, 30, 40);
 				gp.Warp (pts, r, new Matrix ());
-				Assert.AreEqual (2, gp.PointCount, "PointCount-2");
+				Assert.Equal (2, gp.PointCount);
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
 		public void Warp_NullMatrix ()
 		{
@@ -1986,7 +1986,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckWrap (path);
 		}
 
-		[Test]
+		[Fact]
 		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
 		public void Warp_EmptyMatrix ()
 		{
@@ -1998,7 +1998,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckWrap (path);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Warp_Rectangle_Empty ()
 		{
@@ -2009,7 +2009,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckWrapNaN (path, true);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Warp_Rectangle_NegativeWidthHeight ()
 		{
@@ -2018,48 +2018,48 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
 			RectangleF r = new RectangleF (10, 20, -30, -40);
 			path.Warp (pts, r, null);
-			Assert.AreEqual (3, path.PointCount, "Count");
+			Assert.Equal (3, path.PointCount);
 
 			pts = path.PathPoints;
-			Assert.AreEqual (1.131355e-39, pts[0].X, 1e40, "0.X");
-			Assert.AreEqual (-2.0240637E-33, pts[0].Y, 1e40, "0.Y");
-			Assert.AreEqual (1.070131E-39, pts[1].X, 1e40, "1.X");
-			Assert.AreEqual (-2.02406389E-33, pts[1].Y, 1e40, "1.Y");
-			Assert.AreEqual (3.669146E-40, pts[2].X, 1e40, "2.X");
-			Assert.AreEqual (-6.746879E-34, pts[2].Y, 1e40, "2.Y");
+			Assert.Equal (1.131355e-39, pts[0].X, Precision);
+			Assert.Equal (-2.0240637E-33, pts[0].Y, Precision);
+			Assert.Equal (1.070131E-39, pts[1].X, Precision);
+			Assert.Equal (-2.02406389E-33, pts[1].Y, Precision);
+			Assert.Equal (3.669146E-40, pts[2].X, Precision);
+			Assert.Equal (-6.746879E-34, pts[2].Y, Precision);
 			byte[] types = path.PathTypes;
-			Assert.AreEqual (0, types[0], "0");
-			Assert.AreEqual (1, types[1], "1");
-			Assert.AreEqual (129, types[2], "2");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[1]);
+			Assert.Equal (129, types[2]);
 		}
 
-		[Test]
+		[Fact]
 		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
 		public void Warp_Matrix_NonInvertible ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
-			Assert.IsFalse (matrix.IsInvertible, "!IsInvertible");
+			Assert.False (matrix.IsInvertible);
 			PointF[] pts = new PointF[1] { new PointF (0, 0) };
 			GraphicsPath path = new GraphicsPath ();
 			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
 			RectangleF r = new RectangleF (10, 20, 30, 40);
 			path.Warp (pts, r, matrix);
 
-			Assert.AreEqual (3, path.PointCount, "Count");
+			Assert.Equal (3, path.PointCount);
 			pts = path.PathPoints;
-			Assert.AreEqual (47, pts[0].X, "0.X");
-			Assert.AreEqual (30, pts[0].Y, "0.Y");
-			Assert.AreEqual (47, pts[1].X, "1.X");
-			Assert.AreEqual (30, pts[1].Y, "1.Y");
-			Assert.AreEqual (47, pts[2].X, "2.X");
-			Assert.AreEqual (30, pts[2].Y, "2.Y");
+			Assert.Equal (47, pts[0].X);
+			Assert.Equal (30, pts[0].Y);
+			Assert.Equal (47, pts[1].X);
+			Assert.Equal (30, pts[1].Y);
+			Assert.Equal (47, pts[2].X);
+			Assert.Equal (30, pts[2].Y);
 			byte[] types = path.PathTypes;
-			Assert.AreEqual (0, types[0], "0");
-			Assert.AreEqual (1, types[1], "1");
-			Assert.AreEqual (129, types[2], "2");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[1]);
+			Assert.Equal (129, types[2]);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Warp_Bilinear ()
 		{
@@ -2072,7 +2072,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckWrapNaN (path, false);
 		}
 
-		[Test]
+		[Fact]
 		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
 		public void Warp_Perspective ()
 		{
@@ -2084,7 +2084,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckWrap (path);
 		}
 
-		[Test]
+		[Fact]
 		public void Warp_Invalid ()
 		{
 			PointF[] pts = new PointF[1] { new PointF (0, 0) };
@@ -2092,10 +2092,10 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
 			RectangleF r = new RectangleF (10, 20, 30, 40);
 			path.Warp (pts, r, new Matrix (), (WarpMode) Int32.MinValue);
-			Assert.AreEqual (0, path.PointCount, "Count");
+			Assert.Equal (0, path.PointCount);
 		}
 
-		[Test]
+		[Fact]
 		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
 		public void Warp_Flatness_Negative ()
 		{
@@ -2107,7 +2107,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckWrap (path);
 		}
 
-		[Test]
+		[Fact]
 		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
 		public void Warp_Flatness_OverOne ()
 		{
@@ -2119,31 +2119,31 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckWrap (path);
 		}
 
-		[Test]
+		[Fact]
 		public void SetMarkers_EmptyPath ()
 		{
 			new GraphicsPath ().SetMarkers ();
 		}
 
-		[Test]
+		[Fact]
 		public void ClearMarkers_EmptyPath ()
 		{
 			new GraphicsPath ().ClearMarkers ();
 		}
 
-		[Test]
+		[Fact]
 		public void CloseFigure_EmptyPath ()
 		{
 			new GraphicsPath ().CloseFigure ();
 		}
 
-		[Test]
+		[Fact]
 		public void CloseAllFigures_EmptyPath ()
 		{
 			new GraphicsPath ().CloseAllFigures ();
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddArc ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2152,14 +2152,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (1, types[2], "start/Arc");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[2]);
 			// check last types
-			Assert.AreEqual (3, types[path.PointCount - 3], "end/Arc");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line");
+			Assert.Equal (3, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddBezier ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2168,14 +2168,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (1, types[2], "start/Bezier");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[2]);
 			// check last types
-			Assert.AreEqual (3, types[path.PointCount - 3], "end/Bezier");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line");
+			Assert.Equal (3, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddBeziers ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2187,14 +2187,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (1, types[2], "start/Bezier");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[2]);
 			// check last types
-			Assert.AreEqual (3, types[path.PointCount - 3], "end/Bezier");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line");
+			Assert.Equal (3, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddClosedCurve ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2203,15 +2203,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (0, types[2], "start/ClosedCurve");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (0, types[2]);
 			// check last types
-			Assert.AreEqual (131, types[path.PointCount - 3], "end/ClosedCurve");
-			Assert.AreEqual (0, types[path.PointCount - 2], "start/Line3");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line3");
+			Assert.Equal (131, types[path.PointCount - 3]);
+			Assert.Equal (0, types[path.PointCount - 2]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddCurve ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2220,14 +2220,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (1, types[2], "start/Curve");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[2]);
 			// check last types
-			Assert.AreEqual (3, types[path.PointCount - 3], "end/Curve");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line");
+			Assert.Equal (3, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddEllipse ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2236,15 +2236,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (0, types[2], "start/Ellipse");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (0, types[2]);
 			// check last types
-			Assert.AreEqual (131, types[path.PointCount - 3], "end/Ellipse");
-			Assert.AreEqual (0, types[path.PointCount - 2], "start/Line3");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line3");
+			Assert.Equal (131, types[path.PointCount - 3]);
+			Assert.Equal (0, types[path.PointCount - 2]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddLine ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2253,14 +2253,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (1, types[2], "start/Line2");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[2]);
 			// check last types
-			Assert.AreEqual (1, types[path.PointCount - 3], "end/Line2");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line");
+			Assert.Equal (1, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddLines ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2269,14 +2269,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (1, types[2], "start/Lines");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[2]);
 			// check last types
-			Assert.AreEqual (1, types[path.PointCount - 3], "end/Lines");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line");
+			Assert.Equal (1, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddPath_Connect ()
 		{
 			GraphicsPath inner = new GraphicsPath ();
@@ -2287,14 +2287,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (1, types[2], "start/Path");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[2]);
 			// check last types
-			Assert.AreEqual (3, types[path.PointCount - 3], "end/Path");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line");
+			Assert.Equal (3, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddPath_NoConnect ()
 		{
 			GraphicsPath inner = new GraphicsPath ();
@@ -2305,14 +2305,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (0, types[2], "start/Path");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (0, types[2]);
 			// check last types
-			Assert.AreEqual (3, types[path.PointCount - 3], "end/Path");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line");
+			Assert.Equal (3, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddPie ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2321,16 +2321,16 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (0, types[2], "start/Pie");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (0, types[2]);
 			// check last types
 			// libgdiplus draws pie by ending with a line (not a curve) section
-			Assert.IsTrue ((types[path.PointCount - 3] & 128) == 128, "end/Pie");
-			Assert.AreEqual (0, types[path.PointCount - 2], "start/Line2");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line2");
+			Assert.True ((types[path.PointCount - 3] & 128) == 128);
+			Assert.Equal (0, types[path.PointCount - 2]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddPolygon ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2339,15 +2339,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (0, types[2], "start/Polygon");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (0, types[2]);
 			// check last types
-			Assert.AreEqual (129, types[path.PointCount - 3], "end/Polygon");
-			Assert.AreEqual (0, types[path.PointCount - 2], "start/Line2");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line2");
+			Assert.Equal (129, types[path.PointCount - 3]);
+			Assert.Equal (0, types[path.PointCount - 2]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddRectangle ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2356,15 +2356,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (0, types[2], "start/Rectangle");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (0, types[2]);
 			// check last types
-			Assert.AreEqual (129, types[path.PointCount - 3], "end/Rectangle");
-			Assert.AreEqual (0, types[path.PointCount - 2], "start/Line2");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line2");
+			Assert.Equal (129, types[path.PointCount - 3]);
+			Assert.Equal (0, types[path.PointCount - 2]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void StartClose_AddRectangles ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2375,15 +2375,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (0, types[2], "start/Rectangles");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (0, types[2]);
 			// check last types
-			Assert.AreEqual (129, types[path.PointCount - 3], "end/Rectangles");
-			Assert.AreEqual (0, types[path.PointCount - 2], "start/Line2");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line2");
+			Assert.Equal (129, types[path.PointCount - 3]);
+			Assert.Equal (0, types[path.PointCount - 2]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void StartClose_AddString ()
 		{
@@ -2393,136 +2393,136 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			path.AddLine (10, 10, 20, 20);
 			byte[] types = path.PathTypes;
 			// check first types
-			Assert.AreEqual (0, types[0], "start/Line");
-			Assert.AreEqual (0, types[2], "start/String");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (0, types[2]);
 			// check last types
-			Assert.AreEqual (163, types[path.PointCount - 3], "end/String");
-			Assert.AreEqual (1, types[path.PointCount - 2], "start/Line2");
-			Assert.AreEqual (1, types[path.PointCount - 1], "end/Line2");
+			Assert.Equal (163, types[path.PointCount - 3]);
+			Assert.Equal (1, types[path.PointCount - 2]);
+			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void Widen_Pen_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Widen (null));
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Widen_Pen ()
 		{
 			Pen pen = new Pen (Color.Blue);
 			GraphicsPath path = new GraphicsPath ();
 			path.AddRectangle (new Rectangle (1, 1, 2, 2));
-			Assert.AreEqual (4, path.PointCount, "Count-1");
+			Assert.Equal (4, path.PointCount);
 			path.Widen (pen);
-			Assert.AreEqual (12, path.PointCount, "Count-2");
+			Assert.Equal (12, path.PointCount);
 
 			PointF[] pts = path.PathPoints;
-			Assert.AreEqual (0.5, pts[0].X, 0.25, "0.X");
-			Assert.AreEqual (0.5, pts[0].Y, 0.25, "0.Y");
-			Assert.AreEqual (3.5, pts[1].X, 0.25, "1.X");
-			Assert.AreEqual (0.5, pts[1].Y, 0.25, "1.Y");
-			Assert.AreEqual (3.5, pts[2].X, 0.25, "2.X");
-			Assert.AreEqual (3.5, pts[2].Y, 0.25, "2.Y");
-			Assert.AreEqual (0.5, pts[3].X, 0.25, "3.X");
-			Assert.AreEqual (3.5, pts[3].Y, 0.25, "3.Y");
-			Assert.AreEqual (1.5, pts[4].X, 0.25, "4.X");
-			Assert.AreEqual (3.0, pts[4].Y, 0.25, "4.Y");
-			Assert.AreEqual (1.0, pts[5].X, 0.25, "5.X");
-			Assert.AreEqual (2.5, pts[5].Y, 0.25, "5.Y");
-			Assert.AreEqual (3.0, pts[6].X, 0.25, "6.X");
-			Assert.AreEqual (2.5, pts[6].Y, 0.25, "6.Y");
-			Assert.AreEqual (2.5, pts[7].X, 0.25, "7.X");
-			Assert.AreEqual (3.0, pts[7].Y, 0.25, "7.Y");
-			Assert.AreEqual (2.5, pts[8].X, 0.25, "8.X");
-			Assert.AreEqual (1.0, pts[8].Y, 0.25, "8.Y");
-			Assert.AreEqual (3.0, pts[9].X, 0.25, "9.X");
-			Assert.AreEqual (1.5, pts[9].Y, 0.25, "9.Y");
-			Assert.AreEqual (1.0, pts[10].X, 0.25, "10.X");
-			Assert.AreEqual (1.5, pts[10].Y, 0.25, "10.Y");
-			Assert.AreEqual (1.5, pts[11].X, 0.25, "11.X");
-			Assert.AreEqual (1.0, pts[11].Y, 0.25, "11.Y");
+			Assert.Equal (0.5, pts[0].X, LowPrecision);
+			Assert.Equal (0.5, pts[0].Y, LowPrecision);
+			Assert.Equal (3.5, pts[1].X, LowPrecision);
+			Assert.Equal (0.5, pts[1].Y, LowPrecision);
+			Assert.Equal (3.5, pts[2].X, LowPrecision);
+			Assert.Equal (3.5, pts[2].Y, LowPrecision);
+			Assert.Equal (0.5, pts[3].X, LowPrecision);
+			Assert.Equal (3.5, pts[3].Y, LowPrecision);
+			Assert.Equal (1.5, pts[4].X, LowPrecision);
+			Assert.Equal (3.0, pts[4].Y, LowPrecision);
+			Assert.Equal (1.0, pts[5].X, LowPrecision);
+			Assert.Equal (2.5, pts[5].Y, LowPrecision);
+			Assert.Equal (3.0, pts[6].X, LowPrecision);
+			Assert.Equal (2.5, pts[6].Y, LowPrecision);
+			Assert.Equal (2.5, pts[7].X, LowPrecision);
+			Assert.Equal (3.0, pts[7].Y, LowPrecision);
+			Assert.Equal (2.5, pts[8].X, LowPrecision);
+			Assert.Equal (1.0, pts[8].Y, LowPrecision);
+			Assert.Equal (3.0, pts[9].X, LowPrecision);
+			Assert.Equal (1.5, pts[9].Y, LowPrecision);
+			Assert.Equal (1.0, pts[10].X, LowPrecision);
+			Assert.Equal (1.5, pts[10].Y, LowPrecision);
+			Assert.Equal (1.5, pts[11].X, LowPrecision);
+			Assert.Equal (1.0, pts[11].Y, LowPrecision);
 
 			byte[] types = path.PathTypes;
-			Assert.AreEqual (0, types[0], "0");
-			Assert.AreEqual (1, types[1], "1");
-			Assert.AreEqual (1, types[2], "2");
-			Assert.AreEqual (129, types[3], "3");
-			Assert.AreEqual (0, types[4], "4");
-			Assert.AreEqual (1, types[5], "5");
-			Assert.AreEqual (1, types[6], "6");
-			Assert.AreEqual (1, types[7], "7");
-			Assert.AreEqual (1, types[8], "8");
-			Assert.AreEqual (1, types[9], "9");
-			Assert.AreEqual (1, types[10], "10");
-			Assert.AreEqual (129, types[11], "11");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[1]);
+			Assert.Equal (1, types[2]);
+			Assert.Equal (129, types[3]);
+			Assert.Equal (0, types[4]);
+			Assert.Equal (1, types[5]);
+			Assert.Equal (1, types[6]);
+			Assert.Equal (1, types[7]);
+			Assert.Equal (1, types[8]);
+			Assert.Equal (1, types[9]);
+			Assert.Equal (1, types[10]);
+			Assert.Equal (129, types[11]);
 		}
 
-		[Test]
+		[Fact]
 		public void Widen_Pen_Null_Matrix ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Widen (null, new Matrix ()));
 		}
 
-		[Test]
+		[Fact]
 		public void Widen_NoPoint ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
-				Assert.AreEqual (0, gp.PointCount, "PointCount-1");
+				Assert.Equal (0, gp.PointCount);
 				Pen pen = new Pen (Color.Blue);
 				gp.Widen (pen);
-				Assert.AreEqual (0, gp.PointCount, "PointCount-2");
+				Assert.Equal (0, gp.PointCount);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Widen_SinglePoint ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (new Point[1] { new Point (1, 1) });
 				// Special case - a line with a single point is valid
-				Assert.AreEqual (1, gp.PointCount, "PointCount");
+				Assert.Equal (1, gp.PointCount);
 				Assert.Throws<OutOfMemoryException> (() => gp.Widen (Pens.Red));
-				// oops ;-)
+				// oops );-)
 			}
 		}
 
 		private void CheckWiden3 (GraphicsPath path)
 		{
 			PointF[] pts = path.PathPoints;
-			Assert.AreEqual (4.2, pts[0].X, 0.25, "0.X");
-			Assert.AreEqual (4.5, pts[0].Y, 0.25, "0.Y");
-			Assert.AreEqual (15.8, pts[1].X, 0.25, "1.X");
-			Assert.AreEqual (4.5, pts[1].Y, 0.25, "1.Y");
-			Assert.AreEqual (10.0, pts[2].X, 0.25, "2.X");
-			Assert.AreEqual (16.1, pts[2].Y, 0.25, "2.Y");
-			Assert.AreEqual (10.4, pts[3].X, 0.25, "3.X");
-			Assert.AreEqual (14.8, pts[3].Y, 0.25, "3.Y");
-			Assert.AreEqual (9.6, pts[4].X, 0.25, "4.X");
-			Assert.AreEqual (14.8, pts[4].Y, 0.25, "4.Y");
-			Assert.AreEqual (14.6, pts[5].X, 0.25, "7.X");
-			Assert.AreEqual (4.8, pts[5].Y, 0.25, "7.Y");
-			Assert.AreEqual (15.0, pts[6].X, 0.25, "5.X");
-			Assert.AreEqual (5.5, pts[6].Y, 0.25, "5.Y");
-			Assert.AreEqual (5.0, pts[7].X, 0.25, "6.X");
-			Assert.AreEqual (5.5, pts[7].Y, 0.25, "6.Y");
-			Assert.AreEqual (5.4, pts[8].X, 0.25, "8.X");
-			Assert.AreEqual (4.8, pts[8].Y, 0.25, "8.Y");
+			Assert.Equal (4.2, pts[0].X, LowPrecision);
+			Assert.Equal (4.5, pts[0].Y, LowPrecision);
+			Assert.Equal (15.8, pts[1].X, LowPrecision);
+			Assert.Equal (4.5, pts[1].Y, LowPrecision);
+			Assert.Equal (10.0, pts[2].X, LowPrecision);
+			Assert.Equal (16.1, pts[2].Y, LowPrecision);
+			Assert.Equal (10.4, pts[3].X, LowPrecision);
+			Assert.Equal (14.8, pts[3].Y, LowPrecision);
+			Assert.Equal (9.6, pts[4].X, LowPrecision);
+			Assert.Equal (14.8, pts[4].Y, LowPrecision);
+			Assert.Equal (14.6, pts[5].X, LowPrecision);
+			Assert.Equal (4.8, pts[5].Y, LowPrecision);
+			Assert.Equal (15.0, pts[6].X, LowPrecision);
+			Assert.Equal (5.5, pts[6].Y, LowPrecision);
+			Assert.Equal (5.0, pts[7].X, LowPrecision);
+			Assert.Equal (5.5, pts[7].Y, LowPrecision);
+			Assert.Equal (5.4, pts[8].X, LowPrecision);
+			Assert.Equal (4.8, pts[8].Y, LowPrecision);
 
 			byte[] types = path.PathTypes;
-			Assert.AreEqual (0, types[0], "0");
-			Assert.AreEqual (1, types[1], "1");
-			Assert.AreEqual (129, types[2], "2");
-			Assert.AreEqual (0, types[3], "3");
-			Assert.AreEqual (1, types[4], "4");
-			Assert.AreEqual (1, types[5], "5");
-			Assert.AreEqual (1, types[6], "6");
-			Assert.AreEqual (1, types[7], "7");
-			Assert.AreEqual (129, types[8], "8");
+			Assert.Equal (0, types[0]);
+			Assert.Equal (1, types[1]);
+			Assert.Equal (129, types[2]);
+			Assert.Equal (0, types[3]);
+			Assert.Equal (1, types[4]);
+			Assert.Equal (1, types[5]);
+			Assert.Equal (1, types[6]);
+			Assert.Equal (1, types[7]);
+			Assert.Equal (129, types[8]);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Widen_Pen_Matrix_Null ()
 		{
@@ -2530,11 +2530,11 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			GraphicsPath path = new GraphicsPath ();
 			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
 			path.Widen (pen, null);
-			Assert.AreEqual (9, path.PointCount, "Count");
+			Assert.Equal (9, path.PointCount);
 			CheckWiden3 (path);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Widen_Pen_Matrix_Empty ()
 		{
@@ -2542,31 +2542,31 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			GraphicsPath path = new GraphicsPath ();
 			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
 			path.Widen (pen, new Matrix ());
-			Assert.AreEqual (9, path.PointCount, "Count");
+			Assert.Equal (9, path.PointCount);
 			CheckWiden3 (path);
 		}
 
-		[Test]
+		[Fact]
 		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
 		public void Widen_Pen_Matrix_NonInvertible ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
-			Assert.IsFalse (matrix.IsInvertible, "!IsInvertible");
+			Assert.False (matrix.IsInvertible);
 			GraphicsPath path = new GraphicsPath ();
 			path.Widen (new Pen (Color.Blue), matrix);
-			Assert.AreEqual (0, path.PointCount, "Points");
+			Assert.Equal (0, path.PointCount);
 		}
 
 		private void CheckWidenedBounds (string message, GraphicsPath gp, Matrix m)
 		{
 			RectangleF bounds = gp.GetBounds (m);
-			Assert.AreEqual (0.5f, bounds.X, 0.00001f, message + ".Bounds.X");
-			Assert.AreEqual (0.5f, bounds.Y, 0.00001f, message + ".Bounds.Y");
-			Assert.AreEqual (3.0f, bounds.Width, 0.00001f, message + ".Bounds.Width");
-			Assert.AreEqual (3.0f, bounds.Height, 0.00001f, message + ".Bounds.Height");
+			Assert.Equal (0.5f, bounds.X, Precision);
+			Assert.Equal (0.5f, bounds.Y, Precision);
+			Assert.Equal (3.0f, bounds.Width, Precision);
+			Assert.Equal (3.0f, bounds.Height, Precision);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Widen_Pen_SmallWidth ()
 		{
@@ -2600,31 +2600,31 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.AddRectangle (rect);
 			gp.Widen (p);
 			RectangleF bounds = gp.GetBounds (m);
-			Assert.AreEqual (0.45f, bounds.X, 0.00001f, "1.1.Bounds.X");
-			Assert.AreEqual (0.45f, bounds.Y, 0.00001f, "1.1.Bounds.Y");
-			Assert.AreEqual (3.10f, bounds.Width, 0.00001f, "1.1.Bounds.Width");
-			Assert.AreEqual (3.10f, bounds.Height, 0.00001f, "1.1.Bounds.Height");
+			Assert.Equal (0.45f, bounds.X, Precision);
+			Assert.Equal (0.45f, bounds.Y, Precision);
+			Assert.Equal (3.10f, bounds.Width, Precision);
+			Assert.Equal (3.10f, bounds.Height, Precision);
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_IntNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().IsOutlineVisible (1, 1, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_FloatNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().IsOutlineVisible (1.0f, 1.0f, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_PointNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().IsOutlineVisible (new Point (), null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_PointFNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().IsOutlineVisible (new PointF (), null));
@@ -2635,36 +2635,36 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Pen p2 = new Pen (Color.Red, 3.0f);
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLine (10, 1, 14, 1);
-				Assert.IsTrue (gp.IsOutlineVisible (10, 1, Pens.Red, graphics), "Int1");
-				Assert.IsTrue (gp.IsOutlineVisible (10, 2, p2, graphics), "Int2");
-				Assert.IsFalse (gp.IsOutlineVisible (10, 2, Pens.Red, graphics), "Int3");
+				Assert.True (gp.IsOutlineVisible (10, 1, Pens.Red, graphics));
+				Assert.True (gp.IsOutlineVisible (10, 2, p2, graphics));
+				Assert.False (gp.IsOutlineVisible (10, 2, Pens.Red, graphics));
 
-				Assert.IsTrue (gp.IsOutlineVisible (11.0f, 1.0f, Pens.Red, graphics), "Float1");
-				Assert.IsTrue (gp.IsOutlineVisible (11.0f, 1.0f, p2, graphics), "Float2");
-				Assert.IsFalse (gp.IsOutlineVisible (11.0f, 2.0f, Pens.Red, graphics), "Float3");
+				Assert.True (gp.IsOutlineVisible (11.0f, 1.0f, Pens.Red, graphics));
+				Assert.True (gp.IsOutlineVisible (11.0f, 1.0f, p2, graphics));
+				Assert.False (gp.IsOutlineVisible (11.0f, 2.0f, Pens.Red, graphics));
 
 				Point pt = new Point (12, 2);
-				Assert.IsFalse (gp.IsOutlineVisible (pt, Pens.Red, graphics), "Point1");
-				Assert.IsTrue (gp.IsOutlineVisible (pt, p2, graphics), "Point2");
+				Assert.False (gp.IsOutlineVisible (pt, Pens.Red, graphics));
+				Assert.True (gp.IsOutlineVisible (pt, p2, graphics));
 				pt.Y = 1;
-				Assert.IsTrue (gp.IsOutlineVisible (pt, Pens.Red, graphics), "Point3");
+				Assert.True (gp.IsOutlineVisible (pt, Pens.Red, graphics));
 
 				PointF pf = new PointF (13.0f, 2.0f);
-				Assert.IsFalse (gp.IsOutlineVisible (pf, Pens.Red, graphics), "PointF1");
-				Assert.IsTrue (gp.IsOutlineVisible (pf, p2, graphics), "PointF2");
+				Assert.False (gp.IsOutlineVisible (pf, Pens.Red, graphics));
+				Assert.True (gp.IsOutlineVisible (pf, p2, graphics));
 				pf.Y = 1;
-				Assert.IsTrue (gp.IsOutlineVisible (pf, Pens.Red, graphics), "PointF3");
+				Assert.True (gp.IsOutlineVisible (pf, Pens.Red, graphics));
 			}
 			p2.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_Line_WithoutGraphics ()
 		{
 			IsOutlineVisible_Line (null);
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_Line_WithGraphics_Inside ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2674,7 +2674,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_Line_WithGraphics_Outside ()
 		{
 			using (Bitmap bitmap = new Bitmap (5, 5)) {
@@ -2688,7 +2688,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		// docs ways the point is in world coordinates and that the graphics transform 
 		// should be applied
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_Line_WithGraphics_Transform ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2700,7 +2700,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_Line_WithGraphics_PageUnit ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2712,7 +2712,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_Line_WithGraphics_PageScale ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2724,7 +2724,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void IsOutlineVisible_Line_WithGraphics ()
 		{
@@ -2735,36 +2735,36 @@ namespace MonoTests.System.Drawing.Drawing2D {
 					g.PageScale = 2.0f;
 					using (GraphicsPath gp = new GraphicsPath ()) {
 						gp.AddLine (10, 1, 14, 1);
-						Assert.IsFalse (gp.IsOutlineVisible (10, 1, Pens.Red, g), "Int1");
+						Assert.False (gp.IsOutlineVisible (10, 1, Pens.Red, g));
 					}
 				}
 				// graphics ISN'T ignored (Transform+PageUnit+PageScale)
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // looks buggy - reported to MS as FDBK50868
 		public void IsOutlineVisible_Line_End ()
 		{
 			// horizontal line
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLine (10, 1, 14, 1);
-				Assert.IsFalse (gp.IsOutlineVisible (14, 1, Pens.Red, null), "Int1h");
-				Assert.IsFalse (gp.IsOutlineVisible (13.5f, 1.0f, Pens.Red, null), "Float1h");
-				Assert.IsTrue (gp.IsOutlineVisible (13.4f, 1.0f, Pens.Red, null), "Float2h");
-				Assert.IsFalse (gp.IsOutlineVisible (new Point (14, 1), Pens.Red, null), "Point1h");
-				Assert.IsFalse (gp.IsOutlineVisible (new PointF (13.5f, 1.0f), Pens.Red, null), "PointF1h");
-				Assert.IsTrue (gp.IsOutlineVisible (new PointF (13.49f, 1.0f), Pens.Red, null), "PointF2h");
+				Assert.False (gp.IsOutlineVisible (14, 1, Pens.Red, null));
+				Assert.False (gp.IsOutlineVisible (13.5f, 1.0f, Pens.Red, null));
+				Assert.True (gp.IsOutlineVisible (13.4f, 1.0f, Pens.Red, null));
+				Assert.False (gp.IsOutlineVisible (new Point (14, 1), Pens.Red, null));
+				Assert.False (gp.IsOutlineVisible (new PointF (13.5f, 1.0f), Pens.Red, null));
+				Assert.True (gp.IsOutlineVisible (new PointF (13.49f, 1.0f), Pens.Red, null));
 			}
 			// vertical line
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLine (1, 10, 1, 14);
-				Assert.IsFalse (gp.IsOutlineVisible (1, 14, Pens.Red, null), "Int1v");
-				Assert.IsFalse (gp.IsOutlineVisible (1.0f, 13.5f, Pens.Red, null), "Float1v");
-				Assert.IsTrue (gp.IsOutlineVisible (1.0f, 13.4f, Pens.Red, null), "Float2v");
-				Assert.IsFalse (gp.IsOutlineVisible (new Point (1, 14), Pens.Red, null), "Point1v");
-				Assert.IsFalse (gp.IsOutlineVisible (new PointF (1.0f, 13.5f), Pens.Red, null), "PointF1v");
-				Assert.IsTrue (gp.IsOutlineVisible (new PointF (1.0f, 13.49f), Pens.Red, null), "PointF2v");
+				Assert.False (gp.IsOutlineVisible (1, 14, Pens.Red, null));
+				Assert.False (gp.IsOutlineVisible (1.0f, 13.5f, Pens.Red, null));
+				Assert.True (gp.IsOutlineVisible (1.0f, 13.4f, Pens.Red, null));
+				Assert.False (gp.IsOutlineVisible (new Point (1, 14), Pens.Red, null));
+				Assert.False (gp.IsOutlineVisible (new PointF (1.0f, 13.5f), Pens.Red, null));
+				Assert.True (gp.IsOutlineVisible (new PointF (1.0f, 13.49f), Pens.Red, null));
 			}
 		}
 
@@ -2773,30 +2773,30 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Pen p2 = new Pen (Color.Red, 3.0f);
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddRectangle (new Rectangle (10, 10, 20, 20));
-				Assert.IsTrue (gp.IsOutlineVisible (10, 10, Pens.Red, graphics), "Int1");
-				Assert.IsTrue (gp.IsOutlineVisible (10, 11, p2, graphics), "Int2");
-				Assert.IsFalse (gp.IsOutlineVisible (11, 11, Pens.Red, graphics), "Int3");
+				Assert.True (gp.IsOutlineVisible (10, 10, Pens.Red, graphics));
+				Assert.True (gp.IsOutlineVisible (10, 11, p2, graphics));
+				Assert.False (gp.IsOutlineVisible (11, 11, Pens.Red, graphics));
 
-				Assert.IsTrue (gp.IsOutlineVisible (11.0f, 10.0f, Pens.Red, graphics), "Float1");
-				Assert.IsTrue (gp.IsOutlineVisible (11.0f, 11.0f, p2, graphics), "Float2");
-				Assert.IsFalse (gp.IsOutlineVisible (11.0f, 11.0f, Pens.Red, graphics), "Float3");
+				Assert.True (gp.IsOutlineVisible (11.0f, 10.0f, Pens.Red, graphics));
+				Assert.True (gp.IsOutlineVisible (11.0f, 11.0f, p2, graphics));
+				Assert.False (gp.IsOutlineVisible (11.0f, 11.0f, Pens.Red, graphics));
 
 				Point pt = new Point (15, 10);
-				Assert.IsTrue (gp.IsOutlineVisible (pt, Pens.Red, graphics), "Point1");
-				Assert.IsTrue (gp.IsOutlineVisible (pt, p2, graphics), "Point2");
+				Assert.True (gp.IsOutlineVisible (pt, Pens.Red, graphics));
+				Assert.True (gp.IsOutlineVisible (pt, p2, graphics));
 				pt.Y = 15;
-				Assert.IsFalse (gp.IsOutlineVisible (pt, Pens.Red, graphics), "Point3");
+				Assert.False (gp.IsOutlineVisible (pt, Pens.Red, graphics));
 
 				PointF pf = new PointF (29.0f, 29.0f);
-				Assert.IsFalse (gp.IsOutlineVisible (pf, Pens.Red, graphics), "PointF1");
-				Assert.IsTrue (gp.IsOutlineVisible (pf, p2, graphics), "PointF2");
+				Assert.False (gp.IsOutlineVisible (pf, Pens.Red, graphics));
+				Assert.True (gp.IsOutlineVisible (pf, p2, graphics));
 				pf.Y = 31.0f;
-				Assert.IsTrue (gp.IsOutlineVisible (pf, p2, graphics), "PointF3");
+				Assert.True (gp.IsOutlineVisible (pf, p2, graphics));
 			}
 			p2.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void IsOutlineVisible_Rectangle_WithoutGraphics ()
 		{
 			IsOutlineVisible_Rectangle (null);
@@ -2806,33 +2806,33 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddRectangle (new Rectangle (10, 10, 20, 20));
-				Assert.IsFalse (gp.IsVisible (9, 9, graphics), "Int0");
-				Assert.IsTrue (gp.IsVisible (10, 10, graphics), "Int1");
-				Assert.IsTrue (gp.IsVisible (20, 20, graphics), "Int2");
-				Assert.IsTrue (gp.IsVisible (29, 29, graphics), "Int3");
-				Assert.IsFalse (gp.IsVisible (30, 29, graphics), "Int4");
-				Assert.IsFalse (gp.IsVisible (29, 30, graphics), "Int5");
-				Assert.IsFalse (gp.IsVisible (30, 30, graphics), "Int6");
+				Assert.False (gp.IsVisible (9, 9, graphics));
+				Assert.True (gp.IsVisible (10, 10, graphics));
+				Assert.True (gp.IsVisible (20, 20, graphics));
+				Assert.True (gp.IsVisible (29, 29, graphics));
+				Assert.False (gp.IsVisible (30, 29, graphics));
+				Assert.False (gp.IsVisible (29, 30, graphics));
+				Assert.False (gp.IsVisible (30, 30, graphics));
 
-				Assert.IsFalse (gp.IsVisible (9.4f, 9.4f, graphics), "Float0");
-				Assert.IsTrue (gp.IsVisible (9.5f, 9.5f, graphics), "Float1");
-				Assert.IsTrue (gp.IsVisible (10f, 10f, graphics), "Float2");
-				Assert.IsTrue (gp.IsVisible (20f, 20f, graphics), "Float3");
+				Assert.False (gp.IsVisible (9.4f, 9.4f, graphics));
+				Assert.True (gp.IsVisible (9.5f, 9.5f, graphics));
+				Assert.True (gp.IsVisible (10f, 10f, graphics));
+				Assert.True (gp.IsVisible (20f, 20f, graphics));
 				// the next diff is too close, so this fails with libgdiplus/cairo
-				//Assert.IsTrue (gp.IsVisible (29.4f, 29.4f, graphics), "Float4");
-				Assert.IsFalse (gp.IsVisible (29.5f, 29.5f, graphics), "Float5");
-				Assert.IsFalse (gp.IsVisible (29.5f, 29.4f, graphics), "Float6");
-				Assert.IsFalse (gp.IsVisible (29.4f, 29.5f, graphics), "Float7");
+				//Assert.True (gp.IsVisible (29.4f, 29.4f, graphics));
+				Assert.False (gp.IsVisible (29.5f, 29.5f, graphics));
+				Assert.False (gp.IsVisible (29.5f, 29.4f, graphics));
+				Assert.False (gp.IsVisible (29.4f, 29.5f, graphics));
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_Rectangle_WithoutGraphics ()
 		{
 			IsVisible_Rectangle (null);
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_Rectangle_WithGraphics ()
 		{
 			using (Bitmap bitmap = new Bitmap (40, 40)) {
@@ -2847,23 +2847,23 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddEllipse (new Rectangle (10, 10, 20, 20));
-				Assert.IsFalse (gp.IsVisible (10, 10, graphics), "Int1");
-				Assert.IsTrue (gp.IsVisible (20, 20, graphics), "Int2");
-				Assert.IsFalse (gp.IsVisible (29, 29, graphics), "Int3");
+				Assert.False (gp.IsVisible (10, 10, graphics));
+				Assert.True (gp.IsVisible (20, 20, graphics));
+				Assert.False (gp.IsVisible (29, 29, graphics));
 
-				Assert.IsFalse (gp.IsVisible (10f, 10f, graphics), "Float2");
-				Assert.IsTrue (gp.IsVisible (20f, 20f, graphics), "Float3");
-				Assert.IsFalse (gp.IsVisible (29.4f, 29.4f, graphics), "Float4");
+				Assert.False (gp.IsVisible (10f, 10f, graphics));
+				Assert.True (gp.IsVisible (20f, 20f, graphics));
+				Assert.False (gp.IsVisible (29.4f, 29.4f, graphics));
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_Ellipse_WithoutGraphics ()
 		{
 			IsVisible_Ellipse (null);
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_Ellipse_WithGraphics ()
 		{
 			using (Bitmap bitmap = new Bitmap (40, 40)) {
@@ -2885,14 +2885,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			byte[] at = gp.PathTypes;
 
 			int count = gp.PointCount;
-			Assert.AreEqual (bp.Length, count, "PointCount");
+			Assert.Equal (bp.Length, count);
 			for (int i = 0; i < count; i++) {
-				Assert.AreEqual (bp[i], ap[count - i - 1], "Point" + i.ToString ());
-				Assert.AreEqual (bt[i], at[i], "Type" + i.ToString ());
+				Assert.Equal (bp[i], ap[count - i - 1]);
+				Assert.Equal (bt[i], at[i]);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Arc ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2901,7 +2901,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Bezier ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2910,7 +2910,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Beziers ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2921,7 +2921,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_ClosedCurve ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2932,7 +2932,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Curve ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2943,7 +2943,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Ellipse ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2952,7 +2952,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Line ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2961,7 +2961,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Line_Closed ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2971,7 +2971,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Lines ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2982,7 +2982,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Polygon ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2993,7 +2993,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Rectangle ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -3002,7 +3002,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Rectangles ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -3014,7 +3014,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		// Reverse complex test cases
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // the output differs from GDI+ and libgdiplus
 		public void Reverse_Pie ()
 		{
@@ -3027,15 +3027,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				PointF[] ap = gp.PathPoints;
 				byte[] at = gp.PathTypes;
 				int count = gp.PointCount;
-				Assert.AreEqual (bp.Length, count, "PointCount");
+				Assert.Equal (bp.Length, count);
 				for (int i = 0; i < count; i++) {
-					Assert.AreEqual (bp[i], ap[count - i - 1], "Point" + i.ToString ());
-					Assert.AreEqual (expected[i], at[i], "Type" + i.ToString ());
+					Assert.Equal (bp[i], ap[count - i - 1]);
+					Assert.Equal (expected[i], at[i]);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Path ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -3051,15 +3051,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				byte[] at = gp.PathTypes;
 
 				int count = gp.PointCount;
-				Assert.AreEqual (bp.Length, count, "PointCount");
+				Assert.Equal (bp.Length, count);
 				for (int i = 0; i < count; i++) {
-					Assert.AreEqual (bp[i], ap[count - i - 1], "Point" + i.ToString ());
-					Assert.AreEqual (expected[i], at[i], "Type" + i.ToString ());
+					Assert.Equal (bp[i], ap[count - i - 1]);
+					Assert.Equal (expected[i], at[i]);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Path_2 ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -3073,15 +3073,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				byte[] at = gp.PathTypes;
 
 				int count = gp.PointCount;
-				Assert.AreEqual (bp.Length, count, "PointCount");
+				Assert.Equal (bp.Length, count);
 				for (int i = 0; i < count; i++) {
-					Assert.AreEqual (bp[i], ap[count - i - 1], "Point" + i.ToString ());
-					Assert.AreEqual (expected[i], at[i], "Type" + i.ToString ());
+					Assert.Equal (bp[i], ap[count - i - 1]);
+					Assert.Equal (expected[i], at[i]);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // the output differs from GDI+ and libgdiplus
 		public void Reverse_String ()
 		{
@@ -3105,15 +3105,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				byte[] at = gp.PathTypes;
 
 				int count = gp.PointCount;
-				Assert.AreEqual (bp.Length, count, "PointCount");
+				Assert.Equal (bp.Length, count);
 				for (int i = 0; i < count; i++) {
-					Assert.AreEqual (bp[i], ap[count - i - 1], "Point" + i.ToString ());
-					Assert.AreEqual (expected[i], at[i], "Type" + i.ToString ());
+					Assert.Equal (bp[i], ap[count - i - 1]);
+					Assert.Equal (expected[i], at[i]);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Marker ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -3127,15 +3127,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				byte[] at = gp.PathTypes;
 
 				int count = gp.PointCount;
-				Assert.AreEqual (bp.Length, count, "PointCount");
+				Assert.Equal (bp.Length, count);
 				for (int i = 0; i < count; i++) {
-					Assert.AreEqual (bp[i], ap[count - i - 1], "Point" + i.ToString ());
-					Assert.AreEqual (expected[i], at[i], "Type" + i.ToString ());
+					Assert.Equal (bp[i], ap[count - i - 1]);
+					Assert.Equal (expected[i], at[i]);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Subpath_Marker ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -3152,15 +3152,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				byte[] at = gp.PathTypes;
 
 				int count = gp.PointCount;
-				Assert.AreEqual (bp.Length, count, "PointCount");
+				Assert.Equal (bp.Length, count);
 				for (int i = 0; i < count; i++) {
-					Assert.AreEqual (bp[i], ap[count - i - 1], "Point" + i.ToString ());
-					Assert.AreEqual (expected[i], at[i], "Type" + i.ToString ());
+					Assert.Equal (bp[i], ap[count - i - 1]);
+					Assert.Equal (expected[i], at[i]);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Reverse_Subpath_Marker_2 ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -3177,15 +3177,15 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				byte[] at = gp.PathTypes;
 
 				int count = gp.PointCount;
-				Assert.AreEqual (bp.Length, count, "PointCount");
+				Assert.Equal (bp.Length, count);
 				for (int i = 0; i < count; i++) {
-					Assert.AreEqual (bp[i], ap[count - i - 1], "Point" + i.ToString ());
-					Assert.AreEqual (expected[i], at[i], "Type" + i.ToString ());
+					Assert.Equal (bp[i], ap[count - i - 1]);
+					Assert.Equal (expected[i], at[i]);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void bug413461 ()
 		{
 			int dX = 520;
@@ -3208,16 +3208,16 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				(byte)PathPointType.Bezier,
 				(byte)PathPointType.Bezier };
 			using (GraphicsPath path = new GraphicsPath (expected_points, expected_types)) {
-				Assert.AreEqual (7, path.PointCount, "PathCount");
+				Assert.Equal (7, path.PointCount);
 				byte [] actual_types = path.PathTypes;
-				Assert.AreEqual (expected_types [0], actual_types [0], "types-0");
-				Assert.AreEqual (expected_types [1], actual_types [1], "types-1");
-				Assert.AreEqual (expected_types [2], actual_types [2], "types-2");
-				Assert.AreEqual (expected_types [3], actual_types [3], "types-3");
-				Assert.AreEqual (expected_types [4], actual_types [4], "types-4");
-				Assert.AreEqual (expected_types [5], actual_types [5], "types-5");
+				Assert.Equal (expected_types [0], actual_types [0]);
+				Assert.Equal (expected_types [1], actual_types [1]);
+				Assert.Equal (expected_types [2], actual_types [2]);
+				Assert.Equal (expected_types [3], actual_types [3]);
+				Assert.Equal (expected_types [4], actual_types [4]);
+				Assert.Equal (expected_types [5], actual_types [5]);
 				// path is filled like closed but this does not show on the type
-				Assert.AreEqual (expected_types [6], actual_types [6], "types-6");
+				Assert.Equal (expected_types [6], actual_types [6]);
 			}
 		}
 	}

@@ -30,88 +30,87 @@ using System;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Printing {
 
-	[TestFixture]
 	public class MarginsTest {
 
-		[Test]
+		[Fact]
 		public void CtorDefault ()
 		{
 			Margins m = new Margins ();
-			Assert.AreEqual (100, m.Left, "Left");
-			Assert.AreEqual (100, m.Top, "Top");
-			Assert.AreEqual (100, m.Right, "Right");
-			Assert.AreEqual (100, m.Bottom, "Bottom");
-			Assert.AreEqual ("[Margins Left=100 Right=100 Top=100 Bottom=100]", m.ToString (), "ToString");
+			Assert.Equal (100, m.Left);
+			Assert.Equal (100, m.Top);
+			Assert.Equal (100, m.Right);
+			Assert.Equal (100, m.Bottom);
+			Assert.Equal ("[Margins Left=100 Right=100 Top=100 Bottom=100]", m.ToString ());
 			Margins clone = (Margins) m.Clone ();
-			Assert.AreEqual (m, clone, "clone");
-			Assert.IsTrue (m == clone, "==");
-			Assert.IsFalse (m != clone, "!=");
+			Assert.Equal (m, clone);
+			Assert.True (m == clone, "==");
+			Assert.False (m != clone, "!=");
 		}
 
-		[Test]
+		[Fact]
 		public void Ctor4Int ()
 		{
 			Margins m1 = new Margins (Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue);
-			Assert.AreEqual (Int32.MaxValue, m1.Left, "Left");
-			Assert.AreEqual (Int32.MaxValue, m1.Top, "Top");
-			Assert.AreEqual (Int32.MaxValue, m1.Right, "Right");
-			Assert.AreEqual (Int32.MaxValue, m1.Bottom, "Bottom");
+			Assert.Equal (Int32.MaxValue, m1.Left);
+			Assert.Equal (Int32.MaxValue, m1.Top);
+			Assert.Equal (Int32.MaxValue, m1.Right);
+			Assert.Equal (Int32.MaxValue, m1.Bottom);
 			// right smaller than left
 			Margins m2 = new Margins (Int32.MaxValue, 0, 10, 20);
 			// bottom smaller than top
 			Margins m3 = new Margins (10, 20, Int32.MaxValue, 0);
-			Assert.IsFalse (m2.GetHashCode () == m3.GetHashCode (), "GetHashCode");
-			Assert.IsTrue (m1 != m2, "m1 != m2");
-			Assert.IsFalse (m1 == m2, "m1 == m2");
+			Assert.False (m2.GetHashCode () == m3.GetHashCode (), "GetHashCode");
+			Assert.True (m1 != m2, "m1 != m2");
+			Assert.False (m1 == m2, "m1 == m2");
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void Ctor_BadLeft ()
 		{
 			new Margins (-1, 0, 0, 0); 
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void Ctor_BadRight ()
 		{
 			new Margins (0, Int32.MinValue, 0, 0);
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void Ctor_BadTop ()
 		{
 			new Margins (0, 0, Int32.MinValue, 0);
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void Ctor_BadBottom ()
 		{
 			new Margins (0, 0, 0, -1);
 		}
 
-		[Test]
+		[Fact]
 		public void Equals ()
 		{
 			Margins m = new Margins ();
-			Assert.IsTrue (m.Equals (m), "Equals(m)");
-			Assert.IsFalse (m.Equals (null), "Equals(null)");
+			Assert.True (m.Equals (m), "Equals(m)");
+			Assert.False (m.Equals (null), "Equals(null)");
 		}
 
-		[Test]
+		[Fact]
 		public void OperatorsWithNulls ()
 		{
 			Margins m1 = null;
 			Margins m2 = null;
-			Assert.IsTrue (m1 == m2, "null==null");
-			Assert.IsFalse (m1 != m2, "null!=null");
+			Assert.True (m1 == m2, "null==null");
+			Assert.False (m1 != m2, "null!=null");
 		}
 	}
 }

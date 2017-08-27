@@ -24,7 +24,7 @@
 // 	Carlos Alberto Cortez <calberto.cortez@gmail.com>
 //
 
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.Drawing;
 using System.Drawing.Printing;
@@ -34,7 +34,7 @@ namespace MonoTests.System.Drawing.Printing
 	[TestFixture]
 	public class PageSettingsTest
 	{
-		[Test]
+		[Fact]
 		public void CloneTest ()
 		{
 			// Check for installed printers, because we need
@@ -49,25 +49,25 @@ namespace MonoTests.System.Drawing.Printing
 			ps.PaperSize = new PaperSize ("My Custom Size", 222, 333);
 			PageSettings clone = (PageSettings) ps.Clone ();
 
-			Assert.AreEqual (ps.Color, clone.Color, "#1");
-			Assert.AreEqual (ps.Landscape, clone.Landscape, "#2");
-			Assert.AreEqual (ps.Margins, clone.Margins, "#3");
+			Assert.Equal (ps.Color, clone.Color, "#1");
+			Assert.Equal (ps.Landscape, clone.Landscape, "#2");
+			Assert.Equal (ps.Margins, clone.Margins, "#3");
 			Assert.AreSame (ps.PrinterSettings, clone.PrinterSettings, "#4");
 
 			// PaperSize
-			Assert.AreEqual (ps.PaperSize.PaperName, clone.PaperSize.PaperName, "#5");
-			Assert.AreEqual (ps.PaperSize.Width, clone.PaperSize.Width, "#6");
-			Assert.AreEqual (ps.PaperSize.Height, clone.PaperSize.Height, "#7");
-			Assert.AreEqual (ps.PaperSize.Kind, clone.PaperSize.Kind, "#8");
+			Assert.Equal (ps.PaperSize.PaperName, clone.PaperSize.PaperName, "#5");
+			Assert.Equal (ps.PaperSize.Width, clone.PaperSize.Width, "#6");
+			Assert.Equal (ps.PaperSize.Height, clone.PaperSize.Height, "#7");
+			Assert.Equal (ps.PaperSize.Kind, clone.PaperSize.Kind, "#8");
 
 			// PrinterResolution
-			Assert.AreEqual (ps.PrinterResolution.X, clone.PrinterResolution.X, "#9");
-			Assert.AreEqual (ps.PrinterResolution.Y, clone.PrinterResolution.Y, "#10");
-			Assert.AreEqual (ps.PrinterResolution.Kind, clone.PrinterResolution.Kind, "#11");
+			Assert.Equal (ps.PrinterResolution.X, clone.PrinterResolution.X, "#9");
+			Assert.Equal (ps.PrinterResolution.Y, clone.PrinterResolution.Y, "#10");
+			Assert.Equal (ps.PrinterResolution.Kind, clone.PrinterResolution.Kind, "#11");
 
 			// PaperSource
-			Assert.AreEqual (ps.PaperSource.Kind, clone.PaperSource.Kind, "#12");
-			Assert.AreEqual (ps.PaperSource.SourceName, clone.PaperSource.SourceName, "#13");
+			Assert.Equal (ps.PaperSource.Kind, clone.PaperSource.Kind, "#12");
+			Assert.Equal (ps.PaperSource.SourceName, clone.PaperSource.SourceName, "#13");
 		}
 	}
 }

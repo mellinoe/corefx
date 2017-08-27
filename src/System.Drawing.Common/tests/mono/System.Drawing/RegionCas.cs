@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 
 using System;
 using System.Drawing;
@@ -61,27 +61,27 @@ namespace MonoCasTests.System.Drawing {
 				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (SecurityException))]
 		public void FromHrgn_Deny_UnmanagedCode ()
 		{
 			Region.FromHrgn (IntPtr.Zero);
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void FromHrgn_PermitOnly_UnmanagedCode ()
 		{
 			Region.FromHrgn (IntPtr.Zero);
 		}
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (SecurityException))]
 		public void ReleaseHrgn_Deny_UnmanagedCode ()
 		{
 			new Region ().ReleaseHrgn (IntPtr.Zero);
 		}
 
-		[Test]
+		[Fact]
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
 		[ExpectedException (typeof (ArgumentNullException))]
 		public void ReleaseHrgn_PermitOnly_UnmanagedCode ()

@@ -31,7 +31,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing {
 
@@ -56,21 +56,21 @@ namespace MonoTests.System.Drawing {
 			sp2.AddPolygon (new Point[4] { new Point (2, 2), new Point (5, 2), new Point (5, 5), new Point (2, 5) });
 		}
 
-		[Test]
+		[Fact]
 		public void RegionData_Null ()
 		{
 			RegionData data = new Region ().GetRegionData ();
 			data.Data = null;
-			Assert.IsNull (data.Data, "Data");
+			Assert.Null (data.Data, "Data");
 			Assert.Throws<NullReferenceException> (() => new Region (data));
 		}
 
-		[Test]
+		[Fact]
 		public void RegionData_EmptyData ()
 		{
 			RegionData data = new Region ().GetRegionData ();
 			data.Data = new byte[0];
-			Assert.AreEqual (0, data.Data.Length, "Data");
+			Assert.Equal (0, data.Data.Length, "Data");
 			try {
 				new Region (data);
 			}
@@ -82,41 +82,41 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void EmptyRegion ()
 		{
 			// note: an empty region is (for libgdiplus) a rectangular based region
 			Region empty = new Region ();
 			RegionData data = empty.GetRegionData ();
-			Assert.IsNotNull (data.Data, "Data");
+			Assert.NotNull (data.Data, "Data");
 			Region region = new Region (data);
 		}
 
-		[Test]
+		[Fact]
 		public void PathRegion ()
 		{
 			GraphicsPath path = new GraphicsPath ();
 			path.AddCurve (new Point[2] { new Point (1, 1), new Point (2, 2) });
 			Region r = new Region (path);
 			RegionData data = r.GetRegionData ();
-			Assert.IsNotNull (data.Data, "Data");
+			Assert.NotNull (data.Data, "Data");
 			Region region = new Region (data);
-			Assert.IsTrue (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
+			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
 		}
 
-		[Test]
+		[Fact]
 		public void CombinedPathRegion ()
 		{
 			// note: seems identical to PathRegion but it test another code path inside libgdiplus
 			Region r = new Region (sp1);
 			r.Xor (sp2);
 			RegionData data = r.GetRegionData ();
-			Assert.IsNotNull (data.Data, "Data");
+			Assert.NotNull (data.Data, "Data");
 			Region region = new Region (data);
-			Assert.IsTrue (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
+			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
 		}
 
-		[Test]
+		[Fact]
 		public void MultiCombinedPathRegion ()
 		{
 			// note: seems identical to PathRegion but it test another code path inside libgdiplus
@@ -128,9 +128,9 @@ namespace MonoTests.System.Drawing {
 			Region r = r1.Clone ();
 			r.Union (r2);
 			RegionData data = r.GetRegionData ();
-			Assert.IsNotNull (data.Data, "Data");
+			Assert.NotNull (data.Data, "Data");
 			Region region = new Region (data);
-			Assert.IsTrue (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
+			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)), "Bounds");
 		}
 	}
 }

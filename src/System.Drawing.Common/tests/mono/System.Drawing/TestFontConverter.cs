@@ -27,7 +27,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.Drawing;
 using System.Security.Permissions;
@@ -37,24 +37,24 @@ namespace MonoTests.System.Drawing{
 	[TestFixture]
 	public class FontNameConverterTest {
 
-		[Test]
+		[Fact]
 		public void TestConvertFrom ()
 		{
 			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
 			// returns "Times" under Linux and "Times New Roman" under Windows
-			Assert.IsTrue ((f.ConvertFrom ("Times") as string).StartsWith ("Times"), "string test");
-			Assert.IsTrue (f.GetStandardValuesSupported (), "standard values supported");
-			Assert.IsFalse (f.GetStandardValuesExclusive (), "standard values exclusive");
+			Assert.True ((f.ConvertFrom ("Times") as string).StartsWith ("Times"), "string test");
+			Assert.True (f.GetStandardValuesSupported (), "standard values supported");
+			Assert.False (f.GetStandardValuesExclusive (), "standard values exclusive");
 		}
 
-		[Test]
+		[Fact]
 		public void ExTestConvertFrom ()
 		{
 			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();
 			Assert.Throws<NotSupportedException> (() => f.ConvertFrom (null));
 		}
 
-		[Test]
+		[Fact]
 		public void ExTestConvertFrom2 ()
 		{
 			FontConverter.FontNameConverter f = new FontConverter.FontNameConverter ();

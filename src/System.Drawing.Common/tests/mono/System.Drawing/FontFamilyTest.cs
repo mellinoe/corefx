@@ -31,7 +31,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing {
 
@@ -57,13 +57,13 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_String_Null ()
 		{
 			Assert.Throws<ArgumentException> (() => new FontFamily (null));
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // libgdiplus/fontconfig always return something
 		public void FontFamily_String_Empty ()
 		{
@@ -72,121 +72,121 @@ namespace MonoTests.System.Drawing {
 
 		private void CheckMono (FontFamily ff)
 		{
-			Assert.IsTrue (ff.Equals (FontFamily.GenericMonospace), "GenericMonospace");
+			Assert.True (ff.Equals (FontFamily.GenericMonospace), "GenericMonospace");
 			// note: Mono has this behaviour on both 1.1 and 2.0 profiles
-			Assert.AreEqual (ff.Name.GetHashCode (), ff.GetHashCode (), "GetHashCode");
+			Assert.Equal (ff.Name.GetHashCode (), ff.GetHashCode (), "GetHashCode");
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_String ()
 		{
 			FontFamily ff = new FontFamily (name);
 			CheckMono (ff);
 			FontStyle style = FontStyle.Bold;
-			Assert.AreEqual (ff.Name, ff.GetName (0), "GetName");
-			Assert.IsTrue ((ff.GetCellAscent (style) > 0), "GetCellAscent");
-			Assert.IsTrue ((ff.GetCellDescent (style) > 0), "GetCellDescent");
-			Assert.IsTrue ((ff.GetEmHeight (style) > 0), "GetEmHeight");
-			Assert.IsTrue ((ff.GetLineSpacing (style) > 0), "GetLineSpacing");
-			Assert.IsTrue (ff.IsStyleAvailable (style), "IsStyleAvailable");
+			Assert.Equal (ff.Name, ff.GetName (0), "GetName");
+			Assert.True ((ff.GetCellAscent (style) > 0), "GetCellAscent");
+			Assert.True ((ff.GetCellDescent (style) > 0), "GetCellDescent");
+			Assert.True ((ff.GetEmHeight (style) > 0), "GetEmHeight");
+			Assert.True ((ff.GetLineSpacing (style) > 0), "GetLineSpacing");
+			Assert.True (ff.IsStyleAvailable (style), "IsStyleAvailable");
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_String_FontCollection_Null ()
 		{
 			FontFamily ff = new FontFamily (name, null);
 			CheckMono (ff);
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_String_InstalledFontCollection ()
 		{
 			FontFamily ff = new FontFamily (name, new InstalledFontCollection ());
 			CheckMono (ff);
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_String_PrivateFontCollection ()
 		{
 			Assert.Throws<ArgumentException> (() => new FontFamily (name, new PrivateFontCollection ()));
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_Monospace ()
 		{
 			FontFamily ff = new FontFamily (GenericFontFamilies.Monospace);
 			CheckMono (ff);
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_SansSerif ()
 		{
 			FontFamily ff = new FontFamily (GenericFontFamilies.SansSerif);
-			Assert.IsTrue (ff.Equals (FontFamily.GenericSansSerif), "GenericSansSerif");
+			Assert.True (ff.Equals (FontFamily.GenericSansSerif), "GenericSansSerif");
 			// note: Mono has this behaviour on both 1.1 and 2.0 profiles
-			Assert.AreEqual (ff.Name.GetHashCode (), ff.GetHashCode (), "GetHashCode");
+			Assert.Equal (ff.Name.GetHashCode (), ff.GetHashCode (), "GetHashCode");
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_Serif ()
 		{
 			FontFamily ff = new FontFamily (GenericFontFamilies.Serif);
-			Assert.IsTrue (ff.Equals (FontFamily.GenericSerif), "GenericSerif");
+			Assert.True (ff.Equals (FontFamily.GenericSerif), "GenericSerif");
 			// note: Mono has this behaviour on both 1.1 and 2.0 profiles
-			Assert.AreEqual (ff.Name.GetHashCode (), ff.GetHashCode (), "GetHashCode");
+			Assert.Equal (ff.Name.GetHashCode (), ff.GetHashCode (), "GetHashCode");
 		}
 
-		[Test]
+		[Fact]
 		public void FontFamily_Invalid ()
 		{
 			FontFamily ff = new FontFamily ((GenericFontFamilies)Int32.MinValue);
 			// default to Monospace
-			Assert.IsTrue (ff.Equals (FontFamily.GenericMonospace), "GenericMonospace");
+			Assert.True (ff.Equals (FontFamily.GenericMonospace), "GenericMonospace");
 			CheckMono (ff);
 		}
 
-		[Test]
+		[Fact]
 		public void GenericMonospace ()
 		{
 			FontFamily ff = FontFamily.GenericMonospace;
 			string ts = ff.ToString ();
-			Assert.AreEqual ('[', ts[0], "[");
-			Assert.IsTrue ((ts.IndexOf (name) >= 0), "ToString");
-			Assert.AreEqual (']', ts[ts.Length - 1], "]");
+			Assert.Equal ('[', ts[0]);
+			Assert.True ((ts.IndexOf (name) >= 0), "ToString");
+			Assert.Equal (']', ts[ts.Length - 1]);
 		}
 
-		[Test]
+		[Fact]
 		public void GenericSansSerif ()
 		{
 			FontFamily ff = FontFamily.GenericSansSerif;
 			string name = ff.Name;
 			ff.Dispose ();
-			Assert.AreEqual (name, FontFamily.GenericSansSerif.Name, "Name");
+			Assert.Equal (name, FontFamily.GenericSansSerif.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void GenericSerif ()
 		{
 			FontFamily ff = FontFamily.GenericSerif;
 			string name = ff.Name;
 			ff.Dispose ();
-			Assert.AreEqual (name, FontFamily.GenericSerif.Name, "Name");
+			Assert.Equal (name, FontFamily.GenericSerif.Name);
 		}
 
-		[Test]
+		[Fact]
 		public void GetFamilies_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => FontFamily.GetFamilies (null));
 		}
 
-		[Test]
+		[Fact]
 		public void GetFamilies ()
 		{
 			FontFamily[] ffc = FontFamily.GetFamilies (graphic);
-			Assert.AreEqual (ffc.Length, FontFamily.Families.Length, "Length");
+			Assert.Equal (ffc.Length, FontFamily.Families.Length, "Length");
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_Double ()
 		{
 			FontFamily ff = FontFamily.GenericSerif;
@@ -194,7 +194,7 @@ namespace MonoTests.System.Drawing {
 			ff.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_UseAfter ()
 		{
 			FontFamily ff = FontFamily.GenericMonospace;

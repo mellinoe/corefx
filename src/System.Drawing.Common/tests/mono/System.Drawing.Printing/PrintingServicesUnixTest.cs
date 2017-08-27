@@ -31,7 +31,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Runtime.InteropServices;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Printing {
 
@@ -41,14 +41,14 @@ namespace MonoTests.System.Drawing.Printing {
 		[DllImport ("gdiplus.dll")]
 		static extern Status GdipGetPostScriptSavePage (IntPtr graphics);
 
-		[Test]
+		[Fact]
 		public void BuiltInPrinting ()
 		{
 			// ensure libgdiplus is built with printing support enabled
 			if (GDIPlus.RunningOnWindows ())
 				Assert.Ignore ("Running on Windows.");
 
-			Assert.AreEqual (Status.InvalidParameter, GdipGetPostScriptSavePage (IntPtr.Zero), "Missing printing support");
+			Assert.Equal (Status.InvalidParameter, GdipGetPostScriptSavePage (IntPtr.Zero), "Missing printing support");
 		}
 
 		#region Novell Bug #602934
@@ -102,7 +102,7 @@ namespace MonoTests.System.Drawing.Printing {
 			return options;
 		}
 
-		[Test]
+		[Fact]
 		[Platform (Exclude = "Win", Reason = "Depends on CUPS which is usually not installed on Windows")]
 		public void Bug602934_PrinterSettingsReturnActualValues ()
 		{
@@ -112,10 +112,10 @@ namespace MonoTests.System.Drawing.Printing {
 			var options = GetOptionsOfFirstPrinterThroughCups ();
 
 			var settings = new PrinterSettings () { PrinterName = PrinterSettings.InstalledPrinters [0] };
-			Assert.AreEqual (options ["PageSize"], settings.DefaultPageSettings.PaperSize.PaperName,
+			Assert.Equal (options ["PageSize"], settings.DefaultPageSettings.PaperSize.PaperName,
 				"Bug #602934 (https://bugzilla.novell.com/show_bug.cgi?id=602934) not fixed (PaperSize)");
 			if (options.ContainsKey("Resolution"))
-				Assert.AreEqual (options ["Resolution"], string.Format ("{0}dpi", settings.DefaultPageSettings.PrinterResolution.X),
+				Assert.Equal (options ["Resolution"], string.Format ("{0}dpi", settings.DefaultPageSettings.PrinterResolution.X),
 					"Bug #602934 (https://bugzilla.novell.com/show_bug.cgi?id=602934) not fixed (Resolution)");
 		}
 

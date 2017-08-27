@@ -30,64 +30,64 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging {
 
 	[TestFixture]
 	public class MetaHeaderTest {
 
-		[Test]
+		[Fact]
 		public void DefaultValues ()
 		{
 			MetaHeader mh = new MetaHeader ();
-			Assert.AreEqual (0, mh.HeaderSize, "HeaderSize");
-			Assert.AreEqual (0, mh.MaxRecord, "MaxRecord");
-			Assert.AreEqual (0, mh.NoObjects, "NoObjects");
-			Assert.AreEqual (0, mh.NoParameters, "NoParameters");
-			Assert.AreEqual (0, mh.Size, "Size");
-			Assert.AreEqual (0, mh.Type, "Type");
-			Assert.AreEqual (0, mh.Version, "Version");
+			Assert.Equal (0, mh.HeaderSize, "HeaderSize");
+			Assert.Equal (0, mh.MaxRecord, "MaxRecord");
+			Assert.Equal (0, mh.NoObjects, "NoObjects");
+			Assert.Equal (0, mh.NoParameters, "NoParameters");
+			Assert.Equal (0, mh.Size, "Size");
+			Assert.Equal (0, mh.Type, "Type");
+			Assert.Equal (0, mh.Version, "Version");
 		}
 
-		[Test]
+		[Fact]
 		public void Min ()
 		{
 			MetaHeader mh = new MetaHeader ();
 			mh.HeaderSize = short.MinValue;
-			Assert.AreEqual (short.MinValue, mh.HeaderSize, "HeaderSize");
+			Assert.Equal (short.MinValue, mh.HeaderSize, "HeaderSize");
 			mh.MaxRecord = int.MinValue;
-			Assert.AreEqual (int.MinValue, mh.MaxRecord, "MaxRecord");
+			Assert.Equal (int.MinValue, mh.MaxRecord, "MaxRecord");
 			mh.NoObjects = short.MinValue;
-			Assert.AreEqual (short.MinValue, mh.NoObjects, "NoObjects");
+			Assert.Equal (short.MinValue, mh.NoObjects, "NoObjects");
 			mh.NoParameters = short.MinValue;
-			Assert.AreEqual (short.MinValue, mh.NoParameters, "NoParameters");
+			Assert.Equal (short.MinValue, mh.NoParameters, "NoParameters");
 			mh.Size = int.MinValue;
-			Assert.AreEqual (int.MinValue, mh.Size, "Size");
+			Assert.Equal (int.MinValue, mh.Size, "Size");
 			mh.Type = short.MinValue;
-			Assert.AreEqual (short.MinValue, mh.Type, "Type");
+			Assert.Equal (short.MinValue, mh.Type, "Type");
 			mh.Version = short.MinValue;
-			Assert.AreEqual (short.MinValue, mh.Version, "Version");
+			Assert.Equal (short.MinValue, mh.Version, "Version");
 		}
 
-		[Test]
+		[Fact]
 		public void Max ()
 		{
 			MetaHeader mh = new MetaHeader ();
 			mh.HeaderSize = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, mh.HeaderSize, "HeaderSize");
+			Assert.Equal (short.MaxValue, mh.HeaderSize, "HeaderSize");
 			mh.MaxRecord = int.MaxValue;
-			Assert.AreEqual (int.MaxValue, mh.MaxRecord, "MaxRecord");
+			Assert.Equal (int.MaxValue, mh.MaxRecord, "MaxRecord");
 			mh.NoObjects = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, mh.NoObjects, "NoObjects");
+			Assert.Equal (short.MaxValue, mh.NoObjects, "NoObjects");
 			mh.NoParameters = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, mh.NoParameters, "NoParameters");
+			Assert.Equal (short.MaxValue, mh.NoParameters, "NoParameters");
 			mh.Size = int.MaxValue;
-			Assert.AreEqual (int.MaxValue, mh.Size, "Size");
+			Assert.Equal (int.MaxValue, mh.Size, "Size");
 			mh.Type = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, mh.Type, "Type");
+			Assert.Equal (short.MaxValue, mh.Type, "Type");
 			mh.Version = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, mh.Version, "Version");
+			Assert.Equal (short.MaxValue, mh.Version, "Version");
 		}
 	}
 }

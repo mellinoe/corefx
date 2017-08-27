@@ -33,7 +33,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging {
 
@@ -55,32 +55,32 @@ namespace MonoTests.System.Drawing.Imaging {
 			return sRslt;
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_Stream_Null ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile ((Stream)null));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_String_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Metafile ((string) null));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_String_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (String.Empty));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_String_FileDoesNotExists ()
 		{
 			string filename = getInFile ("telescope_02.wmf");
 			Assert.Throws<ExternalException> (() => new Metafile (filename));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_String ()
 		{
 			string filename = getInFile (WmfPlaceable);
@@ -88,7 +88,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Metafile clone = (Metafile) mf.Clone ();
 		}
 
-		[Test]
+		[Fact]
 		public void GetMetafileHeader_Bitmap ()
 		{
 			Assert.Throws<ExternalException> (() => new Metafile (getInFile (Bitmap)));
@@ -96,46 +96,46 @@ namespace MonoTests.System.Drawing.Imaging {
 
 		static public void Check_MetaHeader_WmfPlaceable (MetaHeader mh)
 		{
-			Assert.AreEqual (9, mh.HeaderSize, "HeaderSize");
-			Assert.AreEqual (98, mh.MaxRecord, "MaxRecord");
-			Assert.AreEqual (3, mh.NoObjects, "NoObjects");
-			Assert.AreEqual (0, mh.NoParameters, "NoParameters");
-			Assert.AreEqual (1737, mh.Size, "Size");
-			Assert.AreEqual (1, mh.Type, "Type");
-			Assert.AreEqual (0x300, mh.Version, "Version");
+			Assert.Equal (9, mh.HeaderSize, "HeaderSize");
+			Assert.Equal (98, mh.MaxRecord, "MaxRecord");
+			Assert.Equal (3, mh.NoObjects, "NoObjects");
+			Assert.Equal (0, mh.NoParameters, "NoParameters");
+			Assert.Equal (1737, mh.Size, "Size");
+			Assert.Equal (1, mh.Type, "Type");
+			Assert.Equal (0x300, mh.Version, "Version");
 		}
 
 		public static void Check_MetafileHeader_WmfPlaceable (MetafileHeader header)
 		{
-			Assert.AreEqual (MetafileType.WmfPlaceable, header.Type, "Type");
-			Assert.AreEqual (0x300, header.Version, "Version");
+			Assert.Equal (MetafileType.WmfPlaceable, header.Type, "Type");
+			Assert.Equal (0x300, header.Version, "Version");
 			// filesize - 22, which happens to be the size (22) of a PLACEABLEMETAHEADER struct
-			Assert.AreEqual (3474, header.MetafileSize, "MetafileSize");
+			Assert.Equal (3474, header.MetafileSize, "MetafileSize");
 
-			Assert.AreEqual (-30, header.Bounds.X, "Bounds.X");
-			Assert.AreEqual (-40, header.Bounds.Y, "Bounds.Y");
-			Assert.AreEqual (3096, header.Bounds.Width, "Bounds.Width");
-			Assert.AreEqual (4127, header.Bounds.Height, "Bounds.Height");
-			Assert.AreEqual (606, header.DpiX, "DpiX");
-			Assert.AreEqual (606, header.DpiY, "DpiY");
-			Assert.AreEqual (0, header.EmfPlusHeaderSize, "EmfPlusHeaderSize");
-			Assert.AreEqual (0, header.LogicalDpiX, "LogicalDpiX");
-			Assert.AreEqual (0, header.LogicalDpiY, "LogicalDpiY");
+			Assert.Equal (-30, header.Bounds.X, "Bounds.X");
+			Assert.Equal (-40, header.Bounds.Y, "Bounds.Y");
+			Assert.Equal (3096, header.Bounds.Width, "Bounds.Width");
+			Assert.Equal (4127, header.Bounds.Height, "Bounds.Height");
+			Assert.Equal (606, header.DpiX, "DpiX");
+			Assert.Equal (606, header.DpiY, "DpiY");
+			Assert.Equal (0, header.EmfPlusHeaderSize, "EmfPlusHeaderSize");
+			Assert.Equal (0, header.LogicalDpiX, "LogicalDpiX");
+			Assert.Equal (0, header.LogicalDpiY, "LogicalDpiY");
 
-			Assert.IsNotNull (header.WmfHeader, "WmfHeader");
+			Assert.NotNull (header.WmfHeader, "WmfHeader");
 			Check_MetaHeader_WmfPlaceable (header.WmfHeader);
 
-			Assert.IsFalse (header.IsDisplay (), "IsDisplay");
-			Assert.IsFalse (header.IsEmf (), "IsEmf");
-			Assert.IsFalse (header.IsEmfOrEmfPlus (), "IsEmfOrEmfPlus");
-			Assert.IsFalse (header.IsEmfPlus (), "IsEmfPlus");
-			Assert.IsFalse (header.IsEmfPlusDual (), "IsEmfPlusDual");
-			Assert.IsFalse (header.IsEmfPlusOnly (), "IsEmfPlusOnly");
-			Assert.IsTrue (header.IsWmf (), "IsWmf");
-			Assert.IsTrue (header.IsWmfPlaceable (), "IsWmfPlaceable");
+			Assert.False (header.IsDisplay (), "IsDisplay");
+			Assert.False (header.IsEmf (), "IsEmf");
+			Assert.False (header.IsEmfOrEmfPlus (), "IsEmfOrEmfPlus");
+			Assert.False (header.IsEmfPlus (), "IsEmfPlus");
+			Assert.False (header.IsEmfPlusDual (), "IsEmfPlusDual");
+			Assert.False (header.IsEmfPlusOnly (), "IsEmfPlusOnly");
+			Assert.True (header.IsWmf (), "IsWmf");
+			Assert.True (header.IsWmfPlaceable (), "IsWmfPlaceable");
 		}
 
-		[Test]
+		[Fact]
 		public void GetMetafileHeader_WmfPlaceable ()
 		{
 			using (Metafile mf = new Metafile (getInFile (WmfPlaceable))) {
@@ -143,11 +143,11 @@ namespace MonoTests.System.Drawing.Imaging {
 				Check_MetafileHeader_WmfPlaceable (header1);
 
 				MetafileHeader header2 = mf.GetMetafileHeader ();
-				Assert.IsFalse (Object.ReferenceEquals (header1, header2), "Same object");
+				Assert.False (Object.ReferenceEquals (header1, header2), "Same object");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetMetafileHeader_FromFile_WmfPlaceable ()
 		{
 			using (Metafile mf = new Metafile (getInFile (WmfPlaceable))) {
@@ -158,11 +158,11 @@ namespace MonoTests.System.Drawing.Imaging {
 				Check_MetaHeader_WmfPlaceable (mh1);
 
 				MetaHeader mh2 = mf.GetMetafileHeader ().WmfHeader;
-				Assert.IsFalse (Object.ReferenceEquals (mh1, mh2), "Same object");
+				Assert.False (Object.ReferenceEquals (mh1, mh2), "Same object");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetMetafileHeader_FromFileStream_WmfPlaceable ()
 		{
 			using (FileStream fs = File.OpenRead (getInFile (WmfPlaceable))) {
@@ -174,12 +174,12 @@ namespace MonoTests.System.Drawing.Imaging {
 					Check_MetaHeader_WmfPlaceable (mh1);
 
 					MetaHeader mh2 = mf.GetMetafileHeader ().WmfHeader;
-					Assert.IsFalse (Object.ReferenceEquals (mh1, mh2), "Same object");
+					Assert.False (Object.ReferenceEquals (mh1, mh2), "Same object");
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetMetafileHeader_FromMemoryStream_WmfPlaceable ()
 		{
 			MemoryStream ms;
@@ -197,31 +197,31 @@ namespace MonoTests.System.Drawing.Imaging {
 				Check_MetaHeader_WmfPlaceable (mh1);
 
 				MetaHeader mh2 = mf.GetMetafileHeader ().WmfHeader;
-				Assert.IsFalse (Object.ReferenceEquals (mh1, mh2), "Same object");
+				Assert.False (Object.ReferenceEquals (mh1, mh2), "Same object");
 			}
 			ms.Close ();
 		}
 
 		public static void Check_MetafileHeader_Emf (MetafileHeader header)
 		{
-			Assert.AreEqual (MetafileType.Emf, header.Type, "Type");
-			Assert.AreEqual (65536, header.Version, "Version");
+			Assert.Equal (MetafileType.Emf, header.Type, "Type");
+			Assert.Equal (65536, header.Version, "Version");
 			// extactly the filesize
-			Assert.AreEqual (20456, header.MetafileSize, "MetafileSize");
+			Assert.Equal (20456, header.MetafileSize, "MetafileSize");
 
-			Assert.AreEqual (0, header.Bounds.X, "Bounds.X");
-			Assert.AreEqual (0, header.Bounds.Y, "Bounds.Y");
+			Assert.Equal (0, header.Bounds.X, "Bounds.X");
+			Assert.Equal (0, header.Bounds.Y, "Bounds.Y");
 #if false
-			Assert.AreEqual (759, header.Bounds.Width, "Bounds.Width");
-			Assert.AreEqual (1073, header.Bounds.Height, "Bounds.Height");
-			Assert.AreEqual (96f, header.DpiX, 0.5f, "DpiX");
-			Assert.AreEqual (96f, header.DpiY, 0.5f, "DpiY");
-			Assert.AreEqual (6619188, header.EmfPlusHeaderSize, "EmfPlusHeaderSize");
-			Assert.AreEqual (3670064, header.LogicalDpiX, "LogicalDpiX");
-			Assert.AreEqual (3670064, header.LogicalDpiY, "LogicalDpiY");
+			Assert.Equal (759, header.Bounds.Width, "Bounds.Width");
+			Assert.Equal (1073, header.Bounds.Height, "Bounds.Height");
+			Assert.Equal (96f, header.DpiX, 0.5f, "DpiX");
+			Assert.Equal (96f, header.DpiY, 0.5f, "DpiY");
+			Assert.Equal (6619188, header.EmfPlusHeaderSize, "EmfPlusHeaderSize");
+			Assert.Equal (3670064, header.LogicalDpiX, "LogicalDpiX");
+			Assert.Equal (3670064, header.LogicalDpiY, "LogicalDpiY");
 #endif
 			try {
-				Assert.IsNotNull (header.WmfHeader, "WmfHeader");
+				Assert.NotNull (header.WmfHeader, "WmfHeader");
 				Assert.Fail ("WmfHeader didn't throw an ArgumentException");
 			}
 			catch (ArgumentException) {
@@ -230,17 +230,17 @@ namespace MonoTests.System.Drawing.Imaging {
 				Assert.Fail ("WmfHeader didn't throw an ArgumentException but: {0}.", e.ToString ());
 			}
 
-			Assert.IsFalse (header.IsDisplay (), "IsDisplay");
-			Assert.IsTrue (header.IsEmf (), "IsEmf");
-			Assert.IsTrue (header.IsEmfOrEmfPlus (), "IsEmfOrEmfPlus");
-			Assert.IsFalse (header.IsEmfPlus (), "IsEmfPlus");
-			Assert.IsFalse (header.IsEmfPlusDual (), "IsEmfPlusDual");
-			Assert.IsFalse (header.IsEmfPlusOnly (), "IsEmfPlusOnly");
-			Assert.IsFalse (header.IsWmf (), "IsWmf");
-			Assert.IsFalse (header.IsWmfPlaceable (), "IsWmfPlaceable");
+			Assert.False (header.IsDisplay (), "IsDisplay");
+			Assert.True (header.IsEmf (), "IsEmf");
+			Assert.True (header.IsEmfOrEmfPlus (), "IsEmfOrEmfPlus");
+			Assert.False (header.IsEmfPlus (), "IsEmfPlus");
+			Assert.False (header.IsEmfPlusDual (), "IsEmfPlusDual");
+			Assert.False (header.IsEmfPlusOnly (), "IsEmfPlusOnly");
+			Assert.False (header.IsWmf (), "IsWmf");
+			Assert.False (header.IsWmfPlaceable (), "IsWmfPlaceable");
 		}
 
-		[Test]
+		[Fact]
 		public void GetMetafileHeader_FromFile_Emf ()
 		{
 			using (Metafile mf = new Metafile (getInFile (Emf))) {
@@ -249,7 +249,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetMetafileHeader_FromFileStream_Emf ()
 		{
 			using (FileStream fs = File.OpenRead (getInFile (Emf))) {
@@ -260,7 +260,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetMetafileHeader_FromMemoryStream_Emf ()
 		{
 			MemoryStream ms;
@@ -277,13 +277,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			ms.Close ();
 		}
 
-		[Test]
+		[Fact]
 		public void Static_GetMetafileHeader_Stream_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => Metafile.GetMetafileHeader ((Stream)null));
 		}
 
-		[Test]
+		[Fact]
 		public void Static_GetMetafileHeader_Stream ()
 		{
 			string filename = getInFile (WmfPlaceable);
@@ -293,13 +293,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Static_GetMetafileHeader_Filename_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => Metafile.GetMetafileHeader ((string) null));
 		}
 
-		[Test]
+		[Fact]
 		public void Static_GetMetafileHeader_Filename ()
 		{
 			string filename = getInFile (WmfPlaceable);
@@ -323,32 +323,32 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Static_GetMetafileHeader_IntPtr_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => Metafile.GetMetafileHeader (IntPtr.Zero));
 		}
 
-		[Test]
+		[Fact]
 		public void Static_GetMetafileHeader_IntPtr ()
 		{
 			string filename = MetafileTest.getInFile (MetafileTest.WmfPlaceable);
 			using (Metafile mf = new Metafile (filename)) {
 
 				IntPtr hemf = mf.GetHenhmetafile ();
-				Assert.IsTrue (hemf != IntPtr.Zero, "GetHenhmetafile");
+				Assert.True (hemf != IntPtr.Zero, "GetHenhmetafile");
 
 				Assert.Throws<ArgumentException> (() => Metafile.GetMetafileHeader (hemf));
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrBool_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (IntPtr.Zero, false));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrEmfType_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (IntPtr.Zero, EmfType.EmfOnly));
@@ -357,20 +357,20 @@ namespace MonoTests.System.Drawing.Imaging {
 		private void CheckEmptyHeader (Metafile mf, EmfType type)
 		{
 			MetafileHeader mh = mf.GetMetafileHeader ();
-			Assert.AreEqual (0, mh.Bounds.X, "Bounds.X");
-			Assert.AreEqual (0, mh.Bounds.Y, "Bounds.Y");
-			Assert.AreEqual (0, mh.Bounds.Width, "Bounds.Width");
-			Assert.AreEqual (0, mh.Bounds.Height, "Bounds.Height");
-			Assert.AreEqual (0, mh.MetafileSize, "MetafileSize");
+			Assert.Equal (0, mh.Bounds.X, "Bounds.X");
+			Assert.Equal (0, mh.Bounds.Y, "Bounds.Y");
+			Assert.Equal (0, mh.Bounds.Width, "Bounds.Width");
+			Assert.Equal (0, mh.Bounds.Height, "Bounds.Height");
+			Assert.Equal (0, mh.MetafileSize, "MetafileSize");
 			switch (type) {
 			case EmfType.EmfOnly:
-				Assert.AreEqual (MetafileType.Emf, mh.Type, "Type");
+				Assert.Equal (MetafileType.Emf, mh.Type, "Type");
 				break;
 			case EmfType.EmfPlusDual:
-				Assert.AreEqual (MetafileType.EmfPlusDual, mh.Type, "Type");
+				Assert.Equal (MetafileType.EmfPlusDual, mh.Type, "Type");
 				break;
 			case EmfType.EmfPlusOnly:
-				Assert.AreEqual (MetafileType.EmfPlusOnly, mh.Type, "Type");
+				Assert.Equal (MetafileType.EmfPlusOnly, mh.Type, "Type");
 				break;
 			default:
 				Assert.Fail ("Unknown EmfType '{0}'", type);
@@ -394,37 +394,37 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrEmfType_Invalid ()
 		{
 			Assert.Throws<ArgumentException> (() => Metafile_IntPtrEmfType ((EmfType)Int32.MinValue));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrEmfType_EmfOnly ()
 		{
 			Metafile_IntPtrEmfType (EmfType.EmfOnly);
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrEmfType_EmfPlusDual ()
 		{
 			Metafile_IntPtrEmfType (EmfType.EmfPlusDual);
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrEmfType_EmfPlusOnly ()
 		{
 			Metafile_IntPtrEmfType (EmfType.EmfPlusOnly);
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrRectangle_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (IntPtr.Zero, new Rectangle (1, 2, 3, 4)));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrRectangle_Empty ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10, PixelFormat.Format32bppArgb)) {
@@ -441,13 +441,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrRectangleF_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (IntPtr.Zero, new RectangleF (1, 2, 3, 4)));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_IntPtrRectangleF_Empty ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10, PixelFormat.Format32bppArgb)) {
@@ -480,13 +480,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_StreamIntPtrEmfType_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => Metafile_StreamEmfType (null, EmfType.EmfOnly));
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_StreamIntPtrEmfType_EmfOnly ()
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
@@ -494,7 +494,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Metafile_StreamIntPtrEmfType_Invalid ()
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
@@ -512,7 +512,7 @@ namespace MonoTests.System.Drawing.Imaging {
 					IntPtr hdc = g.GetHdc ();
 					try {
 						mf = new Metafile (filename, hdc, type);
-						Assert.AreEqual (0, new FileInfo (filename).Length, "Empty");
+						Assert.Equal (0, new FileInfo (filename).Length, "Empty");
 					}
 					finally {
 						g.ReleaseHdc (hdc);
@@ -522,11 +522,11 @@ namespace MonoTests.System.Drawing.Imaging {
 				using (Graphics g = Graphics.FromImage (mf)) {
 					g.FillRectangle (Brushes.BlueViolet, 10, 10, 80, 80);
 					size = new FileInfo (filename).Length;
-					Assert.AreEqual (0, size, "Still-Empty");
+					Assert.Equal (0, size, "Still-Empty");
 				}
 // FIXME / doesn't work on mono yet
 //				size = new FileInfo (filename).Length;
-//				Assert.IsTrue (size > 0, "Non-Empty/GraphicsDisposed");
+//				Assert.True (size > 0, "Non-Empty/GraphicsDisposed");
 				if (!single) {
 					// can we append stuff ?
 					using (Graphics g = Graphics.FromImage (mf)) {
@@ -535,47 +535,47 @@ namespace MonoTests.System.Drawing.Imaging {
 					}
 				}
 				mf.Dispose ();
-				Assert.AreEqual (size, new FileInfo (filename).Length, "Non-Empty/MetafileDisposed");
+				Assert.Equal (size, new FileInfo (filename).Length, "Non-Empty/MetafileDisposed");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void CreateFilename_SingleGraphics_EmfOnly ()
 		{
 			CreateFilename (EmfType.EmfOnly, true);
 		}
 
-		[Test]
+		[Fact]
 		public void CreateFilename_SingleGraphics_EmfPlusDual ()
 		{
 			CreateFilename (EmfType.EmfPlusDual, true);
 		}
 
-		[Test]
+		[Fact]
 		public void CreateFilename_SingleGraphics_EmfPlusOnly ()
 		{
 			CreateFilename (EmfType.EmfPlusOnly, true);
 		}
 
-		[Test]
+		[Fact]
 		public void CreateFilename_MultipleGraphics_EmfOnly ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => CreateFilename (EmfType.EmfOnly, false));
 		}
 
-		[Test]
+		[Fact]
 		public void CreateFilename_MultipleGraphics_EmfPlusDual ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => CreateFilename (EmfType.EmfPlusDual, false));
 		}
 
-		[Test]
+		[Fact]
 		public void CreateFilename_MultipleGraphics_EmfPlusOnly ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => CreateFilename (EmfType.EmfPlusOnly, false));
 		}
 
-		[Test]
+		[Fact]
 		public void Measure ()
 		{
 			if (test_font == null)
@@ -599,7 +599,7 @@ namespace MonoTests.System.Drawing.Imaging {
 					ranges[1] = new CharacterRange (5, 9);
 
 					SizeF size = g.MeasureString (text, test_font);
-					Assert.IsFalse (size.IsEmpty, "MeasureString");
+					Assert.False (size.IsEmpty, "MeasureString");
 
 					StringFormat sf = new StringFormat ();
 					sf.FormatFlags = StringFormatFlags.NoClip;
@@ -607,13 +607,13 @@ namespace MonoTests.System.Drawing.Imaging {
 
 					RectangleF rect = new RectangleF (0, 0, size.Width, size.Height);
 					Region[] region = g.MeasureCharacterRanges (text, test_font, rect, sf);
-					Assert.AreEqual (2, region.Length, "MeasureCharacterRanges");
+					Assert.Equal (2, region.Length, "MeasureCharacterRanges");
 				}
 				mf.Dispose ();
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void WorldTransforms ()
 		{
 			Metafile mf;
@@ -628,33 +628,33 @@ namespace MonoTests.System.Drawing.Imaging {
 					}
 				}
 				using (Graphics g = Graphics.FromImage (mf)) {
-					Assert.IsTrue (g.Transform.IsIdentity, "Initial/IsIdentity");
+					Assert.True (g.Transform.IsIdentity, "Initial/IsIdentity");
 					g.ScaleTransform (2f, 0.5f);
-					Assert.IsFalse (g.Transform.IsIdentity, "Scale/IsIdentity");
+					Assert.False (g.Transform.IsIdentity, "Scale/IsIdentity");
 					g.RotateTransform (90);
 					g.TranslateTransform (-2, 2);
 					Matrix m = g.Transform;
 					g.MultiplyTransform (m);
 					// check
 					float[] elements = g.Transform.Elements;
-					Assert.AreEqual (-1f, elements[0], 0.00001f, "a0");
-					Assert.AreEqual (0f, elements[1], 0.00001f, "a1");
-					Assert.AreEqual (0f, elements[2], 0.00001f, "a2");
-					Assert.AreEqual (-1f, elements[3], 0.00001f, "a3");
-					Assert.AreEqual (-2f, elements[4], 0.00001f, "a4");
-					Assert.AreEqual (-3f, elements[5], 0.00001f, "a5");
+					Assert.Equal (-1f, elements[0], 0.00001f, "a0");
+					Assert.Equal (0f, elements[1], 0.00001f, "a1");
+					Assert.Equal (0f, elements[2], 0.00001f, "a2");
+					Assert.Equal (-1f, elements[3], 0.00001f, "a3");
+					Assert.Equal (-2f, elements[4], 0.00001f, "a4");
+					Assert.Equal (-3f, elements[5], 0.00001f, "a5");
 
 					g.Transform = m;
 					elements = g.Transform.Elements;
-					Assert.AreEqual (0f, elements[0], 0.00001f, "b0");
-					Assert.AreEqual (0.5f, elements[1], 0.00001f, "b1");
-					Assert.AreEqual (-2f, elements[2], 0.00001f, "b2");
-					Assert.AreEqual (0f, elements[3], 0.00001f, "b3");
-					Assert.AreEqual (-4f, elements[4], 0.00001f, "b4");
-					Assert.AreEqual (-1f, elements[5], 0.00001f, "b5");
+					Assert.Equal (0f, elements[0], 0.00001f, "b0");
+					Assert.Equal (0.5f, elements[1], 0.00001f, "b1");
+					Assert.Equal (-2f, elements[2], 0.00001f, "b2");
+					Assert.Equal (0f, elements[3], 0.00001f, "b3");
+					Assert.Equal (-4f, elements[4], 0.00001f, "b4");
+					Assert.Equal (-1f, elements[5], 0.00001f, "b5");
 
 					g.ResetTransform ();
-					Assert.IsTrue (g.Transform.IsIdentity, "Reset/IsIdentity");
+					Assert.True (g.Transform.IsIdentity, "Reset/IsIdentity");
 				}
 				mf.Dispose ();
 			}

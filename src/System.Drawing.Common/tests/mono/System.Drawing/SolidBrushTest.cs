@@ -29,34 +29,34 @@
 using System;
 using System.Drawing;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing {
 
 	[TestFixture]
 	public class SolidBrushTest {
 
-		[Test]
+		[Fact]
 		public void Transparent ()
 		{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
-			Assert.AreEqual (Color.Transparent, sb.Color, "Color");
+			Assert.Equal (Color.Transparent, sb.Color, "Color");
 			sb.Color = Color.Empty;
 			SolidBrush clone = (SolidBrush) sb.Clone ();
 			sb.Dispose ();
-			Assert.AreEqual (Color.Empty.ToArgb (), clone.Color.ToArgb (), "Clone.Color");
+			Assert.Equal (Color.Empty.ToArgb (), clone.Color.ToArgb (), "Clone.Color");
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_Color ()
 		{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
 			sb.Dispose ();
-			Assert.AreEqual (Color.Transparent, sb.Color, "Color");
+			Assert.Equal (Color.Transparent, sb.Color, "Color");
 			// no exception - the call probably doesn't get to gdi+
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_Clone ()
 		{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
@@ -64,7 +64,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => sb.Clone ());
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_Dispose ()
 		{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
@@ -72,7 +72,7 @@ namespace MonoTests.System.Drawing {
 			sb.Dispose ();
 		}
 
-		[Test]
+		[Fact]
 		public void FillRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -82,13 +82,13 @@ namespace MonoTests.System.Drawing {
 					sb.Color = Color.Blue;
 					g.FillRectangle (sb, 4, 4, 5, 5);
 				}
-				Assert.AreEqual (Color.Red.ToArgb (), bmp.GetPixel (0, 0).ToArgb (), "0,0");
-				Assert.AreEqual (Color.Blue.ToArgb (), bmp.GetPixel (8, 8).ToArgb (), "8,8");
-				Assert.AreEqual (0, bmp.GetPixel (9, 9).ToArgb (), "9,9");
+				Assert.Equal (Color.Red.ToArgb (), bmp.GetPixel (0, 0).ToArgb (), "0,0");
+				Assert.Equal (Color.Blue.ToArgb (), bmp.GetPixel (8, 8).ToArgb (), "8,8");
+				Assert.Equal (0, bmp.GetPixel (9, 9).ToArgb (), "9,9");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void DrawLine ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -99,9 +99,9 @@ namespace MonoTests.System.Drawing {
 					sb.Color = Color.Blue;
 					g.DrawLine (p, 8, 8, 4, 4); // pen is still red
 				}
-				Assert.AreEqual (Color.Red.ToArgb (), bmp.GetPixel (0, 0).ToArgb (), "0,0");
-				Assert.AreEqual (Color.Red.ToArgb (), bmp.GetPixel (8, 8).ToArgb (), "8,8");
-				Assert.AreEqual (Color.Red.ToArgb (), bmp.GetPixel (9, 9).ToArgb (), "9,9"); // include end point
+				Assert.Equal (Color.Red.ToArgb (), bmp.GetPixel (0, 0).ToArgb (), "0,0");
+				Assert.Equal (Color.Red.ToArgb (), bmp.GetPixel (8, 8).ToArgb (), "8,8");
+				Assert.Equal (Color.Red.ToArgb (), bmp.GetPixel (9, 9).ToArgb (), "9,9"); // include end point
 			}
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				using (Graphics g = Graphics.FromImage (bmp)) {
@@ -113,16 +113,16 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Clone ()
 		{
 			using (SolidBrush sb = new SolidBrush (Color.Transparent)) {
 				// we still get a "named" color
-				Assert.AreEqual (Color.Transparent, sb.Color, "Color");
+				Assert.Equal (Color.Transparent, sb.Color, "Color");
 				using (SolidBrush clone = (SolidBrush) sb.Clone ()) {
 					// but not after cloning the brush
-					Assert.IsFalse (Color.Transparent.Equals (clone.Color), "Color-Clone-Unnamed");
-					Assert.AreEqual (Color.Transparent.ToArgb (), clone.Color.ToArgb (), "Color-Clone-Argb");
+					Assert.False (Color.Transparent.Equals (clone.Color), "Color-Clone-Unnamed");
+					Assert.Equal (Color.Transparent.ToArgb (), clone.Color.ToArgb (), "Color-Clone-Argb");
 				}
 			}
 		}

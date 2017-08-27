@@ -31,7 +31,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging {
 
@@ -69,7 +69,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 
 		// Text Color Matrix processing
-		[Test]
+		[Fact]
 		public void ColorMatrix1 ()
 		{			
 			Color clr_src, clr_rslt;
@@ -85,10 +85,10 @@ namespace MonoTests.System.Drawing.Imaging {
 			clr_src = Color.FromArgb (255, 100, 20, 50);
 			clr_rslt = ProcessColorMatrix (clr_src, cm);
 
-			Assert.AreEqual (Color.FromArgb (255, 251, 20, 50), clr_rslt, "Color");
+			Assert.Equal (Color.FromArgb (255, 251, 20, 50), clr_rslt, "Color");
 		}
 
-		[Test]
+		[Fact]
 		public void ColorMatrix2 ()
 		{
 			Color clr_src, clr_rslt;
@@ -103,7 +103,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 			clr_src = Color.FromArgb (255, 100, 40, 25);
 			clr_rslt = ProcessColorMatrix (clr_src, cm);
-			Assert.AreEqual (Color.FromArgb (255, 100, 40, 165), clr_rslt, "Color");
+			Assert.Equal (Color.FromArgb (255, 100, 40, 165), clr_rslt, "Color");
 		}
 
 		private void Bug80323 (Color c)
@@ -135,8 +135,8 @@ namespace MonoTests.System.Drawing.Imaging {
 							g.DrawImage (bmp, new Rectangle (100, 0, 100, 100), 0, 0, 100, 100, GraphicsUnit.Pixel, ia);
 						}
 						b.Save (fileName);
-						Assert.AreEqual (Color.FromArgb (255, 255, 155, 155), b.GetPixel (50, 50), "50,50");
-						Assert.AreEqual (Color.FromArgb (255, 255, 205, 205), b.GetPixel (150, 50), "150,50");
+						Assert.Equal (Color.FromArgb (255, 255, 155, 155), b.GetPixel (50, 50), "50,50");
+						Assert.Equal (Color.FromArgb (255, 255, 205, 205), b.GetPixel (150, 50), "150,50");
 					}
 				}
 			}
@@ -144,13 +144,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			File.Delete (fileName);
 		}
 	
-		[Test]
+		[Fact]
 		public void ColorMatrix_80323_UsingAlpha ()
 		{
 			Bug80323 (Color.FromArgb (100, 255, 0, 0));
 		}
 
-		[Test]
+		[Fact]
 		public void ColorMatrix_80323_WithoutAlpha ()
 		{
 			// this color is identical, once drawn over the bitmap, to Color.FromArgb (100, 255, 0, 0)
@@ -172,7 +172,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_Null ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -180,7 +180,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_Default ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -193,7 +193,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_Default_Any ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -201,7 +201,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_Default_Count ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -209,7 +209,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_AltGrays ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -217,7 +217,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_AltGrays_Any ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -225,7 +225,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_AltGrays_Bitmap ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -233,7 +233,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_AltGrays_Brush ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -241,7 +241,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_AltGrays_Count ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -249,7 +249,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_AltGrays_Default ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -257,7 +257,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_AltGrays_Pen ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -265,7 +265,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_AltGrays_Text ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -273,7 +273,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_SkipGrays ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -286,7 +286,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_SkipGrays_Any ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -294,7 +294,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_SkipGrays_Count ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -302,7 +302,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_InvalidFlag ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -310,7 +310,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrix_InvalidType()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -318,7 +318,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrices_Null_ColorMatrix ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -326,7 +326,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrices_ColorMatrix_Null ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -336,7 +336,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrices_ColorMatrix_Null_AltGrays ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -344,7 +344,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrices_ColorMatrix_ColorMatrix ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -355,33 +355,33 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrices_Gray ()
 		{
 			Color c = ProcessColorMatrices (Color.Gray, global_color_matrix, global_gray_matrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
-			Assert.AreEqual (0xFFFF8080, (uint)c.ToArgb (), "Gray|Default|Default");
+			Assert.Equal (0xFFFF8080, (uint)c.ToArgb (), "Gray|Default|Default");
 
 			c = ProcessColorMatrices (Color.Gray, global_color_matrix, global_gray_matrix, ColorMatrixFlag.SkipGrays, ColorAdjustType.Default);
-			Assert.AreEqual (0xFF808080, (uint) c.ToArgb (), "Gray|SkipGrays|Default");
+			Assert.Equal (0xFF808080, (uint) c.ToArgb (), "Gray|SkipGrays|Default");
 
 			c = ProcessColorMatrices (Color.Gray, global_color_matrix, global_gray_matrix, ColorMatrixFlag.AltGrays, ColorAdjustType.Default);
-			Assert.AreEqual (0xFFFFFFFF, (uint) c.ToArgb (), "Gray|AltGrays|Default");
+			Assert.Equal (0xFFFFFFFF, (uint) c.ToArgb (), "Gray|AltGrays|Default");
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrices_Color ()
 		{
 			Color c = ProcessColorMatrices (Color.MidnightBlue, global_color_matrix, global_gray_matrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
-			Assert.AreEqual (0xFF651970, (uint) c.ToArgb (), "Color|Default|Default");
+			Assert.Equal (0xFF651970, (uint) c.ToArgb (), "Color|Default|Default");
 
 			c = ProcessColorMatrices (Color.MidnightBlue, global_color_matrix, global_gray_matrix, ColorMatrixFlag.SkipGrays, ColorAdjustType.Default);
-			Assert.AreEqual (0xFF651970, (uint) c.ToArgb (), "Color|SkipGrays|Default");
+			Assert.Equal (0xFF651970, (uint) c.ToArgb (), "Color|SkipGrays|Default");
 
 			c = ProcessColorMatrices (Color.MidnightBlue, global_color_matrix, global_gray_matrix, ColorMatrixFlag.AltGrays, ColorAdjustType.Default);
-			Assert.AreEqual (0xFF651970, (uint) c.ToArgb (), "Color|AltGrays|Default");
+			Assert.Equal (0xFF651970, (uint) c.ToArgb (), "Color|AltGrays|Default");
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrices_InvalidFlags ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -389,7 +389,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetColorMatrices_InvalidType ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -418,17 +418,17 @@ namespace MonoTests.System.Drawing.Imaging {
 						ia.SetColorMatrix (cm);
 						g.FillRectangle (Brushes.White, new Rectangle (0, 0, 1, 4));
 						g.DrawImage (bmp, new Rectangle (0, 0, 1, 4), 0, 0, 1, 4, GraphicsUnit.Pixel, ia);
-						Assert.AreEqual (Color.FromArgb (255, 255, 255, 255), b.GetPixel (0,0), prefix + "-0,0");
+						Assert.Equal (Color.FromArgb (255, 255, 255, 255), b.GetPixel (0,0), prefix + "-0,0");
 						int val = 255 - n;
-						Assert.AreEqual (Color.FromArgb (255, 255, val, val), b.GetPixel (0, 1), prefix + "-0,1");
-						Assert.AreEqual (Color.FromArgb (255, val, 255, val), b.GetPixel (0, 2), prefix + "-0,2");
-						Assert.AreEqual (Color.FromArgb (255, val, val, 255), b.GetPixel (0, 3), prefix + "-0,3");
+						Assert.Equal (Color.FromArgb (255, 255, val, val), b.GetPixel (0, 1), prefix + "-0,1");
+						Assert.Equal (Color.FromArgb (255, val, 255, val), b.GetPixel (0, 2), prefix + "-0,2");
+						Assert.Equal (Color.FromArgb (255, val, val, 255), b.GetPixel (0, 3), prefix + "-0,3");
 					}
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void ColorMatrixAlpha ()
 		{
 			for (int i = 0; i < 256; i++) {

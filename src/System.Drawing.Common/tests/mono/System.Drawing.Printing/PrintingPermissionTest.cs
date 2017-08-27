@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.IO;
 using System.Drawing.Printing;
@@ -62,45 +62,45 @@ namespace MonoTests.System.Drawing.Printing {
 			PrintingPermissionLevel.DefaultPrinting,
 		};
 
-		[Test]
+		[Fact]
 		public void PermissionState_None ()
 		{
 			PermissionState ps = PermissionState.None;
 			PrintingPermission pp = new PrintingPermission (ps);
-			Assert.AreEqual (PrintingPermissionLevel.NoPrinting, pp.Level, "Level");
-			Assert.IsFalse (pp.IsUnrestricted (), "IsUnrestricted");
+			Assert.Equal (PrintingPermissionLevel.NoPrinting, pp.Level, "Level");
+			Assert.False (pp.IsUnrestricted (), "IsUnrestricted");
 
 			SecurityElement se = pp.ToXml ();
 			// only class and version are present
-			Assert.AreEqual ("NoPrinting", se.Attribute ("Level"), "Xml-Level");
-			Assert.IsNull (se.Children, "Xml-Children");
+			Assert.Equal ("NoPrinting", se.Attribute ("Level"), "Xml-Level");
+			Assert.Null (se.Children, "Xml-Children");
 
 			PrintingPermission copy = (PrintingPermission)pp.Copy ();
-			Assert.IsFalse (Object.ReferenceEquals (pp, copy), "ReferenceEquals");
-			Assert.AreEqual (pp.Level, copy.Level, "Level");
-			Assert.AreEqual (pp.IsUnrestricted (), copy.IsUnrestricted (), "IsUnrestricted ()");
+			Assert.False (Object.ReferenceEquals (pp, copy), "ReferenceEquals");
+			Assert.Equal (pp.Level, copy.Level, "Level");
+			Assert.Equal (pp.IsUnrestricted (), copy.IsUnrestricted (), "IsUnrestricted ()");
 		}
 
-		[Test]
+		[Fact]
 		public void PermissionState_Unrestricted ()
 		{
 			PermissionState ps = PermissionState.Unrestricted;
 			PrintingPermission pp = new PrintingPermission (ps);
-			Assert.AreEqual (PrintingPermissionLevel.AllPrinting, pp.Level, "Level");
-			Assert.IsTrue (pp.IsUnrestricted (), "IsUnrestricted");
+			Assert.Equal (PrintingPermissionLevel.AllPrinting, pp.Level, "Level");
+			Assert.True (pp.IsUnrestricted (), "IsUnrestricted");
 
 			SecurityElement se = pp.ToXml ();
 			// only class and version are present
-			Assert.AreEqual ("true", se.Attribute ("Unrestricted"), "Xml-Unrestricted");
-			Assert.IsNull (se.Children, "Xml-Children");
+			Assert.Equal ("true", se.Attribute ("Unrestricted"), "Xml-Unrestricted");
+			Assert.Null (se.Children, "Xml-Children");
 
 			PrintingPermission copy = (PrintingPermission)pp.Copy ();
-			Assert.IsFalse (Object.ReferenceEquals (pp, copy), "ReferenceEquals");
-			Assert.AreEqual (pp.Level, copy.Level, "Level");
-			Assert.AreEqual (pp.IsUnrestricted (), copy.IsUnrestricted (), "IsUnrestricted ()");
+			Assert.False (Object.ReferenceEquals (pp, copy), "ReferenceEquals");
+			Assert.Equal (pp.Level, copy.Level, "Level");
+			Assert.Equal (pp.IsUnrestricted (), copy.IsUnrestricted (), "IsUnrestricted ()");
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void PermissionState_Bad ()
 		{
@@ -108,7 +108,7 @@ namespace MonoTests.System.Drawing.Printing {
 			PrintingPermission pp = new PrintingPermission (ps);
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void PrintingPermissionLevels_Bad ()
 		{
@@ -116,7 +116,7 @@ namespace MonoTests.System.Drawing.Printing {
 			PrintingPermission pp = new PrintingPermission (ppl);
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void Level_PrintingPermissionLevels_Bad ()
 		{
@@ -125,29 +125,29 @@ namespace MonoTests.System.Drawing.Printing {
 			pp.Level = ppl;
 		}
 
-		[Test]
+		[Fact]
 		public void Copy ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
 			foreach (PrintingPermissionLevel ppl in AllLevel) {
 				pp.Level = ppl;
 				PrintingPermission copy = (PrintingPermission)pp.Copy ();
-				Assert.AreEqual (ppl, copy.Level, ppl.ToString ());
+				Assert.Equal (ppl, copy.Level, ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Intersect_Null ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
 			// No intersection with null
 			foreach (PrintingPermissionLevel ppl in AllLevel) {
 				pp.Level = ppl;
-				Assert.IsNull (pp.Intersect (null), ppl.ToString ());
+				Assert.Null (pp.Intersect (null), ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Intersect_None ()
 		{
 			PrintingPermission sp1 = new PrintingPermission (PermissionState.None);
@@ -156,25 +156,25 @@ namespace MonoTests.System.Drawing.Printing {
 				sp2.Level = ppl;
 				// 1. Intersect None with ppl
 				PrintingPermission result = (PrintingPermission)sp1.Intersect (sp2);
-				Assert.IsNull (result, "None N " + ppl.ToString ());
+				Assert.Null (result, "None N " + ppl.ToString ());
 				// 2. Intersect ppl with None
 				result = (PrintingPermission)sp2.Intersect (sp1);
-				Assert.IsNull (result, "None N " + ppl.ToString ());
+				Assert.Null (result, "None N " + ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Intersect_Self ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptNoLevel) {
 				pp.Level = ppl;
 				PrintingPermission result = (PrintingPermission)pp.Intersect (pp);
-				Assert.AreEqual (ppl, result.Level, ppl.ToString ());
+				Assert.Equal (ppl, result.Level, ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Intersect_Unrestricted ()
 		{
 			// Intersection with unrestricted == Copy
@@ -184,32 +184,32 @@ namespace MonoTests.System.Drawing.Printing {
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptNoLevel) {
 				sp2.Level = ppl;
 				PrintingPermission result = (PrintingPermission)sp1.Intersect (sp2);
-				Assert.AreEqual (sp2.Level, result.Level, "target " + ppl.ToString ());
+				Assert.Equal (sp2.Level, result.Level, "target " + ppl.ToString ());
 			}
 			// b. destination (target) is unrestricted
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptNoLevel) {
 				sp2.Level = ppl;
 				PrintingPermission result = (PrintingPermission)sp2.Intersect (sp1);
-				Assert.AreEqual (sp2.Level, result.Level, "source " + ppl.ToString ());
+				Assert.Equal (sp2.Level, result.Level, "source " + ppl.ToString ());
 			}
 			// exceptions for NoLevel
 			sp2.Level = PrintingPermissionLevel.NoPrinting;
-			Assert.IsNull (sp1.Intersect (sp2), "target NoLevel");
-			Assert.IsNull (sp2.Intersect (sp1), "source NoLevel");
+			Assert.Null (sp1.Intersect (sp2), "target NoLevel");
+			Assert.Null (sp2.Intersect (sp1), "source NoLevel");
 		}
 
-		[Test]
+		[Fact]
 		public void IsSubset_Null ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
-			Assert.IsTrue (pp.IsSubsetOf (null), "NoLevel");
+			Assert.True (pp.IsSubsetOf (null), "NoLevel");
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptNoLevel) {
 				pp.Level = ppl;
-				Assert.IsFalse (pp.IsSubsetOf (null), ppl.ToString ());
+				Assert.False (pp.IsSubsetOf (null), ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void IsSubset_None ()
 		{
 			// IsSubset with none
@@ -218,30 +218,30 @@ namespace MonoTests.System.Drawing.Printing {
 			PrintingPermission sp2 = new PrintingPermission (PermissionState.None);
 			foreach (PrintingPermissionLevel ppl in AllLevel) {
 				sp2.Level = ppl;
-				Assert.IsTrue (sp1.IsSubsetOf (sp2), "target " + ppl.ToString ());
+				Assert.True (sp1.IsSubsetOf (sp2), "target " + ppl.ToString ());
 			}
 			// b. destination (target) is none -> target is always a subset
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptNoLevel) {
 				sp2.Level = ppl;
-				Assert.IsFalse (sp2.IsSubsetOf (sp1), "source " + ppl.ToString ());
+				Assert.False (sp2.IsSubsetOf (sp1), "source " + ppl.ToString ());
 			}
 			// exception of NoLevel
 			sp2.Level = PrintingPermissionLevel.NoPrinting;
-			Assert.IsTrue (sp2.IsSubsetOf (sp1), "source NoLevel");
+			Assert.True (sp2.IsSubsetOf (sp1), "source NoLevel");
 		}
 
-		[Test]
+		[Fact]
 		public void IsSubset_Self ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
 			foreach (PrintingPermissionLevel ppl in AllLevel) {
 				pp.Level = ppl;
 				PrintingPermission result = (PrintingPermission)pp.Intersect (pp);
-				Assert.IsTrue (pp.IsSubsetOf (pp), ppl.ToString ());
+				Assert.True (pp.IsSubsetOf (pp), ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void IsSubset_Unrestricted ()
 		{
 			// IsSubset with unrestricted
@@ -250,19 +250,19 @@ namespace MonoTests.System.Drawing.Printing {
 			PrintingPermission sp2 = new PrintingPermission (PermissionState.None);
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptAllLevel) {
 				sp2.Level = ppl;
-				Assert.IsFalse (sp1.IsSubsetOf (sp2), "target " + ppl.ToString ());
+				Assert.False (sp1.IsSubsetOf (sp2), "target " + ppl.ToString ());
 			}
 			// exception of AllLevel
 			sp2.Level = PrintingPermissionLevel.AllPrinting;
-			Assert.IsTrue (sp1.IsSubsetOf (sp2), "target AllLevel");
+			Assert.True (sp1.IsSubsetOf (sp2), "target AllLevel");
 			// b. destination (target) is unrestricted -> target is always a subset
 			foreach (PrintingPermissionLevel ppl in AllLevel) {
 				sp2.Level = ppl;
-				Assert.IsTrue (sp2.IsSubsetOf (sp1), "source " + ppl.ToString ());
+				Assert.True (sp2.IsSubsetOf (sp1), "source " + ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Union_Null ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
@@ -270,11 +270,11 @@ namespace MonoTests.System.Drawing.Printing {
 			foreach (PrintingPermissionLevel ppl in AllLevel) {
 				pp.Level = ppl;
 				PrintingPermission union = (PrintingPermission)pp.Union (null);
-				Assert.AreEqual (ppl, union.Level, ppl.ToString ());
+				Assert.Equal (ppl, union.Level, ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Union_None ()
 		{
 			// Union with none is same
@@ -285,45 +285,45 @@ namespace MonoTests.System.Drawing.Printing {
 			// a. source (this) is none
 			pp2.Level = PrintingPermissionLevel.NoPrinting;
 			union = (PrintingPermission)pp1.Union (pp2);
-			Assert.IsNull (union, "target NoPrinting");
+			Assert.Null (union, "target NoPrinting");
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptNoAndAllLevel) {
 				pp2.Level = ppl;
 				union = (PrintingPermission)pp1.Union (pp2);
-				Assert.IsFalse (union.IsUnrestricted (), "target " + ppl.ToString ());
+				Assert.False (union.IsUnrestricted (), "target " + ppl.ToString ());
 			}
 			pp2.Level = PrintingPermissionLevel.AllPrinting;
 			union = (PrintingPermission)pp1.Union (pp2);
-			Assert.IsTrue (union.IsUnrestricted (), "target AllPrinting");
+			Assert.True (union.IsUnrestricted (), "target AllPrinting");
 
 			// b. destination (target) is none
 			pp2.Level = PrintingPermissionLevel.NoPrinting;
 			union = (PrintingPermission)pp2.Union (pp1);
-			Assert.IsNull (union, "source NoPrinting");
+			Assert.Null (union, "source NoPrinting");
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptNoAndAllLevel) {
 				pp2.Level = ppl;
 				union = (PrintingPermission)pp2.Union (pp1);
-				Assert.IsFalse (union.IsUnrestricted (), "source " + ppl.ToString ());
+				Assert.False (union.IsUnrestricted (), "source " + ppl.ToString ());
 			}
 			pp2.Level = PrintingPermissionLevel.AllPrinting;
 			union = (PrintingPermission)pp2.Union (pp1);
-			Assert.IsTrue (union.IsUnrestricted (), "source AllPrinting");
+			Assert.True (union.IsUnrestricted (), "source AllPrinting");
 		}
 
-		[Test]
+		[Fact]
 		public void Union_Self ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
 			foreach (PrintingPermissionLevel ppl in AllLevelExceptNoLevel) {
 				pp.Level = ppl;
 				PrintingPermission result = (PrintingPermission)pp.Union (pp);
-				Assert.AreEqual (ppl, result.Level, ppl.ToString ());
+				Assert.Equal (ppl, result.Level, ppl.ToString ());
 			}
 			// union of NoPrinting with NoPrinting == null
 			pp.Level = PrintingPermissionLevel.NoPrinting;
-			Assert.IsNull (pp.Union (pp), "NoPrinting");
+			Assert.Null (pp.Union (pp), "NoPrinting");
 		}
 
-		[Test]
+		[Fact]
 		public void Union_Unrestricted ()
 		{
 			// Union with unrestricted is unrestricted
@@ -333,17 +333,17 @@ namespace MonoTests.System.Drawing.Printing {
 			foreach (PrintingPermissionLevel ppl in AllLevel) {
 				sp2.Level = ppl;
 				PrintingPermission union = (PrintingPermission)sp1.Union (sp2);
-				Assert.IsTrue (union.IsUnrestricted (), "target " + ppl.ToString ());
+				Assert.True (union.IsUnrestricted (), "target " + ppl.ToString ());
 			}
 			// b. destination (target) is unrestricted
 			foreach (PrintingPermissionLevel ppl in AllLevel) {
 				sp2.Level = ppl;
 				PrintingPermission union = (PrintingPermission)sp2.Union (sp1);
-				Assert.IsTrue (union.IsUnrestricted (), "source " + ppl.ToString ());
+				Assert.True (union.IsUnrestricted (), "source " + ppl.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentNullException))]
 		public void FromXml_Null ()
 		{
@@ -351,7 +351,7 @@ namespace MonoTests.System.Drawing.Printing {
 			pp.FromXml (null);
 		}
 
-		[Test]
+		[Fact]
 		public void FromXml_WrongTag ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
@@ -362,7 +362,7 @@ namespace MonoTests.System.Drawing.Printing {
 			// IPermission tag
 		}
 
-		[Test]
+		[Fact]
 		public void FromXml_WrongTagCase ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
@@ -373,7 +373,7 @@ namespace MonoTests.System.Drawing.Printing {
 			// IPermission tag
 		}
 
-		[Test]
+		[Fact]
 		public void FromXml_WrongClass ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
@@ -387,7 +387,7 @@ namespace MonoTests.System.Drawing.Printing {
 			// anyway the class has already be created so...
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void FromXml_NoClass ()
 		{
@@ -401,7 +401,7 @@ namespace MonoTests.System.Drawing.Printing {
 			// attribute "class" name presence in the XML
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void FromXml_WrongVersion ()
 		{
@@ -412,7 +412,7 @@ namespace MonoTests.System.Drawing.Printing {
 			pp.FromXml (se);
 		}
 
-		[Test]
+		[Fact]
 		public void FromXml_NoVersion ()
 		{
 			PrintingPermission pp = new PrintingPermission (PermissionState.None);
@@ -436,28 +436,28 @@ namespace MonoTests.System.Drawing.Printing {
 			psa.XML = xml;
 			string pset = psa.CreatePermissionSet ().ToString ();
 			string currentVersion = typeof (string).Assembly.GetName ().Version.ToString ();
-			Assert.IsTrue ((pset.IndexOf (currentVersion) > 0), currentVersion);
+			Assert.True ((pset.IndexOf (currentVersion) > 0), currentVersion);
 		}
 
-		[Test]
+		[Fact]
 		public void Unification_FromFx10 ()
 		{
 			Unification (String.Format (PermissionPattern, fx10version));
 		}
 
-		[Test]
+		[Fact]
 		public void Unification_FromFx11 ()
 		{
 			Unification (String.Format (PermissionPattern, fx11version));
 		}
 
-		[Test]
+		[Fact]
 		public void Unification_FromFx20 ()
 		{
 			Unification (String.Format (PermissionPattern, fx20version));
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		[ExpectedException (typeof (FileLoadException))]
 		public void Unification_FromFx99 ()

@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.Drawing;
 using System.Security.Permissions;
@@ -36,31 +36,31 @@ namespace MonoTests.System.Drawing {
 	[TestFixture]
 	public class SystemIconsTest {
 
-		[Test]
+		[Fact]
 		public void Same ()
 		{
 			// SystemIcons always return the same icon
-			Assert.IsTrue (Object.ReferenceEquals (SystemIcons.Application, SystemIcons.Application), "Same");
+			Assert.True (Object.ReferenceEquals (SystemIcons.Application, SystemIcons.Application), "Same");
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_SystemIcons ()
 		{
 			// SystemIcons icon's can't be disposed
 			SystemIcons.Application.Dispose ();
-			Assert.IsNotNull (SystemIcons.Application.ToBitmap ());
+			Assert.NotNull (SystemIcons.Application.ToBitmap ());
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_Indirect ()
 		{
 			// SystemIcons icon's can't be disposed
 			Icon app = SystemIcons.Application;
 			app.Dispose ();
-			Assert.IsNotNull (app.ToBitmap ());
+			Assert.NotNull (app.ToBitmap ());
 		}
 
-		[Test]
+		[Fact]
 		public void Clone_Dispose ()
 		{
 			// Clones of SystemIcons icon's can be disposed

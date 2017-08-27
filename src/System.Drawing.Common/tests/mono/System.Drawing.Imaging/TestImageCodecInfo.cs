@@ -31,7 +31,7 @@
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
-using NUnit.Framework;
+using Xunit;
 using System.Collections;
 using System.Security.Permissions;
 using System.Text.RegularExpressions;
@@ -75,55 +75,55 @@ namespace MonoTests.System.Drawing.Imaging {
 				RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
 			if (e != null) {
-				Assert.AreEqual (FormatID, e.FormatID, "Encoder.FormatID");
-				Assert.IsTrue (e.CodecName.IndexOf (CodecName)>=0,
+				Assert.Equal (FormatID, e.FormatID, "Encoder.FormatID");
+				Assert.True (e.CodecName.IndexOf (CodecName)>=0,
 					"Encoder.CodecName contains "+CodecName);
-				Assert.AreEqual (DllName, e.DllName, "Encoder.DllName");
-				Assert.IsTrue (extRegex.IsMatch (e.FilenameExtension),
+				Assert.Equal (DllName, e.DllName, "Encoder.DllName");
+				Assert.True (extRegex.IsMatch (e.FilenameExtension),
 					"Encoder.FilenameExtension is a right list with "+FilenameExtension);
-				Assert.AreEqual (Flags, e.Flags, "Encoder.Flags");
-				Assert.IsTrue (e.FormatDescription.IndexOf (FormatDescription)>=0,
+				Assert.Equal (Flags, e.Flags, "Encoder.Flags");
+				Assert.True (e.FormatDescription.IndexOf (FormatDescription)>=0,
 					"Encoder.FormatDescription contains "+FormatDescription);
-				Assert.IsTrue (e.MimeType.IndexOf (MimeType)>=0,
+				Assert.True (e.MimeType.IndexOf (MimeType)>=0,
 					"Encoder.MimeType contains "+MimeType);
 
-				Assert.AreEqual (signatureLength, e.SignatureMasks.Length, "Encoder.SignatureMasks.Length");
+				Assert.Equal (signatureLength, e.SignatureMasks.Length, "Encoder.SignatureMasks.Length");
 				for (int i = 0; i < signatureLength; i++) {
-					Assert.AreEqual (mask, BitConverter.ToString (e.SignatureMasks[i]), String.Format ("Encoder.SignatureMasks[{0}]", i));
+					Assert.Equal (mask, BitConverter.ToString (e.SignatureMasks[i]), String.Format ("Encoder.SignatureMasks[{0}]", i));
 				}
-				Assert.AreEqual (signatureLength, e.SignaturePatterns.Length, "Encoder.SignaturePatterns.Length");
-				Assert.AreEqual (pattern, BitConverter.ToString (e.SignaturePatterns[0]), "Encoder.SignaturePatterns[0]");
+				Assert.Equal (signatureLength, e.SignaturePatterns.Length, "Encoder.SignaturePatterns.Length");
+				Assert.Equal (pattern, BitConverter.ToString (e.SignaturePatterns[0]), "Encoder.SignaturePatterns[0]");
 				if (pattern2 != null)
-					Assert.AreEqual (pattern2, BitConverter.ToString (e.SignaturePatterns[1]), "Encoder.SignaturePatterns[1]");
+					Assert.Equal (pattern2, BitConverter.ToString (e.SignaturePatterns[1]), "Encoder.SignaturePatterns[1]");
 			}
 			if (d != null) {
-				Assert.AreEqual (FormatID, d.FormatID, "Decoder.FormatID");
-				Assert.IsTrue (d.CodecName.IndexOf (CodecName)>=0,
+				Assert.Equal (FormatID, d.FormatID, "Decoder.FormatID");
+				Assert.True (d.CodecName.IndexOf (CodecName)>=0,
 					"Decoder.CodecName contains "+CodecName);
-				Assert.AreEqual (DllName, d.DllName, "Decoder.DllName");
-				Assert.IsTrue (extRegex.IsMatch (d.FilenameExtension),
+				Assert.Equal (DllName, d.DllName, "Decoder.DllName");
+				Assert.True (extRegex.IsMatch (d.FilenameExtension),
 					"Decoder.FilenameExtension is a right list with "+FilenameExtension);
-				Assert.AreEqual (Flags, d.Flags, "Decoder.Flags");
-				Assert.IsTrue (d.FormatDescription.IndexOf (FormatDescription)>=0,
+				Assert.Equal (Flags, d.Flags, "Decoder.Flags");
+				Assert.True (d.FormatDescription.IndexOf (FormatDescription)>=0,
 					"Decoder.FormatDescription contains "+FormatDescription);
-				Assert.IsTrue (d.MimeType.IndexOf (MimeType)>=0,
+				Assert.True (d.MimeType.IndexOf (MimeType)>=0,
 					"Decoder.MimeType contains "+MimeType);
 
-				Assert.AreEqual (signatureLength, d.SignatureMasks.Length, "Decoder.SignatureMasks.Length");
+				Assert.Equal (signatureLength, d.SignatureMasks.Length, "Decoder.SignatureMasks.Length");
 				for (int i = 0; i < signatureLength; i++) {
-					Assert.AreEqual (mask, BitConverter.ToString (d.SignatureMasks[i]), String.Format ("Decoder.SignatureMasks[{0}]", i));
+					Assert.Equal (mask, BitConverter.ToString (d.SignatureMasks[i]), String.Format ("Decoder.SignatureMasks[{0}]", i));
 				}
-				Assert.AreEqual (signatureLength, d.SignaturePatterns.Length, "Decoder.SignaturePatterns.Length");
-				Assert.AreEqual (pattern, BitConverter.ToString (d.SignaturePatterns[0]), "Decoder.SignaturePatterns[0]");
+				Assert.Equal (signatureLength, d.SignaturePatterns.Length, "Decoder.SignaturePatterns.Length");
+				Assert.Equal (pattern, BitConverter.ToString (d.SignaturePatterns[0]), "Decoder.SignaturePatterns[0]");
 				if (pattern2 != null)
-					Assert.AreEqual (pattern2, BitConverter.ToString (d.SignaturePatterns[1]), "Decoder.SignaturePatterns[1]");
+					Assert.Equal (pattern2, BitConverter.ToString (d.SignaturePatterns[1]), "Decoder.SignaturePatterns[1]");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Decoders ()
 		{
-			Assert.AreEqual (8, decoders.Count, "Count");
+			Assert.Equal (8, decoders.Count, "Count");
 			foreach (DictionaryEntry de in decoders) {
 				string guid = de.Key.ToString ();
 				switch (guid) {
@@ -143,10 +143,10 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Encoders ()
 		{
-			Assert.AreEqual (5, encoders.Count, "Count");
+			Assert.Equal (5, encoders.Count, "Count");
 			foreach (DictionaryEntry de in encoders) {
 				string guid = de.Key.ToString ();
 				switch (guid) {
@@ -163,7 +163,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void BMPCodec()
 		{
 			Guid g = new Guid ("557cf400-1a04-11d3-9a73-0000f81ef32e");
@@ -173,7 +173,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				"BMP", "image/bmp", 1, 1, "FF-FF", "42-4D", null);
 		}
 
-		[Test]
+		[Fact]
 		public void GifCodec()
 		{
 			Guid g = new Guid ("557cf402-1a04-11d3-9a73-0000f81ef32e");
@@ -183,7 +183,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				"GIF", "image/gif", 1, 2, "FF-FF-FF-FF-FF-FF", "47-49-46-38-39-61", "47-49-46-38-37-61");
 		}
 		
-		[Test]
+		[Fact]
 		public void JpegCodec()
 		{
 			Guid g = new Guid ("557cf401-1a04-11d3-9a73-0000f81ef32e");
@@ -193,7 +193,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				"JPEG", "image/jpeg", 1, 1, "FF-FF", "FF-D8", null);
 		}
 
-		[Test]
+		[Fact]
 		public void PngCodec()
 		{
 			Guid g = new Guid ("557cf406-1a04-11d3-9a73-0000f81ef32e");
@@ -203,7 +203,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				"PNG", "image/png", 1, 1, "FF-FF-FF-FF-FF-FF-FF-FF", "89-50-4E-47-0D-0A-1A-0A", null);
 		}
 
-		[Test]
+		[Fact]
 		public void TiffCodec ()
 		{
 			Guid g = new Guid ("557cf405-1a04-11d3-9a73-0000f81ef32e");
@@ -213,14 +213,14 @@ namespace MonoTests.System.Drawing.Imaging {
 				"TIFF", "image/tiff", 1, 2, "FF-FF", "49-49", "4D-4D");
 		}
 
-		[Test]
+		[Fact]
 		public void IconCodec_Encoder ()
 		{
 			Guid g = new Guid ("557cf407-1a04-11d3-9a73-0000f81ef32e");
-			Assert.IsNull (GetEncoder (g), "Encoder");
+			Assert.Null (GetEncoder (g), "Encoder");
 		}
 
-		[Test]
+		[Fact]
 		public void IconCodec_Decoder ()
 		{
 			Guid g = new Guid ("557cf407-1a04-11d3-9a73-0000f81ef32e");
@@ -230,14 +230,14 @@ namespace MonoTests.System.Drawing.Imaging {
 				"ICO", "image/x-icon", 1, 1, "FF-FF-FF-FF", "00-00-01-00", null);
 		}
 
-		[Test]
+		[Fact]
 		public void EmfCodec_Encoder ()
 		{
 			Guid g = new Guid ("557cf403-1a04-11d3-9a73-0000f81ef32e");
-			Assert.IsNull (GetEncoder (g), "Encoder");
+			Assert.Null (GetEncoder (g), "Encoder");
 		}
 
-		[Test]
+		[Fact]
 		public void EmfCodec_Decoder ()
 		{
 			Guid g = new Guid ("557cf403-1a04-11d3-9a73-0000f81ef32e");
@@ -248,14 +248,14 @@ namespace MonoTests.System.Drawing.Imaging {
 				"00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-20-45-4D-46", null);
 		}
 
-		[Test]
+		[Fact]
 		public void WmfCodec_Encoder ()
 		{
 			Guid g = new Guid ("557cf404-1a04-11d3-9a73-0000f81ef32e");
-			Assert.IsNull (GetEncoder (g), "Encoder");
+			Assert.Null (GetEncoder (g), "Encoder");
 		}
 
-		[Test]
+		[Fact]
 		public void WmfCodec_Decoder ()
 		{
 			Guid g = new Guid ("557cf404-1a04-11d3-9a73-0000f81ef32e");

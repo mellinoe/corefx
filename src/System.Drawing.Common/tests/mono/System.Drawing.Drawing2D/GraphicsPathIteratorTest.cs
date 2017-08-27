@@ -30,7 +30,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Drawing2D {
 
@@ -39,39 +39,39 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private PointF [] pts_2f = new PointF [2] { new PointF (1, 2), new PointF (20, 30) };
 
-		[Test]
+		[Fact]
 		public void Ctor_Null ()
 		{
 			using (GraphicsPathIterator gpi = new GraphicsPathIterator (null)) {
-				Assert.AreEqual (0, gpi.Count, "Count");
+				Assert.Equal (0, gpi.Count, "Count");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void NextMarker_Null ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (pts_2f);
 				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
-					Assert.AreEqual (0, gpi.NextMarker (null));
+					Assert.Equal (0, gpi.NextMarker (null));
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void NextSubpath_Null ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (pts_2f);
 				using (GraphicsPathIterator gpi = new GraphicsPathIterator (gp)) {
 					bool closed;
-					Assert.AreEqual (0, gpi.NextSubpath (null, out closed));
-					Assert.IsTrue (closed, "Closed");
+					Assert.Equal (0, gpi.NextSubpath (null, out closed));
+					Assert.True (closed, "Closed");
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void CopyData_NullPoints ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -84,7 +84,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void CopyData_NullTypes ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -97,7 +97,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void CopyData_DifferentSize ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -110,7 +110,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Enumerate_NullPoints ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -123,7 +123,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Enumerate_NullTypes ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -136,7 +136,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Enumerate_DifferentSize ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {

@@ -32,7 +32,7 @@ using System.Drawing.Imaging;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing
 {
@@ -60,7 +60,7 @@ namespace MonoTests.System.Drawing
 			graphic = Graphics.FromImage (bitmap);
 		}
 
-		[Test]
+		[Fact]
 		public void TestBounds()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -77,13 +77,13 @@ namespace MonoTests.System.Drawing
 
 			bounds = rgn1.GetBounds (dc);
 
-			Assert.AreEqual (500, bounds.X);
-			Assert.AreEqual (30, bounds.Y);
-			Assert.AreEqual (80, bounds.Width);
-			Assert.AreEqual (90, bounds.Height);
+			Assert.Equal (500, bounds.X);
+			Assert.Equal (30, bounds.Y);
+			Assert.Equal (80, bounds.Width);
+			Assert.Equal (90, bounds.Height);
 		}
 
-		[Test]
+		[Fact]
 		public void TestCloneAndEquals()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -103,21 +103,21 @@ namespace MonoTests.System.Drawing
 			rects = rgn1.GetRegionScans (matrix);
 			rects2 = rgn2.GetRegionScans (matrix);
 
-			Assert.AreEqual (rects.Length, rects2.Length);
+			Assert.Equal (rects.Length, rects2.Length);
 
 			for (int i = 0; i < rects.Length; i++) {
 
-				Assert.AreEqual (rects[i].X, rects[i].X);
-				Assert.AreEqual (rects[i].Y, rects[i].Y);
-				Assert.AreEqual (rects[i].Width, rects[i].Width);
-				Assert.AreEqual (rects[i].Height, rects[i].Height);
+				Assert.Equal (rects[i].X, rects[i].X);
+				Assert.Equal (rects[i].Y, rects[i].Y);
+				Assert.Equal (rects[i].Width, rects[i].Width);
+				Assert.Equal (rects[i].Height, rects[i].Height);
 			}
 
-			Assert.AreEqual (true, rgn1.Equals (rgn2, dc));
+			Assert.Equal (true, rgn1.Equals (rgn2, dc));
 		}
 
 		 /*Tests infinite, empty, etc*/
-		[Test]
+		[Fact]
 		public void TestInfiniteAndEmpty()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -132,27 +132,27 @@ namespace MonoTests.System.Drawing
 			rgn1 = new Region (rect1);
 			rgn1.Union (rect2);
 
-			Assert.AreEqual (false, rgn1.IsEmpty (dc));
-			Assert.AreEqual (false, rgn1.IsInfinite (dc));
+			Assert.Equal (false, rgn1.IsEmpty (dc));
+			Assert.Equal (false, rgn1.IsInfinite (dc));
 
 			rgn1.MakeEmpty();
-			Assert.AreEqual (true, rgn1.IsEmpty (dc));
+			Assert.Equal (true, rgn1.IsEmpty (dc));
 
 			rgn1 = new Region (rect1);
 			rgn1.Union (rect2);
 			rgn1.MakeInfinite ();
 			rects = rgn1.GetRegionScans (matrix);
 
-			Assert.AreEqual (1, rects.Length);
-			Assert.AreEqual (-4194304, rects[0].X);
-			Assert.AreEqual (-4194304, rects[0].Y);
-			Assert.AreEqual (8388608, rects[0].Width);
-			Assert.AreEqual (8388608, rects[0].Height);
-			Assert.AreEqual (true, rgn1.IsInfinite (dc));
+			Assert.Equal (1, rects.Length);
+			Assert.Equal (-4194304, rects[0].X);
+			Assert.Equal (-4194304, rects[0].Y);
+			Assert.Equal (8388608, rects[0].Width);
+			Assert.Equal (8388608, rects[0].Height);
+			Assert.Equal (true, rgn1.IsInfinite (dc));
 		}
 
 
-		[Test]
+		[Fact]
 		public void TestUnionGroup1 ()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -169,21 +169,21 @@ namespace MonoTests.System.Drawing
 			rgn1.Union(rgn2);
 			rects = rgn1.GetRegionScans (matrix);
 
-			Assert.AreEqual (3, rects.Length);
-			Assert.AreEqual (500, rects[0].X);
-			Assert.AreEqual (30, rects[0].Y);
-			Assert.AreEqual (60, rects[0].Width);
-			Assert.AreEqual (10, rects[0].Height);
+			Assert.Equal (3, rects.Length);
+			Assert.Equal (500, rects[0].X);
+			Assert.Equal (30, rects[0].Y);
+			Assert.Equal (60, rects[0].Width);
+			Assert.Equal (10, rects[0].Height);
 
-			Assert.AreEqual (500, rects[1].X);
-			Assert.AreEqual (40, rects[1].Y);
-			Assert.AreEqual (80, rects[1].Width);
-			Assert.AreEqual (70, rects[1].Height);
+			Assert.Equal (500, rects[1].X);
+			Assert.Equal (40, rects[1].Y);
+			Assert.Equal (80, rects[1].Width);
+			Assert.Equal (70, rects[1].Height);
 
-			Assert.AreEqual (520, rects[2].X);
-			Assert.AreEqual (110, rects[2].Y);
-			Assert.AreEqual (60, rects[2].Width);
-			Assert.AreEqual (10, rects[2].Height);
+			Assert.Equal (520, rects[2].X);
+			Assert.Equal (110, rects[2].Y);
+			Assert.Equal (60, rects[2].Width);
+			Assert.Equal (10, rects[2].Height);
 
 			rect1 = new Rectangle (20, 180, 40, 50);
 			rect2 = new Rectangle (50, 190, 40, 50);
@@ -195,32 +195,32 @@ namespace MonoTests.System.Drawing
 			rgn1.Union (rgn2);
 			rgn1.Union (rgn3);
 			rects = rgn1.GetRegionScans (matrix);
-			Assert.AreEqual (5, rects.Length);
+			Assert.Equal (5, rects.Length);
 
-			Assert.AreEqual (20, rects[0].X);
-			Assert.AreEqual (180, rects[0].Y);
-			Assert.AreEqual (40, rects[0].Width);
-			Assert.AreEqual (10, rects[0].Height);
+			Assert.Equal (20, rects[0].X);
+			Assert.Equal (180, rects[0].Y);
+			Assert.Equal (40, rects[0].Width);
+			Assert.Equal (10, rects[0].Height);
 
-			Assert.AreEqual (20, rects[1].X);
-			Assert.AreEqual (190, rects[1].Y);
-			Assert.AreEqual (70, rects[1].Width);
-			Assert.AreEqual (20, rects[1].Height);
+			Assert.Equal (20, rects[1].X);
+			Assert.Equal (190, rects[1].Y);
+			Assert.Equal (70, rects[1].Width);
+			Assert.Equal (20, rects[1].Height);
 
-			Assert.AreEqual (20, rects[2].X);
-			Assert.AreEqual (210, rects[2].Y);
-			Assert.AreEqual (80, rects[2].Width);
-			Assert.AreEqual (20, rects[2].Height);
+			Assert.Equal (20, rects[2].X);
+			Assert.Equal (210, rects[2].Y);
+			Assert.Equal (80, rects[2].Width);
+			Assert.Equal (20, rects[2].Height);
 
-			Assert.AreEqual (50, rects[3].X);
-			Assert.AreEqual (230, rects[3].Y);
-			Assert.AreEqual (50, rects[3].Width);
-			Assert.AreEqual (10, rects[3].Height);
+			Assert.Equal (50, rects[3].X);
+			Assert.Equal (230, rects[3].Y);
+			Assert.Equal (50, rects[3].Width);
+			Assert.Equal (10, rects[3].Height);
 
-			Assert.AreEqual (70, rects[4].X);
-			Assert.AreEqual (240, rects[4].Y);
-			Assert.AreEqual (30, rects[4].Width);
-			Assert.AreEqual (20, rects[4].Height);
+			Assert.Equal (70, rects[4].X);
+			Assert.Equal (240, rects[4].Y);
+			Assert.Equal (30, rects[4].Width);
+			Assert.Equal (20, rects[4].Height);
 
 			rect1 = new Rectangle (20, 330, 40, 50);
 			rect2 = new Rectangle (50, 340, 40, 50);
@@ -237,37 +237,37 @@ namespace MonoTests.System.Drawing
 
 			rects = rgn1.GetRegionScans (matrix);
 
-			Assert.AreEqual (6, rects.Length);
+			Assert.Equal (6, rects.Length);
 
-			Assert.AreEqual (20, rects[0].X);
-			Assert.AreEqual (330, rects[0].Y);
-			Assert.AreEqual (40, rects[0].Width);
-			Assert.AreEqual (10, rects[0].Height);
+			Assert.Equal (20, rects[0].X);
+			Assert.Equal (330, rects[0].Y);
+			Assert.Equal (40, rects[0].Width);
+			Assert.Equal (10, rects[0].Height);
 
-			Assert.AreEqual (20, rects[1].X);
-			Assert.AreEqual (340, rects[1].Y);
-			Assert.AreEqual (70, rects[1].Width);
-			Assert.AreEqual (20, rects[1].Height);
+			Assert.Equal (20, rects[1].X);
+			Assert.Equal (340, rects[1].Y);
+			Assert.Equal (70, rects[1].Width);
+			Assert.Equal (20, rects[1].Height);
 
-			Assert.AreEqual (20, rects[2].X);
-			Assert.AreEqual (360, rects[2].Y);
-			Assert.AreEqual (80, rects[2].Width);
-			Assert.AreEqual (20, rects[2].Height);
+			Assert.Equal (20, rects[2].X);
+			Assert.Equal (360, rects[2].Y);
+			Assert.Equal (80, rects[2].Width);
+			Assert.Equal (20, rects[2].Height);
 
-			Assert.AreEqual (50, rects[3].X);
-			Assert.AreEqual (380, rects[3].Y);
-			Assert.AreEqual (50, rects[3].Width);
-			Assert.AreEqual (10, rects[3].Height);
+			Assert.Equal (50, rects[3].X);
+			Assert.Equal (380, rects[3].Y);
+			Assert.Equal (50, rects[3].Width);
+			Assert.Equal (10, rects[3].Height);
 
-			Assert.AreEqual (70, rects[4].X);
-			Assert.AreEqual (390, rects[4].Y);
-			Assert.AreEqual (30, rects[4].Width);
-			Assert.AreEqual (10, rects[4].Height);
+			Assert.Equal (70, rects[4].X);
+			Assert.Equal (390, rects[4].Y);
+			Assert.Equal (30, rects[4].Width);
+			Assert.Equal (10, rects[4].Height);
 
-			Assert.AreEqual (70, rects[5].X);
-			Assert.AreEqual (400, rects[5].Y);
-			Assert.AreEqual (40, rects[5].Width);
-			Assert.AreEqual (10, rects[5].Height);
+			Assert.Equal (70, rects[5].X);
+			Assert.Equal (400, rects[5].Y);
+			Assert.Equal (40, rects[5].Width);
+			Assert.Equal (10, rects[5].Height);
 
 			rect1 = new Rectangle (10, 20, 50, 50);
 			rect2 = new Rectangle (100, 100, 60, 60);
@@ -279,33 +279,33 @@ namespace MonoTests.System.Drawing
 
 			rects = rgn1.GetRegionScans (matrix);
 
-			Assert.AreEqual (3, rects.Length);
+			Assert.Equal (3, rects.Length);
 
-			Assert.AreEqual (10, rects[0].X);
-			Assert.AreEqual (20, rects[0].Y);
-			Assert.AreEqual (50, rects[0].Width);
-			Assert.AreEqual (50, rects[0].Height);
+			Assert.Equal (10, rects[0].X);
+			Assert.Equal (20, rects[0].Y);
+			Assert.Equal (50, rects[0].Width);
+			Assert.Equal (50, rects[0].Height);
 
-			Assert.AreEqual (100, rects[1].X);
-			Assert.AreEqual (100, rects[1].Y);
-			Assert.AreEqual (60, rects[1].Width);
-			Assert.AreEqual (60, rects[1].Height);
+			Assert.Equal (100, rects[1].X);
+			Assert.Equal (100, rects[1].Y);
+			Assert.Equal (60, rects[1].Width);
+			Assert.Equal (60, rects[1].Height);
 
-			Assert.AreEqual (200, rects[2].X);
-			Assert.AreEqual (200, rects[2].Y);
-			Assert.AreEqual (80, rects[2].Width);
-			Assert.AreEqual (80, rects[2].Height);
+			Assert.Equal (200, rects[2].X);
+			Assert.Equal (200, rects[2].Y);
+			Assert.Equal (80, rects[2].Width);
+			Assert.Equal (80, rects[2].Height);
 		}
 
 		void AssertEqualRectangles (RectangleF rect1, RectangleF rect2, string text)
 		{
-			Assert.AreEqual (rect1.X, rect2.X, text + ".X");
-			Assert.AreEqual (rect1.Y, rect2.Y, text + ".Y");
-			Assert.AreEqual (rect1.Width, rect2.Width, text + ".Width");
-			Assert.AreEqual (rect1.Height, rect2.Height, text + ".Height");
+			Assert.Equal (rect1.X, rect2.X, text + ".X");
+			Assert.Equal (rect1.Y, rect2.Y, text + ".Y");
+			Assert.Equal (rect1.Width, rect2.Width, text + ".Width");
+			Assert.Equal (rect1.Height, rect2.Height, text + ".Height");
 		}
 
-		[Test]
+		[Fact]
 		public void TestUnionGroup2 ()
 		{
 			RectangleF[] rects;
@@ -326,7 +326,7 @@ namespace MonoTests.System.Drawing
 				r1.Union (rect3);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual (3, rects.Length, "TUG1Test1");
+				Assert.Equal (3, rects.Length, "TUG1Test1");
 				AssertEqualRectangles (new RectangleF (20, 20, 20, 20), rects[0], "TUG1Test2");
 				AssertEqualRectangles (new RectangleF (60, 60, 30, 10), rects[1], "TUG1Test3");
 				AssertEqualRectangles (new RectangleF (20, 80, 20, 10), rects[2], "TUG1Test4");
@@ -350,7 +350,7 @@ namespace MonoTests.System.Drawing
 				r1.Union (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (3, rects.Length, "TUG2Test1");
+				Assert.Equal  (3, rects.Length, "TUG2Test1");
 				AssertEqualRectangles (new RectangleF (10, 10, 100, 50), rects[0], "TUG2Test2");
 				AssertEqualRectangles (new RectangleF (10, 60, 130, 20), rects[1], "TUG2Test3");
 				AssertEqualRectangles (new RectangleF (10, 80, 100, 30), rects[2], "TUG2Test4");
@@ -375,7 +375,7 @@ namespace MonoTests.System.Drawing
 				r1.Union (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (3, rects.Length, "TUG3Test1");
+				Assert.Equal  (3, rects.Length, "TUG3Test1");
 				AssertEqualRectangles (new RectangleF (70, 10, 100, 50), rects[0], "TUG3Test2");
 				AssertEqualRectangles (new RectangleF (40, 60, 130, 20), rects[1], "TUG3Test3");
 				AssertEqualRectangles (new RectangleF (70, 80, 100, 30), rects[2], "TUG3Test4");
@@ -400,7 +400,7 @@ namespace MonoTests.System.Drawing
 				r1.Union (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (2, rects.Length, "TUG4Test1");
+				Assert.Equal  (2, rects.Length, "TUG4Test1");
 				AssertEqualRectangles (new RectangleF (70, 80, 50, 20), rects[0], "TUG4Test2");
 				AssertEqualRectangles (new RectangleF (40, 100, 100, 100), rects[1], "TUG4Test3");
 			}
@@ -425,7 +425,7 @@ namespace MonoTests.System.Drawing
 				r1.Union (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (2, rects.Length, "TUG5Test1");
+				Assert.Equal  (2, rects.Length, "TUG5Test1");
 				AssertEqualRectangles (new RectangleF (40, 10, 100, 100), rects[0], "TUG5Test2");
 				AssertEqualRectangles (new RectangleF (70, 110, 50, 10), rects[1], "TUG5Test3");
 			}
@@ -443,7 +443,7 @@ namespace MonoTests.System.Drawing
 				r1.Union (rect4);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (4, rects.Length, "TUG6Test1");
+				Assert.Equal  (4, rects.Length, "TUG6Test1");
 				AssertEqualRectangles (new RectangleF (30, 30, 80, 15), rects[0], "TUG6Test2");
 				AssertEqualRectangles (new RectangleF (30, 45, 215, 65), rects[1], "TUG6Test3");
 				AssertEqualRectangles (new RectangleF (45, 110, 200, 135), rects[2], "TUG6Test4");
@@ -452,7 +452,7 @@ namespace MonoTests.System.Drawing
 		}
 
 
-		[Test]
+		[Fact]
 		public void TestComplementGroup1 ()
 		{
 			RectangleF[] rects;
@@ -479,7 +479,7 @@ namespace MonoTests.System.Drawing
 				r1.Complement (r2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (2, rects.Length, "TCG1Test1");
+				Assert.Equal  (2, rects.Length, "TCG1Test1");
 				AssertEqualRectangles (new RectangleF (60, 60, 30, 10), rects[0], "TCG1Test2");
 				AssertEqualRectangles (new RectangleF (20, 80, 20, 10), rects[1], "TCG1Test3");
 			}
@@ -494,7 +494,7 @@ namespace MonoTests.System.Drawing
 				r1.Complement (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (1, rects.Length, "TCG2Test1");
+				Assert.Equal  (1, rects.Length, "TCG2Test1");
 				AssertEqualRectangles (new RectangleF (110, 60, 30, 20), rects[0], "TCG2Test2");
 			}
 
@@ -507,7 +507,7 @@ namespace MonoTests.System.Drawing
 				r1.Complement (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (1, rects.Length, "TCG3Test1");
+				Assert.Equal  (1, rects.Length, "TCG3Test1");
 				AssertEqualRectangles (new RectangleF (40, 60, 30, 20), rects[0], "TCG3Test2");
 			}
 
@@ -520,7 +520,7 @@ namespace MonoTests.System.Drawing
 				r1.Complement (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (1, rects.Length, "TCG4Test1");
+				Assert.Equal  (1, rects.Length, "TCG4Test1");
 				AssertEqualRectangles (new RectangleF (70, 80, 50, 20), rects[0], "TCG4Test2");
 			}
 
@@ -533,7 +533,7 @@ namespace MonoTests.System.Drawing
 				r1.Complement (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (1, rects.Length, "TCG5Test1");
+				Assert.Equal  (1, rects.Length, "TCG5Test1");
 				AssertEqualRectangles (new RectangleF (70, 110, 50, 10), rects[0], "TCG5Test2");
 			}
 
@@ -550,13 +550,13 @@ namespace MonoTests.System.Drawing
 				r1.Complement (rect4);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (1, rects.Length, "TCG6Test1");
+				Assert.Equal  (1, rects.Length, "TCG6Test1");
 				AssertEqualRectangles (new RectangleF (170, 260, 10, 10), rects[0], "TCG6Test2");
 			}
 
 		}
 
-		[Test]
+		[Fact]
 		public void TestComplementGroup2 ()
 		{
 
@@ -579,22 +579,22 @@ namespace MonoTests.System.Drawing
 
 			rects = rgn1.GetRegionScans (matrix);
 
-			Assert.AreEqual (2, rects.Length);
+			Assert.Equal (2, rects.Length);
 
-			Assert.AreEqual (80, rects[0].X);
-			Assert.AreEqual (40, rects[0].Y);
-			Assert.AreEqual (30, rects[0].Width);
-			Assert.AreEqual (70, rects[0].Height);
+			Assert.Equal (80, rects[0].X);
+			Assert.Equal (40, rects[0].Y);
+			Assert.Equal (30, rects[0].Width);
+			Assert.Equal (70, rects[0].Height);
 
-			Assert.AreEqual (50, rects[1].X);
-			Assert.AreEqual (110, rects[1].Y);
-			Assert.AreEqual (60, rects[1].Width);
-			Assert.AreEqual (10, rects[1].Height);
+			Assert.Equal (50, rects[1].X);
+			Assert.Equal (110, rects[1].Y);
+			Assert.Equal (60, rects[1].Width);
+			Assert.Equal (10, rects[1].Height);
 
 		}
 
 
-		[Test]
+		[Fact]
 		public void TestExcludeGroup1 ()
 		{
 			RectangleF[] rects;
@@ -621,7 +621,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (r2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (1, rects.Length, "TEG1Test1");
+				Assert.Equal  (1, rects.Length, "TEG1Test1");
 				AssertEqualRectangles (new RectangleF (20, 20, 20, 20), rects[0], "TEG1Test2");
 			}
 
@@ -643,7 +643,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (3, rects.Length, "TEG2Test1");
+				Assert.Equal  (3, rects.Length, "TEG2Test1");
 				AssertEqualRectangles (new RectangleF (10, 10, 100, 50), rects[0], "TEG2Test2");
 				AssertEqualRectangles (new RectangleF (10, 60, 30, 20), rects[1], "TEG2Test3");
 				AssertEqualRectangles (new RectangleF (10, 80, 100, 30), rects[2], "TEG2Test4");
@@ -669,7 +669,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (3, rects.Length, "TEG3Test1");
+				Assert.Equal  (3, rects.Length, "TEG3Test1");
 				AssertEqualRectangles (new RectangleF (70, 10, 100, 50), rects[0], "TEG3Test2");
 				AssertEqualRectangles (new RectangleF (140, 60, 30, 20), rects[1], "TEG3Test3");
 				AssertEqualRectangles (new RectangleF (70, 80, 100, 30), rects[2], "TEG3Test4");
@@ -696,7 +696,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual  (3, rects.Length, "TEG4Test1");
+				Assert.Equal  (3, rects.Length, "TEG4Test1");
 				AssertEqualRectangles (new RectangleF (40, 100, 30, 20), rects[0], "TEG4Test2");
 				AssertEqualRectangles (new RectangleF (120, 100, 20, 20), rects[1], "TEG4Test3");
 				AssertEqualRectangles (new RectangleF (40, 120, 100, 80), rects[2], "TEG4Test4");
@@ -723,7 +723,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual (3, rects.Length, "TEG5Test1");
+				Assert.Equal (3, rects.Length, "TEG5Test1");
 				AssertEqualRectangles (new RectangleF (40, 10, 100, 70), rects[0], "TEG5Test2");
 				AssertEqualRectangles (new RectangleF (40, 80, 30, 30), rects[1], "TEG5Test3");
 				AssertEqualRectangles (new RectangleF (120, 80, 20, 30), rects[2], "TEG5Test4");
@@ -743,7 +743,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect4);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual (2, rects.Length, "TEG6Test1");
+				Assert.Equal (2, rects.Length, "TEG6Test1");
 				AssertEqualRectangles (new RectangleF (30, 30, 80, 15), rects[0], "TEG6Test2");
 				AssertEqualRectangles (new RectangleF (30, 45, 15, 65), rects[1], "TEG6Test3");
 			}
@@ -769,7 +769,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual (1, rects.Length, "TEG7Test1");
+				Assert.Equal (1, rects.Length, "TEG7Test1");
 				AssertEqualRectangles (new RectangleF (50, 110, 100, 90), rects[0], "TEG7Test2");
 			}
 
@@ -795,7 +795,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual (1, rects.Length, "TEG8Test1");
+				Assert.Equal (1, rects.Length, "TEG8Test1");
 				AssertEqualRectangles (new RectangleF (140, 60, 30, 70), rects[0], "TEG8Test2");
 
 			}
@@ -824,7 +824,7 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual (1, rects.Length, "TEG9Test1");
+				Assert.Equal (1, rects.Length, "TEG9Test1");
 				AssertEqualRectangles (new RectangleF (70, 60, 30, 70), rects[0], "TEG9Test2");
 			}
 
@@ -850,14 +850,14 @@ namespace MonoTests.System.Drawing
 				r1.Exclude (rect2);
 
 				rects = r1.GetRegionScans (new Matrix ());
-				Assert.AreEqual (1, rects.Length, "TEG10Test1");
+				Assert.Equal (1, rects.Length, "TEG10Test1");
 				AssertEqualRectangles (new RectangleF (20, 20, 100, 60), rects[0], "TEG10Test2");
 			}
 
 
 		}
 
-		[Test]
+		[Fact]
 		public void TestExcludeGroup2 ()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -873,30 +873,30 @@ namespace MonoTests.System.Drawing
 			rgn1.Exclude (rect2);
 			rects = rgn1.GetRegionScans (matrix);
 
-			Assert.AreEqual (2, rects.Length);
+			Assert.Equal (2, rects.Length);
 
-			Assert.AreEqual (130, rects[0].X);
-			Assert.AreEqual (30, rects[0].Y);
-			Assert.AreEqual (60, rects[0].Width);
-			Assert.AreEqual (10, rects[0].Height);
+			Assert.Equal (130, rects[0].X);
+			Assert.Equal (30, rects[0].Y);
+			Assert.Equal (60, rects[0].Width);
+			Assert.Equal (10, rects[0].Height);
 
-			Assert.AreEqual (130, rects[1].X);
-			Assert.AreEqual (40, rects[1].Y);
-			Assert.AreEqual (40, rects[1].Width);
-			Assert.AreEqual (70, rects[1].Height);
+			Assert.Equal (130, rects[1].X);
+			Assert.Equal (40, rects[1].Y);
+			Assert.Equal (40, rects[1].Width);
+			Assert.Equal (70, rects[1].Height);
 		}
 
-		[Test]
+		[Fact]
 		public void ExcludeBug402613 ()
 		{
 			Region r = new Region();
 			r.MakeInfinite ();
 			r.Exclude (new Rectangle (387,292,189,133));
 			r.Exclude (new Rectangle (387,66,189,133));
-			Assert.IsTrue (r.IsVisible (new Rectangle (66,292,189,133)));
+			Assert.True (r.IsVisible (new Rectangle (66,292,189,133)));
 		}
 
-		[Test]
+		[Fact]
 		public void TestIntersect()
 		{
 
@@ -916,12 +916,12 @@ namespace MonoTests.System.Drawing
 			rgn1.Intersect (rgn2);
 
 			rects = rgn1.GetRegionScans (matrix);
-			Assert.AreEqual (1, rects.Length);
+			Assert.Equal (1, rects.Length);
 
-			Assert.AreEqual (290, rects[0].X);
-			Assert.AreEqual (40, rects[0].Y);
-			Assert.AreEqual (30, rects[0].Width);
-			Assert.AreEqual (70, rects[0].Height);							
+			Assert.Equal (290, rects[0].X);
+			Assert.Equal (40, rects[0].Y);
+			Assert.Equal (30, rects[0].Width);
+			Assert.Equal (70, rects[0].Height);							
 
 			/* No intersect */
 			rect1 = new Rectangle (20, 330, 40, 50);
@@ -937,10 +937,10 @@ namespace MonoTests.System.Drawing
 			rgn1.Intersect (rgn3);
 			rgn1.Intersect (rgn4);
 			rects = rgn1.GetRegionScans (matrix);
-			Assert.AreEqual (0, rects.Length);
+			Assert.Equal (0, rects.Length);
 		}
 
-		[Test]
+		[Fact]
 		public void TestXor()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -957,31 +957,31 @@ namespace MonoTests.System.Drawing
 
 			rects = rgn1.GetRegionScans (matrix);
 
-			Assert.AreEqual (4, rects.Length);
+			Assert.Equal (4, rects.Length);
 
-			Assert.AreEqual (380, rects[0].X);
-			Assert.AreEqual (30, rects[0].Y);
-			Assert.AreEqual (60, rects[0].Width);
-			Assert.AreEqual (10, rects[0].Height);
+			Assert.Equal (380, rects[0].X);
+			Assert.Equal (30, rects[0].Y);
+			Assert.Equal (60, rects[0].Width);
+			Assert.Equal (10, rects[0].Height);
 
-			Assert.AreEqual (380, rects[1].X);
-			Assert.AreEqual (40, rects[1].Y);
-			Assert.AreEqual (30, rects[1].Width);
-			Assert.AreEqual (70, rects[1].Height);
+			Assert.Equal (380, rects[1].X);
+			Assert.Equal (40, rects[1].Y);
+			Assert.Equal (30, rects[1].Width);
+			Assert.Equal (70, rects[1].Height);
 
-			Assert.AreEqual (440, rects[2].X);
-			Assert.AreEqual (40, rects[2].Y);
-			Assert.AreEqual (30, rects[2].Width);
-			Assert.AreEqual (70, rects[2].Height);
+			Assert.Equal (440, rects[2].X);
+			Assert.Equal (40, rects[2].Y);
+			Assert.Equal (30, rects[2].Width);
+			Assert.Equal (70, rects[2].Height);
 
-			Assert.AreEqual (410, rects[3].X);
-			Assert.AreEqual (110, rects[3].Y);
-			Assert.AreEqual (60, rects[3].Width);
-			Assert.AreEqual (10, rects[3].Height);
+			Assert.Equal (410, rects[3].X);
+			Assert.Equal (110, rects[3].Y);
+			Assert.Equal (60, rects[3].Width);
+			Assert.Equal (10, rects[3].Height);
 		}
 
 
-		[Test]
+		[Fact]
 		public void TestIsVisible()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -994,42 +994,42 @@ namespace MonoTests.System.Drawing
 			rect2 = new Rectangle (520, 40, 60, 80);
 
 			rgn1 = new Region (new RectangleF (0, 0, 10,10));
-			Assert.AreEqual (false, rgn1.IsVisible (0,0,0,1));
+			Assert.Equal (false, rgn1.IsVisible (0,0,0,1));
 
 			rgn1 = new Region (rect1);
-			Assert.AreEqual (false, rgn1.IsVisible (500,29));
-			Assert.AreEqual (true, rgn1.IsVisible (500,30));
-			Assert.AreEqual (true, rgn1.IsVisible (rect1));
-			Assert.AreEqual (true, rgn1.IsVisible (rect2));
-			Assert.AreEqual (false, rgn1.IsVisible (new Rectangle (50,50,2,5)));
+			Assert.Equal (false, rgn1.IsVisible (500,29));
+			Assert.Equal (true, rgn1.IsVisible (500,30));
+			Assert.Equal (true, rgn1.IsVisible (rect1));
+			Assert.Equal (true, rgn1.IsVisible (rect2));
+			Assert.Equal (false, rgn1.IsVisible (new Rectangle (50,50,2,5)));
 
 			Rectangle r = new Rectangle (1,1, 2,1);
 			rgn2 = new Region (r);
-			Assert.AreEqual (true, rgn2.IsVisible (r));
-			Assert.AreEqual (true, rgn2.IsVisible (new Rectangle (1,1, 2,2)));
-			Assert.AreEqual (true, rgn2.IsVisible (new Rectangle (1,1, 10,10)));
-			Assert.AreEqual (true, rgn2.IsVisible (new Rectangle (1,1, 1,1)));
-			Assert.AreEqual (false, rgn2.IsVisible (new Rectangle (2,2, 1,1)));
-			Assert.AreEqual (false, rgn2.IsVisible (new Rectangle (0,0, 1,1)));
-			Assert.AreEqual (false, rgn2.IsVisible (new Rectangle (3,3, 1,1)));
+			Assert.Equal (true, rgn2.IsVisible (r));
+			Assert.Equal (true, rgn2.IsVisible (new Rectangle (1,1, 2,2)));
+			Assert.Equal (true, rgn2.IsVisible (new Rectangle (1,1, 10,10)));
+			Assert.Equal (true, rgn2.IsVisible (new Rectangle (1,1, 1,1)));
+			Assert.Equal (false, rgn2.IsVisible (new Rectangle (2,2, 1,1)));
+			Assert.Equal (false, rgn2.IsVisible (new Rectangle (0,0, 1,1)));
+			Assert.Equal (false, rgn2.IsVisible (new Rectangle (3,3, 1,1)));
 
-			Assert.AreEqual (false, rgn2.IsVisible (0,0));
-			Assert.AreEqual (false, rgn2.IsVisible (1,0));
-			Assert.AreEqual (false, rgn2.IsVisible (2,0));
-			Assert.AreEqual (false, rgn2.IsVisible (3,0));
-			Assert.AreEqual (false, rgn2.IsVisible (0,1));
-			Assert.AreEqual (true, rgn2.IsVisible (1,1));
-			Assert.AreEqual (true, rgn2.IsVisible (2,1));
-			Assert.AreEqual (false, rgn2.IsVisible (3,1));
-			Assert.AreEqual (false, rgn2.IsVisible (0,2));
-			Assert.AreEqual (false, rgn2.IsVisible (1,2));
-			Assert.AreEqual (false, rgn2.IsVisible (2,2));
-			Assert.AreEqual (false, rgn2.IsVisible (3,2));
+			Assert.Equal (false, rgn2.IsVisible (0,0));
+			Assert.Equal (false, rgn2.IsVisible (1,0));
+			Assert.Equal (false, rgn2.IsVisible (2,0));
+			Assert.Equal (false, rgn2.IsVisible (3,0));
+			Assert.Equal (false, rgn2.IsVisible (0,1));
+			Assert.Equal (true, rgn2.IsVisible (1,1));
+			Assert.Equal (true, rgn2.IsVisible (2,1));
+			Assert.Equal (false, rgn2.IsVisible (3,1));
+			Assert.Equal (false, rgn2.IsVisible (0,2));
+			Assert.Equal (false, rgn2.IsVisible (1,2));
+			Assert.Equal (false, rgn2.IsVisible (2,2));
+			Assert.Equal (false, rgn2.IsVisible (3,2));
 
 
 		}
 
-		[Test]
+		[Fact]
 		public void TestTranslate()
 		{
 			Region rgn1 = new Region (new RectangleF (10, 10, 120,120));
@@ -1038,43 +1038,43 @@ namespace MonoTests.System.Drawing
 
 			RectangleF [] rects = rgn1.GetRegionScans (matrix);
 
-			Assert.AreEqual (1, rects.Length);
+			Assert.Equal (1, rects.Length);
 
-			Assert.AreEqual (40, rects[0].X);
-			Assert.AreEqual (30, rects[0].Y);
-			Assert.AreEqual (120, rects[0].Width);
-			Assert.AreEqual (120, rects[0].Height);
+			Assert.Equal (40, rects[0].X);
+			Assert.Equal (30, rects[0].Y);
+			Assert.Equal (120, rects[0].Width);
+			Assert.Equal (120, rects[0].Height);
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region (gp));
 		}
 
-		[Test]
+		[Fact]
 		public void Constructor_RegionData_Null ()
 		{
 			RegionData rd = null;
 			Assert.Throws<ArgumentNullException> (() => new Region (rd));
 		}
 
-		[Test]
+		[Fact]
 		public void Union_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Union (gp));
 		}
 
-		[Test]
+		[Fact]
 		public void Union_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Union (r));
 		}
 
-		[Test]
+		[Fact]
 		public void Union_Region_Infinite ()
 		{
 			// default ctor creates an infinite region
@@ -1085,158 +1085,158 @@ namespace MonoTests.System.Drawing
 			CheckEmpty ("U infinity", r);
 		}
 
-		[Test]
+		[Fact]
 		public void Intersect_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Intersect (gp));
 		}
 
-		[Test]
+		[Fact]
 		public void Intersect_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Intersect (r));
 		}
 
-		[Test]
+		[Fact]
 		public void Complement_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Complement (gp));
 		}
 
-		[Test]
+		[Fact]
 		public void Complement_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Complement (r));
 		}
 
-		[Test]
+		[Fact]
 		public void Exclude_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Exclude (gp));
 		}
 
-		[Test]
+		[Fact]
 		public void Exclude_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Exclude (r));
 		}
 
-		[Test]
+		[Fact]
 		public void Xor_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Xor (gp));
 		}
 
-		[Test]
+		[Fact]
 		public void Xor_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Xor (r));
 		}
 
-		[Test]
+		[Fact]
 		public void GetBounds_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().GetBounds (null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_IntIntNull ()
 		{
-			Assert.IsTrue (new Region ().IsVisible (0, 0, null));
+			Assert.True (new Region ().IsVisible (0, 0, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_IntIntIntIntNull ()
 		{
-			Assert.IsFalse (new Region ().IsVisible (0, 0, 0, 0, null));
+			Assert.False (new Region ().IsVisible (0, 0, 0, 0, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_PointNull ()
 		{
 			Point p = new Point ();
-			Assert.IsTrue (new Region ().IsVisible (p, null));
+			Assert.True (new Region ().IsVisible (p, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_PointFNull ()
 		{
 			PointF p = new PointF ();
-			Assert.IsTrue (new Region ().IsVisible (p, null));
+			Assert.True (new Region ().IsVisible (p, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_RectangleNull ()
 		{
 			Rectangle r = new Rectangle ();
-			Assert.IsFalse (new Region ().IsVisible (r, null));
+			Assert.False (new Region ().IsVisible (r, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_RectangleFNull ()
 		{
 			RectangleF r = new RectangleF ();
-			Assert.IsFalse (new Region ().IsVisible (r, null));
+			Assert.False (new Region ().IsVisible (r, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_SingleSingleNull ()
 		{
-			Assert.IsTrue (new Region ().IsVisible (0f, 0f, null));
+			Assert.True (new Region ().IsVisible (0f, 0f, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsVisible_SingleSingleSingleSingleNull ()
 		{
-			Assert.IsFalse (new Region ().IsVisible (0f, 0f, 0f, 0f, null));
+			Assert.False (new Region ().IsVisible (0f, 0f, 0f, 0f, null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsEmpty_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().IsEmpty (null));
 		}
 
-		[Test]
+		[Fact]
 		public void IsInfinite_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().IsInfinite (null));
 		}
 
-		[Test]
+		[Fact]
 		public void Equals_NullGraphics ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().Equals (null, Graphics.FromImage (new Bitmap (10, 10))));
 		}
 
-		[Test]
+		[Fact]
 		public void Equals_RegionNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().Equals (new Region (), null));
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // caused regression in SWF
 		public void GetHrgn_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().GetHrgn (null));
 		}
 
-		[Test]
+		[Fact]
 		public void GetRegionScans_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().GetRegionScans (null));
 		}
 
-		[Test]
+		[Fact]
 		public void Transform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().Transform (null));
@@ -1245,17 +1245,17 @@ namespace MonoTests.System.Drawing
 		// an "empty ctor" Region is infinite
 		private void CheckEmpty (string prefix, Region region)
 		{
-			Assert.IsFalse (region.IsEmpty (graphic), prefix + "IsEmpty");
-			Assert.IsTrue (region.IsInfinite (graphic), prefix + "graphic");
+			Assert.False (region.IsEmpty (graphic), prefix + "IsEmpty");
+			Assert.True (region.IsInfinite (graphic), prefix + "graphic");
 
 			RectangleF rect = region.GetBounds (graphic);
-			Assert.AreEqual (-4194304f, rect.X, prefix + "GetBounds.X");
-			Assert.AreEqual (-4194304f, rect.Y, prefix + "GetBounds.Y");
-			Assert.AreEqual (8388608f, rect.Width, prefix + "GetBounds.Width");
-			Assert.AreEqual (8388608f, rect.Height, prefix + "GetBounds.Height");
+			Assert.Equal (-4194304f, rect.X, prefix + "GetBounds.X");
+			Assert.Equal (-4194304f, rect.Y, prefix + "GetBounds.Y");
+			Assert.Equal (8388608f, rect.Width, prefix + "GetBounds.Width");
+			Assert.Equal (8388608f, rect.Height, prefix + "GetBounds.Height");
 		}
 
-		[Test]
+		[Fact]
 		public void Region_Empty ()
 		{
 			Region region = new Region ();
@@ -1269,176 +1269,176 @@ namespace MonoTests.System.Drawing
 			CheckEmpty ("RegionData.", region);
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]
 		public void Region_Infinite_MultipleRectangles ()
 		{
 			Region region = new Region ();
-			Assert.IsTrue (region.IsInfinite (graphic), "Empty.IsInfinite");
+			Assert.True (region.IsInfinite (graphic), "Empty.IsInfinite");
 
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangle (new Rectangle (-4194304, -4194304, 8388608, 8388608));
 			region = new Region (gp);
-			Assert.IsTrue (region.IsInfinite (graphic), "OneRectangle.IsInfinite");
+			Assert.True (region.IsInfinite (graphic), "OneRectangle.IsInfinite");
 
 			gp.AddRectangle (new Rectangle (1, 1, 2, 2));
 			region = new Region (gp);
-			Assert.IsFalse (region.IsInfinite (graphic), "TwoOverlappingRectangle.IsInfinite");
+			Assert.False (region.IsInfinite (graphic), "TwoOverlappingRectangle.IsInfinite");
 
 			gp = new GraphicsPath ();
 			gp.AddRectangle (new Rectangle (-4194304, -4194304, 4194304, 8388608));
 			gp.AddRectangle (new Rectangle (0, -4194304, 4194304, 8388608));
-			Assert.IsFalse (region.IsInfinite (graphic), "TwoSideBySideRectangle.IsInfinite");
+			Assert.False (region.IsInfinite (graphic), "TwoSideBySideRectangle.IsInfinite");
 		}
 
-		[Test]
+		[Fact]
 		public void Rectangle_GetRegionScans ()
 		{
 			Matrix matrix = new Matrix ();
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangle (new Rectangle (10, 10, 10, 10));
 			Region region = new Region (gp);
-			Assert.AreEqual (1, region.GetRegionScans (matrix).Length, "1");
+			Assert.Equal (1, region.GetRegionScans (matrix).Length, "1");
 
 			gp.AddRectangle (new Rectangle (20, 20, 20, 20));
 			region = new Region (gp);
-			Assert.AreEqual (2, region.GetRegionScans (matrix).Length, "2");
+			Assert.Equal (2, region.GetRegionScans (matrix).Length, "2");
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityExclude ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				r.Exclude (new Rectangle (5, 5, 10, 10));
-				Assert.IsFalse (r.IsInfinite (graphic), "after");
+				Assert.False (r.IsInfinite (graphic), "after");
 				RectangleF bounds = r.GetBounds (graphic);
-				Assert.AreEqual (-4194304, bounds.X, "X");
-				Assert.AreEqual (-4194304, bounds.Y, "Y");
-				Assert.AreEqual (8388608, bounds.Width, "Width");
-				Assert.AreEqual (8388608, bounds.Height, "Height");
+				Assert.Equal (-4194304, bounds.X, "X");
+				Assert.Equal (-4194304, bounds.Y, "Y");
+				Assert.Equal (8388608, bounds.Width, "Width");
+				Assert.Equal (8388608, bounds.Height, "Height");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityIntersect ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				r.Intersect (new Rectangle (-10, -10, 20, 20));
-				Assert.IsFalse (r.IsInfinite (graphic), "after");
+				Assert.False (r.IsInfinite (graphic), "after");
 				RectangleF bounds = r.GetBounds (graphic);
-				Assert.AreEqual (-10, bounds.X, "X");
-				Assert.AreEqual (-10, bounds.Y, "Y");
-				Assert.AreEqual (20, bounds.Width, "Width");
-				Assert.AreEqual (20, bounds.Height, "Height");
+				Assert.Equal (-10, bounds.X, "X");
+				Assert.Equal (-10, bounds.Y, "Y");
+				Assert.Equal (20, bounds.Width, "Width");
+				Assert.Equal (20, bounds.Height, "Height");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityIntersectTranslate ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				r.Intersect (new Rectangle (-10, -10, 20, 20));
 				r.Translate (10, 10);
 				RectangleF bounds = r.GetBounds (graphic);
-				Assert.AreEqual (0, bounds.X, "X");
-				Assert.AreEqual (0, bounds.Y, "Y");
-				Assert.AreEqual (20, bounds.Width, "Width");
-				Assert.AreEqual (20, bounds.Height, "Height");
+				Assert.Equal (0, bounds.X, "X");
+				Assert.Equal (0, bounds.Y, "Y");
+				Assert.Equal (20, bounds.Width, "Width");
+				Assert.Equal (20, bounds.Height, "Height");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityIntersectScale ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				r.Intersect (new Rectangle (-10, -10, 20, 20));
 				using (Matrix m = new Matrix ()) {
 					m.Scale (2, 0.5f);
 					r.Transform (m);
 				}
 				RectangleF bounds = r.GetBounds (graphic);
-				Assert.AreEqual (-20, bounds.X, "X");
-				Assert.AreEqual (-5, bounds.Y, "Y");
-				Assert.AreEqual (40, bounds.Width, "Width");
-				Assert.AreEqual (10, bounds.Height, "Height");
+				Assert.Equal (-20, bounds.X, "X");
+				Assert.Equal (-5, bounds.Y, "Y");
+				Assert.Equal (40, bounds.Width, "Width");
+				Assert.Equal (10, bounds.Height, "Height");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityIntersectTransform ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				r.Intersect (new Rectangle (-10, -10, 20, 20));
 				using (Matrix m = new Matrix (2, 0, 0, 0.5f, 10, 10)) {
 					r.Transform (m);
 				}
 				RectangleF bounds = r.GetBounds (graphic);
-				Assert.AreEqual (-10, bounds.X, "X");
-				Assert.AreEqual (5, bounds.Y, "Y");
-				Assert.AreEqual (40, bounds.Width, "Width");
-				Assert.AreEqual (10, bounds.Height, "Height");
+				Assert.Equal (-10, bounds.X, "X");
+				Assert.Equal (5, bounds.Y, "Y");
+				Assert.Equal (40, bounds.Width, "Width");
+				Assert.Equal (10, bounds.Height, "Height");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityTranslate ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				r.Translate (10, 10);
-				Assert.IsTrue (r.IsInfinite (graphic), "after");
+				Assert.True (r.IsInfinite (graphic), "after");
 				CheckEmpty ("InfinityTranslate", r);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityScaleUp ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				using (Matrix m = new Matrix ()) {
 					m.Scale (2, 2);
 					r.Transform (m);
 				}
-				Assert.IsTrue (r.IsInfinite (graphic), "after");
+				Assert.True (r.IsInfinite (graphic), "after");
 				CheckEmpty ("InfinityScaleUp", r);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityScaleDown ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				using (Matrix m = new Matrix ()) {
 					m.Scale (0.5f, 0.5f);
 					r.Transform (m);
 				}
-				Assert.IsTrue (r.IsInfinite (graphic), "after");
+				Assert.True (r.IsInfinite (graphic), "after");
 				CheckEmpty ("InfinityScaleDown", r);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void InfinityRotate ()
 		{
 			using (Region r = new Region ()) {
-				Assert.IsTrue (r.IsInfinite (graphic), "before");
+				Assert.True (r.IsInfinite (graphic), "before");
 				using (Matrix m = new Matrix ()) {
 					m.Rotate (45);
 					r.Transform (m);
 				}
-				Assert.IsTrue (r.IsInfinite (graphic), "after");
+				Assert.True (r.IsInfinite (graphic), "after");
 				CheckEmpty ("InfinityRotate", r);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Intersect_383878 ()
 		{
 			using (Region clipRegion = new Region ()) {
@@ -1447,16 +1447,16 @@ namespace MonoTests.System.Drawing
 				Rectangle smaller = new Rectangle (5, 5, -10, -10);
 
 				clipRegion.Intersect (smaller);
-				Assert.IsFalse (clipRegion.IsEmpty (graphic), "IsEmpty");
-				Assert.IsFalse (clipRegion.IsInfinite (graphic), "IsInfinite");
+				Assert.False (clipRegion.IsEmpty (graphic), "IsEmpty");
+				Assert.False (clipRegion.IsInfinite (graphic), "IsInfinite");
 
 				RectangleF [] rects = clipRegion.GetRegionScans (new Matrix ());
-				Assert.AreEqual (1, rects.Length, "Length");
-				Assert.AreEqual (new RectangleF (-5, -5, 10, 10), rects [0], "0");
+				Assert.Equal (1, rects.Length, "Length");
+				Assert.Equal (new RectangleF (-5, -5, 10, 10), rects [0], "0");
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Complement_383878 ()
 		{
 			using (Region clipRegion = new Region ()) {
@@ -1468,13 +1468,13 @@ namespace MonoTests.System.Drawing
 				clipRegion.Intersect (smaller);
 				clipRegion.Complement (bigger);
 
-				Assert.IsFalse (clipRegion.IsEmpty (graphic), "IsEmpty");
-				Assert.IsFalse (clipRegion.IsInfinite (graphic), "IsInfinite");
+				Assert.False (clipRegion.IsEmpty (graphic), "IsEmpty");
+				Assert.False (clipRegion.IsInfinite (graphic), "IsInfinite");
 
 				RectangleF [] rects = clipRegion.GetRegionScans (new Matrix ());
-				Assert.AreEqual (2, rects.Length, "Length");
-				Assert.AreEqual (new RectangleF (5, -5, 2, 10), rects [0], "0");
-				Assert.AreEqual (new RectangleF (-5, 5, 12, 2), rects [1], "1");
+				Assert.Equal (2, rects.Length, "Length");
+				Assert.Equal (new RectangleF (5, -5, 2, 10), rects [0], "0");
+				Assert.Equal (new RectangleF (-5, 5, 12, 2), rects [1], "1");
 			}
 		}
 	}
@@ -1495,82 +1495,82 @@ namespace MonoTests.System.Drawing
 		// Note: Test cases calling GetHrng will leak memory unless ReleaseHrgn
 		// (which only exists in 2.0) is called.
 
-		[Test]
+		[Fact]
 		public void GetHrgn_Infinite_MakeEmpty ()
 		{
 			Region r = new Region ();
-			Assert.IsFalse (r.IsEmpty (graphic), "!Empty");
-			Assert.IsTrue (r.IsInfinite (graphic), "Infinite");
-			Assert.AreEqual (IntPtr.Zero, r.GetHrgn (graphic), "Handle==0");
+			Assert.False (r.IsEmpty (graphic), "!Empty");
+			Assert.True (r.IsInfinite (graphic), "Infinite");
+			Assert.Equal (IntPtr.Zero, r.GetHrgn (graphic), "Handle==0");
 
 			r.MakeEmpty ();
-			Assert.IsTrue (r.IsEmpty (graphic), "Empty");
-			Assert.IsFalse (r.IsInfinite (graphic), "!Infinite");
+			Assert.True (r.IsEmpty (graphic), "Empty");
+			Assert.False (r.IsInfinite (graphic), "!Infinite");
 			IntPtr h = r.GetHrgn (graphic);
-			Assert.IsFalse (h == IntPtr.Zero, "Handle!=0");
+			Assert.False (h == IntPtr.Zero, "Handle!=0");
 			r.ReleaseHrgn (h);
 		}
 
-		[Test]
+		[Fact]
 		public void GetHrgn_Empty_MakeInfinite ()
 		{
 			Region r = new Region (new GraphicsPath ());
-			Assert.IsTrue (r.IsEmpty (graphic), "Empty");
-			Assert.IsFalse (r.IsInfinite (graphic), "!Infinite");
+			Assert.True (r.IsEmpty (graphic), "Empty");
+			Assert.False (r.IsInfinite (graphic), "!Infinite");
 			IntPtr h = r.GetHrgn (graphic);
-			Assert.IsFalse (h == IntPtr.Zero, "Handle!=0");
+			Assert.False (h == IntPtr.Zero, "Handle!=0");
 
 			r.MakeInfinite ();
-			Assert.IsFalse (r.IsEmpty (graphic), "!Empty");
-			Assert.IsTrue (r.IsInfinite (graphic), "Infinite");
-			Assert.AreEqual (IntPtr.Zero, r.GetHrgn (graphic), "Handle==0");
+			Assert.False (r.IsEmpty (graphic), "!Empty");
+			Assert.True (r.IsInfinite (graphic), "Infinite");
+			Assert.Equal (IntPtr.Zero, r.GetHrgn (graphic), "Handle==0");
 			r.ReleaseHrgn (h);
 		}
 
-		[Test]
+		[Fact]
 		public void GetHrgn_TwiceFromSameRegionInstance ()
 		{
 			Region r = new Region (new GraphicsPath ());
 			IntPtr h1 = r.GetHrgn (graphic);
 			IntPtr h2 = r.GetHrgn (graphic);
-			Assert.IsFalse (h1 == h2, "Handle_1!=Handle_2");
+			Assert.False (h1 == h2, "Handle_1!=Handle_2");
 			r.ReleaseHrgn (h1);
 			r.ReleaseHrgn (h2);
 		}
 
-		[Test]
+		[Fact]
 		public void GetHrgn_FromHrgn ()
 		{
 			Region r1 = new Region (new GraphicsPath ());
 			IntPtr h1 = r1.GetHrgn (graphic);
-			Assert.IsFalse (h1 == IntPtr.Zero, "Handle_1!=0");
+			Assert.False (h1 == IntPtr.Zero, "Handle_1!=0");
 
 			Region r2 = Region.FromHrgn (h1);
 			IntPtr h2 = r2.GetHrgn (graphic);
-			Assert.IsFalse (h2 == IntPtr.Zero, "Handle_2!=0");
-			Assert.IsFalse (h1 == h2, "Handle_1!=Handle_2");
+			Assert.False (h2 == IntPtr.Zero, "Handle_2!=0");
+			Assert.False (h1 == h2, "Handle_1!=Handle_2");
 			r1.ReleaseHrgn (h1);
 			r2.ReleaseHrgn (h2);
 		}
 
-		[Test]
+		[Fact]
 		public void FromHrgn_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => Region.FromHrgn (IntPtr.Zero));
 		}
-		[Test]
+		[Fact]
 		public void ReleaseHrng_Zero ()
 		{
 			Region r = new Region (new GraphicsPath ());
 			Assert.Throws<ArgumentNullException> (() => r.ReleaseHrgn (IntPtr.Zero));
 		}
 
-		[Test]
+		[Fact]
 		public void ReleaseHrng ()
 		{
 			Region r = new Region (new GraphicsPath ());
 			IntPtr ptr = r.GetHrgn (graphic);
-			Assert.IsFalse (IntPtr.Zero == ptr, "ptr");
+			Assert.False (IntPtr.Zero == ptr, "ptr");
 			r.ReleaseHrgn (ptr);
 		}
 	}

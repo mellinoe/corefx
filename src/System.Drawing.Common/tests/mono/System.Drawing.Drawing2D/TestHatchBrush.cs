@@ -33,7 +33,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Drawing2D
 {
@@ -67,35 +67,35 @@ namespace MonoTests.System.Drawing.Drawing2D
 			fgColor = Color.Red;
 		}
 
-		[Test]
+		[Fact]
 		public void TestProperties () 
 		{
 			HatchBrush hbr = new HatchBrush(HatchStyle.SolidDiamond, fgColor);
 
-			Assert.AreEqual (hbr.HatchStyle, HatchStyle.SolidDiamond, "Props#1");
-			Assert.AreEqual (hbr.ForegroundColor.ToArgb (), fgColor.ToArgb (), "Props#2");
-			Assert.AreEqual (hbr.BackgroundColor.ToArgb (), Color.Black.ToArgb (), "Props#3");
+			Assert.Equal (hbr.HatchStyle, HatchStyle.SolidDiamond, "Props#1");
+			Assert.Equal (hbr.ForegroundColor.ToArgb (), fgColor.ToArgb (), "Props#2");
+			Assert.Equal (hbr.BackgroundColor.ToArgb (), Color.Black.ToArgb (), "Props#3");
 
 			hbr = new HatchBrush(HatchStyle.Cross, fgColor, bgColor);
 
-			Assert.AreEqual (hbr.HatchStyle, HatchStyle.Cross, "Props#4");
-			Assert.AreEqual (hbr.ForegroundColor.ToArgb (), fgColor.ToArgb (), "Props#5");
-			Assert.AreEqual (hbr.BackgroundColor.ToArgb (), bgColor.ToArgb (), "Props#6");
+			Assert.Equal (hbr.HatchStyle, HatchStyle.Cross, "Props#4");
+			Assert.Equal (hbr.ForegroundColor.ToArgb (), fgColor.ToArgb (), "Props#5");
+			Assert.Equal (hbr.BackgroundColor.ToArgb (), bgColor.ToArgb (), "Props#6");
 		}
 
-		[Test]
+		[Fact]
 		public void TestClone ()
 		{
 			HatchBrush hbr = new HatchBrush(HatchStyle.Cross, fgColor, bgColor);
 
 			HatchBrush clone = (HatchBrush) hbr.Clone ();
 
-			Assert.AreEqual (hbr.HatchStyle, clone.HatchStyle, "Clone#1");
-			Assert.AreEqual (hbr.ForegroundColor, clone.ForegroundColor, "Clone#2");
-			Assert.AreEqual (hbr.BackgroundColor, clone.BackgroundColor, "Clone#3");
+			Assert.Equal (hbr.HatchStyle, clone.HatchStyle, "Clone#1");
+			Assert.Equal (hbr.ForegroundColor, clone.ForegroundColor, "Clone#2");
+			Assert.Equal (hbr.BackgroundColor, clone.BackgroundColor, "Clone#3");
 		}
 
-		[Test]
+		[Fact]
 		public void TestDrawing ()
 		{
 			// create a bitmap with big enough dimensions 

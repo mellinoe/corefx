@@ -33,7 +33,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing{
 
@@ -42,29 +42,29 @@ namespace MonoTests.System.Drawing{
 
 		private void CheckDefaults (StringFormat sf)
 		{
-			Assert.AreEqual (StringAlignment.Near, sf.Alignment, "Alignment");
-			Assert.AreEqual (0, sf.DigitSubstitutionLanguage, "DigitSubstitutionLanguage");
-			Assert.AreEqual (StringDigitSubstitute.User, sf.DigitSubstitutionMethod, "DigitSubstitutionMethod");
-			Assert.AreEqual ((StringFormatFlags) 0, sf.FormatFlags, "FormatFlags");
-			Assert.AreEqual (HotkeyPrefix.None, sf.HotkeyPrefix, "HotkeyPrefix");
-			Assert.AreEqual (StringAlignment.Near, sf.LineAlignment, "LineAlignment");
-			Assert.AreEqual (StringTrimming.Character, sf.Trimming, "Trimming");
+			Assert.Equal (StringAlignment.Near, sf.Alignment);
+			Assert.Equal (0, sf.DigitSubstitutionLanguage);
+			Assert.Equal (StringDigitSubstitute.User, sf.DigitSubstitutionMethod);
+			Assert.Equal ((StringFormatFlags) 0, sf.FormatFlags);
+			Assert.Equal (HotkeyPrefix.None, sf.HotkeyPrefix);
+			Assert.Equal (StringAlignment.Near, sf.LineAlignment);
+			Assert.Equal (StringTrimming.Character, sf.Trimming);
 		}
 
-		[Test]
+		[Fact]
 		public void Default ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
 				CheckDefaults (sf);
-				Assert.AreEqual ("[StringFormat, FormatFlags=0]", sf.ToString (), "ToString");
+				Assert.Equal ("[StringFormat, FormatFlags=0]", sf.ToString ());
 				// check setters validations
 				sf.FormatFlags = (StringFormatFlags) Int32.MinValue;
-				Assert.AreEqual ((StringFormatFlags) Int32.MinValue, sf.FormatFlags, "Min-FormatFlags");
-				Assert.AreEqual ("[StringFormat, FormatFlags=-2147483648]", sf.ToString (), "ToString-2");
+				Assert.Equal ((StringFormatFlags) Int32.MinValue, sf.FormatFlags);
+				Assert.Equal ("[StringFormat, FormatFlags=-2147483648]", sf.ToString ());
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Default_Dispose ()
 		{
 			StringFormat sf = new StringFormat ();
@@ -72,13 +72,13 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => sf.ToString ());
 		}
 
-		[Test]
+		[Fact]
 		public void ctor_StringFormat_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new StringFormat (null));
 		}
 
-		[Test]
+		[Fact]
 		public void ctor_StringFormat ()
 		{
 			using (StringFormat sf = new StringFormat (StringFormat.GenericTypographic)) {
@@ -86,37 +86,37 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void ctor_StringFormatFlags ()
 		{
 			using (StringFormat sf = new StringFormat ((StringFormatFlags)Int32.MinValue)) {
-				Assert.AreEqual ((StringFormatFlags) Int32.MinValue, sf.FormatFlags, "FormatFlags");
+				Assert.Equal ((StringFormatFlags) Int32.MinValue, sf.FormatFlags);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void ctor_StringFormatFlags_Int32 ()
 		{
 			using (StringFormat sf = new StringFormat ((StringFormatFlags) Int32.MinValue, Int32.MinValue)) {
-				Assert.AreEqual (0, sf.DigitSubstitutionLanguage, "DigitSubstitutionLanguage");
-				Assert.AreEqual ((StringFormatFlags) Int32.MinValue, sf.FormatFlags, "FormatFlags");
+				Assert.Equal (0, sf.DigitSubstitutionLanguage);
+				Assert.Equal ((StringFormatFlags) Int32.MinValue, sf.FormatFlags);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GenericDefault ()
 		{
 			CheckDefaults (StringFormat.GenericDefault);
 		}
 
-		[Test]
+		[Fact]
 		public void GenericDefault_Dispose ()
 		{
 			StringFormat.GenericDefault.Dispose ();
 			CheckDefaults (StringFormat.GenericDefault);
 		}
 
-		[Test]
+		[Fact]
 		public void GenericDefault_Local_Dispose ()
 		{
 			StringFormat sf = StringFormat.GenericDefault;
@@ -126,31 +126,31 @@ namespace MonoTests.System.Drawing{
 
 		private void CheckTypographic (StringFormat sf)
 		{
-			Assert.AreEqual (StringAlignment.Near, sf.Alignment, "Alignment");
-			Assert.AreEqual (0, sf.DigitSubstitutionLanguage, "DigitSubstitutionLanguage");
-			Assert.AreEqual (StringDigitSubstitute.User, sf.DigitSubstitutionMethod, "DigitSubstitutionMethod");
-			Assert.AreEqual (StringFormatFlags.FitBlackBox | StringFormatFlags.LineLimit | StringFormatFlags.NoClip, sf.FormatFlags, "FormatFlags");
-			Assert.AreEqual (HotkeyPrefix.None, sf.HotkeyPrefix, "HotkeyPrefix");
-			Assert.AreEqual (StringAlignment.Near, sf.LineAlignment, "LineAlignment");
-			Assert.AreEqual (StringTrimming.None, sf.Trimming, "Trimming");
+			Assert.Equal (StringAlignment.Near, sf.Alignment);
+			Assert.Equal (0, sf.DigitSubstitutionLanguage);
+			Assert.Equal (StringDigitSubstitute.User, sf.DigitSubstitutionMethod);
+			Assert.Equal (StringFormatFlags.FitBlackBox | StringFormatFlags.LineLimit | StringFormatFlags.NoClip, sf.FormatFlags);
+			Assert.Equal (HotkeyPrefix.None, sf.HotkeyPrefix);
+			Assert.Equal (StringAlignment.Near, sf.LineAlignment);
+			Assert.Equal (StringTrimming.None, sf.Trimming);
 		}
 
-		[Test]
+		[Fact]
 		public void GenericTypographic ()
 		{
 			StringFormat sf = StringFormat.GenericTypographic;
 			CheckTypographic (sf);
-			Assert.AreEqual ("[StringFormat, FormatFlags=FitBlackBox, LineLimit, NoClip]", sf.ToString (), "ToString");
+			Assert.Equal ("[StringFormat, FormatFlags=FitBlackBox, LineLimit, NoClip]", sf.ToString ());
 		}
 
-		[Test]
+		[Fact]
 		public void GenericTypographic_Dispose ()
 		{
 			StringFormat.GenericTypographic.Dispose ();
 			CheckTypographic (StringFormat.GenericTypographic);
 		}
 
-		[Test]
+		[Fact]
 		public void GenericTypographic_Local_Dispose ()
 		{
 			StringFormat sf = StringFormat.GenericTypographic;
@@ -158,18 +158,18 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => CheckTypographic (sf));
 		}
 
-		[Test]
+		[Fact]
 		public void Alignment_All ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
 				foreach (StringAlignment sa in Enum.GetValues (typeof (StringAlignment))) {
 					sf.Alignment = sa;
-					Assert.AreEqual (sa, sf.Alignment, sa.ToString ());
+					Assert.Equal (sa, sf.Alignment);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Alignment_Invalid ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -177,18 +177,18 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void HotkeyPrefix_All ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
 				foreach (HotkeyPrefix hp in Enum.GetValues (typeof (HotkeyPrefix))) {
 					sf.HotkeyPrefix = hp;
-					Assert.AreEqual (hp, sf.HotkeyPrefix, hp.ToString ());
+					Assert.Equal (hp, sf.HotkeyPrefix);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void HotkeyPrefix_Invalid ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -196,18 +196,18 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void LineAlignment_All ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
 				foreach (StringAlignment sa in Enum.GetValues (typeof (StringAlignment))) {
 					sf.LineAlignment = sa;
-					Assert.AreEqual (sa, sf.LineAlignment, sa.ToString ());
+					Assert.Equal (sa, sf.LineAlignment);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void LineAlignment_Invalid ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -215,18 +215,18 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Trimming_All ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
 				foreach (StringTrimming st in Enum.GetValues (typeof (StringTrimming))) {
 					sf.Trimming = st;
-					Assert.AreEqual (st, sf.Trimming, st.ToString ());
+					Assert.Equal (st, sf.Trimming);
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Trimming_Invalid ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -234,7 +234,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Clone() 
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -244,7 +244,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Clone_Complex ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -265,23 +265,23 @@ namespace MonoTests.System.Drawing{
 
 					float first;
 					float[] cloned_stops = clone.GetTabStops (out first);
-					Assert.AreEqual (5.0f, first, "first");
-					Assert.AreEqual (6.0f, cloned_stops[0], "cloned_stops[0]");
-					Assert.AreEqual (7.0f, cloned_stops[1], "cloned_stops[1]");
+					Assert.Equal (5.0f, first);
+					Assert.Equal (6.0f, cloned_stops[0]);
+					Assert.Equal (7.0f, cloned_stops[1]);
 				}
 			}
 		}
 			
-		[Test]
+		[Fact]
 		public void TestFormatFlags() 
 		{
 			using (StringFormat smf = new StringFormat ()) {
 				smf.FormatFlags = StringFormatFlags.DisplayFormatControl;
-				Assert.AreEqual (StringFormatFlags.DisplayFormatControl, smf.FormatFlags);
+				Assert.Equal (StringFormatFlags.DisplayFormatControl, smf.FormatFlags);
 			}
 		}		
 		
-		[Test]
+		[Fact]
 		public void TabsStops() 
 		{
 			using (StringFormat smf = new StringFormat ()) {
@@ -292,16 +292,16 @@ namespace MonoTests.System.Drawing{
 				smf.SetTabStops (200, tabsSrc);
 				tabStops = smf.GetTabStops (out firstTabOffset);
 
-				Assert.AreEqual (200, firstTabOffset);
-				Assert.AreEqual (tabsSrc.Length, tabStops.Length);
-				Assert.AreEqual (tabsSrc[0], tabStops[0]);
-				Assert.AreEqual (tabsSrc[1], tabStops[1]);
-				Assert.AreEqual (tabsSrc[2], tabStops[2]);
-				Assert.AreEqual (tabsSrc[3], tabStops[3]);
+				Assert.Equal (200, firstTabOffset);
+				Assert.Equal (tabsSrc.Length, tabStops.Length);
+				Assert.Equal (tabsSrc[0], tabStops[0]);
+				Assert.Equal (tabsSrc[1], tabStops[1]);
+				Assert.Equal (tabsSrc[2], tabStops[2]);
+				Assert.Equal (tabsSrc[3], tabStops[3]);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetTabStops_Null ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -309,17 +309,17 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetDigitSubstitution ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
 				sf.SetDigitSubstitution (Int32.MinValue, (StringDigitSubstitute) Int32.MinValue);
-				Assert.AreEqual (0, sf.DigitSubstitutionLanguage, "DigitSubstitutionLanguage");
-				Assert.AreEqual ((StringDigitSubstitute) Int32.MinValue, sf.DigitSubstitutionMethod, "DigitSubstitutionMethod");
+				Assert.Equal (0, sf.DigitSubstitutionLanguage);
+				Assert.Equal ((StringDigitSubstitute) Int32.MinValue, sf.DigitSubstitutionMethod);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetMeasurableCharacterRanges_Null ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -327,7 +327,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetMeasurableCharacterRanges_Empty ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -336,7 +336,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetMeasurableCharacterRanges_Max ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -345,7 +345,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void SetMeasurableCharacterRanges_TooBig ()
 		{
 			using (StringFormat sf = new StringFormat ()) {

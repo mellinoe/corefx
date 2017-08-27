@@ -33,7 +33,7 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoCasTests.System.Drawing.Text {
 
@@ -41,22 +41,22 @@ namespace MonoCasTests.System.Drawing.Text {
 	[Category ("CAS")]
 	public class PrivateFontCollectionCas {
 
-		[Test]
+		[Fact]
 		public void Constructor ()
 		{
 			PrivateFontCollection pfc = new PrivateFontCollection ();
-			Assert.IsNotNull (pfc.Families);
+			Assert.NotNull (pfc.Families);
 		}
 
 		// TODO - tests for AddFontFile
 
-		[Test]
+		[Fact]
 		public void AddMemoryFont_Deny_UnmanagedCode () 
 		{
 			Assert.Throws<SecurityException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
 		}
 
-		[Test]
+		[Fact]
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
 		public void AddMemoryFont_PermitOnly_UnmanagedCode ()
 		{
@@ -65,7 +65,7 @@ namespace MonoCasTests.System.Drawing.Text {
 
 		// yes, that fails with FileNotFoundException ;-)
 
-		[Test]
+		[Fact]
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
 		public void AddMemoryFont_NegativeLength ()
 		{
@@ -78,7 +78,7 @@ namespace MonoCasTests.System.Drawing.Text {
 			}
 		}
 
-		[Test]
+		[Fact]
 		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
 		public void AddMemoryFont_InvalidData ()
 		{

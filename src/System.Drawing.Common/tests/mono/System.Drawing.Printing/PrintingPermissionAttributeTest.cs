@@ -27,7 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.Drawing.Printing;
 using System.Security;
@@ -38,77 +38,77 @@ namespace MonoTests.System.Drawing.Printing {
 	[TestFixture]
 	public class PrintingPermissionAttributeTest {
 
-		[Test]
+		[Fact]
 		public void Default ()
 		{
 			PrintingPermissionAttribute a = new PrintingPermissionAttribute (SecurityAction.Assert);
-			Assert.AreEqual (a.ToString (), a.TypeId.ToString (), "TypeId");
-			Assert.IsFalse (a.Unrestricted, "Unrestricted");
-			Assert.AreEqual (PrintingPermissionLevel.NoPrinting, a.Level, "PrintingPermissionLevel");
+			Assert.Equal (a.ToString (), a.TypeId.ToString (), "TypeId");
+			Assert.False (a.Unrestricted, "Unrestricted");
+			Assert.Equal (PrintingPermissionLevel.NoPrinting, a.Level, "PrintingPermissionLevel");
 
 			PrintingPermission sp = (PrintingPermission)a.CreatePermission ();
-			Assert.IsFalse (sp.IsUnrestricted (), "IsUnrestricted");
+			Assert.False (sp.IsUnrestricted (), "IsUnrestricted");
 		}
 
-		[Test]
+		[Fact]
 		public void Action ()
 		{
 			PrintingPermissionAttribute a = new PrintingPermissionAttribute (SecurityAction.Assert);
-			Assert.AreEqual (SecurityAction.Assert, a.Action, "Action=Assert");
+			Assert.Equal (SecurityAction.Assert, a.Action, "Action=Assert");
 			a.Action = SecurityAction.Demand;
-			Assert.AreEqual (SecurityAction.Demand, a.Action, "Action=Demand");
+			Assert.Equal (SecurityAction.Demand, a.Action, "Action=Demand");
 			a.Action = SecurityAction.Deny;
-			Assert.AreEqual (SecurityAction.Deny, a.Action, "Action=Deny");
+			Assert.Equal (SecurityAction.Deny, a.Action, "Action=Deny");
 			a.Action = SecurityAction.InheritanceDemand;
-			Assert.AreEqual (SecurityAction.InheritanceDemand, a.Action, "Action=InheritanceDemand");
+			Assert.Equal (SecurityAction.InheritanceDemand, a.Action, "Action=InheritanceDemand");
 			a.Action = SecurityAction.LinkDemand;
-			Assert.AreEqual (SecurityAction.LinkDemand, a.Action, "Action=LinkDemand");
+			Assert.Equal (SecurityAction.LinkDemand, a.Action, "Action=LinkDemand");
 			a.Action = SecurityAction.PermitOnly;
-			Assert.AreEqual (SecurityAction.PermitOnly, a.Action, "Action=PermitOnly");
+			Assert.Equal (SecurityAction.PermitOnly, a.Action, "Action=PermitOnly");
 			a.Action = SecurityAction.RequestMinimum;
-			Assert.AreEqual (SecurityAction.RequestMinimum, a.Action, "Action=RequestMinimum");
+			Assert.Equal (SecurityAction.RequestMinimum, a.Action, "Action=RequestMinimum");
 			a.Action = SecurityAction.RequestOptional;
-			Assert.AreEqual (SecurityAction.RequestOptional, a.Action, "Action=RequestOptional");
+			Assert.Equal (SecurityAction.RequestOptional, a.Action, "Action=RequestOptional");
 			a.Action = SecurityAction.RequestRefuse;
-			Assert.AreEqual (SecurityAction.RequestRefuse, a.Action, "Action=RequestRefuse");
+			Assert.Equal (SecurityAction.RequestRefuse, a.Action, "Action=RequestRefuse");
 		}
 
-		[Test]
+		[Fact]
 		public void Action_Invalid ()
 		{
 			PrintingPermissionAttribute a = new PrintingPermissionAttribute ((SecurityAction)Int32.MinValue);
 			// no validation in attribute
 		}
 
-		[Test]
+		[Fact]
 		public void Unrestricted ()
 		{
 			PrintingPermissionAttribute a = new PrintingPermissionAttribute (SecurityAction.Assert);
 			a.Unrestricted = true;
 			PrintingPermission wp = (PrintingPermission)a.CreatePermission ();
-			Assert.IsTrue (wp.IsUnrestricted (), "IsUnrestricted");
-			Assert.AreEqual (PrintingPermissionLevel.NoPrinting, a.Level, "NoPrinting");
+			Assert.True (wp.IsUnrestricted (), "IsUnrestricted");
+			Assert.Equal (PrintingPermissionLevel.NoPrinting, a.Level, "NoPrinting");
 
 			a.Unrestricted = false;
 			wp = (PrintingPermission)a.CreatePermission ();
-			Assert.IsFalse (wp.IsUnrestricted (), "!IsUnrestricted");
+			Assert.False (wp.IsUnrestricted (), "!IsUnrestricted");
 		}
 
-		[Test]
+		[Fact]
 		public void Level ()
 		{
 			PrintingPermissionAttribute a = new PrintingPermissionAttribute (SecurityAction.Assert);
 			a.Level = PrintingPermissionLevel.NoPrinting;
-			Assert.AreEqual (PrintingPermissionLevel.NoPrinting, a.Level, "NoPrinting");
+			Assert.Equal (PrintingPermissionLevel.NoPrinting, a.Level, "NoPrinting");
 			a.Level = PrintingPermissionLevel.SafePrinting;
-			Assert.AreEqual (PrintingPermissionLevel.SafePrinting, a.Level, "SafePrinting");
+			Assert.Equal (PrintingPermissionLevel.SafePrinting, a.Level, "SafePrinting");
 			a.Level = PrintingPermissionLevel.DefaultPrinting;
-			Assert.AreEqual (PrintingPermissionLevel.DefaultPrinting, a.Level, "DefaultPrintin.");
+			Assert.Equal (PrintingPermissionLevel.DefaultPrinting, a.Level, "DefaultPrintin.");
 			a.Level = PrintingPermissionLevel.AllPrinting;
-			Assert.AreEqual (PrintingPermissionLevel.AllPrinting, a.Level, "AllPrinting");
+			Assert.Equal (PrintingPermissionLevel.AllPrinting, a.Level, "AllPrinting");
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (ArgumentException))]
 		public void Level_Invalid ()
 		{
@@ -116,19 +116,19 @@ namespace MonoTests.System.Drawing.Printing {
 			a.Level = (PrintingPermissionLevel) Int32.MinValue;
 		}
 
-		[Test]
+		[Fact]
 		public void Attributes ()
 		{
 			Type t = typeof (PrintingPermissionAttribute);
-			Assert.IsFalse (t.IsSerializable, "IsSerializable");
+			Assert.False (t.IsSerializable, "IsSerializable");
 
 			object [] attrs = t.GetCustomAttributes (typeof (AttributeUsageAttribute), false);
-			Assert.AreEqual (1, attrs.Length, "AttributeUsage");
+			Assert.Equal (1, attrs.Length, "AttributeUsage");
 			AttributeUsageAttribute aua = (AttributeUsageAttribute)attrs [0];
-			Assert.IsTrue (aua.AllowMultiple, "AllowMultiple");
-			Assert.IsTrue (aua.Inherited, "Inherited");
+			Assert.True (aua.AllowMultiple, "AllowMultiple");
+			Assert.True (aua.Inherited, "Inherited");
 			AttributeTargets at = AttributeTargets.All;
-			Assert.AreEqual (at, aua.ValidOn, "ValidOn");
+			Assert.Equal (at, aua.ValidOn, "ValidOn");
 		}
 	}
 }

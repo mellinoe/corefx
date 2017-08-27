@@ -33,46 +33,46 @@ using System.Drawing.Text;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Text {
 
 	[TestFixture]
 	public class PrivateFontCollectionTest {
 
-		[Test]
+		[Fact]
 		public void Constructor ()
 		{
 			PrivateFontCollection pfc = new PrivateFontCollection ();
-			Assert.IsNotNull (pfc.Families);
+			Assert.NotNull (pfc.Families);
 		}
 
-		[Test]
+		[Fact]
 		public void AddFontFile_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new PrivateFontCollection ().AddFontFile (null));
 		}
 
-		[Test]
+		[Fact]
 		public void AddFontFile_Empty ()
 		{
 			// badly formetted filename
 			Assert.Throws<ArgumentException> (() => new PrivateFontCollection ().AddFontFile (String.Empty));
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // it seems fontconfig doesn't validate on add...
 		public void AddFontFile_NotAFontFile ()
 		{
 			string file = Path.GetTempFileName ();
-			Assert.IsTrue (File.Exists (file), "Exists");
+			Assert.True (File.Exists (file), "Exists");
 			// even if the file exists....
 			Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddFontFile (file));
 		}
 
 		// tests for AddMemoryFont are available in the CAS unit tests
 
-		[Test]
+		[Fact]
 		public void Dispose_Family ()
 		{
 			PrivateFontCollection pfc = new PrivateFontCollection ();

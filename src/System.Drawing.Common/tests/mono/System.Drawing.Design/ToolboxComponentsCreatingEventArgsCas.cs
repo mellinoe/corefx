@@ -27,7 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 
 using System;
 using System.Drawing.Design;
@@ -59,7 +59,7 @@ namespace MonoCasTests.System.Drawing.Design {
 				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
 		}
 
-		[Test]
+		[Fact]
 		public void Create ()
 		{
 			new ToolboxComponentsCreatingEventArgs (null);
@@ -69,12 +69,12 @@ namespace MonoCasTests.System.Drawing.Design {
 		// it's protected by a  LinkDemand (which will be converted into full demand,
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (SecurityException))]
 		public void Create_LinkDemand ()
 		{
 			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (ctor, "constructor");
+			Assert.NotNull (ctor, "constructor");
 			ctor.Invoke (new object[1] { null });
 		}
 	}

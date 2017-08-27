@@ -30,74 +30,73 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Imaging {
 
-	[TestFixture]
 	public class WmfPlaceableFileHeaderTest {
 
-		[Test]
+		[Fact]
 		public void DefaultValues ()
 		{
 			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();
-			Assert.AreEqual (0, wh.BboxBottom, "BboxBottom");
-			Assert.AreEqual (0, wh.BboxLeft, "BboxLeft");
-			Assert.AreEqual (0, wh.BboxRight, "BboxRight");
-			Assert.AreEqual (0, wh.BboxTop, "BboxTop");
-			Assert.AreEqual (0, wh.Checksum, "Checksum");
-			Assert.AreEqual (0, wh.Hmf, "Hmf");
-			Assert.AreEqual (0, wh.Inch, "Inch");
-			Assert.AreEqual (unchecked ((int)0x9AC6CDD7), wh.Key, "Key"); // always (from documentation)
-			Assert.AreEqual (0, wh.Reserved, "Reserved");
+			Assert.Equal (0, wh.BboxBottom);
+			Assert.Equal (0, wh.BboxLeft);
+			Assert.Equal (0, wh.BboxRight);
+			Assert.Equal (0, wh.BboxTop);
+			Assert.Equal (0, wh.Checksum);
+			Assert.Equal (0, wh.Hmf);
+			Assert.Equal (0, wh.Inch);
+			Assert.Equal (unchecked ((int)0x9AC6CDD7), wh.Key); // always (from documentation)
+			Assert.Equal (0, wh.Reserved);
 		}
 
-		[Test]
+		[Fact]
 		public void Min ()
 		{
 			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();
 			wh.BboxBottom = short.MinValue;
-			Assert.AreEqual (short.MinValue, wh.BboxBottom, "BboxBottom");
+			Assert.Equal (short.MinValue, wh.BboxBottom);
 			wh.BboxLeft = short.MinValue;
-			Assert.AreEqual (short.MinValue, wh.BboxLeft, "BboxLeft");
+			Assert.Equal (short.MinValue, wh.BboxLeft);
 			wh.BboxRight = short.MinValue;
-			Assert.AreEqual (short.MinValue, wh.BboxRight, "BboxRight");
+			Assert.Equal (short.MinValue, wh.BboxRight);
 			wh.BboxTop = short.MinValue;
-			Assert.AreEqual (short.MinValue, wh.BboxTop, "BboxTop");
+			Assert.Equal (short.MinValue, wh.BboxTop);
 			wh.Checksum = short.MinValue;
-			Assert.AreEqual (short.MinValue, wh.Checksum, "Checksum");
+			Assert.Equal (short.MinValue, wh.Checksum);
 			wh.Hmf = short.MinValue;
-			Assert.AreEqual (short.MinValue, wh.Hmf, "Hmf");
+			Assert.Equal (short.MinValue, wh.Hmf);
 			wh.Inch = short.MinValue;
-			Assert.AreEqual (short.MinValue, wh.Inch, "Inch");
+			Assert.Equal (short.MinValue, wh.Inch);
 			wh.Key = int.MinValue;
-			Assert.AreEqual (int.MinValue, wh.Key, "Key");
+			Assert.Equal (int.MinValue, wh.Key);
 			wh.Reserved = int.MinValue;
-			Assert.AreEqual (int.MinValue, wh.Reserved, "Reserved");
+			Assert.Equal (int.MinValue, wh.Reserved);
 		}
 
-		[Test]
+		[Fact]
 		public void Max ()
 		{
 			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();
 			wh.BboxBottom = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, wh.BboxBottom, "BboxBottom");
+			Assert.Equal (short.MaxValue, wh.BboxBottom);
 			wh.BboxLeft = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, wh.BboxLeft, "BboxLeft");
+			Assert.Equal (short.MaxValue, wh.BboxLeft);
 			wh.BboxRight = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, wh.BboxRight, "BboxRight");
+			Assert.Equal (short.MaxValue, wh.BboxRight);
 			wh.BboxTop = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, wh.BboxTop, "BboxTop");
+			Assert.Equal (short.MaxValue, wh.BboxTop);
 			wh.Checksum = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, wh.Checksum, "Checksum");
+			Assert.Equal (short.MaxValue, wh.Checksum);
 			wh.Hmf = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, wh.Hmf, "Hmf");
+			Assert.Equal (short.MaxValue, wh.Hmf);
 			wh.Inch = short.MaxValue;
-			Assert.AreEqual (short.MaxValue, wh.Inch, "Inch");
+			Assert.Equal (short.MaxValue, wh.Inch);
 			wh.Key = int.MaxValue;
-			Assert.AreEqual (int.MaxValue, wh.Key, "Key");
+			Assert.Equal (int.MaxValue, wh.Key);
 			wh.Reserved = int.MaxValue;
-			Assert.AreEqual (int.MaxValue, wh.Reserved, "Reserved");
+			Assert.Equal (int.MaxValue, wh.Reserved);
 		}
 	}
 }

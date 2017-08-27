@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -43,27 +43,27 @@ namespace MonoTests.System.Drawing.Drawing2D
 		[SetUp]
 		public void SetUp () { }
 
-		[Test]
+		[Fact]
 		public void TestConstructors ()
 		{
 			Blend blend0 = new Blend ();
 
-			Assert.AreEqual (1, blend0.Factors.Length, "C#1");
-			Assert.AreEqual (1, blend0.Positions.Length, "C#2");
+			Assert.Equal (1, blend0.Factors.Length, "C#1");
+			Assert.Equal (1, blend0.Positions.Length, "C#2");
 
 			Blend blend1 = new Blend (1);
 
-			Assert.AreEqual (1, blend1.Factors.Length, "C#3");
-			Assert.AreEqual (1, blend1.Positions.Length, "C#4");
+			Assert.Equal (1, blend1.Factors.Length, "C#3");
+			Assert.Equal (1, blend1.Positions.Length, "C#4");
 		}
 
-		[Test]
+		[Fact]
 		public void TestProperties () 
 		{
 			Blend blend0 = new Blend ();
 
-			Assert.AreEqual (0, blend0.Factors[0], "P#1");
-			Assert.AreEqual (0, blend0.Positions[0], "P#2");
+			Assert.Equal (0, blend0.Factors[0], "P#1");
+			Assert.Equal (0, blend0.Positions[0], "P#2");
 
 			Blend blend1 = new Blend (1);
 			float[] positions = {0.0F, 0.5F, 1.0F};
@@ -71,12 +71,12 @@ namespace MonoTests.System.Drawing.Drawing2D
 			blend1.Factors = factors;
 			blend1.Positions = positions;
 
-			Assert.AreEqual (factors[0], blend1.Factors[0], "P#3");
-			Assert.AreEqual (factors[1], blend1.Factors[1], "P#4");
-			Assert.AreEqual (factors[2], blend1.Factors[2], "P#5");
-			Assert.AreEqual (positions[0], blend1.Positions[0], "P#6");
-			Assert.AreEqual (positions[1], blend1.Positions[1], "P#7");
-			Assert.AreEqual (positions[2], blend1.Positions[2], "P#8");
+			Assert.Equal (factors[0], blend1.Factors[0], "P#3");
+			Assert.Equal (factors[1], blend1.Factors[1], "P#4");
+			Assert.Equal (factors[2], blend1.Factors[2], "P#5");
+			Assert.Equal (positions[0], blend1.Positions[0], "P#6");
+			Assert.Equal (positions[1], blend1.Positions[1], "P#7");
+			Assert.Equal (positions[2], blend1.Positions[2], "P#8");
 		}
 	}
 }

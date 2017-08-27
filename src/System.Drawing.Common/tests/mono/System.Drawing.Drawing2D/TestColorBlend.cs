@@ -27,7 +27,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 using System;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -38,15 +38,15 @@ namespace MonoTests.System.Drawing.Drawing2D
 	[TestFixture]	
 	public class ColorBlendTest {
 
-		[Test]
+		[Fact]
 		public void TestConstructors ()
 		{
 			ColorBlend cb1 = new ColorBlend (1);
-			Assert.AreEqual (1, cb1.Colors.Length, "Colors");
-			Assert.AreEqual (1, cb1.Positions.Length, "Positions");
+			Assert.Equal (1, cb1.Colors.Length, "Colors");
+			Assert.Equal (1, cb1.Positions.Length, "Positions");
 		}
 
-		[Test]
+		[Fact]
 		public void TestProperties () 
 		{
 			ColorBlend cb1 = new ColorBlend (1);
@@ -56,56 +56,56 @@ namespace MonoTests.System.Drawing.Drawing2D
 			cb1.Positions = positions;
 
 			// size match
-			Assert.AreEqual (colors[0], cb1.Colors[0], "c0");
-			Assert.AreEqual (colors[1], cb1.Colors[1], "c1");
-			Assert.AreEqual (colors[2], cb1.Colors[2], "c2");
-			Assert.AreEqual (positions[0], cb1.Positions[0], "p0");
-			Assert.AreEqual (positions[1], cb1.Positions[1], "p1");
-			Assert.AreEqual (positions[2], cb1.Positions[2], "p2");
+			Assert.Equal (colors[0], cb1.Colors[0], "c0");
+			Assert.Equal (colors[1], cb1.Colors[1], "c1");
+			Assert.Equal (colors[2], cb1.Colors[2], "c2");
+			Assert.Equal (positions[0], cb1.Positions[0], "p0");
+			Assert.Equal (positions[1], cb1.Positions[1], "p1");
+			Assert.Equal (positions[2], cb1.Positions[2], "p2");
 		}
 
-		[Test]
+		[Fact]
 		public void ColorBlend_Empty ()
 		{
 			ColorBlend cb = new ColorBlend ();
-			Assert.AreEqual (1, cb.Colors.Length, "Colors");
-			Assert.IsTrue (cb.Colors[0].IsEmpty, "C0");
-			Assert.AreEqual (1, cb.Positions.Length, "Positions");
-			Assert.AreEqual (0f, cb.Positions[0], "P0");
+			Assert.Equal (1, cb.Colors.Length, "Colors");
+			Assert.True (cb.Colors[0].IsEmpty, "C0");
+			Assert.Equal (1, cb.Positions.Length, "Positions");
+			Assert.Equal (0f, cb.Positions[0], "P0");
 		}
 
-		[Test]
+		[Fact]
 		public void ColorBlend_Zero ()
 		{
 			ColorBlend cb = new ColorBlend (0);
-			Assert.AreEqual (0, cb.Colors.Length, "Colors");
-			Assert.AreEqual (0, cb.Positions.Length, "Positions");
+			Assert.Equal (0, cb.Colors.Length, "Colors");
+			Assert.Equal (0, cb.Positions.Length, "Positions");
 		}
 
-		[Test]
+		[Fact]
 		public void MismatchSizes ()
 		{
 			ColorBlend cb = new ColorBlend ();
 
 			cb.Colors = new Color[16];
-			Assert.AreEqual (16, cb.Colors.Length, "Colors");
+			Assert.Equal (16, cb.Colors.Length, "Colors");
 
 			cb.Positions = new float[1];
-			Assert.AreEqual (1, cb.Positions.Length, "Positions");
+			Assert.Equal (1, cb.Positions.Length, "Positions");
 		}
 
-		[Test]
+		[Fact]
 		public void ColorBlend_Negative ()
 		{
 			Assert.Throws<OverflowException> (() => new ColorBlend (-1));
 		}
 
-		[Test]
+		[Fact]
 		public void ColorBlend_Lots ()
 		{
 			ColorBlend cb = new ColorBlend (1000);
-			Assert.AreEqual (1000, cb.Colors.Length, "Colors");
-			Assert.AreEqual (1000, cb.Positions.Length, "Positions");
+			Assert.Equal (1000, cb.Colors.Length, "Colors");
+			Assert.Equal (1000, cb.Positions.Length, "Positions");
 		}
 	}
 }

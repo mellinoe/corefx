@@ -31,27 +31,27 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Security.Permissions;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing.Text {
 
 	[TestFixture]
 	public class InstalledFontCollectionTest {
 
-		[Test]
+		[Fact]
 		public void Family ()
 		{
 			InstalledFontCollection ifc = new InstalledFontCollection ();
-			Assert.IsNotNull (ifc.Families, "Families");
+			Assert.NotNull (ifc.Families, "Families");
 		}
 
-		[Test]
+		[Fact]
 		public void Dispose_Family ()
 		{
 			InstalledFontCollection ifc = new InstalledFontCollection ();
 			int count = ifc.Families.Length;
 			ifc.Dispose ();
-			Assert.AreEqual (count, ifc.Families.Length, "Families");
+			Assert.Equal (count, ifc.Families.Length, "Families");
 			// there is *no* exception here
 		}
 	}

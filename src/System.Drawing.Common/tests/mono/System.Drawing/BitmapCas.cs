@@ -26,7 +26,7 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
+using Xunit;
 
 using System;
 using System.Drawing;
@@ -37,7 +37,6 @@ using System.Security.Policy;
 
 namespace MonoCasTests.System.Drawing {
 
-	[TestFixture]
 	[Category ("CAS")]
 	public class BitmapCas {
 
@@ -61,30 +60,30 @@ namespace MonoCasTests.System.Drawing {
 				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
 		}
 
-		[Test]
+		[Fact]
 		public void GetHbitmap ()
 		{
 			Bitmap b = new Bitmap (10, 10);
 			try {
-				Assert.IsTrue (b.GetHbitmap () != IntPtr.Zero, "GetHbitmap");
+				Assert.True (b.GetHbitmap () != IntPtr.Zero, "GetHbitmap");
 			}
 			catch (NotImplementedException) {
 				// not available on Mono
 			}
 			try {
-				Assert.IsTrue (b.GetHbitmap (Color.Aqua) != IntPtr.Zero, "GetHbitmap(Color)");
+				Assert.True (b.GetHbitmap (Color.Aqua) != IntPtr.Zero, "GetHbitmap(Color)");
 			}
 			catch (NotImplementedException) {
 				// not available on Mono
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetHicon ()
 		{
 			Bitmap b = new Bitmap (10, 10);
 			try {
-				Assert.IsTrue (b.GetHicon () != IntPtr.Zero, "GetHicon");
+				Assert.True (b.GetHicon () != IntPtr.Zero, "GetHicon");
 			}
 			catch (NotImplementedException) {
 				// not available on Mono
@@ -95,31 +94,31 @@ namespace MonoCasTests.System.Drawing {
 		// are protected by a LinkDemand (which will be converted into full demand, 
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
-		[Test]
+		[Fact]
 		public void GetHbitmap_Empty_LinkDemand ()
 		{
 			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (getHbitmap1, "GetHbitmap");
+			Assert.NotNull (getHbitmap1, "GetHbitmap");
 			Bitmap b = new Bitmap (10, 10);
 			getHbitmap1.Invoke (b, null);
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (SecurityException))]
 		public void GetHbitmap_Color_LinkDemand ()
 		{
 			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (getHbitmap2, "GetHbitmap(Color)");
+			Assert.NotNull (getHbitmap2, "GetHbitmap(Color)");
 			Bitmap b = new Bitmap (10, 10);
 			getHbitmap2.Invoke (b, new object[1] { Color.Aqua });
 		}
 
-		[Test]
+		[Fact]
 		[ExpectedException (typeof (SecurityException))]
 		public void GetHicon_LinkDemand ()
 		{
 			// requires FullTrust, so denying anything break the requirements
-			Assert.IsNotNull (getHicon, "GetHicon");
+			Assert.NotNull (getHicon, "GetHicon");
 			Bitmap b = new Bitmap (10, 10);
 			getHicon.Invoke (b, null);
 		}

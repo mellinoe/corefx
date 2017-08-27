@@ -35,7 +35,7 @@ using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Xml.Serialization;
-using NUnit.Framework;
+using Xunit;
 
 namespace MonoTests.System.Drawing{
 
@@ -67,7 +67,7 @@ namespace MonoTests.System.Drawing{
 			callback = false;
 		}
 
-		[Test]
+		[Fact]
 		public void FileDoesNotExists ()
 		{
 			Assert.Throws<FileNotFoundException> (() => Image.FromFile ("FileDoesNotExists.jpg"));
@@ -85,20 +85,20 @@ namespace MonoTests.System.Drawing{
 			return false;
 		}
 
-		[Test]
+		[Fact]
 		public void GetThumbnailImage_NullCallback_Tiff ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				// according to documentation a callback is mandatory
 				Image tn = bmp.GetThumbnailImage (10, 5, null, IntPtr.Zero);
-				Assert.AreEqual (5, tn.Height, "Height");
-				Assert.AreEqual (10, tn.Width, "Width");
-				Assert.IsFalse (callback, "Callback called");
+				Assert.Equal (5, tn.Height, "Height");
+				Assert.Equal (10, tn.Width, "Width");
+				Assert.False (callback, "Callback called");
 				tn.Save (fname, ImageFormat.Tiff);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetThumbnailImage_Height_Zero ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -106,7 +106,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetThumbnailImage_Width_Negative ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -114,56 +114,56 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetThumbnailImage_CallbackData_Invalid ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				// according to documentation IntPtr.Zero must be supplied as data
 				Image tn = bmp.GetThumbnailImage (5, 5, new Image.GetThumbnailImageAbort (CallbackFalse), (IntPtr)Int32.MaxValue);
-				Assert.AreEqual (5, tn.Height, "Height");
-				Assert.AreEqual (5, tn.Width, "Width");
-				Assert.IsFalse (callback, "Callback called");
+				Assert.Equal (5, tn.Height, "Height");
+				Assert.Equal (5, tn.Width, "Width");
+				Assert.False (callback, "Callback called");
 				tn.Save (fname, ImageFormat.Tiff);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetThumbnailImage_SameSize_Bmp ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				Image tn = bmp.GetThumbnailImage (10, 10, new Image.GetThumbnailImageAbort (CallbackFalse), IntPtr.Zero);
-				Assert.AreEqual (10, tn.Height, "Height");
-				Assert.AreEqual (10, tn.Width, "Width");
-				Assert.IsFalse (callback, "Callback called");
+				Assert.Equal (10, tn.Height, "Height");
+				Assert.Equal (10, tn.Width, "Width");
+				Assert.False (callback, "Callback called");
 				tn.Save (fname, ImageFormat.Bmp);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetThumbnailImage_Smaller_Gif ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				Image tn = bmp.GetThumbnailImage (4, 4, new Image.GetThumbnailImageAbort (CallbackTrue), IntPtr.Zero);
-				Assert.AreEqual (4, tn.Height, "Height");
-				Assert.AreEqual (4, tn.Width, "Width");
-				Assert.IsFalse (callback, "Callback called");
+				Assert.Equal (4, tn.Height, "Height");
+				Assert.Equal (4, tn.Width, "Width");
+				Assert.False (callback, "Callback called");
 				tn.Save (fname, ImageFormat.Gif);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void GetThumbnailImage_Bigger_Png ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
 				Image tn = bmp.GetThumbnailImage (40, 40, new Image.GetThumbnailImageAbort (CallbackTrue), IntPtr.Zero);
-				Assert.AreEqual (40, tn.Height, "Height");
-				Assert.AreEqual (40, tn.Width, "Width");
-				Assert.IsFalse (callback, "Callback called");
+				Assert.Equal (40, tn.Height, "Height");
+				Assert.Equal (40, tn.Width, "Width");
+				Assert.False (callback, "Callback called");
 				tn.Save (fname, ImageFormat.Png);
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Stream_Unlocked ()
 		{
 			try {
@@ -187,7 +187,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void Stream_Locked ()
 		{
 			Image img = null;
@@ -202,7 +202,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")]	// http://bugzilla.ximian.com/show_bug.cgi?id=80558
 		public void XmlSerialize ()
 		{
@@ -211,15 +211,15 @@ namespace MonoTests.System.Drawing{
 
 		private void Wmf (Image img)
 		{
-			Assert.IsFalse (img is Bitmap, "Bitmap");
-			Assert.IsTrue (img is Metafile, "Metafile");
+			Assert.False (img is Bitmap, "Bitmap");
+			Assert.True (img is Metafile, "Metafile");
 			// as Image
-			Assert.AreEqual (327683, img.Flags, "Flags");
-			Assert.IsTrue (img.RawFormat.Equals (ImageFormat.Wmf), "Wmf");
-			Assert.IsNull (img.Tag, "Tag");
+			Assert.Equal (327683, img.Flags, "Flags");
+			Assert.True (img.RawFormat.Equals (ImageFormat.Wmf), "Wmf");
+			Assert.Null (img.Tag, "Tag");
 		}
 
-		[Test]
+		[Fact]
 		public void FromFile_Metafile_Wmf ()
 		{
 			string filename = TestBitmap.getInFile ("bitmaps/telescope_01.wmf");
@@ -228,7 +228,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void FromStream_Metafile_Wmf ()
 		{
 			string filename = TestBitmap.getInFile ("bitmaps/telescope_01.wmf");
@@ -239,7 +239,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // https://bugzilla.novell.com/show_bug.cgi?id=338779
 		public void FromStream_Metafile_Wmf_NotOrigin ()
 		{
@@ -252,15 +252,15 @@ namespace MonoTests.System.Drawing{
 
 		private void Emf (Image img)
 		{
-			Assert.IsFalse (img is Bitmap, "Bitmap");
-			Assert.IsTrue (img is Metafile, "Metafile");
+			Assert.False (img is Bitmap, "Bitmap");
+			Assert.True (img is Metafile, "Metafile");
 			// as Image
-			Assert.AreEqual (327683, img.Flags, "Flags");
-			Assert.IsTrue (img.RawFormat.Equals (ImageFormat.Emf), "Emf");
-			Assert.IsNull (img.Tag, "Tag");
+			Assert.Equal (327683, img.Flags, "Flags");
+			Assert.True (img.RawFormat.Equals (ImageFormat.Emf), "Emf");
+			Assert.Null (img.Tag, "Tag");
 		}
 
-		[Test]
+		[Fact]
 		public void FromFile_Metafile_Emf ()
 		{
 			string filename = TestBitmap.getInFile ("bitmaps/milkmateya01.emf");
@@ -269,7 +269,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void FromStream_Metafile_Emf ()
 		{
 			string filename = TestBitmap.getInFile ("bitmaps/milkmateya01.emf");
@@ -280,7 +280,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		[Category ("NotWorking")] // https://bugzilla.novell.com/show_bug.cgi?id=338779
 		public void FromStream_Metafile_Emf_NotOrigin ()
 		{
@@ -291,14 +291,14 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void FromFile_Invalid ()
 		{
 			string filename = Assembly.GetExecutingAssembly ().Location;
 			Assert.Throws<OutOfMemoryException> (() => Image.FromFile (filename));
 		}
 
-		[Test]
+		[Fact]
 		public void FromStream_Invalid ()
 		{
 			string filename = Assembly.GetExecutingAssembly ().Location;
@@ -318,48 +318,48 @@ namespace MonoTests.System.Drawing{
 			return bmp;
 		}
 
-		[Test]
+		[Fact]
 		public void StreamSaveLoad ()
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
 				using (Bitmap bmp = GetBitmap ()) {
-					Assert.AreEqual (0, ms.Position, "Position-1");
+					Assert.Equal (0, ms.Position, "Position-1");
 					bmp.Save (ms, ImageFormat.Bmp);
-					Assert.IsTrue (ms.Position > 0, "Position-2");
+					Assert.True (ms.Position > 0, "Position-2");
 
 					ms.Position = ms.Length;
-					Assert.AreEqual (ms.Length, ms.Position, "Position-3");
+					Assert.Equal (ms.Length, ms.Position, "Position-3");
 
 					Bitmap bmp2 = (Bitmap)Image.FromStream (ms);
-					Assert.IsTrue (ms.Position > 20, "Position-4");
+					Assert.True (ms.Position > 20, "Position-4");
 
-					Assert.IsTrue (bmp2.RawFormat.Equals (ImageFormat.Bmp), "Bmp");
+					Assert.True (bmp2.RawFormat.Equals (ImageFormat.Bmp), "Bmp");
 
-					Assert.AreEqual (bmp.GetPixel (0, 0), bmp2.GetPixel (0, 0), "0,0");
-					Assert.AreEqual (bmp.GetPixel (10, 0), bmp2.GetPixel (10, 0), "10,0");
+					Assert.Equal (bmp.GetPixel (0, 0), bmp2.GetPixel (0, 0), "0,0");
+					Assert.Equal (bmp.GetPixel (10, 0), bmp2.GetPixel (10, 0), "10,0");
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void StreamJunkSaveLoad ()
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
 				// junk
 				ms.WriteByte (0xff);
 				ms.WriteByte (0xef);
-				Assert.AreEqual (2, ms.Position, "Position-1");
+				Assert.Equal (2, ms.Position, "Position-1");
 
 				using (Bitmap bmp = GetBitmap ()) {
 					bmp.Save (ms, ImageFormat.Bmp);
-					Assert.IsTrue (ms.Position > 2, "Position-2");
+					Assert.True (ms.Position > 2, "Position-2");
 					// exception here
 					Assert.Throws<ArgumentException> (() => Image.FromStream (ms));
 				}
 			}
 		}
 
-		[Test]
+		[Fact]
 		public void XmlSerialization ()
 		{
 			new XmlSerializer (typeof (Image));
