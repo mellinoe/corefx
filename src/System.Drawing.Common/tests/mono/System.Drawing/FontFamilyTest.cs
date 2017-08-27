@@ -63,13 +63,6 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => new FontFamily (null));
 		}
 
-		[Fact]
-		[Category ("NotWorking")] // libgdiplus/fontconfig always return something
-		public void FontFamily_String_Empty ()
-		{
-			Assert.Throws<ArgumentException> (() => new FontFamily (String.Empty));
-		}
-
 		private void CheckMono (FontFamily ff)
 		{
 			Assert.True (ff.Equals (FontFamily.GenericMonospace), "GenericMonospace");

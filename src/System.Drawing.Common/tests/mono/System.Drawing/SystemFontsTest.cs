@@ -76,15 +76,6 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		[Category ("NotWorking")] // on Unix mapping is done to Bitstream Vera Sans
-		public void DefaultFont_Names ()
-		{
-			Font f = SystemFonts.DefaultFont;
-			Assert.Equal ("Microsoft Sans Serif", f.FontFamily.Name, "#1");
-			Assert.Equal ("Microsoft Sans Serif", f.Name, "#2");
-		}
-
-		[Fact]
 		public void SystemFontName ()
 		{
 			Assert.Equal ("CaptionFont", SystemFonts.CaptionFont.SystemFontName, "CaptionFont");

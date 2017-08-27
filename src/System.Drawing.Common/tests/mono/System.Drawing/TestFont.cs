@@ -118,19 +118,6 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Fact]
-		[Category ("CAS")]
-		public void ToLogFont_DenyUnmanagedCode ()
-		{
-			Font f;
-			LOGFONT	lf;
-
-			lf = new LOGFONT();
-			f = new Font("Arial", 10);
-
-			Assert.Throws<SecurityException> (() => f.ToLogFont(lf));
-		}
-
-		[Fact]
 		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
 		public void ToLogFont_AssertUnmanagedCode ()
 		{
@@ -497,15 +484,6 @@ namespace MonoTests.System.Drawing{
 			Font f = new Font (name, 12.5f);
 			f.Dispose ();
 			Assert.Throws<ArgumentException> (() => f.ToHfont ());
-		}
-		
-		[Fact]
-		[Category ("NotWorking")]
-		public void UnavailableStyleException ()
-		{
-			// Marked NotWorking because it is dependent on what fonts/styles are available
-			// on the OS.  This test is written for Windows.
-			Assert.Throws<ArgumentException> (() => new Font ("Monotype Corsiva", 8, FontStyle.Regular));
 		}
 
 		[Fact]

@@ -60,16 +60,6 @@ namespace MonoTests.System.Drawing.Text {
 			Assert.Throws<ArgumentException> (() => new PrivateFontCollection ().AddFontFile (String.Empty));
 		}
 
-		[Fact]
-		[Category ("NotWorking")] // it seems fontconfig doesn't validate on add...
-		public void AddFontFile_NotAFontFile ()
-		{
-			string file = Path.GetTempFileName ();
-			Assert.True (File.Exists (file), "Exists");
-			// even if the file exists....
-			Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddFontFile (file));
-		}
-
 		// tests for AddMemoryFont are available in the CAS unit tests
 
 		[Fact]

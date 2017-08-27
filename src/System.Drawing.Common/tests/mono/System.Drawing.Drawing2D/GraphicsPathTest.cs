@@ -1551,26 +1551,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Fact]
-		[Category ("NotWorking")] // StringFormat not yet supported in libgdiplus
-		public void AddString_StringFormat ()
-		{
-			FontFamily ff = GetFontFamily ();
-			// null maps to ?
-			GraphicsPath gp1 = new GraphicsPath ();
-			gp1.AddString ("mono", ff, 0, 10, new RectangleF (10, 10, 10, 10), null);
-
-			// StringFormat.GenericDefault
-			GraphicsPath gp2 = new GraphicsPath ();
-			gp2.AddString ("mono", ff, 0, 10, new RectangleF (10, 10, 10, 10), StringFormat.GenericDefault);
-			Assert.Equal (gp1.PointCount, gp2.PointCount);
-
-			// StringFormat.GenericTypographic
-			GraphicsPath gp3 = new GraphicsPath ();
-			gp3.AddString ("mono", ff, 0, 10, new RectangleF (10, 10, 10, 10), StringFormat.GenericTypographic);
-			Assert.False (gp1.PointCount == gp3.PointCount);
-		}
-
-		[Fact]
 		public void GetBounds_Empty_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1619,47 +1599,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			GraphicsPath gp = new GraphicsPath ();
 			gp.AddRectangle (new Rectangle (1, 1, 2, 2));
 			CheckRectangleBounds (gp.GetBounds (null, null));
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // can't/wont duplicate the lack of precision
-		public void GetBounds_WithPen ()
-		{
-			Rectangle rect = new Rectangle (1, 1, 2, 2);
-			Pen p = new Pen (Color.Aqua, 0);
-			GraphicsPath gp = new GraphicsPath ();
-			gp.AddRectangle (rect);
-
-			RectangleF bounds = gp.GetBounds (null, p);
-			// those bounds doesn't make any sense (even visually)
-			// probably null gets mis-interpreted ???
-			Assert.Equal (-6.09999943f, bounds.X);
-			Assert.Equal (-6.09999943f, bounds.Y);
-			Assert.Equal (16.1999989f, bounds.Width);
-			Assert.Equal (16.1999989f, bounds.Height);
-
-			Matrix m = new Matrix ();
-			bounds = gp.GetBounds (m, p);
-			Assert.Equal (-0.419999957f, bounds.X);
-			Assert.Equal (-0.419999957f, bounds.Y);
-			Assert.Equal (4.83999968f, bounds.Width);
-			Assert.Equal (4.83999968f, bounds.Height);
-			// visually we can see the bounds just a pixel bigger than the rectangle
-
-			gp = new GraphicsPath ();
-			gp.AddRectangle (rect);
-			gp.Widen (p);
-			bounds = gp.GetBounds (null);
-			Assert.Equal (0.499999523f, bounds.X);
-			Assert.Equal (0.499999523f, bounds.Y);
-			Assert.Equal (3.000001f, bounds.Width);
-			Assert.Equal (3.000001f, bounds.Height);
-
-			bounds = gp.GetBounds (m);
-			Assert.Equal (0.499999523f, bounds.X);
-			Assert.Equal (0.499999523f, bounds.Y);
-			Assert.Equal (3.000001f, bounds.Width);
-			Assert.Equal (3.000001f, bounds.Height);
 		}
 
 		private void CheckPieBounds (RectangleF rect)
@@ -1944,147 +1883,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Fact]
-		[Category ("NotWorking")]
-		public void Wrap_SinglePoint ()
-		{
-			using (GraphicsPath gp = new GraphicsPath ()) {
-				gp.AddLines (new Point[1] { new Point (1, 1) });
-				// Special case - a line with a single point is valid
-				Assert.Equal (1, gp.PointCount);
-
-				PointF[] pts = new PointF[1] { new PointF (0, 0) };
-				RectangleF r = new RectangleF (10, 20, 30, 40);
-				gp.Warp (pts, r, new Matrix ());
-				Assert.Equal (0, gp.PointCount);
-			}
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Wrap_Line ()
-		{
-			using (GraphicsPath gp = new GraphicsPath ()) {
-				gp.AddLine (new Point (1, 1), new Point (20, 20));
-				Assert.Equal (2, gp.PointCount);
-
-				PointF[] pts = new PointF[1] { new PointF (0, 0) };
-				RectangleF r = new RectangleF (10, 20, 30, 40);
-				gp.Warp (pts, r, new Matrix ());
-				Assert.Equal (2, gp.PointCount);
-			}
-		}
-
-		[Fact]
-		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
-		public void Warp_NullMatrix ()
-		{
-			PointF[] pts = new PointF[1] { new PointF (0,0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			RectangleF r = new RectangleF (10, 20, 30, 40);
-			path.Warp (pts, r, null);
-			CheckWrap (path);
-		}
-
-		[Fact]
-		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
-		public void Warp_EmptyMatrix ()
-		{
-			PointF[] pts = new PointF[1] { new PointF (0, 0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			RectangleF r = new RectangleF (10, 20, 30, 40);
-			path.Warp (pts, r, new Matrix ());
-			CheckWrap (path);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Warp_Rectangle_Empty ()
-		{
-			PointF[] pts = new PointF[1] { new PointF (0, 0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			path.Warp (pts, new RectangleF (), null);
-			CheckWrapNaN (path, true);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Warp_Rectangle_NegativeWidthHeight ()
-		{
-			PointF[] pts = new PointF[1] { new PointF (0, 0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			RectangleF r = new RectangleF (10, 20, -30, -40);
-			path.Warp (pts, r, null);
-			Assert.Equal (3, path.PointCount);
-
-			pts = path.PathPoints;
-			Assert.Equal (1.131355e-39, pts[0].X, Precision);
-			Assert.Equal (-2.0240637E-33, pts[0].Y, Precision);
-			Assert.Equal (1.070131E-39, pts[1].X, Precision);
-			Assert.Equal (-2.02406389E-33, pts[1].Y, Precision);
-			Assert.Equal (3.669146E-40, pts[2].X, Precision);
-			Assert.Equal (-6.746879E-34, pts[2].Y, Precision);
-			byte[] types = path.PathTypes;
-			Assert.Equal (0, types[0]);
-			Assert.Equal (1, types[1]);
-			Assert.Equal (129, types[2]);
-		}
-
-		[Fact]
-		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
-		public void Warp_Matrix_NonInvertible ()
-		{
-			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
-			Assert.False (matrix.IsInvertible);
-			PointF[] pts = new PointF[1] { new PointF (0, 0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			RectangleF r = new RectangleF (10, 20, 30, 40);
-			path.Warp (pts, r, matrix);
-
-			Assert.Equal (3, path.PointCount);
-			pts = path.PathPoints;
-			Assert.Equal (47, pts[0].X);
-			Assert.Equal (30, pts[0].Y);
-			Assert.Equal (47, pts[1].X);
-			Assert.Equal (30, pts[1].Y);
-			Assert.Equal (47, pts[2].X);
-			Assert.Equal (30, pts[2].Y);
-			byte[] types = path.PathTypes;
-			Assert.Equal (0, types[0]);
-			Assert.Equal (1, types[1]);
-			Assert.Equal (129, types[2]);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Warp_Bilinear ()
-		{
-			PointF[] pts = new PointF[1] { new PointF (0, 0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			RectangleF r = new RectangleF (10, 20, 30, 40);
-			path.Warp (pts, r, new Matrix (), WarpMode.Bilinear);
-			// note that the last point is no more closed
-			CheckWrapNaN (path, false);
-		}
-
-		[Fact]
-		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
-		public void Warp_Perspective ()
-		{
-			PointF[] pts = new PointF[1] { new PointF (0, 0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			RectangleF r = new RectangleF (10, 20, 30, 40);
-			path.Warp (pts, r, new Matrix (), WarpMode.Perspective);
-			CheckWrap (path);
-		}
-
-		[Fact]
 		public void Warp_Invalid ()
 		{
 			PointF[] pts = new PointF[1] { new PointF (0, 0) };
@@ -2093,30 +1891,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			RectangleF r = new RectangleF (10, 20, 30, 40);
 			path.Warp (pts, r, new Matrix (), (WarpMode) Int32.MinValue);
 			Assert.Equal (0, path.PointCount);
-		}
-
-		[Fact]
-		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
-		public void Warp_Flatness_Negative ()
-		{
-			PointF[] pts = new PointF[1] { new PointF (0, 0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			RectangleF r = new RectangleF (10, 20, 30, 40);
-			path.Warp (pts, r, new Matrix (), WarpMode.Perspective, -1f);
-			CheckWrap (path);
-		}
-
-		[Fact]
-		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
-		public void Warp_Flatness_OverOne ()
-		{
-			PointF[] pts = new PointF[1] { new PointF (0, 0) };
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			RectangleF r = new RectangleF (10, 20, 30, 40);
-			path.Warp (pts, r, new Matrix (), WarpMode.Perspective, 2.0f);
-			CheckWrap (path);
 		}
 
 		[Fact]
@@ -2384,79 +2158,9 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		}
 
 		[Fact]
-		[Category ("NotWorking")]
-		public void StartClose_AddString ()
-		{
-			GraphicsPath path = new GraphicsPath ();
-			path.AddLine (1, 1, 2, 2);
-			path.AddString ("mono", FontFamily.GenericMonospace, 0, 10, new Point (20,20), StringFormat.GenericDefault);
-			path.AddLine (10, 10, 20, 20);
-			byte[] types = path.PathTypes;
-			// check first types
-			Assert.Equal (0, types[0]);
-			Assert.Equal (0, types[2]);
-			// check last types
-			Assert.Equal (163, types[path.PointCount - 3]);
-			Assert.Equal (1, types[path.PointCount - 2]);
-			Assert.Equal (1, types[path.PointCount - 1]);
-		}
-
-		[Fact]
 		public void Widen_Pen_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Widen (null));
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Widen_Pen ()
-		{
-			Pen pen = new Pen (Color.Blue);
-			GraphicsPath path = new GraphicsPath ();
-			path.AddRectangle (new Rectangle (1, 1, 2, 2));
-			Assert.Equal (4, path.PointCount);
-			path.Widen (pen);
-			Assert.Equal (12, path.PointCount);
-
-			PointF[] pts = path.PathPoints;
-			Assert.Equal (0.5, pts[0].X, LowPrecision);
-			Assert.Equal (0.5, pts[0].Y, LowPrecision);
-			Assert.Equal (3.5, pts[1].X, LowPrecision);
-			Assert.Equal (0.5, pts[1].Y, LowPrecision);
-			Assert.Equal (3.5, pts[2].X, LowPrecision);
-			Assert.Equal (3.5, pts[2].Y, LowPrecision);
-			Assert.Equal (0.5, pts[3].X, LowPrecision);
-			Assert.Equal (3.5, pts[3].Y, LowPrecision);
-			Assert.Equal (1.5, pts[4].X, LowPrecision);
-			Assert.Equal (3.0, pts[4].Y, LowPrecision);
-			Assert.Equal (1.0, pts[5].X, LowPrecision);
-			Assert.Equal (2.5, pts[5].Y, LowPrecision);
-			Assert.Equal (3.0, pts[6].X, LowPrecision);
-			Assert.Equal (2.5, pts[6].Y, LowPrecision);
-			Assert.Equal (2.5, pts[7].X, LowPrecision);
-			Assert.Equal (3.0, pts[7].Y, LowPrecision);
-			Assert.Equal (2.5, pts[8].X, LowPrecision);
-			Assert.Equal (1.0, pts[8].Y, LowPrecision);
-			Assert.Equal (3.0, pts[9].X, LowPrecision);
-			Assert.Equal (1.5, pts[9].Y, LowPrecision);
-			Assert.Equal (1.0, pts[10].X, LowPrecision);
-			Assert.Equal (1.5, pts[10].Y, LowPrecision);
-			Assert.Equal (1.5, pts[11].X, LowPrecision);
-			Assert.Equal (1.0, pts[11].Y, LowPrecision);
-
-			byte[] types = path.PathTypes;
-			Assert.Equal (0, types[0]);
-			Assert.Equal (1, types[1]);
-			Assert.Equal (1, types[2]);
-			Assert.Equal (129, types[3]);
-			Assert.Equal (0, types[4]);
-			Assert.Equal (1, types[5]);
-			Assert.Equal (1, types[6]);
-			Assert.Equal (1, types[7]);
-			Assert.Equal (1, types[8]);
-			Assert.Equal (1, types[9]);
-			Assert.Equal (1, types[10]);
-			Assert.Equal (129, types[11]);
 		}
 
 		[Fact]
@@ -2522,41 +2226,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (129, types[8]);
 		}
 
-		[Fact]
-		[Category ("NotWorking")]
-		public void Widen_Pen_Matrix_Null ()
-		{
-			Pen pen = new Pen (Color.Blue);
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			path.Widen (pen, null);
-			Assert.Equal (9, path.PointCount);
-			CheckWiden3 (path);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Widen_Pen_Matrix_Empty ()
-		{
-			Pen pen = new Pen (Color.Blue);
-			GraphicsPath path = new GraphicsPath ();
-			path.AddPolygon (new Point[3] { new Point (5, 5), new Point (15, 5), new Point (10, 15) });
-			path.Widen (pen, new Matrix ());
-			Assert.Equal (9, path.PointCount);
-			CheckWiden3 (path);
-		}
-
-		[Fact]
-		[Ignore ("results aren't always constant and differs from 1.x and 2.0")]
-		public void Widen_Pen_Matrix_NonInvertible ()
-		{
-			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
-			Assert.False (matrix.IsInvertible);
-			GraphicsPath path = new GraphicsPath ();
-			path.Widen (new Pen (Color.Blue), matrix);
-			Assert.Equal (0, path.PointCount);
-		}
-
 		private void CheckWidenedBounds (string message, GraphicsPath gp, Matrix m)
 		{
 			RectangleF bounds = gp.GetBounds (m);
@@ -2564,46 +2233,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0.5f, bounds.Y, Precision);
 			Assert.Equal (3.0f, bounds.Width, Precision);
 			Assert.Equal (3.0f, bounds.Height, Precision);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Widen_Pen_SmallWidth ()
-		{
-			Matrix m = new Matrix ();
-			Rectangle rect = new Rectangle (1, 1, 2, 2);
-
-			// pen's smaller than 1.0 (width) are "promoted" to 1
-			Pen p = new Pen (Color.Aqua, 0);
-			GraphicsPath gp = new GraphicsPath ();
-			gp.AddRectangle (rect);
-			gp.Widen (p);
-			CheckWidenedBounds ("Width == 0, Null matrix", gp, null);
-			CheckWidenedBounds ("Width == 0, Empty matrix", gp, m);
-
-			p.Width = 0.5f;
-			gp = new GraphicsPath ();
-			gp.AddRectangle (rect);
-			gp.Widen (p);
-			CheckWidenedBounds ("Width == 0.5, Null matrix", gp, null);
-			CheckWidenedBounds ("Width == 0.5, Empty matrix", gp, m);
-
-			p.Width = 1.0f;
-			gp = new GraphicsPath ();
-			gp.AddRectangle (rect);
-			gp.Widen (p);
-			CheckWidenedBounds ("Width == 1.0, Null matrix", gp, null);
-			CheckWidenedBounds ("Width == 1.0, Empty matrix", gp, m);
-
-			p.Width = 1.1f;
-			gp = new GraphicsPath ();
-			gp.AddRectangle (rect);
-			gp.Widen (p);
-			RectangleF bounds = gp.GetBounds (m);
-			Assert.Equal (0.45f, bounds.X, Precision);
-			Assert.Equal (0.45f, bounds.Y, Precision);
-			Assert.Equal (3.10f, bounds.Width, Precision);
-			Assert.Equal (3.10f, bounds.Height, Precision);
 		}
 
 		[Fact]
@@ -2721,50 +2350,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 					IsOutlineVisible_Line (g);
 				}
 				// graphics still "seems" ignored (PageScale)
-			}
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void IsOutlineVisible_Line_WithGraphics ()
-		{
-			using (Bitmap bitmap = new Bitmap (20, 20)) {
-				using (Graphics g = Graphics.FromImage (bitmap)) {
-					g.Transform = new Matrix (2, 0, 0, 2, 50, -50);
-					g.PageUnit = GraphicsUnit.Millimeter;
-					g.PageScale = 2.0f;
-					using (GraphicsPath gp = new GraphicsPath ()) {
-						gp.AddLine (10, 1, 14, 1);
-						Assert.False (gp.IsOutlineVisible (10, 1, Pens.Red, g));
-					}
-				}
-				// graphics ISN'T ignored (Transform+PageUnit+PageScale)
-			}
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // looks buggy - reported to MS as FDBK50868
-		public void IsOutlineVisible_Line_End ()
-		{
-			// horizontal line
-			using (GraphicsPath gp = new GraphicsPath ()) {
-				gp.AddLine (10, 1, 14, 1);
-				Assert.False (gp.IsOutlineVisible (14, 1, Pens.Red, null));
-				Assert.False (gp.IsOutlineVisible (13.5f, 1.0f, Pens.Red, null));
-				Assert.True (gp.IsOutlineVisible (13.4f, 1.0f, Pens.Red, null));
-				Assert.False (gp.IsOutlineVisible (new Point (14, 1), Pens.Red, null));
-				Assert.False (gp.IsOutlineVisible (new PointF (13.5f, 1.0f), Pens.Red, null));
-				Assert.True (gp.IsOutlineVisible (new PointF (13.49f, 1.0f), Pens.Red, null));
-			}
-			// vertical line
-			using (GraphicsPath gp = new GraphicsPath ()) {
-				gp.AddLine (1, 10, 1, 14);
-				Assert.False (gp.IsOutlineVisible (1, 14, Pens.Red, null));
-				Assert.False (gp.IsOutlineVisible (1.0f, 13.5f, Pens.Red, null));
-				Assert.True (gp.IsOutlineVisible (1.0f, 13.4f, Pens.Red, null));
-				Assert.False (gp.IsOutlineVisible (new Point (1, 14), Pens.Red, null));
-				Assert.False (gp.IsOutlineVisible (new PointF (1.0f, 13.5f), Pens.Red, null));
-				Assert.True (gp.IsOutlineVisible (new PointF (1.0f, 13.49f), Pens.Red, null));
 			}
 		}
 
@@ -3015,27 +2600,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		// Reverse complex test cases
 
 		[Fact]
-		[Category ("NotWorking")] // the output differs from GDI+ and libgdiplus
-		public void Reverse_Pie ()
-		{
-			using (GraphicsPath gp = new GraphicsPath ()) {
-				gp.AddPie (1, 2, 3, 4, 10, 20);
-				PointF[] bp = gp.PathPoints;
-				byte[] expected = new byte[] { 0, 3, 3, 3, 129 };
-
-				gp.Reverse ();
-				PointF[] ap = gp.PathPoints;
-				byte[] at = gp.PathTypes;
-				int count = gp.PointCount;
-				Assert.Equal (bp.Length, count);
-				for (int i = 0; i < count; i++) {
-					Assert.Equal (bp[i], ap[count - i - 1]);
-					Assert.Equal (expected[i], at[i]);
-				}
-			}
-		}
-
-		[Fact]
 		public void Reverse_Path ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -3067,38 +2631,6 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				gp.AddRectangle (new Rectangle (200, 201, 60, 61));
 				PointF[] bp = gp.PathPoints;
 				byte[] expected = new byte[] { 0, 1, 1, 129, 0, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 131 };
-
-				gp.Reverse ();
-				PointF[] ap = gp.PathPoints;
-				byte[] at = gp.PathTypes;
-
-				int count = gp.PointCount;
-				Assert.Equal (bp.Length, count);
-				for (int i = 0; i < count; i++) {
-					Assert.Equal (bp[i], ap[count - i - 1]);
-					Assert.Equal (expected[i], at[i]);
-				}
-			}
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // the output differs from GDI+ and libgdiplus
-		public void Reverse_String ()
-		{
-			using (GraphicsPath gp = new GraphicsPath ()) {
-				FontFamily ff = GetFontFamily ();
-				gp.AddString ("Mono::", ff, 0, 10, new Point (10, 10), StringFormat.GenericDefault);
-				PointF[] bp = gp.PathPoints;
-				byte[] expected = new byte[] { 0,3,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,129,0,3,3,3,
-					3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,161,0,3,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,
-					3,3,3,3,3,3,3,129,0,3,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,161,0,3,3,3,3,3,
-					3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,131,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,
-					163,0,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,
-					1,1,3,3,3,3,3,3,3,3,3,3,3,3,1,1,3,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,1,1,
-					3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,161,0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,131,
-					0,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,163,0,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,1,
-					3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,
-					1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,1,3,3,3,3,3,3,3,3,3,3,3,3,1,1,1,1,129 };
 
 				gp.Reverse ();
 				PointF[] ap = gp.PathPoints;

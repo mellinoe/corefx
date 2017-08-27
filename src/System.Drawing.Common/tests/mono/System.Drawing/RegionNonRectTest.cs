@@ -133,45 +133,6 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		[Category ("NotWorking")]
-		public void Region_Polygon4_IsInfinite ()
-		{
-			Point[] points = new Point[4] { new Point (-4194304, -4194304), new Point (-4194304, 4194304), new Point (4194304, 4194304), new Point (4194304, -4194304) };
-			GraphicsPath gp = new GraphicsPath ();
-			gp.AddPolygon (points);
-			CheckInfiniteBounds (gp);
-
-			Region region = new Region (gp);
-			Assert.True (region.IsInfinite (graphic), "IsInfinite");
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Region_Polygon5_IsInfinite ()
-		{
-			// overlap the first/last point
-			Point[] points = new Point[5] { new Point (-4194304, -4194304), new Point (-4194304, 4194304), new Point (4194304, 4194304), new Point (4194304, -4194304), new Point (-4194304, -4194304) };
-			GraphicsPath gp = new GraphicsPath ();
-			gp.AddPolygon (points);
-			CheckInfiniteBounds (gp);
-
-			Region region = new Region (gp);
-			Assert.True (region.IsInfinite (graphic), "IsInfinite");
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Region_Rectangle_IsInfinite ()
-		{
-			GraphicsPath gp = new GraphicsPath ();
-			gp.AddRectangle (new Rectangle (-4194304, -4194304, 8388608, 8388608));
-			CheckInfiniteBounds (gp);
-
-			Region region = new Region (gp);
-			Assert.True (region.IsInfinite (graphic), "IsInfinite");
-		}
-
-		[Fact]
 		public void Curve_GetRegionScans ()
 		{
 			Point[] points = new Point[2] { new Point (-4194304, -4194304), new Point (4194304, 4194304) };

@@ -560,27 +560,6 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		[Fact]
-		[Category ("NotWorking")]
-		public void Save_48bppRgb ()
-		{
-			Save (PixelFormat.Format48bppRgb, PixelFormat.Format32bppRgb, false);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Save_64bppArgb ()
-		{
-			Save (PixelFormat.Format64bppArgb, PixelFormat.Format64bppArgb, true);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Save_64bppPArgb ()
-		{
-			Save (PixelFormat.Format64bppPArgb, PixelFormat.Format64bppArgb, true);
-		}
-
-		[Fact]
 		public void NonInvertedBitmap ()
 		{
 			// regression check against http://bugzilla.ximian.com/show_bug.cgi?id=80751

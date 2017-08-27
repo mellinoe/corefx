@@ -457,26 +457,5 @@ namespace MonoTests.System.Drawing.Imaging {
 		{
 			Save (PixelFormat.Format32bppPArgb, PixelFormat.Format24bppRgb);
 		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Save_48bppRgb ()
-		{
-			Save (PixelFormat.Format48bppRgb, PixelFormat.Format24bppRgb);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Save_64bppArgb ()
-		{
-			Save (PixelFormat.Format64bppArgb, PixelFormat.Format24bppRgb);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Save_64bppPArgb ()
-		{
-			Save (PixelFormat.Format64bppPArgb, PixelFormat.Format24bppRgb);
-		}
 	}
 }

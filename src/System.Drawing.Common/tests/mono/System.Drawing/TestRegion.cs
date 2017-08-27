@@ -1224,13 +1224,6 @@ namespace MonoTests.System.Drawing
 		}
 
 		[Fact]
-		[Category ("NotWorking")] // caused regression in SWF
-		public void GetHrgn_Null ()
-		{
-			Assert.Throws<ArgumentNullException> (() => new Region ().GetHrgn (null));
-		}
-
-		[Fact]
 		public void GetRegionScans_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().GetRegionScans (null));
@@ -1267,28 +1260,6 @@ namespace MonoTests.System.Drawing
 			RegionData data = region.GetRegionData ();
 			Region r2 = new Region (data);
 			CheckEmpty ("RegionData.", region);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Region_Infinite_MultipleRectangles ()
-		{
-			Region region = new Region ();
-			Assert.True (region.IsInfinite (graphic), "Empty.IsInfinite");
-
-			GraphicsPath gp = new GraphicsPath ();
-			gp.AddRectangle (new Rectangle (-4194304, -4194304, 8388608, 8388608));
-			region = new Region (gp);
-			Assert.True (region.IsInfinite (graphic), "OneRectangle.IsInfinite");
-
-			gp.AddRectangle (new Rectangle (1, 1, 2, 2));
-			region = new Region (gp);
-			Assert.False (region.IsInfinite (graphic), "TwoOverlappingRectangle.IsInfinite");
-
-			gp = new GraphicsPath ();
-			gp.AddRectangle (new Rectangle (-4194304, -4194304, 4194304, 8388608));
-			gp.AddRectangle (new Rectangle (0, -4194304, 4194304, 8388608));
-			Assert.False (region.IsInfinite (graphic), "TwoSideBySideRectangle.IsInfinite");
 		}
 
 		[Fact]

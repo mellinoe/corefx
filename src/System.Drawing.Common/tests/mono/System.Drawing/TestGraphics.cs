@@ -574,21 +574,6 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		[Category ("NotWorking")]
-		public void ClipBounds_Transform_Scale_Strange ()
-		{
-			Graphics g = Get (16, 16);
-			g.Clip = new Region (new Rectangle (0, 0, 8, 8));
-			g.Transform = new Matrix (0.5f, 0, 0, 0.25f, 0, 0);
-			CheckBounds ("scale.ClipBounds", g.ClipBounds, 0, 0, 16, 32);
-			CheckBounds ("scale.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 16, 32);
-
-			g.ResetClip ();
-			// note: strange case where g.ClipBounds and g.Clip.GetBounds are different
-			CheckBounds ("resetclip.ClipBounds", g.ClipBounds, -8388608, -16777216, 16777216, 33554432);
-		}
-
-		[Fact]
 		public void ClipBounds_Multiply ()
 		{
 			Graphics g = Get (16, 16);
@@ -688,28 +673,6 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		[Category ("NotWorking")]
-		public void Clip_RotateTransform_BoundsChange_45 ()
-		{
-			Graphics g = Get (16, 16);
-			CheckBounds ("graphics.ClipBounds", g.ClipBounds, 0, 0, 16, 16);
-			CheckBounds ("graphics.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 16, 16);
-			g.RotateTransform (45);
-			// we can't use the "normal" CheckBound here because of libgdiplus crude rounding
-			CheckBoundsInt ("rotated.ClipBounds", g.ClipBounds, 0, -11, 24, 24);
-			CheckBoundsInt ("rotated.Clip.GetBounds", g.Clip.GetBounds (g), 0, -11, 24, 24);
-			g.Clip = new Region (new Rectangle (0, 0, 8, 8));
-			// ClipBounds IS affected by a previous rotation (45)
-			CheckBoundsInt ("rectangle.ClipBounds", g.ClipBounds, -3, -4, 16, 16);
-			// Clip.GetBounds isn't affected by a previous rotation
-			CheckBounds ("rectangle.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
-
-			g.ResetTransform ();
-			CheckBounds ("reseted.ClipBounds", g.ClipBounds, -5, 1, 11, 11);
-			CheckBounds ("reseted.Clip.GetBounds", g.Clip.GetBounds (g), -5.6f, 0, 11.3f, 11.3f);
-		}
-
-		[Fact]
 		public void Clip_ScaleTransform_NoBoundsChange ()
 		{
 			Graphics g = Get (16, 16);
@@ -727,27 +690,6 @@ namespace MonoTests.System.Drawing {
 			g.ResetTransform ();
 			CheckBounds ("reseted.ClipBounds", g.ClipBounds, 0, 0, 16, 4);
 			CheckBounds ("reseted.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 16, 4);
-		}
-
-		[Fact]
-		[Category ("NotWorking")]
-		public void Clip_MultiplyTransform_NoBoundsChange ()
-		{
-			Graphics g = Get (16, 16);
-			CheckBounds ("graphics.ClipBounds", g.ClipBounds, 0, 0, 16, 16);
-			CheckBounds ("graphics.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 16, 16);
-			g.MultiplyTransform (new Matrix (2.5f, 0.5f, -2.5f, 0.5f, 4, -4));
-			CheckBounds ("multiplied.ClipBounds", g.ClipBounds, 3.2f, 1.6f, 19.2f, 19.2f);
-			CheckBounds ("multiplied.Clip.GetBounds", g.Clip.GetBounds (g), 3.2f, 1.6f, 19.2f, 19.2f);
-			g.Clip = new Region (new Rectangle (0, 0, 8, 8));
-			// ClipBounds IS affected by the previous multiplication
-			CheckBounds ("rectangle.ClipBounds", g.ClipBounds, -3, -3, 15, 15);
-			// Clip.GetBounds isn't affected by the previous multiplication
-			CheckBounds ("rectangle.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
-
-			g.ResetTransform ();
-			CheckBounds ("reseted.ClipBounds", g.ClipBounds, -16, -3, 40, 7);
-			CheckBounds ("reseted.Clip.GetBounds", g.Clip.GetBounds (g), -16, -4, 40, 8);
 		}
 
 		[Fact]
@@ -886,19 +828,6 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		[Category ("NotWorking")] // libgdiplus is drawing something
-		public void DrawCurve_LargeTension ()
-		{
-			Bitmap bitmap = new Bitmap (20, 20);
-			Graphics g = Graphics.FromImage (bitmap);
-			g.DrawCurve (Pens.Black, SmallCurve, Single.MaxValue);
-			CheckForEmptyBitmap (bitmap);
-			// too much tension ;)
-			g.Dispose ();
-			bitmap.Dispose ();
-		}
-
-		[Fact]
 		public void DrawCurve_ZeroSegments ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -1026,14 +955,6 @@ namespace MonoTests.System.Drawing {
 			brush.Dispose ();
 			g.Dispose ();
 			bitmap.Dispose ();
-		}
-
-		[Fact] // bug #355141
-		[Category ("CAS")]
-		public void FromHwnd_Zero ()
-		{
-			Graphics g = Graphics.FromHwnd (IntPtr.Zero);
-			Assert.NotNull (g);
 		}
 
 		private void CheckDefaultProperties (string message, Graphics g)
@@ -1714,6 +1635,7 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
+<<<<<<< HEAD
 		[Category ("NotWorking")]
 		public void DrawLines_Width_2 ()
 		{
@@ -1815,6 +1737,8 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
+=======
+>>>>>>> 3d610b2c8a... Delete CAS-related tests
 		public void MeasureString_StringFont ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2250,6 +2174,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
+<<<<<<< HEAD
 		[Fact]
 		[Category ("NotWorking")]
 		public void MeasureCharacterRanges_StringFormat_Alignment ()
@@ -2424,6 +2349,8 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
+=======
+>>>>>>> 3d610b2c8a... Delete CAS-related tests
 		static CharacterRange [] ranges = new CharacterRange [] {
 					new CharacterRange (0, 1),
 					new CharacterRange (1, 1),

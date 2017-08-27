@@ -202,13 +202,6 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
-		[Category ("NotWorking")]	// http://bugzilla.ximian.com/show_bug.cgi?id=80558
-		public void XmlSerialize ()
-		{
-			new XmlSerializer (typeof (Image));
-		}
-
 		private void Wmf (Image img)
 		{
 			Assert.False (img is Bitmap, "Bitmap");
@@ -239,17 +232,6 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
-		[Category ("NotWorking")] // https://bugzilla.novell.com/show_bug.cgi?id=338779
-		public void FromStream_Metafile_Wmf_NotOrigin ()
-		{
-			string filename = TestBitmap.getInFile ("bitmaps/telescope_01.wmf");
-			using (FileStream fs = File.OpenRead (filename)) {
-				fs.Position = fs.Length / 2;
-				Assert.Throws<ArgumentException> (() => Image.FromStream (fs));
-			}
-		}
-
 		private void Emf (Image img)
 		{
 			Assert.False (img is Bitmap, "Bitmap");
@@ -277,17 +259,6 @@ namespace MonoTests.System.Drawing{
 				using (Image img = Image.FromStream (fs)) {
 					Emf (img);
 				}
-			}
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // https://bugzilla.novell.com/show_bug.cgi?id=338779
-		public void FromStream_Metafile_Emf_NotOrigin ()
-		{
-			string filename = TestBitmap.getInFile ("bitmaps/milkmateya01.emf");
-			using (FileStream fs = File.OpenRead (filename)) {
-				fs.Position = fs.Length / 2;
-				Assert.Throws<ArgumentException> (() => Image.FromStream (fs));
 			}
 		}
 

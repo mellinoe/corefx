@@ -201,19 +201,6 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		[Category ("Valgrind")] // this test is known to leak memory (API design limitation)
-		public void UnlockBits_Disposed ()
-		{
-			Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb);
-			Rectangle rect = new Rectangle (0, 0, bmp.Width, bmp.Height);
-			BitmapData data = bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format32bppRgb);
-			bmp.Dispose ();
-			Assert.Throws<ArgumentException> (() => bmp.UnlockBits (data));
-			// and that results in something like this when executed under Valgrind 
-			// "40,000 bytes in 1 blocks are possibly lost in loss record 88 of 92"
-		}
-
-		[Fact]
 		public void UnlockBits_Null ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
@@ -316,16 +303,6 @@ namespace MonoTests.System.Drawing {
 				Color c = bmp.GetPixel (0, 0);
 				Assert.Equal (-16777216, c.ToArgb (), "Color");
 				Assert.Throws<InvalidOperationException> (() => bmp.SetPixel (0, 0, c));
-			}
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // libgdiplus doesn't support this format
-		public void Format16bppGrayScale ()
-		{
-			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format16bppGrayScale)) {
-				// and MS GDI+ support seems quite limited too
-				Assert.Throws<ArgumentException> (() => bmp.GetPixel (0, 0));
 			}
 		}
 
@@ -435,37 +412,9 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		[Category ("NotWorking")] // libgdiplus doesn't support this format
-		public void Format16bppArgb1555 ()
-		{
-			FormatTest (PixelFormat.Format16bppArgb1555);
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // GetPixel is a few bits off
-		public void Format16bppRgb555 ()
-		{
-			FormatTest (PixelFormat.Format16bppRgb555);
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // GetPixel is a few bits off
-		public void Format16bppRgb565 ()
-		{
-			FormatTest (PixelFormat.Format16bppRgb565);
-		}
-
-		[Fact]
 		public void Format32bppArgb ()
 		{
 			FormatTest (PixelFormat.Format32bppArgb);
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // I'm not sure we're handling this format anywhere (Cairo itself use it)
-		public void Format32bppPArgb ()
-		{
-			FormatTest (PixelFormat.Format32bppPArgb);
 		}
 
 		[Fact]
@@ -1164,13 +1113,6 @@ namespace MonoTests.System.Drawing {
 		}
 #endif
 
-		[Fact]
-		[Category ("NotWorking")]	// http://bugzilla.ximian.com/show_bug.cgi?id=80558
-		public void XmlSerialize ()
-		{
-			new XmlSerializer (typeof (Bitmap));
-		}
-
 		static int[] palette1 = {
 			-16777216,
 			-1,
@@ -1676,16 +1618,6 @@ namespace MonoTests.System.Drawing {
 			using (Bitmap bitmap2 = Bitmap.FromHicon (hicon)) {
 				// hicon survives bitmap and icon disposal
 				HiconTest ("GetHicon/FromHicon", bitmap2, size);
-			}
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // libgdiplus has lost track of the original 1bpp state
-		public void Hicon48 ()
-		{
-			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/48x48x1.ico"))) {
-				// looks like 1bbp icons aren't welcome as bitmaps ;-)
-				Assert.Throws<ArgumentException> (() => Bitmap.FromHicon (icon.Handle));
 			}
 		}
 

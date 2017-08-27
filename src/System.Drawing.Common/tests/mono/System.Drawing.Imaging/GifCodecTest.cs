@@ -291,26 +291,5 @@ namespace MonoTests.System.Drawing.Imaging {
 		{
 			Save (PixelFormat.Format32bppPArgb, PixelFormat.Format8bppIndexed, false);
 		}
-
-		[Fact]
-		[Category ("NotWorking")] // libgdiplus/cairo can't create a bitmap with this format
-		public void Save_48bppRgb ()
-		{
-			Save (PixelFormat.Format48bppRgb, PixelFormat.Format8bppIndexed, false);
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // libgdiplus/cairo can't create a bitmap with this format
-		public void Save_64bppArgb ()
-		{
-			Save (PixelFormat.Format64bppArgb, PixelFormat.Format8bppIndexed, false);
-		}
-
-		[Fact]
-		[Category ("NotWorking")] // libgdiplus/cairo can't create a bitmap with this format
-		public void Save_64bppPArgb ()
-		{
-			Save (PixelFormat.Format64bppPArgb, PixelFormat.Format8bppIndexed, false);
-		}
 	}
 }
