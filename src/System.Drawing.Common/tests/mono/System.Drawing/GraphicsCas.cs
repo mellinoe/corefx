@@ -69,7 +69,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void FromHdcInternal ()
 		{
 			try {
@@ -83,7 +82,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[Category ("NotWorking")]
 		public void FromHwndInternal ()
 		{
@@ -98,7 +96,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void ReleaseHdcInternal ()
 		{
 			try {
@@ -117,7 +114,6 @@ namespace MonoCasTests.System.Drawing {
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void FromHdcInternal_LinkDemand ()
 		{
@@ -127,7 +123,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void FromHwndInternal_LinkDemand ()
 		{
@@ -137,7 +132,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void ReleaseHdcInternal_LinkDemand ()
 		{

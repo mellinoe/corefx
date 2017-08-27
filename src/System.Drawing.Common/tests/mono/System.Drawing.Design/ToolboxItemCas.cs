@@ -59,7 +59,6 @@ namespace MonoCasTests.System.Drawing.Design {
 		}
 
 		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
 		public void Create ()
 		{
 			new ToolboxItem ();
@@ -70,7 +69,6 @@ namespace MonoCasTests.System.Drawing.Design {
 		// walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void Create_LinkDemand ()
 		{

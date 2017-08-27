@@ -62,7 +62,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void FromHrgn_Deny_UnmanagedCode ()
 		{
@@ -70,14 +69,12 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
 		[ExpectedException (typeof (ArgumentException))]
 		public void FromHrgn_PermitOnly_UnmanagedCode ()
 		{
 			Region.FromHrgn (IntPtr.Zero);
 		}
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void ReleaseHrgn_Deny_UnmanagedCode ()
 		{

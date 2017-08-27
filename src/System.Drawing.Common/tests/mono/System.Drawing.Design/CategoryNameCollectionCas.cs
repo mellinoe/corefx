@@ -60,7 +60,6 @@ namespace MonoCasTests.System.Drawing.Design {
 		}
 
 		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
 		public void Create ()
 		{
 			new CategoryNameCollection (new string[0]);
@@ -71,7 +70,6 @@ namespace MonoCasTests.System.Drawing.Design {
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void Create_LinkDemand ()
 		{

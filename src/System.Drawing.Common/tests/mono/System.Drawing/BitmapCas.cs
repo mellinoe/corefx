@@ -62,7 +62,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void GetHbitmap ()
 		{
 			Bitmap b = new Bitmap (10, 10);
@@ -81,7 +80,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void GetHicon ()
 		{
 			Bitmap b = new Bitmap (10, 10);
@@ -98,8 +96,6 @@ namespace MonoCasTests.System.Drawing {
 		// i.e. a stack walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		[ExpectedException (typeof (SecurityException))]
 		public void GetHbitmap_Empty_LinkDemand ()
 		{
 			// requires FullTrust, so denying anything break the requirements
@@ -109,7 +105,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void GetHbitmap_Color_LinkDemand ()
 		{
@@ -120,7 +115,6 @@ namespace MonoCasTests.System.Drawing {
 		}
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void GetHicon_LinkDemand ()
 		{

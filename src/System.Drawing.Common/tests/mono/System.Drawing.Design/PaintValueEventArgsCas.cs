@@ -61,7 +61,6 @@ namespace MonoCasTests.System.Drawing.Design {
 		}
 
 		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
 		public void Create ()
 		{
 			Rectangle r = new Rectangle ();
@@ -73,7 +72,6 @@ namespace MonoCasTests.System.Drawing.Design {
 		// stack walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void Create_LinkDemand ()
 		{

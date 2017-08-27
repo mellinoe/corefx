@@ -42,7 +42,6 @@ namespace MonoCasTests.System.Drawing.Text {
 	public class PrivateFontCollectionCas {
 
 		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
 		public void Constructor ()
 		{
 			PrivateFontCollection pfc = new PrivateFontCollection ();
@@ -52,7 +51,6 @@ namespace MonoCasTests.System.Drawing.Text {
 		// TODO - tests for AddFontFile
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
 		public void AddMemoryFont_Deny_UnmanagedCode () 
 		{
 			Assert.Throws<SecurityException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));

@@ -65,21 +65,18 @@ namespace MonoCasTests.System.Drawing.Design {
 		}
 
 		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
 		public void Create ()
 		{
 			new UITypeEditor ();
 		}
 
 		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
 		public void UnitTests ()
 		{
 			unit.DefaultValues ();
 		}
 
 		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
 		public void UnitTests_PaintValue ()
 		{
 			unit.PaintValue_PaintValueEventArgs_Null ();
@@ -92,7 +89,6 @@ namespace MonoCasTests.System.Drawing.Design {
 		// walk) when reflection is used (i.e. it gets testable).
 
 		[Test]
-		[SecurityPermission (SecurityAction.Deny, SkipVerification = true)]
 		[ExpectedException (typeof (SecurityException))]
 		public void Create_LinkDemand ()
 		{
