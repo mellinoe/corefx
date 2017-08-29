@@ -3,6 +3,7 @@
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.props))\dir.props" />
   <PropertyGroup>
     <ProjectGuid>{4B93E684-0630-45F4-8F63-6C7788C9892F}</ProjectGuid>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcoreapp-Debug|AnyCPU'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'netcoreapp-Release|AnyCPU'" />
@@ -31,6 +32,69 @@
     <Compile Include="Imaging\ImageAttributesTests.cs" />
     <Compile Include="Imaging\MetafileTests.cs" />
     <Compile Include="Imaging\PropertyItemTests.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\GraphicsPathIteratorTest.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\GraphicsPathTest.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\LinearGradientBrushTest.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\PathDataTest.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\PathGradientBrushTest.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\TestBlend.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\TestColorBlend.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\TestHatchBrush.cs" />
+    <Compile Include="mono\System.Drawing.Drawing2D\TestMatrix.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\EmfPlusRecordTypeTest.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\FrameDimensionTest.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\GifCodecTest.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\IconCodecTest.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\MetafileTest.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\MetaHeaderTest.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\PngCodecTest.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\TestBmpCodec.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\TestColorMatrix.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\TestImageAttributes.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\TestImageCodecInfo.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\TestImageFormat.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\TestJpegCodec.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\TiffCodecTest.cs" />
+    <Compile Include="mono\System.Drawing.Imaging\WmfPlaceableFileHeaderTest.cs" />
+    <Compile Include="mono\System.Drawing.Printing\MarginsTest.cs" />
+    <Compile Include="mono\System.Drawing.Printing\PageSettingsTest.cs" />
+    <Compile Include="mono\System.Drawing.Printing\PageSourceTest.cs" />
+    <Compile Include="mono\System.Drawing.Printing\PaperSizeTest.cs" />
+    <Compile Include="mono\System.Drawing.Printing\PrinterUnitConvertTest.cs" />
+    <Compile Include="mono\System.Drawing.Printing\PrintingServicesUnixTest.cs" />
+    <Compile Include="mono\System.Drawing.Text\InstalledFontCollectionTest.cs" />
+    <Compile Include="mono\System.Drawing.Text\PrivateFontCollectionTest.cs" />
+    <Compile Include="mono\System.Drawing\ColorTranslator.cs" />
+    <Compile Include="mono\System.Drawing\FontFamilyTest.cs" />
+    <Compile Include="mono\System.Drawing\PenTest.cs" />
+    <Compile Include="mono\System.Drawing\RegionDataTest.cs" />
+    <Compile Include="mono\System.Drawing\RegionNonRectTest.cs" />
+    <Compile Include="mono\System.Drawing\SolidBrushTest.cs" />
+    <Compile Include="mono\System.Drawing\SystemFontsTest.cs" />
+    <Compile Include="mono\System.Drawing\SystemIconsTest.cs" />
+    <Compile Include="mono\System.Drawing\TestBitmap.cs" />
+    <Compile Include="mono\System.Drawing\TestBrushes.cs" />
+    <Compile Include="mono\System.Drawing\TestColor.cs" />
+    <Compile Include="mono\System.Drawing\TestFont.cs" />
+    <Compile Include="mono\System.Drawing\TestGraphics.cs" />
+    <Compile Include="mono\System.Drawing\TestIcon.cs" />
+    <Compile Include="mono\System.Drawing\TestImage.cs" />
+    <Compile Include="mono\System.Drawing\TestPens.cs" />
+    <Compile Include="mono\System.Drawing\TestPoint.cs" />
+    <Compile Include="mono\System.Drawing\TestPointConverter.cs" />
+    <Compile Include="mono\System.Drawing\TestPointF.cs" />
+    <Compile Include="mono\System.Drawing\TestRectangle.cs" />
+    <Compile Include="mono\System.Drawing\TestRectangleConverter.cs" />
+    <Compile Include="mono\System.Drawing\TestRectangleF.cs" />
+    <Compile Include="mono\System.Drawing\TestRegion.cs" />
+    <Compile Include="mono\System.Drawing\TestSize.cs" />
+    <Compile Include="mono\System.Drawing\TestSizeConverter.cs" />
+    <Compile Include="mono\System.Drawing\TestSizeF.cs" />
+    <Compile Include="mono\System.Drawing\TestSizeFConverter.cs" />
+    <Compile Include="mono\System.Drawing\TestStringFormat.cs" />
+    <Compile Include="mono\System.Drawing\TestSystemBrushes.cs" />
+    <Compile Include="mono\System.Drawing\TestSystemPens.cs" />
+    <Compile Include="mono\System.Drawing\TextureBrushTest.cs" />
     <Compile Include="PenTests.cs" />
     <Compile Include="PensTests.cs" />
     <Compile Include="Imaging\BitmapDataTests.cs" />
@@ -77,6 +141,11 @@
     <SupplementalTestData Include="$(PackagesDir)system.drawing.common.testdata\1.0.3\content\**\*.*">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
     </SupplementalTestData>
+
+    <SupplementalTestData Include="mono\System.Drawing\bitmaps\*.*">
+      <DestinationDir>mono\System.Drawing\bitmaps\</DestinationDir>
+    </SupplementalTestData>
+
     <EmbeddedResource Include="$(PackagesDir)system.drawing.common.testdata\1.0.3\content\bitmaps\48x48_multiple_entries_4bit.ico">
       <LogicalName>System.Drawing.Tests.48x48_multiple_entries_4bit.ico</LogicalName>
     </EmbeddedResource>
@@ -101,6 +170,19 @@
       <Project>{69e46a6f-9966-45a5-8945-2559fe337827}</Project>
       <Name>RemoteExecutorConsoleApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="mono\System.Drawing.Design\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mono\System.Drawing.Imaging\.gitattributes" />
+    <None Include="mono\System.Drawing\.gitattributes" />
+    <None Include="mono\System.Drawing\README" />
+    <None Include="mono\System.Drawing\tests-ms.sh" />
+    <None Include="mono\System.Drawing\tests.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="mono\resources\indexed.png" />
   </ItemGroup>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), dir.targets))\dir.targets" />
 </Project>
