@@ -88,6 +88,7 @@ namespace MonoTests.System.Drawing.Printing {
 		}
 
 		[Fact]
+        [PlatformSpecific(TestPlatforms.AnyUnix)]
 		public void Bug602934_PrinterSettingsReturnActualValues ()
 		{
 			if (PrinterSettings.InstalledPrinters.Count < 1)

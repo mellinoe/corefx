@@ -92,7 +92,7 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 		public void Constructor_IconNull_Int_Int ()
 		{
-			Assert.Throws<ArgumentException> (() => new Icon ((Icon)null, 32, 32));
+			Assert.Throws<ArgumentNullException> (() => new Icon ((Icon)null, 32, 32));
 		}
 
 		[Fact]
@@ -106,7 +106,7 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 		public void Constructor_IconNull_Size ()
 		{
-			Assert.Throws<ArgumentException> (() => new Icon ((Icon) null, new Size (32, 32)));
+			Assert.Throws<ArgumentNullException> (() => new Icon ((Icon) null, new Size (32, 32)));
 		}
 
 		[Fact]
@@ -170,13 +170,13 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 		public void Constructor_StreamNull ()
 		{
-			Assert.Throws<ArgumentException> (() => new Icon ((Stream) null));
+			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null));
 		}
 
 		[Fact]
 		public void Constructor_StreamNull_Int_Int ()
 		{
-			Assert.Throws<ArgumentException> (() => new Icon ((Stream) null, 32, 32));
+			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null, 32, 32));
 		}
 
 		[Fact]
@@ -199,7 +199,7 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 		public void Constructor_StreamNull_Size ()
 		{
-			Assert.Throws<ArgumentException> (() => new Icon ((Stream) null, new Size (32, 32)));
+			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null, new Size (32, 32)));
 		}
 
 		[Fact]
@@ -498,7 +498,7 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 		public void ExtractAssociatedIcon_Null ()
 		{
-			Assert.Throws<ArgumentException> (() => Icon.ExtractAssociatedIcon (null));
+			Assert.Throws<ArgumentNullException> (() => Icon.ExtractAssociatedIcon (null));
 		}
 
 		[Fact]

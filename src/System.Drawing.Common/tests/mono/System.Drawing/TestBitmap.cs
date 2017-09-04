@@ -1404,13 +1404,13 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 		public void BitmapStreamCtor ()
 		{
-			Assert.Throws<ArgumentException> (() => new Bitmap ((Stream) null));
+			Assert.Throws<ArgumentNullException> (() => new Bitmap ((Stream) null));
 		}
 
 		[Fact]
 		public void BitmapStreamBoolCtor ()
 		{
-			Assert.Throws<ArgumentException> (() => new Bitmap ((Stream) null, true));
+			Assert.Throws<ArgumentNullException> (() => new Bitmap ((Stream) null, true));
 		}
 
 		[Fact]
