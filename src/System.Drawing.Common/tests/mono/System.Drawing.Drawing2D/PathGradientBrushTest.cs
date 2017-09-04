@@ -54,14 +54,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, pgb.Blend.Factors.Length);
 			Assert.Equal (1f, pgb.Blend.Factors[0]);
 			Assert.Equal (1, pgb.Blend.Positions.Length);
-			Assert.Equal (0f, pgb.Blend.Positions[0], -30);
+			Assert.Equal (0f, pgb.Blend.Positions[0]);
 			Assert.Equal (10.5f, pgb.CenterPoint.X);
 			Assert.Equal (16f, pgb.CenterPoint.Y);
 			Assert.True (pgb.FocusScales.IsEmpty);
 			Assert.Equal (1, pgb.InterpolationColors.Colors.Length);
 			Assert.Equal (0, pgb.InterpolationColors.Colors[0].ToArgb ());
 			Assert.Equal (1, pgb.InterpolationColors.Positions.Length);
-			Assert.Equal (0f, pgb.InterpolationColors.Positions[0], -38);
+			Assert.Equal (0f, pgb.InterpolationColors.Positions[0]);
 			CheckDefaultRectangle (String.Empty, pgb.Rectangle);
 			Assert.Equal (1, pgb.SurroundColors.Length);
 			Assert.Equal (-1, pgb.SurroundColors[0].ToArgb ());
