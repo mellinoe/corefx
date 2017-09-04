@@ -118,6 +118,7 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
+        [ActiveIssue(20884)]
 		public void LockBits_IndexedWrite_NonIndexed ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format8bppIndexed)) {
@@ -127,7 +128,8 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		public void LockBits_NonIndexedWrite_ToIndexed ()
+        [ActiveIssue(20884)]
+        public void LockBits_NonIndexedWrite_ToIndexed ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
  				BitmapData bd = new BitmapData ();
@@ -414,6 +416,7 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
+        [ActiveIssue(20884)]
 		public void Format32bppRgb ()
 		{
 			FormatTest (PixelFormat.Format32bppRgb);
@@ -795,7 +798,8 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		public void LockBitmap_Format32bppArgb_Format32bppRgb_ReadWrite_Whole ()
+        [ActiveIssue(20884)]
+        public void LockBitmap_Format32bppArgb_Format32bppRgb_ReadWrite_Whole ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
 				Assert.Equal (DefaultBitmapHash, HashPixels (bmp));
@@ -845,6 +849,7 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
+        [ActiveIssue(20884)]
 		public void LockBitmap_Format32bppArgb_Format32bppRgb_ReadWrite_Partial ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {

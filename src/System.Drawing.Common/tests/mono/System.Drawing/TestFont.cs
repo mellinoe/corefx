@@ -163,6 +163,7 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Fact]
+        [ActiveIssue(20844)]
 		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
 		public void ToLogFont_Null ()
 		{
@@ -200,7 +201,8 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Fact]
-		public void Font_String_Float_FontStyle ()
+        [ActiveIssue(20844)]
+        public void Font_String_Float_FontStyle ()
 		{
 			Font f = new Font (name, 12.5f, FontStyle.Bold);
 			Assert.Equal (FontFamily.GenericMonospace, f.FontFamily);
@@ -218,7 +220,8 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Fact]
-		public void Font_String_Float_FontStyle_GraphicsUnit ()
+        [ActiveIssue(20844)]
+        public void Font_String_Float_FontStyle_GraphicsUnit ()
 		{
 			Font f = new Font (name, 12.5f, FontStyle.Italic, GraphicsUnit.Pixel);
 			Assert.False (f.Bold);
@@ -241,6 +244,7 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Fact]
+        [ActiveIssue(20844)]
 		public void Font_String_Float_FontStyle_GraphicsUnit_Byte ()
 		{
 			Font f = new Font (name, 12.5f, FontStyle.Strikeout, GraphicsUnit.Inch, Byte.MaxValue);
@@ -259,6 +263,7 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Fact]
+        [ActiveIssue(20844)]
 		public void Font_String_Float_FontStyle_GraphicsUnit_Byte_Bool ()
 		{
 			Font f = new Font (name, 12.5f, FontStyle.Underline, GraphicsUnit.Document, Byte.MinValue, true);
@@ -534,6 +539,7 @@ namespace MonoTests.System.Drawing{
 		}
 
 		[Fact]
+        [ActiveIssue(20844)]
 		public void GetHashCode_NameDiffers_HashesNotEqual()
 		{
 			Font f1 = new Font("Arial", 8.25F, GraphicsUnit.Point);

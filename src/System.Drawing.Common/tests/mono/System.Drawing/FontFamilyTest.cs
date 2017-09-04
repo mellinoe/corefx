@@ -64,7 +64,8 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
-		public void FontFamily_String ()
+        [ActiveIssue(20884)]
+        public void FontFamily_String ()
 		{
 			FontFamily ff = new FontFamily (name);
 			CheckMono (ff);
@@ -78,6 +79,7 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
+        [ActiveIssue(20884)]
 		public void FontFamily_String_FontCollection_Null ()
 		{
 			FontFamily ff = new FontFamily (name, null);
@@ -85,6 +87,7 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[Fact]
+        [ActiveIssue(20884)]
 		public void FontFamily_String_InstalledFontCollection ()
 		{
 			FontFamily ff = new FontFamily (name, new InstalledFontCollection ());
