@@ -338,7 +338,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (FontFamily.GenericMonospace, f.FontFamily);
 			Assert.Equal (f.Name, f.FontFamily.Name);
 			Assert.Equal (12.5f, f.Size);
-			Assert.Equal (35.43307f, f.SizeInPoints);
+			Assert.Equal (35.43307f, f.SizeInPoints, 4);
 			Assert.False (f.Strikeout);
 			Assert.False (f.Underline);
 			Assert.Equal (GraphicsUnit.Millimeter, f.Unit);
@@ -380,7 +380,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (FontFamily.GenericMonospace, f.FontFamily);
 			Assert.Equal (f.Name, f.FontFamily.Name);
 			Assert.Equal (12.5f, f.Size);
-			Assert.Equal (3f, f.SizeInPoints);
+			Assert.Equal (3f, f.SizeInPoints, precision: 3);
 			Assert.False (f.Strikeout);
 			Assert.True (f.Underline);
 			Assert.Equal (GraphicsUnit.Document, f.Unit);

@@ -45,14 +45,9 @@ namespace MonoTests.System.Drawing.Imaging {
 
 		// Get the input directory depending on the runtime
 		static public string getInFile (string file)
-		{
-			string sRslt = Path.GetFullPath ("../System.Drawing/" + file);
-
-			if (!File.Exists (sRslt))
-				sRslt = "Test/System.Drawing/" + file;
-
-			return sRslt;
-		}
+        {
+            return Path.GetFullPath("mono/System.Drawing/" + file);
+        }
 
 		[Fact]
 		public void Metafile_Stream_Null ()

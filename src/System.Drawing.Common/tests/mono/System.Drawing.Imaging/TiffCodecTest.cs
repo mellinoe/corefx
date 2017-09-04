@@ -59,14 +59,9 @@ namespace MonoTests.System.Drawing.Imaging {
 
 		/* Get the input directory depending on the runtime*/
 		internal string getInFile (string file)
-		{
-			string sRslt = Path.GetFullPath ("../System.Drawing/" + file);
-
-			if (!File.Exists (sRslt))
-				sRslt = "Test/System.Drawing/" + file;
-
-			return sRslt;
-		}
+        {
+            return Path.GetFullPath("mono/System.Drawing/" + file);
+        }
 
 		/* Checks bitmap features on a know 32bbp bitmap */
 		[Fact]
