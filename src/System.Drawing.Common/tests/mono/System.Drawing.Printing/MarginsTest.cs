@@ -36,7 +36,7 @@ namespace MonoTests.System.Drawing.Printing {
 
 	public class MarginsTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorDefault ()
 		{
 			Margins m = new Margins ();
@@ -51,7 +51,7 @@ namespace MonoTests.System.Drawing.Printing {
 			Assert.False (m != clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Ctor4Int ()
 		{
 			Margins m1 = new Margins (Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue);
@@ -68,31 +68,31 @@ namespace MonoTests.System.Drawing.Printing {
 			Assert.False (m1 == m2);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Ctor_BadLeft ()
 		{
             Assert.Throws<ArgumentException>(() => new Margins(-1, 0, 0, 0)); 
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Ctor_BadRight ()
 		{
 			Assert.Throws<ArgumentException>(() => new Margins (0, Int32.MinValue, 0, 0));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Ctor_BadTop ()
 		{
 			Assert.Throws<ArgumentException>(() => new Margins (0, 0, Int32.MinValue, 0));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Ctor_BadBottom ()
 		{
 			Assert.Throws<ArgumentException>(() => new Margins (0, 0, 0, -1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Equals ()
 		{
 			Margins m = new Margins ();
@@ -100,7 +100,7 @@ namespace MonoTests.System.Drawing.Printing {
 			Assert.False (m.Equals (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void OperatorsWithNulls ()
 		{
 			Margins m1 = null;

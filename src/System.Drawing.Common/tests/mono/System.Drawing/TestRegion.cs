@@ -58,7 +58,7 @@ namespace MonoTests.System.Drawing
 			graphic = Graphics.FromImage (bitmap);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBounds()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -81,7 +81,7 @@ namespace MonoTests.System.Drawing
 			Assert.Equal (90, bounds.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestCloneAndEquals()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -115,7 +115,7 @@ namespace MonoTests.System.Drawing
 		}
 
 		 /*Tests infinite, empty, etc*/
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestInfiniteAndEmpty()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -150,7 +150,7 @@ namespace MonoTests.System.Drawing
 		}
 
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestUnionGroup1 ()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -303,7 +303,7 @@ namespace MonoTests.System.Drawing
 			Assert.Equal (rect1.Height, rect2.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestUnionGroup2 ()
 		{
 			RectangleF[] rects;
@@ -450,7 +450,7 @@ namespace MonoTests.System.Drawing
 		}
 
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestComplementGroup1 ()
 		{
 			RectangleF[] rects;
@@ -554,7 +554,7 @@ namespace MonoTests.System.Drawing
 
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestComplementGroup2 ()
 		{
 
@@ -592,7 +592,7 @@ namespace MonoTests.System.Drawing
 		}
 
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestExcludeGroup1 ()
 		{
 			RectangleF[] rects;
@@ -855,7 +855,7 @@ namespace MonoTests.System.Drawing
 
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestExcludeGroup2 ()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -884,7 +884,7 @@ namespace MonoTests.System.Drawing
 			Assert.Equal (70, rects[1].Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ExcludeBug402613 ()
 		{
 			Region r = new Region();
@@ -894,7 +894,7 @@ namespace MonoTests.System.Drawing
 			Assert.True (r.IsVisible (new Rectangle (66,292,189,133)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestIntersect()
 		{
 
@@ -938,7 +938,7 @@ namespace MonoTests.System.Drawing
 			Assert.Equal (0, rects.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestXor()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -979,7 +979,7 @@ namespace MonoTests.System.Drawing
 		}
 
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestIsVisible()
 		{
 			Bitmap bmp = new Bitmap (600, 800);
@@ -1027,7 +1027,7 @@ namespace MonoTests.System.Drawing
 
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestTranslate()
 		{
 			Region rgn1 = new Region (new RectangleF (10, 10, 120,120));
@@ -1044,35 +1044,35 @@ namespace MonoTests.System.Drawing
 			Assert.Equal (120, rects[0].Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region (gp));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RegionData_Null ()
 		{
 			RegionData rd = null;
 			Assert.Throws<ArgumentNullException> (() => new Region (rd));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Union_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Union (gp));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Union_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Union (r));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Union_Region_Infinite ()
 		{
 			// default ctor creates an infinite region
@@ -1083,151 +1083,151 @@ namespace MonoTests.System.Drawing
 			CheckEmpty ("U infinity", r);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Intersect_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Intersect (gp));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Intersect_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Intersect (r));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Complement_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Complement (gp));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Complement_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Complement (r));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Exclude_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Exclude (gp));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Exclude_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Exclude (r));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Xor_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Xor (gp));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Xor_Region_Null ()
 		{
 			Region r = null;
 			Assert.Throws<ArgumentNullException> (() => new Region ().Xor (r));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().GetBounds (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_IntIntNull ()
 		{
 			Assert.True (new Region ().IsVisible (0, 0, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_IntIntIntIntNull ()
 		{
 			Assert.False (new Region ().IsVisible (0, 0, 0, 0, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_PointNull ()
 		{
 			Point p = new Point ();
 			Assert.True (new Region ().IsVisible (p, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_PointFNull ()
 		{
 			PointF p = new PointF ();
 			Assert.True (new Region ().IsVisible (p, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_RectangleNull ()
 		{
 			Rectangle r = new Rectangle ();
 			Assert.False (new Region ().IsVisible (r, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_RectangleFNull ()
 		{
 			RectangleF r = new RectangleF ();
 			Assert.False (new Region ().IsVisible (r, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_SingleSingleNull ()
 		{
 			Assert.True (new Region ().IsVisible (0f, 0f, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_SingleSingleSingleSingleNull ()
 		{
 			Assert.False (new Region ().IsVisible (0f, 0f, 0f, 0f, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsEmpty_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().IsEmpty (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsInfinite_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().IsInfinite (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Equals_NullGraphics ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().Equals (null, Graphics.FromImage (new Bitmap (10, 10))));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Equals_RegionNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().Equals (new Region (), null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetRegionScans_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().GetRegionScans (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Region ().Transform (null));
@@ -1246,7 +1246,7 @@ namespace MonoTests.System.Drawing
 			Assert.Equal (8388608f, rect.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Region_Empty ()
 		{
 			Region region = new Region ();
@@ -1260,7 +1260,7 @@ namespace MonoTests.System.Drawing
 			CheckEmpty ("RegionData.", region);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rectangle_GetRegionScans ()
 		{
 			Matrix matrix = new Matrix ();
@@ -1274,7 +1274,7 @@ namespace MonoTests.System.Drawing
 			Assert.Equal (2, region.GetRegionScans (matrix).Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityExclude ()
 		{
 			using (Region r = new Region ()) {
@@ -1289,7 +1289,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityIntersect ()
 		{
 			using (Region r = new Region ()) {
@@ -1304,7 +1304,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityIntersectTranslate ()
 		{
 			using (Region r = new Region ()) {
@@ -1319,7 +1319,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityIntersectScale ()
 		{
 			using (Region r = new Region ()) {
@@ -1337,7 +1337,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityIntersectTransform ()
 		{
 			using (Region r = new Region ()) {
@@ -1354,7 +1354,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityTranslate ()
 		{
 			using (Region r = new Region ()) {
@@ -1365,7 +1365,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityScaleUp ()
 		{
 			using (Region r = new Region ()) {
@@ -1379,7 +1379,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityScaleDown ()
 		{
 			using (Region r = new Region ()) {
@@ -1393,7 +1393,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InfinityRotate ()
 		{
 			using (Region r = new Region ()) {
@@ -1407,7 +1407,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Intersect_383878 ()
 		{
 			using (Region clipRegion = new Region ()) {
@@ -1425,7 +1425,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Complement_383878 ()
 		{
 			using (Region clipRegion = new Region ()) {
@@ -1462,7 +1462,7 @@ namespace MonoTests.System.Drawing
 		// Note: Test cases calling GetHrng will leak memory unless ReleaseHrgn
 		// (which only exists in 2.0) is called.
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHrgn_Infinite_MakeEmpty ()
 		{
 			Region r = new Region ();
@@ -1478,7 +1478,7 @@ namespace MonoTests.System.Drawing
 			r.ReleaseHrgn (h);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHrgn_Empty_MakeInfinite ()
 		{
 			Region r = new Region (new GraphicsPath ());
@@ -1494,7 +1494,7 @@ namespace MonoTests.System.Drawing
 			r.ReleaseHrgn (h);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHrgn_TwiceFromSameRegionInstance ()
 		{
 			Region r = new Region (new GraphicsPath ());
@@ -1505,7 +1505,7 @@ namespace MonoTests.System.Drawing
 			r.ReleaseHrgn (h2);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHrgn_FromHrgn ()
 		{
 			Region r1 = new Region (new GraphicsPath ());
@@ -1520,19 +1520,19 @@ namespace MonoTests.System.Drawing
 			r2.ReleaseHrgn (h2);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHrgn_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => Region.FromHrgn (IntPtr.Zero));
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ReleaseHrng_Zero ()
 		{
 			Region r = new Region (new GraphicsPath ());
 			Assert.Throws<ArgumentNullException> (() => r.ReleaseHrgn (IntPtr.Zero));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ReleaseHrng ()
 		{
 			Region r = new Region (new GraphicsPath ());

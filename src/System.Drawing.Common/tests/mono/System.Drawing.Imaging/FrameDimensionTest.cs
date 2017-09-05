@@ -34,7 +34,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 	public class FrameDimensionTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Empty ()
 		{
 			FrameDimension fd = new FrameDimension (Guid.Empty);
@@ -46,7 +46,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.False (fd.Equals (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WellKnownValues ()
 		{
 			Assert.Equal ("7462dc86-6180-4c7e-8e3f-ee7333a7a483", FrameDimension.Page.Guid.ToString ());
@@ -62,7 +62,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.True (Object.ReferenceEquals (FrameDimension.Time, FrameDimension.Time));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Equals ()
 		{
 			FrameDimension fd = new FrameDimension (new Guid ("7462dc86-6180-4c7e-8e3f-ee7333a7a483"));

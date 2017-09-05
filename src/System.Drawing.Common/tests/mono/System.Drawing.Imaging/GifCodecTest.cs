@@ -86,13 +86,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsFeatures_Gif89 ()
 		{
 			Bitmap8bitsFeatures (getInFile ("bitmaps/nature24bits.gif"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsFeatures_Gif87 ()
 		{
 			Bitmap8bitsFeatures (getInFile ("bitmaps/nature24bits87.gif"));
@@ -128,19 +128,19 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsPixels_Gif89 ()
 		{
 			Bitmap8bitsPixels (getInFile ("bitmaps/nature24bits.gif"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsPixels_Gif87 ()
 		{
 			Bitmap8bitsPixels (getInFile ("bitmaps/nature24bits87.gif"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsData ()
 		{
 			string sInFile = getInFile ("bitmaps/nature24bits.gif");
@@ -203,7 +203,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Interlaced ()
 		{
 			string sInFile = getInFile ("bitmaps/81773-interlaced.gif");
@@ -262,25 +262,25 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_24bppRgb ()
 		{
 			Save (PixelFormat.Format24bppRgb, PixelFormat.Format8bppIndexed, false);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppRgb ()
 		{
 			Save (PixelFormat.Format32bppRgb, PixelFormat.Format8bppIndexed, false);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppArgb ()
 		{
 			Save (PixelFormat.Format32bppArgb, PixelFormat.Format8bppIndexed, false);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppPArgb ()
 		{
 			Save (PixelFormat.Format32bppPArgb, PixelFormat.Format8bppIndexed, false);

@@ -37,7 +37,7 @@ namespace MonoTests.System.Drawing {
 
 	public class SystemFontsTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DefaultFont ()
 		{
 			Font f = SystemFonts.DefaultFont;
@@ -52,7 +52,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (GraphicsUnit.Point, f.Unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SystemFontName ()
 		{
 			Assert.Equal ("CaptionFont", SystemFonts.CaptionFont.SystemFontName);
@@ -65,7 +65,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal ("StatusFont", SystemFonts.StatusFont.SystemFontName);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetFontByName ()
 		{
 			Assert.Equal ("CaptionFont", SystemFonts.GetFontByName ("CaptionFont").SystemFontName);
@@ -78,7 +78,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal ("StatusFont", SystemFonts.GetFontByName ("StatusFont").SystemFontName);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetFontByName_Invalid ()
 		{
 			Assert.Null (SystemFonts.GetFontByName (null));
@@ -87,7 +87,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Null (SystemFonts.GetFontByName ("DEFAULTFONT"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Same ()
 		{
 			Font f1 = SystemFonts.CaptionFont;
@@ -97,7 +97,7 @@ namespace MonoTests.System.Drawing {
 			Assert.False (Object.ReferenceEquals (f1, f2));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Instance ()
 		{
 			Font f1 = SystemFonts.CaptionFont;
@@ -106,7 +106,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => f1.GetHeight (72f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Property ()
 		{
 			float height = SystemFonts.CaptionFont.GetHeight (72f);

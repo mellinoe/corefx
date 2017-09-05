@@ -36,7 +36,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 	public class PathDataTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PathData_Empty ()
 		{
 			PathData data = new PathData ();
@@ -54,7 +54,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Null (data.Types);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PathData_LengthMismatch ()
 		{
 			PathData data = new PathData ();
@@ -64,7 +64,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, data.Types.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PathData_UnclonedProperties ()
 		{
 			PathData data = new PathData ();

@@ -36,7 +36,7 @@ namespace MonoTests.System.Drawing {
 
 	public class BrushesTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Equality ()
 		{
 			Brush brush1 = Brushes.Blue;
@@ -45,7 +45,7 @@ namespace MonoTests.System.Drawing {
 			Assert.True (Object.ReferenceEquals (brush1, brush2));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose ()
 		{
 			Brushes.YellowGreen.Dispose ();
@@ -54,7 +54,7 @@ namespace MonoTests.System.Drawing {
 			// and it is! so watch your brushes ;-)
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Properties ()
 		{
 			Brush br;

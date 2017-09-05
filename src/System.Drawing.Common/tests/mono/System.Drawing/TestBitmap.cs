@@ -46,7 +46,7 @@ namespace MonoTests.System.Drawing {
 
 	public class TestBitmap {
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPixels() 
 		{		
 			// Tests GetSetPixel/SetPixel			
@@ -61,7 +61,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (Color.FromArgb(255,255,0,155), color2);			
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_32_32_NonIndexedWrite ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
@@ -75,7 +75,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_32_24_NonIndexedWrite ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
@@ -89,7 +89,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_24_24_NonIndexedWrite ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format24bppRgb)) {
@@ -103,7 +103,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_24_32_NonIndexedWrite ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format24bppRgb)) {
@@ -139,7 +139,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_IndexedWrite_SameIndexedFormat ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format8bppIndexed)) {
@@ -153,7 +153,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_ImageLockMode_Invalid ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10, PixelFormat.Format24bppRgb)) {
@@ -172,7 +172,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_Double ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10, PixelFormat.Format24bppRgb)) {
@@ -187,7 +187,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_Disposed ()
 		{
 			Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb);
@@ -196,14 +196,14 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => bmp.LockBits (rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void UnlockBits_Null ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
 				Assert.Throws<ArgumentException> (() => bmp.UnlockBits (null));
 			}
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_BitmapData_Null ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100, PixelFormat.Format32bppRgb)) {
@@ -212,7 +212,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_32_32_BitmapData ()
 		{
 			BitmapData data = new BitmapData ();
@@ -227,7 +227,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_32_24_BitmapData ()
 		{
 			BitmapData data = new BitmapData ();
@@ -242,7 +242,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_24_24_BitmapData ()
 		{
 			BitmapData data = new BitmapData ();
@@ -257,7 +257,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBits_24_32_BitmapData ()
 		{
 			BitmapData data = new BitmapData ();
@@ -272,7 +272,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Format1bppIndexed ()
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format1bppIndexed)) {
@@ -282,7 +282,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Format4bppIndexed ()
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format4bppIndexed)) {
@@ -292,7 +292,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Format8bppIndexed ()
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format8bppIndexed)) {
@@ -407,7 +407,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Format32bppArgb ()
 		{
 			FormatTest (PixelFormat.Format32bppArgb);
@@ -419,7 +419,7 @@ namespace MonoTests.System.Drawing {
 			FormatTest (PixelFormat.Format32bppRgb);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Format24bppRgb ()
 		{
 			FormatTest (PixelFormat.Format24bppRgb);
@@ -454,7 +454,7 @@ namespace MonoTests.System.Drawing {
         }
 
 		// note: this test fails when saving (for the same reason) on Mono and MS.NET
-		//[Fact]
+		//[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MakeTransparent() 
 		{
 			string sInFile =   getInFile("bitmaps/maketransparent.bmp");
@@ -471,7 +471,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (Color.Black.B, color.B);										
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone()
 		{
 			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");
@@ -488,7 +488,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (colororg50, colornew50);				
 		}	
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CloneImage()
 		{
 			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");			
@@ -502,7 +502,7 @@ namespace MonoTests.System.Drawing {
 			
 		}	
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Frames()
 		{
 			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");			
@@ -514,7 +514,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0, active);											
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FileDoesNotExists ()
 		{			
 			Assert.Throws<ArgumentException> (() => new Bitmap ("FileDoesNotExists.jpg"));			
@@ -609,7 +609,7 @@ namespace MonoTests.System.Drawing {
 			Rotate bitmap in diffent ways, and check the result
 			pixels using MD5
 		*/
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rotate()
 		{
 			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");	
@@ -770,7 +770,7 @@ namespace MonoTests.System.Drawing {
 		private static byte[] DefaultBitmapHash = new byte[] { 0xD8, 0xD3, 0x68, 0x9C, 0x86, 0x7F, 0xB6, 0xA0, 0x76, 0xD6, 0x00, 0xEF, 0xFF, 0xE5, 0x8E, 0x1B };
 		private static byte[] FinalWholeBitmapHash = new byte[] { 0x5F, 0x52, 0x98, 0x37, 0xE3, 0x94, 0xE1, 0xA6, 0x06, 0x6C, 0x5B, 0xF1, 0xA9, 0xC2, 0xA9, 0x43 };
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBitmap_Format32bppArgb_Format32bppArgb_ReadWrite_Whole ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
@@ -782,7 +782,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBitmap_Format32bppArgb_Format32bppPArgb_ReadWrite_Whole ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
@@ -806,7 +806,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBitmap_Format32bppArgb_Format24bppRgb_ReadWrite_Whole ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
@@ -820,7 +820,7 @@ namespace MonoTests.System.Drawing {
 
 		private static byte[] FinalPartialBitmapHash = new byte[] { 0xED, 0xD8, 0xDC, 0x9B, 0x44, 0x00, 0x22, 0x9B, 0x07, 0x06, 0x4A, 0x21, 0x70, 0xA7, 0x31, 0x1D };
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBitmap_Format32bppArgb_Format32bppArgb_ReadWrite_Partial ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
@@ -832,7 +832,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBitmap_Format32bppArgb_Format32bppPArgb_ReadWrite_Partial ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
@@ -856,7 +856,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockBitmap_Format32bppArgb_Format24bppRgb_ReadWrite_Partial ()
 		{
 			using (Bitmap bmp = CreateBitmap (100, 100, PixelFormat.Format32bppArgb)) {
@@ -872,7 +872,7 @@ namespace MonoTests.System.Drawing {
 			Tests the LockBitmap and UnlockBitmap functions, specifically the copying
 			of bitmap data in the directions indicated by the ImageLockMode.
 		*/
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LockUnlockBitmap ()
 		{
 			BitmapData data;
@@ -967,7 +967,7 @@ namespace MonoTests.System.Drawing {
 				}
 			}
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DefaultFormat1 ()
 		{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
@@ -975,7 +975,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DefaultFormat2 ()
 		{
 			string filename =  Path.GetTempFileName ();
@@ -989,7 +989,7 @@ namespace MonoTests.System.Drawing {
 			File.Delete (filename);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BmpDataStride1 ()
 		{
 			Bitmap bmp = new Bitmap (184, 184, PixelFormat.Format1bppIndexed);
@@ -1039,7 +1039,7 @@ namespace MonoTests.System.Drawing {
 			-1,
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Format1bppIndexed_Palette ()
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format1bppIndexed)) {
@@ -1071,7 +1071,7 @@ namespace MonoTests.System.Drawing {
 			-1,
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Format4bppIndexed_Palette ()
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format4bppIndexed)) {
@@ -1343,7 +1343,7 @@ namespace MonoTests.System.Drawing {
 			-1,
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Format8bppIndexed_Palette ()
 		{
 			using (Bitmap bmp = new Bitmap (1, 1, PixelFormat.Format8bppIndexed)) {
@@ -1356,79 +1356,79 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void XmlSerialization ()
 		{
 			new XmlSerializer (typeof (Bitmap));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapImageCtor ()
 		{
 			Assert.Throws<NullReferenceException> (() => new Bitmap ((Image) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapImageSizeCtor ()
 		{
 			Assert.Throws<ArgumentException> (() => new Bitmap ((Image) null, Size.Empty));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapImageIntIntCtor ()
 		{
 			Assert.Throws<ArgumentException> (() => new Bitmap ((Image) null, Int32.MinValue, Int32.MaxValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapIntIntCtor ()
 		{
 			Assert.Throws<ArgumentException> (() => new Bitmap (Int32.MinValue, Int32.MaxValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapIntIntGraphicCtor ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Bitmap (1, 1, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapIntIntPixelFormatCtor ()
 		{
 			Assert.Throws<ArgumentException> (() => new Bitmap (Int32.MinValue, Int32.MaxValue, PixelFormat.Format1bppIndexed));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapStreamCtor ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Bitmap ((Stream) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapStreamBoolCtor ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Bitmap ((Stream) null, true));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapStringCtor ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Bitmap ((string) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapStringBoolCtor ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Bitmap ((string) null, false));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapTypeStringCtor1 ()
 		{
 			Assert.Throws<NullReferenceException> (() => new Bitmap ((Type) null, "mono"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapTypeStringCtor2 ()
 		{
 			Assert.Throws<ArgumentException> (() => new Bitmap (typeof (Bitmap), null));
@@ -1441,43 +1441,43 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetResolution_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => SetResolution (0.0f, 0.0f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetResolution_Negative_X ()
 		{
 			Assert.Throws<ArgumentException> (() => SetResolution (-1.0f, 1.0f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetResolution_Negative_Y ()
 		{
 			Assert.Throws<ArgumentException> (() => SetResolution (1.0f, -1.0f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetResolution_MaxValue ()
 		{
 			SetResolution (Single.MaxValue, Single.MaxValue);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetResolution_PositiveInfinity ()
 		{
 			SetResolution (Single.PositiveInfinity, Single.PositiveInfinity);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetResolution_NaN ()
 		{
 			Assert.Throws<ArgumentException> (() => SetResolution (Single.NaN, Single.NaN));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetResolution_NegativeInfinity ()
 		{
 			Assert.Throws<ArgumentException> (() => SetResolution (Single.NegativeInfinity, Single.NegativeInfinity));
@@ -1485,7 +1485,7 @@ namespace MonoTests.System.Drawing {
 	}
 
 	public class BitmapFullTrustTest {
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BitmapIntIntIntPixelFormatIntPtrCtor ()
 		{
 			new Bitmap (1, 1, 1, PixelFormat.Format1bppIndexed, IntPtr.Zero);
@@ -1505,7 +1505,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (335888, b.Flags);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Hicon16 ()
 		{
 			IntPtr hicon;
@@ -1523,7 +1523,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Hicon32 ()
 		{
 			IntPtr hicon;
@@ -1541,7 +1541,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Hicon64 ()
 		{
 			IntPtr hicon;
@@ -1559,7 +1559,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Hicon96 ()
 		{
 			IntPtr hicon;
@@ -1577,7 +1577,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void HBitmap ()
 		{
 			IntPtr hbitmap;
@@ -1602,7 +1602,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CreateMultipleBitmapFromSameHBITMAP ()
 		{
 			IntPtr hbitmap;

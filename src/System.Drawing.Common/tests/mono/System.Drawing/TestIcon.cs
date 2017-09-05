@@ -74,7 +74,7 @@ namespace MonoTests.System.Drawing {
 				File.Delete ("newIcon.ico");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestConstructors ()
 		{
 			Assert.Equal (32, icon.Height);
@@ -89,13 +89,13 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (16, newIcon.Width);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_IconNull_Int_Int ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Icon ((Icon)null, 32, 32));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_IntNegative_Int ()
 		{
 			Icon neg = new Icon (icon, -32, 32);
@@ -103,13 +103,13 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (32, neg.Width);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_IconNull_Size ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Icon ((Icon) null, new Size (32, 32)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_Size_Negative ()
 		{
 			Icon neg = new Icon (icon, new Size (-32, -32));
@@ -117,7 +117,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (16, neg.Width);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_Int_Int_NonSquare ()
 		{
 			Icon non_square = new Icon (icon, 32, 16);
@@ -125,7 +125,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (32, non_square.Width);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_GetNormalSizeFromIconWith256 ()
 		{
 			string filepath = TestBitmap.getInFile ("bitmaps/323511.ico");
@@ -139,7 +139,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (48, ret.Width);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_DoesntReturn256Passing0 ()
 		{
 			string filepath = TestBitmap.getInFile ("bitmaps/323511.ico");
@@ -153,7 +153,7 @@ namespace MonoTests.System.Drawing {
 			Assert.NotEqual (0, ret.Width);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_DoesntReturn256Passing1 ()
 		{
 			string filepath = TestBitmap.getInFile ("bitmaps/323511.ico");
@@ -167,54 +167,54 @@ namespace MonoTests.System.Drawing {
 			Assert.NotEqual (0, ret.Width);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StreamNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StreamNull_Int_Int ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null, 32, 32));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StringNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Icon ((string) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_TypeNull_String ()
 		{
 			Assert.Throws<NullReferenceException> (() => new Icon ((Type) null, "mono.ico"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Type_StringNull ()
 		{
 			Assert.Throws<ArgumentException> (() => new Icon (typeof (Icon), null));
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StreamNull_Size ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null, new Size (32, 32)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StringNull_Size ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Icon ((string) null, new Size (32, 32)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StringNull_Int_Int ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Icon ((string) null, 32, 32));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestProperties ()
 		{
 			Assert.Equal (32, icon.Height);
@@ -223,7 +223,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (32, icon.Size.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone ()
 		{
 			Icon clone = (Icon) icon.Clone ();
@@ -233,7 +233,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (32, clone.Size.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CloneHandleIcon ()
 		{
 			Icon clone = (Icon) Icon.FromHandle (SystemIcons.Hand.Handle).Clone ();
@@ -262,25 +262,25 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon32bits_XP16 ()
 		{
 			XPIcon (16);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon32bits_XP32 ()
 		{
 			XPIcon (32);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon32bits_XP48 ()
 		{
 			XPIcon (48);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SelectFromUnusualSize_Small16 ()
 		{
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/80509.ico"))) {
@@ -293,7 +293,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SelectFromUnusualSize_Normal32 ()
 		{
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/80509.ico"))) {
@@ -338,7 +338,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save ()
 		{
 			SaveAndCompare ("16", icon16, true);
@@ -348,8 +348,8 @@ namespace MonoTests.System.Drawing {
 			SaveAndCompare ("96", icon96, true);
 		}
 
-		[Fact] // bug #410608
-		public void Save_256 ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)] // bug #410608
+        public void Save_256 ()
 		{
 			string filepath = TestBitmap.getInFile ("bitmaps/323511.ico");
 
@@ -367,13 +367,13 @@ namespace MonoTests.System.Drawing {
             Assert.Equal(orig.ToArray(), saved.ToArray());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => icon.Save (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon16ToBitmap ()
 		{
 			using (Bitmap b = icon16.ToBitmap ()) {
@@ -387,7 +387,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon32ToBitmap ()
 		{
 			using (Bitmap b = icon32.ToBitmap ()) {
@@ -401,7 +401,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon48ToBitmap ()
 		{
 			using (Bitmap b = icon48.ToBitmap ()) {
@@ -415,7 +415,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon64ToBitmap ()
 		{
 			using (Bitmap b = icon64.ToBitmap ()) {
@@ -429,7 +429,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon96ToBitmap ()
 		{
 			using (Bitmap b = icon96.ToBitmap ()) {
@@ -443,8 +443,8 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact] // bug #415581
-		public void Icon256ToBitmap ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)] // bug #415581
+        public void Icon256ToBitmap ()
 		{
 			using (FileStream fs = File.OpenRead (TestBitmap.getInFile ("bitmaps/415581.ico"))) {
 				Icon icon = new Icon (fs, 48, 48);
@@ -470,7 +470,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Icon256ToBitmap_Request0 ()
 		{
 			// 415581.ico has 2 images, the 256 and 48
@@ -495,19 +495,19 @@ namespace MonoTests.System.Drawing {
 		}
 
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ExtractAssociatedIcon_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => Icon.ExtractAssociatedIcon (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ExtractAssociatedIcon_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => Icon.ExtractAssociatedIcon (String.Empty));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ExtractAssociatedIcon_DoesNotExists ()
 		{
 			Assert.Throws<FileNotFoundException> (() => Icon.ExtractAssociatedIcon ("does-not-exists.png"));
@@ -523,14 +523,14 @@ namespace MonoTests.System.Drawing {
 	}
 
 	public class IconFullTrustTest {
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ExtractAssociatedIcon ()
 		{
 			string filename_dll = Assembly.GetExecutingAssembly ().Location;
 			Assert.NotNull (Icon.ExtractAssociatedIcon (filename_dll));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void HandleRoundtrip ()
 		{
 			IntPtr handle;
@@ -554,7 +554,7 @@ namespace MonoTests.System.Drawing {
 			}*/
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CreateMultipleIconFromSameHandle ()
 		{
 			IntPtr handle;
@@ -579,7 +579,7 @@ namespace MonoTests.System.Drawing {
 			// commented / using freed memory is risky ;-)
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void HiconRoundtrip ()
 		{
 			IntPtr handle;
@@ -597,7 +597,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CreateMultipleIconFromSameHICON ()
 		{
 			IntPtr handle;

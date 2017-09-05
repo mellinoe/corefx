@@ -36,7 +36,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 	public class MetaHeaderTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DefaultValues ()
 		{
 			MetaHeader mh = new MetaHeader ();
@@ -49,7 +49,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (0, mh.Version);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Min ()
 		{
 			MetaHeader mh = new MetaHeader ();
@@ -69,7 +69,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (short.MinValue, mh.Version);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Max ()
 		{
 			MetaHeader mh = new MetaHeader ();

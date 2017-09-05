@@ -127,7 +127,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (testVals[5], m.Elements[5], 3);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_Point_Color_Color ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (pt1, pt2, c1, c2);
@@ -143,7 +143,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// can't set WrapMode.Clamp
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_Point_Color_Color_1 ()
 		{
 			PointF pt1 = new Point (100, 200);
@@ -179,7 +179,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckMatrixAndRect (pt1, pt2, new float[] { -1, -0.5616435f, 0.8539224f, -1.520399f, 59.11317f, 236.0361f, 27, 59, 73, 41 });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_0 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -200,7 +200,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (matrix, lgb.Transform);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_22_5 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 22.5f);
@@ -214,14 +214,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (-11.313709, elements[5], 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_45 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 45f);
 			CheckBrushAt45 (lgb);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_90 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 90f);
@@ -235,7 +235,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, elements[5], 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_135 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 135f);
@@ -249,7 +249,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (16, elements[5], 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_180 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 180f);
@@ -263,7 +263,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (32, elements[5], 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_270 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 270f);
@@ -277,7 +277,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (32, elements[5], 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_315 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 315f);
@@ -291,7 +291,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (16, elements[5], 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_360()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 360f);
@@ -306,7 +306,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, elements[5], 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectangleF_Color_Color_Single_540 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 540f);
@@ -321,33 +321,33 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (32, elements[5], 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InterpolationColors_Colors_InvalidBlend ()
 		{
 			// default Blend doesn't allow getting this property
 			Assert.Throws<ArgumentException> (() => { var x = default_brush.InterpolationColors.Colors; });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InterpolationColors_Positions_InvalidBlend ()
 		{
 			// default Blend doesn't allow getting this property
 			Assert.Throws<ArgumentException> (() => { var x = default_brush.InterpolationColors.Positions; });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LinearColors_Empty ()
 		{
 			Assert.Throws<IndexOutOfRangeException> (() => default_brush.LinearColors = new Color[0]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LinearColors_One ()
 		{
 			Assert.Throws<IndexOutOfRangeException> (() => default_brush.LinearColors = new Color[1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LinearColors_Two ()
 		{
 			Assert.Equal (Color.FromArgb (255, 0, 0, 255), default_brush.LinearColors[0]);
@@ -360,7 +360,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (Color.FromArgb (255, 255, 255, 255), lgb.LinearColors[1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LinearColors_Three ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (pt1, pt2, c1, c2);
@@ -370,7 +370,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (Color.FromArgb (255, 0, 128, 0), lgb.LinearColors[1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rectangle ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -392,13 +392,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckDefaultRectangle ("SetSigmaBellShape", lgb.Rectangle);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => default_brush.Transform = null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Empty ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (pt1, pt2, c1, c2);
@@ -406,13 +406,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.True (lgb.Transform.IsIdentity);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_NonInvertible ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.Transform = new Matrix (123, 24, 82, 16, 47, 30));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WrapMode_AllValid ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (pt1, pt2, c1, c2);
@@ -426,20 +426,20 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (WrapMode.TileFlipXY, lgb.WrapMode);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WrapMode_Clamp ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.WrapMode = WrapMode.Clamp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WrapMode_Invalid ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => default_brush.WrapMode = (WrapMode) Int32.MinValue);
 		}
 
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -454,32 +454,32 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (lgb.WrapMode, clone.WrapMode);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform1_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => default_brush.MultiplyTransform (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform2_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => default_brush.MultiplyTransform (null, MatrixOrder.Append));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform2_Invalid ()
 		{
 			default_brush.MultiplyTransform (empty_matrix, (MatrixOrder) Int32.MinValue);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform_NonInvertible ()
 		{
 			Matrix noninvertible = new Matrix (123, 24, 82, 16, 47, 30);
 			Assert.Throws<ArgumentException> (() => default_brush.MultiplyTransform (noninvertible));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ResetTransform ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (pt1, pt2, c1, c2);
@@ -488,7 +488,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.True (lgb.Transform.IsIdentity);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RotateTransform ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -505,14 +505,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.True (lgb.Transform.IsIdentity);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RotateTransform_InvalidOrder ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (pt1, pt2, c1, c2);
 			Assert.Throws<ArgumentException> (() => lgb.RotateTransform (720, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -529,7 +529,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.True (lgb.Transform.IsIdentity);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_45 ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 45f);
@@ -543,7 +543,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (-16, elements[5], 1);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_MaxMin ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -557,14 +557,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, elements[5], 1);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_InvalidOrder ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (pt1, pt2, c1, c2);
 			Assert.Throws<ArgumentException> (() => lgb.ScaleTransform (1, 1, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_Focus ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -580,7 +580,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// no impact on matrix
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_Scale ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -596,31 +596,31 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// no impact on matrix
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_FocusTooSmall ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.SetBlendTriangularShape (-1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_FocusTooBig ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.SetBlendTriangularShape (1.01f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_ScaleTooSmall ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.SetBlendTriangularShape (1, -1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_ScaleTooBig ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.SetBlendTriangularShape (1, 1.01f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_Focus ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -636,7 +636,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// no impact on matrix
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_Scale ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -652,31 +652,31 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// no impact on matrix
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_FocusTooSmall ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.SetSigmaBellShape (-1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_FocusTooBig ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.SetSigmaBellShape (1.01f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_ScaleTooSmall ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.SetSigmaBellShape (1, -1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_ScaleTooBig ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.SetSigmaBellShape (1, 1.01f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TranslateTransform ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
@@ -700,14 +700,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, elements[5], 1);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TranslateTransform_InvalidOrder ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (pt1, pt2, c1, c2);
 			Assert.Throws<ArgumentException> (() => lgb.TranslateTransform (1, 1, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Operations ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 45f);
@@ -751,7 +751,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (lgb.Transform, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Operations_OnScalableAngle ()
 		{
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 360f, true);
@@ -799,7 +799,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (lgb.Transform, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Rectangle_Angle_Scalable ()
 		{
 			CheckMatrixForScalableAngle (new RectangleF (0, 0, 10, 10), 15, new float[] { 1.183013f, 0.3169873f, -0.3169873f, 1.183012f, 0.6698728f, -2.5f });
@@ -819,25 +819,25 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckMatrixForScalableAngle (new RectangleF (30, 60, 90, 150), 300, new float[] { 0.6830127f, -1.971688f, 0.7098075f, 0.6830125f, -72.04998f, 190.6699f });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LinearColors_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => default_brush.LinearColors = null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InterpolationColors_Null ()
 		{
 			Assert.Throws<ArgumentException> (() => default_brush.InterpolationColors = null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Blend_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => default_brush.Blend = null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ZeroWidthRectangle ()
 		{
 			Rectangle r = new Rectangle (10, 10, 0, 10);
@@ -845,7 +845,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Throws<ArgumentException> (() => new LinearGradientBrush (r, Color.Red, Color.Blue, LinearGradientMode.Vertical));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ZeroHeightRectangleF ()
 		{
 			RectangleF r = new RectangleF (10.0f, 10.0f, 10.0f, 0.0f);

@@ -37,7 +37,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 {
 	public class ColorBlendTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestConstructors ()
 		{
 			ColorBlend cb1 = new ColorBlend (1);
@@ -45,7 +45,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (1, cb1.Positions.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestProperties () 
 		{
 			ColorBlend cb1 = new ColorBlend (1);
@@ -63,7 +63,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (positions[2], cb1.Positions[2]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ColorBlend_Empty ()
 		{
 			ColorBlend cb = new ColorBlend ();
@@ -73,7 +73,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (0f, cb.Positions[0]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ColorBlend_Zero ()
 		{
 			ColorBlend cb = new ColorBlend (0);
@@ -81,7 +81,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (0, cb.Positions.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MismatchSizes ()
 		{
 			ColorBlend cb = new ColorBlend ();
@@ -93,13 +93,13 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (1, cb.Positions.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ColorBlend_Negative ()
 		{
 			Assert.Throws<OverflowException> (() => new ColorBlend (-1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ColorBlend_Lots ()
 		{
 			ColorBlend cb = new ColorBlend (1000);

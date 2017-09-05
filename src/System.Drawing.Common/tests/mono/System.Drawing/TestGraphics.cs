@@ -112,7 +112,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (expected, actual, precision);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DefaultProperties ()
 		{
 			Bitmap bmp = new Bitmap (200, 200);
@@ -133,7 +133,7 @@ namespace MonoTests.System.Drawing {
 			r.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetGetProperties ()
 		{
 			Bitmap bmp = new Bitmap (200, 200);
@@ -162,7 +162,7 @@ namespace MonoTests.System.Drawing {
 		}
 
 		// Properties
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clip ()
 		{
 			RectangleF[] rects;
@@ -178,7 +178,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (220, rects[0].Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clip_NotAReference ()
 		{
 			Bitmap bmp = new Bitmap (200, 200);
@@ -189,7 +189,7 @@ namespace MonoTests.System.Drawing {
 			Assert.True (g.Clip.IsInfinite (g));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ExcludeClip ()
 		{
 			Bitmap bmp = new Bitmap (200, 200);
@@ -217,7 +217,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (30, rects[2].Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IntersectClip ()
 		{
 			Bitmap bmp = new Bitmap (200, 200);
@@ -235,7 +235,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (70, rects[0].Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ResetClip ()
 		{
 			Bitmap bmp = new Bitmap (200, 200);
@@ -254,7 +254,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (8388608, rects[0].Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetClip ()
 		{
 			RectangleF[] rects;
@@ -291,7 +291,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (220, rects[0].Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSaveReset ()
 		{
 			Bitmap bmp = new Bitmap (200, 200);
@@ -374,7 +374,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LoadIndexed_BmpFile ()
 		{
 			// Tests that we can load an indexed file, but...
@@ -386,7 +386,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromImage ()
 		{
 			Assert.Throws<ArgumentNullException> (() => Graphics.FromImage (null));
@@ -408,7 +408,7 @@ namespace MonoTests.System.Drawing {
 			AssertEquals (msg + ".compare.Height", b1.Height, b2.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clip_GetBounds ()
 		{
 			Graphics g = Get (16, 16);
@@ -421,7 +421,7 @@ namespace MonoTests.System.Drawing {
 			g.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clip_TranslateTransform ()
 		{
 			Graphics g = Get (16, 16);
@@ -451,7 +451,7 @@ namespace MonoTests.System.Drawing {
 			g.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_NonInvertibleMatrix ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
@@ -461,7 +461,7 @@ namespace MonoTests.System.Drawing {
 		}
 
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Multiply_NonInvertibleMatrix ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
@@ -470,7 +470,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => g.MultiplyTransform (matrix));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Multiply_Null ()
 		{
 			Graphics g = Get (16, 16);
@@ -485,7 +485,7 @@ namespace MonoTests.System.Drawing {
 			AssertEquals (msg + ".Height", h, bounds.Height, 1);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClipBounds ()
 		{
 			Graphics g = Get (16, 16);
@@ -497,7 +497,7 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("clip.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClipBounds_Rotate ()
 		{
 			Graphics g = Get (16, 16);
@@ -511,7 +511,7 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("identity.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClipBounds_Scale ()
 		{
 			RectangleF clip = new Rectangle (0, 0, 8, 8);
@@ -526,7 +526,7 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("setclip.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClipBounds_Translate ()
 		{
 			Graphics g = Get (16, 16);
@@ -541,7 +541,7 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("setclip.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClipBounds_Transform_Translation ()
 		{
 			Graphics g = Get (16, 16);
@@ -555,7 +555,7 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("reset.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClipBounds_Transform_Scale ()
 		{
 			Graphics g = Get (16, 16);
@@ -570,7 +570,7 @@ namespace MonoTests.System.Drawing {
 			Assert.True (g.Clip.IsInfinite (g));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClipBounds_Multiply ()
 		{
 			Graphics g = Get (16, 16);
@@ -585,7 +585,7 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("reset.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClipBounds_Cumulative_Effects ()
 		{
 			Graphics g = Get (16, 16);
@@ -617,7 +617,7 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("reset.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 8, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clip_TranslateTransform_BoundsChange ()
 		{
 			Graphics g = Get (16, 16);
@@ -638,7 +638,7 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("reseted.Clip.GetBounds", g.Clip.GetBounds (g), -16, -16, 8, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clip_RotateTransform_BoundsChange ()
 		{
 			Graphics g = Get (16, 16);
@@ -669,7 +669,7 @@ namespace MonoTests.System.Drawing {
 			AssertEquals (msg + ".Height", h, bounds.Height, -1);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clip_ScaleTransform_NoBoundsChange ()
 		{
 			Graphics g = Get (16, 16);
@@ -689,21 +689,21 @@ namespace MonoTests.System.Drawing {
 			CheckBounds ("reseted.Clip.GetBounds", g.Clip.GetBounds (g), 0, 0, 16, 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_X0 ()
 		{
 			Graphics g = Get (16, 16);
 			Assert.Throws<ArgumentException> (() => g.ScaleTransform (0, 1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_Y0 ()
 		{
 			Graphics g = Get (16, 16);
 			Assert.Throws<ArgumentException> (() => g.ScaleTransform (1, 0));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TranslateTransform_Order ()
 		{
 			Graphics g = Get (16, 16);
@@ -744,7 +744,7 @@ namespace MonoTests.System.Drawing {
 		static Point[] TooSmallCurve = new Point[2] { new Point (0, 0), new Point (15, 5) };
 		static PointF[] LargeCurveF = new PointF[4] { new PointF (0, 0), new PointF (15, 5), new PointF (5, 15), new PointF (0, 20) };
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_PenNull ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -752,7 +752,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentNullException> (() => g.DrawCurve (null, SmallCurveF));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_PointFNull ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -760,7 +760,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentNullException> (() => g.DrawCurve (Pens.Black, (PointF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_PointNull ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -768,7 +768,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentNullException> (() => g.DrawCurve (Pens.Black, (Point[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_NotEnoughPoints ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -782,7 +782,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_SinglePoint ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -791,7 +791,7 @@ namespace MonoTests.System.Drawing {
 			// a single point isn't enough
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve3_NotEnoughPoints ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -800,7 +800,7 @@ namespace MonoTests.System.Drawing {
 			// aha, this is API dependent
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_NegativeTension ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -812,7 +812,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_PositiveTension ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -824,7 +824,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_ZeroSegments ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -832,7 +832,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => g.DrawCurve (Pens.Black, SmallCurveF, 0, 0));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_NegativeSegments ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -840,7 +840,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => g.DrawCurve (Pens.Black, SmallCurveF, 0, -1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_OffsetTooLarge ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -850,7 +850,7 @@ namespace MonoTests.System.Drawing {
 			// and in this case 2 points aren't enough to draw something
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_Offset_0 ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -861,7 +861,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_Offset_1 ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -872,7 +872,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawCurve_Offset_2 ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -884,7 +884,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawRectangle_Negative ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -899,7 +899,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawRectangles_Negative ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -919,7 +919,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillRectangle_Negative ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -934,7 +934,7 @@ namespace MonoTests.System.Drawing {
 			bitmap.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillRectangles_Negative ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -996,7 +996,7 @@ namespace MonoTests.System.Drawing {
 			AssertEquals (message + ".Matrix.y0", y0, elements[5], 2);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BeginContainer ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -1030,7 +1030,7 @@ namespace MonoTests.System.Drawing {
 			CheckCustomProperties ("EndContainer", g);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BeginContainer_Rect ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -1065,7 +1065,7 @@ namespace MonoTests.System.Drawing {
 			CheckMatrix ("EndContainer.Transform", g.Transform, 0.707f, 0.707f, -0.707f, 0.707f, 0, 0);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BeginContainer_RectF ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -1106,13 +1106,13 @@ namespace MonoTests.System.Drawing {
 			g.BeginContainer (new RectangleF (40, 30, 20, 10), new RectangleF (10, 20, 30, 40), unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BeginContainer_GraphicsUnit_Display ()
 		{
 			Assert.Throws<ArgumentException> (() => BeginContainer_GraphicsUnit(GraphicsUnit.Display));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BeginContainer_GraphicsUnit_Valid ()
 		{
 			BeginContainer_GraphicsUnit (GraphicsUnit.Document);
@@ -1122,19 +1122,19 @@ namespace MonoTests.System.Drawing {
 			BeginContainer_GraphicsUnit (GraphicsUnit.Point);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BeginContainer_GraphicsUnit_World ()
 		{
 			Assert.Throws<ArgumentException> (() => BeginContainer_GraphicsUnit(GraphicsUnit.World));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BeginContainer_GraphicsUnit_Bad ()
 		{
 			Assert.Throws<ArgumentException> (() => BeginContainer_GraphicsUnit((GraphicsUnit) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void EndContainer_Null ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -1142,7 +1142,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentNullException> (() => g.EndContainer (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -1183,7 +1183,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (new Point (0, 0), g.RenderingOrigin);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Restore_Null ()
 		{
 			Bitmap bitmap = new Bitmap (20, 20);
@@ -1191,7 +1191,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<NullReferenceException> (() => g.Restore (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillRectangles_BrushNull_Rectangle ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1201,7 +1201,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillRectangles_Rectangle_Null ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1221,7 +1221,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillRectangles_BrushNull_RectangleF ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1231,7 +1231,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillRectangles_RectangleF_Null ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1241,8 +1241,8 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact] // see bug #78408
-		public void FillRectanglesZeroRectangleF ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)] // see bug #78408
+        public void FillRectanglesZeroRectangleF ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
@@ -1251,7 +1251,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillRectangles_NormalBehavior ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1291,7 +1291,7 @@ namespace MonoTests.System.Drawing {
 			return bitmap;
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillDrawRectangle_Width_Default ()
 		{
 			// default pen size
@@ -1331,9 +1331,9 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
-		// [Category ("NotOnMac")]
-		public void FillDrawRectangle_Width_2 ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        // [Category ("NotOnMac")]
+        public void FillDrawRectangle_Width_2 ()
 		{
 			// even pen size
 			using (Bitmap bitmap = FillDrawRectangle (2.0f)) {
@@ -1380,7 +1380,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillDrawRectangle_Width_3 ()
 		{
 			// odd pen size
@@ -1455,7 +1455,7 @@ namespace MonoTests.System.Drawing {
 			return bitmap;
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawFillRectangle_Width_Default ()
 		{
 			// default pen size
@@ -1537,7 +1537,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawFillRectangle_Width_3 ()
 		{
 			// odd pen size
@@ -1599,7 +1599,7 @@ namespace MonoTests.System.Drawing {
 			return bitmap;
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawLines_Width_Default ()
 		{
 			// default pen size
@@ -1631,6 +1631,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
+<<<<<<< HEAD
 		[Fact]
 <<<<<<< HEAD
 		[Category ("NotWorking")]
@@ -1736,6 +1737,9 @@ namespace MonoTests.System.Drawing {
 		[Fact]
 =======
 >>>>>>> 3d610b2c8a... Delete CAS-related tests
+=======
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+>>>>>>> 492ac6e23e... Add [ConditionalFact] attribute
 		public void MeasureString_StringFont ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1753,7 +1757,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFont_Null ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1763,7 +1767,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFontSizeF ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1790,19 +1794,19 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFontInt_ShortString ()
 		{
 			MeasureString_StringFontInt ("a");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFontInt_LongString ()
 		{
 			MeasureString_StringFontInt ("A very long string..."); // see bug #79643
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFormat_Alignment ()
 		{
 			string text = "Hello Mono::";
@@ -1828,7 +1832,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFormat_Alignment_DirectionVertical ()
 		{
 			string text = "Hello Mono::";
@@ -1855,7 +1859,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFormat_LineAlignment ()
 		{
 			string text = "Hello Mono::";
@@ -1881,7 +1885,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFormat_LineAlignment_DirectionVertical ()
 		{
 			string text = "Hello Mono::";
@@ -1926,7 +1930,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_Bug76664 ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1948,7 +1952,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_Bug80680 ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -1991,7 +1995,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureCharacterRanges_NullOrEmptyText ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2009,7 +2013,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureCharacterRanges_EmptyStringFormat ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2021,7 +2025,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureCharacterRanges_FontNull ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2031,8 +2035,8 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact] // adapted from bug #78777
-		public void MeasureCharacterRanges_TwoLines ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)] // adapted from bug #78777
+        public void MeasureCharacterRanges_TwoLines ()
 		{
 			string text = "this\nis a test";
 			CharacterRange[] ranges = new CharacterRange[2];
@@ -2073,21 +2077,21 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureCharacterRanges_FirstTooFar ()
 		{
 			string text = "this\nis a test";
 			Assert.Throws<ArgumentException> (() => MeasureCharacterRanges(text, text.Length, 1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureCharacterRanges_LengthTooLong ()
 		{
 			string text = "this\nis a test";
 			Assert.Throws<ArgumentException> (() => MeasureCharacterRanges(text, 0, text.Length + 1));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureCharacterRanges_Prefix ()
 		{
 			string text = "Hello &Mono::";
@@ -2122,7 +2126,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureCharacterRanges_NullStringFormat ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2326,7 +2330,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Measure ()
 		{
 			using (Graphics gfx = Graphics.FromImage (new Bitmap (1, 1))) {
@@ -2357,7 +2361,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureLimits ()
 		{
 			using (Graphics gfx = Graphics.FromImage (new Bitmap (1, 1))) {
@@ -2383,7 +2387,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawString_EndlessLoop_Bug77699 ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2401,7 +2405,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawString_EndlessLoop_Wrapping ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2418,7 +2422,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_Wrapping_Dots ()
 		{
 			string text = "this is really long text........................................... with a lot o periods.";
@@ -2434,7 +2438,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetReleaseHdcInternal ()
 		{
 			using (Bitmap b = new Bitmap (10, 10)) {
@@ -2448,7 +2452,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ReleaseHdcInternal_IntPtrZero ()
 		{
 			using (Bitmap b = new Bitmap (10, 10)) {
@@ -2458,7 +2462,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ReleaseHdcInternal_TwoTimes ()
 		{
 			using (Bitmap b = new Bitmap (10, 10)) {
@@ -2469,7 +2473,7 @@ namespace MonoTests.System.Drawing {
 				}
 			}
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestReleaseHdc ()
 		{
 			using (Bitmap b = new Bitmap (10, 10)) {
@@ -2483,7 +2487,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestReleaseHdcException ()
 		{
 			using (Bitmap b = new Bitmap (10, 10)) {
@@ -2493,7 +2497,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestReleaseHdcException2 ()
 		{
 			using (Bitmap b = new Bitmap (10, 10)) {
@@ -2504,7 +2508,7 @@ namespace MonoTests.System.Drawing {
 				}
 			}
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void VisibleClipBound ()
 		{
 			// see #78958
@@ -2534,7 +2538,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void VisibleClipBound_BigClip ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 100)) {
@@ -2575,7 +2579,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rotate ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 50)) {
@@ -2596,7 +2600,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Scale ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 50)) {
@@ -2617,7 +2621,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Translate ()
 		{
 			using (Bitmap bmp = new Bitmap (100, 50)) {
@@ -2638,7 +2642,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawIcon_NullRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2648,7 +2652,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawIcon_IconRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2666,7 +2670,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawIcon_NullIntInt ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2676,7 +2680,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawIcon_IconIntInt ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2687,7 +2691,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawIconUnstretched_NullRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2697,7 +2701,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawIconUnstretched_IconRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2715,7 +2719,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullRectangleF ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2725,7 +2729,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageRectangleF ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2738,7 +2742,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullPointF ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2748,7 +2752,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointF ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2758,7 +2762,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullPointFArray ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2768,7 +2772,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointFArrayNull ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2778,7 +2782,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointFArrayEmpty ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2788,7 +2792,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointFArray ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2799,7 +2803,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2809,7 +2813,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2826,7 +2830,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullPoint ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2836,7 +2840,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePoint ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2846,7 +2850,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullPointArray ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2856,7 +2860,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointArrayNull ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2866,7 +2870,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointArrayEmpty ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2876,7 +2880,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointArray ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2887,7 +2891,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullIntInt ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2897,7 +2901,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageIntInt_Overflow ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2907,7 +2911,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageIntInt ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2917,7 +2921,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullFloat ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2927,7 +2931,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageFloatFloat_Overflow ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2937,7 +2941,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageFloatFloat ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2947,7 +2951,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullRectangleRectangleGraphicsUnit ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -2967,7 +2971,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Display ()
 		{
 			Assert.Throws<ArgumentException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Display));
@@ -2991,7 +2995,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Millimeter));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Pixel ()
 		{
 			// this unit works
@@ -3004,13 +3008,13 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Point));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_World ()
 		{
 			Assert.Throws<ArgumentException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.World));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullPointRectangleGraphicsUnit ()
 		{
 			Rectangle r = new Rectangle (1, 2, 3, 4);
@@ -3032,47 +3036,47 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageNullRectangleGraphicsUnit ()
 		{
 			Assert.Throws<ArgumentNullException> (() => DrawImage_ImagePointRectangleGraphicsUnit (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePoint0RectangleGraphicsUnit ()
 		{
 			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointRectangleGraphicsUnit (new Point[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePoint1RectangleGraphicsUnit ()
 		{
 			Point p = new Point (1, 1);
 			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointRectangleGraphicsUnit (new Point[1] { p }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePoint2RectangleGraphicsUnit ()
 		{
 			Point p = new Point (1, 1);
 			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointRectangleGraphicsUnit (new Point[2] { p, p }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePoint3RectangleGraphicsUnit ()
 		{
 			Point p = new Point (1, 1);
 			DrawImage_ImagePointRectangleGraphicsUnit (new Point[3] { p, p, p });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePoint4RectangleGraphicsUnit ()
 		{
 			Point p = new Point (1, 1);
 			Assert.Throws<NotImplementedException> (() => DrawImage_ImagePointRectangleGraphicsUnit (new Point[4] { p, p, p, p }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_NullPointFRectangleGraphicsUnit ()
 		{
 			Rectangle r = new Rectangle (1, 2, 3, 4);
@@ -3094,47 +3098,47 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImageNullFRectangleGraphicsUnit ()
 		{
 			Assert.Throws<ArgumentNullException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointF0RectangleGraphicsUnit ()
 		{
 			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointF1RectangleGraphicsUnit ()
 		{
 			PointF p = new PointF (1, 1);
 			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[1] { p }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointF2RectangleGraphicsUnit ()
 		{
 			PointF p = new PointF (1, 1);
 			Assert.Throws<ArgumentException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[2] { p, p }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointF3RectangleGraphicsUnit ()
 		{
 			PointF p = new PointF (1, 1);
 			DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[3] { p, p, p });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointF4RectangleGraphicsUnit ()
 		{
 			PointF p = new PointF (1, 1);
 			Assert.Throws<NotImplementedException> (() => DrawImage_ImagePointFRectangleGraphicsUnit (new PointF[4] { p, p, p, p }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointRectangleGraphicsUnitNull ()
 		{
 			Point p = new Point (1, 1);
@@ -3147,7 +3151,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImage_ImagePointRectangleGraphicsUnitAttributes ()
 		{
 			Point p = new Point (1, 1);
@@ -3161,7 +3165,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaled_NullPoint ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3171,7 +3175,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaled_ImagePoint ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3181,7 +3185,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaled_NullRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3191,7 +3195,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaled_ImageRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3201,7 +3205,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaled_NullIntInt ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3211,7 +3215,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaled_ImageIntInt ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3221,7 +3225,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaled_NullIntIntIntInt ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3231,7 +3235,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaled_ImageIntIntIntInt ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3240,7 +3244,7 @@ namespace MonoTests.System.Drawing {
 				}
 			}
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaledAndClipped_Null ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3250,7 +3254,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawImageUnscaledAndClipped ()
 		{
 			using (Bitmap bmp = new Bitmap (40, 40)) {
@@ -3271,7 +3275,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawPath_Pen_Null ()
 		{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
@@ -3283,7 +3287,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawPath_Path_Null ()
 		{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
@@ -3293,7 +3297,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawPath_82202 ()
 		{
 			// based on test case from bug #82202
@@ -3322,7 +3326,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillPath_Brush_Null ()
 		{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
@@ -3334,7 +3338,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillPath_Path_Null ()
 		{
 			using (Bitmap bmp = new Bitmap (20, 20)) {
@@ -3344,7 +3348,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillPath_82202 ()
 		{
 			// based on test case from bug #82202
@@ -3373,7 +3377,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformPoints_349800 ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -3398,7 +3402,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dpi_556181 ()
 		{
 			float x, y;
@@ -3420,7 +3424,7 @@ namespace MonoTests.System.Drawing {
 
 		// note: this test would fail, on ReleaseHdc, without fulltrust
 		// i.e. it's a demand and not a linkdemand
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetReleaseHdc ()
 		{
 			using (Bitmap b = new Bitmap (100, 100)) {

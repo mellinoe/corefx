@@ -38,7 +38,7 @@ namespace MonoTests.System.Drawing
 {
 	public class SystemPensTest
 	{
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestActiveCaptionText ()
 		{
 			Pen pen;
@@ -47,7 +47,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M1");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControl ()
 		{
 			Pen pen;
@@ -56,7 +56,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M2");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlDark ()
 		{
 			Pen pen;
@@ -65,7 +65,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M3");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlDarkDark ()
 		{
 			Pen pen;
@@ -74,7 +74,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M4");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlLight ()
 		{
 			Pen pen;
@@ -83,7 +83,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M5");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlLightLight ()
 		{
 			Pen pen;
@@ -92,7 +92,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M6");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlText ()
 		{
 			Pen pen;
@@ -101,7 +101,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M7");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGrayText ()
 		{
 			Pen pen;
@@ -110,7 +110,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M8");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestHighlight ()
 		{
 			Pen pen;
@@ -119,7 +119,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M9");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestHighlightText ()
 		{
 			Pen pen;
@@ -128,7 +128,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M10");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestInactiveCaptionText ()
 		{
 			Pen pen;
@@ -137,7 +137,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M11");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestInfoText ()
 		{
 			Pen pen;
@@ -146,7 +146,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M12");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMenuText ()
 		{
 			Pen pen;
@@ -155,7 +155,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M13");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestWindowFrame ()
 		{
 			Pen pen;
@@ -164,7 +164,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M14");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestWindowText ()
 		{
 			Pen pen;
@@ -173,7 +173,7 @@ namespace MonoTests.System.Drawing
 			CheckMethods (pen, "M15");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestFromSystemColor ()
 		{
 			Pen pen;

@@ -38,7 +38,7 @@ namespace MonoTests.System.Drawing
 {
 	public class PensTest
 	{
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestEquals ()
 		{
 			Pen pen1 = Pens.Blue;
@@ -47,7 +47,7 @@ namespace MonoTests.System.Drawing
 			Assert.Equal (true, pen1.Equals (pen2));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestAliceBlue ()
 		{
 			Pen pen = Pens.AliceBlue;
@@ -62,7 +62,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestAntiqueWhite ()
 		{
 			Pen pen = Pens.AntiqueWhite;
@@ -77,7 +77,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestAqua ()
 		{
 			Pen pen = Pens.Aqua;
@@ -92,7 +92,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestAquamarine ()
 		{
 			Pen pen = Pens.Aquamarine;
@@ -107,7 +107,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestAzure ()
 		{
 			Pen pen = Pens.Azure;
@@ -122,7 +122,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBeige ()
 		{
 			Pen pen = Pens.Beige;
@@ -137,7 +137,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBisque ()
 		{
 			Pen pen = Pens.Bisque;
@@ -152,7 +152,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBlack ()
 		{
 			Pen pen = Pens.Black;
@@ -167,7 +167,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBlanchedAlmond ()
 		{
 			Pen pen = Pens.BlanchedAlmond;
@@ -182,7 +182,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBlue ()
 		{
 			Pen pen = Pens.Blue;
@@ -197,7 +197,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBlueViolet ()
 		{
 			Pen pen = Pens.BlueViolet;
@@ -212,7 +212,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBrown ()
 		{
 			Pen pen = Pens.Brown;
@@ -227,7 +227,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestBurlyWood ()
 		{
 			Pen pen = Pens.BurlyWood;
@@ -242,7 +242,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestCadetBlue ()
 		{
 			Pen pen = Pens.CadetBlue;
@@ -257,7 +257,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestChartreuse ()
 		{
 			Pen pen = Pens.Chartreuse;
@@ -272,7 +272,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestChocolate ()
 		{
 			Pen pen = Pens.Chocolate;
@@ -287,7 +287,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestCoral ()
 		{
 			Pen pen = Pens.Coral;
@@ -302,7 +302,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestCornflowerBlue ()
 		{
 			Pen pen = Pens.CornflowerBlue;
@@ -317,7 +317,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestCornsilk ()
 		{
 			Pen pen = Pens.Cornsilk;
@@ -332,7 +332,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestCrimson ()
 		{
 			Pen pen = Pens.Crimson;
@@ -347,7 +347,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestCyan ()
 		{
 			Pen pen = Pens.Cyan;
@@ -362,7 +362,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkBlue ()
 		{
 			Pen pen = Pens.DarkBlue;
@@ -377,7 +377,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkCyan ()
 		{
 			Pen pen = Pens.DarkCyan;
@@ -392,7 +392,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkGoldenrod ()
 		{
 			Pen pen = Pens.DarkGoldenrod;
@@ -407,7 +407,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkGray ()
 		{
 			Pen pen = Pens.DarkGray;
@@ -422,7 +422,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkGreen ()
 		{
 			Pen pen = Pens.DarkGreen;
@@ -437,7 +437,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkKhaki ()
 		{
 			Pen pen = Pens.DarkKhaki;
@@ -452,7 +452,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkMagenta ()
 		{
 			Pen pen = Pens.DarkMagenta;
@@ -467,7 +467,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkOliveGreen ()
 		{
 			Pen pen = Pens.DarkOliveGreen;
@@ -482,7 +482,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkOrange ()
 		{
 			Pen pen = Pens.DarkOrange;
@@ -497,7 +497,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkOrchid ()
 		{
 			Pen pen = Pens.DarkOrchid;
@@ -512,7 +512,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkRed ()
 		{
 			Pen pen = Pens.DarkRed;
@@ -527,7 +527,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkSalmon ()
 		{
 			Pen pen = Pens.DarkSalmon;
@@ -542,7 +542,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkSeaGreen ()
 		{
 			Pen pen = Pens.DarkSeaGreen;
@@ -557,7 +557,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkSlateBlue ()
 		{
 			Pen pen = Pens.DarkSlateBlue;
@@ -572,7 +572,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkSlateGray ()
 		{
 			Pen pen = Pens.DarkSlateGray;
@@ -587,7 +587,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkTurquoise ()
 		{
 			Pen pen = Pens.DarkTurquoise;
@@ -602,7 +602,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDarkViolet ()
 		{
 			Pen pen = Pens.DarkViolet;
@@ -617,7 +617,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDeepPink ()
 		{
 			Pen pen = Pens.DeepPink;
@@ -632,7 +632,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDeepSkyBlue ()
 		{
 			Pen pen = Pens.DeepSkyBlue;
@@ -647,7 +647,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDimGray ()
 		{
 			Pen pen = Pens.DimGray;
@@ -662,7 +662,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDodgerBlue ()
 		{
 			Pen pen = Pens.DodgerBlue;
@@ -677,7 +677,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestFirebrick ()
 		{
 			Pen pen = Pens.Firebrick;
@@ -692,7 +692,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestFloralWhite ()
 		{
 			Pen pen = Pens.FloralWhite;
@@ -707,7 +707,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestForestGreen ()
 		{
 			Pen pen = Pens.ForestGreen;
@@ -722,7 +722,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestFuchsia ()
 		{
 			Pen pen = Pens.Fuchsia;
@@ -737,7 +737,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGainsboro ()
 		{
 			Pen pen = Pens.Gainsboro;
@@ -752,7 +752,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGhostWhite ()
 		{
 			Pen pen = Pens.GhostWhite;
@@ -767,7 +767,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGold ()
 		{
 			Pen pen = Pens.Gold;
@@ -782,7 +782,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGoldenrod ()
 		{
 			Pen pen = Pens.Goldenrod;
@@ -797,7 +797,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGray ()
 		{
 			Pen pen = Pens.Gray;
@@ -812,7 +812,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGreen ()
 		{
 			Pen pen = Pens.Green;
@@ -827,7 +827,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGreenYellow ()
 		{
 			Pen pen = Pens.GreenYellow;
@@ -842,7 +842,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestHoneydew ()
 		{
 			Pen pen = Pens.Honeydew;
@@ -857,7 +857,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestHotPink ()
 		{
 			Pen pen = Pens.HotPink;
@@ -872,7 +872,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestIndianRed ()
 		{
 			Pen pen = Pens.IndianRed;
@@ -887,7 +887,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestIndigo ()
 		{
 			Pen pen = Pens.Indigo;
@@ -902,7 +902,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestIvory ()
 		{
 			Pen pen = Pens.Ivory;
@@ -917,7 +917,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestKhaki ()
 		{
 			Pen pen = Pens.Khaki;
@@ -932,7 +932,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLavender ()
 		{
 			Pen pen = Pens.Lavender;
@@ -947,7 +947,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLavenderBlush ()
 		{
 			Pen pen = Pens.LavenderBlush;
@@ -962,7 +962,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLawnGreen ()
 		{
 			Pen pen = Pens.LawnGreen;
@@ -977,7 +977,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLemonChiffon ()
 		{
 			Pen pen = Pens.LemonChiffon;
@@ -992,7 +992,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightBlue ()
 		{
 			Pen pen = Pens.LightBlue;
@@ -1007,7 +1007,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightCoral ()
 		{
 			Pen pen = Pens.LightCoral;
@@ -1022,7 +1022,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightCyan ()
 		{
 			Pen pen = Pens.LightCyan;
@@ -1037,7 +1037,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightGoldenrodYellow ()
 		{
 			Pen pen = Pens.LightGoldenrodYellow;
@@ -1052,7 +1052,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightGray ()
 		{
 			Pen pen = Pens.LightGray;
@@ -1067,7 +1067,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightGreen ()
 		{
 			Pen pen = Pens.LightGreen;
@@ -1082,7 +1082,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightPink ()
 		{
 			Pen pen = Pens.LightPink;
@@ -1097,7 +1097,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightSalmon ()
 		{
 			Pen pen = Pens.LightSalmon;
@@ -1112,7 +1112,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightSeaGreen ()
 		{
 			Pen pen = Pens.LightSeaGreen;
@@ -1127,7 +1127,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightSkyBlue ()
 		{
 			Pen pen = Pens.LightSkyBlue;
@@ -1142,7 +1142,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightSlateGray ()
 		{
 			Pen pen = Pens.LightSlateGray;
@@ -1157,7 +1157,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightSteelBlue ()
 		{
 			Pen pen = Pens.LightSteelBlue;
@@ -1172,7 +1172,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLightYellow ()
 		{
 			Pen pen = Pens.LightYellow;
@@ -1187,7 +1187,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLime ()
 		{
 			Pen pen = Pens.Lime;
@@ -1202,7 +1202,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLimeGreen ()
 		{
 			Pen pen = Pens.LimeGreen;
@@ -1217,7 +1217,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestLinen ()
 		{
 			Pen pen = Pens.Linen;
@@ -1232,7 +1232,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMagenta ()
 		{
 			Pen pen = Pens.Magenta;
@@ -1247,7 +1247,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMaroon ()
 		{
 			Pen pen = Pens.Maroon;
@@ -1262,7 +1262,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumAquamarine ()
 		{
 			Pen pen = Pens.MediumAquamarine;
@@ -1277,7 +1277,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumBlue ()
 		{
 			Pen pen = Pens.MediumBlue;
@@ -1292,7 +1292,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumOrchid ()
 		{
 			Pen pen = Pens.MediumOrchid;
@@ -1307,7 +1307,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumPurple ()
 		{
 			Pen pen = Pens.MediumPurple;
@@ -1322,7 +1322,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumSeaGreen ()
 		{
 			Pen pen = Pens.MediumSeaGreen;
@@ -1337,7 +1337,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumSlateBlue ()
 		{
 			Pen pen = Pens.MediumSlateBlue;
@@ -1352,7 +1352,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumSpringGreen ()
 		{
 			Pen pen = Pens.MediumSpringGreen;
@@ -1367,7 +1367,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumTurquoise ()
 		{
 			Pen pen = Pens.MediumTurquoise;
@@ -1382,7 +1382,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMediumVioletRed ()
 		{
 			Pen pen = Pens.MediumVioletRed;
@@ -1397,7 +1397,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMidnightBlue ()
 		{
 			Pen pen = Pens.MidnightBlue;
@@ -1412,7 +1412,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMintCream ()
 		{
 			Pen pen = Pens.MintCream;
@@ -1427,7 +1427,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMistyRose ()
 		{
 			Pen pen = Pens.MistyRose;
@@ -1442,7 +1442,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMoccasin ()
 		{
 			Pen pen = Pens.Moccasin;
@@ -1457,7 +1457,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestNavajoWhite ()
 		{
 			Pen pen = Pens.NavajoWhite;
@@ -1472,7 +1472,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestNavy ()
 		{
 			Pen pen = Pens.Navy;
@@ -1487,7 +1487,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestOldLace ()
 		{
 			Pen pen = Pens.OldLace;
@@ -1502,7 +1502,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestOlive ()
 		{
 			Pen pen = Pens.Olive;
@@ -1517,7 +1517,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestOliveDrab ()
 		{
 			Pen pen = Pens.OliveDrab;
@@ -1532,7 +1532,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestOrange ()
 		{
 			Pen pen = Pens.Orange;
@@ -1547,7 +1547,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestOrangeRed ()
 		{
 			Pen pen = Pens.OrangeRed;
@@ -1562,7 +1562,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestOrchid ()
 		{
 			Pen pen = Pens.Orchid;
@@ -1577,7 +1577,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPaleGoldenrod ()
 		{
 			Pen pen = Pens.PaleGoldenrod;
@@ -1592,7 +1592,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPaleGreen ()
 		{
 			Pen pen = Pens.PaleGreen;
@@ -1607,7 +1607,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPaleTurquoise ()
 		{
 			Pen pen = Pens.PaleTurquoise;
@@ -1622,7 +1622,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPaleVioletRed ()
 		{
 			Pen pen = Pens.PaleVioletRed;
@@ -1637,7 +1637,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPapayaWhip ()
 		{
 			Pen pen = Pens.PapayaWhip;
@@ -1652,7 +1652,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPeachPuff ()
 		{
 			Pen pen = Pens.PeachPuff;
@@ -1667,7 +1667,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPeru ()
 		{
 			Pen pen = Pens.Peru;
@@ -1682,7 +1682,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPink ()
 		{
 			Pen pen = Pens.Pink;
@@ -1697,7 +1697,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPlum ()
 		{
 			Pen pen = Pens.Plum;
@@ -1712,7 +1712,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPowderBlue ()
 		{
 			Pen pen = Pens.PowderBlue;
@@ -1727,7 +1727,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestPurple ()
 		{
 			Pen pen = Pens.Purple;
@@ -1742,7 +1742,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestRed ()
 		{
 			Pen pen = Pens.Red;
@@ -1757,7 +1757,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestRosyBrown ()
 		{
 			Pen pen = Pens.RosyBrown;
@@ -1772,7 +1772,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestRoyalBlue ()
 		{
 			Pen pen = Pens.RoyalBlue;
@@ -1787,7 +1787,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSaddleBrown ()
 		{
 			Pen pen = Pens.SaddleBrown;
@@ -1802,7 +1802,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSalmon ()
 		{
 			Pen pen = Pens.Salmon;
@@ -1817,7 +1817,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSandyBrown ()
 		{
 			Pen pen = Pens.SandyBrown;
@@ -1832,7 +1832,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSeaGreen ()
 		{
 			Pen pen = Pens.SeaGreen;
@@ -1847,7 +1847,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSeaShell ()
 		{
 			Pen pen = Pens.SeaShell;
@@ -1862,7 +1862,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSienna ()
 		{
 			Pen pen = Pens.Sienna;
@@ -1877,7 +1877,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSilver ()
 		{
 			Pen pen = Pens.Silver;
@@ -1892,7 +1892,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSkyBlue ()
 		{
 			Pen pen = Pens.SkyBlue;
@@ -1907,7 +1907,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSlateBlue ()
 		{
 			Pen pen = Pens.SlateBlue;
@@ -1922,7 +1922,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSlateGray ()
 		{
 			Pen pen = Pens.SlateGray;
@@ -1937,7 +1937,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSnow ()
 		{
 			Pen pen = Pens.Snow;
@@ -1952,7 +1952,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSpringGreen ()
 		{
 			Pen pen = Pens.SpringGreen;
@@ -1967,7 +1967,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestSteelBlue ()
 		{
 			Pen pen = Pens.SteelBlue;
@@ -1982,7 +1982,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestTan ()
 		{
 			Pen pen = Pens.Tan;
@@ -1997,7 +1997,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestTeal ()
 		{
 			Pen pen = Pens.Teal;
@@ -2012,7 +2012,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestThistle ()
 		{
 			Pen pen = Pens.Thistle;
@@ -2027,7 +2027,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestTomato ()
 		{
 			Pen pen = Pens.Tomato;
@@ -2042,7 +2042,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestTransparent ()
 		{
 			Pen pen = Pens.Transparent;
@@ -2057,7 +2057,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestTurquoise ()
 		{
 			Pen pen = Pens.Turquoise;
@@ -2072,7 +2072,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestViolet ()
 		{
 			Pen pen = Pens.Violet;
@@ -2087,7 +2087,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestWheat ()
 		{
 			Pen pen = Pens.Wheat;
@@ -2102,7 +2102,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestWhite ()
 		{
 			Pen pen = Pens.White;
@@ -2117,7 +2117,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestWhiteSmoke ()
 		{
 			Pen pen = Pens.WhiteSmoke;
@@ -2132,7 +2132,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestYellow ()
 		{
 			Pen pen = Pens.Yellow;
@@ -2147,7 +2147,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestYellowGreen ()
 		{
 			Pen pen = Pens.YellowGreen;

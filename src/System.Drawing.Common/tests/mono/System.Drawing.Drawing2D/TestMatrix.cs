@@ -37,14 +37,14 @@ namespace MonoTests.System.Drawing.Drawing2D
 {
 	public class MatrixTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Default ()
 		{
 			Matrix matrix = new Matrix ();
 			Assert.Equal (6, matrix.Elements.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_SixFloats ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -57,7 +57,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (60, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Float ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -70,25 +70,25 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (60, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Int_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix (default (Rectangle), null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Int_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix (default (Rectangle), new Point[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Int_4Point ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix (default (Rectangle), new Point[4]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Rect_Point ()
 		{
 			Rectangle r = new Rectangle (100, 200, 300, 400);
@@ -102,25 +102,25 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (-6.666667, elements[5], 5);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Float_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix (default (RectangleF), null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Float_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix (default (RectangleF), new PointF[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Float_2PointF ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix (default (RectangleF), new PointF[2]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_RectF_PointF ()
 		{
 			RectangleF r = new RectangleF (100, 200, 300, 400);
@@ -136,7 +136,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 
 		// Properties
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Invertible ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
@@ -152,7 +152,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (true, matrix.IsInvertible);
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsIdentity ()
 		{
 			Matrix identity = new Matrix ();
@@ -188,14 +188,14 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.True (!identity.Equals (matrix));
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOffsetX ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
 			Assert.Equal (47, matrix.OffsetX);
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOffsetY ()
 		{
 			Matrix matrix = new Matrix (123, 24, 82, 16, 47, 30);
@@ -209,7 +209,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 		//
 		
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone ()
 		{
 			Matrix matsrc = new Matrix (10, 20, 30, 40, 50, 60);
@@ -224,7 +224,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (60, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void HashCode ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -235,7 +235,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.True (matrix.GetHashCode () != matrix2.GetHashCode ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reset ()
 		{
 			Matrix matrix = new Matrix (51, 52, 53, 54, 55, 56);
@@ -250,7 +250,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (0, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rotate ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -264,7 +264,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (60, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rotate_45_135 ()
 		{
 			Matrix matrix = new Matrix ();
@@ -291,7 +291,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (0, elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rotate_90_270_Matrix ()
 		{
 			Matrix matrix = new Matrix ();
@@ -313,13 +313,13 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.True (!new Matrix ().Equals (matrix));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rotate_InvalidOrder ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().Rotate (180, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RotateAt ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -333,19 +333,19 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (1260, matrix.Elements[5], 2);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RotateAt_InvalidOrder ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().RotateAt (180, new PointF (10, 10), (MatrixOrder) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Multiply_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix (10, 20, 30, 40, 50, 60).Multiply (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Multiply ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -359,13 +359,13 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (3460, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Multiply_Null_Order ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix (10, 20, 30, 40, 50, 60).Multiply (null, MatrixOrder.Append));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Multiply_Append ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -379,7 +379,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (3460, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Multiply_Prepend ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -393,14 +393,14 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (3460, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Multiply_InvalidOrder ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
 			Assert.Throws<ArgumentException> (() => matrix.Multiply (new Matrix (10, 20, 30, 40, 50, 60), (MatrixOrder)Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Equals ()
 		{
 			Matrix mat1 = new Matrix (10, 20, 30, 40, 50, 60);
@@ -412,7 +412,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (false, mat1.Equals (mat3));
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Invert ()
 		{
 			Matrix matrix = new Matrix (1, 2, 3, 4, 5, 6);
@@ -426,7 +426,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (-2, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Invert_Translation ()
 		{
 			Matrix matrix = new Matrix (1, 0, 0, 1, 8, 8);
@@ -441,7 +441,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (-8, elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Invert_Identity ()
 		{
 			Matrix matrix = new Matrix ();
@@ -452,7 +452,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.True (matrix.IsInvertible);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Scale ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -475,7 +475,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (60, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Scale_Negative ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -489,13 +489,13 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (60, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Scale_InvalidOrder ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().Scale (2, 1, (MatrixOrder) Int32.MinValue));
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Shear ()
 		{
 			Matrix matrix = new Matrix (10, 20, 30, 40, 50, 60);
@@ -519,13 +519,13 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (1, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Shear_InvalidOrder ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().Shear (-1, 1, (MatrixOrder) Int32.MinValue));
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformPoints ()
 		{
 			Matrix matrix = new Matrix (2, 4, 6, 8, 10, 12);
@@ -545,31 +545,31 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (92, pointsF[1].Y);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformPoints_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix ().TransformPoints ((Point[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformPoints_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix ().TransformPoints ((PointF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformPoints_Point_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().TransformPoints (new Point[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformPoints_PointF_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().TransformPoints (new PointF[0]));
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformVectors  ()
 		{
 			Matrix matrix = new Matrix (2, 4, 6, 8, 10, 12);
@@ -589,31 +589,31 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (80, pointsF[1].Y);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformVectors_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix ().TransformVectors ((Point[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformVectors_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix ().TransformVectors ((PointF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformVectors_Point_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().TransformVectors (new Point[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TransformVectors_PointF_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().TransformVectors (new PointF[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Translate  ()
 		{
 			Matrix matrix = new Matrix (2, 4, 6, 8, 10, 12);			
@@ -627,19 +627,19 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (112, matrix.Elements[5]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Translate_InvalidOrder ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().Translate (-1, 1, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void VectorTransformPoints_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Matrix ().VectorTransformPoints ((Point[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void VectorTransformPoints_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Matrix ().VectorTransformPoints (new Point[0]));

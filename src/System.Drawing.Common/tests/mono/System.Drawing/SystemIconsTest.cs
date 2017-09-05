@@ -35,14 +35,14 @@ namespace MonoTests.System.Drawing {
 
 	public class SystemIconsTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Same ()
 		{
 			// SystemIcons always return the same icon
 			Assert.True (Object.ReferenceEquals (SystemIcons.Application, SystemIcons.Application));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_SystemIcons ()
 		{
 			// SystemIcons icon's can't be disposed
@@ -50,7 +50,7 @@ namespace MonoTests.System.Drawing {
 			Assert.NotNull (SystemIcons.Application.ToBitmap ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Indirect ()
 		{
 			// SystemIcons icon's can't be disposed
@@ -59,7 +59,7 @@ namespace MonoTests.System.Drawing {
 			Assert.NotNull (app.ToBitmap ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone_Dispose ()
 		{
 			// Clones of SystemIcons icon's can be disposed

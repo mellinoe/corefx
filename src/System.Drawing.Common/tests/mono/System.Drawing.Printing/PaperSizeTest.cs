@@ -33,7 +33,7 @@ namespace MonoTests.System.Drawing.Printing
 {
 	public class PaperSizeTest
 	{
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PaperSizeKindTest()
 		{
 			// set_RawKind seems to accept any value (no ArgEx seen), but get_Kind 

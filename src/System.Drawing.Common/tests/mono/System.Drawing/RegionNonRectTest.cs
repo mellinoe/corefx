@@ -77,7 +77,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0f, rect.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Region_Ctor_GraphicsPath_Empty ()
 		{
 			Region region = new Region (new GraphicsPath ());
@@ -87,7 +87,7 @@ namespace MonoTests.System.Drawing {
 			CheckEmpty ("Clone.", region);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Region_Ctor_GraphicsPath ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -107,7 +107,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (8388608f, rect.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Region_Curve_IsInfinite ()
 		{
 			Point[] points = new Point[2] { new Point (-4194304, -4194304), new Point (4194304, 4194304) };
@@ -120,7 +120,7 @@ namespace MonoTests.System.Drawing {
 			// note: infinity isn't based on the bounds
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Curve_GetRegionScans ()
 		{
 			Point[] points = new Point[2] { new Point (-4194304, -4194304), new Point (4194304, 4194304) };
@@ -184,7 +184,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, // .......
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallUnion1 ()
 		{
 			Region region = new Region (sp1);
@@ -198,7 +198,7 @@ namespace MonoTests.System.Drawing {
 			CheckRectF ("[2]", 2, 3, 3, 2, scans[2]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallUnion2 ()
 		{
 			Region region = new Region (sp2);
@@ -222,7 +222,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, // .......
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallUnion_Self1 ()
 		{
 			Region region = new Region (sp1);
@@ -244,7 +244,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, // .......
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallUnion_Self2 ()
 		{
 			Region region = new Region (sp2);
@@ -266,7 +266,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, // .......
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallIntersection1 ()
 		{
 			Region region = new Region (sp1);
@@ -278,7 +278,7 @@ namespace MonoTests.System.Drawing {
 			CheckRectF ("[0]", 2, 2, 1, 1, scans[0]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallIntersection2 ()
 		{
 			Region region = new Region (sp2);
@@ -290,7 +290,7 @@ namespace MonoTests.System.Drawing {
 			CheckRectF ("[0]", 2, 2, 1, 1, scans[0]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallIntersection_Self1 ()
 		{
 			Region region = new Region (sp1);
@@ -302,7 +302,7 @@ namespace MonoTests.System.Drawing {
 			CheckRectF ("[0]", 0, 0, 3, 3, scans[0]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallIntersection_Self2 ()
 		{
 			Region region = new Region (sp2);
@@ -324,7 +324,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, // .......
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallExclude1 ()
 		{
 			Region region = new Region (sp1);
@@ -347,7 +347,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, // .......
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallExclude2 ()
 		{
 			Region region = new Region (sp2);
@@ -370,7 +370,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, // .......
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallExclude_Self1 ()
 		{
 			Region region = new Region (sp1);
@@ -381,7 +381,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0, scans.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallExclude_Self2 ()
 		{
 			Region region = new Region (sp2);
@@ -392,7 +392,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0, scans.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallComplement1 ()
 		{
 			Region region = new Region (sp1);
@@ -405,7 +405,7 @@ namespace MonoTests.System.Drawing {
 			CheckRectF ("[1]", 2, 3, 3, 2, scans[1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallComplement2 ()
 		{
 			Region region = new Region (sp2);
@@ -418,7 +418,7 @@ namespace MonoTests.System.Drawing {
 			CheckRectF ("[1]", 0, 2, 2, 1, scans[1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallComplement_Self1 ()
 		{
 			Region region = new Region (sp1);
@@ -429,7 +429,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0, scans.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallComplement_Self2 ()
 		{
 			Region region = new Region (sp2);
@@ -450,7 +450,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, // .......
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallXor1 ()
 		{
 			Region region = new Region (sp1);
@@ -465,7 +465,7 @@ namespace MonoTests.System.Drawing {
 			CheckRectF ("[3]", 2, 3, 3, 2, scans[3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallXor2 ()
 		{
 			Region region = new Region (sp2);
@@ -480,7 +480,7 @@ namespace MonoTests.System.Drawing {
 			CheckRectF ("[3]", 2, 3, 3, 2, scans[3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallXor_Self1 ()
 		{
 			Region region = new Region (sp1);
@@ -491,7 +491,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0, scans.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SmallXor_Self2 ()
 		{
 			Region region = new Region (sp2);
@@ -502,7 +502,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0, scans.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void NegativeXor ()
 		{
 			GraphicsPath neg = new GraphicsPath ();
@@ -522,7 +522,7 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, false, false, false, false, // ...........
 		};
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void UnionWithoutIntersection ()
 		{
 			Region region = new Region (sp1);
@@ -530,7 +530,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, ni_union, 11,5 );
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		// libgdiplus: both region are considered inside as intersecting rectangle because
 		// part of them co-exists in the same 8x8 bitmap. Full algorithm apply but results
 		// in an empty bitmap
@@ -541,16 +541,16 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, sempty, 7, 7);
 		}
 
-		[Fact]
-		// libgdiplus: no intersection results in an empty bitmap (optimization)
-		public void IntersectionWithoutIntersection_Large ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        // libgdiplus: no intersection results in an empty bitmap (optimization)
+        public void IntersectionWithoutIntersection_Large ()
 		{
 			Region region = new Region (sp1);
 			region.Intersect (sp4);
 			CompareSmallRegion (region, sempty, 7, 7);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		// libgdiplus: both region are considered inside as intersecting rectangle because
 		// part of them co-exists in the same 8x8 bitmap. Full algorithm apply but results
 		// as a copy of sp1
@@ -561,7 +561,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, self1, 7, 7);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		// libgdiplus: no intersection results in a clone of sp1 (optimization)
 		public void ExcludeWithoutIntersection_Large ()
 		{
@@ -570,7 +570,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, self1, 7, 7);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		// libgdiplus: both region are considered inside as intersecting rectangle because
 		// part of them co-exists in the same 8x8 bitmap. Full algorithm apply but results
 		// as a copy of sp1
@@ -581,7 +581,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, self1, 7, 7);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		// libgdiplus: no intersection results in a clone of sp1 (optimization)
 		public void ComplementWithoutIntersection_Large ()
 		{
@@ -590,7 +590,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (region, self1, 7, 7);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		// libgdiplus: both region are considered inside as intersecting rectangle because
 		// part of them co-exists in the same 8x8 bitmap.
 		public void XorWithoutIntersection ()
@@ -608,18 +608,18 @@ namespace MonoTests.System.Drawing {
 			false, false, false, false, false, false, false, false, false, false, false, false, false, // .............
 		};
 
-		[Fact]
-		// libgdiplus: both region aren't considered as an intersection because they do 
-		// not co-exists in the same 8x8 bitmap. In this case the xor function calls the
-		// union code (optimization).
-		public void XorWithoutIntersection_Large ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        // libgdiplus: both region aren't considered as an intersection because they do 
+        // not co-exists in the same 8x8 bitmap. In this case the xor function calls the
+        // union code (optimization).
+        public void XorWithoutIntersection_Large ()
 		{
 			Region region = new Region (sp1);
 			region.Xor (sp4);
 			CompareSmallRegion (region, ni_xor, 13, 5);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsEqual ()
 		{
 			Region r1 = new Region (sp1);
@@ -645,7 +645,7 @@ namespace MonoTests.System.Drawing {
 			Assert.False (r4.Equals (r5, graphic));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Translate_Int ()
 		{
 			Region r1 = new Region (sp1);
@@ -655,7 +655,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (r1, self1, 7, 7);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Translate_Float ()
 		{
 			Region r1 = new Region (sp1);
@@ -665,7 +665,7 @@ namespace MonoTests.System.Drawing {
 			CompareSmallRegion (r1, self1, 7, 7);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void EmptyPathWithInfiniteRegion ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -689,7 +689,7 @@ namespace MonoTests.System.Drawing {
 			Assert.True (region.IsEmpty (graphic));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void EmptyRegionWithInfiniteRegion ()
 		{
 			Region empty = new Region ();

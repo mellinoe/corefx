@@ -35,7 +35,7 @@ namespace MonoTests.System.Drawing {
 
 	public class SolidBrushTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transparent ()
 		{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
@@ -46,7 +46,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (Color.Empty.ToArgb (), clone.Color.ToArgb ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Color ()
 		{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
@@ -55,7 +55,7 @@ namespace MonoTests.System.Drawing {
 			// no exception - the call probably doesn't get to gdi+
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Clone ()
 		{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
@@ -63,7 +63,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => sb.Clone ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Dispose ()
 		{
 			SolidBrush sb = new SolidBrush (Color.Transparent);
@@ -71,7 +71,7 @@ namespace MonoTests.System.Drawing {
 			sb.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillRectangle ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -87,7 +87,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DrawLine ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -112,7 +112,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone ()
 		{
 			using (SolidBrush sb = new SolidBrush (Color.Transparent)) {

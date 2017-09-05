@@ -39,20 +39,20 @@ namespace MonoTests.System.Drawing.Text {
 
 	public class PrivateFontCollectionTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor ()
 		{
 			PrivateFontCollection pfc = new PrivateFontCollection ();
 			Assert.NotNull (pfc.Families);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddFontFile_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new PrivateFontCollection ().AddFontFile (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddFontFile_Empty ()
 		{
 			// badly formetted filename
@@ -61,7 +61,7 @@ namespace MonoTests.System.Drawing.Text {
 
 		// tests for AddMemoryFont are available in the CAS unit tests
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Family ()
 		{
 			PrivateFontCollection pfc = new PrivateFontCollection ();

@@ -59,7 +59,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FileDoesNotExists ()
 		{
 			Assert.Throws<FileNotFoundException> (() => Image.FromFile ("FileDoesNotExists.jpg"));
@@ -77,7 +77,7 @@ namespace MonoTests.System.Drawing{
 			return false;
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetThumbnailImage_NullCallback_Tiff ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -90,7 +90,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetThumbnailImage_Height_Zero ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -98,7 +98,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetThumbnailImage_Width_Negative ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -106,7 +106,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetThumbnailImage_CallbackData_Invalid ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -119,7 +119,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetThumbnailImage_SameSize_Bmp ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -131,7 +131,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetThumbnailImage_Smaller_Gif ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -143,7 +143,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetThumbnailImage_Bigger_Png ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -155,7 +155,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Stream_Unlocked ()
 		{
 			try {
@@ -179,7 +179,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Stream_Locked ()
 		{
 			Image img = null;
@@ -204,7 +204,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Null (img.Tag);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromFile_Metafile_Wmf ()
 		{
 			string filename = TestBitmap.getInFile ("bitmaps/telescope_01.wmf");
@@ -213,7 +213,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromStream_Metafile_Wmf ()
 		{
 			string filename = TestBitmap.getInFile ("bitmaps/telescope_01.wmf");
@@ -234,7 +234,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Null (img.Tag);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromFile_Metafile_Emf ()
 		{
 			string filename = TestBitmap.getInFile ("bitmaps/milkmateya01.emf");
@@ -243,7 +243,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromStream_Metafile_Emf ()
 		{
 			string filename = TestBitmap.getInFile ("bitmaps/milkmateya01.emf");
@@ -254,14 +254,14 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromFile_Invalid ()
 		{
 			string filename = Assembly.GetExecutingAssembly ().Location;
 			Assert.Throws<OutOfMemoryException> (() => Image.FromFile (filename));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromStream_Invalid ()
 		{
 			string filename = Assembly.GetExecutingAssembly ().Location;
@@ -281,7 +281,7 @@ namespace MonoTests.System.Drawing{
 			return bmp;
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StreamSaveLoad ()
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
@@ -304,7 +304,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StreamJunkSaveLoad ()
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
@@ -322,7 +322,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void XmlSerialization ()
 		{
 			new XmlSerializer (typeof (Image));

@@ -54,7 +54,7 @@ namespace MonoTests.System.Drawing {
 			sp2.AddPolygon (new Point[4] { new Point (2, 2), new Point (5, 2), new Point (5, 5), new Point (2, 5) });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RegionData_Null ()
 		{
 			RegionData data = new Region ().GetRegionData ();
@@ -63,7 +63,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<NullReferenceException> (() => new Region (data));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RegionData_EmptyData ()
 		{
 			RegionData data = new Region ().GetRegionData ();
@@ -80,7 +80,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void EmptyRegion ()
 		{
 			// note: an empty region is (for libgdiplus) a rectangular based region
@@ -90,7 +90,7 @@ namespace MonoTests.System.Drawing {
 			Region region = new Region (data);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PathRegion ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -102,7 +102,7 @@ namespace MonoTests.System.Drawing {
 			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CombinedPathRegion ()
 		{
 			// note: seems identical to PathRegion but it test another code path inside libgdiplus
@@ -114,7 +114,7 @@ namespace MonoTests.System.Drawing {
 			Assert.True (r.GetBounds (graphic).Equals (region.GetBounds (graphic)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiCombinedPathRegion ()
 		{
 			// note: seems identical to PathRegion but it test another code path inside libgdiplus

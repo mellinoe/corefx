@@ -133,7 +133,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap16Pixels ()
 		{
 			string sInFile = getInFile ("bitmaps/smiley.ico");
@@ -165,7 +165,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap16Data ()
 		{
 			string sInFile = getInFile ("bitmaps/smiley.ico");
@@ -302,7 +302,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap32Pixels ()
 		{
 			string sInFile = getInFile ("bitmaps/VisualPng.ico");
@@ -382,7 +382,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap32Data ()
 		{
 			string sInFile = getInFile ("bitmaps/VisualPng.ico");
@@ -514,7 +514,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap48Pixels ()
 		{
 			string sInFile = getInFile ("bitmaps/48x48x1.ico");
@@ -607,7 +607,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap48Data ()
 		{
 			string sInFile = getInFile ("bitmaps/48x48x1.ico");
@@ -741,7 +741,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap64Pixels ()
 		{
 			string sInFile = getInFile ("bitmaps/64x64x256.ico");
@@ -816,7 +816,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap64Data ()
 		{
 			string sInFile = getInFile ("bitmaps/64x64x256.ico");
@@ -1596,7 +1596,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap96Data ()
 		{
 			string sInFile = getInFile ("bitmaps/96x96x256.ico");
@@ -1911,7 +1911,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Xp32bppIconFeatures ()
 		{
 			string sInFile = getInFile ("bitmaps/32bpp.ico");
@@ -1982,25 +1982,25 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_24bppRgb ()
 		{
 			Save (PixelFormat.Format24bppRgb, PixelFormat.Format24bppRgb, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppRgb ()
 		{
 			Save (PixelFormat.Format32bppRgb, PixelFormat.Format32bppArgb, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppArgb ()
 		{
 			Save (PixelFormat.Format32bppArgb, PixelFormat.Format32bppArgb, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppPArgb ()
 		{
 			Save (PixelFormat.Format32bppPArgb, PixelFormat.Format32bppArgb, true);

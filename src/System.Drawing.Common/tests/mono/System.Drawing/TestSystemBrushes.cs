@@ -36,7 +36,7 @@ namespace MonoTests.System.Drawing
 {
 	public class SystemBrushesTest
 	{
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestActiveBorder ()
 		{
 			SolidBrush brush;
@@ -66,7 +66,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestActiveCaption ()
 		{
 			SolidBrush brush;
@@ -97,7 +97,7 @@ namespace MonoTests.System.Drawing
 
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestActiveCaptionText ()
 		{
 			SolidBrush brush;
@@ -127,7 +127,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestAppWorkspace ()
 		{
 			SolidBrush brush;
@@ -157,7 +157,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControl ()
 		{
 			SolidBrush brush;
@@ -188,7 +188,7 @@ namespace MonoTests.System.Drawing
 
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlDark ()
 		{
 			SolidBrush brush;
@@ -218,7 +218,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlDarkDark ()
 		{
 			SolidBrush brush;
@@ -248,7 +248,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlLight ()
 		{
 			SolidBrush brush;
@@ -278,7 +278,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlLightLight ()
 		{
 			SolidBrush brush;
@@ -308,7 +308,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestControlText ()
 		{
 			SolidBrush brush;
@@ -339,7 +339,7 @@ namespace MonoTests.System.Drawing
 		}
 
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDesktop ()
 		{
 			SolidBrush brush;
@@ -369,7 +369,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestHighlight ()
 		{
 			SolidBrush brush;
@@ -399,7 +399,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestHighlightText ()
 		{
 			SolidBrush brush;
@@ -429,7 +429,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestHotTrack ()
 		{
 			SolidBrush brush;
@@ -459,7 +459,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestInactiveBorder ()
 		{
 			SolidBrush brush;
@@ -489,7 +489,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestInactiveCaption ()
 		{
 			SolidBrush brush;
@@ -519,7 +519,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestInfo ()
 		{
 			SolidBrush brush;
@@ -549,7 +549,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestMenu ()
 		{
 			SolidBrush brush;
@@ -579,7 +579,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestScrollBar ()
 		{
 			SolidBrush brush;
@@ -609,7 +609,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestWindow ()
 		{
 			SolidBrush brush;
@@ -639,7 +639,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestWindowText ()
 		{
 			SolidBrush brush;
@@ -669,7 +669,7 @@ namespace MonoTests.System.Drawing
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestFromSystemColor ()
 		{
 			SolidBrush brush;

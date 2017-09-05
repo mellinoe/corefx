@@ -68,7 +68,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 
 		// Text Color Matrix processing
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ColorMatrix1 ()
 		{			
 			Color clr_src, clr_rslt;
@@ -87,7 +87,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (Color.FromArgb (255, 251, 20, 50), clr_rslt);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ColorMatrix2 ()
 		{
 			Color clr_src, clr_rslt;
@@ -143,13 +143,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			File.Delete (fileName);
 		}
 	
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ColorMatrix_80323_UsingAlpha ()
 		{
 			Bug80323 (Color.FromArgb (100, 255, 0, 0));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ColorMatrix_80323_WithoutAlpha ()
 		{
 			// this color is identical, once drawn over the bitmap, to Color.FromArgb (100, 255, 0, 0)
@@ -171,7 +171,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_Null ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -179,7 +179,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_Default ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -192,7 +192,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_Default_Any ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -200,7 +200,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_Default_Count ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -208,7 +208,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_AltGrays ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -216,7 +216,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_AltGrays_Any ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -224,7 +224,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_AltGrays_Bitmap ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -232,7 +232,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_AltGrays_Brush ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -240,7 +240,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_AltGrays_Count ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -248,7 +248,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_AltGrays_Default ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -256,7 +256,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_AltGrays_Pen ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -264,7 +264,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_AltGrays_Text ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -272,7 +272,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_SkipGrays ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -285,7 +285,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_SkipGrays_Any ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -293,7 +293,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_SkipGrays_Count ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -301,7 +301,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_InvalidFlag ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -309,7 +309,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrix_InvalidType()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -317,7 +317,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrices_Null_ColorMatrix ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -325,7 +325,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrices_ColorMatrix_Null ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -335,7 +335,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrices_ColorMatrix_Null_AltGrays ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -343,7 +343,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrices_ColorMatrix_ColorMatrix ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -354,7 +354,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrices_Gray ()
 		{
 			Color c = ProcessColorMatrices (Color.Gray, global_color_matrix, global_gray_matrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
@@ -367,7 +367,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (0xFFFFFFFF, (uint) c.ToArgb ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrices_Color ()
 		{
 			Color c = ProcessColorMatrices (Color.MidnightBlue, global_color_matrix, global_gray_matrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
@@ -380,7 +380,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (0xFF651970, (uint) c.ToArgb ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrices_InvalidFlags ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {
@@ -388,7 +388,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetColorMatrices_InvalidType ()
 		{
 			using (ImageAttributes ia = new ImageAttributes ()) {

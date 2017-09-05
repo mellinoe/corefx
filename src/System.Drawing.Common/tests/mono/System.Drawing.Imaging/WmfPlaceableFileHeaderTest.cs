@@ -36,7 +36,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 	public class WmfPlaceableFileHeaderTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DefaultValues ()
 		{
 			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();
@@ -51,7 +51,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (0, wh.Reserved);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Min ()
 		{
 			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();
@@ -75,7 +75,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (int.MinValue, wh.Reserved);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Max ()
 		{
 			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();

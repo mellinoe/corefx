@@ -63,26 +63,26 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (wm, t.WrapMode);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImage_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImage ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImage_Null_WrapMode ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, WrapMode.Clamp));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageWrapMode ()
 		{
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
@@ -91,103 +91,103 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageWrapMode_Invalid ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new TextureBrush (image, (WrapMode) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImage_Null_Rectangle ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, rect));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangle_Empty ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (image, new Rectangle ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangle ()
 		{
 			TextureBrush t = new TextureBrush (image, rect);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImage_Null_RectangleF ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, rectf));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangleF_Empty ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (image, new RectangleF ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangleF ()
 		{
 			TextureBrush t = new TextureBrush (image, rectf);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImage_Null_RectangleAttributes ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, rect, attr));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangle_Empty_Attributes ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (image, new Rectangle (), attr));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangleAttributes_Null ()
 		{
 			TextureBrush t = new TextureBrush (image, rect, null);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangleAttributes ()
 		{
 			TextureBrush t = new TextureBrush (image, rect, attr);
 			Common (t, WrapMode.Clamp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImage_Null_RectangleFAttributes ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (null, rectf, attr));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangleF_Empty_Attributes ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (image, new RectangleF ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangleFAttributes_Null ()
 		{
 			TextureBrush t = new TextureBrush (image, rectf, null);
 			Common (t, WrapMode.Tile);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageRectangleFAttributes ()
 		{
 			TextureBrush t = new TextureBrush (image, rectf, attr);
 			Common (t, WrapMode.Clamp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageWrapModeRectangle ()
 		{
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
@@ -196,13 +196,13 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageWrapMode_Invalid_Rectangle ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new TextureBrush (image, (WrapMode) Int32.MinValue, rect));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageWrapModeRectangleF ()
 		{
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
@@ -211,13 +211,13 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CtorImageWrapMode_Invalid_RectangleF ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new TextureBrush (image, (WrapMode) Int32.MinValue, rectf));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TextureBush_RectangleInsideBitmap ()
 		{
 			Rectangle r = new Rectangle (10, 10, 40, 40);
@@ -232,7 +232,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (WrapMode.Tile, b.WrapMode);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TextureBush_RectangleOutsideBitmap ()
 		{
 			Rectangle r = new Rectangle (50, 50, 50, 50);
@@ -241,13 +241,13 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<OutOfMemoryException> (() => new TextureBrush (bmp, r));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (image).Transform = null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform ()
 		{
 			Matrix m = new Matrix ();
@@ -256,7 +256,7 @@ namespace MonoTests.System.Drawing {
 			Assert.False (Object.ReferenceEquals (m, t.Transform));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WrapMode_Valid ()
 		{
 			foreach (WrapMode wm in Enum.GetValues (typeof (WrapMode))) {
@@ -266,13 +266,13 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WrapMode_Invalid ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new TextureBrush (image).WrapMode = (WrapMode)Int32.MinValue);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -280,7 +280,7 @@ namespace MonoTests.System.Drawing {
 			Common (clone, t.WrapMode);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Clone ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -288,7 +288,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => t.Clone ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Dispose ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -296,26 +296,26 @@ namespace MonoTests.System.Drawing {
 			t.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (image).MultiplyTransform (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform_Null_Order ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new TextureBrush (image).MultiplyTransform (null, MatrixOrder.Append));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransformOrder_Invalid ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			t.MultiplyTransform (new Matrix (), (MatrixOrder) Int32.MinValue);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform_NonInvertible ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -323,7 +323,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => t.MultiplyTransform (noninvertible));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ResetTransform ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -333,7 +333,7 @@ namespace MonoTests.System.Drawing {
 			Assert.True (t.Transform.IsIdentity);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RotateTransform ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -350,14 +350,14 @@ namespace MonoTests.System.Drawing {
 			Assert.True (t.Transform.IsIdentity);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RotateTransform_InvalidOrder ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			Assert.Throws<ArgumentException> (() => t.RotateTransform (720, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -374,7 +374,7 @@ namespace MonoTests.System.Drawing {
 			Assert.True (t.Transform.IsIdentity);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_MaxMin ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -388,14 +388,14 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0, elements[5], 1);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_InvalidOrder ()
 		{
 			TextureBrush t = new TextureBrush (image);
 			Assert.Throws<ArgumentException> (() => t.ScaleTransform (1, 1, (MatrixOrder) Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TranslateTransform ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -418,7 +418,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (0, elements[5], 1);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TranslateTransform_InvalidOrder ()
 		{
 			TextureBrush t = new TextureBrush (image);
@@ -448,31 +448,31 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Alpha_81828_Clamp ()
 		{
 			Alpha_81828 (WrapMode.Clamp, false);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Alpha_81828_Tile ()
 		{
 			Alpha_81828 (WrapMode.Tile, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Alpha_81828_TileFlipX ()
 		{
 			Alpha_81828 (WrapMode.TileFlipX, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Alpha_81828_TileFlipY ()
 		{
 			Alpha_81828 (WrapMode.TileFlipY, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Alpha_81828_TileFlipXY ()
 		{
 			Alpha_81828 (WrapMode.TileFlipXY, true);

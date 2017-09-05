@@ -27,6 +27,7 @@
 //
 
 using System;
+using System.Drawing;
 using System.Drawing.Imaging;
 using System.Security.Permissions;
 using Xunit;
@@ -35,7 +36,7 @@ namespace MonoTests.System.Drawing.Imaging {
 
 	public class EmfPlusRecordTypeTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void EmfRecords ()
 		{
 			Assert.Equal (1, (int)EmfPlusRecordType.EmfMin);
@@ -164,7 +165,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (122, (int)EmfPlusRecordType.EmfMax);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void EmfPlusRecords ()
 		{
 			Assert.Equal (16384, (int)EmfPlusRecordType.EmfPlusRecordBase);
@@ -228,7 +229,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (16439, (int)EmfPlusRecordType.Total);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WmfRecords ()
 		{
 			Assert.Equal (65536, (int)EmfPlusRecordType.WmfRecordBase);

@@ -105,7 +105,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bbpIndexedGreyscalePixels ()
 		{
 			string sInFile = getInFile ("bitmaps/nature-greyscale.jpg");
@@ -233,7 +233,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap24bitPixels ()
 		{
 			string sInFile = getInFile ("bitmaps/nature24bits.jpg");
@@ -265,7 +265,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap24bitData ()
 		{
 			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");

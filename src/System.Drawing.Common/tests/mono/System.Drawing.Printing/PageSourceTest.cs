@@ -33,7 +33,7 @@ namespace MonoTests.System.Drawing.Printing
 {	
 	public class PaperSourceTest
 	{
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void KindTest ()
 		{
 			PaperSource ps = new PaperSource ();

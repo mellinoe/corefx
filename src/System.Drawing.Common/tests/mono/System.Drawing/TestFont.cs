@@ -51,7 +51,7 @@ namespace MonoTests.System.Drawing{
 		}
 
 		// Test basic Font clone, properties and contructor
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestClone()
 		{		
 			Font f = new Font("Arial",12);	
@@ -110,8 +110,8 @@ namespace MonoTests.System.Drawing{
 			public string lfFaceName;
 		}
 
-		[Fact]
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
 		public void ToLogFont_AssertUnmanagedCode ()
 		{
 			Font f = new Font("Arial", 10);
@@ -142,8 +142,8 @@ namespace MonoTests.System.Drawing{
 			Assert.Null (lfs.lfFaceName);
 		}
 
-		[Fact]
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
 		public void ToLogFont_TooSmall ()
 		{
 			Font f = new Font ("Arial", 10);
@@ -152,8 +152,8 @@ namespace MonoTests.System.Drawing{
 			// no PInvoke conversion exists !?!?
 		}
 
-		[Fact]
-		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
 		public void ToLogFont_Int ()
 		{
 			Font f = new Font ("Arial", 10);
@@ -169,7 +169,7 @@ namespace MonoTests.System.Drawing{
 			Font f = new Font ("Arial", 10);
 			Assert.Throws<AccessViolationException> (() => f.ToLogFont (null));
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_StringNull_Float ()
 		{
 			string family = null;
@@ -234,7 +234,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Pixel, f.Unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_String_Float_FontStyle_GraphicsUnit_Display ()
 		{
 			Assert.Throws<ArgumentException> (() => new Font (name, 12.5f, FontStyle.Italic, GraphicsUnit.Display));
@@ -276,21 +276,21 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Document, f.Unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_FontFamilyNull_Float ()
 		{
 			FontFamily ff = null;
 			Assert.Throws<ArgumentNullException> (() => new Font (ff, 12.5f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_FontNull_FontStyle ()
 		{
 			Font f = null;
 			Assert.Throws<NullReferenceException> (() => new Font (f, FontStyle.Bold));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_FontFamily_Float ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f);
@@ -308,7 +308,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Point, f.Unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_FontFamily_Float_FontStyle ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Bold);
@@ -326,7 +326,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Point, f.Unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_FontFamily_Float_FontStyle_GraphicsUnit ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Italic, GraphicsUnit.Millimeter);
@@ -344,13 +344,13 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Millimeter, f.Unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Display ()
 		{
 			Assert.Throws<ArgumentException> (() => new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Italic, GraphicsUnit.Display));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Byte ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Strikeout, GraphicsUnit.Inch, Byte.MaxValue);
@@ -368,7 +368,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Inch, f.Unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Byte_Bool ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Underline, GraphicsUnit.Document, Byte.MinValue, true);
@@ -386,7 +386,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Document, f.Unit);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Double ()
 		{
 			Font f = new Font (name, 12.5f);
@@ -394,7 +394,7 @@ namespace MonoTests.System.Drawing{
 			f.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_UseAfter_Works ()
 		{
 			Font f = new Font (name, 12.5f);
@@ -405,7 +405,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (12.5f, f.Size);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Height ()
 		{
 			Font f = new Font (name, 12.5f);
@@ -413,7 +413,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => { var x = f.Height; });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_ToLogFont ()
 		{
 			Font f = new Font (name, 12.5f);
@@ -422,7 +422,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => f.ToLogFont (lf));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_ToLogFont_LoopCharSet ()
 		{
 			Font f = new Font (name, 12.5f);
@@ -471,7 +471,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_ToHFont ()
 		{
 			Font f = new Font (name, 12.5f);
@@ -479,7 +479,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => f.ToHfont ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHeight_Float ()
 		{
 			using (Font f = new Font (name, 12.5f)) {
@@ -487,7 +487,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHeight_Graphics ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10)) {
@@ -504,7 +504,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHeight_Graphics_Null ()
 		{
 			using (Font f = new Font (name, 12.5f)) {
@@ -512,7 +512,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FontUniqueHashCode ()
 		{
 			Font f1 = new Font ("Arial", 14);
@@ -523,7 +523,7 @@ namespace MonoTests.System.Drawing{
 			Assert.False (f1.GetHashCode () == f3.GetHashCode ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHashCode_UnitDiffers_HashesNotEqual()
 		{
 			Font f1 = new Font("Arial", 8.25F, GraphicsUnit.Point);
@@ -545,7 +545,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetHashCode_StyleEqualsGdiCharSet_HashesNotEqual()
 		{
 			Font f1 = new Font("Arial", 8.25F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));

@@ -49,7 +49,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (StringTrimming.Character, sf.Trimming);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Default ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -62,7 +62,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Default_Dispose ()
 		{
 			StringFormat sf = new StringFormat ();
@@ -70,13 +70,13 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => sf.ToString ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ctor_StringFormat_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new StringFormat (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ctor_StringFormat ()
 		{
 			using (StringFormat sf = new StringFormat (StringFormat.GenericTypographic)) {
@@ -84,7 +84,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ctor_StringFormatFlags ()
 		{
 			using (StringFormat sf = new StringFormat ((StringFormatFlags)Int32.MinValue)) {
@@ -92,7 +92,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ctor_StringFormatFlags_Int32 ()
 		{
 			using (StringFormat sf = new StringFormat ((StringFormatFlags) Int32.MinValue, Int32.MinValue)) {
@@ -101,20 +101,20 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericDefault ()
 		{
 			CheckDefaults (StringFormat.GenericDefault);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericDefault_Dispose ()
 		{
 			StringFormat.GenericDefault.Dispose ();
 			CheckDefaults (StringFormat.GenericDefault);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericDefault_Local_Dispose ()
 		{
 			StringFormat sf = StringFormat.GenericDefault;
@@ -133,7 +133,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (StringTrimming.None, sf.Trimming);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericTypographic ()
 		{
 			StringFormat sf = StringFormat.GenericTypographic;
@@ -141,14 +141,14 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal ("[StringFormat, FormatFlags=FitBlackBox, LineLimit, NoClip]", sf.ToString ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericTypographic_Dispose ()
 		{
 			StringFormat.GenericTypographic.Dispose ();
 			CheckTypographic (StringFormat.GenericTypographic);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericTypographic_Local_Dispose ()
 		{
 			StringFormat sf = StringFormat.GenericTypographic;
@@ -156,7 +156,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => CheckTypographic (sf));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Alignment_All ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -167,7 +167,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Alignment_Invalid ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -175,7 +175,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void HotkeyPrefix_All ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -186,7 +186,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void HotkeyPrefix_Invalid ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -194,7 +194,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LineAlignment_All ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -205,7 +205,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void LineAlignment_Invalid ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -213,7 +213,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Trimming_All ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -224,7 +224,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Trimming_Invalid ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -232,7 +232,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone() 
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -242,7 +242,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone_Complex ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -270,7 +270,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 			
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestFormatFlags() 
 		{
 			using (StringFormat smf = new StringFormat ()) {
@@ -279,7 +279,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}		
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TabsStops() 
 		{
 			using (StringFormat smf = new StringFormat ()) {
@@ -299,7 +299,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetTabStops_Null ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -307,7 +307,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetDigitSubstitution ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -317,7 +317,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetMeasurableCharacterRanges_Null ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -325,7 +325,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetMeasurableCharacterRanges_Empty ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -334,7 +334,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetMeasurableCharacterRanges_Max ()
 		{
 			using (StringFormat sf = new StringFormat ()) {
@@ -343,7 +343,7 @@ namespace MonoTests.System.Drawing{
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetMeasurableCharacterRanges_TooBig ()
 		{
 			using (StringFormat sf = new StringFormat ()) {

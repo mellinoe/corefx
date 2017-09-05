@@ -118,7 +118,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Decoders ()
 		{
 			Assert.Equal (8, decoders.Count);
@@ -141,7 +141,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Encoders ()
 		{
 			Assert.Equal (5, encoders.Count);
@@ -161,7 +161,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void BMPCodec()
 		{
 			Guid g = new Guid ("557cf400-1a04-11d3-9a73-0000f81ef32e");
@@ -171,7 +171,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				"BMP", "image/bmp", 1, 1, "FF-FF", "42-4D", null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GifCodec()
 		{
 			Guid g = new Guid ("557cf402-1a04-11d3-9a73-0000f81ef32e");
@@ -181,7 +181,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				"GIF", "image/gif", 1, 2, "FF-FF-FF-FF-FF-FF", "47-49-46-38-39-61", "47-49-46-38-37-61");
 		}
 		
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void JpegCodec()
 		{
 			Guid g = new Guid ("557cf401-1a04-11d3-9a73-0000f81ef32e");
@@ -191,7 +191,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				"JPEG", "image/jpeg", 1, 1, "FF-FF", "FF-D8", null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PngCodec()
 		{
 			Guid g = new Guid ("557cf406-1a04-11d3-9a73-0000f81ef32e");
@@ -201,7 +201,7 @@ namespace MonoTests.System.Drawing.Imaging {
 				"PNG", "image/png", 1, 1, "FF-FF-FF-FF-FF-FF-FF-FF", "89-50-4E-47-0D-0A-1A-0A", null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TiffCodec ()
 		{
 			Guid g = new Guid ("557cf405-1a04-11d3-9a73-0000f81ef32e");
@@ -211,14 +211,14 @@ namespace MonoTests.System.Drawing.Imaging {
 				"TIFF", "image/tiff", 1, 2, "FF-FF", "49-49", "4D-4D");
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IconCodec_Encoder ()
 		{
 			Guid g = new Guid ("557cf407-1a04-11d3-9a73-0000f81ef32e");
 			Assert.Null (GetEncoder (g));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IconCodec_Decoder ()
 		{
 			Guid g = new Guid ("557cf407-1a04-11d3-9a73-0000f81ef32e");
@@ -228,14 +228,14 @@ namespace MonoTests.System.Drawing.Imaging {
 				"ICO", "image/x-icon", 1, 1, "FF-FF-FF-FF", "00-00-01-00", null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void EmfCodec_Encoder ()
 		{
 			Guid g = new Guid ("557cf403-1a04-11d3-9a73-0000f81ef32e");
 			Assert.Null (GetEncoder (g));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void EmfCodec_Decoder ()
 		{
 			Guid g = new Guid ("557cf403-1a04-11d3-9a73-0000f81ef32e");
@@ -246,14 +246,14 @@ namespace MonoTests.System.Drawing.Imaging {
 				"00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-20-45-4D-46", null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WmfCodec_Encoder ()
 		{
 			Guid g = new Guid ("557cf404-1a04-11d3-9a73-0000f81ef32e");
 			Assert.Null (GetEncoder (g));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WmfCodec_Decoder ()
 		{
 			Guid g = new Guid ("557cf404-1a04-11d3-9a73-0000f81ef32e");

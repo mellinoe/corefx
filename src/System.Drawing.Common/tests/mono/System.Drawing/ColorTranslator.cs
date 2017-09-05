@@ -32,19 +32,19 @@ namespace MonoTests.System.Drawing {
 
 	public class ColorTranslatorTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHtml_Null ()
 		{
 			Assert.Equal (0, ColorTranslator.FromHtml (null).ToArgb ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHtml_Empty ()
 		{
 			Assert.Equal (0, ColorTranslator.FromHtml (String.Empty).ToArgb ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHtml_KnownValues ()
 		{
 			Assert.Equal (SystemColors.Control, ColorTranslator.FromHtml ("buttonface"));
@@ -55,7 +55,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (SystemColors.Info, ColorTranslator.FromHtml ("infobackground"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHtml_Int ()
 		{
 			Assert.Equal (-1, ColorTranslator.FromHtml ("-1").ToArgb ());
@@ -81,25 +81,25 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (Color.White, ColorTranslator.FromHtml ("0xFFFFFF"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHtml_PoundNegative ()
 		{
 			Assert.Throws<Exception> (() => ColorTranslator.FromHtml ("#-1"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHtml_PoundTooLarge ()
 		{
 			Assert.Throws<Exception> (() => ColorTranslator.FromHtml ("#100000000"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHtml_Unknown ()
 		{
 			Assert.Throws<Exception> (() => ColorTranslator.FromHtml ("unknown-color-test"));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromHtml ()
 		{
 			Color [] colors = new Color [] {
@@ -158,21 +158,21 @@ SystemColors.MenuText, SystemColors.ScrollBar,
 			Assert.Equal (Color.LightGray, ColorTranslator.FromHtml(ColorTranslator.ToHtml(Color.LightGray)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromOle ()
 		{
 			Assert.Equal (Color.FromArgb (0x10, 0x20, 0x30), ColorTranslator.FromOle (0x302010));
 			Assert.Equal (Color.FromArgb (0xbb, 0x20, 0x30), ColorTranslator.FromOle (unchecked ((int)0xee3020bb)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromWin32 ()
 		{
 			Assert.Equal (Color.FromArgb (0x10, 0x20, 0x30), ColorTranslator.FromWin32 (0x302010));
 			Assert.Equal (Color.FromArgb (0xbb, 0x20, 0x30), ColorTranslator.FromWin32 (unchecked ((int)0xee3020bb)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ToHtml ()
 		{
 			string [] htmlColors = new string [] {
@@ -208,13 +208,13 @@ SystemColors.MenuText, SystemColors.ScrollBar,
 				Assert.Equal (htmlColors[(int)i-1], ColorTranslator.ToHtml (Color.FromKnownColor (i)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ToOle () {
 			Assert.Equal (0x302010, ColorTranslator.ToOle (Color.FromArgb (0x10, 0x20, 0x30)));
 			Assert.Equal (unchecked ((int)0x3020bb), ColorTranslator.ToOle (Color.FromArgb (0xee, 0xbb, 0x20, 0x30)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ToWin32 () {
 			Assert.Equal (0x302010, ColorTranslator.ToWin32 (Color.FromArgb (0x10, 0x20, 0x30)));
 			Assert.Equal (unchecked ((int)0x3020bb), ColorTranslator.ToWin32 (Color.FromArgb (0xee, 0xbb, 0x20, 0x30)));

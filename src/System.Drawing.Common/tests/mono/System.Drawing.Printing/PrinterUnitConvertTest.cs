@@ -31,6 +31,7 @@ using System.IO;
 using System.Drawing.Printing;
 using System.Security;
 using System.Security.Permissions;
+using System.Drawing;
 
 namespace MonoTests.System.Drawing.Printing {
 
@@ -38,7 +39,7 @@ namespace MonoTests.System.Drawing.Printing {
 	{
 		static int n = 100, r;
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ConvertFromDisplay ()
 		{
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
@@ -62,7 +63,7 @@ namespace MonoTests.System.Drawing.Printing {
 			Assert.Equal (1000, r);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ConvertFromHundredthsOfAMillimeter ()
 		{
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
@@ -86,7 +87,7 @@ namespace MonoTests.System.Drawing.Printing {
 			Assert.Equal (39, r);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ConvertFromTenthsOfAMillimeter ()
 		{
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
@@ -110,7 +111,7 @@ namespace MonoTests.System.Drawing.Printing {
 			Assert.Equal (394, r);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ConvertFromThousandthsOfAnInch ()
 		{
 			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,

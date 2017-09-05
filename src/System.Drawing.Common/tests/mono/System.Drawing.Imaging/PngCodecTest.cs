@@ -86,7 +86,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		/* Checks bitmap features on a known 1bbp bitmap */
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap1bitFeatures ()
 		{
 			string sInFile = getInFile ("bitmaps/1bit.png");
@@ -114,7 +114,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap1bitPixels ()
 		{
 			string sInFile = getInFile ("bitmaps/1bit.png");
@@ -196,7 +196,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap1bitData ()
 		{
 			string sInFile = getInFile ("bitmaps/1bit.png");
@@ -301,7 +301,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		/* Checks bitmap features on a known 2bbp bitmap */
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap2bitFeatures ()
 		{
 			if (IsArm64Process ())
@@ -332,7 +332,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap2bitPixels ()
 		{
 			if (IsArm64Process ())
@@ -367,7 +367,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap2bitData ()
 		{
 			if (IsArm64Process ())
@@ -431,7 +431,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		/* Checks bitmap features on a known 4bbp bitmap */
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap4bitFeatures ()
 		{
 			string sInFile = getInFile ("bitmaps/4bit.png");
@@ -473,7 +473,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap4bitPixels ()
 		{
 			string sInFile = getInFile ("bitmaps/4bit.png");
@@ -556,7 +556,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap4bitData ()
 		{
 			string sInFile = getInFile ("bitmaps/4bit.png");
@@ -696,25 +696,25 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_24bppRgb ()
 		{
 			Save (PixelFormat.Format24bppRgb, PixelFormat.Format24bppRgb, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppRgb ()
 		{
 			Save (PixelFormat.Format32bppRgb, PixelFormat.Format32bppArgb, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppArgb ()
 		{
 			Save (PixelFormat.Format32bppArgb, PixelFormat.Format32bppArgb, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Save_32bppPArgb ()
 		{
 			Save (PixelFormat.Format32bppPArgb, PixelFormat.Format32bppArgb, true);

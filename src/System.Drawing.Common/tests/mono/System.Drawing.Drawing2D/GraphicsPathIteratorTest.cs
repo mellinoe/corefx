@@ -38,7 +38,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private PointF [] pts_2f = new PointF [2] { new PointF (1, 2), new PointF (20, 30) };
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Ctor_Null ()
 		{
 			using (GraphicsPathIterator gpi = new GraphicsPathIterator (null)) {
@@ -46,7 +46,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void NextMarker_Null ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -70,7 +70,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CopyData_NullPoints ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -83,7 +83,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CopyData_NullTypes ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -96,7 +96,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CopyData_DifferentSize ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -109,7 +109,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Enumerate_NullPoints ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -122,7 +122,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Enumerate_NullTypes ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -135,7 +135,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Enumerate_DifferentSize ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {

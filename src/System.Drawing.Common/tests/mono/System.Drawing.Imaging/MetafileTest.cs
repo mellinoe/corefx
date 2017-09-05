@@ -49,32 +49,32 @@ namespace MonoTests.System.Drawing.Imaging {
             return Path.GetFullPath("mono/System.Drawing/" + file);
         }
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_Stream_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Metafile ((Stream)null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_String_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new Metafile ((string) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_String_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (String.Empty));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_String_FileDoesNotExists ()
 		{
 			string filename = getInFile ("telescope_02.wmf");
 			Assert.Throws<ExternalException> (() => new Metafile (filename));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_String ()
 		{
 			string filename = getInFile (WmfPlaceable);
@@ -82,7 +82,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Metafile clone = (Metafile) mf.Clone ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_Bitmap ()
 		{
 			Assert.Throws<ExternalException> (() => new Metafile (getInFile (Bitmap)));
@@ -129,7 +129,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.True (header.IsWmfPlaceable ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_WmfPlaceable ()
 		{
 			using (Metafile mf = new Metafile (getInFile (WmfPlaceable))) {
@@ -141,7 +141,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromFile_WmfPlaceable ()
 		{
 			using (Metafile mf = new Metafile (getInFile (WmfPlaceable))) {
@@ -156,7 +156,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromFileStream_WmfPlaceable ()
 		{
 			using (FileStream fs = File.OpenRead (getInFile (WmfPlaceable))) {
@@ -173,7 +173,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromMemoryStream_WmfPlaceable ()
 		{
 			MemoryStream ms;
@@ -234,7 +234,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.False (header.IsWmfPlaceable ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromFile_Emf ()
 		{
 			using (Metafile mf = new Metafile (getInFile (Emf))) {
@@ -243,7 +243,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromFileStream_Emf ()
 		{
 			using (FileStream fs = File.OpenRead (getInFile (Emf))) {
@@ -254,7 +254,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromMemoryStream_Emf ()
 		{
 			MemoryStream ms;
@@ -271,13 +271,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			ms.Close ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_Stream_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => Metafile.GetMetafileHeader ((Stream)null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_Stream ()
 		{
 			string filename = getInFile (WmfPlaceable);
@@ -287,13 +287,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_Filename_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => Metafile.GetMetafileHeader ((string) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_Filename ()
 		{
 			string filename = getInFile (WmfPlaceable);
@@ -315,13 +315,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_IntPtr_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => Metafile.GetMetafileHeader (IntPtr.Zero));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_IntPtr ()
 		{
 			string filename = MetafileTest.getInFile (MetafileTest.WmfPlaceable);
@@ -334,13 +334,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrBool_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (IntPtr.Zero, false));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrEmfType_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (IntPtr.Zero, EmfType.EmfOnly));
@@ -386,37 +386,37 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrEmfType_Invalid ()
 		{
 			Assert.Throws<ArgumentException> (() => Metafile_IntPtrEmfType ((EmfType)Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrEmfType_EmfOnly ()
 		{
 			Metafile_IntPtrEmfType (EmfType.EmfOnly);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrEmfType_EmfPlusDual ()
 		{
 			Metafile_IntPtrEmfType (EmfType.EmfPlusDual);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrEmfType_EmfPlusOnly ()
 		{
 			Metafile_IntPtrEmfType (EmfType.EmfPlusOnly);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrRectangle_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (IntPtr.Zero, new Rectangle (1, 2, 3, 4)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrRectangle_Empty ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10, PixelFormat.Format32bppArgb)) {
@@ -433,13 +433,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrRectangleF_Zero ()
 		{
 			Assert.Throws<ArgumentException> (() => new Metafile (IntPtr.Zero, new RectangleF (1, 2, 3, 4)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_IntPtrRectangleF_Empty ()
 		{
 			using (Bitmap bmp = new Bitmap (10, 10, PixelFormat.Format32bppArgb)) {
@@ -472,13 +472,13 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_StreamIntPtrEmfType_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => Metafile_StreamEmfType (null, EmfType.EmfOnly));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_StreamIntPtrEmfType_EmfOnly ()
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
@@ -486,7 +486,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_StreamIntPtrEmfType_Invalid ()
 		{
 			using (MemoryStream ms = new MemoryStream ()) {
@@ -549,25 +549,25 @@ namespace MonoTests.System.Drawing.Imaging {
 			CreateFilename (EmfType.EmfPlusOnly, true);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CreateFilename_MultipleGraphics_EmfOnly ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => CreateFilename (EmfType.EmfOnly, false));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CreateFilename_MultipleGraphics_EmfPlusDual ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => CreateFilename (EmfType.EmfPlusDual, false));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CreateFilename_MultipleGraphics_EmfPlusOnly ()
 		{
 			Assert.Throws<OutOfMemoryException> (() => CreateFilename (EmfType.EmfPlusOnly, false));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Measure ()
 		{
 			Metafile mf;
@@ -602,7 +602,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WorldTransforms ()
 		{
 			Metafile mf;

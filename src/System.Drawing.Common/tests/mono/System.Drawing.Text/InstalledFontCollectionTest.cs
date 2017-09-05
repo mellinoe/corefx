@@ -37,14 +37,14 @@ namespace MonoTests.System.Drawing.Text {
 
 	public class InstalledFontCollectionTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Family ()
 		{
 			InstalledFontCollection ifc = new InstalledFontCollection ();
 			Assert.NotNull (ifc.Families);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Family ()
 		{
 			InstalledFontCollection ifc = new InstalledFontCollection ();

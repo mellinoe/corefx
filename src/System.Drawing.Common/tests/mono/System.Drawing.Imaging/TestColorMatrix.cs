@@ -37,19 +37,19 @@ namespace MonoTests.System.Drawing.Imaging {
 
 	public class ColorMatrixTest {
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => new ColorMatrix (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_TooSmallArraySize ()
 		{
 			Assert.Throws<IndexOutOfRangeException> (() => new ColorMatrix (new float[][] { }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_TooWideArraySize ()
 		{
 			Assert.Throws<IndexOutOfRangeException> (() => new ColorMatrix (new float[][] {
@@ -57,7 +57,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_TooTallArraySize ()
 		{
 			Assert.Throws<IndexOutOfRangeException> (() => new ColorMatrix (new float[][] {
@@ -70,7 +70,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_TooBigArraySize ()
 		{
 			ColorMatrix cm = new ColorMatrix (new float[][] {
@@ -109,7 +109,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (4.4f, cm.Matrix44);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TooBigItems ()
 		{
 			ColorMatrix cm = new ColorMatrix (new float[][] {
@@ -123,7 +123,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Throws<IndexOutOfRangeException> (() => { var x = cm[5, 5]; });
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DefaultConstructor ()
 		{
 			ColorMatrix cm = new ColorMatrix ();
@@ -157,7 +157,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (100, Marshal.SizeOf (typeof (ColorMatrix)));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ConstructorArrayAndMethods ()
 		{
 			ColorMatrix cm = new ColorMatrix (new float[][] {
@@ -199,7 +199,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (1, cm.Matrix44);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IndexerProperty ()
 		{
 			ColorMatrix cm = new ColorMatrix (new float[][] {
@@ -241,7 +241,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (0, cm[4,4]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IndividualProperties ()
 		{
 			ColorMatrix cm = new ColorMatrix (new float[][] {

@@ -47,7 +47,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		private static ImageFormat WmfImageFormat = new ImageFormat (new Guid ("b96b3cad-0728-11d3-9d7b-0000f81ef32e"));
 		private static ImageFormat CustomImageFormat = new ImageFormat (new Guid ("48749428-316f-496a-ab30-c819a92b3137"));
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void DefaultImageFormats ()
 		{
 			Assert.Equal (BmpImageFormat.Guid, ImageFormat.Bmp.Guid);
@@ -62,7 +62,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal (WmfImageFormat.Guid, ImageFormat.Wmf.Guid);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ToStringTest ()
 		{
 			Assert.Equal ("[ImageFormat: b96b3cab-0728-11d3-9d7b-0000f81ef32e]", BmpImageFormat.ToString ());
@@ -78,7 +78,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal ("[ImageFormat: 48749428-316f-496a-ab30-c819a92b3137]", CustomImageFormat.ToString ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WellKnown_ToString ()
 		{
 			Assert.Equal ("Bmp", ImageFormat.Bmp.ToString ());
@@ -93,7 +93,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.Equal ("Wmf", ImageFormat.Wmf.ToString ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestEquals ()
 		{
 			Assert.True (BmpImageFormat.Equals (BmpImageFormat));
@@ -113,7 +113,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			Assert.False (BmpImageFormat.Equals (BmpImageFormat.ToString ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestGetHashCode ()
 		{
 			Assert.Equal (BmpImageFormat.GetHashCode (), BmpImageFormat.Guid.GetHashCode ());

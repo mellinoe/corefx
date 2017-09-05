@@ -36,7 +36,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 {
 	public class BlendTest
 	{
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestConstructors ()
 		{
 			Blend blend0 = new Blend ();
@@ -50,7 +50,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (1, blend1.Positions.Length);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestProperties () 
 		{
 			Blend blend0 = new Blend ();

@@ -50,7 +50,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FontFamily_String_Null ()
 		{
 			Assert.Throws<ArgumentException> (() => new FontFamily (null));
@@ -91,20 +91,20 @@ namespace MonoTests.System.Drawing {
 			CheckMono (ff);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FontFamily_String_PrivateFontCollection ()
 		{
 			Assert.Throws<ArgumentException> (() => new FontFamily (name, new PrivateFontCollection ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FontFamily_Monospace ()
 		{
 			FontFamily ff = new FontFamily (GenericFontFamilies.Monospace);
 			CheckMono (ff);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FontFamily_SansSerif ()
 		{
 			FontFamily ff = new FontFamily (GenericFontFamilies.SansSerif);
@@ -113,7 +113,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (ff.Name.GetHashCode (), ff.GetHashCode ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FontFamily_Serif ()
 		{
 			FontFamily ff = new FontFamily (GenericFontFamilies.Serif);
@@ -122,7 +122,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (ff.Name.GetHashCode (), ff.GetHashCode ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FontFamily_Invalid ()
 		{
 			FontFamily ff = new FontFamily ((GenericFontFamilies)Int32.MinValue);
@@ -131,7 +131,7 @@ namespace MonoTests.System.Drawing {
 			CheckMono (ff);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericMonospace ()
 		{
 			FontFamily ff = FontFamily.GenericMonospace;
@@ -141,7 +141,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (']', ts[ts.Length - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericSansSerif ()
 		{
 			FontFamily ff = FontFamily.GenericSansSerif;
@@ -150,7 +150,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (name, FontFamily.GenericSansSerif.Name);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GenericSerif ()
 		{
 			FontFamily ff = FontFamily.GenericSerif;
@@ -159,7 +159,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (name, FontFamily.GenericSerif.Name);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetFamilies_Null ()
         {
 #pragma warning disable 618
@@ -167,7 +167,7 @@ namespace MonoTests.System.Drawing {
 #pragma warning restore 618
         }
 
-        [Fact]
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetFamilies ()
 		{
 #pragma warning disable 618
@@ -176,7 +176,7 @@ namespace MonoTests.System.Drawing {
 #pragma warning restore 618
         }
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_Double ()
 		{
 			FontFamily ff = FontFamily.GenericSerif;
@@ -184,7 +184,7 @@ namespace MonoTests.System.Drawing {
 			ff.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Dispose_UseAfter ()
 		{
 			FontFamily ff = FontFamily.GenericMonospace;

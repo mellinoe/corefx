@@ -49,7 +49,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, gp.PointCount);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_InvalidFillMode ()
 		{
 			GraphicsPath gp = new GraphicsPath ((FillMode) Int32.MinValue);
@@ -57,43 +57,43 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckEmpty ("InvalidFillMode.", gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_Null_Byte ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ((Point[]) null, new byte[1]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_Byte_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => new GraphicsPath (new Point[1], null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_Byte_LengthMismatch ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath (new Point[1], new byte [2]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_Null_Byte ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ((PointF[])null, new byte [1]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_Byte_Null ()
 		{
 			Assert.Throws<NullReferenceException> (() => new GraphicsPath ( new PointF[1], null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_Byte_LengthMismatch ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath (new PointF[2], new byte [1]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GraphicsPath_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -108,19 +108,19 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckEmpty ("Reverse.", gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GraphicsPath_Empty_PathPoints ()
 		{
 			Assert.Throws<ArgumentException> (() => Assert.Null (new GraphicsPath ().PathPoints));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GraphicsPath_Empty_PathTypes ()
 		{
 			Assert.Throws<ArgumentException> (() => Assert.Null (new GraphicsPath ().PathTypes));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GraphicsPath_SamePoint ()
 		{
 			Point[] points = new Point [] {
@@ -141,7 +141,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GraphicsPath_SamePointF ()
 		{
 			PointF [] points = new PointF [] {
@@ -162,7 +162,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FillMode_Invalid ()
 		{
 			// constructor accept an invalid FillMode
@@ -172,7 +172,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Throws<SC.InvalidEnumArgumentException> (() => gp.FillMode = (FillMode) Int32.MaxValue);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PathData_CannotChange ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -188,7 +188,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1f, gp.PathData.Points[0].Y);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PathPoints_CannotChange ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -204,7 +204,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1f, gp.PathPoints[0].Y);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void PathTypes_CannotChange ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -245,7 +245,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (3, path.PathTypes[3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddArc_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -253,7 +253,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckArc (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddArc_RectangleF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -261,7 +261,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckArc (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddArc_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -269,7 +269,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckArc (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddArc_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -305,7 +305,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (3, path.PathTypes[3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBezier_Point ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -313,7 +313,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBezier_PointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -321,7 +321,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBezier_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -329,7 +329,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBezier_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -337,7 +337,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBezier_SamePoint ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -357,7 +357,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (3, gp.PathTypes [6]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBezier_SamePointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -377,20 +377,20 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (3, gp.PathTypes [6]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBeziers_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddBeziers ((Point[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBeziers_3_Points ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddBeziers (new Point[3] { new Point (1, 1), new Point (2, 2), new Point (3, 3) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBeziers_Point ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -398,20 +398,20 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBeziers_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddBeziers ((PointF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBeziers_3_PointFs ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddBeziers (new PointF[3] { new PointF (1f, 1f), new PointF (2f, 2f), new PointF (3f, 3f) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBeziers_PointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -419,7 +419,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckBezier (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBeziers_SamePoint ()
 		{
 			Point [] points = new Point [4] { new Point (1, 1), new Point (1, 1), new Point (1, 1), new Point (1, 1) };
@@ -440,7 +440,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (3, gp.PathTypes [6]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddBeziers_SamePointF ()
 		{
 			PointF[] points = new PointF [4] { new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f) };
@@ -480,7 +480,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (131, path.PathData.Types[12]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddEllipse_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -488,7 +488,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckEllipse (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddEllipse_RectangleF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -496,7 +496,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckEllipse (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddEllipse_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -504,7 +504,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckEllipse (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddEllipse_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -533,7 +533,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, path.PathTypes[1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLine_Point ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -541,7 +541,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLine_PointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -549,7 +549,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLine_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -557,7 +557,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLine_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -565,7 +565,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLine_SamePoint ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -590,7 +590,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, gp.PathTypes [3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLine_SamePointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -607,7 +607,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, gp.PathTypes [2]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLine_SamePointsF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -626,20 +626,20 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, gp.PathTypes [3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddLines ((Point[])null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_Point_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddLines (new Point[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_Point_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -649,7 +649,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, gp.PathTypes[0]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_Point ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -657,20 +657,20 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddLines ((PointF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_PointF_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddLines (new PointF[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -680,7 +680,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, gp.PathTypes[0]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_PointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -688,7 +688,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckLine (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_SamePoint ()
 		{
 			Point [] points = new Point [] { new Point (1, 1), new Point (1, 1) };
@@ -714,7 +714,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, gp.PathTypes [3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddLines_SamePointF ()
 		{
 			PointF [] points = new PointF [] { new PointF (49.2f, 157f), new PointF (49.2f, 157f), new PointF (49.2f, 157f), new PointF (49.2f, 157f) };
@@ -772,7 +772,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 #endif
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPie_Rect ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -780,7 +780,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckPie (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPie_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -788,7 +788,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckPie (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPie_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -825,33 +825,33 @@ namespace MonoTests.System.Drawing.Drawing2D {
 #endif
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddPolygon ((Point[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_Point_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath ().AddPolygon (new Point[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_Point_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddPolygon (new Point[1] { new Point (1, 1) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_Point_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddPolygon (new Point[2] { new Point (1, 1), new Point (2, 2) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_Point_3 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -859,33 +859,33 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckPolygon (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddPolygon ((PointF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_PointF_Empty ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath ().AddPolygon (new PointF[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddPolygon (new PointF[1] { new PointF (1f, 1f) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_PointF_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddPolygon (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_PointF_3 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -893,7 +893,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckPolygon (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_SamePoint ()
 		{
 			Point [] points = new Point [3] { new Point (1, 1), new Point (1, 1), new Point (1, 1) };
@@ -927,7 +927,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (129, gp.PathTypes [11]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPolygon_SamePointF ()
 		{
 			PointF [] points = new PointF [3] { new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f) };
@@ -989,7 +989,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (129, path.PathTypes[3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangle_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -997,7 +997,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangle_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1005,7 +1005,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangle_SamePoint ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1030,7 +1030,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (129, gp.PathTypes [3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangle_SamePointF ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1055,21 +1055,21 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (129, gp.PathTypes [3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangles_Int_Null ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentNullException> (() => gp.AddRectangles ((Rectangle[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangles_Int_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddRectangles (new Rectangle[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangles_Int ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1077,21 +1077,21 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangles_Float_Null ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentNullException> (() => gp.AddRectangles ((RectangleF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangles_Float_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddRectangles ( new RectangleF[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangles_Float ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1099,7 +1099,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangles_Two ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1115,7 +1115,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 8);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddRectangles_SamePoint ()
 		{
 			Rectangle r1 = new Rectangle (1, 1, 0, 0);
@@ -1128,13 +1128,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// first rect is ignore, then all other 2x4 (8) points are present, no compression
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPath_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddPath (null, false));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddPath ()
 		{
 			GraphicsPath gpr = new GraphicsPath ();
@@ -1163,34 +1163,34 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (131, path.PathData.Types[9]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddClosedCurve ((Point[])null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_Point_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new Point [0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_Point_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new Point[1] { new Point (1, 1) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_Point_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new Point[2] { new Point (1, 1), new Point (2, 2) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_Point_3 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1198,34 +1198,34 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckClosedCurve (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddClosedCurve ((PointF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_PointF_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new PointF[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new PointF[1] { new PointF (1f, 1f) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_PointF_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddClosedCurve (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_PointF_3 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1233,7 +1233,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckClosedCurve (gp);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_SamePoint ()
 		{
 			Point [] points = new Point [3] { new Point (1, 1), new Point (1, 1), new Point (1, 1) };
@@ -1244,7 +1244,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (20, gp.PointCount);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddClosedCurve_SamePointF ()
 		{
 			PointF [] points = new PointF [3] { new PointF (1f, 1f), new PointF (1f, 1f), new PointF (1f, 1f) };
@@ -1288,27 +1288,27 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (3, path.PathTypes[3]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_Point_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddCurve ((Point[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_Point_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new Point[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_Point_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new Point[1] { new Point (1, 1) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_Point_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1318,7 +1318,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_Point_2_Tension ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1328,7 +1328,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve3_Point_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1336,27 +1336,27 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// adding only two points isn't supported by GdipAddCurve3I
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_PointF_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().AddCurve ((PointF[]) null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_PointF_0 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[0]));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_PointF_1 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[1] { new PointF (1f, 1f) }));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_PointF_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1366,7 +1366,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_PoinFt_2_Tension ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1376,7 +1376,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve3_PointF_2 ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1384,7 +1384,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			// adding only two points isn't supported by GdipAddCurve3
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_LargeTension ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1393,28 +1393,28 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_ZeroSegments ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }, 0, 0, 0.5f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_NegativeSegments ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[2] { new PointF (1f, 1f), new PointF (2f, 2f) }, 0, -1, 0.5f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_OffsetTooLarge ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddCurve (new PointF[3] { new PointF (1f, 1f), new PointF (0f, 20f), new PointF (20f, 0f) }, 1, 2, 0.5f));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_Offset ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1423,7 +1423,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_SamePoint ()
 		{
 			Point [] points = new Point [2] { new Point (1, 1), new Point (1, 1) };
@@ -1434,7 +1434,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (7, gp.PointCount);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddCurve_SamePointF ()
 		{
 			PointF [] points = new PointF [2] { new PointF (1f, 1f), new PointF (1f, 1f) };
@@ -1517,7 +1517,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddString_NullString ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1525,7 +1525,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Throws<NullReferenceException> (() => gp.AddString (null, ff, 0, 10, new Point (10, 10), StringFormat.GenericDefault));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddString_EmptyString ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1534,14 +1534,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, gp.PointCount);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddString_NullFontFamily ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
 			Assert.Throws<ArgumentException> (() => gp.AddString ("mono", null, 0, 10, new Point (10, 10), StringFormat.GenericDefault));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void AddString_NegativeSize ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1550,7 +1550,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.True (gp.PointCount > 0);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_Empty_Empty ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1569,7 +1569,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (2.0f, rect.Height);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_Empty_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1577,7 +1577,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangleBounds (gp.GetBounds ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_Null_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1585,7 +1585,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangleBounds (gp.GetBounds (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_MatrixEmpty_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1593,7 +1593,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangleBounds (gp.GetBounds (new Matrix ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_NullNull_Rectangle ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1609,7 +1609,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (48.3f, rect.Height, 1);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_Empty_Pie ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1618,7 +1618,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_Null_Pie ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1627,7 +1627,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_MatrixEmpty_Pie ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1636,7 +1636,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_NullNull_Pie ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1645,7 +1645,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetBounds_Empty_ClosedCurve ()
 		{
 			GraphicsPath gp = new GraphicsPath ();
@@ -1661,12 +1661,12 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			gp.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Transform (null));
 		}
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Empty ()
 		{
 			// no points in path and no exception
@@ -1690,7 +1690,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Empty ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1700,7 +1700,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Null ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1711,7 +1711,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_NullFloat ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1722,7 +1722,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Arc ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1732,7 +1732,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Bezier ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1742,7 +1742,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_ClosedCurve ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1755,7 +1755,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Curve ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1768,7 +1768,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Ellipse ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1778,7 +1778,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Line ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1788,7 +1788,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Pie ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1798,7 +1798,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CompareFlats (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Polygon ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1811,7 +1811,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			ComparePaths (path, clone);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Flatten_Rectangle ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1857,19 +1857,19 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (closed ? 129 : 1, types[2]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Warp_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Warp (null, new RectangleF ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Warp_NoPoints ()
 		{
 			Assert.Throws<ArgumentException> (() => new GraphicsPath ().Warp (new PointF[0], new RectangleF ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Wrap_NoPoint ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -1882,7 +1882,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Warp_Invalid ()
 		{
 			PointF[] pts = new PointF[1] { new PointF (0, 0) };
@@ -1893,31 +1893,31 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (0, path.PointCount);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetMarkers_EmptyPath ()
 		{
 			new GraphicsPath ().SetMarkers ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ClearMarkers_EmptyPath ()
 		{
 			new GraphicsPath ().ClearMarkers ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CloseFigure_EmptyPath ()
 		{
 			new GraphicsPath ().CloseFigure ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CloseAllFigures_EmptyPath ()
 		{
 			new GraphicsPath ().CloseAllFigures ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddArc ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1933,7 +1933,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddBezier ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1949,7 +1949,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddBeziers ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1968,7 +1968,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddClosedCurve ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -1985,7 +1985,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddCurve ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2001,7 +2001,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddEllipse ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2018,7 +2018,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddLine ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2034,7 +2034,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddLines ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2050,7 +2050,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddPath_Connect ()
 		{
 			GraphicsPath inner = new GraphicsPath ();
@@ -2068,7 +2068,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddPath_NoConnect ()
 		{
 			GraphicsPath inner = new GraphicsPath ();
@@ -2086,7 +2086,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddPie ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2104,7 +2104,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddPolygon ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2121,7 +2121,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddRectangle ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2138,7 +2138,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void StartClose_AddRectangles ()
 		{
 			GraphicsPath path = new GraphicsPath ();
@@ -2157,19 +2157,19 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (1, types[path.PointCount - 1]);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Widen_Pen_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Widen (null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Widen_Pen_Null_Matrix ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().Widen (null, new Matrix ()));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Widen_NoPoint ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2180,7 +2180,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Widen_SinglePoint ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2235,25 +2235,25 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (3.0f, bounds.Height, Precision);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_IntNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().IsOutlineVisible (1, 1, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_FloatNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().IsOutlineVisible (1.0f, 1.0f, null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_PointNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().IsOutlineVisible (new Point (), null));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_PointFNull ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new GraphicsPath ().IsOutlineVisible (new PointF (), null));
@@ -2287,13 +2287,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			p2.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_Line_WithoutGraphics ()
 		{
 			IsOutlineVisible_Line (null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_Line_WithGraphics_Inside ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2303,7 +2303,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_Line_WithGraphics_Outside ()
 		{
 			using (Bitmap bitmap = new Bitmap (5, 5)) {
@@ -2317,7 +2317,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 		// docs ways the point is in world coordinates and that the graphics transform 
 		// should be applied
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_Line_WithGraphics_Transform ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2329,7 +2329,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_Line_WithGraphics_PageUnit ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2341,7 +2341,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_Line_WithGraphics_PageScale ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2381,7 +2381,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			p2.Dispose ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsOutlineVisible_Rectangle_WithoutGraphics ()
 		{
 			IsOutlineVisible_Rectangle (null);
@@ -2411,13 +2411,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_Rectangle_WithoutGraphics ()
 		{
 			IsVisible_Rectangle (null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_Rectangle_WithGraphics ()
 		{
 			using (Bitmap bitmap = new Bitmap (40, 40)) {
@@ -2442,13 +2442,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_Ellipse_WithoutGraphics ()
 		{
 			IsVisible_Ellipse (null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void IsVisible_Ellipse_WithGraphics ()
 		{
 			using (Bitmap bitmap = new Bitmap (40, 40)) {
@@ -2477,7 +2477,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Arc ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2486,7 +2486,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Bezier ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2495,7 +2495,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Beziers ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2506,7 +2506,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_ClosedCurve ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2517,7 +2517,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Curve ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2528,7 +2528,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Ellipse ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2537,7 +2537,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Line ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2546,7 +2546,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Line_Closed ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2556,7 +2556,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Lines ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2567,7 +2567,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Polygon ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2578,7 +2578,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Rectangle ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2587,7 +2587,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Rectangles ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2599,7 +2599,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		// Reverse complex test cases
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Path ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2623,7 +2623,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Path_2 ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2645,7 +2645,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Marker ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2667,7 +2667,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Subpath_Marker ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2692,7 +2692,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Reverse_Subpath_Marker_2 ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -2717,7 +2717,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void bug413461 ()
 		{
 			int dX = 520;

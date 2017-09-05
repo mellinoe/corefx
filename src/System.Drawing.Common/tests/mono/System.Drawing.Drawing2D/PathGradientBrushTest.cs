@@ -87,14 +87,14 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			empty_matrix = new Matrix ();
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_GraphicsPath_Null ()
 		{
 			GraphicsPath gp = null;
 			Assert.Throws<ArgumentNullException> (() => new PathGradientBrush (gp));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_GraphicsPath_Empty ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -102,7 +102,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_GraphicsPath_SinglePoint ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -112,7 +112,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_GraphicsPath_Line ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -124,28 +124,28 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_Null ()
 		{
 			Point[] pts = null;
 			Assert.Throws<ArgumentNullException> (() => new PathGradientBrush (pts));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_Empty ()
 		{
 			Point[] pts = new Point [0];
 			Assert.Throws<OutOfMemoryException> (() => new PathGradientBrush (pts));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_One ()
 		{
 			Point[] pts = new Point[1] { new Point (1, 1) };
 			Assert.Throws<OutOfMemoryException> (() => new PathGradientBrush (pts));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_Two ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i)) {
@@ -154,7 +154,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_WrapMode_Clamp ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.Clamp)) {
@@ -163,7 +163,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_WrapMode_Tile ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.Tile)) {
@@ -172,7 +172,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_WrapMode_TileFlipX ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.TileFlipX)) {
@@ -181,7 +181,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_WrapMode_TileFlipY ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.TileFlipY)) {
@@ -190,7 +190,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Point_WrapMode_TileFlipXY ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.TileFlipXY)) {
@@ -199,28 +199,28 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_Null ()
 		{
 			PointF[] pts = null;
 			Assert.Throws<ArgumentNullException> (() => new PathGradientBrush (pts));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_Empty ()
 		{
 			PointF[] pts = new PointF[0];
 			Assert.Throws<OutOfMemoryException> (() => new PathGradientBrush (pts));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_One ()
 		{
 			PointF[] pts = new PointF[1] { new PointF (1, 1) };
 			Assert.Throws<OutOfMemoryException> (() => new PathGradientBrush (pts));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_Two ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f)) {
@@ -229,13 +229,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_WrapMode_Invalid ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new PathGradientBrush (pts_2f, (WrapMode)Int32.MinValue));
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_WrapMode_Clamp ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -244,7 +244,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_WrapMode_Tile ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Tile)) {
@@ -253,7 +253,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_WrapMode_TileFlipX ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipX)) {
@@ -262,7 +262,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_WrapMode_TileFlipY ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipY)) {
@@ -271,7 +271,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_PointF_WrapMode_TileFlipXY ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -280,7 +280,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Blend ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -298,7 +298,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FocusScales ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -315,7 +315,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CenterColor ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -326,7 +326,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CenterPoint ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -343,7 +343,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InterpolationColors ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -361,7 +361,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rectangle ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -384,7 +384,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SurroundColors_Empty ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -392,7 +392,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SurroundColors_2PointF ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipXY)) {
@@ -415,7 +415,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SurroundColors_3PointsF ()
 		{
 			PointF[] points = new PointF[3] { new PointF (5, 50), new PointF (10, 100), new PointF (20, 75) };
@@ -433,13 +433,13 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Null ()
 		{
 			Assert.Throws<ArgumentNullException> (() => new PathGradientBrush (pts_2f, WrapMode.Clamp).Transform = null);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Empty ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -448,7 +448,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_NonInvertible ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -456,7 +456,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WrapMode_All ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -467,7 +467,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void WrapMode_Invalid ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -475,7 +475,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -489,7 +489,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform1_Null ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -497,7 +497,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform2_Null ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -505,7 +505,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform2_Invalid ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -513,7 +513,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MultiplyTransform_NonInvertible ()
 		{
 			using (Matrix noninvertible = new Matrix (123, 24, 82, 16, 47, 30)) {
@@ -523,7 +523,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ResetTransform ()
 		{
 			using (Matrix m = new Matrix (2, 0, 0, 2, 10, -10)) {
@@ -536,7 +536,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RotateTransform ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -554,7 +554,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void RotateTransform_InvalidOrder ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -562,7 +562,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -580,7 +580,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_MaxMin ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -595,7 +595,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ScaleTransform_InvalidOrder ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -603,7 +603,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_Focus ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -620,7 +620,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_Scale ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -637,7 +637,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_FocusTooSmall ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -645,7 +645,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_FocusTooBig ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -653,7 +653,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_ScaleTooSmall ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -661,7 +661,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetBlendTriangularShape_ScaleTooBig ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -669,7 +669,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_Focus ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -686,7 +686,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_Scale ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -703,7 +703,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_FocusTooSmall ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -711,7 +711,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_FocusTooBig ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -719,7 +719,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_ScaleTooSmall ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -727,7 +727,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SetSigmaBellShape_ScaleTooBig ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -735,7 +735,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TranslateTransform ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -760,7 +760,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TranslateTransform_InvalidOrder ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -768,7 +768,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Transform_Operations ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
@@ -813,7 +813,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Blend_Null ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -824,7 +824,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void InterpolationColors_Null ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -835,7 +835,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SurroundColors_Null ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {

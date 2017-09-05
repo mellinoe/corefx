@@ -66,7 +66,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			fgColor = Color.Red;
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestProperties () 
 		{
 			HatchBrush hbr = new HatchBrush(HatchStyle.SolidDiamond, fgColor);
@@ -82,7 +82,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (hbr.BackgroundColor.ToArgb (), bgColor.ToArgb ());
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestClone ()
 		{
 			HatchBrush hbr = new HatchBrush(HatchStyle.Cross, fgColor, bgColor);
@@ -94,7 +94,7 @@ namespace MonoTests.System.Drawing.Drawing2D
 			Assert.Equal (hbr.BackgroundColor, clone.BackgroundColor);
 		}
 
-		[Fact]
+		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void TestDrawing ()
 		{
 			// create a bitmap with big enough dimensions 
