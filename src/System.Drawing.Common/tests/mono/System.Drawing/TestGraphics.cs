@@ -2525,15 +2525,15 @@ namespace MonoTests.System.Drawing {
 					RectangleF clip = g.VisibleClipBounds;
 					Assert.Equal (0, clip.X);
 					Assert.Equal (0, clip.Y);
-					Assert.Equal (32, clip.Width);
-					Assert.Equal (32, clip.Height);
+					Assert.Equal (32, clip.Width, 4);
+					Assert.Equal (32, clip.Height, 4);
 
 					g.RotateTransform (90);
 					RectangleF rotclip = g.VisibleClipBounds;
 					Assert.Equal (0, rotclip.X);
 					Assert.Equal (-32, rotclip.Y, 4);
-					Assert.Equal (32, rotclip.Width);
-					Assert.Equal (32, rotclip.Height);
+					Assert.Equal (32, rotclip.Width, 4);
+					Assert.Equal (32, rotclip.Height, 4);
 				}
 			}
 		}
@@ -2566,7 +2566,7 @@ namespace MonoTests.System.Drawing {
 					g.RotateTransform (90);
 					RectangleF rotclipbound = g.ClipBounds;
 					Assert.Equal (0, rotclipbound.X);
-					Assert.Equal (-200, rotclipbound.Y);
+					Assert.Equal (-200, rotclipbound.Y, 4);
 					Assert.Equal (200, rotclipbound.Width, 4);
 					Assert.Equal (200, rotclipbound.Height);
 
@@ -2593,7 +2593,7 @@ namespace MonoTests.System.Drawing {
 					g.RotateTransform (90);
 					RectangleF rvcb = g.VisibleClipBounds;
 					Assert.Equal (0, rvcb.X);
-					Assert.Equal (-100, rvcb.Y);
+					Assert.Equal (-100, rvcb.Y, 4);
 					Assert.Equal (50.0f, rvcb.Width, 4);
 					Assert.Equal (100, rvcb.Height);
 				}
