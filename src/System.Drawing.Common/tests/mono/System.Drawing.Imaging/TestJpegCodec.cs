@@ -64,7 +64,6 @@ namespace MonoTests.System.Drawing.Imaging {
             return Path.GetFullPath("mono/System.Drawing/" + file);
         }
 
-		[Fact]
         [ActiveIssue(20844)]
         public void Bitmap8bbpIndexedGreyscaleFeatures ()
 		{
@@ -138,7 +137,6 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
         public void Bitmap8bbpIndexedGreyscaleData ()
 		{
@@ -202,7 +200,6 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		/* Checks bitmap features on a known 24-bits bitmap */
-		[Fact]
         [ActiveIssue(20844)]
         public void Bitmap24bitFeatures ()
 		{
@@ -431,28 +428,24 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
         public void Save_24bppRgb ()
 		{
 			Save (PixelFormat.Format24bppRgb, PixelFormat.Format24bppRgb);
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
         public void Save_32bppRgb ()
 		{
 			Save (PixelFormat.Format32bppRgb, PixelFormat.Format24bppRgb);
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
         public void Save_32bppArgb ()
 		{
 			Save (PixelFormat.Format32bppArgb, PixelFormat.Format24bppRgb);
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
 		public void Save_32bppPArgb ()
 		{

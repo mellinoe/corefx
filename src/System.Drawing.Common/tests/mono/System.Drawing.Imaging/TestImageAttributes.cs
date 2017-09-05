@@ -427,7 +427,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ActiveIssue(20844)]
 		public void ColorMatrixAlpha ()
 		{
 			for (int i = 0; i < 256; i++) {

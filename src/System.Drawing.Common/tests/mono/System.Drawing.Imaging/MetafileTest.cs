@@ -531,20 +531,20 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ActiveIssue(20844)]
 		public void CreateFilename_SingleGraphics_EmfOnly ()
 		{
 			CreateFilename (EmfType.EmfOnly, true);
 		}
 
-		[Fact]
-		public void CreateFilename_SingleGraphics_EmfPlusDual ()
+        [ActiveIssue(20844)]
+        public void CreateFilename_SingleGraphics_EmfPlusDual ()
 		{
 			CreateFilename (EmfType.EmfPlusDual, true);
 		}
 
-		[Fact]
-		public void CreateFilename_SingleGraphics_EmfPlusOnly ()
+        [ActiveIssue(20844)]
+        public void CreateFilename_SingleGraphics_EmfPlusOnly ()
 		{
 			CreateFilename (EmfType.EmfPlusOnly, true);
 		}

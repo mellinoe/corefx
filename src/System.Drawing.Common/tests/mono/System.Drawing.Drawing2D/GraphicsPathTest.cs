@@ -1445,7 +1445,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Equal (7, gp.PointCount);
 		}
 
-		[Fact]
+		[ActiveIssue(20844)]
 		public void AddCurve ()
 		{
 			PointF [] points = new PointF [] {

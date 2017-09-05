@@ -57,7 +57,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[Fact]
+		[ActiveIssue(20844)]
 		public void NextSubpath_Null ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {

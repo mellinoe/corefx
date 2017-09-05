@@ -117,7 +117,6 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
         [ActiveIssue(20884)]
 		public void LockBits_IndexedWrite_NonIndexed ()
 		{
@@ -127,7 +126,6 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
         [ActiveIssue(20884)]
         public void LockBits_NonIndexedWrite_ToIndexed ()
 		{
@@ -415,7 +413,6 @@ namespace MonoTests.System.Drawing {
 			FormatTest (PixelFormat.Format32bppArgb);
 		}
 
-		[Fact]
         [ActiveIssue(20884)]
 		public void Format32bppRgb ()
 		{
@@ -797,7 +794,6 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
         [ActiveIssue(20884)]
         public void LockBitmap_Format32bppArgb_Format32bppRgb_ReadWrite_Whole ()
 		{
@@ -848,7 +844,6 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
         [ActiveIssue(20884)]
 		public void LockBitmap_Format32bppArgb_Format32bppRgb_ReadWrite_Partial ()
 		{
@@ -1021,7 +1016,7 @@ namespace MonoTests.System.Drawing {
 			return new BinaryFormatter ().Deserialize (s);
 		}
 
-		[Fact]
+		[ActiveIssue(20844)]
 		public void Serialize_Icon ()
 		{
 			// this cause a problem with resgen, see http://bugzilla.ximian.com/show_bug.cgi?id=80565

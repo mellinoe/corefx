@@ -162,7 +162,6 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (1, i);
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
 		[SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
 		public void ToLogFont_Null ()
@@ -182,8 +181,8 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Point, f.Unit);
 		}
 
-		[Fact]
-		public void Font_String_Float ()
+        [ActiveIssue(20844)]
+        public void Font_String_Float ()
 		{
 			Font f = new Font (name, 12.5f);
 			Assert.Equal (FontFamily.GenericMonospace, f.FontFamily);
@@ -200,7 +199,6 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Point, f.Unit);
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
         public void Font_String_Float_FontStyle ()
 		{
@@ -219,7 +217,6 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Point, f.Unit);
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
         public void Font_String_Float_FontStyle_GraphicsUnit ()
 		{
@@ -243,7 +240,6 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => new Font (name, 12.5f, FontStyle.Italic, GraphicsUnit.Display));
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
 		public void Font_String_Float_FontStyle_GraphicsUnit_Byte ()
 		{
@@ -262,7 +258,6 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Inch, f.Unit);
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
 		public void Font_String_Float_FontStyle_GraphicsUnit_Byte_Bool ()
 		{
@@ -538,7 +533,6 @@ namespace MonoTests.System.Drawing{
 				"Hashcodes should differ if _unit member differs");
 		}
 
-		[Fact]
         [ActiveIssue(20844)]
 		public void GetHashCode_NameDiffers_HashesNotEqual()
 		{

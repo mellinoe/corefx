@@ -380,10 +380,10 @@ namespace MonoTests.System.Drawing {
 			TextureBrush t = new TextureBrush (image);
 			t.ScaleTransform (Single.MaxValue, Single.MinValue);
 			float[] elements = t.Transform.Elements;
-			Assert.Equal (Single.MaxValue, elements[0], -33);
+			Assert.Equal (Single.MaxValue, elements[0]);
 			Assert.Equal (0, elements[1], 1);
 			Assert.Equal (0, elements[2], 1);
-			Assert.Equal (Single.MinValue, elements[3], -33);
+			Assert.Equal (Single.MinValue, elements[3]);
 			Assert.Equal (0, elements[4], 1);
 			Assert.Equal (0, elements[5], 1);
 		}

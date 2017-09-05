@@ -63,7 +63,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (1, ColorTranslator.FromHtml ("1").ToArgb ());
 		}
 
-		[Fact]
+        [ActiveIssue(20844, TestPlatforms.Any)]
 		public void FromHtml_PoundInt ()
 		{
 			Assert.Equal (0, ColorTranslator.FromHtml ("#0").ToArgb ());

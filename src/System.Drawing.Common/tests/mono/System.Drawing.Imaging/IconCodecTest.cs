@@ -64,8 +64,8 @@ namespace MonoTests.System.Drawing.Imaging {
             return Path.GetFullPath("mono/System.Drawing/" + file);
         }
 
-		[Fact]
-		public void Image16 ()
+        [ActiveIssue(20844)]
+        public void Image16 ()
 		{
 			string sInFile = getInFile ("bitmaps/16x16x16.ico");
 			using (Image image = Image.FromFile (sInFile)) {
@@ -85,7 +85,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		// simley.ico has 48x48, 32x32 and 16x16 images (in that order)
-		[Fact]
+		[ActiveIssue(20844)]
 		public void Bitmap16Features ()
 		{
 			string sInFile = getInFile ("bitmaps/smiley.ico");
@@ -255,7 +255,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		// VisualPng.ico only has a 32x32 size available
-		[Fact]
+		[ActiveIssue(20844)]
 		public void Bitmap32Features ()
 		{
 			string sInFile = getInFile ("bitmaps/VisualPng.ico");
@@ -481,7 +481,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		// 48x48x1.ico only has a 48x48 size available
-		[Fact]
+		[ActiveIssue(20844)]
 		public void Bitmap48Features ()
 		{
 			string sInFile = getInFile ("bitmaps/48x48x1.ico");
@@ -710,7 +710,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		// 64x64x256 only has a 64x64 size available
-		[Fact]
+		[ActiveIssue(20844)]
 		public void Bitmap64Features ()
 		{
 			string sInFile = getInFile ("bitmaps/64x64x256.ico");
@@ -973,7 +973,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		}
 
 		// 96x96x256.ico only has a 96x96 size available
-		[Fact]
+		[ActiveIssue(20844)]
 		public void Bitmap96Features ()
 		{
 			string sInFile = getInFile ("bitmaps/96x96x256.ico");
@@ -1004,7 +1004,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[Fact]
+		[ActiveIssue(20844)]
 		public void Bitmap96Pixels ()
 		{
 			string sInFile = getInFile ("bitmaps/96x96x256.ico");

@@ -1846,11 +1846,11 @@ namespace MonoTests.System.Drawing {
 					string_format.Alignment = StringAlignment.Far;
 					SizeF far = g.MeasureString (text, font, Int32.MaxValue, string_format);
 
-					Assert.Equal (near.Width, center.Width, 1);
-					Assert.Equal (near.Height, center.Height, 1);
+					Assert.Equal (near.Width, center.Width, 0);
+					Assert.Equal (near.Height, center.Height, 0);
 
-					Assert.Equal (center.Width, far.Width, 1);
-					Assert.Equal (center.Height, far.Height, 1);
+					Assert.Equal (center.Width, far.Width, 0);
+					Assert.Equal (center.Height, far.Height, 0);
 				}
 			}
 		}
@@ -1908,7 +1908,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
+		[ActiveIssue(20844)]
 		public void MeasureString_MultlineString_Width ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2527,7 +2527,7 @@ namespace MonoTests.System.Drawing {
 					g.RotateTransform (90);
 					RectangleF rotclip = g.VisibleClipBounds;
 					Assert.Equal (0, rotclip.X);
-					Assert.Equal (-32, rotclip.Y);
+					Assert.Equal (-32, rotclip.Y, 4);
 					Assert.Equal (32, rotclip.Width);
 					Assert.Equal (32, rotclip.Height);
 				}
@@ -2563,13 +2563,13 @@ namespace MonoTests.System.Drawing {
 					RectangleF rotclipbound = g.ClipBounds;
 					Assert.Equal (0, rotclipbound.X);
 					Assert.Equal (-200, rotclipbound.Y);
-					Assert.Equal (200, rotclipbound.Width);
+					Assert.Equal (200, rotclipbound.Width, 4);
 					Assert.Equal (200, rotclipbound.Height);
 
 					RectangleF rotclip = g.VisibleClipBounds;
 					Assert.Equal (0, rotclip.X);
 					Assert.Equal (-100, rotclip.Y);
-					Assert.Equal (100, rotclip.Width);
+					Assert.Equal (100, rotclip.Width, 4);
 					Assert.Equal (100, rotclip.Height);
 				}
 			}
@@ -2973,19 +2973,19 @@ namespace MonoTests.System.Drawing {
 			Assert.Throws<ArgumentException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Display));
 		}
 
-		[Fact]
+        [ActiveIssue(20844, TestPlatforms.Any)]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Document ()
 		{
 			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Document));
 		}
 
-		[Fact]
-		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Inch ()
+        [ActiveIssue(20844)]
+        public void DrawImage_ImageRectangleRectangleGraphicsUnit_Inch ()
 		{
 			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit(GraphicsUnit.Inch));
 		}
 
-		[Fact]
+        [ActiveIssue(20844, TestPlatforms.Any)]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Millimeter ()
 		{
 			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Millimeter));
@@ -2998,7 +2998,7 @@ namespace MonoTests.System.Drawing {
 			DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Pixel);
 		}
 
-		[Fact]
+        [ActiveIssue(20844, TestPlatforms.Any)]
 		public void DrawImage_ImageRectangleRectangleGraphicsUnit_Point ()
 		{
 			Assert.Throws<NotImplementedException> (() => DrawImage_ImageRectangleRectangleGraphicsUnit (GraphicsUnit.Point));

@@ -98,17 +98,17 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				rect = b.Rectangle;
 			}
 
-			Assert.Equal (testVals[0], m.Elements[0], 4);
-			Assert.Equal (testVals[1], m.Elements[1], 4);
-			Assert.Equal (testVals[2], m.Elements[2], 4);
-			Assert.Equal (testVals[3], m.Elements[3], 4);
-			Assert.Equal (testVals[4], m.Elements[4], 4);
-			Assert.Equal (testVals[5], m.Elements[5], 4);
+			Assert.Equal (testVals[0], m.Elements[0], 3);
+			Assert.Equal (testVals[1], m.Elements[1], 3);
+			Assert.Equal (testVals[2], m.Elements[2], 3);
+			Assert.Equal (testVals[3], m.Elements[3], 3);
+			Assert.Equal (testVals[4], m.Elements[4], 3);
+			Assert.Equal (testVals[5], m.Elements[5], 3);
 
-			Assert.Equal (testVals[6], rect.X, 4);
-			Assert.Equal (testVals[7], rect.Y, 4);
-			Assert.Equal (testVals[8], rect.Width, 4);
-			Assert.Equal (testVals[9], rect.Height, 4);
+			Assert.Equal (testVals[6], rect.X, 3);
+			Assert.Equal (testVals[7], rect.Y, 3);
+			Assert.Equal (testVals[8], rect.Width, 3);
+			Assert.Equal (testVals[9], rect.Height, 3);
 		}
 
 		private void CheckMatrixForScalableAngle (RectangleF rect, float angle, float[] testVals)
@@ -119,12 +119,12 @@ namespace MonoTests.System.Drawing.Drawing2D {
 				m = b.Transform;
 			}
 
-			Assert.Equal (testVals[0], m.Elements[0], 4);
-			Assert.Equal (testVals[1], m.Elements[1], 4);
-			Assert.Equal (testVals[2], m.Elements[2], 4);
-			Assert.Equal (testVals[3], m.Elements[3], 4);
-			Assert.Equal (testVals[4], m.Elements[4], 4);
-			Assert.Equal (testVals[5], m.Elements[5], 4);
+			Assert.Equal (testVals[0], m.Elements[0], 3);
+			Assert.Equal (testVals[1], m.Elements[1], 3);
+			Assert.Equal (testVals[2], m.Elements[2], 3);
+			Assert.Equal (testVals[3], m.Elements[3], 3);
+			Assert.Equal (testVals[4], m.Elements[4], 3);
+			Assert.Equal (testVals[5], m.Elements[5], 3);
 		}
 
 		[Fact]
@@ -549,10 +549,10 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			LinearGradientBrush lgb = new LinearGradientBrush (rect, c1, c2, 0f);
 			lgb.ScaleTransform (Single.MaxValue, Single.MinValue);
 			float[] elements = lgb.Transform.Elements;
-			Assert.Equal (Single.MaxValue, elements[0], -33);
+			Assert.Equal (Single.MaxValue, elements[0]);
 			Assert.Equal (0, elements[1], 1);
 			Assert.Equal (0, elements[2], 1);
-			Assert.Equal (Single.MinValue, elements[3], -33);
+			Assert.Equal (Single.MinValue, elements[3]);
 			Assert.Equal (0, elements[4], 1);
 			Assert.Equal (0, elements[5], 1);
 		}

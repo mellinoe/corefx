@@ -586,10 +586,10 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				pgb.ScaleTransform (Single.MaxValue, Single.MinValue);
 				float[] elements = pgb.Transform.Elements;
-				Assert.Equal (Single.MaxValue, elements[0], -33);
+				Assert.Equal (Single.MaxValue, elements[0]);
 				Assert.Equal (0, elements[1], 1);
 				Assert.Equal (0, elements[2], 1);
-				Assert.Equal (Single.MinValue, elements[3], -33);
+				Assert.Equal (Single.MinValue, elements[3]);
 				Assert.Equal (0, elements[4], 1);
 				Assert.Equal (0, elements[5], 1);
 			}

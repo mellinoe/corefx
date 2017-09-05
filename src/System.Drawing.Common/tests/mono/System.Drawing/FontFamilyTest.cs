@@ -63,7 +63,6 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (ff.Name.GetHashCode (), ff.GetHashCode ());
 		}
 
-		[Fact]
         [ActiveIssue(20884)]
         public void FontFamily_String ()
 		{
@@ -78,16 +77,14 @@ namespace MonoTests.System.Drawing {
 			Assert.True (ff.IsStyleAvailable (style));
 		}
 
-		[Fact]
-        [ActiveIssue(20884)]
+        [ActiveIssue(20884, TestPlatforms.Any)]
 		public void FontFamily_String_FontCollection_Null ()
 		{
 			FontFamily ff = new FontFamily (name, null);
 			CheckMono (ff);
 		}
 
-		[Fact]
-        [ActiveIssue(20884)]
+        [ActiveIssue(20884, TestPlatforms.Any)]
 		public void FontFamily_String_InstalledFontCollection ()
 		{
 			FontFamily ff = new FontFamily (name, new InstalledFontCollection ());
