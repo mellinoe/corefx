@@ -50,6 +50,7 @@ namespace System.Drawing
         private static extern IntPtr dlopen(string libName, int flags);
         public const int RTLD_NOW = 0x002;
 
+        public static string GetTestMonoAssetPath(string fileName) => GetTestPath("mono/System.Drawing", fileName);
         public static string GetTestBitmapPath(string fileName) => GetTestPath("bitmaps", fileName);
         public static string GetTestFontPath(string fileName) => GetTestPath("fonts", fileName);
         public static string GetTestColorProfilePath(string fileName) => GetTestPath("colorProfiles", fileName);

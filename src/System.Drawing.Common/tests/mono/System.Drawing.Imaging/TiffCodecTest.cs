@@ -59,17 +59,11 @@ namespace MonoTests.System.Drawing.Imaging
             return s;
         }
 
-        /* Get the input directory depending on the runtime*/
-        internal string getInFile(string file)
-        {
-            return Path.GetFullPath("mono/System.Drawing/" + file);
-        }
-
         /* Checks bitmap features on a know 32bbp bitmap */
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap32bitsFeatures()
         {
-            string sInFile = getInFile("bitmaps/almogaver32bits.tif");
+            string sInFile = Helpers.GetTestMonoAssetPath("bitmaps/almogaver32bits.tif");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 GraphicsUnit unit = GraphicsUnit.World;
@@ -92,7 +86,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap32bitsPixels()
         {
-            string sInFile = getInFile("bitmaps/almogaver32bits.tif");
+            string sInFile = Helpers.GetTestMonoAssetPath("bitmaps/almogaver32bits.tif");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
 #if false
@@ -145,7 +139,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap32bitsData()
         {
-            string sInFile = getInFile("bitmaps/almogaver32bits.tif");
+            string sInFile = Helpers.GetTestMonoAssetPath("bitmaps/almogaver32bits.tif");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);

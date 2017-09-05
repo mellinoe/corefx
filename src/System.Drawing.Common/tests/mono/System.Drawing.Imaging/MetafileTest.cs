@@ -43,12 +43,6 @@ namespace MonoTests.System.Drawing.Imaging {
 		public const string WmfPlaceable = "bitmaps/telescope_01.wmf";
 		public const string Emf = "bitmaps/milkmateya01.emf";
 
-		// Get the input directory depending on the runtime
-		static public string getInFile (string file)
-        {
-            return Path.GetFullPath("mono/System.Drawing/" + file);
-        }
-
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_Stream_Null ()
 		{
@@ -70,14 +64,14 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_String_FileDoesNotExists ()
 		{
-			string filename = getInFile ("telescope_02.wmf");
+			string filename = Helpers.GetTestMonoAssetPath ("telescope_02.wmf");
 			Assert.Throws<ExternalException> (() => new Metafile (filename));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_String ()
 		{
-			string filename = getInFile (WmfPlaceable);
+			string filename = Helpers.GetTestMonoAssetPath (WmfPlaceable);
 			Metafile mf = new Metafile (filename);
 			Metafile clone = (Metafile) mf.Clone ();
 		}
@@ -85,7 +79,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_Bitmap ()
 		{
-			Assert.Throws<ExternalException> (() => new Metafile (getInFile (Bitmap)));
+			Assert.Throws<ExternalException> (() => new Metafile (Helpers.GetTestMonoAssetPath (Bitmap)));
 		}
 
 		static public void Check_MetaHeader_WmfPlaceable (MetaHeader mh)
@@ -132,7 +126,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_WmfPlaceable ()
 		{
-			using (Metafile mf = new Metafile (getInFile (WmfPlaceable))) {
+			using (Metafile mf = new Metafile (Helpers.GetTestMonoAssetPath (WmfPlaceable))) {
 				MetafileHeader header1 = mf.GetMetafileHeader ();
 				Check_MetafileHeader_WmfPlaceable (header1);
 
@@ -144,7 +138,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromFile_WmfPlaceable ()
 		{
-			using (Metafile mf = new Metafile (getInFile (WmfPlaceable))) {
+			using (Metafile mf = new Metafile (Helpers.GetTestMonoAssetPath (WmfPlaceable))) {
 				MetafileHeader header1 = mf.GetMetafileHeader ();
 				Check_MetafileHeader_WmfPlaceable (header1);
 
@@ -159,7 +153,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromFileStream_WmfPlaceable ()
 		{
-			using (FileStream fs = File.OpenRead (getInFile (WmfPlaceable))) {
+			using (FileStream fs = File.OpenRead (Helpers.GetTestMonoAssetPath (WmfPlaceable))) {
 				using (Metafile mf = new Metafile (fs)) {
 					MetafileHeader header1 = mf.GetMetafileHeader ();
 					Check_MetafileHeader_WmfPlaceable (header1);
@@ -177,7 +171,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		public void GetMetafileHeader_FromMemoryStream_WmfPlaceable ()
 		{
 			MemoryStream ms;
-			string filename = getInFile (WmfPlaceable);
+			string filename = Helpers.GetTestMonoAssetPath (WmfPlaceable);
 			using (FileStream fs = File.OpenRead (filename)) {
 				byte[] data = new byte[fs.Length];
 				fs.Read (data, 0, data.Length);
@@ -237,7 +231,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromFile_Emf ()
 		{
-			using (Metafile mf = new Metafile (getInFile (Emf))) {
+			using (Metafile mf = new Metafile (Helpers.GetTestMonoAssetPath (Emf))) {
 				MetafileHeader header1 = mf.GetMetafileHeader ();
 				Check_MetafileHeader_Emf (header1);
 			}
@@ -246,7 +240,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void GetMetafileHeader_FromFileStream_Emf ()
 		{
-			using (FileStream fs = File.OpenRead (getInFile (Emf))) {
+			using (FileStream fs = File.OpenRead (Helpers.GetTestMonoAssetPath (Emf))) {
 				using (Metafile mf = new Metafile (fs)) {
 					MetafileHeader header1 = mf.GetMetafileHeader ();
 					Check_MetafileHeader_Emf (header1);
@@ -258,7 +252,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		public void GetMetafileHeader_FromMemoryStream_Emf ()
 		{
 			MemoryStream ms;
-			string filename = getInFile (Emf);
+			string filename = Helpers.GetTestMonoAssetPath (Emf);
 			using (FileStream fs = File.OpenRead (filename)) {
 				byte[] data = new byte[fs.Length];
 				fs.Read (data, 0, data.Length);
@@ -280,7 +274,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_Stream ()
 		{
-			string filename = getInFile (WmfPlaceable);
+			string filename = Helpers.GetTestMonoAssetPath (WmfPlaceable);
 			using (FileStream fs = File.OpenRead (filename)) {
 				MetafileHeader header = Metafile.GetMetafileHeader (fs);
 				Check_MetafileHeader_WmfPlaceable (header);
@@ -296,7 +290,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_Filename ()
 		{
-			string filename = getInFile (WmfPlaceable);
+			string filename = Helpers.GetTestMonoAssetPath (WmfPlaceable);
 			MetafileHeader header = Metafile.GetMetafileHeader (filename);
 			Check_MetafileHeader_WmfPlaceable (header);
 		}
@@ -324,7 +318,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Static_GetMetafileHeader_IntPtr ()
 		{
-			string filename = MetafileTest.getInFile (MetafileTest.WmfPlaceable);
+			string filename = Helpers.GetTestMonoAssetPath (MetafileTest.WmfPlaceable);
 			using (Metafile mf = new Metafile (filename)) {
 
 				IntPtr hemf = mf.GetHenhmetafile ();

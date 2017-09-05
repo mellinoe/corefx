@@ -446,18 +446,12 @@ namespace MonoTests.System.Drawing {
 			
 			return sRslt;
 		}
-		
-		/* Get the input directory depending on the runtime*/
-		public static string getInFile(string file)
-        {
-            return Path.GetFullPath("mono/System.Drawing/" + file);
-        }
 
 		// note: this test fails when saving (for the same reason) on Mono and MS.NET
 		//[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MakeTransparent() 
 		{
-			string sInFile =   getInFile("bitmaps/maketransparent.bmp");
+			string sInFile =   Helpers.GetTestMonoAssetPath("bitmaps/maketransparent.bmp");
 			string sOutFile =  getOutSubDir() + "transparent.bmp";
 						
 			Bitmap	bmp = new Bitmap(sInFile);
@@ -474,7 +468,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Clone()
 		{
-			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");
+			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");
 			Rectangle rect = new Rectangle(0,0,50,50);						
 			Bitmap	bmp = new Bitmap(sInFile);			
 			
@@ -491,7 +485,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void CloneImage()
 		{
-			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");			
+			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");			
 			Bitmap	bmp = new Bitmap(sInFile);			
 			
 			Bitmap bmpNew = (Bitmap) bmp.Clone ();			
@@ -505,7 +499,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Frames()
 		{
-			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");			
+			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");			
 			Bitmap	bmp = new Bitmap(sInFile);						
 			int cnt = bmp.GetFrameCount(FrameDimension.Page);			
 			int active = bmp.SelectActiveFrame (FrameDimension.Page, 0);
@@ -612,7 +606,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Rotate()
 		{
-			string sInFile = getInFile ("bitmaps/almogaver24bits.bmp");	
+			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");	
 			Bitmap	bmp = new Bitmap(sInFile);
 			
 			Assert.Equal ("312958A3C67402E1299413794988A3", RotateBmp (bmp, RotateFlipType.Rotate90FlipNone));	
@@ -634,8 +628,8 @@ namespace MonoTests.System.Drawing {
 		public void Rotate1bit4bit()
 		{
 			string[] files = {
-			                   getInFile ("bitmaps/1bit.png"),
-			                   getInFile ("bitmaps/4bit.png")
+			                   Helpers.GetTestMonoAssetPath ("bitmaps/1bit.png"),
+			                   Helpers.GetTestMonoAssetPath ("bitmaps/4bit.png")
 			                 };
 
 			StringBuilder md5s = new StringBuilder();
@@ -1020,7 +1014,7 @@ namespace MonoTests.System.Drawing {
 		public void Serialize_Icon ()
 		{
 			// this cause a problem with resgen, see http://bugzilla.ximian.com/show_bug.cgi?id=80565
-			string filename = getInFile ("bitmaps/16x16x16.ico");
+			string filename = Helpers.GetTestMonoAssetPath ("bitmaps/16x16x16.ico");
 			using (Bitmap icon = new Bitmap (filename)) {
 				using (Stream s = Serialize (icon)) {
 					using (Bitmap copy = (Bitmap)Deserialize (s)) {
@@ -1510,7 +1504,7 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr hicon;
 			int size;
-			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/16x16x16.ico"))) {
+			using (Icon icon = new Icon (Helpers.GetTestMonoAssetPath ("bitmaps/16x16x16.ico"))) {
 				size = icon.Width;
 				using (Bitmap bitmap = Bitmap.FromHicon (icon.Handle)) {
 					HiconTest ("Icon.Handle/FromHicon", bitmap, size);
@@ -1528,7 +1522,7 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr hicon;
 			int size;
-			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/32x32x16.ico"))) {
+			using (Icon icon = new Icon (Helpers.GetTestMonoAssetPath ("bitmaps/32x32x16.ico"))) {
 				size = icon.Width;
 				using (Bitmap bitmap = Bitmap.FromHicon (icon.Handle)) {
 					HiconTest ("Icon.Handle/FromHicon", bitmap, size);
@@ -1546,7 +1540,7 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr hicon;
 			int size;
-			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/64x64x256.ico"))) {
+			using (Icon icon = new Icon (Helpers.GetTestMonoAssetPath ("bitmaps/64x64x256.ico"))) {
 				size = icon.Width;
 				using (Bitmap bitmap = Bitmap.FromHicon (icon.Handle)) {
 					HiconTest ("Icon.Handle/FromHicon", bitmap, size);
@@ -1564,7 +1558,7 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr hicon;
 			int size;
-			using (Icon icon = new Icon (TestBitmap.getInFile ("bitmaps/96x96x256.ico"))) {
+			using (Icon icon = new Icon (Helpers.GetTestMonoAssetPath ("bitmaps/96x96x256.ico"))) {
 				size = icon.Width;
 				using (Bitmap bitmap = Bitmap.FromHicon (icon.Handle)) {
 					HiconTest ("Icon.Handle/FromHicon", bitmap, size);
@@ -1581,7 +1575,7 @@ namespace MonoTests.System.Drawing {
 		public void HBitmap ()
 		{
 			IntPtr hbitmap;
-			string sInFile = TestBitmap.getInFile ("bitmaps/almogaver24bits.bmp");
+			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");
 			using (Bitmap bitmap = new Bitmap (sInFile)) {
 				Assert.Equal (PixelFormat.Format24bppRgb, bitmap.PixelFormat);
 				Assert.Equal (0, bitmap.Palette.Entries.Length);
@@ -1606,7 +1600,7 @@ namespace MonoTests.System.Drawing {
 		public void CreateMultipleBitmapFromSameHBITMAP ()
 		{
 			IntPtr hbitmap;
-			string sInFile = TestBitmap.getInFile ("bitmaps/almogaver24bits.bmp");
+			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");
 			using (Bitmap bitmap = new Bitmap (sInFile)) {
 				Assert.Equal (PixelFormat.Format24bppRgb, bitmap.PixelFormat);
 				Assert.Equal (0, bitmap.Palette.Entries.Length);
