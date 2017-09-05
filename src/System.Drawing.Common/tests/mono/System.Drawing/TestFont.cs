@@ -152,7 +152,8 @@ namespace MonoTests.System.Drawing{
 			// no PInvoke conversion exists !?!?
 		}
 
-        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        // This test seems to cause the test host to crash.
+        [ActiveIssue(20844)]
         [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
 		public void ToLogFont_Int ()
 		{
