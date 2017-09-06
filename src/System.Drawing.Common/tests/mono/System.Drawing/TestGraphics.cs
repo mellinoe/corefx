@@ -1211,8 +1211,8 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact] // see bug #78408
-		public void FillRectanglesZeroRectangle ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)] // see bug #78408
+        public void FillRectanglesZeroRectangle ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
 				using (Graphics g = Graphics.FromImage (bitmap)) {
@@ -1495,9 +1495,9 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
-		// [Category ("NotOnMac")]
-		public void DrawFillRectangle_Width_2 ()
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        // [Category ("NotOnMac")]
+        public void DrawFillRectangle_Width_2 ()
 		{
 			// even pen size
 			using (Bitmap bitmap = DrawFillRectangle (2.0f)) {
@@ -2568,13 +2568,13 @@ namespace MonoTests.System.Drawing {
 					Assert.Equal (0, rotclipbound.X);
 					Assert.Equal (-200, rotclipbound.Y, 4);
 					Assert.Equal (200, rotclipbound.Width, 4);
-					Assert.Equal (200, rotclipbound.Height);
+					Assert.Equal (200, rotclipbound.Height, 4);
 
 					RectangleF rotclip = g.VisibleClipBounds;
 					Assert.Equal (0, rotclip.X);
 					Assert.Equal (-100, rotclip.Y, 4);
 					Assert.Equal (100, rotclip.Width, 4);
-					Assert.Equal (100, rotclip.Height);
+					Assert.Equal (100, rotclip.Height, 4);
 				}
 			}
 		}
@@ -2587,15 +2587,15 @@ namespace MonoTests.System.Drawing {
 					RectangleF vcb = g.VisibleClipBounds;
 					Assert.Equal (0, vcb.X);
 					Assert.Equal (0, vcb.Y);
-					Assert.Equal (100, vcb.Width);
-					Assert.Equal (50, vcb.Height);
+					Assert.Equal (100, vcb.Width, 4);
+					Assert.Equal (50, vcb.Height, 4);
 
 					g.RotateTransform (90);
 					RectangleF rvcb = g.VisibleClipBounds;
 					Assert.Equal (0, rvcb.X);
 					Assert.Equal (-100, rvcb.Y, 4);
 					Assert.Equal (50.0f, rvcb.Width, 4);
-					Assert.Equal (100, rvcb.Height);
+					Assert.Equal (100, rvcb.Height, 4);
 				}
 			}
 		}

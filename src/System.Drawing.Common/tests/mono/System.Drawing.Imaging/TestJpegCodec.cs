@@ -99,8 +99,8 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Bitmap8bbpIndexedGreyscalePixels ()
+        [ActiveIssue(20844)]
+        public void Bitmap8bbpIndexedGreyscalePixels ()
 		{
 			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/nature-greyscale.jpg");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
