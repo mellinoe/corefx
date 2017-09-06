@@ -33,7 +33,7 @@ namespace MonoTests.System.Drawing.Printing
 {
 	public class PageSettingsTest
 	{
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+        [ActiveIssue(20844)]
 		public void CloneTest ()
 		{
 			// Check for installed printers, because we need
