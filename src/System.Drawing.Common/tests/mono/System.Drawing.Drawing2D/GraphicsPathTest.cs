@@ -39,7 +39,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 		private const float Pi4 = (float) (Math.PI / 4);
 		// let's tolerate a few differences
-		private const int Precision = 4;
+		private const int Precision = 3;
         private const int LowPrecision = 1;
 
         private void CheckEmpty (string prefix, GraphicsPath gp)
