@@ -2572,7 +2572,7 @@ namespace MonoTests.System.Drawing {
 
 					RectangleF rotclip = g.VisibleClipBounds;
 					Assert.Equal (0, rotclip.X);
-					Assert.Equal (-100, rotclip.Y);
+					Assert.Equal (-100, rotclip.Y, 4);
 					Assert.Equal (100, rotclip.Width, 4);
 					Assert.Equal (100, rotclip.Height);
 				}
