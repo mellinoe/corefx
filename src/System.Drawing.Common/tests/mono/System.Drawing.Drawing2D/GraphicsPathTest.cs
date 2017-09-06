@@ -1144,6 +1144,12 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			CheckRectangle (gp, 4);
 		}
 
+        private void AssertEqualWithTolerance(float expected, float actual, float tolerance)
+        {
+            var difference = Math.Abs(expected - actual);
+            Assert.True(difference < tolerance);
+        }
+
 		private void CheckClosedCurve (GraphicsPath path)
 		{
 			Assert.Equal (10, path.PathPoints.Length);
@@ -1152,10 +1158,10 @@ namespace MonoTests.System.Drawing.Drawing2D {
 
 			// GetBounds (well GdipGetPathWorldBounds) isn't very precise with curves
 			RectangleF rect = path.GetBounds ();
-			Assert.Equal (0.8333333f, rect.X, 1);
-			Assert.Equal (0.8333333f, rect.Y, 1);
-			Assert.Equal (2.33333278f, rect.Width, 1);
-			Assert.Equal (2.33333278f, rect.Height, 1);
+            AssertEqualWithTolerance(0.8333333f, rect.X, 0.2f);
+            AssertEqualWithTolerance(0.8333333f, rect.Y, 0.2f);
+            AssertEqualWithTolerance(2.33333278f, rect.Width, 0.4f);
+            AssertEqualWithTolerance(2.33333278f, rect.Height, 0.4f);
 
 			Assert.Equal (0, path.PathData.Types[0]);
 			for (int i = 1; i < 9; i++)
