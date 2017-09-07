@@ -1331,7 +1331,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        [ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
         // [Category ("NotOnMac")]
         public void FillDrawRectangle_Width_2 ()
 		{
@@ -1495,7 +1495,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        [ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
         // [Category ("NotOnMac")]
         public void DrawFillRectangle_Width_2 ()
 		{
@@ -1952,7 +1952,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+		[ConditionalFact(Helpers.GdiPlusIsAvailableNotRedhat73)]
 		public void MeasureString_Bug80680 ()
 		{
 			using (Bitmap bitmap = new Bitmap (20, 20)) {
@@ -2035,7 +2035,7 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-        [ConditionalFact(Helpers.GdiplusIsAvailable)] // adapted from bug #78777
+        [ConditionalFact(Helpers.GdiPlusIsAvailableNotRedhat73)] // adapted from bug #78777
         public void MeasureCharacterRanges_TwoLines ()
 		{
 			string text = "this\nis a test";

@@ -65,7 +65,7 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal ("StatusFont", SystemFonts.StatusFont.SystemFontName);
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
 		public void GetFontByName ()
 		{
 			Assert.Equal ("CaptionFont", SystemFonts.GetFontByName ("CaptionFont").SystemFontName);

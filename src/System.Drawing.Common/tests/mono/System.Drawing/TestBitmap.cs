@@ -623,8 +623,8 @@ namespace MonoTests.System.Drawing {
 			Rotate 1- and 4-bit bitmaps in different ways and check the
 			resulting pixels using MD5
 		*/
-		[Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]
+		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
+                [PlatformSpecific(TestPlatforms.AnyUnix)]
 		public void Rotate1bit4bit()
 		{
 			string[] files = {

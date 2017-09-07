@@ -523,26 +523,30 @@ namespace MonoTests.System.Drawing.Imaging {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Save_24bppRgb ()
+        [ActiveIssue(23846)]
+        [ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
+        public void Save_24bppRgb ()
 		{
 			Save (PixelFormat.Format24bppRgb, PixelFormat.Format24bppRgb, true);
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Save_32bppRgb ()
+        [ActiveIssue(23846)]
+        [ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
+        public void Save_32bppRgb ()
 		{
 			Save (PixelFormat.Format32bppRgb, PixelFormat.Format32bppRgb, true);
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Save_32bppArgb ()
+        [ActiveIssue(23846)]
+        [ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
+        public void Save_32bppArgb ()
 		{
 			Save (PixelFormat.Format32bppArgb, PixelFormat.Format32bppRgb, true);
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Save_32bppPArgb ()
+        [ActiveIssue(23846)]
+        [ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
+        public void Save_32bppPArgb ()
 		{
 			Save (PixelFormat.Format32bppPArgb, PixelFormat.Format32bppRgb, true);
 		}

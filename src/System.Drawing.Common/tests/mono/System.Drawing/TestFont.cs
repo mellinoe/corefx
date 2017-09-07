@@ -110,7 +110,7 @@ namespace MonoTests.System.Drawing{
 			public string lfFaceName;
 		}
 
-        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        [ConditionalFact(Helpers.GdiplusIsAvailableOnWindows)]
         [SecurityPermission (SecurityAction.Assert, UnmanagedCode = true)]
 		public void ToLogFont_AssertUnmanagedCode ()
 		{
@@ -291,7 +291,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<NullReferenceException> (() => new Font (f, FontStyle.Bold));
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+		[ConditionalFact(Helpers.GdiPlusIsAvailableNotRedhat73)]
 		public void Font_FontFamily_Float ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f);
@@ -309,8 +309,8 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Point, f.Unit);
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Font_FontFamily_Float_FontStyle ()
+        [ConditionalFact(Helpers.GdiPlusIsAvailableNotRedhat73)]
+        public void Font_FontFamily_Float_FontStyle ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Bold);
 			Assert.Equal (FontFamily.GenericMonospace, f.FontFamily);
@@ -327,8 +327,8 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Point, f.Unit);
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Font_FontFamily_Float_FontStyle_GraphicsUnit ()
+        [ConditionalFact(Helpers.GdiPlusIsAvailableNotRedhat73)]
+        public void Font_FontFamily_Float_FontStyle_GraphicsUnit ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Italic, GraphicsUnit.Millimeter);
 			Assert.False (f.Bold);
@@ -351,8 +351,8 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Italic, GraphicsUnit.Display));
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Byte ()
+        [ConditionalFact(Helpers.GdiPlusIsAvailableNotRedhat73)]
+        public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Byte ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Strikeout, GraphicsUnit.Inch, Byte.MaxValue);
 			Assert.False (f.Bold);
@@ -369,8 +369,8 @@ namespace MonoTests.System.Drawing{
 			Assert.Equal (GraphicsUnit.Inch, f.Unit);
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Byte_Bool ()
+        [ConditionalFact(Helpers.GdiPlusIsAvailableNotRedhat73)]
+        public void Font_FontFamily_Float_FontStyle_GraphicsUnit_Byte_Bool ()
 		{
 			Font f = new Font (FontFamily.GenericMonospace, 12.5f, FontStyle.Underline, GraphicsUnit.Document, Byte.MinValue, true);
 			Assert.False (f.Bold);
@@ -423,7 +423,7 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => f.ToLogFont (lf));
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+		[ConditionalFact(Helpers.GdiplusIsAvailableOnWindows)]
 		public void Dispose_ToLogFont_LoopCharSet ()
 		{
 			Font f = new Font (name, 12.5f);
@@ -480,8 +480,8 @@ namespace MonoTests.System.Drawing{
 			Assert.Throws<ArgumentException> (() => f.ToHfont ());
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void GetHeight_Float ()
+        [ConditionalFact(Helpers.GdiPlusIsAvailableNotRedhat73)]
+        public void GetHeight_Float ()
 		{
 			using (Font f = new Font (name, 12.5f)) {
 				Assert.Equal (0, f.GetHeight (0));
