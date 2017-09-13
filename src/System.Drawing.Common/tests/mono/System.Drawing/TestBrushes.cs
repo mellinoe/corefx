@@ -46,15 +46,6 @@ namespace MonoTests.System.Drawing {
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Dispose ()
-		{
-			Brushes.YellowGreen.Dispose ();
-			// a "normal" SolidBrush would throw an ArgumentException here
-			Assert.Throws<ArgumentException> (() => Brushes.YellowGreen.Clone ());
-			// and it is! so watch your brushes ;-)
-		}
-
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Properties ()
 		{
 			Brush br;
