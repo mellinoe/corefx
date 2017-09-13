@@ -74,23 +74,12 @@
     <Compile Include="mono\System.Drawing\SystemIconsTest.cs" />
     <Compile Include="mono\System.Drawing\TestBitmap.cs" />
     <Compile Include="mono\System.Drawing\TestBrushes.cs" />
-    <Compile Include="mono\System.Drawing\TestColor.cs" />
     <Compile Include="mono\System.Drawing\TestFont.cs" />
     <Compile Include="mono\System.Drawing\TestGraphics.cs" />
     <Compile Include="mono\System.Drawing\TestIcon.cs" />
     <Compile Include="mono\System.Drawing\TestImage.cs" />
     <Compile Include="mono\System.Drawing\TestPens.cs" />
-    <Compile Include="mono\System.Drawing\TestPoint.cs" />
-    <Compile Include="mono\System.Drawing\TestPointConverter.cs" />
-    <Compile Include="mono\System.Drawing\TestPointF.cs" />
-    <Compile Include="mono\System.Drawing\TestRectangle.cs" />
-    <Compile Include="mono\System.Drawing\TestRectangleConverter.cs" />
-    <Compile Include="mono\System.Drawing\TestRectangleF.cs" />
     <Compile Include="mono\System.Drawing\TestRegion.cs" />
-    <Compile Include="mono\System.Drawing\TestSize.cs" />
-    <Compile Include="mono\System.Drawing\TestSizeConverter.cs" />
-    <Compile Include="mono\System.Drawing\TestSizeF.cs" />
-    <Compile Include="mono\System.Drawing\TestSizeFConverter.cs" />
     <Compile Include="mono\System.Drawing\TestStringFormat.cs" />
     <Compile Include="mono\System.Drawing\TestSystemBrushes.cs" />
     <Compile Include="mono\System.Drawing\TestSystemPens.cs" />
@@ -141,11 +130,9 @@
     <SupplementalTestData Include="$(PackagesDir)system.drawing.common.testdata\1.0.3\content\**\*.*">
       <Link>%(RecursiveDir)%(Filename)%(Extension)</Link>
     </SupplementalTestData>
-
     <SupplementalTestData Include="mono\System.Drawing\bitmaps\*.*">
       <DestinationDir>mono\System.Drawing\bitmaps\</DestinationDir>
     </SupplementalTestData>
-
     <EmbeddedResource Include="$(PackagesDir)system.drawing.common.testdata\1.0.3\content\bitmaps\48x48_multiple_entries_4bit.ico">
       <LogicalName>System.Drawing.Tests.48x48_multiple_entries_4bit.ico</LogicalName>
     </EmbeddedResource>
@@ -171,16 +158,7 @@
       <Name>RemoteExecutorConsoleApp</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="mono\System.Drawing.Design\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="mono\System.Drawing.Imaging\.gitattributes" />
-    <None Include="mono\System.Drawing\.gitattributes" />
-    <None Include="mono\System.Drawing\README" />
-    <None Include="mono\System.Drawing\tests-ms.sh" />
-    <None Include="mono\System.Drawing\tests.sh" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="mono\resources\indexed.png" />
   </ItemGroup>
