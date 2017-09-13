@@ -1614,7 +1614,6 @@ namespace MonoTests.System.Drawing {
 			}
 		}
 
-		[Fact]
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void MeasureString_StringFont ()
 		{
