@@ -361,7 +361,7 @@ namespace MonoTests.System.Drawing {
 		public void LoadIndexed_BmpFile ()
 		{
 			// Tests that we can load an indexed file, but...
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver1bit.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver1bit.bmp");
 			// note: file is misnamed (it's a 4bpp bitmap)
 			using (Image img = Image.FromFile (sInFile)) {
 				Assert.Equal (PixelFormat.Format4bppIndexed, img.PixelFormat);

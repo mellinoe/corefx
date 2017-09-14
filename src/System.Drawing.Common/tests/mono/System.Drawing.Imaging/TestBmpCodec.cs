@@ -64,7 +64,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap1bitFeatures ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver1bit.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver1bit.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -87,7 +87,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap1bitPixels ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver1bit.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver1bit.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 #if false
 				for (int x = 0; x < bmp.Width; x += 32) {
@@ -140,7 +140,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitFeatures ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver8bits.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver8bits.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -162,7 +162,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitPixels ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver8bits.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver8bits.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 #if false
 				for (int x = 0; x < bmp.Width; x += 32) {
@@ -216,7 +216,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap24bitFeatures()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver24bits.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -238,7 +238,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap24bitPixels ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver24bits.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 #if false
 				for (int x = 0; x < bmp.Width; x += 32) {
@@ -289,7 +289,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap24bitData ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver24bits.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				Assert.Equal (-3355456, bmp.GetPixel (163, 1).ToArgb ());
 				BitmapData data = bmp.LockBits (new Rectangle (0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -416,7 +416,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap32bitFeatures ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver32bits.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver32bits.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -437,7 +437,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap32bitPixels ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver32bits.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver32bits.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				Assert.Equal (PixelFormat.Format32bppRgb, bmp.PixelFormat);
 #if false
@@ -555,7 +555,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		public void NonInvertedBitmap ()
 		{
 			// regression check against http://bugzilla.ximian.com/show_bug.cgi?id=80751
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/non-inverted.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("non-inverted.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);

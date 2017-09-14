@@ -61,7 +61,7 @@ namespace MonoTests.System.Drawing.Imaging {
         [ActiveIssue(20844)]
         public void Bitmap8bbpIndexedGreyscaleFeatures ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/nature-greyscale.jpg");
+			string sInFile = Helpers.GetTestBitmapPath ("nature-greyscale.jpg");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -102,7 +102,7 @@ namespace MonoTests.System.Drawing.Imaging {
         [ActiveIssue(20844)]
         public void Bitmap8bbpIndexedGreyscalePixels ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/nature-greyscale.jpg");
+			string sInFile = Helpers.GetTestBitmapPath ("nature-greyscale.jpg");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 #if false
 				for (int x = 0; x < bmp.Width; x += 32) {
@@ -134,7 +134,7 @@ namespace MonoTests.System.Drawing.Imaging {
         [ActiveIssue(20844)]
         public void Bitmap8bbpIndexedGreyscaleData ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/nature-greyscale.jpg");
+			string sInFile = Helpers.GetTestBitmapPath ("nature-greyscale.jpg");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				BitmapData data = bmp.LockBits (new Rectangle (0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 				try {
@@ -197,7 +197,7 @@ namespace MonoTests.System.Drawing.Imaging {
         [ActiveIssue(20844)]
         public void Bitmap24bitFeatures ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/nature24bits.jpg");
+			string sInFile = Helpers.GetTestBitmapPath ("nature24bits.jpg");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -230,7 +230,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap24bitPixels ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/nature24bits.jpg");
+			string sInFile = Helpers.GetTestBitmapPath ("nature24bits.jpg");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 #if false
 				for (int x = 0; x < bmp.Width; x += 32) {
@@ -262,7 +262,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap24bitData ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/almogaver24bits.bmp");
+			string sInFile = Helpers.GetTestBitmapPath ("almogaver24bits.bmp");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				BitmapData data = bmp.LockBits (new Rectangle (0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 				try {

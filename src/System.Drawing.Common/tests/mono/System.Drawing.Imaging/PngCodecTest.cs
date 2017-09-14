@@ -83,7 +83,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
 		public void Bitmap1bitFeatures ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/1bit.png");
+			string sInFile = Helpers.GetTestBitmapPath ("1bit.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -111,7 +111,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
 		public void Bitmap1bitPixels ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/1bit.png");
+			string sInFile = Helpers.GetTestBitmapPath ("1bit.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 #if false
 				for (int x = 0; x < bmp.Width; x += 32) {
@@ -193,7 +193,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
 		public void Bitmap1bitData ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/1bit.png");
+			string sInFile = Helpers.GetTestBitmapPath ("1bit.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				BitmapData data = bmp.LockBits (new Rectangle (0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 				try {
@@ -301,7 +301,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			if (IsArm64Process ())
 				Assert.True (false, "https://bugzilla.xamarin.com/show_bug.cgi?id=41171");
 
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/81674-2bpp.png");
+			string sInFile = Helpers.GetTestBitmapPath ("81674-2bpp.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -332,7 +332,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			if (IsArm64Process ())
 				Assert.True (false, "https://bugzilla.xamarin.com/show_bug.cgi?id=41171");
 
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/81674-2bpp.png");
+			string sInFile = Helpers.GetTestBitmapPath ("81674-2bpp.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 #if false
 				for (int x = 0; x < bmp.Width; x += 32) {
@@ -367,7 +367,7 @@ namespace MonoTests.System.Drawing.Imaging {
 			if (IsArm64Process ())
 				Assert.True (false, "https://bugzilla.xamarin.com/show_bug.cgi?id=41171");
 
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/81674-2bpp.png");
+			string sInFile = Helpers.GetTestBitmapPath ("81674-2bpp.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				BitmapData data = bmp.LockBits (new Rectangle (0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 				try {
@@ -428,7 +428,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
 		public void Bitmap4bitFeatures ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/4bit.png");
+			string sInFile = Helpers.GetTestBitmapPath ("4bit.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				GraphicsUnit unit = GraphicsUnit.World;
 				RectangleF rect = bmp.GetBounds (ref unit);
@@ -470,7 +470,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
 		public void Bitmap4bitPixels ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/4bit.png");
+			string sInFile = Helpers.GetTestBitmapPath ("4bit.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 #if false
 				for (int x = 0; x < bmp.Width; x += 32) {
@@ -553,7 +553,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
 		public void Bitmap4bitData ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/4bit.png");
+			string sInFile = Helpers.GetTestBitmapPath ("4bit.png");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				BitmapData data = bmp.LockBits (new Rectangle (0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 				try {

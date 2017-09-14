@@ -83,13 +83,13 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsFeatures_Gif89 ()
 		{
-			Bitmap8bitsFeatures (Helpers.GetTestMonoAssetPath ("bitmaps/nature24bits.gif"));
+			Bitmap8bitsFeatures (Helpers.GetTestBitmapPath ("nature24bits.gif"));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsFeatures_Gif87 ()
 		{
-			Bitmap8bitsFeatures (Helpers.GetTestMonoAssetPath ("bitmaps/nature24bits87.gif"));
+			Bitmap8bitsFeatures (Helpers.GetTestBitmapPath ("nature24bits87.gif"));
 		}
 
 		private void Bitmap8bitsPixels (string filename)
@@ -125,19 +125,19 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsPixels_Gif89 ()
 		{
-			Bitmap8bitsPixels (Helpers.GetTestMonoAssetPath ("bitmaps/nature24bits.gif"));
+			Bitmap8bitsPixels (Helpers.GetTestBitmapPath ("nature24bits.gif"));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsPixels_Gif87 ()
 		{
-			Bitmap8bitsPixels (Helpers.GetTestMonoAssetPath ("bitmaps/nature24bits87.gif"));
+			Bitmap8bitsPixels (Helpers.GetTestBitmapPath ("nature24bits87.gif"));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Bitmap8bitsData ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/nature24bits.gif");
+			string sInFile = Helpers.GetTestBitmapPath ("nature24bits.gif");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				BitmapData data = bmp.LockBits (new Rectangle (0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
 				try {
@@ -200,7 +200,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Interlaced ()
 		{
-			string sInFile = Helpers.GetTestMonoAssetPath ("bitmaps/81773-interlaced.gif");
+			string sInFile = Helpers.GetTestBitmapPath ("81773-interlaced.gif");
 			using (Bitmap bmp = new Bitmap (sInFile)) {
 				for (int i = 0; i < 255; i++) {
 					Color c = bmp.GetPixel (0, i);

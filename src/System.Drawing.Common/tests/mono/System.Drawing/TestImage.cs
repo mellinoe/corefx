@@ -207,7 +207,7 @@ namespace MonoTests.System.Drawing{
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromFile_Metafile_Wmf ()
 		{
-			string filename = Helpers.GetTestMonoAssetPath ("bitmaps/telescope_01.wmf");
+			string filename = Helpers.GetTestBitmapPath ("telescope_01.wmf");
 			using (Image img = Image.FromFile (filename)) {
 				Wmf (img);
 			}
@@ -216,7 +216,7 @@ namespace MonoTests.System.Drawing{
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromStream_Metafile_Wmf ()
 		{
-			string filename = Helpers.GetTestMonoAssetPath ("bitmaps/telescope_01.wmf");
+			string filename = Helpers.GetTestBitmapPath ("telescope_01.wmf");
 			using (FileStream fs = File.OpenRead (filename)) {
 				using (Image img = Image.FromStream (fs)) {
 					Wmf (img);
@@ -237,7 +237,7 @@ namespace MonoTests.System.Drawing{
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromFile_Metafile_Emf ()
 		{
-			string filename = Helpers.GetTestMonoAssetPath ("bitmaps/milkmateya01.emf");
+			string filename = Helpers.GetTestBitmapPath ("milkmateya01.emf");
 			using (Image img = Image.FromFile (filename)) {
 				Emf (img);
 			}
@@ -246,7 +246,7 @@ namespace MonoTests.System.Drawing{
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void FromStream_Metafile_Emf ()
 		{
-			string filename = Helpers.GetTestMonoAssetPath ("bitmaps/milkmateya01.emf");
+			string filename = Helpers.GetTestBitmapPath ("milkmateya01.emf");
 			using (FileStream fs = File.OpenRead (filename)) {
 				using (Image img = Image.FromStream (fs)) {
 					Emf (img);
