@@ -455,6 +455,13 @@
     ]
   },
   {
+    "Name": "System.Data.Odbc",
+    "Description": "Provides XXX TODO: add description and commontypes.",
+    "CommonTypes": [
+     
+    ]
+  },
+  {
     "Name": "System.Data.SqlClient",
     "Description": "Provides the data provider for SQL Server. These classes provide access to versions of SQL Server and encapsulate database-specific protocols, including tabular data stream (TDS)",
     "CommonTypes": [
