@@ -61,7 +61,7 @@ namespace MonoTests.System.Drawing {
 			icon32 = new Icon (Helpers.GetTestBitmapPath ("32x32_one_entry_4bit.ico"));
 			icon48 = new Icon (Helpers.GetTestBitmapPath ("48x48_one_entry_1bit.ico"));
 			icon64 = new Icon (Helpers.GetTestBitmapPath ("64x64_one_entry_8bit.ico"));
-			icon96 = new Icon (Helpers.GetTestBitmapPath ("96x96x256.ico"));
+			icon96 = new Icon (Helpers.GetTestBitmapPath ("96x96_one_entry_8bit.ico"));
 		}
 
 		public void Dispose ()
