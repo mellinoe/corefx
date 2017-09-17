@@ -128,7 +128,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_GetNormalSizeFromIconWith256 ()
 		{
-			string filepath = Helpers.GetTestBitmapPath ("323511.ico");
+			string filepath = Helpers.GetTestBitmapPath ("256x256_seven_entries_multiple_bits.ico");
 
 			Icon orig = new Icon (filepath);
 			Assert.Equal (32,orig.Height);
@@ -142,7 +142,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_DoesntReturn256Passing0 ()
 		{
-			string filepath = Helpers.GetTestBitmapPath ("323511.ico");
+			string filepath = Helpers.GetTestBitmapPath ("256x256_seven_entries_multiple_bits.ico");
 			
 			Icon orig = new Icon (filepath);
 			Assert.Equal (32,orig.Height);
@@ -156,7 +156,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_Icon_DoesntReturn256Passing1 ()
 		{
-			string filepath = Helpers.GetTestBitmapPath ("323511.ico");
+			string filepath = Helpers.GetTestBitmapPath ("256x256_seven_entries_multiple_bits.ico");
 			
 			Icon orig = new Icon (filepath);
 			Assert.Equal (32,orig.Height);
@@ -246,7 +246,7 @@ namespace MonoTests.System.Drawing {
 		private void XPIcon (int size)
 		{
 			// note: the Icon(string,Size) or Icon(string,int,int) doesn't exists under 1.x
-			using (FileStream fs = File.OpenRead (Helpers.GetTestBitmapPath ("48x48_multiple_entries_32bit"))) {
+			using (FileStream fs = File.OpenRead (Helpers.GetTestBitmapPath ("48x48_multiple_entries_32bit.ico"))) {
 				using (Icon xp = new Icon (fs, size, size)) {
 					Assert.Equal (size, xp.Height);
 					Assert.Equal (size, xp.Width);
@@ -283,7 +283,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SelectFromUnusualSize_Small16 ()
 		{
-			using (FileStream fs = File.OpenRead (Helpers.GetTestBitmapPath ("80509.ico"))) {
+			using (FileStream fs = File.OpenRead (Helpers.GetTestBitmapPath ("10x16_one_entry_32bit.ico"))) {
 				using (Icon xp = new Icon (fs, 16, 16)) {
 					Assert.Equal (16, xp.Height);
 					Assert.Equal (10, xp.Width);
@@ -296,7 +296,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void SelectFromUnusualSize_Normal32 ()
 		{
-			using (FileStream fs = File.OpenRead (Helpers.GetTestBitmapPath ("80509.ico"))) {
+			using (FileStream fs = File.OpenRead (Helpers.GetTestBitmapPath ("10x16_one_entry_32bit.ico"))) {
 				using (Icon xp = new Icon (fs, 32, 32)) {
 					Assert.Equal (22, xp.Height);
 					Assert.Equal (11, xp.Width);
@@ -351,7 +351,7 @@ namespace MonoTests.System.Drawing {
         [ConditionalFact(Helpers.GdiplusIsAvailable)] // bug #410608
         public void Save_256 ()
 		{
-			string filepath = Helpers.GetTestBitmapPath ("323511.ico");
+			string filepath = Helpers.GetTestBitmapPath ("256x256_seven_entries_multiple_bits.ico");
 
 			using (Icon icon = new Icon (filepath)) {
 				// bug #415809 fixed
