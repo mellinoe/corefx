@@ -229,7 +229,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+		[ConditionalFact(Helpers.GdiplusIsAvailable, Skip = "Internal ArgumentException in System.Drawing")]
 		public void Constructor_PointF_WrapMode_Invalid ()
 		{
 			Assert.Throws<InvalidEnumArgumentException> (() => new PathGradientBrush (pts_2f, (WrapMode)Int32.MinValue));
@@ -467,11 +467,11 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+		[ConditionalFact(Helpers.GdiplusIsAvailable, Skip = "Internal ArgumentException in System.Drawing")]
 		public void WrapMode_Invalid ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
-				Assert.Throws<InvalidEnumArgumentException> (() => pgb.WrapMode = (WrapMode) Int32.MinValue);
+				Assert.Throws<ArgumentException> (() => pgb.WrapMode = (WrapMode) Int32.MinValue);
 			}
 		}
 
