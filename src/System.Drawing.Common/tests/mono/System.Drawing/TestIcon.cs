@@ -43,7 +43,6 @@ namespace MonoTests.System.Drawing {
 		
 		Icon icon;
 		Icon icon16, icon32, icon48, icon64, icon96;
-		FileStream fs1;
 
 		static string filename_dll;
 
@@ -57,7 +56,6 @@ namespace MonoTests.System.Drawing {
 		{
 			String path = Helpers.GetTestBitmapPath ("48x48_multiple_entries_4bit.ico");
 			icon = new Icon (path);	
-			fs1 = new FileStream (path, FileMode.Open);
 
 			icon16 = new Icon (Helpers.GetTestBitmapPath ("16x16_one_entry_4bit.ico"));
 			icon32 = new Icon (Helpers.GetTestBitmapPath ("32x32_one_entry_4bit.ico"));
@@ -68,8 +66,6 @@ namespace MonoTests.System.Drawing {
 
 		public void Dispose ()
 		{
-			if (fs1 != null)
-				fs1.Close ();
 			if (File.Exists ("newIcon.ico"))
 				File.Delete ("newIcon.ico");
 		}
@@ -80,13 +76,17 @@ namespace MonoTests.System.Drawing {
 			Assert.Equal (32, icon.Height);
 			Assert.Equal (32, icon.Width);
 
-			Icon newIcon = new Icon (fs1, 48, 48);
-			Assert.Equal (48, newIcon.Height); 			
-			Assert.Equal (48, newIcon.Width);
+            String path = Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico");
+            using (var fs1 = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read))
+            {
+                Icon newIcon = new Icon(fs1, 48, 48);
+                Assert.Equal(48, newIcon.Height);
+                Assert.Equal(48, newIcon.Width);
 
-			newIcon = new Icon (icon, 16, 16);
-			Assert.Equal (16, newIcon.Height); 			
-			Assert.Equal (16, newIcon.Width);
+                newIcon = new Icon(icon, 16, 16);
+                Assert.Equal(16, newIcon.Height);
+                Assert.Equal(16, newIcon.Width);
+            }
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
