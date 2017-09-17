@@ -1623,7 +1623,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap96Data()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("96x96x256.ico");
+            string sInFile = Helpers.GetTestBitmapPath ("96x96_one_entry_8bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -1942,7 +1942,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Xp32bppIconFeatures()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("48x48_multiple_entries_32bit");
+            string sInFile = Helpers.GetTestBitmapPath ("48x48_multiple_entries_32bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 GraphicsUnit unit = GraphicsUnit.World;

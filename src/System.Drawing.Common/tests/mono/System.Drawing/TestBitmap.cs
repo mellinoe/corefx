@@ -1558,7 +1558,7 @@ namespace MonoTests.System.Drawing {
 		{
 			IntPtr hicon;
 			int size;
-			using (Icon icon = new Icon (Helpers.GetTestBitmapPath ("96x96x256.ico"))) {
+			using (Icon icon = new Icon (Helpers.GetTestBitmapPath ("96x96_one_entry_8bit.ico"))) {
 				size = icon.Width;
 				using (Bitmap bitmap = Bitmap.FromHicon (icon.Handle)) {
 					HiconTest ("Icon.Handle/FromHicon", bitmap, size);
