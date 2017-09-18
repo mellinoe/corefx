@@ -112,7 +112,7 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
+		[ConditionalFact(Helpers.GdiplusIsAvailable, Skip = "Inconsistent between Deskop & Core")]
 		public void Constructor_GraphicsPath_Line ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
@@ -145,8 +145,8 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Throws<OutOfMemoryException> (() => new PathGradientBrush (pts));
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Constructor_Point_Two ()
+		[ConditionalFact(Helpers.GdiplusIsAvailable, Skip = "Inconsistent between Desktop & CoreFX")]
+        public void Constructor_Point_Two ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i)) {
 				CheckPointsDefaults (pgb);
@@ -181,8 +181,8 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Constructor_Point_WrapMode_TileFlipY ()
+		[ConditionalFact(Helpers.GdiplusIsAvailable, Skip = "Inconsistent between Desktop & Core")]
+        public void Constructor_Point_WrapMode_TileFlipY ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2i, WrapMode.TileFlipY)) {
 				CheckPointsDefaults (pgb);
@@ -235,8 +235,8 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			Assert.Throws<InvalidEnumArgumentException> (() => new PathGradientBrush (pts_2f, (WrapMode)Int32.MinValue));
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Constructor_PointF_WrapMode_Clamp ()
+		[ConditionalFact(Helpers.GdiplusIsAvailable, Skip = "Internal ArgumentException in System.Drawing")]
+        public void Constructor_PointF_WrapMode_Clamp ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.Clamp)) {
 				CheckPointsDefaults (pgb);
@@ -253,8 +253,8 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Constructor_PointF_WrapMode_TileFlipX ()
+		[ConditionalFact(Helpers.GdiplusIsAvailable, Skip = "Inconsistent between Desktop & CoreFX")]
+        public void Constructor_PointF_WrapMode_TileFlipX ()
 		{
 			using (PathGradientBrush pgb = new PathGradientBrush (pts_2f, WrapMode.TileFlipX)) {
 				CheckPointsDefaults (pgb);
@@ -475,8 +475,8 @@ namespace MonoTests.System.Drawing.Drawing2D {
 			}
 		}
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Clone ()
+		[ConditionalFact(Helpers.GdiplusIsAvailable, Skip = "Internal ArgumentException in System.Drawing")]
+        public void Clone ()
 		{
 			using (GraphicsPath gp = new GraphicsPath ()) {
 				gp.AddLines (pts_2f);
