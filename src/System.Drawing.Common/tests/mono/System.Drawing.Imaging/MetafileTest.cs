@@ -46,7 +46,7 @@ namespace MonoTests.System.Drawing.Imaging {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Metafile_Stream_Null ()
 		{
-			Assert.Throws<ArgumentNullException> (() => new Metafile ((Stream)null));
+			Assert.Throws<ArgumentException> (() => new Metafile ((Stream)null));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]

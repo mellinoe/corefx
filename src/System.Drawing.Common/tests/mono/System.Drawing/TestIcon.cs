@@ -92,7 +92,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_IconNull_Int_Int ()
 		{
-			Assert.Throws<ArgumentNullException> (() => new Icon ((Icon)null, 32, 32));
+			Assert.Throws<ArgumentException> (() => new Icon ((Icon)null, 32, 32));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
@@ -106,7 +106,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_IconNull_Size ()
 		{
-			Assert.Throws<ArgumentNullException> (() => new Icon ((Icon) null, new Size (32, 32)));
+			Assert.Throws<ArgumentException> (() => new Icon ((Icon) null, new Size (32, 32)));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
@@ -176,7 +176,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StreamNull_Int_Int ()
 		{
-			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null, 32, 32));
+			Assert.Throws<ArgumentException> (() => new Icon ((Stream) null, 32, 32));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
@@ -498,7 +498,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void ExtractAssociatedIcon_Null ()
 		{
-			Assert.Throws<ArgumentNullException> (() => Icon.ExtractAssociatedIcon (null));
+			Assert.Throws<ArgumentException> (() => Icon.ExtractAssociatedIcon (null));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
