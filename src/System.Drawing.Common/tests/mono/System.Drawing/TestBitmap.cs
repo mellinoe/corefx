@@ -1503,13 +1503,13 @@ namespace MonoTests.System.Drawing
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void BitmapStreamCtor()
         {
-            Assert.Throws<ArgumentException>(() => new Bitmap((Stream)null));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Bitmap((Stream)null));
         }
 
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void BitmapStreamBoolCtor()
         {
-            Assert.Throws<ArgumentException>(() => new Bitmap((Stream)null, true));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Bitmap((Stream)null, true));
         }
 
         [ConditionalFact(Helpers.GdiplusIsAvailable)]

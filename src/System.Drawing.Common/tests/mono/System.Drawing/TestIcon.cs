@@ -94,7 +94,7 @@ namespace MonoTests.System.Drawing
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Constructor_IconNull_Int_Int()
         {
-            Assert.Throws<ArgumentException>(() => new Icon((Icon)null, 32, 32));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("original", null, () => new Icon((Icon)null, 32, 32));
         }
 
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
@@ -108,7 +108,7 @@ namespace MonoTests.System.Drawing
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Constructor_IconNull_Size()
         {
-            Assert.Throws<ArgumentException>(() => new Icon((Icon)null, new Size(32, 32)));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("original", null, () => new Icon((Icon)null, new Size(32, 32)));
         }
 
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
@@ -172,13 +172,13 @@ namespace MonoTests.System.Drawing
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Constructor_StreamNull()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", () => new Icon((Stream)null));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Icon((Stream)null));
         }
 
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Constructor_StreamNull_Int_Int()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", () => new Icon((Stream)null, 32, 32));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Icon((Stream)null, 32, 32));
         }
 
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
@@ -201,7 +201,7 @@ namespace MonoTests.System.Drawing
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Constructor_StreamNull_Size()
         {
-            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", () => new Icon((Stream)null, new Size(32, 32)));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", null, () => new Icon((Stream)null, new Size(32, 32)));
         }
 
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
@@ -525,7 +525,7 @@ namespace MonoTests.System.Drawing
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void ExtractAssociatedIcon_Null()
         {
-            Assert.Throws<ArgumentException>(() => Icon.ExtractAssociatedIcon(null));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("filePath", null, () => Icon.ExtractAssociatedIcon(null));
         }
 
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
