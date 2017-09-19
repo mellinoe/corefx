@@ -170,13 +170,13 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StreamNull ()
 		{
-			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", () => new Icon ((Stream) null));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StreamNull_Int_Int ()
 		{
-			Assert.Throws<ArgumentException> (() => new Icon ((Stream) null, 32, 32));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", () => new Icon ((Stream) null, 32, 32));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
@@ -199,7 +199,7 @@ namespace MonoTests.System.Drawing {
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
 		public void Constructor_StreamNull_Size ()
 		{
-			Assert.Throws<ArgumentNullException> (() => new Icon ((Stream) null, new Size (32, 32)));
+            AssertExtensions.Throws<ArgumentNullException, ArgumentException>("stream", () => new Icon ((Stream) null, new Size (32, 32)));
 		}
 
 		[ConditionalFact(Helpers.GdiplusIsAvailable)]
