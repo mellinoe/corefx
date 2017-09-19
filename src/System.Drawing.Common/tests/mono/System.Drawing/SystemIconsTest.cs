@@ -31,42 +31,44 @@ using System;
 using System.Drawing;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.Drawing
+{
 
-	public class SystemIconsTest {
+    public class SystemIconsTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Same ()
-		{
-			// SystemIcons always return the same icon
-			Assert.True (Object.ReferenceEquals (SystemIcons.Application, SystemIcons.Application));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Same()
+        {
+            // SystemIcons always return the same icon
+            Assert.True(Object.ReferenceEquals(SystemIcons.Application, SystemIcons.Application));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Dispose_SystemIcons ()
-		{
-			// SystemIcons icon's can't be disposed
-			SystemIcons.Application.Dispose ();
-			Assert.NotNull (SystemIcons.Application.ToBitmap ());
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Dispose_SystemIcons()
+        {
+            // SystemIcons icon's can't be disposed
+            SystemIcons.Application.Dispose();
+            Assert.NotNull(SystemIcons.Application.ToBitmap());
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Dispose_Indirect ()
-		{
-			// SystemIcons icon's can't be disposed
-			Icon app = SystemIcons.Application;
-			app.Dispose ();
-			Assert.NotNull (app.ToBitmap ());
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Dispose_Indirect()
+        {
+            // SystemIcons icon's can't be disposed
+            Icon app = SystemIcons.Application;
+            app.Dispose();
+            Assert.NotNull(app.ToBitmap());
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Clone_Dispose ()
-		{
-			// Clones of SystemIcons icon's can be disposed
-			Icon app = SystemIcons.Application;
-			Icon clone = (Icon) app.Clone ();
-			clone.Dispose ();
-			Assert.Throws<ObjectDisposedException> (() => clone.ToBitmap ());
-		}
-	}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Clone_Dispose()
+        {
+            // Clones of SystemIcons icon's can be disposed
+            Icon app = SystemIcons.Application;
+            Icon clone = (Icon)app.Clone();
+            clone.Dispose();
+            Assert.Throws<ObjectDisposedException>(() => clone.ToBitmap());
+        }
+    }
 }

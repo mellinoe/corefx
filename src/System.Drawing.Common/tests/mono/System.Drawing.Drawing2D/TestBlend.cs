@@ -34,42 +34,42 @@ using System.Security.Permissions;
 
 namespace MonoTests.System.Drawing.Drawing2D
 {
-	public class BlendTest
-	{
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void TestConstructors ()
-		{
-			Blend blend0 = new Blend ();
+    public class BlendTest
+    {
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void TestConstructors()
+        {
+            Blend blend0 = new Blend();
 
-			Assert.Equal (1, blend0.Factors.Length);
-			Assert.Equal (1, blend0.Positions.Length);
+            Assert.Equal(1, blend0.Factors.Length);
+            Assert.Equal(1, blend0.Positions.Length);
 
-			Blend blend1 = new Blend (1);
+            Blend blend1 = new Blend(1);
 
-			Assert.Equal (1, blend1.Factors.Length);
-			Assert.Equal (1, blend1.Positions.Length);
-		}
+            Assert.Equal(1, blend1.Factors.Length);
+            Assert.Equal(1, blend1.Positions.Length);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void TestProperties () 
-		{
-			Blend blend0 = new Blend ();
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void TestProperties()
+        {
+            Blend blend0 = new Blend();
 
-			Assert.Equal (0, blend0.Factors[0]);
-			Assert.Equal (0, blend0.Positions[0]);
+            Assert.Equal(0, blend0.Factors[0]);
+            Assert.Equal(0, blend0.Positions[0]);
 
-			Blend blend1 = new Blend (1);
-			float[] positions = {0.0F, 0.5F, 1.0F};
-			float[] factors = {0.0F, 0.5F, 1.0F};
-			blend1.Factors = factors;
-			blend1.Positions = positions;
+            Blend blend1 = new Blend(1);
+            float[] positions = { 0.0F, 0.5F, 1.0F };
+            float[] factors = { 0.0F, 0.5F, 1.0F };
+            blend1.Factors = factors;
+            blend1.Positions = positions;
 
-			Assert.Equal (factors[0], blend1.Factors[0]);
-			Assert.Equal (factors[1], blend1.Factors[1]);
-			Assert.Equal (factors[2], blend1.Factors[2]);
-			Assert.Equal (positions[0], blend1.Positions[0]);
-			Assert.Equal (positions[1], blend1.Positions[1]);
-			Assert.Equal (positions[2], blend1.Positions[2]);
-		}
-	}
+            Assert.Equal(factors[0], blend1.Factors[0]);
+            Assert.Equal(factors[1], blend1.Factors[1]);
+            Assert.Equal(factors[2], blend1.Factors[2]);
+            Assert.Equal(positions[0], blend1.Positions[0]);
+            Assert.Equal(positions[1], blend1.Positions[1]);
+            Assert.Equal(positions[2], blend1.Positions[2]);
+        }
+    }
 }

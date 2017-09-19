@@ -33,107 +33,108 @@ using System.Security;
 using System.Security.Permissions;
 using System.Drawing;
 
-namespace MonoTests.System.Drawing.Printing {
+namespace MonoTests.System.Drawing.Printing
+{
 
-	public class PrinterUnitConvertTest
-	{
-		static int n = 100, r;
+    public class PrinterUnitConvertTest
+    {
+        static int n = 100, r;
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void ConvertFromDisplay ()
-		{
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
-				PrinterUnit.Display);
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void ConvertFromDisplay()
+        {
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.Display,
+                PrinterUnit.Display);
 
-			Assert.Equal (100, r);
+            Assert.Equal(100, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
-				PrinterUnit.HundredthsOfAMillimeter);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.Display,
+                PrinterUnit.HundredthsOfAMillimeter);
 
-			Assert.Equal (2540, r);
+            Assert.Equal(2540, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
-				PrinterUnit.TenthsOfAMillimeter);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.Display,
+                PrinterUnit.TenthsOfAMillimeter);
 
-			Assert.Equal (254, r);
+            Assert.Equal(254, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.Display,
-				PrinterUnit.ThousandthsOfAnInch);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.Display,
+                PrinterUnit.ThousandthsOfAnInch);
 
-			Assert.Equal (1000, r);
-		}
+            Assert.Equal(1000, r);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void ConvertFromHundredthsOfAMillimeter ()
-		{
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
-				PrinterUnit.Display);
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void ConvertFromHundredthsOfAMillimeter()
+        {
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.HundredthsOfAMillimeter,
+                PrinterUnit.Display);
 
-			Assert.Equal (4, r);
+            Assert.Equal(4, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
-				PrinterUnit.HundredthsOfAMillimeter);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.HundredthsOfAMillimeter,
+                PrinterUnit.HundredthsOfAMillimeter);
 
-			Assert.Equal (100, r);
+            Assert.Equal(100, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
-				PrinterUnit.TenthsOfAMillimeter);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.HundredthsOfAMillimeter,
+                PrinterUnit.TenthsOfAMillimeter);
 
-			Assert.Equal (10, r);
+            Assert.Equal(10, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.HundredthsOfAMillimeter,
-				PrinterUnit.ThousandthsOfAnInch);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.HundredthsOfAMillimeter,
+                PrinterUnit.ThousandthsOfAnInch);
 
-			Assert.Equal (39, r);
-		}
+            Assert.Equal(39, r);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void ConvertFromTenthsOfAMillimeter ()
-		{
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
-				PrinterUnit.Display);
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void ConvertFromTenthsOfAMillimeter()
+        {
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.TenthsOfAMillimeter,
+                PrinterUnit.Display);
 
-			Assert.Equal (39, r);
+            Assert.Equal(39, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
-				PrinterUnit.HundredthsOfAMillimeter);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.TenthsOfAMillimeter,
+                PrinterUnit.HundredthsOfAMillimeter);
 
-			Assert.Equal (1000, r);
+            Assert.Equal(1000, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
-				PrinterUnit.TenthsOfAMillimeter);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.TenthsOfAMillimeter,
+                PrinterUnit.TenthsOfAMillimeter);
 
-			Assert.Equal (100, r);
+            Assert.Equal(100, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.TenthsOfAMillimeter,
-				PrinterUnit.ThousandthsOfAnInch);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.TenthsOfAMillimeter,
+                PrinterUnit.ThousandthsOfAnInch);
 
-			Assert.Equal (394, r);
-		}
+            Assert.Equal(394, r);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void ConvertFromThousandthsOfAnInch ()
-		{
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
-				PrinterUnit.Display);
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void ConvertFromThousandthsOfAnInch()
+        {
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.ThousandthsOfAnInch,
+                PrinterUnit.Display);
 
-			Assert.Equal (10, r);
+            Assert.Equal(10, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
-				PrinterUnit.HundredthsOfAMillimeter);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.ThousandthsOfAnInch,
+                PrinterUnit.HundredthsOfAMillimeter);
 
-			Assert.Equal (254, r);
+            Assert.Equal(254, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
-				PrinterUnit.TenthsOfAMillimeter);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.ThousandthsOfAnInch,
+                PrinterUnit.TenthsOfAMillimeter);
 
-			Assert.Equal (25, r);
+            Assert.Equal(25, r);
 
-			r = PrinterUnitConvert.Convert (n, PrinterUnit.ThousandthsOfAnInch,
-				PrinterUnit.ThousandthsOfAnInch);
+            r = PrinterUnitConvert.Convert(n, PrinterUnit.ThousandthsOfAnInch,
+                PrinterUnit.ThousandthsOfAnInch);
 
-			Assert.Equal (100, r);
-		}
-	}
+            Assert.Equal(100, r);
+        }
+    }
 }
 

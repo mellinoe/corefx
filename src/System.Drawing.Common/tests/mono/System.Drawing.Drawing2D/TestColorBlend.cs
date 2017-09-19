@@ -33,78 +33,79 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Security.Permissions;
 
-namespace MonoTests.System.Drawing.Drawing2D 
+namespace MonoTests.System.Drawing.Drawing2D
 {
-	public class ColorBlendTest {
+    public class ColorBlendTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void TestConstructors ()
-		{
-			ColorBlend cb1 = new ColorBlend (1);
-			Assert.Equal (1, cb1.Colors.Length);
-			Assert.Equal (1, cb1.Positions.Length);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void TestConstructors()
+        {
+            ColorBlend cb1 = new ColorBlend(1);
+            Assert.Equal(1, cb1.Colors.Length);
+            Assert.Equal(1, cb1.Positions.Length);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void TestProperties () 
-		{
-			ColorBlend cb1 = new ColorBlend (1);
-			float[] positions = {0.0F, 0.5F, 1.0F};
-			Color[] colors = {Color.Red, Color.White, Color.Black};
-			cb1.Colors = colors;
-			cb1.Positions = positions;
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void TestProperties()
+        {
+            ColorBlend cb1 = new ColorBlend(1);
+            float[] positions = { 0.0F, 0.5F, 1.0F };
+            Color[] colors = { Color.Red, Color.White, Color.Black };
+            cb1.Colors = colors;
+            cb1.Positions = positions;
 
-			// size match
-			Assert.Equal (colors[0], cb1.Colors[0]);
-			Assert.Equal (colors[1], cb1.Colors[1]);
-			Assert.Equal (colors[2], cb1.Colors[2]);
-			Assert.Equal (positions[0], cb1.Positions[0]);
-			Assert.Equal (positions[1], cb1.Positions[1]);
-			Assert.Equal (positions[2], cb1.Positions[2]);
-		}
+            // size match
+            Assert.Equal(colors[0], cb1.Colors[0]);
+            Assert.Equal(colors[1], cb1.Colors[1]);
+            Assert.Equal(colors[2], cb1.Colors[2]);
+            Assert.Equal(positions[0], cb1.Positions[0]);
+            Assert.Equal(positions[1], cb1.Positions[1]);
+            Assert.Equal(positions[2], cb1.Positions[2]);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void ColorBlend_Empty ()
-		{
-			ColorBlend cb = new ColorBlend ();
-			Assert.Equal (1, cb.Colors.Length);
-			Assert.True (cb.Colors[0].IsEmpty);
-			Assert.Equal (1, cb.Positions.Length);
-			Assert.Equal (0f, cb.Positions[0]);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void ColorBlend_Empty()
+        {
+            ColorBlend cb = new ColorBlend();
+            Assert.Equal(1, cb.Colors.Length);
+            Assert.True(cb.Colors[0].IsEmpty);
+            Assert.Equal(1, cb.Positions.Length);
+            Assert.Equal(0f, cb.Positions[0]);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void ColorBlend_Zero ()
-		{
-			ColorBlend cb = new ColorBlend (0);
-			Assert.Equal (0, cb.Colors.Length);
-			Assert.Equal (0, cb.Positions.Length);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void ColorBlend_Zero()
+        {
+            ColorBlend cb = new ColorBlend(0);
+            Assert.Equal(0, cb.Colors.Length);
+            Assert.Equal(0, cb.Positions.Length);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void MismatchSizes ()
-		{
-			ColorBlend cb = new ColorBlend ();
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void MismatchSizes()
+        {
+            ColorBlend cb = new ColorBlend();
 
-			cb.Colors = new Color[16];
-			Assert.Equal (16, cb.Colors.Length);
+            cb.Colors = new Color[16];
+            Assert.Equal(16, cb.Colors.Length);
 
-			cb.Positions = new float[1];
-			Assert.Equal (1, cb.Positions.Length);
-		}
+            cb.Positions = new float[1];
+            Assert.Equal(1, cb.Positions.Length);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void ColorBlend_Negative ()
-		{
-			Assert.Throws<OverflowException> (() => new ColorBlend (-1));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void ColorBlend_Negative()
+        {
+            Assert.Throws<OverflowException>(() => new ColorBlend(-1));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void ColorBlend_Lots ()
-		{
-			ColorBlend cb = new ColorBlend (1000);
-			Assert.Equal (1000, cb.Colors.Length);
-			Assert.Equal (1000, cb.Positions.Length);
-		}
-	}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void ColorBlend_Lots()
+        {
+            ColorBlend cb = new ColorBlend(1000);
+            Assert.Equal(1000, cb.Colors.Length);
+            Assert.Equal(1000, cb.Positions.Length);
+        }
+    }
 }

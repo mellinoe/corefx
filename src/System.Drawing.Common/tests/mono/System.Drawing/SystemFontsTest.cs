@@ -33,86 +33,88 @@ using System.Drawing;
 
 using Xunit;
 
-namespace MonoTests.System.Drawing {
+namespace MonoTests.System.Drawing
+{
 
-	public class SystemFontsTest {
+    public class SystemFontsTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void DefaultFont ()
-		{
-			Font f = SystemFonts.DefaultFont;
-			Assert.False (f.Bold);
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void DefaultFont()
+        {
+            Font f = SystemFonts.DefaultFont;
+            Assert.False(f.Bold);
 
-			Assert.Equal (true, f.IsSystemFont);
-			Assert.False (f.Italic);
-			Assert.Equal (8.25, f.Size, 2);
-			Assert.Equal (8.25, f.SizeInPoints, 2);
-			Assert.False (f.Strikeout);
-			Assert.False (f.Underline);
-			Assert.Equal (GraphicsUnit.Point, f.Unit);
-		}
+            Assert.Equal(true, f.IsSystemFont);
+            Assert.False(f.Italic);
+            Assert.Equal(8.25, f.Size, 2);
+            Assert.Equal(8.25, f.SizeInPoints, 2);
+            Assert.False(f.Strikeout);
+            Assert.False(f.Underline);
+            Assert.Equal(GraphicsUnit.Point, f.Unit);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void SystemFontName ()
-		{
-			Assert.Equal ("CaptionFont", SystemFonts.CaptionFont.SystemFontName);
-			Assert.Equal ("DefaultFont", SystemFonts.DefaultFont.SystemFontName);
-			Assert.Equal ("DialogFont", SystemFonts.DialogFont.SystemFontName);
-			Assert.Equal ("IconTitleFont", SystemFonts.IconTitleFont.SystemFontName);
-			Assert.Equal ("MenuFont", SystemFonts.MenuFont.SystemFontName);
-			Assert.Equal ("MessageBoxFont", SystemFonts.MessageBoxFont.SystemFontName);
-			Assert.Equal ("SmallCaptionFont", SystemFonts.SmallCaptionFont.SystemFontName);
-			Assert.Equal ("StatusFont", SystemFonts.StatusFont.SystemFontName);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void SystemFontName()
+        {
+            Assert.Equal("CaptionFont", SystemFonts.CaptionFont.SystemFontName);
+            Assert.Equal("DefaultFont", SystemFonts.DefaultFont.SystemFontName);
+            Assert.Equal("DialogFont", SystemFonts.DialogFont.SystemFontName);
+            Assert.Equal("IconTitleFont", SystemFonts.IconTitleFont.SystemFontName);
+            Assert.Equal("MenuFont", SystemFonts.MenuFont.SystemFontName);
+            Assert.Equal("MessageBoxFont", SystemFonts.MessageBoxFont.SystemFontName);
+            Assert.Equal("SmallCaptionFont", SystemFonts.SmallCaptionFont.SystemFontName);
+            Assert.Equal("StatusFont", SystemFonts.StatusFont.SystemFontName);
+        }
 
-		[ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
-		public void GetFontByName ()
-		{
-			Assert.Equal ("CaptionFont", SystemFonts.GetFontByName ("CaptionFont").SystemFontName);
-			Assert.Equal ("DefaultFont", SystemFonts.GetFontByName ("DefaultFont").SystemFontName);
-			Assert.Equal ("DialogFont", SystemFonts.GetFontByName ("DialogFont").SystemFontName);
-			Assert.Equal ("IconTitleFont", SystemFonts.GetFontByName ("IconTitleFont").SystemFontName);
-			Assert.Equal ("MenuFont", SystemFonts.GetFontByName ("MenuFont").SystemFontName);
-			Assert.Equal ("MessageBoxFont", SystemFonts.GetFontByName ("MessageBoxFont").SystemFontName);
-			Assert.Equal ("SmallCaptionFont", SystemFonts.GetFontByName ("SmallCaptionFont").SystemFontName);
-			Assert.Equal ("StatusFont", SystemFonts.GetFontByName ("StatusFont").SystemFontName);
-		}
+        [ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
+        public void GetFontByName()
+        {
+            Assert.Equal("CaptionFont", SystemFonts.GetFontByName("CaptionFont").SystemFontName);
+            Assert.Equal("DefaultFont", SystemFonts.GetFontByName("DefaultFont").SystemFontName);
+            Assert.Equal("DialogFont", SystemFonts.GetFontByName("DialogFont").SystemFontName);
+            Assert.Equal("IconTitleFont", SystemFonts.GetFontByName("IconTitleFont").SystemFontName);
+            Assert.Equal("MenuFont", SystemFonts.GetFontByName("MenuFont").SystemFontName);
+            Assert.Equal("MessageBoxFont", SystemFonts.GetFontByName("MessageBoxFont").SystemFontName);
+            Assert.Equal("SmallCaptionFont", SystemFonts.GetFontByName("SmallCaptionFont").SystemFontName);
+            Assert.Equal("StatusFont", SystemFonts.GetFontByName("StatusFont").SystemFontName);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void GetFontByName_Invalid ()
-		{
-			Assert.Null (SystemFonts.GetFontByName (null));
-			Assert.Null (SystemFonts.GetFontByName (String.Empty));
-			Assert.Null (SystemFonts.GetFontByName ("defaultfont"));
-			Assert.Null (SystemFonts.GetFontByName ("DEFAULTFONT"));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void GetFontByName_Invalid()
+        {
+            Assert.Null(SystemFonts.GetFontByName(null));
+            Assert.Null(SystemFonts.GetFontByName(String.Empty));
+            Assert.Null(SystemFonts.GetFontByName("defaultfont"));
+            Assert.Null(SystemFonts.GetFontByName("DEFAULTFONT"));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Same ()
-		{
-			Font f1 = SystemFonts.CaptionFont;
-			Font f2 = SystemFonts.CaptionFont;
-			Assert.False (Object.ReferenceEquals (f1, f2));
-			f2 = SystemFonts.GetFontByName ("CaptionFont");
-			Assert.False (Object.ReferenceEquals (f1, f2));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Same()
+        {
+            Font f1 = SystemFonts.CaptionFont;
+            Font f2 = SystemFonts.CaptionFont;
+            Assert.False(Object.ReferenceEquals(f1, f2));
+            f2 = SystemFonts.GetFontByName("CaptionFont");
+            Assert.False(Object.ReferenceEquals(f1, f2));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Dispose_Instance ()
-		{
-			Font f1 = SystemFonts.CaptionFont;
-			float height = f1.GetHeight (72f);
-			f1.Dispose ();
-			Assert.Throws<ArgumentException> (() => f1.GetHeight (72f));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Dispose_Instance()
+        {
+            Font f1 = SystemFonts.CaptionFont;
+            float height = f1.GetHeight(72f);
+            f1.Dispose();
+            Assert.Throws<ArgumentException>(() => f1.GetHeight(72f));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Dispose_Property ()
-		{
-			float height = SystemFonts.CaptionFont.GetHeight (72f);
-			SystemFonts.CaptionFont.Dispose ();
-			Assert.Equal (height, SystemFonts.CaptionFont.GetHeight (72f));
-		}
-	}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Dispose_Property()
+        {
+            float height = SystemFonts.CaptionFont.GetHeight(72f);
+            SystemFonts.CaptionFont.Dispose();
+            Assert.Equal(height, SystemFonts.CaptionFont.GetHeight(72f));
+        }
+    }
 }
 

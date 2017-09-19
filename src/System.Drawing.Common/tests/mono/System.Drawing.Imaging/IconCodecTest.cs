@@ -63,7 +63,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ActiveIssue(20844)]
         public void Image16()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("16x16_one_entry_4bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico");
             using (Image image = Image.FromFile(sInFile))
             {
                 Assert.True(image.RawFormat.Equals(ImageFormat.Icon));
@@ -86,7 +86,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ActiveIssue(20844)]
         public void Bitmap16Features()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("48x48_multiple_entries_4bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 GraphicsUnit unit = GraphicsUnit.World;
@@ -135,7 +135,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap16Pixels()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("48x48_multiple_entries_4bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
 #if false
@@ -168,7 +168,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap16Data()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("48x48_multiple_entries_4bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("48x48_multiple_entries_4bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -262,7 +262,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ActiveIssue(20844)]
         public void Bitmap32Features()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("VisualPng.ico");
+            string sInFile = Helpers.GetTestBitmapPath("VisualPng.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 GraphicsUnit unit = GraphicsUnit.World;
@@ -310,7 +310,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap32Pixels()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("VisualPng.ico");
+            string sInFile = Helpers.GetTestBitmapPath("VisualPng.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
 #if false
@@ -391,7 +391,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap32Data()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("VisualPng.ico");
+            string sInFile = Helpers.GetTestBitmapPath("VisualPng.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -494,7 +494,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ActiveIssue(20844)]
         public void Bitmap48Features()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("48x48_one_entry_1bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("48x48_one_entry_1bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 GraphicsUnit unit = GraphicsUnit.World;
@@ -528,7 +528,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap48Pixels()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("48x48_one_entry_1bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("48x48_one_entry_1bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
 #if false
@@ -622,7 +622,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap48Data()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("48x48_one_entry_1bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("48x48_one_entry_1bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -729,7 +729,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ActiveIssue(20844)]
         public void Bitmap64Features()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("64x64_one_entry_8bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("64x64_one_entry_8bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 GraphicsUnit unit = GraphicsUnit.World;
@@ -761,7 +761,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap64Pixels()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("64x64_one_entry_8bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("64x64_one_entry_8bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
 #if false
@@ -837,7 +837,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap64Data()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("64x64_one_entry_8bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("64x64_one_entry_8bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -998,7 +998,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ActiveIssue(20844)]
         public void Bitmap96Features()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("96x96x256.ico");
+            string sInFile = Helpers.GetTestBitmapPath("96x96x256.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 GraphicsUnit unit = GraphicsUnit.World;
@@ -1030,7 +1030,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ActiveIssue(20844)]
         public void Bitmap96Pixels()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("96x96x256.ico");
+            string sInFile = Helpers.GetTestBitmapPath("96x96x256.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
 #if false
@@ -1623,7 +1623,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Bitmap96Data()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("96x96_one_entry_8bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("96x96_one_entry_8bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 BitmapData data = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
@@ -1942,7 +1942,7 @@ namespace MonoTests.System.Drawing.Imaging
         [ConditionalFact(Helpers.GdiplusIsAvailable)]
         public void Xp32bppIconFeatures()
         {
-            string sInFile = Helpers.GetTestBitmapPath ("48x48_multiple_entries_32bit.ico");
+            string sInFile = Helpers.GetTestBitmapPath("48x48_multiple_entries_32bit.ico");
             using (Bitmap bmp = new Bitmap(sInFile))
             {
                 GraphicsUnit unit = GraphicsUnit.World;

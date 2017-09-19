@@ -32,54 +32,56 @@ using System.Drawing.Drawing2D;
 using System.Security.Permissions;
 using Xunit;
 
-namespace MonoTests.System.Drawing.Drawing2D {
+namespace MonoTests.System.Drawing.Drawing2D
+{
 
-	public class PathDataTest {
+    public class PathDataTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void PathData_Empty ()
-		{
-			PathData data = new PathData ();
-			Assert.Null (data.Points);
-			Assert.Null (data.Types);
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void PathData_Empty()
+        {
+            PathData data = new PathData();
+            Assert.Null(data.Points);
+            Assert.Null(data.Types);
 
-			data.Points = new PointF[0];
-			data.Types = new byte[0];
-			Assert.Equal (0, data.Points.Length);
-			Assert.Equal (0, data.Types.Length);
+            data.Points = new PointF[0];
+            data.Types = new byte[0];
+            Assert.Equal(0, data.Points.Length);
+            Assert.Equal(0, data.Types.Length);
 
-			data.Points = null;
-			data.Types = null;
-			Assert.Null (data.Points);
-			Assert.Null (data.Types);
-		}
+            data.Points = null;
+            data.Types = null;
+            Assert.Null(data.Points);
+            Assert.Null(data.Types);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void PathData_LengthMismatch ()
-		{
-			PathData data = new PathData ();
-			data.Points = new PointF[2];
-			data.Types = new byte[1];
-			Assert.Equal (2, data.Points.Length);
-			Assert.Equal (1, data.Types.Length);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void PathData_LengthMismatch()
+        {
+            PathData data = new PathData();
+            data.Points = new PointF[2];
+            data.Types = new byte[1];
+            Assert.Equal(2, data.Points.Length);
+            Assert.Equal(1, data.Types.Length);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void PathData_UnclonedProperties ()
-		{
-			PathData data = new PathData ();
-			data.Points = new PointF[1] { new PointF (1f, 1f) };
-			data.Types = new byte[1] { 1 };
-			Assert.Equal (1f, data.Points[0].X);
-			Assert.Equal (1f, data.Points[0].Y);
-			Assert.Equal (1, data.Types[0]);
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void PathData_UnclonedProperties()
+        {
+            PathData data = new PathData();
+            data.Points = new PointF[1] { new PointF(1f, 1f) };
+            data.Types = new byte[1] { 1 };
+            Assert.Equal(1f, data.Points[0].X);
+            Assert.Equal(1f, data.Points[0].Y);
+            Assert.Equal(1, data.Types[0]);
 
-			data.Points[0] = new PointF (0f, 0f);
-			Assert.Equal (0f, data.Points[0].X);
-			Assert.Equal (0f, data.Points[0].Y);
+            data.Points[0] = new PointF(0f, 0f);
+            Assert.Equal(0f, data.Points[0].X);
+            Assert.Equal(0f, data.Points[0].Y);
 
-			data.Types[0] = 0;
-			Assert.Equal (0, data.Types[0]);
-		}
-	}
+            data.Types[0] = 0;
+            Assert.Equal(0, data.Types[0]);
+        }
+    }
 }

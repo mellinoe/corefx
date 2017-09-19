@@ -33,25 +33,27 @@ using System.Drawing.Text;
 using System.Security.Permissions;
 using Xunit;
 
-namespace MonoTests.System.Drawing.Text {
+namespace MonoTests.System.Drawing.Text
+{
 
-	public class InstalledFontCollectionTest {
+    public class InstalledFontCollectionTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Family ()
-		{
-			InstalledFontCollection ifc = new InstalledFontCollection ();
-			Assert.NotNull (ifc.Families);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Family()
+        {
+            InstalledFontCollection ifc = new InstalledFontCollection();
+            Assert.NotNull(ifc.Families);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Dispose_Family ()
-		{
-			InstalledFontCollection ifc = new InstalledFontCollection ();
-			int count = ifc.Families.Length;
-			ifc.Dispose ();
-			Assert.Equal (count, ifc.Families.Length);
-			// there is *no* exception here
-		}
-	}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Dispose_Family()
+        {
+            InstalledFontCollection ifc = new InstalledFontCollection();
+            int count = ifc.Families.Length;
+            ifc.Dispose();
+            Assert.Equal(count, ifc.Families.Length);
+            // there is *no* exception here
+        }
+    }
 }

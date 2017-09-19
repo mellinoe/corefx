@@ -32,71 +32,73 @@ using System.Drawing.Imaging;
 using System.Security.Permissions;
 using Xunit;
 
-namespace MonoTests.System.Drawing.Imaging {
+namespace MonoTests.System.Drawing.Imaging
+{
 
-	public class WmfPlaceableFileHeaderTest {
+    public class WmfPlaceableFileHeaderTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void DefaultValues ()
-		{
-			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();
-			Assert.Equal (0, wh.BboxBottom);
-			Assert.Equal (0, wh.BboxLeft);
-			Assert.Equal (0, wh.BboxRight);
-			Assert.Equal (0, wh.BboxTop);
-			Assert.Equal (0, wh.Checksum);
-			Assert.Equal (0, wh.Hmf);
-			Assert.Equal (0, wh.Inch);
-			Assert.Equal (unchecked ((int)0x9AC6CDD7), wh.Key); // always (from documentation)
-			Assert.Equal (0, wh.Reserved);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void DefaultValues()
+        {
+            WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader();
+            Assert.Equal(0, wh.BboxBottom);
+            Assert.Equal(0, wh.BboxLeft);
+            Assert.Equal(0, wh.BboxRight);
+            Assert.Equal(0, wh.BboxTop);
+            Assert.Equal(0, wh.Checksum);
+            Assert.Equal(0, wh.Hmf);
+            Assert.Equal(0, wh.Inch);
+            Assert.Equal(unchecked((int)0x9AC6CDD7), wh.Key); // always (from documentation)
+            Assert.Equal(0, wh.Reserved);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Min ()
-		{
-			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();
-			wh.BboxBottom = short.MinValue;
-			Assert.Equal (short.MinValue, wh.BboxBottom);
-			wh.BboxLeft = short.MinValue;
-			Assert.Equal (short.MinValue, wh.BboxLeft);
-			wh.BboxRight = short.MinValue;
-			Assert.Equal (short.MinValue, wh.BboxRight);
-			wh.BboxTop = short.MinValue;
-			Assert.Equal (short.MinValue, wh.BboxTop);
-			wh.Checksum = short.MinValue;
-			Assert.Equal (short.MinValue, wh.Checksum);
-			wh.Hmf = short.MinValue;
-			Assert.Equal (short.MinValue, wh.Hmf);
-			wh.Inch = short.MinValue;
-			Assert.Equal (short.MinValue, wh.Inch);
-			wh.Key = int.MinValue;
-			Assert.Equal (int.MinValue, wh.Key);
-			wh.Reserved = int.MinValue;
-			Assert.Equal (int.MinValue, wh.Reserved);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Min()
+        {
+            WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader();
+            wh.BboxBottom = short.MinValue;
+            Assert.Equal(short.MinValue, wh.BboxBottom);
+            wh.BboxLeft = short.MinValue;
+            Assert.Equal(short.MinValue, wh.BboxLeft);
+            wh.BboxRight = short.MinValue;
+            Assert.Equal(short.MinValue, wh.BboxRight);
+            wh.BboxTop = short.MinValue;
+            Assert.Equal(short.MinValue, wh.BboxTop);
+            wh.Checksum = short.MinValue;
+            Assert.Equal(short.MinValue, wh.Checksum);
+            wh.Hmf = short.MinValue;
+            Assert.Equal(short.MinValue, wh.Hmf);
+            wh.Inch = short.MinValue;
+            Assert.Equal(short.MinValue, wh.Inch);
+            wh.Key = int.MinValue;
+            Assert.Equal(int.MinValue, wh.Key);
+            wh.Reserved = int.MinValue;
+            Assert.Equal(int.MinValue, wh.Reserved);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Max ()
-		{
-			WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader ();
-			wh.BboxBottom = short.MaxValue;
-			Assert.Equal (short.MaxValue, wh.BboxBottom);
-			wh.BboxLeft = short.MaxValue;
-			Assert.Equal (short.MaxValue, wh.BboxLeft);
-			wh.BboxRight = short.MaxValue;
-			Assert.Equal (short.MaxValue, wh.BboxRight);
-			wh.BboxTop = short.MaxValue;
-			Assert.Equal (short.MaxValue, wh.BboxTop);
-			wh.Checksum = short.MaxValue;
-			Assert.Equal (short.MaxValue, wh.Checksum);
-			wh.Hmf = short.MaxValue;
-			Assert.Equal (short.MaxValue, wh.Hmf);
-			wh.Inch = short.MaxValue;
-			Assert.Equal (short.MaxValue, wh.Inch);
-			wh.Key = int.MaxValue;
-			Assert.Equal (int.MaxValue, wh.Key);
-			wh.Reserved = int.MaxValue;
-			Assert.Equal (int.MaxValue, wh.Reserved);
-		}
-	}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Max()
+        {
+            WmfPlaceableFileHeader wh = new WmfPlaceableFileHeader();
+            wh.BboxBottom = short.MaxValue;
+            Assert.Equal(short.MaxValue, wh.BboxBottom);
+            wh.BboxLeft = short.MaxValue;
+            Assert.Equal(short.MaxValue, wh.BboxLeft);
+            wh.BboxRight = short.MaxValue;
+            Assert.Equal(short.MaxValue, wh.BboxRight);
+            wh.BboxTop = short.MaxValue;
+            Assert.Equal(short.MaxValue, wh.BboxTop);
+            wh.Checksum = short.MaxValue;
+            Assert.Equal(short.MaxValue, wh.Checksum);
+            wh.Hmf = short.MaxValue;
+            Assert.Equal(short.MaxValue, wh.Hmf);
+            wh.Inch = short.MaxValue;
+            Assert.Equal(short.MaxValue, wh.Inch);
+            wh.Key = int.MaxValue;
+            Assert.Equal(int.MaxValue, wh.Key);
+            wh.Reserved = int.MaxValue;
+            Assert.Equal(int.MaxValue, wh.Reserved);
+        }
+    }
 }

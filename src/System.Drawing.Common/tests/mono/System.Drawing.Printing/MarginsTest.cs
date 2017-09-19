@@ -32,81 +32,83 @@ using System.Drawing.Printing;
 using System.Security.Permissions;
 using Xunit;
 
-namespace MonoTests.System.Drawing.Printing {
+namespace MonoTests.System.Drawing.Printing
+{
 
-	public class MarginsTest {
+    public class MarginsTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void CtorDefault ()
-		{
-			Margins m = new Margins ();
-			Assert.Equal (100, m.Left);
-			Assert.Equal (100, m.Top);
-			Assert.Equal (100, m.Right);
-			Assert.Equal (100, m.Bottom);
-			Assert.Equal ("[Margins Left=100 Right=100 Top=100 Bottom=100]", m.ToString ());
-			Margins clone = (Margins) m.Clone ();
-			Assert.Equal (m, clone);
-			Assert.True (m == clone);
-			Assert.False (m != clone);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void CtorDefault()
+        {
+            Margins m = new Margins();
+            Assert.Equal(100, m.Left);
+            Assert.Equal(100, m.Top);
+            Assert.Equal(100, m.Right);
+            Assert.Equal(100, m.Bottom);
+            Assert.Equal("[Margins Left=100 Right=100 Top=100 Bottom=100]", m.ToString());
+            Margins clone = (Margins)m.Clone();
+            Assert.Equal(m, clone);
+            Assert.True(m == clone);
+            Assert.False(m != clone);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Ctor4Int ()
-		{
-			Margins m1 = new Margins (Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue);
-			Assert.Equal (Int32.MaxValue, m1.Left);
-			Assert.Equal (Int32.MaxValue, m1.Top);
-			Assert.Equal (Int32.MaxValue, m1.Right);
-			Assert.Equal (Int32.MaxValue, m1.Bottom);
-			// right smaller than left
-			Margins m2 = new Margins (Int32.MaxValue, 0, 10, 20);
-			// bottom smaller than top
-			Margins m3 = new Margins (10, 20, Int32.MaxValue, 0);
-			Assert.False (m2.GetHashCode () == m3.GetHashCode ());
-			Assert.True (m1 != m2);
-			Assert.False (m1 == m2);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Ctor4Int()
+        {
+            Margins m1 = new Margins(Int32.MaxValue, Int32.MaxValue, Int32.MaxValue, Int32.MaxValue);
+            Assert.Equal(Int32.MaxValue, m1.Left);
+            Assert.Equal(Int32.MaxValue, m1.Top);
+            Assert.Equal(Int32.MaxValue, m1.Right);
+            Assert.Equal(Int32.MaxValue, m1.Bottom);
+            // right smaller than left
+            Margins m2 = new Margins(Int32.MaxValue, 0, 10, 20);
+            // bottom smaller than top
+            Margins m3 = new Margins(10, 20, Int32.MaxValue, 0);
+            Assert.False(m2.GetHashCode() == m3.GetHashCode());
+            Assert.True(m1 != m2);
+            Assert.False(m1 == m2);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Ctor_BadLeft ()
-		{
-            Assert.Throws<ArgumentException>(() => new Margins(-1, 0, 0, 0)); 
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Ctor_BadLeft()
+        {
+            Assert.Throws<ArgumentException>(() => new Margins(-1, 0, 0, 0));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Ctor_BadRight ()
-		{
-			Assert.Throws<ArgumentException>(() => new Margins (0, Int32.MinValue, 0, 0));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Ctor_BadRight()
+        {
+            Assert.Throws<ArgumentException>(() => new Margins(0, Int32.MinValue, 0, 0));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Ctor_BadTop ()
-		{
-			Assert.Throws<ArgumentException>(() => new Margins (0, 0, Int32.MinValue, 0));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Ctor_BadTop()
+        {
+            Assert.Throws<ArgumentException>(() => new Margins(0, 0, Int32.MinValue, 0));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Ctor_BadBottom ()
-		{
-			Assert.Throws<ArgumentException>(() => new Margins (0, 0, 0, -1));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Ctor_BadBottom()
+        {
+            Assert.Throws<ArgumentException>(() => new Margins(0, 0, 0, -1));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Equals ()
-		{
-			Margins m = new Margins ();
-			Assert.True (m.Equals (m));
-			Assert.False (m.Equals (null));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Equals()
+        {
+            Margins m = new Margins();
+            Assert.True(m.Equals(m));
+            Assert.False(m.Equals(null));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void OperatorsWithNulls ()
-		{
-			Margins m1 = null;
-			Margins m2 = null;
-			Assert.True (m1 == m2);
-			Assert.False (m1 != m2);
-		}
-	}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void OperatorsWithNulls()
+        {
+            Margins m1 = null;
+            Margins m2 = null;
+            Assert.True(m1 == m2);
+            Assert.False(m1 != m2);
+        }
+    }
 }

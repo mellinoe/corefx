@@ -30,67 +30,67 @@ using System.Drawing;
 using System.Drawing.Printing;
 
 namespace MonoTests.System.Drawing.Printing
-{	
-	public class PaperSourceTest
-	{
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void KindTest ()
-		{
-			PaperSource ps = new PaperSource ();
+{
+    public class PaperSourceTest
+    {
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void KindTest()
+        {
+            PaperSource ps = new PaperSource();
 
-			//
-			// Set Custom
-			ps.RawKind = (int)PaperSourceKind.Custom;
-			Assert.Equal (PaperSourceKind.Custom, ps.Kind);
-			Assert.Equal (257, ps.RawKind);
+            //
+            // Set Custom
+            ps.RawKind = (int)PaperSourceKind.Custom;
+            Assert.Equal(PaperSourceKind.Custom, ps.Kind);
+            Assert.Equal(257, ps.RawKind);
 
-			//
-			// An integer value of 256 and above returns Custom (0x257)
-			ps.RawKind = 256;
-			Assert.Equal (256, ps.RawKind);
-			Assert.Equal (PaperSourceKind.Custom, ps.Kind);
+            //
+            // An integer value of 256 and above returns Custom (0x257)
+            ps.RawKind = 256;
+            Assert.Equal(256, ps.RawKind);
+            Assert.Equal(PaperSourceKind.Custom, ps.Kind);
 
-			//
-			// Zero
-			ps.RawKind = 0;
-			Assert.Equal ((PaperSourceKind)0, ps.Kind);
-			Assert.Equal (0, ps.RawKind);
+            //
+            // Zero
+            ps.RawKind = 0;
+            Assert.Equal((PaperSourceKind)0, ps.Kind);
+            Assert.Equal(0, ps.RawKind);
 
-			//
-			// Well-known
-			ps.RawKind = (int)PaperSourceKind.Upper;
-			Assert.Equal (PaperSourceKind.Upper, ps.Kind);
-			Assert.Equal ((int)PaperSourceKind.Upper, ps.RawKind);
+            //
+            // Well-known
+            ps.RawKind = (int)PaperSourceKind.Upper;
+            Assert.Equal(PaperSourceKind.Upper, ps.Kind);
+            Assert.Equal((int)PaperSourceKind.Upper, ps.RawKind);
 
-			//
-			ps.RawKind = (int)PaperSourceKind.FormSource;
-			Assert.Equal (PaperSourceKind.FormSource, ps.Kind);
-			Assert.Equal ((int)PaperSourceKind.FormSource, ps.RawKind);
+            //
+            ps.RawKind = (int)PaperSourceKind.FormSource;
+            Assert.Equal(PaperSourceKind.FormSource, ps.Kind);
+            Assert.Equal((int)PaperSourceKind.FormSource, ps.RawKind);
 
-			//
-			// Too Big
-			ps.RawKind = 999999;
-			Assert.Equal (PaperSourceKind.Custom, ps.Kind);
-			Assert.Equal (999999, ps.RawKind);
+            //
+            // Too Big
+            ps.RawKind = 999999;
+            Assert.Equal(PaperSourceKind.Custom, ps.Kind);
+            Assert.Equal(999999, ps.RawKind);
 
-			//
-			ps.RawKind = int.MaxValue;
-			Assert.Equal (PaperSourceKind.Custom, ps.Kind);
-			Assert.Equal (int.MaxValue, ps.RawKind);
+            //
+            ps.RawKind = int.MaxValue;
+            Assert.Equal(PaperSourceKind.Custom, ps.Kind);
+            Assert.Equal(int.MaxValue, ps.RawKind);
 
-			//
-			// Negative -- Looks as if MSFT forgot to check for negative!
-			ps.RawKind = -1;
-			Assert.Equal ((PaperSourceKind)(-1), ps.Kind);
-			Assert.Equal (-1, ps.RawKind);
+            //
+            // Negative -- Looks as if MSFT forgot to check for negative!
+            ps.RawKind = -1;
+            Assert.Equal((PaperSourceKind)(-1), ps.Kind);
+            Assert.Equal(-1, ps.RawKind);
 
-			//
-			ps.RawKind = int.MinValue;
-			Assert.Equal ((PaperSourceKind)(int.MinValue), ps.Kind);
-			Assert.Equal (int.MinValue, ps.RawKind);
-		}
+            //
+            ps.RawKind = int.MinValue;
+            Assert.Equal((PaperSourceKind)(int.MinValue), ps.Kind);
+            Assert.Equal(int.MinValue, ps.RawKind);
+        }
 
-	}
+    }
 
 }
 

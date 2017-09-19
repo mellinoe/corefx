@@ -32,61 +32,63 @@ using System.Drawing.Imaging;
 using System.Security.Permissions;
 using Xunit;
 
-namespace MonoTests.System.Drawing.Imaging {
+namespace MonoTests.System.Drawing.Imaging
+{
 
-	public class MetaHeaderTest {
+    public class MetaHeaderTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void DefaultValues ()
-		{
-			MetaHeader mh = new MetaHeader ();
-			Assert.Equal (0, mh.HeaderSize);
-			Assert.Equal (0, mh.MaxRecord);
-			Assert.Equal (0, mh.NoObjects);
-			Assert.Equal (0, mh.NoParameters);
-			Assert.Equal (0, mh.Size);
-			Assert.Equal (0, mh.Type);
-			Assert.Equal (0, mh.Version);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void DefaultValues()
+        {
+            MetaHeader mh = new MetaHeader();
+            Assert.Equal(0, mh.HeaderSize);
+            Assert.Equal(0, mh.MaxRecord);
+            Assert.Equal(0, mh.NoObjects);
+            Assert.Equal(0, mh.NoParameters);
+            Assert.Equal(0, mh.Size);
+            Assert.Equal(0, mh.Type);
+            Assert.Equal(0, mh.Version);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Min ()
-		{
-			MetaHeader mh = new MetaHeader ();
-			mh.HeaderSize = short.MinValue;
-			Assert.Equal (short.MinValue, mh.HeaderSize);
-			mh.MaxRecord = int.MinValue;
-			Assert.Equal (int.MinValue, mh.MaxRecord);
-			mh.NoObjects = short.MinValue;
-			Assert.Equal (short.MinValue, mh.NoObjects);
-			mh.NoParameters = short.MinValue;
-			Assert.Equal (short.MinValue, mh.NoParameters);
-			mh.Size = int.MinValue;
-			Assert.Equal (int.MinValue, mh.Size);
-			mh.Type = short.MinValue;
-			Assert.Equal (short.MinValue, mh.Type);
-			mh.Version = short.MinValue;
-			Assert.Equal (short.MinValue, mh.Version);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Min()
+        {
+            MetaHeader mh = new MetaHeader();
+            mh.HeaderSize = short.MinValue;
+            Assert.Equal(short.MinValue, mh.HeaderSize);
+            mh.MaxRecord = int.MinValue;
+            Assert.Equal(int.MinValue, mh.MaxRecord);
+            mh.NoObjects = short.MinValue;
+            Assert.Equal(short.MinValue, mh.NoObjects);
+            mh.NoParameters = short.MinValue;
+            Assert.Equal(short.MinValue, mh.NoParameters);
+            mh.Size = int.MinValue;
+            Assert.Equal(int.MinValue, mh.Size);
+            mh.Type = short.MinValue;
+            Assert.Equal(short.MinValue, mh.Type);
+            mh.Version = short.MinValue;
+            Assert.Equal(short.MinValue, mh.Version);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Max ()
-		{
-			MetaHeader mh = new MetaHeader ();
-			mh.HeaderSize = short.MaxValue;
-			Assert.Equal (short.MaxValue, mh.HeaderSize);
-			mh.MaxRecord = int.MaxValue;
-			Assert.Equal (int.MaxValue, mh.MaxRecord);
-			mh.NoObjects = short.MaxValue;
-			Assert.Equal (short.MaxValue, mh.NoObjects);
-			mh.NoParameters = short.MaxValue;
-			Assert.Equal (short.MaxValue, mh.NoParameters);
-			mh.Size = int.MaxValue;
-			Assert.Equal (int.MaxValue, mh.Size);
-			mh.Type = short.MaxValue;
-			Assert.Equal (short.MaxValue, mh.Type);
-			mh.Version = short.MaxValue;
-			Assert.Equal (short.MaxValue, mh.Version);
-		}
-	}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Max()
+        {
+            MetaHeader mh = new MetaHeader();
+            mh.HeaderSize = short.MaxValue;
+            Assert.Equal(short.MaxValue, mh.HeaderSize);
+            mh.MaxRecord = int.MaxValue;
+            Assert.Equal(int.MaxValue, mh.MaxRecord);
+            mh.NoObjects = short.MaxValue;
+            Assert.Equal(short.MaxValue, mh.NoObjects);
+            mh.NoParameters = short.MaxValue;
+            Assert.Equal(short.MaxValue, mh.NoParameters);
+            mh.Size = int.MaxValue;
+            Assert.Equal(int.MaxValue, mh.Size);
+            mh.Type = short.MaxValue;
+            Assert.Equal(short.MaxValue, mh.Type);
+            mh.Version = short.MaxValue;
+            Assert.Equal(short.MaxValue, mh.Version);
+        }
+    }
 }

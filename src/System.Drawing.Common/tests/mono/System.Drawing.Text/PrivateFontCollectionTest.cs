@@ -35,39 +35,41 @@ using System.Security;
 using System.Security.Permissions;
 using Xunit;
 
-namespace MonoTests.System.Drawing.Text {
+namespace MonoTests.System.Drawing.Text
+{
 
-	public class PrivateFontCollectionTest {
+    public class PrivateFontCollectionTest
+    {
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Constructor ()
-		{
-			PrivateFontCollection pfc = new PrivateFontCollection ();
-			Assert.NotNull (pfc.Families);
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Constructor()
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            Assert.NotNull(pfc.Families);
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void AddFontFile_Null ()
-		{
-			Assert.Throws<ArgumentNullException> (() => new PrivateFontCollection ().AddFontFile (null));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void AddFontFile_Null()
+        {
+            Assert.Throws<ArgumentNullException>(() => new PrivateFontCollection().AddFontFile(null));
+        }
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void AddFontFile_Empty ()
-		{
-			// badly formetted filename
-			Assert.Throws<ArgumentException> (() => new PrivateFontCollection ().AddFontFile (String.Empty));
-		}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void AddFontFile_Empty()
+        {
+            // badly formetted filename
+            Assert.Throws<ArgumentException>(() => new PrivateFontCollection().AddFontFile(String.Empty));
+        }
 
-		// tests for AddMemoryFont are available in the CAS unit tests
+        // tests for AddMemoryFont are available in the CAS unit tests
 
-		[ConditionalFact(Helpers.GdiplusIsAvailable)]
-		public void Dispose_Family ()
-		{
-			PrivateFontCollection pfc = new PrivateFontCollection ();
-			pfc.Dispose ();
-			Assert.Throws<ArgumentException> (() => { var x = pfc.Families; });
-			// no it's not a ObjectDisposedException
-		}
-	}
+        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        public void Dispose_Family()
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.Dispose();
+            Assert.Throws<ArgumentException>(() => { var x = pfc.Families; });
+            // no it's not a ObjectDisposedException
+        }
+    }
 }
