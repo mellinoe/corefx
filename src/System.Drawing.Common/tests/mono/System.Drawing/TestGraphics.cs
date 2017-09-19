@@ -2214,7 +2214,7 @@ namespace MonoTests.System.Drawing
             }
         }
 
-        [ConditionalFact(Helpers.GdiplusIsAvailable)]
+        [ConditionalFact(Helpers.RecentGdiplusIsAvailable)]
         public void MeasureString_Wrapping_Dots()
         {
             string text = "this is really long text........................................... with a lot o periods.";
